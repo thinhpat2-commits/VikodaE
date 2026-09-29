@@ -1,0 +1,8 @@
+{
+  "name": "Vikoda English Pro - Tiếng Anh Đẳng Cấp Cho Vikodaers",
+  "description": "Ứng dụng học tiếng Anh công sở và giới thiệu thương hiệu Vikoda chuẩn quốc tế. Game hóa lộ trình như Duolingo & VikoVoice AI, tự tin đón tiếp khách nước ngoài và mở rộng thị trường xuất khẩu.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
