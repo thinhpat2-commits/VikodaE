@@ -20,6 +20,7 @@ import { PreMeetingToolkitModal } from './components/PreMeetingToolkitModal';
 import { HandsFreeCommuteModal } from './components/HandsFreeCommuteModal';
 import { PocketSearchModal } from './components/PocketSearchModal';
 import { VikodaExecutivePortfolioModal } from './components/VikodaExecutivePortfolioModal';
+import { AdminPortalModal } from './components/AdminPortalModal';
 import { GamificationState, EmployeeProfile } from './types';
 import { CourseLevel } from './data/curriculumData';
 import { playSound } from './services/soundEffects';
@@ -44,6 +45,7 @@ export default function App() {
   const [isCommuteModalOpen, setIsCommuteModalOpen] = useState<boolean>(false);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
   const [isPortfolioModalOpen, setIsPortfolioModalOpen] = useState<boolean>(false);
+  const [isAdminPortalOpen, setIsAdminPortalOpen] = useState<boolean>(false);
 
   // Employee Profile State (Login by Employee Code & Email with custom Avatar)
   const [profile, setProfile] = useState<EmployeeProfile>({
@@ -222,6 +224,10 @@ export default function App() {
           playSound('click');
           setIsPortfolioModalOpen(true);
         }}
+        onOpenAdmin={() => {
+          playSound('click');
+          setIsAdminPortalOpen(true);
+        }}
       />
 
       {/* Main Screen Content */}
@@ -377,6 +383,14 @@ export default function App() {
         profile={profile}
         stats={gamificationState}
         speechRate={speechRate}
+      />
+
+      {/* Executive HR & Training Admin Portal Modal */}
+      <AdminPortalModal
+        isOpen={isAdminPortalOpen}
+        onClose={() => setIsAdminPortalOpen(false)}
+        currentUserProfile={profile}
+        currentUserStats={gamificationState}
       />
 
       {/* Floating Gamified Toast Notification */}

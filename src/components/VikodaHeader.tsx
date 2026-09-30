@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Flame, Gem, Sparkles, Volume2, VolumeX, Zap, Headphones, Search, Award } from 'lucide-react';
+import { Flame, Gem, Sparkles, Volume2, VolumeX, Zap, Headphones, Search, Award, ShieldCheck } from 'lucide-react';
 import { GamificationState, EmployeeProfile } from '../types';
 import { CourseLevel } from '../data/curriculumData';
 import { HeaderBrandLogo } from './brand/VikodaLogos';
@@ -27,6 +27,7 @@ interface VikodaHeaderProps {
   onOpenCommute?: () => void;
   onOpenSearch?: () => void;
   onOpenPortfolio?: () => void;
+  onOpenAdmin?: () => void;
 }
 
 export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
@@ -42,6 +43,7 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
   onOpenCommute = () => {},
   onOpenSearch = () => {},
   onOpenPortfolio = () => {},
+  onOpenAdmin = () => {},
 }) => {
   const [activeTooltip, setActiveTooltip] = useState<'streak' | 'gems' | 'hearts' | null>(null);
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
@@ -156,7 +158,19 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0066CC]" />
           </button>
 
-          {/* 5. USER PROFILE AVATAR (Click to view profile info) */}
+          {/* 5. ADMIN HR PORTAL BUTTON */}
+          <button
+            onClick={() => {
+              playSound('click');
+              onOpenAdmin();
+            }}
+            className="p-1 sm:p-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-transform active:scale-95 cursor-pointer shadow-2xs"
+            title="Cổng Quản Trị Nhân Sự & Xuất Báo Cáo Excel (Admin Portal)"
+          >
+            <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-600" />
+          </button>
+
+          {/* 6. USER PROFILE AVATAR (Click to view profile info) */}
           <button
             onClick={() => {
               playSound('click');

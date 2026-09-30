@@ -113,7 +113,7 @@ export const VoiceSelectorModal: React.FC<VoiceSelectorModalProps> = ({
                 Chọn Giọng Đọc AI
               </h3>
               <p className="text-[10px] text-slate-500 font-medium">
-                3 giọng đọc chuẩn phát âm quốc tế
+                2 giọng đọc chuẩn phát âm Mỹ rõ nét (Michael & Emma)
               </p>
             </div>
           </div>

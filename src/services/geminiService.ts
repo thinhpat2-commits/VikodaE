@@ -256,3 +256,77 @@ function getFallbackTranslation(vi: string): BoardroomTranslateResult {
     culturalCaution: 'Người bản xứ thường tránh dùng từ phủ định trực tiếp như "No, we cannot" hay "It is impossible". Thay vào đó, họ dùng cấu trúc hướng tới giải pháp như "To ensure quality, we might consider..."'
   };
 }
+
+// In-memory audio cache for Gemini AI voice blobs
+const aiSpeechCache = new Map<string, string>();
+
+/**
+ * Generate natural studio-grade AI speech audio using Gemini 3.8 Flash Lite TTS
+ * Returns a local Blob URL (audio/wav, 24kHz) that plays natively on all devices.
+ */
+export const generateGeminiSpeechAudio = async (
+  text: string,
+  voiceName: 'Puck' | 'Kore' | 'Charon' | 'Zephyr' = 'Puck'
+): Promise<string | null> => {
+  if (!aiInstance) return null;
+
+  const clean = text
+    .replace(/[\u{1F600}-\u{1F64F}\u{1F300}-\u{1F5FF}\u{1F680}-\u{1F6FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '')
+    .replace(/[*_#`~[\]]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!clean) return null;
+
+  const cacheKey = `${voiceName}:${clean.toLowerCase()}`;
+  if (aiSpeechCache.has(cacheKey)) {
+    return aiSpeechCache.get(cacheKey)!;
+  }
+
+  try {
+    const response = await aiInstance.models.generateContent({
+      model: 'gemini-3.8-flash-lite-tts',
+      contents: [
+        {
+          role: 'user',
+          parts: [
+            {
+              text: clean,
+              speechMetadata: {
+                style:
+                  'Crystal-clear, natural international business English pronunciation. Brand Vikoda pronounced Vee-ko-dah, pH 9.0 pronounced pee-aitch nine point oh, natural alkaline mineral water.',
+              },
+            },
+          ],
+        },
+      ],
+      config: {
+        responseModalities: ['AUDIO'],
+        speechConfig: {
+          voiceConfig: {
+            prebuiltVoiceConfig: { voiceName },
+          },
+        },
+      },
+    });
+
+    const base64Audio = response.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+    if (!base64Audio) return null;
+
+    // Convert base64 WAV into a local Blob URL
+    const binary = atob(base64Audio);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    const blob = new Blob([bytes], { type: 'audio/wav' });
+    const blobUrl = URL.createObjectURL(blob);
+
+    aiSpeechCache.set(cacheKey, blobUrl);
+    return blobUrl;
+  } catch (err) {
+    console.warn('Gemini TTS audio generation failed, falling back to browser speech:', err);
+    return null;
+  }
+};
+

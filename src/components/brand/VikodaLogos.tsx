@@ -208,8 +208,9 @@ export const VikodaWordmark: React.FC<{
   return (
     <div className={`inline-flex flex-col justify-center select-none ${className}`}>
       <div className="flex items-center leading-none tracking-tight">
-        <span className="text-[#009FE3] text-[22px] font-black tracking-tight">viko</span>
+        <span className="text-[#009FE3] text-[22px] font-black tracking-tight">Viko</span>
         <span className="text-[#005A9C] text-[22px] font-black tracking-tight">da</span>
+        <span className="text-[#FF9600] text-[23px] font-black tracking-tight ml-0.5">E</span>
       </div>
       {showTagline && (
         <span className="text-[9px] font-bold tracking-wider text-slate-400 uppercase -mt-0.5">
