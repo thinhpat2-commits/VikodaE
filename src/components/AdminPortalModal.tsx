@@ -31,12 +31,14 @@ import {
 } from 'lucide-react';
 import { EmployeeProfile, GamificationState } from '../types';
 import { playSound } from '../services/soundEffects';
+import { fetchAllUsersAdmin, adminResetUserProgress } from '../services/firebase';
 
 interface AdminPortalModalProps {
   isOpen: boolean;
   onClose: () => void;
   currentUserProfile: EmployeeProfile;
   currentUserStats: GamificationState;
+  onResetUserProgress?: (targetEmail: string) => void;
 }
 
 export interface EmployeeRecord {
@@ -180,7 +182,8 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
   isOpen,
   onClose,
   currentUserProfile,
-  currentUserStats
+  currentUserStats,
+  onResetUserProgress,
 }) => {
   // Authentication State
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -219,6 +222,34 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
   const [editingEmployee, setEditingEmployee] = useState<EmployeeRecord | null>(null);
   const [deletingEmployeeId, setDeletingEmployeeId] = useState<string | null>(null);
   const [isCreatingNew, setIsCreatingNew] = useState<boolean>(false);
+  const [resetTarget, setResetTarget] = useState<EmployeeRecord | null>(null);
+  const [resetReason, setResetReason] = useState<string>('Yêu cầu thi lại hoặc đánh giá lại năng lực từ Admin');
+  const [resetLoading, setResetLoading] = useState<boolean>(false);
+
+  const handleConfirmReset = async () => {
+    if (!resetTarget) return;
+    playSound('click');
+    setResetLoading(true);
+    try {
+      await adminResetUserProgress(resetTarget.id, resetTarget.email, resetReason);
+    } catch (e) {
+      console.warn('Firebase cloud reset notice (running offline or local):', e);
+    }
+    // Update local state immediately
+    setEmployees((prev) =>
+      prev.map((emp) =>
+        emp.id === resetTarget.id
+          ? { ...emp, xp: 0, streak: 0, completedUnits: 0, highestScore: 0, lastActive: 'Vừa reset' }
+          : emp
+      )
+    );
+    if (onResetUserProgress) {
+      onResetUserProgress(resetTarget.email);
+    }
+    playSound('success');
+    setResetLoading(false);
+    setResetTarget(null);
+  };
 
   // New Employee Form State
   const [newEmployeeData, setNewEmployeeData] = useState<Partial<EmployeeRecord>>({
@@ -846,6 +877,18 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                                   <button
                                     onClick={() => {
                                       playSound('click');
+                                      setResetTarget(emp);
+                                    }}
+                                    className="px-2 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-colors cursor-pointer flex items-center gap-1 text-[10px] font-black"
+                                    title="Admin: Reset toàn bộ tiến độ (XP, streak, bài học) của tài khoản này về 0"
+                                  >
+                                    <RefreshCw className="w-3 h-3 text-amber-600" />
+                                    <span>Reset Điểm</span>
+                                  </button>
+
+                                  <button
+                                    onClick={() => {
+                                      playSound('click');
                                       setEditingEmployee({ ...emp });
                                     }}
                                     className="p-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-[#0070D1] border border-sky-200 transition-colors cursor-pointer"
@@ -1348,6 +1391,85 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL: CONFIRM PROGRESS RESET ================= */}
+      {resetTarget && (
+        <div 
+          className="fixed inset-0 z-[1000000] bg-slate-950/80 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in"
+          onClick={() => setResetTarget(null)}
+        >
+          <div 
+            className="bg-white w-full max-w-md rounded-3xl p-5 border-2 border-amber-400 shadow-2xl space-y-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center space-x-3 text-amber-600 border-b border-amber-100 pb-3">
+              <div className="w-10 h-10 rounded-2xl bg-amber-100 flex items-center justify-center shrink-0">
+                <RefreshCw className="w-5 h-5 text-amber-600" />
+              </div>
+              <div>
+                <h4 className="text-sm font-black text-slate-900 leading-tight">
+                  Xác Nhận Quyền Admin: Reset Tiến Độ
+                </h4>
+                <p className="text-[11px] text-slate-500 font-medium">
+                  {resetTarget.name} • {resetTarget.email}
+                </p>
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-200 space-y-2 text-xs text-amber-950">
+              <div className="font-bold flex items-center gap-1.5 text-amber-900">
+                <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>Thao tác này sẽ thiết lập các chỉ số về 0:</span>
+              </div>
+              <ul className="list-disc list-inside space-y-1 text-[11px] pl-1 font-medium text-slate-700">
+                <li>Điểm tích lũy XP hiện tại: <b>{resetTarget.xp.toLocaleString()} XP</b> ➔ <b>0 XP</b></li>
+                <li>Chuỗi ngày liên tục: <b>{resetTarget.streak} ngày</b> ➔ <b>0 ngày</b></li>
+                <li>Các chặng bài học và danh hiệu đã vượt qua sẽ được yêu cầu làm lại từ đầu.</li>
+                <li>Dữ liệu được cập nhật trực tiếp lên máy chủ <b>Firebase Cloud</b>.</li>
+              </ul>
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-black text-slate-700 mb-1">
+                Lý do reset tiến độ (Lưu vết kiểm toán Admin Audit Trail):
+              </label>
+              <input
+                type="text"
+                value={resetReason}
+                onChange={(e) => setResetReason(e.target.value)}
+                placeholder="VD: Học viên yêu cầu thi lại / Reset kiểm tra định kỳ..."
+                className="w-full p-2.5 rounded-xl border border-slate-300 font-medium text-xs text-slate-800 focus:outline-none focus:border-amber-500"
+              />
+            </div>
+
+            <div className="flex items-center justify-end space-x-2 pt-2">
+              <button
+                type="button"
+                onClick={() => setResetTarget(null)}
+                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 cursor-pointer"
+              >
+                Hủy bỏ
+              </button>
+
+              <button
+                type="button"
+                disabled={resetLoading}
+                onClick={handleConfirmReset}
+                className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs shadow-md transition-transform active:scale-98 cursor-pointer flex items-center gap-1.5 disabled:opacity-50"
+              >
+                {resetLoading ? (
+                  <div className="w-4 h-4 border-2 border-slate-900 border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <>
+                    <RefreshCw className="w-3.5 h-3.5" />
+                    <span>Xác Nhận Reset Về 0</span>
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account profile and learning progress synchronized to cloud.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Unique auth UID of user" },
+        "email": { "type": "string", "description": "User corporate or personal Gmail address" },
+        "displayName": { "type": "string", "description": "Full name or employee display name" },
+        "role": { "type": "string", "enum": ["employee", "admin"], "description": "User authorization role" },
+        "department": { "type": "string", "description": "Vikoda company department" },
+        "xp": { "type": "number", "description": "Total earned experience points" },
+        "streak": { "type": "number", "description": "Consecutive days learning streak" },
+        "gems": { "type": "number", "description": "Gems balance for power-ups and streak freeze" },
+        "completedLessons": { "type": "array", "description": "List of finished lesson node IDs" },
+        "completedUnits": { "type": "array", "description": "List of finished milestone unit IDs" },
+        "mistakesCount": { "type": "number", "description": "Total active mistakes recorded in Mistake Vault" },
+        "vocabLearned": { "type": "number", "description": "Total vocabulary items mastered" },
+        "dailyGoal": { "type": "number", "description": "Target XP goal per day" },
+        "currentLevel": { "type": "string", "description": "Proficiency belt rank" },
+        "createdAt": { "type": "string", "description": "Account registration ISO timestamp" },
+        "lastActive": { "type": "string", "description": "Last active session timestamp" }
+      },
+      "required": ["userId", "email", "displayName", "role", "xp", "streak"]
+    },
+    "AdminRecord": {
+      "title": "AdminRecord",
+      "description": "Trusted admin whitelist mapping for role verification.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Admin UID" },
+        "email": { "type": "string", "description": "Admin email" },
+        "grantedAt": { "type": "string", "description": "Timestamp when admin role was granted" }
+      },
+      "required": ["userId", "email"]
+    },
+    "AuditResetLog": {
+      "title": "AuditResetLog",
+      "description": "Audit record of progress resets performed by admin.",
+      "type": "object",
+      "properties": {
+        "logId": { "type": "string", "description": "Log record identifier" },
+        "targetUserId": { "type": "string", "description": "UID of account reset" },
+        "targetUserEmail": { "type": "string", "description": "Email of account reset" },
+        "adminUid": { "type": "string", "description": "UID of executing admin" },
+        "reason": { "type": "string", "description": "Reason for progress reset" },
+        "previousXp": { "type": "number", "description": "XP before reset" },
+        "previousStreak": { "type": "number", "description": "Streak before reset" },
+        "timestamp": { "type": "string", "description": "Execution timestamp" }
+      },
+      "required": ["logId", "targetUserId", "adminUid", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User profile, learning path, and cloud backup data."
+    },
+    "/admins/{adminId}": {
+      "schema": { "$ref": "#/entities/AdminRecord" },
+      "description": "Admin authorization registry document."
+    },
+    "/audit_resets/{logId}": {
+      "schema": { "$ref": "#/entities/AuditResetLog" },
+      "description": "Audit trail logs of admin progress resets."
+    }
+  }
+}

@@ -29,6 +29,7 @@ interface EmployeeProfileModalProps {
   profile: EmployeeProfile;
   onSaveProfile: (updated: EmployeeProfile) => void;
   stats: GamificationState;
+  onLogout?: () => void;
 }
 
 const PRESET_AVATARS = [
@@ -45,7 +46,8 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
   onClose,
   profile,
   onSaveProfile,
-  stats
+  stats,
+  onLogout,
 }) => {
   const [isEditing, setIsEditing] = useState<boolean>(!profile.isLoggedIn);
   const [employeeCode, setEmployeeCode] = useState(profile.employeeCode || 'VKD-1957');
@@ -375,6 +377,20 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
               >
                 💾 Lưu Hồ Sơ & Đồng Bộ Thành Tích
               </button>
+
+              {onLogout && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound('click');
+                    onLogout();
+                  }}
+                  className="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-700 border border-slate-300 hover:border-rose-300 text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span>Đăng Xuất Tài Khoản Cloud</span>
+                </button>
+              )}
             </form>
           )}
 

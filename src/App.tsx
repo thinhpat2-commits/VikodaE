@@ -21,9 +21,25 @@ import { HandsFreeCommuteModal } from './components/HandsFreeCommuteModal';
 import { PocketSearchModal } from './components/PocketSearchModal';
 import { VikodaExecutivePortfolioModal } from './components/VikodaExecutivePortfolioModal';
 import { AdminPortalModal } from './components/AdminPortalModal';
+import { AuthModal } from './components/AuthModal';
 import { GamificationState, EmployeeProfile } from './types';
 import { CourseLevel } from './data/curriculumData';
 import { playSound } from './services/soundEffects';
+import { 
+  getPersistedSession, 
+  saveProgressToCloud, 
+  logoutUser, 
+  isUserAdmin, 
+  UserCloudProfile,
+  db 
+} from './services/firebase';
+import { 
+  saveGamificationStateOffline, 
+  loadGamificationStateOffline, 
+  saveProfileOffline, 
+  resolveStateConflict 
+} from './services/offlineStorage';
+import { doc, getDoc } from 'firebase/firestore';
 
 const STORAGE_KEY_VIKODA_STATS = 'vikoda_gamification_state_v3';
 const STORAGE_KEY_LEVEL = 'vikoda_selected_level_v3';
@@ -35,6 +51,11 @@ export default function App() {
   const [speechRate, setSpeechRate] = useState<number>(1.0);
   const [isAiModalOpen, setIsAiModalOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Persistent Session & Cloud Sync States
+  const [currentUserProfile, setCurrentUserProfile] = useState<UserCloudProfile | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [isCloudSynced, setIsCloudSynced] = useState<boolean>(false);
 
   // Modals for requested features
   const [isProfileModalOpen, setIsProfileModalOpen] = useState<boolean>(false);
@@ -57,7 +78,7 @@ export default function App() {
     avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
     highestDrillScore: 560,
     totalPracticeCount: 8,
-    isLoggedIn: true
+    isLoggedIn: false
   });
 
   // Gamification state: XP, Gems, Energy, Streak, Completed Nodes, Highest Drill Score
@@ -72,7 +93,59 @@ export default function App() {
     highestDrillScore: 560
   });
 
-  // Load state from localStorage
+  // 1. Check persistent remembered session on boot (Log in ONCE, device auto-remembers)
+  useEffect(() => {
+    const session = getPersistedSession();
+    if (session) {
+      setCurrentUserProfile(session);
+      setIsAuthModalOpen(false);
+      setIsCloudSynced(true);
+
+      setProfile((prev) => ({
+        ...prev,
+        fullName: session.displayName || prev.fullName,
+        email: session.email || prev.email,
+        department: session.department || prev.department,
+        isLoggedIn: true,
+      }));
+
+      // Restore from IndexedDB first (0ms latency)
+      loadGamificationStateOffline().then((offlineStats) => {
+        if (offlineStats) {
+          setGamificationState((prev) => ({
+            ...prev,
+            xp: offlineStats.xp,
+            gems: offlineStats.gems,
+            streakDays: offlineStats.streakDays,
+            completedNodeIds: offlineStats.completedNodeIds,
+            highestDrillScore: offlineStats.highestDrillScore || prev.highestDrillScore,
+          }));
+        }
+      });
+
+      // Background Cloud Last-Write-Wins Merge with Firestore
+      getDoc(doc(db, 'users', session.userId))
+        .then((snap) => {
+          if (snap.exists()) {
+            const remote = snap.data() as UserCloudProfile;
+            setGamificationState((local) => {
+              const merged = resolveStateConflict(local as any, remote);
+              saveGamificationStateOffline(merged);
+              localStorage.setItem(STORAGE_KEY_VIKODA_STATS, JSON.stringify(merged));
+              return merged;
+            });
+          }
+        })
+        .catch((err) => {
+          console.warn('Background sync notice (running on IndexedDB offline storage):', err);
+        });
+    } else {
+      // First time opening app: require login
+      setIsAuthModalOpen(true);
+    }
+  }, []);
+
+  // 2. Load cached local state
   useEffect(() => {
     try {
       const savedStats = localStorage.getItem(STORAGE_KEY_VIKODA_STATS);
@@ -95,6 +168,53 @@ export default function App() {
   const saveGamificationState = (newState: GamificationState) => {
     setGamificationState(newState);
     localStorage.setItem(STORAGE_KEY_VIKODA_STATS, JSON.stringify(newState));
+    saveGamificationStateOffline(newState); // Write to IndexedDB offline layer
+
+    // Continuous Cloud Auto-Backup
+    const session = getPersistedSession();
+    if (session) {
+      saveProgressToCloud(session.userId, {
+        xp: newState.xp,
+        streak: newState.streakDays,
+        gems: newState.gems,
+        completedLessons: newState.completedNodeIds,
+      });
+      setIsCloudSynced(true);
+    }
+  };
+
+  const handleAuthSuccess = (cloudProfile: UserCloudProfile) => {
+    setCurrentUserProfile(cloudProfile);
+    setIsAuthModalOpen(false);
+    setIsCloudSynced(true);
+    setProfile((prev) => ({
+      ...prev,
+      fullName: cloudProfile.displayName,
+      email: cloudProfile.email,
+      department: cloudProfile.department,
+      isLoggedIn: true,
+    }));
+    setGamificationState((prev) => {
+      const updated = {
+        ...prev,
+        xp: cloudProfile.xp,
+        streakDays: cloudProfile.streak,
+        gems: cloudProfile.gems,
+        completedNodeIds: cloudProfile.completedLessons || prev.completedNodeIds,
+      };
+      saveGamificationStateOffline(updated);
+      return updated;
+    });
+    showToast(`Chào mừng ${cloudProfile.displayName}! Máy đã tự động ghi nhớ tài khoản ☁️`);
+  };
+
+  const handleLogout = async () => {
+    playSound('click');
+    await logoutUser();
+    setCurrentUserProfile(null);
+    setIsProfileModalOpen(false);
+    setIsAuthModalOpen(true);
+    showToast('Đã đăng xuất tài khoản an toàn.');
   };
 
   const handleSaveProfile = (updated: EmployeeProfile) => {
@@ -228,6 +348,7 @@ export default function App() {
           playSound('click');
           setIsAdminPortalOpen(true);
         }}
+        isCloudSynced={isCloudSynced}
       />
 
       {/* Main Screen Content */}
@@ -323,6 +444,7 @@ export default function App() {
         profile={profile}
         onSaveProfile={handleSaveProfile}
         stats={gamificationState}
+        onLogout={handleLogout}
       />
 
       {/* Leaderboard (BXH) Modal */}
@@ -391,6 +513,31 @@ export default function App() {
         onClose={() => setIsAdminPortalOpen(false)}
         currentUserProfile={profile}
         currentUserStats={gamificationState}
+        onResetUserProgress={(targetEmail) => {
+          if (targetEmail.toLowerCase() === profile.email.toLowerCase() || (currentUserProfile && targetEmail.toLowerCase() === currentUserProfile.email?.toLowerCase())) {
+            const resetStats: GamificationState = {
+              xp: 0,
+              gems: 0,
+              energy: 5,
+              streakDays: 0,
+              rank: 'Chiến Binh Vikoda',
+              completedNodeIds: [],
+              lastActiveDate: new Date().toISOString().split('T')[0],
+              highestDrillScore: 0,
+            };
+            setGamificationState(resetStats);
+            localStorage.setItem(STORAGE_KEY_VIKODA_STATS, JSON.stringify(resetStats));
+            showToast('⚠️ Admin đã reset toàn bộ tiến độ của tài khoản này về 0 để thi lại.');
+          } else {
+            showToast(`✅ Đã reset toàn bộ tiến độ của tài khoản ${targetEmail} về 0.`);
+          }
+        }}
+      />
+
+      {/* Mandatory Corporate Auth Modal on First Open */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onSuccess={handleAuthSuccess}
       />
 
       {/* Floating Gamified Toast Notification */}

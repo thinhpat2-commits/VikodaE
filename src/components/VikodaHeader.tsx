@@ -28,6 +28,7 @@ interface VikodaHeaderProps {
   onOpenSearch?: () => void;
   onOpenPortfolio?: () => void;
   onOpenAdmin?: () => void;
+  isCloudSynced?: boolean;
 }
 
 export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
@@ -44,6 +45,7 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
   onOpenSearch = () => {},
   onOpenPortfolio = () => {},
   onOpenAdmin = () => {},
+  isCloudSynced = false,
 }) => {
   const [activeTooltip, setActiveTooltip] = useState<'streak' | 'gems' | 'hearts' | null>(null);
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
@@ -164,10 +166,11 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
               playSound('click');
               onOpenAdmin();
             }}
-            className="p-1 sm:p-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-transform active:scale-95 cursor-pointer shadow-2xs"
-            title="Cổng Quản Trị Nhân Sự & Xuất Báo Cáo Excel (Admin Portal)"
+            className="p-1 sm:p-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-transform active:scale-95 cursor-pointer shadow-2xs relative"
+            title="Cổng Quản Trị Nhân Sự & Reset Tiến Độ (Admin Portal)"
           >
             <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-600" />
+            <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
           </button>
 
           {/* 6. USER PROFILE AVATAR (Click to view profile info) */}
@@ -177,13 +180,19 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
               onOpenProfile();
             }}
             className="relative p-0.5 rounded-full border-2 border-sky-400 hover:border-sky-600 transition-transform active:scale-95 cursor-pointer shadow-2xs shrink-0"
-            title={`Hồ sơ: ${profile.fullName} (${profile.employeeCode})`}
+            title={`Hồ sơ: ${profile.fullName} (${profile.email || profile.employeeCode}) • ${isCloudSynced ? 'Đã sao lưu đám mây' : 'Chưa đồng bộ'}`}
           >
             <img
               src={profile.avatarUrl}
               alt={profile.fullName}
               className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"
             />
+            {isCloudSynced && (
+              <span 
+                className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white"
+                title="Đã đồng bộ thời gian thực lên Firebase Cloud"
+              />
+            )}
           </button>
         </div>
       </div>
