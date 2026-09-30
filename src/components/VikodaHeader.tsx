@@ -1,5 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Flame, Gem, Sparkles, Volume2, VolumeX, Zap, Headphones, Search, Award, ShieldCheck } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  Flame, 
+  Gem, 
+  Sparkles, 
+  Volume2, 
+  VolumeX, 
+  Headphones, 
+  Search, 
+  Award, 
+  ShieldCheck, 
+  LogOut,
+  ChevronDown,
+  Trophy,
+  User,
+  SlidersHorizontal
+} from 'lucide-react';
 import { GamificationState, EmployeeProfile } from '../types';
 import { CourseLevel } from '../data/curriculumData';
 import { HeaderBrandLogo } from './brand/VikodaLogos';
@@ -29,6 +44,7 @@ interface VikodaHeaderProps {
   onOpenPortfolio?: () => void;
   onOpenAdmin?: () => void;
   isCloudSynced?: boolean;
+  onLogout?: () => void;
 }
 
 export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
@@ -46,11 +62,16 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
   onOpenPortfolio = () => {},
   onOpenAdmin = () => {},
   isCloudSynced = false,
+  onLogout,
 }) => {
-  const [activeTooltip, setActiveTooltip] = useState<'streak' | 'gems' | 'hearts' | null>(null);
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
   const [currentVoice, setCurrentVoice] = useState<VoiceOptionId>(getSelectedVoiceId());
   const [isStealth, setIsStealth] = useState<boolean>(() => isStealthOfficeMode());
+  const [isMasterMenuOpen, setIsMasterMenuOpen] = useState<boolean>(false);
+  const [isLevelDropdownOpen, setIsLevelDropdownOpen] = useState<boolean>(false);
+
+  const menuRef = useRef<HTMLDivElement>(null);
+  const levelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const unsubVoice = subscribeVoiceChange((vId) => setCurrentVoice(vId));
@@ -61,295 +82,361 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
     };
   }, []);
 
+  // Close menus on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsMasterMenuOpen(false);
+      }
+      if (levelRef.current && !levelRef.current.contains(e.target as Node)) {
+        setIsLevelDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const toggleStealth = () => {
     const nextVal = !isStealth;
     setIsStealth(nextVal);
     setStealthOfficeMode(nextVal);
   };
 
-  const toggleTooltip = (type: 'streak' | 'gems' | 'hearts') => {
-    playSound('click');
-    setActiveTooltip((prev) => (prev === type ? null : type));
-  };
-
   const activeVoiceOption = VOICE_OPTIONS.find((v) => v.id === currentVoice) || VOICE_OPTIONS[0];
+  const isAuthorizedAdmin = profile.email?.toLowerCase().trim() === 'thinh.pat2@gmail.com' || profile.isAdmin;
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-slate-200/80 shadow-xs">
-      
-      {/* Top Bar: Duolingo HUD Style */}
-      <div className="max-w-md mx-auto px-3 sm:px-3.5 py-1.5 sm:py-2 flex items-center justify-between relative">
-        
-        {/* Duolingo Vikoda Brand Lockup: Click to return to Home Roadmap */}
-        <button 
-          className="flex items-center cursor-pointer transition-transform active:scale-95 text-left shrink-0" 
-          onClick={onGoHome}
-          title="Trang Chủ Lộ Trình Vikoda"
-          aria-label="Về trang chủ Vikoda"
-        >
-          <HeaderBrandLogo className="h-7 sm:h-8" />
-        </button>
-
-        {/* Right HUD: Stealth, Streak, Gems, Voice & Profile */}
-        <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-2xs">
+        <div className="max-w-xl mx-auto px-2.5 sm:px-4 h-13 sm:h-14 flex items-center justify-between gap-1.5 sm:gap-2">
           
-          {/* 0. STEALTH OFFICE MODE TOGGLE (Tắt tiếng chuông ồn ào ở văn phòng) */}
-          <button
-            onClick={toggleStealth}
-            className={`p-1 sm:p-1.5 rounded-xl border transition-all cursor-pointer ${
-              isStealth 
-                ? 'bg-rose-50 text-rose-600 border-rose-300 font-black' 
-                : 'bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100'
-            }`}
-            title={isStealth ? 'Chế độ văn phòng: BẬT (Đã tắt toàn bộ tiếng chuông game)' : 'Chế độ văn phòng: TẮT (Đang bật tiếng chuông game)'}
-          >
-            {isStealth ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-          </button>
+          {/* ================= LEFT CLUSTER: LOGO + LEVEL BADGE ================= */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            <button
+              onClick={() => {
+                playSound('click');
+                onGoHome();
+              }}
+              className="transition-transform active:scale-95 cursor-pointer flex items-center"
+              title="Về Trang Chủ Vikoda"
+            >
+              <HeaderBrandLogo className="h-6 sm:h-7 w-auto" />
+            </button>
 
-          {/* 1. STREAK (Chuỗi ngày liên tục) */}
-          <button
-            onClick={() => toggleTooltip('streak')}
-            className={`flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-xl font-extrabold text-[11px] sm:text-xs transition-all cursor-pointer select-none border-b-2 ${
-              activeTooltip === 'streak'
-                ? 'bg-amber-100 text-amber-900 border-amber-400 scale-105'
-                : 'bg-amber-50 text-amber-700 hover:bg-amber-100/80 border-amber-300/80 active:translate-y-0.5'
-            }`}
-            title="Lý do: Chuỗi ngày học liên tục để rèn phản xạ"
-          >
-            <Flame className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-amber-500 text-amber-500 shrink-0" />
-            <span className="tabular-nums">{stats.streakDays}</span>
-          </button>
+            {/* Level Selector Dropdown */}
+            <div className="relative" ref={levelRef}>
+              <button
+                type="button"
+                onClick={() => {
+                  playSound('click');
+                  setIsLevelDropdownOpen(!isLevelDropdownOpen);
+                }}
+                className="px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-[#0070D1] border border-sky-200 text-[11px] sm:text-xs font-black flex items-center gap-0.5 sm:gap-1 transition-all active:scale-95 cursor-pointer"
+                title="Đổi cấp độ khóa học"
+              >
+                <span>{selectedLevel}</span>
+                <ChevronDown className="w-3 h-3 text-sky-600" />
+              </button>
 
-          {/* 2. GEMS (Ngọc khoáng thiên nhiên) */}
-          <button
-            onClick={() => toggleTooltip('gems')}
-            className={`flex items-center space-x-1 px-2 sm:px-2.5 py-1 rounded-xl font-extrabold text-[11px] sm:text-xs transition-all cursor-pointer select-none border-b-2 ${
-              activeTooltip === 'gems'
-                ? 'bg-cyan-100 text-cyan-900 border-cyan-400 scale-105'
-                : 'bg-cyan-50 text-[#0070D1] hover:bg-cyan-100/80 border-cyan-300/80 active:translate-y-0.5'
-            }`}
-            title="Lý do: Điểm khoáng chất tích lũy khi làm đúng"
-          >
-            <Gem className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-cyan-500 text-cyan-600 shrink-0" />
-            <span className="tabular-nums">{stats.gems}</span>
-          </button>
-
-          {/* 3. VOICE SELECTOR TRIGGER (Chọn giọng đọc: US Male Michael, UK Male, US Female) */}
-          <button
-            onClick={() => {
-              playSound('click');
-              setIsVoiceModalOpen(true);
-            }}
-            className="flex items-center space-x-1 px-1.5 sm:px-2 py-1 rounded-xl font-bold text-xs bg-sky-50 text-[#0070D1] hover:bg-sky-100 border border-sky-200/80 active:translate-y-0.5 cursor-pointer shadow-2xs"
-            title="Đổi giọng đọc AI (Michael US Rõ Nét, Oliver UK, Emma US)"
-          >
-            <span className="text-xs">{activeVoiceOption.flag}</span>
-            <Volume2 className="w-3.5 h-3.5 text-[#0070D1]" />
-          </button>
-
-          {/* 4. AI COACH SHORTCUT */}
-          <button
-            onClick={() => {
-              playSound('click');
-              onOpenAi();
-            }}
-            className="p-1 sm:p-1.5 rounded-xl bg-sky-50 text-[#0066CC] hover:bg-sky-100 border border-sky-200/80 transition-transform active:scale-95 cursor-pointer"
-            title="Trợ lý AI Vikoda"
-          >
-            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0066CC]" />
-          </button>
-
-          {/* 5. ADMIN HR PORTAL BUTTON */}
-          <button
-            onClick={() => {
-              playSound('click');
-              onOpenAdmin();
-            }}
-            className="p-1 sm:p-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-transform active:scale-95 cursor-pointer shadow-2xs relative"
-            title="Cổng Quản Trị Nhân Sự & Reset Tiến Độ (Admin Portal)"
-          >
-            <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-600" />
-            <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          </button>
-
-          {/* 6. USER PROFILE AVATAR (Click to view profile info) */}
-          <button
-            onClick={() => {
-              playSound('click');
-              onOpenProfile();
-            }}
-            className="relative p-0.5 rounded-full border-2 border-sky-400 hover:border-sky-600 transition-transform active:scale-95 cursor-pointer shadow-2xs shrink-0"
-            title={`Hồ sơ: ${profile.fullName} (${profile.email || profile.employeeCode}) • ${isCloudSynced ? 'Đã sao lưu đám mây' : 'Chưa đồng bộ'}`}
-          >
-            <img
-              src={profile.avatarUrl}
-              alt={profile.fullName}
-              className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"
-            />
-            {isCloudSynced && (
-              <span 
-                className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border border-white"
-                title="Đã đồng bộ thời gian thực lên Firebase Cloud"
-              />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* EXECUTIVE QUICK UTILITY BAR: 1-Tap Pre-Meeting, Commute, Search, CEO Portfolio */}
-      <div className="max-w-md mx-auto px-3 sm:px-3.5 pb-2">
-        <div className="grid grid-cols-4 gap-1.5 text-[10px] font-black">
-          <button 
-            onClick={() => {
-              playSound('click');
-              onOpenSOS();
-            }} 
-            className="py-1.5 px-1 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 flex items-center justify-center gap-1 shadow-2xs transition-all active:scale-95 cursor-pointer"
-            title="Cẩm nang nhẩm nhanh 60 giây trước cuộc họp ngoại giao"
-          >
-            <Zap className="w-3 h-3 fill-current" />
-            <span className="truncate">Cứu Nguy 60s</span>
-          </button>
-
-          <button 
-            onClick={() => {
-              playSound('click');
-              onOpenCommute();
-            }} 
-            className="py-1.5 px-1 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 flex items-center justify-center gap-1 shadow-2xs transition-all active:scale-95 cursor-pointer"
-            title="Chế độ nghe rảnh tay khi di chuyển / lái xe / đi bộ"
-          >
-            <Headphones className="w-3 h-3" />
-            <span className="truncate">Rảnh Tay</span>
-          </button>
-
-          <button 
-            onClick={() => {
-              playSound('click');
-              onOpenSearch();
-            }} 
-            className="py-1.5 px-1 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center gap-1 border border-slate-200 transition-all active:scale-95 cursor-pointer"
-            title="Tra cứu nhanh mẫu câu & thuật ngữ xuất khẩu"
-          >
-            <Search className="w-3 h-3 text-[#0070D1]" />
-            <span className="truncate">Tra Cứu</span>
-          </button>
-
-          <button 
-            onClick={() => {
-              playSound('click');
-              onOpenPortfolio();
-            }} 
-            className="py-1.5 px-1 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 flex items-center justify-center gap-1 border border-indigo-200 transition-all active:scale-95 cursor-pointer"
-            title="Xem báo cáo đối chiếu giọng nói và chứng nhận Đại sứ trình CEO"
-          >
-            <Award className="w-3 h-3 text-indigo-600" />
-            <span className="truncate">Báo Cáo CEO</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Tooltip drawer for Streak / Gems / Hearts */}
-      {activeTooltip && (
-        <div className="bg-slate-900 text-white text-xs px-4 py-2 border-t border-slate-800 flex items-center justify-between animate-in slide-in-from-top-1 duration-150">
-          <div>
-            {activeTooltip === 'streak' && (
-              <span>🔥 <b>Chuỗi {stats.streakDays} ngày</b>: Học mỗi ngày giúp tạo phản xạ tiếng Anh tự nhiên khi gặp khách hàng quốc tế.</span>
-            )}
-            {activeTooltip === 'gems' && (
-              <span>💎 <b>{stats.gems} Viên Ngọc</b>: Tích lũy để đổi vật phẩm mở rộng và thăng cấp huy hiệu đại sứ.</span>
-            )}
+              {isLevelDropdownOpen && (
+                <div className="absolute left-0 mt-1.5 w-44 rounded-2xl bg-white border border-slate-200 shadow-xl p-1.5 z-50 animate-in fade-in zoom-in-95 duration-100">
+                  <div className="px-2 py-1 text-[10px] font-black uppercase tracking-wider text-slate-400">
+                    Chọn Cấp Độ
+                  </div>
+                  {[
+                    { id: 'A1', label: 'Cấp độ A1 (Nhập môn)' },
+                    { id: 'A2-B1', label: 'Cấp độ B1 (Mỏ khoáng)' },
+                    { id: 'B2-C1', label: 'Cấp độ C1 (Xuất khẩu)' },
+                    { id: 'C2', label: 'Cấp độ C2 (Bản ngữ CEO)' },
+                  ].map((lvl) => (
+                    <button
+                      key={lvl.id}
+                      type="button"
+                      onClick={() => {
+                        playSound('click');
+                        setSelectedLevel(lvl.id as CourseLevel);
+                        setIsLevelDropdownOpen(false);
+                      }}
+                      className={`w-full text-left px-2.5 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center justify-between ${
+                        selectedLevel === lvl.id
+                          ? 'bg-[#0070D1] text-white'
+                          : 'text-slate-700 hover:bg-slate-50'
+                      }`}
+                    >
+                      <span>{lvl.label}</span>
+                      {selectedLevel === lvl.id && <span className="text-[10px]">✓</span>}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
-          <button
-            onClick={() => setActiveTooltip(null)}
-            className="text-slate-400 hover:text-white p-1 ml-2 font-bold cursor-pointer"
-          >
-            ✕
-          </button>
+
+          {/* ================= RIGHT CLUSTER: STATS + UNIFIED MENU HUB ================= */}
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+            
+            {/* Compact Stats Pill: Streak & Gems (Fits on any mobile screen) */}
+            <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-2.5 py-1 rounded-xl bg-slate-50 border border-slate-200 text-xs font-black text-slate-700 select-none">
+              <span className="flex items-center gap-0.5 text-amber-600" title="Chuỗi ngày liên tục">
+                <Flame className="w-3.5 h-3.5 fill-amber-500 text-amber-500 shrink-0" />
+                <span className="tabular-nums">{stats.streakDays}</span>
+              </span>
+              <span className="text-slate-300 font-normal">·</span>
+              <span className="flex items-center gap-0.5 text-cyan-700" title="Đá quý tích lũy">
+                <Gem className="w-3 h-3 fill-cyan-500 text-cyan-600 shrink-0" />
+                <span className="tabular-nums">{stats.gems}</span>
+              </span>
+            </div>
+
+            {/* Desktop Only: Direct AI Shortcut (Hidden on tiny mobile to guarantee ZERO overflow) */}
+            <button
+              onClick={() => {
+                playSound('click');
+                onOpenAi();
+              }}
+              className="hidden sm:flex p-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-[#0070D1] border border-sky-200/80 transition-transform active:scale-95 cursor-pointer"
+              title="Trợ lý AI Vikoda"
+            >
+              <Sparkles className="w-4 h-4 text-[#0070D1]" />
+            </button>
+
+            {/* UNIFIED MASTER MENU HUB (Avatar + Chevron Trigger) */}
+            <div className="relative" ref={menuRef}>
+              <button
+                type="button"
+                onClick={() => {
+                  playSound('click');
+                  setIsMasterMenuOpen(!isMasterMenuOpen);
+                }}
+                className={`p-0.5 sm:p-1 rounded-2xl border transition-all cursor-pointer flex items-center gap-1 shadow-2xs ${
+                  isMasterMenuOpen
+                    ? 'border-sky-500 bg-sky-50 ring-2 ring-sky-200'
+                    : 'border-slate-200 hover:border-sky-300 bg-white'
+                }`}
+                title="Menu Tiện Ích & Hồ Sơ Cá Nhân"
+              >
+                <div className="relative">
+                  <img
+                    src={profile.avatarUrl}
+                    alt={profile.fullName}
+                    className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"
+                  />
+                  {isCloudSynced && (
+                    <span 
+                      className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 border border-white"
+                      title="Đã đồng bộ thời gian thực"
+                    />
+                  )}
+                </div>
+                <ChevronDown className="w-3 h-3 text-slate-500 pr-0.5" />
+              </button>
+
+              {/* Master Dropdown Drawer */}
+              {isMasterMenuOpen && (
+                <div className="absolute right-0 mt-1.5 w-64 rounded-2xl bg-white border border-slate-200 shadow-2xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100 space-y-1">
+                  
+                  {/* User Profile Card Header */}
+                  <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 mb-1">
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={profile.avatarUrl}
+                        alt=""
+                        className="w-8 h-8 rounded-full object-cover border border-slate-200 shrink-0"
+                      />
+                      <div className="truncate flex-1">
+                        <div className="text-xs font-black text-slate-800 truncate">{profile.fullName}</div>
+                        <div className="text-[10px] text-slate-400 truncate">{profile.email || profile.employeeCode}</div>
+                      </div>
+                    </div>
+                    <div className="mt-2 pt-1.5 border-t border-slate-200 flex items-center justify-between text-[10px] font-bold">
+                      <button
+                        onClick={() => {
+                          playSound('click');
+                          setIsMasterMenuOpen(false);
+                          onOpenProfile();
+                        }}
+                        className="text-[#0070D1] hover:underline flex items-center gap-1"
+                      >
+                        <User className="w-3 h-3" />
+                        <span>Xem & Đổi Avatar</span>
+                      </button>
+                      <span className="text-slate-400">ID: {profile.employeeCode}</span>
+                    </div>
+                  </div>
+
+                  {/* Quick AI Trigger for Mobile */}
+                  <button
+                    onClick={() => {
+                      playSound('click');
+                      setIsMasterMenuOpen(false);
+                      onOpenAi();
+                    }}
+                    className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-sky-900 bg-sky-50/80 hover:bg-sky-100 transition-colors flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <Sparkles className="w-4 h-4 text-[#0070D1]" />
+                    <div>
+                      <div className="leading-tight">Trợ Lý AI Vikoda</div>
+                      <div className="text-[10px] text-sky-600 font-normal">Hỏi đáp từ vựng & sửa lỗi giao tiếp</div>
+                    </div>
+                  </button>
+
+                  <div className="px-2.5 pt-1 text-[10px] font-black uppercase tracking-wider text-slate-400">
+                    Bộ Tiện Ích Doanh Nghiệp
+                  </div>
+
+                  {/* 1. SOS 60s */}
+                  <button
+                    onClick={() => {
+                      playSound('click');
+                      setIsMasterMenuOpen(false);
+                      onOpenSOS();
+                    }}
+                    className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:bg-rose-50 hover:text-rose-700 transition-colors flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <span className="text-sm">🚨</span>
+                    <div>
+                      <div className="leading-tight">Cẩm Nang SOS 60 Giây</div>
+                      <div className="text-[10px] text-slate-400 font-normal">Cứu nguy trước cuộc họp VIP</div>
+                    </div>
+                  </button>
+
+                  {/* 2. Hands-Free Commute */}
+                  <button
+                    onClick={() => {
+                      playSound('click');
+                      setIsMasterMenuOpen(false);
+                      onOpenCommute();
+                    }}
+                    className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:bg-sky-50 hover:text-sky-700 transition-colors flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <Headphones className="w-4 h-4 text-sky-600" />
+                    <div>
+                      <div className="leading-tight">Luyện Nghe Rảnh Tay</div>
+                      <div className="text-[10px] text-slate-400 font-normal">Tự động phát khi lái xe</div>
+                    </div>
+                  </button>
+
+                  {/* 3. Pocket Search */}
+                  <button
+                    onClick={() => {
+                      playSound('click');
+                      setIsMasterMenuOpen(false);
+                      onOpenSearch();
+                    }}
+                    className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:bg-indigo-50 hover:text-indigo-700 transition-colors flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <Search className="w-4 h-4 text-indigo-600" />
+                    <div>
+                      <div className="leading-tight">Tra Cứu Bỏ Túi</div>
+                      <div className="text-[10px] text-slate-400 font-normal">Thuật ngữ mỏ khoáng & Incoterms</div>
+                    </div>
+                  </button>
+
+                  {/* 4. CEO Portfolio */}
+                  <button
+                    onClick={() => {
+                      playSound('click');
+                      setIsMasterMenuOpen(false);
+                      onOpenPortfolio();
+                    }}
+                    className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:bg-amber-50 hover:text-amber-800 transition-colors flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <Award className="w-4 h-4 text-amber-600" />
+                    <div>
+                      <div className="leading-tight">Chứng Chỉ Số CEO</div>
+                      <div className="text-[10px] text-slate-400 font-normal">Bản ghi âm & Chứng nhận hoàn thành</div>
+                    </div>
+                  </button>
+
+                  {/* 5. Leaderboard */}
+                  <button
+                    onClick={() => {
+                      playSound('click');
+                      setIsMasterMenuOpen(false);
+                      onOpenLeaderboard();
+                    }}
+                    className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-slate-800 hover:bg-amber-50 hover:text-amber-800 transition-colors flex items-center gap-2.5 cursor-pointer"
+                  >
+                    <Trophy className="w-4 h-4 text-amber-500" />
+                    <div>
+                      <div className="leading-tight">Bảng Xếp Hạng Toàn Công Ty</div>
+                      <div className="text-[10px] text-slate-400 font-normal">Thi đua phòng ban Vikoda</div>
+                    </div>
+                  </button>
+
+                  {/* 6. ADMIN PORTAL (ONLY VISIBLE IF AUTHORIZED ADMIN) */}
+                  {isAuthorizedAdmin && (
+                    <div className="pt-1 border-t border-slate-100">
+                      <button
+                        onClick={() => {
+                          playSound('click');
+                          setIsMasterMenuOpen(false);
+                          onOpenAdmin();
+                        }}
+                        className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-amber-900 bg-amber-50/70 hover:bg-amber-100 transition-colors flex items-center gap-2.5 cursor-pointer"
+                      >
+                        <ShieldCheck className="w-4 h-4 text-amber-600" />
+                        <div>
+                          <div className="leading-tight">Cổng Quản Trị Nhân Sự (Admin)</div>
+                          <div className="text-[10px] text-amber-700 font-normal">Reset tiến độ & Kiểm toán mây</div>
+                        </div>
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Audio Controls (Voice & Office Stealth) */}
+                  <div className="pt-1 border-t border-slate-100 flex items-center justify-between px-2.5 py-1.5 text-xs text-slate-600">
+                    <button
+                      onClick={() => {
+                        setIsMasterMenuOpen(false);
+                        setIsVoiceModalOpen(true);
+                      }}
+                      className="text-[11px] font-bold text-sky-700 hover:underline flex items-center gap-1"
+                    >
+                      <span>Giọng đọc:</span>
+                      <span>{activeVoiceOption.flag}</span>
+                    </button>
+
+                    <button
+                      onClick={toggleStealth}
+                      className="text-[11px] font-bold text-slate-600 hover:text-slate-900 flex items-center gap-1"
+                    >
+                      {isStealth ? <VolumeX className="w-3.5 h-3.5 text-rose-500" /> : <Volume2 className="w-3.5 h-3.5 text-slate-500" />}
+                      <span>{isStealth ? 'Tắt chuông' : 'Bật chuông'}</span>
+                    </button>
+                  </div>
+
+                  {/* LOGOUT BUTTON */}
+                  {onLogout && (
+                    <div className="pt-1 border-t border-slate-100">
+                      <button
+                        onClick={() => {
+                          playSound('click');
+                          setIsMasterMenuOpen(false);
+                          onLogout();
+                        }}
+                        className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-rose-700 hover:bg-rose-50 transition-colors flex items-center gap-2.5 cursor-pointer"
+                      >
+                        <LogOut className="w-3.5 h-3.5 text-rose-600" />
+                        <span>Đăng Xuất Khỏi Thiết Bị</span>
+                      </button>
+                    </div>
+                  )}
+
+                </div>
+              )}
+            </div>
+
+          </div>
+
         </div>
-      )}
+      </header>
 
-      {/* Duolingo-style Segmented Level Selector with Tactile Depth */}
-      <div className="max-w-md mx-auto px-3.5 pb-2">
-        <div className="bg-slate-100/90 p-1 rounded-2xl flex gap-1 border-2 border-slate-200/80">
-          
-          {/* LEVEL A1 */}
-          <button
-            onClick={() => {
-              playSound('click');
-              setSelectedLevel('A1');
-            }}
-            className={`flex-1 py-1.5 px-1 rounded-xl text-[11px] font-black tracking-tight transition-all text-center cursor-pointer ${
-              selectedLevel === 'A1'
-                ? 'bg-emerald-500 text-white shadow-[0_2px_0_#15803d]'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-            }`}
-            title="Mục tiêu: Đón tiếp đoàn khách quốc tế & Chào hỏi văn phòng"
-          >
-            🌱 A1: Đón Khách
-          </button>
-
-          {/* LEVEL A2-B1 */}
-          <button
-            onClick={() => {
-              playSound('click');
-              setSelectedLevel('A2-B1');
-            }}
-            className={`flex-1 py-1.5 px-1 rounded-xl text-[11px] font-black tracking-tight transition-all text-center cursor-pointer ${
-              selectedLevel === 'A2-B1'
-                ? 'bg-[#009FE3] text-white shadow-[0_2px_0_#0072ce]'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-            }`}
-            title="Mục tiêu: Dẫn tour mỏ Đảnh Thạnh & Thuyết trình độ pH 9.0"
-          >
-            💼 B1: Mỏ Khoáng
-          </button>
-
-          {/* LEVEL B2-C1 */}
-          <button
-            onClick={() => {
-              playSound('click');
-              setSelectedLevel('B2-C1');
-            }}
-            className={`flex-1 py-1.5 px-1 rounded-xl text-[10px] sm:text-[11px] font-black tracking-tight transition-all text-center cursor-pointer ${
-              selectedLevel === 'B2-C1'
-                ? 'bg-indigo-600 text-white shadow-[0_2px_0_#4338ca]'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-            }`}
-            title="Mục tiêu: Báo giá CIF/FOB & Đàm phán hợp đồng container xuất khẩu"
-          >
-            💎 C1: Xuất Khẩu
-          </button>
-
-          {/* LEVEL C2 */}
-          <button
-            onClick={() => {
-              playSound('click');
-              setSelectedLevel('C2');
-            }}
-            className={`flex-1 py-1.5 px-1 rounded-xl text-[10px] sm:text-[11px] font-black tracking-tight transition-all text-center cursor-pointer ${
-              selectedLevel === 'C2'
-                ? 'bg-purple-600 text-white shadow-[0_2px_0_#581c87]'
-                : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-            }`}
-            title="Mục tiêu: Đàm phán cấp CEO, Thành ngữ thương trường & Lối nói Bản Ngữ"
-          >
-            👑 C2: Bản Ngữ
-          </button>
-        </div>
-      </div>
-
-    </header>
-
-    {/* Responsive Voice Selector Modal outside header element */}
-    <VoiceSelectorModal
-      isOpen={isVoiceModalOpen}
-      onClose={() => setIsVoiceModalOpen(false)}
-      onSelectVoice={(vId) => setCurrentVoice(vId)}
-    />
-  </>
-);
+      {/* Voice Selector Modal */}
+      <VoiceSelectorModal
+        isOpen={isVoiceModalOpen}
+        onClose={() => setIsVoiceModalOpen(false)}
+      />
+    </>
+  );
 };
-
-

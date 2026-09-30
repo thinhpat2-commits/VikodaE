@@ -424,6 +424,23 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
             </div>
           )}
 
+          {/* ALWAYS VISIBLE LOGOUT BUTTON */}
+          {onLogout && (
+            <div className="pt-2 border-t border-slate-200">
+              <button
+                type="button"
+                onClick={() => {
+                  playSound('click');
+                  onLogout();
+                }}
+                className="w-full py-2.5 rounded-2xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-300 text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-2 active:scale-98 shadow-2xs"
+              >
+                <LogOut className="w-4 h-4 text-rose-600" />
+                <span>Đăng Xuất Tài Khoản Khỏi Thiết Bị Này</span>
+              </button>
+            </div>
+          )}
+
         </div>
 
       </div>

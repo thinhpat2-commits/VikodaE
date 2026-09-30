@@ -107,6 +107,7 @@ export default function App() {
         email: session.email || prev.email,
         department: session.department || prev.department,
         isLoggedIn: true,
+        isAdmin: session.email?.toLowerCase().trim() === 'thinh.pat2@gmail.com',
       }));
 
       // Restore from IndexedDB first (0ms latency)
@@ -193,6 +194,7 @@ export default function App() {
       email: cloudProfile.email,
       department: cloudProfile.department,
       isLoggedIn: true,
+      isAdmin: cloudProfile.email?.toLowerCase().trim() === 'thinh.pat2@gmail.com',
     }));
     setGamificationState((prev) => {
       const updated = {
@@ -349,6 +351,7 @@ export default function App() {
           setIsAdminPortalOpen(true);
         }}
         isCloudSynced={isCloudSynced}
+        onLogout={handleLogout}
       />
 
       {/* Main Screen Content */}

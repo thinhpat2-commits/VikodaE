@@ -11,12 +11,14 @@ import {
   Sparkles,
   Lock,
   ChevronRight,
-  Compass
+  Compass,
+  ArrowRight,
+  Target,
+  Flame
 } from 'lucide-react';
 import { VIKODA_CURRICULUM, VIKODA_SIDE_QUESTS, UnitLesson, SideQuestItem, CourseLevel } from '../data/curriculumData';
 import { VikoMascot } from './brand/VikodaLogos';
 import { DuolingoGameArena } from './DuolingoGameArena';
-import { DailyActionCoach } from './DailyActionCoach';
 import { PlacementTestModal, PlacementTestResult } from './PlacementTestModal';
 import { playSound } from '../services/soundEffects';
 import { playSpeech } from '../services/speechService';
@@ -105,147 +107,118 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
   return (
     <div className="space-y-4 pb-28 max-w-md mx-auto">
       
-      {/* 1. Duolingo-style Unit Section Banner */}
-      <div className={`p-4 rounded-3xl text-white shadow-md relative overflow-hidden border-b-4 ${
-        selectedLevel === 'A1'
-          ? 'bg-emerald-600 border-emerald-800'
-          : selectedLevel === 'A2-B1'
-          ? 'bg-[#009FE3] border-[#0072CE]'
-          : selectedLevel === 'B2-C1'
-          ? 'bg-indigo-600 border-indigo-800'
-          : 'bg-purple-700 border-purple-900'
-      }`}>
-        {/* Soft background circles */}
-        <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none" />
-
-        <div className="flex items-center justify-between gap-3 relative z-10">
-          <div className="space-y-1 flex-1">
-            <div className="flex items-center gap-2">
-              <span className="inline-block px-2.5 py-0.5 rounded-full bg-white/20 text-[10px] font-black tracking-wide uppercase">
-                {selectedLevel === 'A1' 
-                  ? 'CỬA 1 • NHẬP MÔN' 
-                  : selectedLevel === 'A2-B1' 
-                  ? 'CỬA 2 • MỎ KHOÁNG' 
-                  : selectedLevel === 'B2-C1'
-                  ? 'CỬA 3 • XUẤT KHẨU'
-                  : 'CỬA 4 • BẬC THẦY BẢN NGỮ'}
-              </span>
+      {/* COMPACT VIKO COACH CARD: "NÊN LÀM GÌ & CÓ THỂ LÀM GÌ" (Gọn nhẹ, tối ưu mobile) */}
+      <div className="bg-white rounded-2xl p-3 sm:p-3.5 border border-slate-200/90 shadow-2xs relative overflow-hidden">
+        
+        {/* Coach Header Row: Mascot mini + Level + Streak status */}
+        <div className="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-slate-100">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-center shrink-0">
+              <VikoMascot size="xs" mood="cheering" />
             </div>
-
-            <h2 className="text-base font-black tracking-tight leading-snug text-white">
-              {selectedLevel === 'A1' 
-                ? 'Giao Tiếp & Chào Đón Đoàn Khách' 
-                : selectedLevel === 'A2-B1' 
-                ? 'Giới Thiệu Mỏ Đảnh Thạnh pH 9.0' 
-                : selectedLevel === 'B2-C1'
-                ? 'Thương Thảo & Xuất Khẩu Container'
-                : 'Đàm Phán Cấp CEO & Lối Nói Bản Ngữ'}
-            </h2>
-            
-            <p className="text-xs text-sky-100 font-medium">
-              {selectedLevel === 'C2'
-                ? 'Lối nói Boardroom • Feel-Felt-Found • Incoterms & Lễ ký kết'
-                : 'Lộ trình 5 bài học thực chiến • 3 phút mỗi bài'}
-            </p>
-
-            {/* Guidebook Button ("Sổ tay kiến thức" - mọi nút bấm đều có lý do) */}
-            <div className="pt-1.5 flex items-center gap-2">
-              <button
-                onClick={() => {
-                  playSound('click');
-                  setIsGuidebookOpen(true);
-                }}
-                className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white text-[#0066CC] hover:bg-sky-50 font-extrabold text-xs border-b-2 border-slate-300 active:translate-y-0.5 transition-all cursor-pointer shadow-2xs"
-                title="Lý do: Xem nhanh mẫu câu & từ vựng cần nhớ trước khi học"
-              >
-                <BookOpen className="w-3.5 h-3.5 text-[#0070D1]" />
-                <span>Sổ Tay Ghi Nhớ</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  playSound('click');
-                  setIsPlacementTestOpen(true);
-                }}
-                className="inline-flex items-center space-x-1 px-2.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 font-black text-xs border-b-2 border-amber-600 active:translate-y-0.5 transition-all cursor-pointer shadow-2xs"
-                title="Làm bài kiểm tra đánh giá trình độ và đề xuất lộ trình"
-              >
-                <Compass className="w-3.5 h-3.5" />
-                <span>{hasTakenPlacementTest ? 'Test Lại' : 'Test Đầu Vào'}</span>
-              </button>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs font-black text-slate-800">Viko Coach</span>
+                <span className="text-[10px] font-extrabold uppercase px-1.5 py-0.2 rounded-md bg-sky-100 text-[#0070D1]">
+                  Cấp {selectedLevel}
+                </span>
+              </div>
+              <p className="text-[10px] text-slate-400 font-medium truncate max-w-[190px] sm:max-w-none">
+                {selectedLevel === 'A1' 
+                  ? 'Giao tiếp & Đón đoàn khách VIP' 
+                  : selectedLevel === 'A2-B1' 
+                  ? 'Thuyết trình Mỏ Đảnh Thạnh pH 9.0' 
+                  : selectedLevel === 'B2-C1'
+                  ? 'Đàm phán xuất khẩu Container'
+                  : 'Boardroom B2B Cấp CEO'}
+              </p>
             </div>
           </div>
 
-          {/* Viko Mascot Cheering */}
-          <div className="shrink-0 flex flex-col items-center">
-            <VikoMascot size="lg" mood="cheering" className="animate-duo-float" />
+          <div className="text-[10px] font-extrabold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-lg border border-amber-200 flex items-center gap-1 shrink-0">
+            <Sparkles className="w-3 h-3 text-amber-500" />
+            <span>Mục tiêu ngày</span>
           </div>
         </div>
-      </div>
 
-      {/* 2. SMART ROADMAP ACTION COACH (Answers: "Mở app ra nên làm gì? Học xong thì làm gì tiếp?") */}
-      <DailyActionCoach
-        selectedLevel={selectedLevel}
-        completedUnitIds={completedUnitIds}
-        displayedLessons={displayedLessons}
-        sideQuests={VIKODA_SIDE_QUESTS}
-        onStartLesson={handleStartLesson}
-        onGoToVoiceCoach={onGoToVoiceCoach}
-        onGoToPitchDeck={onGoToPitchDeck}
-        onGoToBattle={onGoToBattle}
-        onOpenSideQuest={(sq) => {
-          playSound('click');
-          setActiveSideQuest(sq);
-          setSideQuestAnswer(null);
-          setIsSideQuestAnswered(false);
-        }}
-        onOpenArena={onOpenEndlessDrill}
-        onOpenPlacementTest={() => setIsPlacementTestOpen(true)}
-        hasTakenPlacementTest={hasTakenPlacementTest}
-        highestDrillScore={highestDrillScore}
-      />
-
-      {/* 2. Action Cards: ARENA Đấu Trường Phản Xạ & Bảng Xếp Hạng */}
-      <div className="grid grid-cols-2 gap-2.5">
-        
-        {/* Arena Đấu Trường Phản Xạ Nhanh */}
-        <button
-          onClick={() => {
-            playSound('click');
-            onOpenEndlessDrill();
-          }}
-          className="p-3 rounded-2xl bg-white border-2 border-slate-200 border-b-4 border-b-slate-300 hover:border-amber-300 hover:border-b-amber-400 shadow-xs flex items-center space-x-2.5 text-left transition-all active:translate-y-0.5 active:border-b-2 cursor-pointer group"
-          title="Lý do: Đấu trường phản xạ 4 cấp bậc (Đồng, Bạc, Vàng, Kim Cương)"
-        >
-          <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-200 group-hover:scale-105 transition-transform">
-            <Zap className="w-5 h-5 fill-amber-500 text-amber-500" />
-          </div>
-          <div>
-            <div className="text-xs font-black text-slate-800 flex items-center gap-1">
-              <span>ARENA Phản Xạ</span>
-              <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+        {/* 1. NÊN LÀM GÌ (Primary recommendation: Học bài tiếp theo) */}
+        {displayedLessons[currentActiveIndex] ? (
+          <div className="space-y-1">
+            <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 flex items-center justify-between">
+              <span className="text-[#0070D1] flex items-center gap-1">
+                <Target className="w-3 h-3" />
+                <span>NÊN LÀM: Hoàn thành bài mới (3 phút)</span>
+              </span>
+              <span className="text-emerald-600 font-bold">+15 XP · +5 💎</span>
             </div>
-            <div className="text-[10px] text-amber-600 font-bold">4 Cấp Bậc • x3 XP</div>
-          </div>
-        </button>
 
-        {/* Bảng Xếp Hạng */}
-        <button
-          onClick={() => {
-            playSound('click');
-            onOpenLeaderboard();
-          }}
-          className="p-3 rounded-2xl bg-white border-2 border-slate-200 border-b-4 border-b-slate-300 hover:border-cyan-300 hover:border-b-cyan-400 shadow-xs flex items-center space-x-2.5 text-left transition-all active:translate-y-0.5 active:border-b-2 cursor-pointer group"
-          title="Lý do: Theo dõi thứ hạng thi đua giữa các phòng ban Vikoda"
-        >
-          <div className="w-9 h-9 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center shrink-0 border border-cyan-200 group-hover:scale-105 transition-transform">
-            <Trophy className="w-5 h-5 fill-cyan-500 text-cyan-600" />
+            <button
+              onClick={() => handleStartLesson(displayedLessons[currentActiveIndex])}
+              className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-[#0070D1] to-[#009FE3] hover:from-[#005bb5] hover:to-[#0088c7] text-white font-black text-xs shadow-xs active:scale-98 transition-all flex items-center justify-between group cursor-pointer"
+            >
+              <div className="flex items-center gap-2 truncate">
+                <span className="w-2 h-2 rounded-full bg-emerald-300 animate-pulse shrink-0" />
+                <span className="truncate">
+                  Bài {displayedLessons[currentActiveIndex].unitNumber}: {displayedLessons[currentActiveIndex].title}
+                </span>
+              </div>
+              <div className="flex items-center gap-1 text-[11px] text-sky-100 group-hover:text-white shrink-0 font-bold ml-1">
+                <span>Vào học</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+              </div>
+            </button>
           </div>
-          <div>
-            <div className="text-xs font-black text-slate-800">Bảng Xếp Hạng</div>
-            <div className="text-[10px] text-[#0070D1] font-bold">{highestDrillScore || 0} điểm kỷ lục</div>
+        ) : (
+          <div className="py-2 px-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800 text-center">
+            🎉 Bạn đã hoàn thành toàn bộ bài học của cấp độ {selectedLevel}!
           </div>
-        </button>
+        )}
+
+        {/* 2. CÓ THỂ LÀM GÌ (Secondary quick activities) */}
+        <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between gap-1 text-[10px] font-bold">
+          <span className="text-slate-400 shrink-0">Có thể làm:</span>
+          
+          <div className="flex items-center gap-1.5 overflow-x-auto">
+            {/* Arena 60s */}
+            <button
+              onClick={() => {
+                playSound('click');
+                onOpenEndlessDrill();
+              }}
+              className="px-2 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 flex items-center gap-1 shrink-0 transition-colors cursor-pointer"
+              title="Thử thách phản xạ nhanh 60 giây"
+            >
+              <Zap className="w-3 h-3 fill-amber-500 text-amber-500" />
+              <span>Arena 60s</span>
+            </button>
+
+            {/* Sổ tay */}
+            <button
+              onClick={() => {
+                playSound('click');
+                setIsGuidebookOpen(true);
+              }}
+              className="px-2 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 flex items-center gap-1 shrink-0 transition-colors cursor-pointer"
+              title="Xem nhanh sổ tay từ vựng & mẫu câu"
+            >
+              <BookOpen className="w-3 h-3 text-[#0070D1]" />
+              <span>Sổ tay</span>
+            </button>
+
+            {/* Test đầu vào */}
+            <button
+              onClick={() => {
+                playSound('click');
+                setIsPlacementTestOpen(true);
+              }}
+              className="px-2 py-1 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 flex items-center gap-1 shrink-0 transition-colors cursor-pointer"
+              title="Đánh giá 4 kỹ năng"
+            >
+              <Compass className="w-3 h-3 text-slate-500" />
+              <span>{hasTakenPlacementTest ? 'Test lại' : 'Test đầu vào'}</span>
+            </button>
+          </div>
+        </div>
 
       </div>
 

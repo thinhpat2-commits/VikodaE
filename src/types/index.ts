@@ -19,6 +19,7 @@ export interface EmployeeProfile {
   highestDrillScore: number;
   totalPracticeCount: number;
   isLoggedIn: boolean;
+  isAdmin?: boolean;
 }
 
 export interface GamificationState {

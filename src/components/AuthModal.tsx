@@ -7,11 +7,9 @@ import {
   Building2, 
   Eye, 
   EyeOff, 
-  Sparkles, 
   CheckCircle2, 
   Cloud,
-  ArrowRight,
-  Zap
+  ArrowRight
 } from 'lucide-react';
 import { 
   loginWithEmail, 
@@ -70,35 +68,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
       }
     } catch (err: any) {
       console.error('Auth error:', err);
-      setErrorMsg('Đăng nhập không thành công. Vui lòng kiểm tra lại kết nối.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleQuickDemoAdmin = async () => {
-    playSound('click');
-    setLoading(true);
-    try {
-      const p = await loginWithEmail('thinh.pat2@gmail.com', 'Vikoda@1957');
-      playSound('success');
-      onSuccess(p);
-    } catch (e) {
-      setErrorMsg('Lỗi đăng nhập tài khoản');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleQuickDemoLearner = async () => {
-    playSound('click');
-    setLoading(true);
-    try {
-      const p = await loginWithEmail('vikodaer@vikoda.com.vn', 'Vikoda@1957');
-      playSound('success');
-      onSuccess(p);
-    } catch (e) {
-      setErrorMsg('Lỗi đăng nhập tài khoản');
+      if (isLoginTab) {
+        setErrorMsg('Email hoặc mật khẩu không chính xác. Vui lòng thử lại hoặc chuyển sang tab Đăng Ký Mới.');
+      } else {
+        setErrorMsg('Đăng ký không thành công. Vui lòng kiểm tra lại email hoặc mật khẩu.');
+      }
     } finally {
       setLoading(false);
     }
@@ -118,7 +92,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
       }}
     >
       <div 
-        className="bg-white w-full max-w-[430px] rounded-3xl border-2 border-slate-200 border-b-6 border-b-sky-600 shadow-2xl overflow-hidden flex flex-col max-h-[95dvh] animate-in zoom-in-95 duration-150"
+        className="bg-white w-full max-w-[420px] rounded-3xl border-2 border-slate-200 border-b-6 border-b-sky-600 shadow-2xl overflow-hidden flex flex-col max-h-[96dvh] animate-in zoom-in-95 duration-150"
       >
         {/* Top Header Banner */}
         <div className="bg-gradient-to-r from-slate-900 via-[#004B87] to-[#0070D1] p-5 text-white text-center relative shrink-0">
@@ -132,7 +106,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
             </span>
             <span className="text-[10px] font-bold text-sky-200 flex items-center gap-0.5">
               <Cloud className="w-3 h-3 text-sky-300" />
-              <span>Tự động sao lưu</span>
+              <span>Đồng bộ mây</span>
             </span>
           </div>
 
@@ -140,7 +114,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
             Vikoda English Pro
           </h2>
           <p className="text-[11px] text-sky-100 font-medium">
-            Đăng nhập để bảo vệ chuỗi ngày học & đồng bộ dữ liệu đám mây
+            Hệ thống đào tạo Tiếng Anh Doanh Nghiệp Quốc Tế
           </p>
         </div>
 
@@ -155,7 +129,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
             }}
             className={`flex-1 py-2 rounded-xl text-xs font-black transition-all cursor-pointer ${
               isLoginTab
-                ? 'bg-white text-[#0070D1] shadow-xs border border-slate-200'
+                ? 'bg-white text-[#0070D1] shadow-2xs border border-slate-200'
                 : 'text-slate-500 hover:text-slate-800'
             }`}
           >
@@ -171,7 +145,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
             }}
             className={`flex-1 py-2 rounded-xl text-xs font-black transition-all cursor-pointer ${
               !isLoginTab
-                ? 'bg-white text-[#0070D1] shadow-xs border border-slate-200'
+                ? 'bg-white text-[#0070D1] shadow-2xs border border-slate-200'
                 : 'text-slate-500 hover:text-slate-800'
             }`}
           >
@@ -179,8 +153,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
           </button>
         </div>
 
-        {/* Scrollable Form Body */}
+        {/* Form Body */}
         <div className="p-5 overflow-y-auto flex-1 space-y-4">
+          
           {errorMsg && (
             <div className="p-3 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold animate-in fade-in flex items-start gap-2">
               <span className="text-sm">⚠️</span>
@@ -193,7 +168,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
               <>
                 <div>
                   <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
-                    Họ và Tên Vikodaer
+                    Họ và Tên Nhân Viên *
                   </label>
                   <div className="relative">
                     <input
@@ -202,7 +177,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
                       value={displayName}
                       onChange={(e) => setDisplayName(e.target.value)}
                       placeholder="VD: Trần Văn Minh"
-                      className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 font-semibold text-xs text-slate-900 focus:outline-none focus:border-[#0070D1] focus:ring-1 focus:ring-[#0070D1] bg-slate-50/50"
+                      className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 font-semibold text-xs text-slate-900 focus:outline-none focus:border-[#0070D1] focus:ring-1 focus:ring-[#0070D1] bg-slate-50/50"
                     />
                     <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   </div>
@@ -216,16 +191,15 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
                     <select
                       value={department}
                       onChange={(e) => setDepartment(e.target.value)}
-                      className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 font-semibold text-xs text-slate-900 focus:outline-none focus:border-[#0070D1] bg-slate-50/50 cursor-pointer"
+                      className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 font-semibold text-xs text-slate-900 focus:outline-none focus:border-[#0070D1] bg-slate-50/50 cursor-pointer"
                     >
                       <option value="Phòng Kinh Doanh & Xuất Khẩu">Phòng Kinh Doanh & Xuất Khẩu</option>
-                      <option value="Phòng Marketing & Phát Triển Thương Hiệu">Phòng Marketing & Thương Hiệu</option>
+                      <option value="Kênh Khách Sạn Cao Cấp HORECA">Kênh Khách Sạn Cao Cấp HORECA</option>
+                      <option value="Phòng Marketing & Thương Hiệu">Phòng Marketing & Thương Hiệu</option>
                       <option value="Nhà Máy Nước Khoáng Đảnh Thạnh">Nhà Máy Khoáng Đảnh Thạnh</option>
-                      <option value="Ban Giám Đốc & Quản Lý">Ban Giám Đốc & Quản Lý</option>
-                      <option value="Phòng Nhân Sự & Đào Tạo">Phòng Nhân Sự & Đào Tạo</option>
-                      <option value="Phòng Tài Chính - Kế Toán">Phòng Tài Chính - Kế Toán</option>
                       <option value="Phòng Quản Lý Chất Lượng QA/QC">Phòng QA/QC & Thí Nghiệm</option>
-                      <option value="Phòng Chuỗi Cung Ứng & Logistics">Phòng Chuỗi Cung Ứng & Logistics</option>
+                      <option value="Phòng Nhân Sự & Đào Tạo">Phòng Nhân Sự & Đào Tạo</option>
+                      <option value="Ban Giám Đốc & Quản Lý">Ban Giám Đốc & Quản Lý</option>
                     </select>
                     <Building2 className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   </div>
@@ -235,7 +209,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
 
             <div>
               <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
-                Địa Chỉ Email (Gmail / Công Ty)
+                Địa Chỉ Email (Gmail / Email Công Ty) *
               </label>
               <div className="relative">
                 <input
@@ -243,8 +217,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="VD: yourname@gmail.com"
-                  className="w-full pl-10 pr-3 py-2.5 rounded-xl border border-slate-300 font-semibold text-xs text-slate-900 focus:outline-none focus:border-[#0070D1] focus:ring-1 focus:ring-[#0070D1] bg-slate-50/50"
+                  placeholder="VD: name@vikoda.com.vn hoặc gmail"
+                  className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 font-semibold text-xs text-slate-900 focus:outline-none focus:border-[#0070D1] focus:ring-1 focus:ring-[#0070D1] bg-slate-50/50"
                 />
                 <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               </div>
@@ -252,7 +226,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
 
             <div>
               <label className="block text-[11px] font-black text-slate-700 uppercase tracking-wider mb-1">
-                Mật Khẩu Bảo Mật
+                Mật Khẩu *
               </label>
               <div className="relative">
                 <input
@@ -260,8 +234,8 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Nhập tối thiểu 6 ký tự..."
-                  className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-300 font-semibold text-xs text-slate-900 focus:outline-none focus:border-[#0070D1] focus:ring-1 focus:ring-[#0070D1] bg-slate-50/50"
+                  placeholder="••••••••"
+                  className="w-full pl-9 pr-10 py-2.5 rounded-xl border border-slate-300 font-semibold text-xs text-slate-900 focus:outline-none focus:border-[#0070D1] focus:ring-1 focus:ring-[#0070D1] bg-slate-50/50"
                 />
                 <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <button
@@ -277,66 +251,30 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onSuccess }) => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 rounded-2xl bg-gradient-to-r from-[#0070D1] to-[#009FE3] hover:from-[#005bb5] hover:to-[#0070D1] text-white font-black text-sm shadow-md transition-all active:scale-98 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3 rounded-2xl bg-[#0070D1] hover:bg-[#005bb5] text-white text-xs font-black shadow-md transition-all active:scale-98 cursor-pointer flex items-center justify-center gap-2 mt-2"
             >
               {loading ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span>Đang xử lý dữ liệu đám mây...</span>
               ) : (
                 <>
-                  <span>{isLoginTab ? 'Đăng Nhập Ngay' : 'Hoàn Tất Đăng Ký Tài Khoản'}</span>
+                  <span>{isLoginTab ? 'Đăng Nhập Vào Hệ Thống' : 'Hoàn Tất Đăng Ký Tài Khoản'}</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>
           </form>
 
-          {/* Quick Demo Shortcuts for Quick Testing */}
-          <div className="pt-2 border-t border-slate-200 space-y-2">
-            <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block text-center">
-              Lối Tắt Đăng Nhập Nhanh (Trải Nghiệm & Kiểm Thử)
-            </span>
-
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={handleQuickDemoAdmin}
-                className="p-2 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-left transition-colors cursor-pointer group"
-              >
-                <div className="flex items-center gap-1 text-[11px] font-black text-amber-900 leading-tight">
-                  <ShieldCheck className="w-3.5 h-3.5 text-amber-600" />
-                  <span>Quyền Admin</span>
-                </div>
-                <div className="text-[9px] text-amber-700 truncate font-mono mt-0.5">
-                  thinh.pat2@gmail.com
-                </div>
-              </button>
-
-              <button
-                type="button"
-                onClick={handleQuickDemoLearner}
-                className="p-2 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-left transition-colors cursor-pointer group"
-              >
-                <div className="flex items-center gap-1 text-[11px] font-black text-sky-900 leading-tight">
-                  <Zap className="w-3.5 h-3.5 text-sky-600" />
-                  <span>Học Viên Vikoda</span>
-                </div>
-                <div className="text-[9px] text-sky-700 truncate font-mono mt-0.5">
-                  vikodaer@vikoda.com.vn
-                </div>
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* Footer Security Badges */}
-        <div className="p-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-[10px] text-slate-500 font-medium shrink-0">
+        <div className="p-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between text-[10px] text-slate-500 font-medium shrink-0">
           <span className="flex items-center gap-1">
-            <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-            <span>Mã hóa AES-256</span>
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Mã hóa bảo mật tài khoản</span>
           </span>
           <span className="flex items-center gap-1">
-            <Cloud className="w-3 h-3 text-[#0070D1]" />
-            <span>Cloud Firestore Sync</span>
+            <Cloud className="w-3.5 h-3.5 text-[#0070D1]" />
+            <span>Google Cloud Firestore</span>
           </span>
         </div>
       </div>
