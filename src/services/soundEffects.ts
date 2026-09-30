@@ -19,9 +19,40 @@ function getAudioContext(): AudioContext | null {
   return audioCtx;
 }
 
+const STORAGE_KEY_STEALTH_MODE = 'vikoda_office_stealth_mode_v1';
+
+export const isStealthOfficeMode = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  return localStorage.getItem(STORAGE_KEY_STEALTH_MODE) === 'true';
+};
+
+export const setStealthOfficeMode = (enabled: boolean) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem(STORAGE_KEY_STEALTH_MODE, enabled ? 'true' : 'false');
+    window.dispatchEvent(new CustomEvent('vikoda_stealth_mode_changed', { detail: enabled }));
+  }
+};
+
+export const subscribeStealthMode = (listener: (enabled: boolean) => void) => {
+  if (typeof window === 'undefined') return () => {};
+  const handler = (e: Event) => {
+    const customEvent = e as CustomEvent<boolean>;
+    listener(customEvent.detail ?? isStealthOfficeMode());
+  };
+  window.addEventListener('vikoda_stealth_mode_changed', handler);
+  return () => {
+    window.removeEventListener('vikoda_stealth_mode_changed', handler);
+  };
+};
+
 export type SoundType = 'correct' | 'wrong' | 'gem' | 'levelup' | 'click' | 'streak' | 'celebrate' | 'success';
 
 export const playSound = (type: SoundType) => {
+  // If user is in Office Stealth Mode, suppress all game SFX (preserve quiet office environment)
+  if (isStealthOfficeMode() && type !== 'click') {
+    return;
+  }
+
   const ctx = getAudioContext();
   if (!ctx) return;
 

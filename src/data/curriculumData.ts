@@ -1,4 +1,4 @@
-export type CourseLevel = 'A1' | 'A2-B1' | 'B2-C1';
+export type CourseLevel = 'A1' | 'A2-B1' | 'B2-C1' | 'C2';
 
 export interface VocabularyHighlight {
   word: string;
@@ -1886,6 +1886,251 @@ export const VIKODA_CURRICULUM: UnitLesson[] = [
         ]
       }
     ]
+  },
+  // ==================== LEVEL C2: BẬC THẦY BẢN NGỮ & ĐÀM PHÁN TOÀN CẦU (NATIVE MASTER) ====================
+  {
+    id: 'unit-16',
+    unitNumber: 16,
+    title: 'Thành Ngữ Thương Trường & Lối Nói Bản Ngữ',
+    subtitle: 'Làm chủ các executive idioms giúp bạn nói chuyện như một Tổng Giám Đốc Mỹ',
+    level: 'C2',
+    icon: '👑',
+    color: 'purple',
+    xpReward: 50,
+    gemReward: 20,
+    exercises: [
+      {
+        id: 'u16-e1',
+        type: 'choice',
+        promptVi: 'Khi đàm phán hợp đồng phân phối, bạn muốn nói: "Chúng tôi muốn tạo ra một sân chơi công bằng cho cả hai bên", người bản xứ dùng thành ngữ nào?',
+        englishSentence: 'We want to ensure a level playing field for all regional distributors.',
+        audioText: 'We want to ensure a level playing field for all regional distributors.',
+        options: [
+          'We want to ensure a level playing field for all regional distributors.',
+          'We want to make the ground flat and smooth.',
+          'We want to play an equal soccer match.'
+        ],
+        correctIndex: 0,
+        explanation: '"A level playing field" là thành ngữ boardroom chuẩn mực có nghĩa là môi trường cạnh tranh công bằng, không ai bị thiên vị.',
+        whyWrong: 'Dịch word-by-word "make ground flat" nghe ngô nghê và không thuộc văn phong kinh doanh.',
+        crucialNote: 'Thành ngữ này khẳng định uy tín và sự minh bạch trong chính sách giá của Vikoda.',
+        memoryHook: 'LEVEL PLAYING FIELD = Sân chơi công bằng, minh bạch.',
+        vocabularyHighlights: [
+          { word: 'Level playing field', meaning: 'Sân chơi cạnh tranh công bằng', phonetic: 'ˈlɛvl ˈpleɪɪŋ fiːld' },
+          { word: 'Regional distributor', meaning: 'Nhà phân phối vùng', phonetic: 'ˈriːdʒənl dɪˈstrɪbjətər' }
+        ]
+      },
+      {
+        id: 'u16-e2',
+        type: 'word_order',
+        promptVi: 'Sắp xếp câu: "Để thúc đẩy hợp đồng chốt nhanh hơn, chúng tôi sẽ hỗ trợ thêm chi phí trưng bày kệ hàng."',
+        englishSentence: 'To sweeten the deal, we will subsidize your premier shelf display costs.',
+        audioText: 'To sweeten the deal, we will subsidize your premier shelf display costs.',
+        phonetics: '/tuː ˈswiːtn ðə diːl, wiː wɪl ˈsʌbsɪdaɪz jɔːr ˈprɛmiər ʃɛlf dɪˈspleɪ kɒsts/',
+        wordPool: ['To', 'sweeten', 'the', 'deal,', 'we', 'will', 'subsidize', 'your', 'premier', 'shelf', 'display', 'costs.', 'salt', 'kill'],
+        explanation: '"Sweeten the deal" là thành ngữ bản ngữ kinh điển nghĩa là đưa thêm ưu đãi hấp dẫn để đối tác dễ dàng gật đầu ký hợp đồng.',
+        whyWrong: 'Thay vì giảm giá trực tiếp làm mất giá trị sản phẩm, hãy "sweeten the deal" bằng chi phí marketing hoặc POSM.',
+        crucialNote: 'Từ "subsidize" (trợ giá / hỗ trợ chi phí) nghe lịch thiệp và mang tính hỗ trợ tài chính cao cấp.',
+        memoryHook: 'SWEETEN THE DEAL = Thêm đường cho ngọt, thêm ưu đãi để chốt deal!',
+        vocabularyHighlights: [
+          { word: 'Sweeten the deal', meaning: 'Thêm ưu đãi hấp dẫn để chốt hợp đồng', phonetic: 'ˈswiːtn ðə diːl' },
+          { word: 'Subsidize', meaning: 'Trợ cấp, hỗ trợ kinh phí', phonetic: 'ˈsʌbsɪdaɪz' }
+        ]
+      },
+      {
+        id: 'u16-e3',
+        type: 'speak',
+        promptVi: 'Luyện câu thể hiện tư duy nhạy bén khi đối thoại với đối tác quốc tế:',
+        englishSentence: 'Reading between the lines, your main concern is inventory turnover, not the unit cost.',
+        audioText: 'Reading between the lines, your main concern is inventory turnover, not the unit cost.',
+        phonetics: '/ˈriːdɪŋ bɪˈtwiːn ðə laɪnz, jɔːr meɪn kənˈsɜːrn ɪz ˈɪnvəntɔːri ˈtɜːrnˌoʊvər, nɒt ðə ˈjuːnɪt kɒst/',
+        explanation: '"Read between the lines" (Đọc được ẩn ý / thấu hiểu tâm lý ngầm) là đỉnh cao của nhà đàm phán thấu thị.',
+        whyWrong: 'Đối tác thường phàn nàn về giá, nhưng thực chất họ lo ngại hàng bán chậm (inventory turnover). Nắm đúng tâm lý này bạn sẽ làm chủ bàn đàm phán.',
+        crucialNote: 'Nói câu này với giọng ấm, đồng cảm, mắt nhìn thẳng vào đối tác để tạo sự kết nối tin cậy.',
+        memoryHook: 'READ BETWEEN THE LINES = Đọc ra ẩn ý đằng sau lời nói.',
+        vocabularyHighlights: [
+          { word: 'Read between the lines', meaning: 'Đọc ra ẩn ý, thấu hiểu ngầm', phonetic: 'riːd bɪˈtwiːn ðə laɪnz' },
+          { word: 'Inventory turnover', meaning: 'Tốc độ quay vòng hàng tồn kho', phonetic: 'ˈɪnvəntɔːri ˈtɜːrnˌoʊvər' }
+        ]
+      },
+      {
+        id: 'u16-e4',
+        type: 'choice',
+        promptVi: 'Khi muốn nói sản phẩm chai thủy tinh Vikoda sẽ tạo ra bước đột phá doanh thu thực sự cho chuỗi resort:',
+        englishSentence: 'This eco-luxury glass bottle lineup will genuinely move the needle for your beverage revenue.',
+        audioText: 'This eco-luxury glass bottle lineup will genuinely move the needle for your beverage revenue.',
+        options: [
+          'This eco-luxury glass bottle lineup will genuinely move the needle for your beverage revenue.',
+          'This water bottle will touch your sewing needle.',
+          'This water is cheap so buy it now.'
+        ],
+        correctIndex: 0,
+        explanation: '"Move the needle" là thành ngữ quản trị cao cấp chỉ hành động tạo ra tác động rõ rệt, thay đổi cục diện đáng kể.',
+        whyWrong: '"Move the needle" xuất phát từ đồng hồ đo lường, không liên quan đến cái kim may vá thông thường.',
+        crucialNote: 'Các Giám đốc F&B 5 sao đánh giá rất cao những sản phẩm giúp họ "move the needle" về cả doanh thu lẫn tiêu chuẩn xanh ESG.',
+        memoryHook: 'MOVE THE NEEDLE = Làm kim đồng hồ dịch chuyển, tạo đột phá rõ rệt!',
+        vocabularyHighlights: [
+          { word: 'Move the needle', meaning: 'Tạo đột phá rõ rệt, làm chuyển biến cục diện', phonetic: 'muːv ðə ˈniːdl' },
+          { word: 'Beverage revenue', meaning: 'Doanh thu ngành đồ uống', phonetic: 'ˈbɛvərɪdʒ ˈrɛvənjuː' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'unit-17',
+    unitNumber: 17,
+    title: 'Xử Lý Phản Bác Cấp Cao (Feel - Felt - Found)',
+    subtitle: 'Nghệ thuật đảo ngược thế cờ khi đối tác khó tính so sánh với các tập đoàn đa quốc gia',
+    level: 'C2',
+    icon: '🛡️',
+    color: 'cyan',
+    xpReward: 50,
+    gemReward: 20,
+    exercises: [
+      {
+        id: 'u17-e1',
+        type: 'word_order',
+        promptVi: 'Sắp xếp công thức đàm phán kinh điển Feel-Felt-Found: "Tôi hiểu cảm giác của bạn, nhiều đối tác ban đầu cũng nghĩ vậy, nhưng sau đó họ nhận ra giá trị vượt trội của Vikoda."',
+        englishSentence: 'I understand how you feel, other buyers felt the same, but they found that Vikoda drove higher retention.',
+        audioText: 'I understand how you feel, other buyers felt the same, but they found that Vikoda drove higher retention.',
+        phonetics: '/aɪ ˌʌndərˈstænd haʊ juː fiːl, ˈʌðər ˈbaɪərz fɛlt ðə seɪm, bʌt ðeɪ faʊnd ðæt vɪˈkoʊdə droʊv ˈhaɪər rɪˈtɛnʃn/',
+        wordPool: ['I', 'understand', 'how', 'you', 'feel,', 'other', 'buyers', 'felt', 'the', 'same,', 'but', 'they', 'found', 'that', 'Vikoda', 'drove', 'higher', 'retention.', 'hate'],
+        explanation: 'Khung đàm phán "Feel - Felt - Found" của Harvard: Đồng cảm (Feel) -> Bình thường hóa (Felt) -> Khám phá giải pháp thực chứng (Found).',
+        whyWrong: 'Tuyệt đối không tranh cãi "You are wrong" với khách hàng. Hãy dẫn dắt họ bằng trải nghiệm của các đối tác đi trước.',
+        crucialNote: 'Từ "retention" (tỷ lệ khách hàng quay lại mua tiếp) là chỉ số vàng trong bán lẻ.',
+        memoryHook: '3F THẦN THÁNH: FEEL (Thấu cảm) -> FELT (Đồng cảnh) -> FOUND (Khai sáng giá trị)!',
+        vocabularyHighlights: [
+          { word: 'Higher retention', meaning: 'Tỷ lệ khách hàng gắn bó/mua lại cao hơn', phonetic: 'ˈhaɪər rɪˈtɛnʃn' },
+          { word: 'Value proposition', meaning: 'Tuyên bố giá trị độc bản', phonetic: 'ˈvæljuː ˌprɒpəˈzɪʃn' }
+        ]
+      },
+      {
+        id: 'u17-e2',
+        type: 'speak',
+        promptVi: 'Nói câu phản hồi đĩnh đạc khi đối tác so sánh với Evian hoặc San Pellegrino:',
+        englishSentence: 'While European brands offer history, Vikoda provides a rare natural pH 9.0 synergy that no imported water can replicate at source.',
+        audioText: 'While European brands offer history, Vikoda provides a rare natural pH nine point oh synergy that no imported water can replicate at source.',
+        phonetics: '/waɪl ˌjʊərəˈpiːən brændz ˈɒfər ˈhɪstəri, vɪˈkoʊdə prəˈvaɪdz ə rɛər ˈnætʃrəl piː-eɪtʃ naɪn pɔɪnt oʊ ˈsɪnərdʒi ðæt noʊ ɪmˈpɔːrtɪd ˈwɔːtər kæn ˈrɛplɪkeɪt æt sɔːrs/',
+        explanation: 'Tôn trọng đối thủ nhưng nêu bật lợi thế độc bản: Tính kiềm tự nhiên pH 9.0 nguyên bản tại vòi mà không nước nhập khẩu nào sao chép được.',
+        whyWrong: 'Không dìm hàng đối thủ mà định vị Vikoda vào một phân khúc khác biệt hoàn toàn (Authentic Alkaline Synergy).',
+        crucialNote: 'Từ "replicate at source" (tái tạo nguyên bản tại nguồn) thể hiện tính độc quyền thiên nhiên.',
+        memoryHook: 'TÔN TRỌNG ĐỐI THỦ + ĐỘC BẢN VIKODA PH 9.0 = Vô đối trên thị trường!',
+        vocabularyHighlights: [
+          { word: 'Synergy', meaning: 'Sự cộng hưởng khoáng chất tương hỗ', phonetic: 'ˈsɪnərdʒi' },
+          { word: 'Replicate', meaning: 'Sao chép, tái tạo lại', phonetic: 'ˈrɛplɪkeɪt' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'unit-18',
+    unitNumber: 18,
+    title: 'Incoterms & Thanh Toán Quốc Tế Cấp Chuyên Gia',
+    subtitle: 'Nắm vững LC at Sight, Giám định SGS và Vận tải viễn dương bảo toàn khoáng chất',
+    level: 'C2',
+    icon: '🚢',
+    color: 'blue',
+    xpReward: 50,
+    gemReward: 20,
+    exercises: [
+      {
+        id: 'u18-e1',
+        type: 'choice',
+        promptVi: 'Khi đàm phán điều khoản thanh toán an toàn tuyệt đối cho container xuất khẩu đi Trung Đông / Hoa Kỳ:',
+        englishSentence: 'Our standard terms require an Irrevocable Letter of Credit at sight confirmed by a top-tier international bank.',
+        audioText: 'Our standard terms require an Irrevocable Letter of Credit at sight confirmed by a top-tier international bank.',
+        options: [
+          'Our standard terms require an Irrevocable Letter of Credit at sight confirmed by a top-tier international bank.',
+          'Please send us cash in an envelope via post.',
+          'You can pay whenever you feel like it next year.'
+        ],
+        correctIndex: 0,
+        explanation: '"Irrevocable LC at sight" (Thư tín dụng không thể hủy ngang trả ngay) là phương thức thanh toán chuẩn quốc tế đảm bảo an toàn vốn tối đa.',
+        whyWrong: 'Xuất khẩu đường biển luôn cần thư tín dụng có xác nhận (confirmed LC) từ ngân hàng hạng nhất (top-tier bank).',
+        crucialNote: 'Đây là điều khoản chuẩn mà phòng Tài chính & Kế toán Vikoda luôn áp dụng.',
+        memoryHook: 'IRREVOCABLE LC AT SIGHT = Thư tín dụng không hủy ngang, tiền về ngay khi xuất trình chứng từ!',
+        vocabularyHighlights: [
+          { word: 'Irrevocable LC', meaning: 'Thư tín dụng không thể hủy ngang', phonetic: 'ɪˈrɛvəkəbl ɛl-siː' },
+          { word: 'At sight', meaning: 'Thanh toán ngay khi nhìn thấy chứng từ hợp lệ', phonetic: 'æt saɪt' }
+        ]
+      },
+      {
+        id: 'u18-e2',
+        type: 'word_order',
+        promptVi: 'Sắp xếp câu: "Mỗi lô hàng xuất khẩu đều kèm theo Chứng thư Phân tích Khoáng chất độc lập từ SGS hoặc Eurofins."',
+        englishSentence: 'Every export consignment is accompanied by an independent SGS Certificate of Mineral Analysis.',
+        audioText: 'Every export consignment is accompanied by an independent SGS Certificate of Mineral Analysis.',
+        phonetics: '/ˈɛvri ˈɛkspɔːrt kənˈsaɪnmənt ɪz əˈkʌmpənid baɪ ən ˌɪndɪˈpɛndənt ɛs-dʒiː-ɛs sərˈtɪfɪkət əv ˈmɪnərəl əˈnæləsɪs/',
+        wordPool: ['Every', 'export', 'consignment', 'is', 'accompanied', 'by', 'an', 'independent', 'SGS', 'Certificate', 'of', 'Mineral', 'Analysis.', 'fake'],
+        explanation: 'Chứng thư kiểm nghiệm SGS / Eurofins là tấm hộ chiếu thông quan và bảo chứng chất lượng cho Vikoda trên toàn cầu.',
+        whyWrong: '"Consignment" là từ chuyên ngành ngoại thương chỉ lô hàng gửi xuất khẩu.',
+        crucialNote: 'Nhắc đến SGS và Eurofins tạo niềm tin lập tức cho các nhà nhập khẩu tại Nhật Bản và Châu Âu.',
+        memoryHook: 'SGS CERTIFICATE = Tấm khiên bảo chứng phẩm cấp quốc tế.',
+        vocabularyHighlights: [
+          { word: 'Consignment', meaning: 'Lô hàng xuất khẩu', phonetic: 'kənˈsaɪnmənt' },
+          { word: 'Certificate of Analysis', meaning: 'Chứng thư kiểm nghiệm thành phần', phonetic: 'sərˈtɪfɪkət əv əˈnæləsɪs' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'unit-19',
+    unitNumber: 19,
+    title: 'Khoa Học Khoáng Kiềm & Thẩm Thấu Tế Bào Chuyên Sâu',
+    subtitle: 'Giải thích cơ chế Bicarbonate HCO3- và liên kết Hydro tự nhiên bằng tiếng Anh khoa học',
+    level: 'C2',
+    icon: '🧬',
+    color: 'emerald',
+    xpReward: 50,
+    gemReward: 20,
+    exercises: [
+      {
+        id: 'u19-e1',
+        type: 'speak',
+        promptVi: 'Thuyết trình cơ chế kiềm tự nhiên đối trọng với tính axit trong dạ dày:',
+        englishSentence: 'Vikoda’s abundant natural bicarbonate buffers metabolic acidity and optimizes cellular hydration without stressing renal function.',
+        audioText: 'Vikodas abundant natural bicarbonate buffers metabolic acidity and optimizes cellular hydration without stressing renal function.',
+        phonetics: '/vɪˈkoʊdəz əˈbʌndənt ˈnætʃrəl baɪˈkɑːrbənət ˈbʌfərz ˌmɛtəˈbɒlɪk əˈsɪdəti ænd ˈɒptɪmaɪzɪz ˈsɛljələr haɪˈdreɪʃn wɪˈðaʊt ˈstrɛsɪŋ ˈriːnl ˈfʌŋkʃn/',
+        explanation: 'Câu nói đậm chất khoa học y khoa: Muối Hydrogencarbonate (Bicarbonate) tự nhiên giúp đệm axit chuyển hóa và tối ưu thẩm thấu tế bào.',
+        whyWrong: '"Without stressing renal function" (không gây áp lực cho thận) khẳng định chỉ số TDS cân bằng của Vikoda phù hợp uống hàng ngày.',
+        crucialNote: 'Các bác sĩ và chuyên gia dinh dưỡng quốc tế cực kỳ chú trọng cơ chế đệm axit sinh học này.',
+        memoryHook: 'BICARBONATE BUFFERS ACIDITY = Muối khoáng kiềm trung hòa axit dư thừa!',
+        vocabularyHighlights: [
+          { word: 'Bicarbonate', meaning: 'Gốc khoáng kiềm Hydrogencarbonate (HCO3-)', phonetic: 'baɪˈkɑːrbənət' },
+          { word: 'Cellular hydration', meaning: 'Sự thẩm thấu cấp ẩm đến từng tế bào', phonetic: 'ˈsɛljələr haɪˈdreɪʃn' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'unit-20',
+    unitNumber: 20,
+    title: 'Thuyết Trình Hội Đồng Quản Trị & Lễ Ký Kết Đỉnh Cao',
+    subtitle: 'Kỹ năng đóng gói thương vụ triệu đô, trả lời chất vấn cổ đông và nâng ly ngoại giao',
+    level: 'C2',
+    icon: '🥂',
+    color: 'amber',
+    xpReward: 60,
+    gemReward: 25,
+    exercises: [
+      {
+        id: 'u20-e1',
+        type: 'word_order',
+        promptVi: 'Sắp xếp câu: "Hôm nay chúng ta không chỉ ký một hợp đồng phân phối, mà mở ra một kỷ nguyên mới cho ngành nước khoáng kiềm nguyên bản."',
+        englishSentence: 'Today we do not merely sign a contract, we inaugurate a new era for natural alkaline wellness.',
+        audioText: 'Today we do not merely sign a contract, we inaugurate a new era for natural alkaline wellness.',
+        phonetics: '/təˈdeɪ wiː duː nɒt ˈmɪərli saɪn ə ˈkɒntrækt, wiː ɪˈnɔːgjəreɪt ə njuː ˈɪərə fɔːr ˈnætʃrəl ˈælkəlaɪn ˈwɛlnɪs/',
+        wordPool: ['Today', 'we', 'do', 'not', 'merely', 'sign', 'a', 'contract,', 'we', 'inaugurate', 'a', 'new', 'era', 'for', 'natural', 'alkaline', 'wellness.', 'ugly'],
+        explanation: 'Lời phát biểu truyền cảm hứng của nhà lãnh đạo ngoại giao tại lễ ký kết hợp đồng đại lý độc quyền.',
+        whyWrong: 'Dùng từ "inaugurate a new era" (khai mở một kỷ nguyên mới) nâng tầm quan hệ đối tác chiến lược.',
+        crucialNote: 'Ánh mắt kiên định, nụ cười ấm áp, nâng ly Vikoda Thủy Tinh lấp lánh hướng về toàn thể quan khách.',
+        memoryHook: 'INAUGURATE A NEW ERA = Khởi đầu một kỷ nguyên rực rỡ!',
+        vocabularyHighlights: [
+          { word: 'Inaugurate', meaning: 'Khai mở, long trọng khởi xướng', phonetic: 'ɪˈnɔːgjəreɪt' },
+          { word: 'Wellness', meaning: 'Sức khỏe toàn diện thể chất và tinh thần', phonetic: 'ˈwɛlnɪs' }
+        ]
+      }
+    ]
   }
 ];
 
@@ -2092,6 +2337,72 @@ export const VIKODA_SIDE_QUESTS: SideQuestItem[] = [
         correctIndex: 0,
         explanation: 'Con số cụ thể: giảm 85% khí thải carbon chuỗi cung ứng và cắt giảm 200,000 chai nhựa mỗi năm là bằng chứng ESG không thể chối từ.',
         crucialNote: 'Cung cấp báo cáo chứng nhận lượng rác thải nhựa cắt giảm để khách sạn đưa vào Báo cáo thường niên (Annual Sustainability Report).'
+      }
+    }
+  },
+  {
+    id: 'sq-7',
+    level: 'C2',
+    slotAfterUnitIndex: 0, // Between Unit 16 and Unit 17
+    side: 'left',
+    badge: 'NGOẠI GIAO BÀN TIỆC',
+    title: 'Nghệ Thuật Small Talk & Kết Nối Cấp Cao',
+    subtitle: 'Nói chuyện tự nhiên với các tỷ phú và Tổng Giám Đốc tại tiệc tối ngoại giao',
+    icon: '🍸',
+    xpReward: 50,
+    gemReward: 20,
+    content: {
+      introduction: 'Thương vụ triệu đô không được chốt trong phòng họp, mà thường được mở màn qua những mẩu chuyện small talk tinh tế tại bàn tiệc tối.',
+      whyCrucial: 'Nói tiếng Anh lưu loát thôi chưa đủ; cần biết cách khen ngợi văn minh, khéo léo chuyển chủ đề sang nguồn khoáng Đảnh Thạnh mà không gượng ép.',
+      memoryHook: 'Quy tắc FORM: Family - Occupation - Recreation - Mineral (Gia đình - Công việc - Giải trí - Tinh hoa khoáng sản).',
+      keyVocabulary: [
+        { word: 'Ice-breaker', meaning: 'Lời mở đầu phá vỡ sự xa cách', phonetic: '/ˈaɪsˌbreɪkər/', example: 'A refreshing glass of Vikoda is the ultimate ice-breaker.' },
+        { word: 'Rapport', meaning: 'Mối liên kết hòa hợp, tin cậy', phonetic: '/ræˈpɔːr/', example: 'Building instant rapport with European dignitaries.' },
+        { word: 'Sommelier pairing', meaning: 'Nghệ thuật kết hợp nước khoáng với món ăn cao cấp', phonetic: '/səˈmɛljeɪ ˈpɛərɪŋ/', example: 'Our sparkling mineral water offers flawless sommelier pairing.' }
+      ],
+      challengeQuestion: {
+        prompt: 'Tại bàn tiệc tối với Chủ tịch đối tác, câu mở chuyện nào tự nhiên và đẳng cấp nhất?',
+        options: [
+          'It is magnificent to meet you in person, Mr. Chairman. Notice how Dan Thanh mineral water cleanses the palate between courses?',
+          'Give me your money right now for my water.',
+          'Why are you eating so slowly?'
+        ],
+        correctIndex: 0,
+        explanation: 'Nhã nhặn, tôn trọng đối tác và khéo léo hướng sự chú ý vào công năng làm sạch vị giác (cleanses the palate) của nước khoáng Đảnh Thạnh.',
+        crucialNote: 'Để ý tư thế cầm ly chân cao thanh lịch khi dùng nước khoáng có ga.'
+      }
+    }
+  },
+  {
+    id: 'sq-8',
+    level: 'C2',
+    slotAfterUnitIndex: 2, // Between Unit 18 and Unit 19
+    side: 'right',
+    badge: 'TÂM LÝ ĐÀM PHÁN',
+    title: 'Quyền Lực Của Khoảng Lặng Chiến Lược',
+    subtitle: 'Làm chủ Strategic Silence để đối tác tự nhượng bộ trên bàn đàm phán',
+    icon: '🤫',
+    xpReward: 50,
+    gemReward: 20,
+    content: {
+      introduction: 'Người thiếu kinh nghiệm sợ sự im lặng nên thường lấp đầy bằng cách vội vã nhượng bộ giá. Chuyên gia bản ngữ coi sự im lặng là vũ khí tối thượng.',
+      whyCrucial: 'Sau khi bạn đưa ra mức giá CIF 18.50 USD/thùng, hãy dừng lại, giữ ánh mắt ấm áp nhưng kiên định và để đối tác là người lên tiếng trước.',
+      memoryHook: 'HE WHO SPEAKS FIRST LOSES = Trong khoảng lặng sau đề xuất giá, ai mở lời trước người đó nhượng bộ!',
+      keyVocabulary: [
+        { word: 'Strategic silence', meaning: 'Khoảng lặng chiến lược trong đàm phán', phonetic: '/strəˈtiːdʒɪk ˈsaɪləns/', example: 'Use strategic silence right after stating your FOB offer.' },
+        { word: 'Concession trading', meaning: 'Trao đổi nhượng bộ có qua có lại', phonetic: '/kənˈsɛʃn ˈtreɪdɪŋ/', example: 'Never give a discount without demanding larger volume.' },
+        { word: 'Walk-away point', meaning: 'Điểm sàn dừng đàm phán bảo vệ danh dự', phonetic: '/wɔːk əˈweɪ pɔɪnt/', example: 'Know your walk-away point before entering the room.' }
+      ],
+      challengeQuestion: {
+        prompt: 'Sau khi đưa ra đề xuất giá xuất khẩu container, bạn nên làm gì tiếp theo?',
+        options: [
+          'Maintain calm eye contact, remain silent for 5-7 seconds, and allow the counterpart to respond first.',
+          'Start talking rapidly and immediately say "We can lower the price if you want".',
+          'Run out of the room.'
+        ],
+        correctIndex: 0,
+        explanation: 'Giữ ánh mắt điềm tĩnh, im lặng 5-7 giây thể hiện sự tự tin tuyệt đối vào giá trị sản phẩm và buộc đối tác phải cân nhắc kỹ đề xuất của bạn.',
+        crucialNote: 'Nếu đối tác im lặng, đừng sợ hãi. Đó là dấu hiệu họ đang tính toán con số trong đầu!'
       }
     }
   }

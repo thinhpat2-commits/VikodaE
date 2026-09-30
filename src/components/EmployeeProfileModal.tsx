@@ -56,6 +56,7 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
   const [avatarUrl, setAvatarUrl] = useState(profile.avatarUrl || PRESET_AVATARS[1].url);
   const [showCertificate, setShowCertificate] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -65,7 +66,8 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
     const file = e.target.files?.[0];
     if (file) {
       if (file.size > 2 * 1024 * 1024) {
-        alert('Vui lòng chọn ảnh nhỏ hơn 2MB để lưu trữ tối ưu.');
+        setErrorMsg('Vui lòng chọn ảnh nhỏ hơn 2MB để lưu trữ tối ưu.');
+        setTimeout(() => setErrorMsg(null), 3500);
         return;
       }
       const reader = new FileReader();
@@ -82,7 +84,8 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     if (!employeeCode.trim() || !fullName.trim()) {
-      alert('Vui lòng nhập Mã Nhân Viên và Họ Tên!');
+      setErrorMsg('Vui lòng nhập đầy đủ Mã Nhân Viên và Họ Tên!');
+      setTimeout(() => setErrorMsg(null), 3500);
       return;
     }
     const updated: EmployeeProfile = {
@@ -359,6 +362,12 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
                   </select>
                 </div>
               </div>
+
+              {errorMsg && (
+                <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-300 text-rose-800 text-xs font-bold text-center animate-in fade-in">
+                  ⚠️ {errorMsg}
+                </div>
+              )}
 
               <button
                 type="submit"

@@ -111,7 +111,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   // Voice recording
   const handleStartSpeaking = () => {
     if (!isSpeechRecognitionSupported()) {
-      alert('Trình duyệt chưa hỗ trợ Web Speech Recognition. Bạn có thể dùng Chrome/Edge.');
+      setSpokenText('Trình duyệt chưa hỗ trợ Web Speech Recognition. Hãy mở trên Chrome hoặc Edge.');
       return;
     }
 

@@ -101,29 +101,73 @@ export const VikodaPitchDeck: React.FC<VikodaPitchDeckProps> = ({
         <ChevronRight className="w-5 h-5 text-white/80" />
       </button>
 
-      {/* 3. Card Tab Selector: Horizontally scrollable on mobile */}
-      <div className="flex overflow-x-auto no-scrollbar bg-slate-100/90 p-1 rounded-2xl gap-1 border border-slate-200/80 select-none">
-        {VIKODA_PITCH_CARDS.map((card, idx) => {
-          const isSelected = card.id === selectedCardId;
-          const icons = ['⚡', '💎', '🏨', '🛡️', '⚡', '📦', '🌱', '🏞️'];
-          return (
-            <button
-              key={card.id}
-              onClick={() => {
-                setSelectedCardId(card.id);
-                playSound('click');
-              }}
-              className={`py-2 px-3 text-center rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
-                isSelected
-                  ? 'bg-white text-[#0066CC] shadow-xs font-black ring-1 ring-sky-300/60'
-                  : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-              }`}
-            >
-              <span>{icons[idx % icons.length]}</span>
-              <span>{card.topic}</span>
-            </button>
-          );
-        })}
+      {/* 3. Slide Stepper & Quick Direct Jump (Replaces clunky horizontal scroll) */}
+      <div className="bg-white rounded-3xl border border-sky-100 p-3 shadow-2xs space-y-2.5">
+        <div className="flex items-center justify-between gap-2">
+          {/* Previous Button */}
+          <button
+            onClick={() => {
+              const currentIdx = VIKODA_PITCH_CARDS.findIndex((c) => c.id === selectedCardId);
+              const prevIdx = currentIdx > 0 ? currentIdx - 1 : VIKODA_PITCH_CARDS.length - 1;
+              setSelectedCardId(VIKODA_PITCH_CARDS[prevIdx].id);
+              playSound('click');
+            }}
+            className="px-3 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-[#0066CC] font-extrabold text-xs flex items-center gap-1 border border-sky-200/80 transition-all active:scale-95 cursor-pointer shrink-0"
+            title="Slide trước"
+          >
+            <span>◀</span>
+            <span className="hidden sm:inline">Trước</span>
+          </button>
+
+          {/* Current Slide Indicator & Quick Title */}
+          <div className="text-center flex-1 min-w-0 px-1">
+            <span className="text-[10px] font-black uppercase tracking-wider text-sky-600 block">
+              Slide {VIKODA_PITCH_CARDS.findIndex((c) => c.id === selectedCardId) + 1} / {VIKODA_PITCH_CARDS.length}
+            </span>
+            <div className="text-xs font-black text-slate-800 truncate">
+              {selectedCard.topic}
+            </div>
+          </div>
+
+          {/* Next Button */}
+          <button
+            onClick={() => {
+              const currentIdx = VIKODA_PITCH_CARDS.findIndex((c) => c.id === selectedCardId);
+              const nextIdx = currentIdx < VIKODA_PITCH_CARDS.length - 1 ? currentIdx + 1 : 0;
+              setSelectedCardId(VIKODA_PITCH_CARDS[nextIdx].id);
+              playSound('click');
+            }}
+            className="px-3 py-1.5 rounded-xl bg-[#0066CC] hover:bg-[#0052a3] text-white font-extrabold text-xs flex items-center gap-1 shadow-xs transition-all active:scale-95 cursor-pointer shrink-0"
+            title="Slide kế tiếp"
+          >
+            <span className="hidden sm:inline">Kế tiếp</span>
+            <span>▶</span>
+          </button>
+        </div>
+
+        {/* 8 Numbered Jump Pills: Tap to jump directly, no horizontal scroll needed */}
+        <div className="grid grid-cols-8 gap-1 pt-1 border-t border-slate-100">
+          {VIKODA_PITCH_CARDS.map((card, idx) => {
+            const isSelected = card.id === selectedCardId;
+            return (
+              <button
+                key={card.id}
+                onClick={() => {
+                  setSelectedCardId(card.id);
+                  playSound('click');
+                }}
+                className={`py-1.5 text-center rounded-lg text-xs font-black transition-all cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#0066CC] text-white shadow-xs scale-105 ring-2 ring-sky-300'
+                    : 'bg-slate-100 text-slate-600 hover:bg-sky-50 hover:text-sky-700'
+                }`}
+                title={`Nhảy tới Slide ${idx + 1}: ${card.topic}`}
+              >
+                {idx + 1}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* 4. Active Pitch Card Content */}

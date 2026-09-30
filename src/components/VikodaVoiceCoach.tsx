@@ -312,6 +312,61 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
     phonetics: '/æz pɑːrt əv ɛf-aɪ-tiː ɡruːp, vɪˈkoʊdə pəˈzɛsɪz ðə faɪˈnænʃl rɪˈzɪliəns ænd ˌmænjuˈfæktʃərɪŋ kəˈpæsəti fɔːr lɑːrdʒ-skeɪl oʊ-iː-ɛm ˈpɑːrtnərʃɪps/',
     vietnamese: 'Thuộc tập đoàn F.I.T., Vikoda sở hữu tiềm lực tài chính vững mạnh và công suất sản xuất quy mô lớn cho các hợp đồng OEM quốc tế.',
     proTip: 'Khẳng định uy tín tập đoàn niêm yết tạo niềm tin tuyệt đối cho các tập đoàn bán lẻ đa quốc gia.'
+  },
+  // LEVEL C2: BẬC THẦY BẢN NGỮ (Executive Boardroom, Hostile Objections, Strategic Closing)
+  {
+    id: 'vp-31',
+    level: 'C2',
+    title: 'Đàm phán công bằng (Level Playing Field)',
+    english: 'We want to ensure a level playing field for all regional distributors.',
+    phonetics: '/wiː wɒnt tuː ɪnˈʃʊər ə ˈlɛvl ˈpleɪɪŋ fiːld fɔːr ɔːl ˈriːdʒənl dɪˈstrɪbjətərz/',
+    vietnamese: 'Chúng tôi muốn đảm bảo một sân chơi cạnh tranh công bằng cho tất cả các nhà phân phối vùng.',
+    proTip: 'Nhấn mạnh cụm "level playing field" với ngữ điệu đĩnh đạc của một CEO.'
+  },
+  {
+    id: 'vp-32',
+    level: 'C2',
+    title: 'Ưu đãi thúc đẩy chốt hợp đồng (Sweeten the Deal)',
+    english: 'To sweeten the deal, we will subsidize your premier shelf display costs.',
+    phonetics: '/tuː ˈswiːtn ðə diːl, wiː wɪl ˈsʌbsɪdaɪz jɔːr ˈprɛmiər ʃɛlf dɪˈspleɪ kɒsts/',
+    vietnamese: 'Để thêm phần ưu đãi chốt deal, chúng tôi sẽ hỗ trợ kinh phí trưng bày tại các vị trí kệ hàng đắc địa nhất.',
+    proTip: 'Phát âm "sweeten" gọn gàng nuốt âm T nhẹ (/ˈswiːtn/).'
+  },
+  {
+    id: 'vp-33',
+    level: 'C2',
+    title: 'Công thức phản hồi Harvard Feel-Felt-Found',
+    english: 'I understand how you feel, other buyers felt the same, but they found that Vikoda drove higher retention.',
+    phonetics: '/aɪ ˌʌndərˈstænd haʊ juː fiːl, ˈʌðər ˈbaɪərz fɛlt ðə seɪm, bʌt ðeɪ faʊnd ðæt vɪˈkoʊdə droʊv ˈhaɪər rɪˈtɛnʃn/',
+    vietnamese: 'Tôi hoàn toàn thấu hiểu cảm giác của ngài, nhiều đối tác ban đầu cũng nghĩ như vậy, nhưng sau đó họ nhận thấy Vikoda mang lại tỷ lệ khách quay lại mua cao hơn hẳn.',
+    proTip: 'Chuyển ngữ điệu từ đồng cảm nhẹ nhàng (Feel) sang tự tin dứt khoát (Found).'
+  },
+  {
+    id: 'vp-34',
+    level: 'C2',
+    title: 'Độc bản kiềm tự nhiên đối đầu Evian / San Pellegrino',
+    english: 'While European brands offer history, Vikoda provides a rare natural pH 9.0 synergy that no imported water can replicate at source.',
+    phonetics: '/waɪl ˌjʊərəˈpiːən brændz ˈɒfər ˈhɪstəri, vɪˈkoʊdə prəˈvaɪdz ə rɛər ˈnætʃrəl piː-eɪtʃ naɪn pɔɪnt oʊ ˈsɪnərdʒi/',
+    vietnamese: 'Trong khi các thương hiệu Châu Âu có bề dày lịch sử, Vikoda sở hữu sự cộng hưởng kiềm tự nhiên pH 9.0 quý hiếm mà không nước nhập khẩu nào có thể sao chép tại nguồn.',
+    proTip: 'Đọc "nine point oh" dứt khoát, không nói "nine point zero".'
+  },
+  {
+    id: 'vp-35',
+    level: 'C2',
+    title: 'Khoa học khoáng kiềm đệm axit tế bào',
+    english: 'Vikoda’s abundant natural bicarbonate buffers metabolic acidity and optimizes cellular hydration.',
+    phonetics: '/vɪˈkoʊdəz əˈbʌndənt ˈnætʃrəl baɪˈkɑːrbənət ˈbʌfərz ˌmɛtəˈbɒlɪk əˈsɪdəti ænd ˈɒptɪmaɪzɪz ˈsɛljələr haɪˈdreɪʃn/',
+    vietnamese: 'Lượng muối Bicarbonate tự nhiên dồi dào trong Vikoda giúp đệm axit chuyển hóa và tối ưu sự thẩm thấu cấp nước tế bào.',
+    proTip: 'Trọng âm chuẩn từ "bicarbonate" /baɪˈkɑːrbənət/ và "cellular" /ˈsɛljələr/.'
+  },
+  {
+    id: 'vp-36',
+    level: 'C2',
+    title: 'Khai mở kỷ nguyên mới tại lễ ký kết',
+    english: 'Today we do not merely sign a contract, we inaugurate a new era for natural alkaline wellness.',
+    phonetics: '/təˈdeɪ wiː duː nɒt ˈmɪərli saɪn ə ˈkɒntrækt, wiː ɪˈnɔːgjəreɪt ə njuː ˈɪərə fɔːr ˈnætʃrəl ˈælkəlaɪn ˈwɛlnɪs/',
+    vietnamese: 'Hôm nay chúng ta không đơn thuần ký kết một hợp đồng, chúng ta cùng nhau khai mở một kỷ nguyên mới cho sức khỏe khoáng kiềm tự nhiên.',
+    proTip: 'Lời phát biểu nâng ly (toast) đầy cảm hứng với âm lượng vang và phong thái đĩnh đạc.'
   }
 ];
 
@@ -357,7 +412,7 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
 
   const handleStartSpeaking = () => {
     if (!isSpeechRecognitionSupported()) {
-      alert('Trình duyệt chưa hỗ trợ Web Speech Recognition. Bạn có thể dùng Chrome hoặc Edge trên điện thoại/máy tính.');
+      setSpokenText('Trình duyệt chưa hỗ trợ Web Speech Recognition. Hãy mở trên Chrome hoặc Edge.');
       return;
     }
 
@@ -516,9 +571,9 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
           </p>
         </div>
 
-        {/* Score Feedback */}
+        {/* Score Feedback & Color-Coded Phonetic Diagnostics */}
         {score !== null && (
-          <div className="p-3.5 rounded-2xl bg-sky-50 border-2 border-sky-200 space-y-2 text-left animate-in fade-in">
+          <div className="p-3.5 rounded-2xl bg-sky-50 border-2 border-sky-200 space-y-3 text-left animate-in fade-in">
             <div className="flex items-center justify-between">
               <span className="text-xs font-black text-slate-800">Độ chuẩn xác giọng đọc:</span>
               <span className={`text-base font-black px-3 py-0.5 rounded-full ${
@@ -532,9 +587,49 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
               </span>
             </div>
 
+            {/* Color-Coded Word Diagnostic Flow */}
+            <div className="p-2.5 rounded-xl bg-white border border-slate-200 space-y-1">
+              <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
+                Phân tích khẩu hình từng từ:
+              </span>
+              <div className="flex flex-wrap gap-1.5 text-xs font-black">
+                {currentItem.english.split(' ').map((word, wIdx) => {
+                  const cleanWord = word.toLowerCase().replace(/[^\w]/g, '');
+                  const spokenLower = spokenText.toLowerCase();
+                  const isMatch = spokenLower.includes(cleanWord);
+                  const hasEndingSound = /[s|t|d|ed|ce|sh|ch]$/i.test(cleanWord);
+
+                  return (
+                    <span 
+                      key={wIdx}
+                      className={`px-1.5 py-0.5 rounded ${
+                        isMatch
+                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                          : 'bg-rose-50 text-rose-700 border border-rose-200 underline decoration-rose-400 decoration-wavy'
+                      }`}
+                      title={!isMatch && hasEndingSound ? 'Chú ý bật rõ âm đuôi' : undefined}
+                    >
+                      {word}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+
             <p className="text-xs text-slate-600 font-semibold italic">
-              Bạn vừa nói: "{spokenText}"
+              AI ghi nhận: "{spokenText}"
             </p>
+
+            {/* Ending Sound & Intonation Reminder */}
+            <div className="p-2 rounded-xl bg-sky-100/70 border border-sky-300/80 text-[11px] text-sky-950 space-y-1">
+              <div className="font-bold flex items-center gap-1 text-[#0070D1]">
+                <span>↘</span>
+                <span>Ngữ điệu ngoại giao: Hạ giọng dứt khoát ở cuối câu khẳng định.</span>
+              </div>
+              <div className="text-slate-600 font-medium">
+                💡 Lưu ý âm đuôi: Bật rõ các âm cuối (/s/, /t/, /d/, /z/) để không bị nuốt âm khi nói với đối tác Mỹ/Châu Âu.
+              </div>
+            </div>
 
             {score >= 75 ? (
               <p className="text-xs text-emerald-700 font-black">

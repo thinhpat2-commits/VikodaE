@@ -97,27 +97,73 @@ export const ExportEmailStudio: React.FC<ExportEmailStudioProps> = ({ speechRate
         </p>
       </div>
 
-      {/* Horizontal Scroll Template Selector */}
-      <div className="flex space-x-2 overflow-x-auto pb-1 no-scrollbar">
-        {allTemplates.map((tpl) => {
-          const isSelected = tpl.id === selectedTemplate.id;
-          return (
-            <button
-              key={tpl.id}
-              onClick={() => {
-                setSelectedTemplate(tpl);
+      {/* Template Selector: Stepper + Quick Dropdown (No clunky horizontal scrolling) */}
+      <div className="bg-white rounded-3xl border border-sky-100 p-3.5 shadow-2xs space-y-3">
+        <div className="flex items-center justify-between gap-2">
+          {/* Previous Template Button */}
+          <button
+            onClick={() => {
+              const currentIdx = allTemplates.findIndex((t) => t.id === selectedTemplate.id);
+              const prevIdx = currentIdx > 0 ? currentIdx - 1 : allTemplates.length - 1;
+              setSelectedTemplate(allTemplates[prevIdx]);
+              playSound('click');
+            }}
+            className="px-3 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-[#0066CC] font-extrabold text-xs flex items-center gap-1 border border-sky-200/80 transition-all active:scale-95 cursor-pointer shrink-0"
+            title="Mẫu thư trước"
+          >
+            <span>◀</span>
+            <span className="hidden sm:inline">Trước</span>
+          </button>
+
+          {/* Current Template Indicator */}
+          <div className="text-center flex-1 min-w-0 px-1">
+            <span className="text-[10px] font-black uppercase tracking-wider text-sky-600 block">
+              Mẫu {allTemplates.findIndex((t) => t.id === selectedTemplate.id) + 1} / {allTemplates.length}
+            </span>
+            <div className="text-xs font-black text-slate-800 truncate">
+              {selectedTemplate.title.split('(')[0]}
+            </div>
+          </div>
+
+          {/* Next Template Button */}
+          <button
+            onClick={() => {
+              const currentIdx = allTemplates.findIndex((t) => t.id === selectedTemplate.id);
+              const nextIdx = currentIdx < allTemplates.length - 1 ? currentIdx + 1 : 0;
+              setSelectedTemplate(allTemplates[nextIdx]);
+              playSound('click');
+            }}
+            className="px-3 py-1.5 rounded-xl bg-[#0066CC] hover:bg-[#0052a3] text-white font-extrabold text-xs flex items-center gap-1 shadow-xs transition-all active:scale-95 cursor-pointer shrink-0"
+            title="Mẫu thư kế tiếp"
+          >
+            <span className="hidden sm:inline">Kế tiếp</span>
+            <span>▶</span>
+          </button>
+        </div>
+
+        {/* Direct Dropdown Selector: Instant 1-tap choice */}
+        <div>
+          <label className="text-[10px] font-black uppercase text-slate-400 tracking-wider block mb-1">
+            Chọn nhanh mẫu thư theo tình huống:
+          </label>
+          <select
+            value={selectedTemplate.id}
+            onChange={(e) => {
+              const found = allTemplates.find((t) => t.id === e.target.value);
+              if (found) {
+                setSelectedTemplate(found);
                 playSound('click');
-              }}
-              className={`px-3 py-2 rounded-2xl text-xs font-bold whitespace-nowrap transition-all border shrink-0 ${
-                isSelected
-                  ? 'bg-[#0066CC] text-white border-[#0066CC] shadow-sm'
-                  : 'bg-white text-slate-600 border-slate-200 hover:border-slate-300'
-              }`}
-            >
-              {tpl.title.split('(')[0]}
-            </button>
-          );
-        })}
+              }
+            }}
+            className="w-full px-3 py-2 text-xs font-bold text-slate-800 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-500 cursor-pointer"
+          >
+            {allTemplates.map((tpl, idx) => (
+              <option key={tpl.id} value={tpl.id}>
+                {idx + 1}. {tpl.title}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/* Context Badge */}

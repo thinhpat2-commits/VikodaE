@@ -170,6 +170,31 @@ const PLACEMENT_QUESTIONS: Question[] = [
         nativeNote: 'Lên giọng ở cuối câu khẳng định (uptalk) thể hiện sự do dự, thiếu quyết đoán trong kinh doanh.'
       }
     ]
+  },
+  {
+    id: 6,
+    category: 'executivePolish',
+    categoryLabel: 'Ngoại Giao Đàm Phán & Thành Ngữ Thương Trường (Boardroom Idioms)',
+    prompt: 'Khi muốn đề nghị ưu đãi thêm chi phí marketing để thúc đẩy đối tác chốt hợp đồng nhanh hơn, câu nói bản ngữ thượng thừa nào hiệu quả nhất?',
+    audioText: 'To sweeten the deal, we will subsidize your premier shelf display costs.',
+    context: 'Tình huống: Đàm phán chốt hợp đồng phân phối độc quyền chuỗi siêu thị quốc tế.',
+    options: [
+      {
+        text: 'To sweeten the deal, we are prepared to subsidize your premier shelf display costs for the launch quarter.',
+        isCorrect: true,
+        nativeNote: 'Tuyệt đỉnh! Dùng thành ngữ "sweeten the deal" và từ vựng "subsidize display costs" thể hiện sự hào phóng có tính toán của nhà ngoại giao chuyên nghiệp.'
+      },
+      {
+        text: 'We give you cheap sugar and big discount now.',
+        isCorrect: false,
+        nativeNote: 'Dịch nghĩa đen sai lầm, hạ thấp giá trị thương hiệu và biến cuộc đàm phán thành bán tháo.'
+      },
+      {
+        text: 'You must sign right now or we leave.',
+        isCorrect: false,
+        nativeNote: 'Tối hậu thư thô thiển phá vỡ mối quan hệ hợp tác lâu dài.'
+      }
+    ]
   }
 ];
 
@@ -268,17 +293,26 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
 
       let recLevel: CourseLevel = 'A1';
       let feedback = '';
-      const nextSteps: string[] = [];
+      let nextSteps: string[] = [];
 
-      if (correctCount >= 4) {
+      if (correctCount >= 5) {
+        recLevel = 'C2';
+        feedback = 'Đẳng cấp Bậc Thầy Bản Ngữ! Bạn làm chủ các executive idioms, ngữ điệu pitching dứt khoát và phong thái ngoại giao thượng thừa.';
+        nextSteps = [
+          'Chinh phục Cửa C2: Thành ngữ thương trường & Lối nói boardroom bản ngữ',
+          'Làm chủ công thức Harvard Feel-Felt-Found để đảo ngược mọi phản bác của đối tác',
+          'Rèn luyện Incoterms CIF/FOB, LC at Sight và đàm phán hợp đồng độc quyền triệu đô',
+          'Thiết lập kỷ lục ARENA Đấu Trường Phản Xạ >700 điểm'
+        ];
+      } else if (correctCount >= 3) {
         recLevel = 'B2-C1';
-        feedback = 'Đẳng cấp chuyên gia! Bạn có tư duy đàm phán sắc bén, khả năng cảm thụ ngữ điệu và am hiểu sâu sắc về mỏ khoáng Vikoda.';
+        feedback = 'Chuyên gia đàm phán sắc bén! Bạn nắm rất vững định vị khoáng kiềm Đảnh Thạnh và kỹ năng bẻ gãy phản đối giá.';
         nextSteps = [
           'Chinh phục Cửa C1: Báo giá CIF/FOB & Đàm phán thanh toán quốc tế',
           'Luyện kỹ năng đối kháng với đối tác khó tính trong Buyer Objections Battle',
           'Nâng điểm số ARENA Phản Xạ lên mốc kỷ lục >600 điểm'
         ];
-      } else if (correctCount >= 2) {
+      } else if (correctCount >= 1) {
         recLevel = 'A2-B1';
         feedback = 'Nền tảng vững chắc! Bạn nắm tốt khái niệm mỏ khoáng, cần rèn thêm ngữ điệu dứt khoát và kỹ năng xử lý phản đối giá.';
         nextSteps = [
@@ -291,7 +325,7 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
         feedback = 'Khởi đầu lý tưởng! Bạn sẽ nhanh chóng làm chủ 5 từ khóa cốt lõi và phong thái đón tiếp đối tác quốc tế đầy tự tin.';
         nextSteps = [
           'Bắt đầu ngay tại Cửa A1: Chào hỏi, đón đoàn khách & giới thiệu bản thân',
-          'Nghe mẫu phát âm chuẩn giọng US/UK trước mỗi buổi làm việc',
+          'Nghe mẫu phát âm chuẩn giọng US Michael trước mỗi buổi làm việc',
           'Luyện tập phản xạ cơ bản với bài tập chọn từ và dịch câu thực chiến'
         ];
       }

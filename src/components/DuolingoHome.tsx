@@ -10,11 +10,14 @@ import {
   Gift,
   Sparkles,
   Lock,
-  ChevronRight
+  ChevronRight,
+  Compass
 } from 'lucide-react';
 import { VIKODA_CURRICULUM, VIKODA_SIDE_QUESTS, UnitLesson, SideQuestItem, CourseLevel } from '../data/curriculumData';
 import { VikoMascot } from './brand/VikodaLogos';
 import { DuolingoGameArena } from './DuolingoGameArena';
+import { DailyActionCoach } from './DailyActionCoach';
+import { PlacementTestModal, PlacementTestResult } from './PlacementTestModal';
 import { playSound } from '../services/soundEffects';
 import { playSpeech } from '../services/speechService';
 
@@ -26,6 +29,7 @@ interface DuolingoHomeProps {
   speechRate: number;
   onGoToVoiceCoach: () => void;
   onGoToPitchDeck: () => void;
+  onGoToBattle?: () => void;
   onOpenEndlessDrill: () => void;
   onOpenLeaderboard: () => void;
   highestDrillScore: number;
@@ -33,9 +37,13 @@ interface DuolingoHomeProps {
 
 export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
   selectedLevel,
+  setSelectedLevel,
   completedUnitIds,
   onCompleteUnit,
   speechRate,
+  onGoToVoiceCoach,
+  onGoToPitchDeck,
+  onGoToBattle = () => {},
   onOpenEndlessDrill,
   onOpenLeaderboard,
   highestDrillScore
@@ -47,6 +55,11 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
   const [activeSideQuest, setActiveSideQuest] = useState<SideQuestItem | null>(null);
   const [sideQuestAnswer, setSideQuestAnswer] = useState<number | null>(null);
   const [isSideQuestAnswered, setIsSideQuestAnswered] = useState<boolean>(false);
+  const [isPlacementTestOpen, setIsPlacementTestOpen] = useState<boolean>(false);
+  const [hasTakenPlacementTest, setHasTakenPlacementTest] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem('vikoda_placement_test_completed_v3') === 'true';
+  });
 
   // Filter lessons based on selected level (5 units per level)
   const displayedLessons = VIKODA_CURRICULUM.filter((u) => u.level === selectedLevel);
@@ -80,11 +93,28 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
     onCompleteUnit('bonus_chest_' + selectedLevel, 50, 15);
   };
 
+  const handleSavePlacementResult = (result: PlacementTestResult) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('vikoda_placement_test_completed_v3', 'true');
+    }
+    setHasTakenPlacementTest(true);
+    setSelectedLevel(result.recommendedLevel);
+    onCompleteUnit('placement_test_completed', 50, 15);
+  };
+
   return (
     <div className="space-y-4 pb-28 max-w-md mx-auto">
       
       {/* 1. Duolingo-style Unit Section Banner */}
-      <div className="bg-[#009FE3] border-b-4 border-[#0072CE] p-4 rounded-3xl text-white shadow-md relative overflow-hidden">
+      <div className={`p-4 rounded-3xl text-white shadow-md relative overflow-hidden border-b-4 ${
+        selectedLevel === 'A1'
+          ? 'bg-emerald-600 border-emerald-800'
+          : selectedLevel === 'A2-B1'
+          ? 'bg-[#009FE3] border-[#0072CE]'
+          : selectedLevel === 'B2-C1'
+          ? 'bg-indigo-600 border-indigo-800'
+          : 'bg-purple-700 border-purple-900'
+      }`}>
         {/* Soft background circles */}
         <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none" />
 
@@ -92,7 +122,13 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
           <div className="space-y-1 flex-1">
             <div className="flex items-center gap-2">
               <span className="inline-block px-2.5 py-0.5 rounded-full bg-white/20 text-[10px] font-black tracking-wide uppercase">
-                {selectedLevel === 'A1' ? 'CỬA 1 • NHẬP MÔN' : selectedLevel === 'A2-B1' ? 'CỬA 2 • VĂN PHÒNG' : 'CỬA 3 • XUẤT KHẨU'}
+                {selectedLevel === 'A1' 
+                  ? 'CỬA 1 • NHẬP MÔN' 
+                  : selectedLevel === 'A2-B1' 
+                  ? 'CỬA 2 • MỎ KHOÁNG' 
+                  : selectedLevel === 'B2-C1'
+                  ? 'CỬA 3 • XUẤT KHẨU'
+                  : 'CỬA 4 • BẬC THẦY BẢN NGỮ'}
               </span>
             </div>
 
@@ -101,15 +137,19 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                 ? 'Giao Tiếp & Chào Đón Đoàn Khách' 
                 : selectedLevel === 'A2-B1' 
                 ? 'Giới Thiệu Mỏ Đảnh Thạnh pH 9.0' 
-                : 'Thương Thảo & Xuất Khẩu Container'}
+                : selectedLevel === 'B2-C1'
+                ? 'Thương Thảo & Xuất Khẩu Container'
+                : 'Đàm Phán Cấp CEO & Lối Nói Bản Ngữ'}
             </h2>
             
             <p className="text-xs text-sky-100 font-medium">
-              Lộ trình 5 bài học thực chiến • 3 phút mỗi bài
+              {selectedLevel === 'C2'
+                ? 'Lối nói Boardroom • Feel-Felt-Found • Incoterms & Lễ ký kết'
+                : 'Lộ trình 5 bài học thực chiến • 3 phút mỗi bài'}
             </p>
 
             {/* Guidebook Button ("Sổ tay kiến thức" - mọi nút bấm đều có lý do) */}
-            <div className="pt-1.5">
+            <div className="pt-1.5 flex items-center gap-2">
               <button
                 onClick={() => {
                   playSound('click');
@@ -121,6 +161,18 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                 <BookOpen className="w-3.5 h-3.5 text-[#0070D1]" />
                 <span>Sổ Tay Ghi Nhớ</span>
               </button>
+
+              <button
+                onClick={() => {
+                  playSound('click');
+                  setIsPlacementTestOpen(true);
+                }}
+                className="inline-flex items-center space-x-1 px-2.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 font-black text-xs border-b-2 border-amber-600 active:translate-y-0.5 transition-all cursor-pointer shadow-2xs"
+                title="Làm bài kiểm tra đánh giá trình độ và đề xuất lộ trình"
+              >
+                <Compass className="w-3.5 h-3.5" />
+                <span>{hasTakenPlacementTest ? 'Test Lại' : 'Test Đầu Vào'}</span>
+              </button>
             </div>
           </div>
 
@@ -130,6 +182,28 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
           </div>
         </div>
       </div>
+
+      {/* 2. SMART ROADMAP ACTION COACH (Answers: "Mở app ra nên làm gì? Học xong thì làm gì tiếp?") */}
+      <DailyActionCoach
+        selectedLevel={selectedLevel}
+        completedUnitIds={completedUnitIds}
+        displayedLessons={displayedLessons}
+        sideQuests={VIKODA_SIDE_QUESTS}
+        onStartLesson={handleStartLesson}
+        onGoToVoiceCoach={onGoToVoiceCoach}
+        onGoToPitchDeck={onGoToPitchDeck}
+        onGoToBattle={onGoToBattle}
+        onOpenSideQuest={(sq) => {
+          playSound('click');
+          setActiveSideQuest(sq);
+          setSideQuestAnswer(null);
+          setIsSideQuestAnswered(false);
+        }}
+        onOpenArena={onOpenEndlessDrill}
+        onOpenPlacementTest={() => setIsPlacementTestOpen(true)}
+        hasTakenPlacementTest={hasTakenPlacementTest}
+        highestDrillScore={highestDrillScore}
+      />
 
       {/* 2. Action Cards: ARENA Đấu Trường Phản Xạ & Bảng Xếp Hạng */}
       <div className="grid grid-cols-2 gap-2.5">
@@ -266,6 +340,37 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                       {lesson.title}
                     </h4>
                   </div>
+
+                  {/* Integrated Satellite Action Links (Ties Voice, Pitch & Lessons together) */}
+                  {isUnlocked && (
+                    <div className="flex items-center gap-1.5 mt-1.5">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playSound('click');
+                          onGoToVoiceCoach();
+                        }}
+                        className="px-2 py-0.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 text-[9px] font-black cursor-pointer shadow-2xs flex items-center gap-0.5 transition-transform active:scale-95"
+                        title="Luyện ngữ điệu câu cốt lõi của bài này với AI"
+                      >
+                        <span>🎙️</span>
+                        <span>VikoVoice</span>
+                      </button>
+
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playSound('click');
+                          onGoToPitchDeck();
+                        }}
+                        className="px-2 py-0.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-[#0070D1] border border-sky-200 text-[9px] font-black cursor-pointer shadow-2xs flex items-center gap-0.5 transition-transform active:scale-95"
+                        title="Xem slide pitching đối tác tương ứng"
+                      >
+                        <span>🤝</span>
+                        <span>Pitch</span>
+                      </button>
+                    </div>
+                  )}
 
                 </div>
 
@@ -631,6 +736,15 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
             onCompleteUnit(activeLesson.id, xp, gems);
           }}
           speechRate={speechRate}
+        />
+      )}
+
+      {/* Placement Test Modal for Level Assessment & Personalized Roadmap */}
+      {isPlacementTestOpen && (
+        <PlacementTestModal
+          isOpen={isPlacementTestOpen}
+          onClose={() => setIsPlacementTestOpen(false)}
+          onSaveResult={handleSavePlacementResult}
         />
       )}
 

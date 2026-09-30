@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Flame, Gem, Sparkles, Volume2 } from 'lucide-react';
+import { Flame, Gem, Sparkles, Volume2, VolumeX, Zap, Headphones, Search, Award } from 'lucide-react';
 import { GamificationState, EmployeeProfile } from '../types';
 import { CourseLevel } from '../data/curriculumData';
 import { HeaderBrandLogo } from './brand/VikodaLogos';
-import { playSound } from '../services/soundEffects';
+import { playSound, isStealthOfficeMode, setStealthOfficeMode, subscribeStealthMode } from '../services/soundEffects';
 import { 
   VOICE_OPTIONS, 
   getSelectedVoiceId, 
@@ -23,6 +23,10 @@ interface VikodaHeaderProps {
   onOpenProfile: () => void;
   onOpenLeaderboard: () => void;
   onGoHome: () => void;
+  onOpenSOS?: () => void;
+  onOpenCommute?: () => void;
+  onOpenSearch?: () => void;
+  onOpenPortfolio?: () => void;
 }
 
 export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
@@ -34,15 +38,30 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
   onOpenProfile,
   onOpenLeaderboard,
   onGoHome,
+  onOpenSOS = () => {},
+  onOpenCommute = () => {},
+  onOpenSearch = () => {},
+  onOpenPortfolio = () => {},
 }) => {
   const [activeTooltip, setActiveTooltip] = useState<'streak' | 'gems' | 'hearts' | null>(null);
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
   const [currentVoice, setCurrentVoice] = useState<VoiceOptionId>(getSelectedVoiceId());
+  const [isStealth, setIsStealth] = useState<boolean>(() => isStealthOfficeMode());
 
   useEffect(() => {
-    const unsub = subscribeVoiceChange((vId) => setCurrentVoice(vId));
-    return unsub;
+    const unsubVoice = subscribeVoiceChange((vId) => setCurrentVoice(vId));
+    const unsubStealth = subscribeStealthMode((enabled) => setIsStealth(enabled));
+    return () => {
+      unsubVoice();
+      unsubStealth();
+    };
   }, []);
+
+  const toggleStealth = () => {
+    const nextVal = !isStealth;
+    setIsStealth(nextVal);
+    setStealthOfficeMode(nextVal);
+  };
 
   const toggleTooltip = (type: 'streak' | 'gems' | 'hearts') => {
     playSound('click');
@@ -68,9 +87,22 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
           <HeaderBrandLogo className="h-7 sm:h-8" />
         </button>
 
-        {/* Right HUD: Streak, Gems, Voice & Profile */}
+        {/* Right HUD: Stealth, Streak, Gems, Voice & Profile */}
         <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
           
+          {/* 0. STEALTH OFFICE MODE TOGGLE (Tắt tiếng chuông ồn ào ở văn phòng) */}
+          <button
+            onClick={toggleStealth}
+            className={`p-1 sm:p-1.5 rounded-xl border transition-all cursor-pointer ${
+              isStealth 
+                ? 'bg-rose-50 text-rose-600 border-rose-300 font-black' 
+                : 'bg-slate-50 text-slate-500 border-slate-200 hover:bg-slate-100'
+            }`}
+            title={isStealth ? 'Chế độ văn phòng: BẬT (Đã tắt toàn bộ tiếng chuông game)' : 'Chế độ văn phòng: TẮT (Đang bật tiếng chuông game)'}
+          >
+            {isStealth ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
+          </button>
+
           {/* 1. STREAK (Chuỗi ngày liên tục) */}
           <button
             onClick={() => toggleTooltip('streak')}
@@ -99,14 +131,14 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
             <span className="tabular-nums">{stats.gems}</span>
           </button>
 
-          {/* 3. VOICE SELECTOR TRIGGER (Chọn giọng đọc: US Male, UK Male, US Female) */}
+          {/* 3. VOICE SELECTOR TRIGGER (Chọn giọng đọc: US Male Michael, UK Male, US Female) */}
           <button
             onClick={() => {
               playSound('click');
               setIsVoiceModalOpen(true);
             }}
             className="flex items-center space-x-1 px-1.5 sm:px-2 py-1 rounded-xl font-bold text-xs bg-sky-50 text-[#0070D1] hover:bg-sky-100 border border-sky-200/80 active:translate-y-0.5 cursor-pointer shadow-2xs"
-            title="Đổi giọng đọc AI (Mỹ Nam, Anh Nam Chuẩn, Mỹ Nữ)"
+            title="Đổi giọng đọc AI (Michael US Rõ Nét, Oliver UK, Emma US)"
           >
             <span className="text-xs">{activeVoiceOption.flag}</span>
             <Volume2 className="w-3.5 h-3.5 text-[#0070D1]" />
@@ -138,6 +170,59 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
               alt={profile.fullName}
               className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover"
             />
+          </button>
+        </div>
+      </div>
+
+      {/* EXECUTIVE QUICK UTILITY BAR: 1-Tap Pre-Meeting, Commute, Search, CEO Portfolio */}
+      <div className="max-w-md mx-auto px-3 sm:px-3.5 pb-2">
+        <div className="grid grid-cols-4 gap-1.5 text-[10px] font-black">
+          <button 
+            onClick={() => {
+              playSound('click');
+              onOpenSOS();
+            }} 
+            className="py-1.5 px-1 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 flex items-center justify-center gap-1 shadow-2xs transition-all active:scale-95 cursor-pointer"
+            title="Cẩm nang nhẩm nhanh 60 giây trước cuộc họp ngoại giao"
+          >
+            <Zap className="w-3 h-3 fill-current" />
+            <span className="truncate">Cứu Nguy 60s</span>
+          </button>
+
+          <button 
+            onClick={() => {
+              playSound('click');
+              onOpenCommute();
+            }} 
+            className="py-1.5 px-1 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 flex items-center justify-center gap-1 shadow-2xs transition-all active:scale-95 cursor-pointer"
+            title="Chế độ nghe rảnh tay khi di chuyển / lái xe / đi bộ"
+          >
+            <Headphones className="w-3 h-3" />
+            <span className="truncate">Rảnh Tay</span>
+          </button>
+
+          <button 
+            onClick={() => {
+              playSound('click');
+              onOpenSearch();
+            }} 
+            className="py-1.5 px-1 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center gap-1 border border-slate-200 transition-all active:scale-95 cursor-pointer"
+            title="Tra cứu nhanh mẫu câu & thuật ngữ xuất khẩu"
+          >
+            <Search className="w-3 h-3 text-[#0070D1]" />
+            <span className="truncate">Tra Cứu</span>
+          </button>
+
+          <button 
+            onClick={() => {
+              playSound('click');
+              onOpenPortfolio();
+            }} 
+            className="py-1.5 px-1 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 flex items-center justify-center gap-1 border border-indigo-200 transition-all active:scale-95 cursor-pointer"
+            title="Xem báo cáo đối chiếu giọng nói và chứng nhận Đại sứ trình CEO"
+          >
+            <Award className="w-3 h-3 text-indigo-600" />
+            <span className="truncate">Báo Cáo CEO</span>
           </button>
         </div>
       </div>
@@ -204,14 +289,30 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
               playSound('click');
               setSelectedLevel('B2-C1');
             }}
-            className={`flex-1 py-1.5 px-1 rounded-xl text-[11px] font-black tracking-tight transition-all text-center cursor-pointer ${
+            className={`flex-1 py-1.5 px-1 rounded-xl text-[10px] sm:text-[11px] font-black tracking-tight transition-all text-center cursor-pointer ${
               selectedLevel === 'B2-C1'
                 ? 'bg-indigo-600 text-white shadow-[0_2px_0_#4338ca]'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
             }`}
             title="Mục tiêu: Báo giá CIF/FOB & Đàm phán hợp đồng container xuất khẩu"
           >
-            💎 C1: Đàm Phán
+            💎 C1: Xuất Khẩu
+          </button>
+
+          {/* LEVEL C2 */}
+          <button
+            onClick={() => {
+              playSound('click');
+              setSelectedLevel('C2');
+            }}
+            className={`flex-1 py-1.5 px-1 rounded-xl text-[10px] sm:text-[11px] font-black tracking-tight transition-all text-center cursor-pointer ${
+              selectedLevel === 'C2'
+                ? 'bg-purple-600 text-white shadow-[0_2px_0_#581c87]'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
+            }`}
+            title="Mục tiêu: Đàm phán cấp CEO, Thành ngữ thương trường & Lối nói Bản Ngữ"
+          >
+            👑 C2: Bản Ngữ
           </button>
         </div>
       </div>

@@ -16,6 +16,10 @@ import { EmployeeProfileModal } from './components/EmployeeProfileModal';
 import { LeaderboardModal } from './components/LeaderboardModal';
 import { EndlessDrillArena } from './components/EndlessDrillArena';
 import { PitchSimulatorModal } from './components/PitchSimulatorModal';
+import { PreMeetingToolkitModal } from './components/PreMeetingToolkitModal';
+import { HandsFreeCommuteModal } from './components/HandsFreeCommuteModal';
+import { PocketSearchModal } from './components/PocketSearchModal';
+import { VikodaExecutivePortfolioModal } from './components/VikodaExecutivePortfolioModal';
 import { GamificationState, EmployeeProfile } from './types';
 import { CourseLevel } from './data/curriculumData';
 import { playSound } from './services/soundEffects';
@@ -36,6 +40,10 @@ export default function App() {
   const [isLeaderboardOpen, setIsLeaderboardOpen] = useState<boolean>(false);
   const [isEndlessDrillOpen, setIsEndlessDrillOpen] = useState<boolean>(false);
   const [isPitchSimulatorOpen, setIsPitchSimulatorOpen] = useState<boolean>(false);
+  const [isSOSModalOpen, setIsSOSModalOpen] = useState<boolean>(false);
+  const [isCommuteModalOpen, setIsCommuteModalOpen] = useState<boolean>(false);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
+  const [isPortfolioModalOpen, setIsPortfolioModalOpen] = useState<boolean>(false);
 
   // Employee Profile State (Login by Employee Code & Email with custom Avatar)
   const [profile, setProfile] = useState<EmployeeProfile>({
@@ -198,6 +206,22 @@ export default function App() {
           setIsEndlessDrillOpen(false);
           setIsPitchSimulatorOpen(false);
         }}
+        onOpenSOS={() => {
+          playSound('click');
+          setIsSOSModalOpen(true);
+        }}
+        onOpenCommute={() => {
+          playSound('click');
+          setIsCommuteModalOpen(true);
+        }}
+        onOpenSearch={() => {
+          playSound('click');
+          setIsSearchModalOpen(true);
+        }}
+        onOpenPortfolio={() => {
+          playSound('click');
+          setIsPortfolioModalOpen(true);
+        }}
       />
 
       {/* Main Screen Content */}
@@ -218,6 +242,10 @@ export default function App() {
             onGoToPitchDeck={() => {
               playSound('click');
               setActiveTab('pitch');
+            }}
+            onGoToBattle={() => {
+              playSound('click');
+              setActiveTab('battle');
             }}
             onOpenEndlessDrill={() => {
               playSound('click');
@@ -318,6 +346,37 @@ export default function App() {
         onClose={() => setIsPitchSimulatorOpen(false)}
         speechRate={speechRate}
         onAwardXpAndGems={handleAwardXpAndGems}
+      />
+
+      {/* Pre-Meeting 60s Emergency SOS Toolkit Modal */}
+      <PreMeetingToolkitModal
+        isOpen={isSOSModalOpen}
+        onClose={() => setIsSOSModalOpen(false)}
+        speechRate={speechRate}
+      />
+
+      {/* Hands-Free Commute Audio Shadowing Modal */}
+      <HandsFreeCommuteModal
+        isOpen={isCommuteModalOpen}
+        onClose={() => setIsCommuteModalOpen(false)}
+        selectedLevel={selectedLevel}
+        speechRate={speechRate}
+      />
+
+      {/* Pocket Instant Search Modal */}
+      <PocketSearchModal
+        isOpen={isSearchModalOpen}
+        onClose={() => setIsSearchModalOpen(false)}
+        speechRate={speechRate}
+      />
+
+      {/* Vikoda Executive Audio Portfolio & CEO Certificate Modal */}
+      <VikodaExecutivePortfolioModal
+        isOpen={isPortfolioModalOpen}
+        onClose={() => setIsPortfolioModalOpen(false)}
+        profile={profile}
+        stats={gamificationState}
+        speechRate={speechRate}
       />
 
       {/* Floating Gamified Toast Notification */}

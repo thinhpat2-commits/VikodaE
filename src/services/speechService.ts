@@ -22,13 +22,13 @@ export interface VoiceOption {
 export const VOICE_OPTIONS: VoiceOption[] = [
   {
     id: 'us_male',
-    name: 'David (Mỹ - Nam)',
+    name: 'Michael (Nam Chuẩn Mỹ Rõ Nét)',
     flag: '🇺🇸',
-    accent: 'Giọng Nam Chuẩn Mỹ',
+    accent: 'Giọng Nam Mỹ Phát Âm Rõ Ràng',
     gender: 'male',
-    description: 'Trầm ấm, đĩnh đạc, chuẩn phong thái đàm phán quốc tế',
-    pitch: 0.95,
-    rateFactor: 0.98,
+    description: 'Tròn vành rõ chữ, nguyên âm chuẩn US, phong thái đàm phán quốc tế chững chạc',
+    pitch: 1.0,
+    rateFactor: 0.94,
   },
   {
     id: 'uk_male',
@@ -117,11 +117,35 @@ const findBestBrowserVoice = (voiceId: VoiceOptionId): SpeechSynthesisVoice | un
     const anyUk = voices.find((v) => v.lang === 'en-GB' || v.lang.includes('GB'));
     if (anyUk) return anyUk;
   } else if (voiceId === 'us_male') {
-    // US Male voice
+    // US Male voice: prioritize crisp, high-clarity natural voices first
+    const preferredNames = [
+      'natural',
+      'google us english',
+      'microsoft guy online',
+      'microsoft christopher online',
+      'microsoft roger',
+      'guy',
+      'christopher',
+      'aaron',
+      'alex',
+      'matthew',
+      'daniel',
+      'tom',
+      'david',
+    ];
+    for (const name of preferredNames) {
+      const v = voices.find(
+        (voice) =>
+          (voice.lang === 'en-US' || voice.lang.startsWith('en')) &&
+          voice.name.toLowerCase().includes(name)
+      );
+      if (v) return v;
+    }
+
     const maleVoice = voices.find(
       (v) =>
         (v.lang === 'en-US' || v.lang.startsWith('en')) &&
-        (v.name.includes('David') || v.name.includes('Alex') || v.name.includes('Guy') || v.name.includes('Tom') || v.name.includes('Male'))
+        (v.name.toLowerCase().includes('male') || !v.name.toLowerCase().includes('female'))
     );
     if (maleVoice) return maleVoice;
   } else {

@@ -61,7 +61,8 @@ export const MeetingSurvival: React.FC<MeetingSurvivalProps> = ({
 
   const handleStartRecording = (phrase: MeetingPhrase) => {
     if (!isSpeechRecognitionSupported()) {
-      alert('Trình duyệt của bạn hiện chưa hỗ trợ Web Speech Recognition. Bạn có thể sử dụng Google Chrome hoặc Edge.');
+      setRecordingId(phrase.id);
+      setSpokenTranscript('Trình duyệt chưa hỗ trợ Web Speech Recognition. Hãy mở trên Chrome hoặc Edge.');
       return;
     }
 

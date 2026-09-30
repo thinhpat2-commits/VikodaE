@@ -51,7 +51,7 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
 
   const handleStartSpeaking = () => {
     if (!isSpeechRecognitionSupported()) {
-      alert('Trình duyệt của bạn hiện chưa hỗ trợ Web Speech Recognition. Bạn có thể sử dụng Google Chrome hoặc Edge trên điện thoại/máy tính.');
+      setSpokenTranscript('Trình duyệt chưa hỗ trợ Web Speech Recognition. Hãy mở trên Chrome hoặc Edge.');
       return;
     }
 
