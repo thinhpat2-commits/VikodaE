@@ -22,6 +22,9 @@ import { PocketSearchModal } from './components/PocketSearchModal';
 import { VikodaExecutivePortfolioModal } from './components/VikodaExecutivePortfolioModal';
 import { AdminPortalModal } from './components/AdminPortalModal';
 import { AuthModal } from './components/AuthModal';
+import { useDeviceDetect } from './hooks/useDeviceDetect';
+import { LaptopSidebarNav } from './components/laptop/LaptopSidebarNav';
+import { LaptopRightPanel } from './components/laptop/LaptopRightPanel';
 import { GamificationState, EmployeeProfile } from './types';
 import { CourseLevel } from './data/curriculumData';
 import { playSound } from './services/soundEffects';
@@ -46,6 +49,7 @@ const STORAGE_KEY_LEVEL = 'vikoda_selected_level_v3';
 const STORAGE_KEY_PROFILE = 'vikoda_employee_profile_v3';
 
 export default function App() {
+  const { isLaptop, deviceType } = useDeviceDetect();
   const [activeTab, setActiveTab] = useState<string>('path');
   const [selectedLevel, setSelectedLevel] = useState<CourseLevel>('A1');
   const [speechRate, setSpeechRate] = useState<number>(1.0);
@@ -301,137 +305,215 @@ export default function App() {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50/70 via-white to-blue-50/40 text-slate-900 flex flex-col antialiased selection:bg-cyan-500 selection:text-white">
-      
-      {/* Vikoda Modern Header (Brand Logo, Level Switcher, Streak, Gems, AI, Profile) */}
-      <VikodaHeader
-        stats={gamificationState}
-        selectedLevel={selectedLevel}
-        setSelectedLevel={handleLevelSelect}
-        speechRate={speechRate}
-        setSpeechRate={setSpeechRate}
-        onOpenAi={() => {
-          playSound('click');
-          setIsAiModalOpen(true);
-        }}
-        profile={profile}
-        onOpenProfile={() => {
-          playSound('click');
-          setIsProfileModalOpen(true);
-        }}
-        onOpenLeaderboard={() => {
-          playSound('click');
-          setIsLeaderboardOpen(true);
-        }}
-        onGoHome={() => {
-          playSound('click');
-          setActiveTab('path');
-          setIsEndlessDrillOpen(false);
-          setIsPitchSimulatorOpen(false);
-        }}
-        onOpenSOS={() => {
-          playSound('click');
-          setIsSOSModalOpen(true);
-        }}
-        onOpenCommute={() => {
-          playSound('click');
-          setIsCommuteModalOpen(true);
-        }}
-        onOpenSearch={() => {
-          playSound('click');
-          setIsSearchModalOpen(true);
-        }}
-        onOpenPortfolio={() => {
-          playSound('click');
-          setIsPortfolioModalOpen(true);
-        }}
-        onOpenAdmin={() => {
-          playSound('click');
-          setIsAdminPortalOpen(true);
-        }}
-        isCloudSynced={isCloudSynced}
-        onLogout={handleLogout}
-      />
+  const renderTabContent = () => (
+    <>
+      {/* TAB 1: DUOLINGO PATH (Interactive Units) */}
+      {activeTab === 'path' && (
+        <DuolingoHome
+          selectedLevel={selectedLevel}
+          setSelectedLevel={handleLevelSelect}
+          completedUnitIds={gamificationState.completedNodeIds}
+          onCompleteUnit={handleCompleteUnit}
+          speechRate={speechRate}
+          onGoToVoiceCoach={() => {
+            playSound('click');
+            setActiveTab('speaking');
+          }}
+          onGoToPitchDeck={() => {
+            playSound('click');
+            setActiveTab('pitch');
+          }}
+          onGoToBattle={() => {
+            playSound('click');
+            setActiveTab('battle');
+          }}
+          onOpenEndlessDrill={() => {
+            playSound('click');
+            setIsEndlessDrillOpen(true);
+          }}
+          onOpenLeaderboard={() => {
+            playSound('click');
+            setIsLeaderboardOpen(true);
+          }}
+          highestDrillScore={profile.highestDrillScore || gamificationState.highestDrillScore || 0}
+        />
+      )}
 
-      {/* Main Screen Content */}
-      <main className="flex-1 max-w-xl w-full mx-auto px-3 sm:px-4 pt-3 sm:pt-4 pb-28 sm:pb-32">
-        
-        {/* TAB 1: DUOLINGO PATH (Interactive Units) */}
-        {activeTab === 'path' && (
-          <DuolingoHome
+      {/* TAB 2: VIKOVOICE AI (Pronunciation Coach) */}
+      {activeTab === 'speaking' && (
+        <VikodaVoiceCoach
+          speechRate={speechRate}
+          onAwardXpAndGems={handleAwardXpAndGems}
+          selectedLevel={selectedLevel}
+        />
+      )}
+
+      {/* TAB 3: VIKODA PITCH DECK & SIMULATOR */}
+      {activeTab === 'pitch' && (
+        <VikodaPitchDeck 
+          speechRate={speechRate} 
+          onOpenPitchSimulator={() => {
+            playSound('click');
+            setIsPitchSimulatorOpen(true);
+          }}
+        />
+      )}
+
+      {/* TAB 4: BUYER OBJECTIONS BATTLE (Đấu Trí Đối Tác) */}
+      {activeTab === 'battle' && (
+        <BuyerObjectionsBattle
+          speechRate={speechRate}
+          onAwardXpAndGems={handleAwardXpAndGems}
+        />
+      )}
+
+      {/* TAB 5: EMAIL STUDIO (Mẫu Thư Xuất Khẩu & Công Sở) */}
+      {activeTab === 'email' && (
+        <ExportEmailStudio speechRate={speechRate} />
+      )}
+    </>
+  );
+
+  return (
+    <div className="min-h-screen bg-slate-100/70 text-slate-900 flex flex-col antialiased selection:bg-cyan-500 selection:text-white">
+      
+      {isLaptop ? (
+        /* ================= LAPTOP / DESKTOP EXECUTIVE WORKSPACE (3-COLUMN) ================= */
+        <div className="flex-1 flex w-full justify-between items-start">
+          {/* 1. Left Fixed Sidebar */}
+          <LaptopSidebarNav
+            activeTab={activeTab}
+            setActiveTab={(t) => {
+              playSound('click');
+              setActiveTab(t);
+            }}
             selectedLevel={selectedLevel}
             setSelectedLevel={handleLevelSelect}
-            completedUnitIds={gamificationState.completedNodeIds}
-            onCompleteUnit={handleCompleteUnit}
-            speechRate={speechRate}
-            onGoToVoiceCoach={() => {
+            profile={profile}
+            stats={gamificationState}
+            onOpenProfile={() => {
               playSound('click');
-              setActiveTab('speaking');
-            }}
-            onGoToPitchDeck={() => {
-              playSound('click');
-              setActiveTab('pitch');
-            }}
-            onGoToBattle={() => {
-              playSound('click');
-              setActiveTab('battle');
-            }}
-            onOpenEndlessDrill={() => {
-              playSound('click');
-              setIsEndlessDrillOpen(true);
+              setIsProfileModalOpen(true);
             }}
             onOpenLeaderboard={() => {
               playSound('click');
               setIsLeaderboardOpen(true);
             }}
-            highestDrillScore={profile.highestDrillScore || gamificationState.highestDrillScore || 0}
-          />
-        )}
-
-        {/* TAB 2: VIKOVOICE AI (Pronunciation Coach) */}
-        {activeTab === 'speaking' && (
-          <VikodaVoiceCoach
-            speechRate={speechRate}
-            onAwardXpAndGems={handleAwardXpAndGems}
-            selectedLevel={selectedLevel}
-          />
-        )}
-
-        {/* TAB 3: VIKODA PITCH DECK & SIMULATOR */}
-        {activeTab === 'pitch' && (
-          <VikodaPitchDeck 
-            speechRate={speechRate} 
-            onOpenPitchSimulator={() => {
+            onOpenAi={() => {
               playSound('click');
-              setIsPitchSimulatorOpen(true);
+              setIsAiModalOpen(true);
+            }}
+            onOpenAdmin={() => {
+              playSound('click');
+              setIsAdminPortalOpen(true);
+            }}
+            onLogout={handleLogout}
+            isCloudSynced={isCloudSynced}
+          />
+
+          {/* 2. Center Spacious Main Canvas */}
+          <main className="flex-1 max-w-2xl px-6 py-6 pb-20 mx-auto w-full">
+            {renderTabContent()}
+          </main>
+
+          {/* 3. Right Executive Widget Panel */}
+          <LaptopRightPanel
+            stats={gamificationState}
+            profile={profile}
+            onOpenArena={() => {
+              playSound('click');
+              setIsEndlessDrillOpen(true);
+            }}
+            onOpenSOS={() => {
+              playSound('click');
+              setIsSOSModalOpen(true);
+            }}
+            onOpenCommute={() => {
+              playSound('click');
+              setIsCommuteModalOpen(true);
+            }}
+            onOpenSearch={() => {
+              playSound('click');
+              setIsSearchModalOpen(true);
+            }}
+            onOpenPortfolio={() => {
+              playSound('click');
+              setIsPortfolioModalOpen(true);
+            }}
+            onOpenLeaderboard={() => {
+              playSound('click');
+              setIsLeaderboardOpen(true);
             }}
           />
-        )}
-
-        {/* TAB 4: BUYER OBJECTIONS BATTLE (Đấu Trí Đối Tác) */}
-        {activeTab === 'battle' && (
-          <BuyerObjectionsBattle
+        </div>
+      ) : (
+        /* ================= MOBILE / COMPACT SCREEN LAYOUT ================= */
+        <>
+          {/* Mobile Modern Header */}
+          <VikodaHeader
+            stats={gamificationState}
+            selectedLevel={selectedLevel}
+            setSelectedLevel={handleLevelSelect}
             speechRate={speechRate}
-            onAwardXpAndGems={handleAwardXpAndGems}
+            setSpeechRate={setSpeechRate}
+            onOpenAi={() => {
+              playSound('click');
+              setIsAiModalOpen(true);
+            }}
+            profile={profile}
+            onOpenProfile={() => {
+              playSound('click');
+              setIsProfileModalOpen(true);
+            }}
+            onOpenLeaderboard={() => {
+              playSound('click');
+              setIsLeaderboardOpen(true);
+            }}
+            onGoHome={() => {
+              playSound('click');
+              setActiveTab('path');
+              setIsEndlessDrillOpen(false);
+              setIsPitchSimulatorOpen(false);
+            }}
+            onOpenSOS={() => {
+              playSound('click');
+              setIsSOSModalOpen(true);
+            }}
+            onOpenCommute={() => {
+              playSound('click');
+              setIsCommuteModalOpen(true);
+            }}
+            onOpenSearch={() => {
+              playSound('click');
+              setIsSearchModalOpen(true);
+            }}
+            onOpenPortfolio={() => {
+              playSound('click');
+              setIsPortfolioModalOpen(true);
+            }}
+            onOpenAdmin={() => {
+              playSound('click');
+              setIsAdminPortalOpen(true);
+            }}
+            isCloudSynced={isCloudSynced}
+            onLogout={handleLogout}
           />
-        )}
 
-        {/* TAB 5: EMAIL STUDIO (Mẫu Thư Xuất Khẩu & Công Sở) */}
-        {activeTab === 'email' && (
-          <ExportEmailStudio speechRate={speechRate} />
-        )}
+          {/* Main Mobile Screen Content */}
+          <main className="flex-1 max-w-xl w-full mx-auto px-3 sm:px-4 pt-3 sm:pt-4 pb-28 sm:pb-32">
+            {renderTabContent()}
+          </main>
 
-      </main>
-
-      {/* Mobile-First Bottom Navigation Bar */}
-      <MobileBottomNav
-        activeTab={activeTab}
-        setActiveTab={(t) => {
-          playSound('click');
-          setActiveTab(t);
-        }}
-      />
+          {/* Mobile Bottom Navigation Bar */}
+          <MobileBottomNav
+            activeTab={activeTab}
+            setActiveTab={(t) => {
+              playSound('click');
+              setActiveTab(t);
+            }}
+          />
+        </>
+      )}
 
       {/* AI Assistant Modal (Boardroom Translator) */}
       <AIAssistantModal
