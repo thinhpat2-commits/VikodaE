@@ -26,6 +26,7 @@ import { PvPArenaModal } from './components/PvPArenaModal';
 import { DailyQuickReviewModal } from './components/DailyQuickReviewModal';
 import { PlacementTestModal, PlacementTestResult } from './components/PlacementTestModal';
 import { PersonalCoachModal } from './components/PersonalCoachModal';
+import { PracticeHub } from './components/PracticeHub';
 import { useDeviceDetect } from './hooks/useDeviceDetect';
 import { LaptopSidebarNav } from './components/laptop/LaptopSidebarNav';
 import { LaptopRightPanel } from './components/laptop/LaptopRightPanel';
@@ -544,10 +545,63 @@ export default function App() {
             playSound('click');
             setIsCoachOpen(true);
           }}
+          streakDays={gamificationState.streakDays}
         />
       )}
 
-      {/* TAB 2: VIKOVOICE AI (Pronunciation Coach) */}
+      {/* TAB 2: PRACTICE HUB (Unified Hub for all drills & simulators) */}
+      {activeTab === 'practice' && (
+        <PracticeHub
+          stats={gamificationState}
+          profile={profile}
+          onOpenPvPArena={() => {
+            playSound('click');
+            setIsPvPArenaOpen(true);
+          }}
+          onOpenDailyReview={() => {
+            playSound('click');
+            setIsDailyReviewOpen(true);
+          }}
+          onOpenEndlessDrill={() => {
+            playSound('click');
+            setIsEndlessDrillOpen(true);
+          }}
+          onGoToVoiceCoach={() => {
+            playSound('click');
+            setActiveTab('speaking');
+          }}
+          onGoToPitchDeck={() => {
+            playSound('click');
+            setActiveTab('pitch');
+          }}
+          onGoToBuyerBattle={() => {
+            playSound('click');
+            setActiveTab('battle');
+          }}
+          onGoToEmailStudio={() => {
+            playSound('click');
+            setActiveTab('email');
+          }}
+          onOpenSOS={() => {
+            playSound('click');
+            setIsSOSModalOpen(true);
+          }}
+          onOpenCommute={() => {
+            playSound('click');
+            setIsCommuteModalOpen(true);
+          }}
+          onOpenSearch={() => {
+            playSound('click');
+            setIsSearchModalOpen(true);
+          }}
+          onOpenPlacementTest={() => {
+            playSound('click');
+            setIsPlacementTestOpen(true);
+          }}
+        />
+      )}
+
+      {/* SUB-TAB: VIKOVOICE AI (Pronunciation Coach) */}
       {activeTab === 'speaking' && (
         <VikodaVoiceCoach
           speechRate={speechRate}
@@ -614,14 +668,6 @@ export default function App() {
             onOpenAdmin={() => {
               playSound('click');
               setIsAdminPortalOpen(true);
-            }}
-            onOpenPvPArena={() => {
-              playSound('click');
-              setIsPvPArenaOpen(true);
-            }}
-            onOpenDailyReview={() => {
-              playSound('click');
-              setIsDailyReviewOpen(true);
             }}
             onOpenCoach={() => {
               playSound('click');
@@ -762,6 +808,18 @@ export default function App() {
             setActiveTab={(t) => {
               playSound('click');
               setActiveTab(t);
+            }}
+            onOpenPvPArena={() => {
+              playSound('click');
+              setIsPvPArenaOpen(true);
+            }}
+            onOpenLeaderboard={() => {
+              playSound('click');
+              setIsLeaderboardOpen(true);
+            }}
+            onOpenProfile={() => {
+              playSound('click');
+              setIsProfileModalOpen(true);
             }}
           />
         </>

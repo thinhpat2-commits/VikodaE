@@ -1,59 +1,67 @@
 import React from 'react';
 
 /**
- * Duolingo-style Vikoda Brand Assets:
- * 1. "Viko" Mascot: Adorable, energetic, 3D-chunky natural alkaline mineral droplet
- *    - Friendly, expressive, beloved Duolingo mascot aesthetic
- *    - Moods: 'happy' | 'cheering' | 'celebrate' | 'thinking' | 'proud' | 'zen'
- * 2. CompanyEmblem: Clean, iconic Đảnh Thạnh spring fountain circle
- * 3. VikodaWordmark: Bold, friendly, geometric brand typography (viko cyan + da navy)
- * 4. HeaderBrandLogo: Compact, pristine pairing for the navigation bar
+ * VIKODA MASCOT - "VIKO"
+ * A charming, plump, glossy mineral water droplet mascot from the 1957 Đảnh Thạnh spring.
+ * Supports expressive emotional states: waving, dancing, scratching head, thinking, celebrate, etc.
  */
+export type MascotMood = 
+  | 'happy' 
+  | 'thinking' 
+  | 'proud' 
+  | 'zen' 
+  | 'cheering' 
+  | 'celebrate'
+  | 'waving'
+  | 'dancing'
+  | 'scratching_head';
 
-export type VikoMood = 'happy' | 'cheering' | 'celebrate' | 'thinking' | 'proud' | 'zen';
-
-export const VikoMascot: React.FC<{
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  mood?: VikoMood;
+export interface VikoMascotProps {
   className?: string;
-}> = ({ size = 'md', mood = 'happy', className = '' }) => {
-  const sizePx = {
-    xs: 28,
-    sm: 40,
-    md: 56,
-    lg: 80,
-    xl: 110,
-  }[size];
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  mood?: MascotMood;
+}
+
+export const VikoMascot: React.FC<VikoMascotProps> = ({
+  className = '',
+  size = 'md',
+  mood = 'happy'
+}) => {
+  const sizeMap = {
+    xs: 'w-7 h-7',
+    sm: 'w-10 h-10',
+    md: 'w-16 h-16',
+    lg: 'w-24 h-24',
+    xl: 'w-32 h-32'
+  };
 
   return (
-    <div
-      className={`relative inline-flex items-center justify-center select-none shrink-0 ${className}`}
-      style={{ width: sizePx, height: sizePx }}
-      aria-label={`Mascot Viko - ${mood}`}
-    >
+    <div className={`relative inline-flex items-center justify-center select-none ${sizeMap[size]} ${className}`}>
       <svg
         viewBox="0 0 120 130"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full drop-shadow-md transition-transform duration-200"
+        className="w-full h-full drop-shadow-sm overflow-visible"
       >
         <defs>
-          {/* Main Body Gradient: Duolingo-grade vibrant Cyan */}
-          <linearGradient id="viko_body" x1="20" y1="15" x2="100" y2="120" gradientUnits="userSpaceOnUse">
+          {/* Main 3D Droplet Gradient */}
+          <linearGradient id="viko_body" x1="20" y1="20" x2="100" y2="120" gradientUnits="userSpaceOnUse">
             <stop stopColor="#38BDF8" />
-            <stop offset="0.45" stopColor="#00A3FF" />
-            <stop offset="1" stopColor="#0070D1" />
+            <stop offset="0.45" stopColor="#009FE3" />
+            <stop offset="0.85" stopColor="#0072CE" />
+            <stop offset="1" stopColor="#005A9C" />
           </linearGradient>
 
-          {/* 3D Bottom Bevel Shadow for tactile Duolingo toy depth */}
-          <linearGradient id="viko_bevel" x1="60" y1="95" x2="60" y2="120" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#005A9C" stopOpacity="0" />
-            <stop offset="1" stopColor="#004A80" stopOpacity="0.55" />
+          {/* 3D Bottom Bevel Shadow */}
+          <linearGradient id="viko_bevel" x1="60" y1="90" x2="60" y2="125" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#00355E" stopOpacity="0" />
+            <stop offset="1" stopColor="#002240" stopOpacity="0.65" />
           </linearGradient>
 
-          {/* Highlights */}
-          <linearGradient id="viko_highlight" x1="30" y1="25" x2="65" y2="65" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#FFFFFF" stopOpacity="0.65" />
+          {/* Glossy Curved Highlight */}
+          <linearGradient id="viko_highlight" x1="40" y1="25" x2="35" y2="90" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#FFFFFF" stopOpacity="0.8" />
+            <stop offset="0.6" stopColor="#FFFFFF" stopOpacity="0.25" />
             <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
           </linearGradient>
 
@@ -100,66 +108,107 @@ export const VikoMascot: React.FC<{
         <ellipse cx="36" cy="85" rx="5.5" ry="3.5" fill="#FF6B8B" fillOpacity="0.75" />
         <ellipse cx="84" cy="85" rx="5.5" ry="3.5" fill="#FF6B8B" fillOpacity="0.75" />
 
-        {/* MOOD SPECIFIC DETAILS */}
-        {mood === 'zen' ? (
-          // Zen / Serene: Peaceful closed curved eyes
+        {/* ================= MOOD SPECIFIC DETAILS ================= */}
+        {mood === 'waving' ? (
+          // 1. WAVING: Cheerful face + One little hand waving in the air!
+          <>
+            {/* Eyes */}
+            <ellipse cx="46" cy="72" rx="7.5" ry="9" fill="#002B4D" />
+            <circle cx="44" cy="69" r="3.2" fill="#FFFFFF" />
+            <circle cx="49" cy="74" r="1.4" fill="#FFFFFF" />
+
+            <ellipse cx="74" cy="72" rx="7.5" ry="9" fill="#002B4D" />
+            <circle cx="72" cy="69" r="3.2" fill="#FFFFFF" />
+            <circle cx="77" cy="74" r="1.4" fill="#FFFFFF" />
+
+            {/* Happy Smile */}
+            <path d="M51 84C51 91 69 91 69 84" stroke="#002B4D" strokeWidth="3" strokeLinecap="round" />
+
+            {/* Left resting hand */}
+            <circle cx="22" cy="84" r="5" fill="#38BDF8" stroke="#0072CE" strokeWidth="1.5" />
+
+            {/* Right hand waving high with movement trail */}
+            <g className="animate-bounce origin-bottom">
+              <circle cx="104" cy="56" r="6" fill="#38BDF8" stroke="#0072CE" strokeWidth="1.8" />
+              {/* Motion wave ripples */}
+              <path d="M112 50C114 53 114 58 112 61" stroke="#009FE3" strokeWidth="2" strokeLinecap="round" />
+              <path d="M116 48C119 52 119 60 116 64" stroke="#38BDF8" strokeWidth="1.5" strokeLinecap="round" />
+            </g>
+          </>
+        ) : mood === 'dancing' || mood === 'celebrate' ? (
+          // 2. DANCING / COMBO STREAK: Joyful closed happy eyes, big open mouth, arms up & musical sparkle notes!
+          <>
+            <path d="M38 73C42 67 49 67 53 73" stroke="#002B4D" strokeWidth="3.5" strokeLinecap="round" />
+            <path d="M67 73C71 67 78 67 82 73" stroke="#002B4D" strokeWidth="3.5" strokeLinecap="round" />
+            
+            {/* Wide happy open mouth */}
+            <path d="M48 83C48 94 72 94 72 83C72 81 48 81 48 83Z" fill="#002B4D" />
+            <path d="M52 86C52 93 68 93 68 86C62 88 58 88 52 86Z" fill="#FF6B8B" />
+
+            {/* Both hands raised in victory */}
+            <circle cx="16" cy="62" r="5.5" fill="#38BDF8" stroke="#0072CE" strokeWidth="1.5" />
+            <circle cx="104" cy="62" r="5.5" fill="#38BDF8" stroke="#0072CE" strokeWidth="1.5" />
+
+            {/* Musical notes & sparkles floating */}
+            <text x="10" y="44" fontSize="13" fill="#EAB308" className="animate-pulse">✨</text>
+            <text x="96" y="40" fontSize="13" fill="#EAB308" className="animate-pulse">🎵</text>
+            <text x="56" y="8" fontSize="14" fill="#F59E0B">👑</text>
+          </>
+        ) : mood === 'scratching_head' || mood === 'thinking' ? (
+          // 3. SCRATCHING HEAD / THINKING (WHEN WRONG): Puzzled eyes, hand on head, sweatdrop 💧
+          <>
+            {/* Puzzled looking up eyes */}
+            <ellipse cx="46" cy="70" rx="6" ry="7.5" fill="#002B4D" />
+            <circle cx="48" cy="67" r="2.5" fill="#FFFFFF" />
+            <ellipse cx="74" cy="70" rx="6" ry="7.5" fill="#002B4D" />
+            <circle cx="76" cy="67" r="2.5" fill="#FFFFFF" />
+
+            {/* Small wavy puzzled mouth */}
+            <path d="M54 86C57 88 60 84 63 86C66 88 68 85 70 86" stroke="#002B4D" strokeWidth="2.5" strokeLinecap="round" />
+
+            {/* Hand raised scratching side of head */}
+            <circle cx="86" cy="50" r="5.5" fill="#38BDF8" stroke="#005A9C" strokeWidth="1.5" />
+            {/* Scratch marks */}
+            <path d="M90 40L94 36" stroke="#0284C7" strokeWidth="1.5" strokeLinecap="round" />
+            <path d="M93 45L98 43" stroke="#0284C7" strokeWidth="1.5" strokeLinecap="round" />
+
+            {/* Cute Anime Blue Sweat Drop 💧 */}
+            <path
+              d="M32 46C32 46 27 54 27 58C27 61 29 63 32 63C35 63 37 61 37 58C37 54 32 46 32 46Z"
+              fill="#38BDF8"
+              stroke="#0284C7"
+              strokeWidth="1"
+            />
+          </>
+        ) : mood === 'zen' ? (
+          // Zen: Peaceful closed eyes
           <>
             <path d="M40 73C44 70 48 70 52 73" stroke="#00355E" strokeWidth="3" strokeLinecap="round" />
             <path d="M68 73C72 70 76 70 80 73" stroke="#00355E" strokeWidth="3" strokeLinecap="round" />
             <path d="M55 83C58 86 62 86 65 83" stroke="#00355E" strokeWidth="2.5" strokeLinecap="round" />
           </>
-        ) : mood === 'thinking' ? (
-          // Thinking: Eyes looking up to top-right
-          <>
-            <ellipse cx="46" cy="71" rx="6.5" ry="8" fill="#002B4D" />
-            <circle cx="48" cy="68" r="2.8" fill="#FFFFFF" />
-            <ellipse cx="74" cy="71" rx="6.5" ry="8" fill="#002B4D" />
-            <circle cx="76" cy="68" r="2.8" fill="#FFFFFF" />
-            {/* Cute small puzzled 'o' mouth */}
-            <ellipse cx="60" cy="86" rx="3.5" ry="4" fill="#002B4D" />
-            {/* Hand on cheek */}
-            <circle cx="78" cy="88" r="4.5" fill="#38BDF8" stroke="#005A9C" strokeWidth="1" />
-          </>
-        ) : mood === 'celebrate' || mood === 'proud' ? (
-          // Celebrating: Super happy smiling eyes & big open mouth
+        ) : mood === 'proud' ? (
+          // Proud: Champion medal
           <>
             <path d="M38 74C42 68 49 68 53 74" stroke="#002B4D" strokeWidth="3.5" strokeLinecap="round" />
             <path d="M67 74C71 68 78 68 82 74" stroke="#002B4D" strokeWidth="3.5" strokeLinecap="round" />
-            {/* Wide happy open mouth with pink tongue */}
-            <path
-              d="M48 84C48 94 72 94 72 84C72 82 48 82 48 84Z"
-              fill="#002B4D"
-            />
-            <path
-              d="M52 87C52 93 68 93 68 87C62 89 58 89 52 87Z"
-              fill="#FF6B8B"
-            />
-            {/* Champion Gold Medal */}
+            <path d="M51 84C51 90 69 90 69 84" stroke="#002B4D" strokeWidth="3" strokeLinecap="round" />
             <circle cx="60" cy="106" r="8" fill="#FBBF24" stroke="#D97706" strokeWidth="1.5" />
             <text x="60" y="110" fontSize="8" fontWeight="bold" textAnchor="middle" fill="#78350F">1</text>
           </>
         ) : (
-          // Default Happy / Cheering: Big Duolingo-style glossy anime eyes & warm smile
+          // Default Cheering / Happy: Warm big glossy eyes
           <>
-            {/* Left Eye */}
             <ellipse cx="46" cy="72" rx="7.5" ry="9" fill="#002B4D" />
             <circle cx="44" cy="69" r="3.2" fill="#FFFFFF" />
             <circle cx="49" cy="74" r="1.4" fill="#FFFFFF" />
 
-            {/* Right Eye */}
             <ellipse cx="74" cy="72" rx="7.5" ry="9" fill="#002B4D" />
             <circle cx="72" cy="69" r="3.2" fill="#FFFFFF" />
             <circle cx="77" cy="74" r="1.4" fill="#FFFFFF" />
 
-            {/* Friendly Warm Smile */}
-            <path
-              d="M51 84C51 90 69 90 69 84"
-              stroke="#002B4D"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
+            <path d="M51 84C51 90 69 90 69 84" stroke="#002B4D" strokeWidth="3" strokeLinecap="round" />
 
-            {/* If cheering, show little hands */}
             {mood === 'cheering' && (
               <>
                 <circle cx="20" cy="74" r="5" fill="#38BDF8" stroke="#0072CE" strokeWidth="1.5" />
@@ -181,12 +230,9 @@ export const CompanyEmblem: React.FC<{ className?: string }> = ({ className = 'w
       xmlns="http://www.w3.org/2000/svg" 
       className={`shrink-0 select-none ${className}`}
     >
-      {/* 3D Circular Bevel */}
       <circle cx="50" cy="52" r="44" fill="#004D8C" />
       <circle cx="50" cy="48" r="44" fill="#009FE3" />
       <circle cx="50" cy="48" r="38" fill="#FFFFFF" />
-
-      {/* Stylized Twin Mineral Fountain Geyser */}
       <path
         d="M32 66C32 46 44 38 50 24C52 36 43 48 43 64C43 70 46 74 50 75C40 75 32 71 32 66Z"
         fill="#005A9C"
@@ -221,11 +267,6 @@ export const VikodaWordmark: React.FC<{
   );
 };
 
-/**
- * Duolingo-style Header Brand Lockup:
- * Playful mini Viko Mascot + crisp Vikoda Wordmark
- * Compact, tactile, cheerful!
- */
 export const HeaderBrandLogo: React.FC<{ className?: string }> = ({ className = 'h-8' }) => {
   return (
     <div className={`inline-flex items-center select-none ${className}`}>
@@ -234,8 +275,4 @@ export const HeaderBrandLogo: React.FC<{ className?: string }> = ({ className = 
   );
 };
 
-/**
- * Backward compatibility alias for any existing imports of BalancedStonesMascot
- */
 export const BalancedStonesMascot = VikoMascot;
-

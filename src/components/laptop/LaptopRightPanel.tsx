@@ -3,14 +3,15 @@ import {
   Flame, 
   Gem, 
   Zap, 
-  Award, 
-  Search, 
-  Headphones, 
+  Trophy, 
+  CheckCircle2, 
   Volume2, 
   VolumeX, 
+  ArrowRight,
+  Target,
   Sparkles,
-  Trophy,
-  CheckCircle2,
+  Award,
+  ChevronRight,
   SlidersHorizontal
 } from 'lucide-react';
 import { GamificationState, EmployeeProfile } from '../../types';
@@ -26,31 +27,28 @@ import { VoiceSelectorModal } from '../VoiceSelectorModal';
 interface LaptopRightPanelProps {
   stats: GamificationState;
   profile: EmployeeProfile;
+  onOpenLeaderboard: () => void;
   onOpenArena: () => void;
   onOpenPvPArena?: () => void;
   onOpenDailyReview?: () => void;
   onOpenCoach?: () => void;
   onOpenPlacementTest?: () => void;
-  onOpenSOS: () => void;
-  onOpenCommute: () => void;
-  onOpenSearch: () => void;
-  onOpenPortfolio: () => void;
-  onOpenLeaderboard: () => void;
+  onOpenSOS?: () => void;
+  onOpenCommute?: () => void;
+  onOpenSearch?: () => void;
+  onOpenPortfolio?: () => void;
 }
 
 export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
   stats,
   profile,
+  onOpenLeaderboard,
   onOpenArena,
   onOpenPvPArena,
   onOpenDailyReview,
   onOpenCoach,
   onOpenPlacementTest,
   onOpenSOS,
-  onOpenCommute,
-  onOpenSearch,
-  onOpenPortfolio,
-  onOpenLeaderboard,
 }) => {
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
   const [currentVoice, setCurrentVoice] = useState<VoiceOptionId>(getSelectedVoiceId());
@@ -73,247 +71,202 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
 
   const activeVoiceOption = VOICE_OPTIONS.find((v) => v.id === currentVoice) || VOICE_OPTIONS[0];
 
+  // 7-day streak calendar calculations (Monday to Sunday)
+  const daysOfWeek = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
+  const todayDayIndex = (new Date().getDay() + 6) % 7; // 0 for Mon, 6 for Sun
+
+  // Quests progress simulations based on actual state
+  const quest1Progress = Math.min(100, Math.round(((stats.xp % 50) / 30) * 100));
+  const quest2Progress = stats.completedNodeIds.length > 0 ? 100 : 0;
+  const quest3Progress = stats.arenaStats?.matchesPlayed ? Math.min(100, stats.arenaStats.matchesPlayed * 50) : 0;
+
   return (
     <aside className="w-80 shrink-0 min-h-screen sticky top-0 p-5 space-y-4 border-l border-slate-200/80 bg-slate-50/50 select-none">
       
-      {/* 1. Daily Stats Card (Streak & Gems) */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-3">
-        <div className="text-[10px] font-black uppercase tracking-wider text-slate-400">
-          Chỉ Số Đào Tạo Hôm Nay
+      {/* 1. TOP CURRENCY & STATUS BAR */}
+      <div className="flex items-center justify-between gap-2 p-2 bg-white rounded-2xl border border-slate-200 shadow-2xs">
+        {/* Streak */}
+        <div className="flex items-center gap-1.5 px-2 py-1 text-xs font-black text-amber-900">
+          <Flame className="w-4 h-4 fill-amber-500 text-amber-500" />
+          <span>{stats.streakDays}</span>
         </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          {/* Streak */}
-          <div className="p-3 rounded-xl bg-amber-50 border border-amber-200/80 flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-2xs">
+        {/* Gems */}
+        <div className="flex items-center gap-1.5 px-2 py-1 text-xs font-black text-cyan-900">
+          <Gem className="w-4 h-4 fill-cyan-500 text-cyan-500" />
+          <span>{stats.gems}</span>
+        </div>
+
+        {/* Voice Selector */}
+        <button
+          onClick={() => setIsVoiceModalOpen(true)}
+          className="p-1.5 rounded-xl hover:bg-slate-100 text-xs font-bold text-slate-700 flex items-center gap-1 cursor-pointer"
+          title="Chọn giọng đọc AI"
+        >
+          <span>{activeVoiceOption.flag}</span>
+        </button>
+
+        {/* Stealth Toggle */}
+        <button
+          onClick={toggleStealth}
+          className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-600 cursor-pointer"
+          title={isStealth ? 'Chế độ công sở: Đã tắt chuông' : 'Bật hiệu ứng âm thanh'}
+        >
+          {isStealth ? (
+            <VolumeX className="w-4 h-4 text-rose-500" />
+          ) : (
+            <Volume2 className="w-4 h-4 text-slate-500" />
+          )}
+        </button>
+      </div>
+
+      {/* 2. STREAK CALENDAR CARD (DUOLINGO STYLE) */}
+      <div className="bg-white p-4 rounded-3xl border-2 border-slate-200 border-b-4 border-b-slate-300 shadow-xs space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shadow-xs">
               <Flame className="w-4 h-4 fill-white" />
             </div>
             <div>
-              <div className="text-base font-black text-amber-950 leading-none">{stats.streakDays} Ngày</div>
-              <div className="text-[10px] text-amber-700 font-bold mt-0.5">Chuỗi liên tục</div>
+              <div className="text-sm font-black text-slate-900 leading-none">
+                Chuỗi {stats.streakDays} ngày
+              </div>
+              <div className="text-[10px] text-amber-600 font-bold mt-0.5">
+                Rèn luyện đều đặn
+              </div>
             </div>
           </div>
-
-          {/* Gems */}
-          <div className="p-3 rounded-xl bg-cyan-50 border border-cyan-200/80 flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-cyan-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
-              <Gem className="w-4 h-4 fill-white" />
-            </div>
-            <div>
-              <div className="text-base font-black text-cyan-950 leading-none">{stats.gems}</div>
-              <div className="text-[10px] text-cyan-700 font-bold mt-0.5">Khoáng chất</div>
-            </div>
-          </div>
+          {onOpenCoach && (
+            <button
+              onClick={() => {
+                playSound('click');
+                onOpenCoach();
+              }}
+              className="text-[10px] font-black text-[#0070D1] hover:underline cursor-pointer"
+            >
+              Lịch học
+            </button>
+          )}
         </div>
 
-        {/* Level Rank */}
-        <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-600">
-          <span>Danh hiệu nội bộ:</span>
-          <span className="text-[#0070D1] font-black">{stats.rank}</span>
-        </div>
-      </div>
-
-      {/* 2. Quick Arena Challenge Banner */}
-      <div className="bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl p-4 text-white shadow-sm space-y-2">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5 font-black text-xs uppercase tracking-wide">
-            <Zap className="w-4 h-4 fill-white" />
-            <span>Arena Phản Xạ 60s</span>
-          </div>
-          <span className="text-[10px] font-extrabold bg-white/20 px-2 py-0.5 rounded-full">
-            x3 XP
-          </span>
-        </div>
-        <p className="text-xs text-amber-50 leading-snug">
-          Thử thách phản xạ từ vựng xuất khẩu nhanh trong 60 giây.
-        </p>
-        <button
-          onClick={() => {
-            playSound('click');
-            onOpenArena();
-          }}
-          className="w-full py-2 rounded-xl bg-white text-amber-950 font-black text-xs shadow-2xs hover:bg-amber-50 active:scale-98 transition-all cursor-pointer"
-        >
-          ⚡ Bắt Đầu Thử Thách Ngay
-        </button>
-      </div>
-
-      {/* 3. Executive Toolset Shortcuts */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
-        <div className="text-[10px] font-black uppercase tracking-wider text-slate-400">
-          Công Cụ Đào Tạo Chiến Lược
-        </div>
-
-        {/* 1v1 PvP Arena */}
-        {onOpenPvPArena && (
-          <button
-            onClick={() => {
-              playSound('click');
-              onOpenPvPArena();
-            }}
-            className="w-full text-left p-2.5 rounded-xl bg-gradient-to-r from-rose-50 to-red-50 hover:from-rose-100 hover:to-red-100 border border-rose-200 text-slate-800 transition-all flex items-center justify-between cursor-pointer group shadow-2xs"
-          >
-            <div className="flex items-center gap-2.5">
-              <span className="text-base group-hover:scale-110 transition-transform">⚔️</span>
-              <div>
-                <div className="text-xs font-black text-rose-950 flex items-center gap-1.5">
-                  <span>Đấu Trường 1v1 PvP</span>
-                  <span className="px-1.5 py-0.2 rounded-full bg-rose-600 text-white text-[9px] font-bold">HOT</span>
+        {/* 7 Day Circles */}
+        <div className="grid grid-cols-7 gap-1 pt-1">
+          {daysOfWeek.map((d, idx) => {
+            const isDone = idx <= todayDayIndex;
+            const isToday = idx === todayDayIndex;
+            return (
+              <div key={d} className="flex flex-col items-center gap-1">
+                <span className="text-[9px] font-bold text-slate-400">{d}</span>
+                <div
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-black transition-all ${
+                    isDone
+                      ? 'bg-amber-500 text-white shadow-xs'
+                      : isToday
+                      ? 'bg-amber-100 text-amber-700 ring-2 ring-amber-400'
+                      : 'bg-slate-100 text-slate-400'
+                  }`}
+                >
+                  {isDone ? '✓' : ''}
                 </div>
-                <div className="text-[10px] text-rose-700">Thách đấu đối kháng đồng nghiệp</div>
               </div>
-            </div>
-            <span className="text-xs font-black text-rose-700">Elo {stats.arenaStats?.eloRating || 1200}</span>
-          </button>
-        )}
-
-        {/* Daily Quick Review (Mistakes Vault) */}
-        {onOpenDailyReview && (
-          <button
-            onClick={() => {
-              playSound('click');
-              onOpenDailyReview();
-            }}
-            className="w-full text-left p-2.5 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 border border-amber-200 text-slate-800 transition-all flex items-center justify-between cursor-pointer group shadow-2xs"
-          >
-            <div className="flex items-center gap-2.5">
-              <span className="text-base group-hover:scale-110 transition-transform">🔁</span>
-              <div>
-                <div className="text-xs font-black text-amber-950">Ôn Tập Nhanh 3 Phút</div>
-                <div className="text-[10px] text-amber-700">Sửa triệt để các câu hay sai</div>
-              </div>
-            </div>
-            {stats.mistakesVault && stats.mistakesVault.filter(m => !m.mastered).length > 0 && (
-              <span className="px-2 py-0.5 rounded-full bg-amber-500 text-white text-[10px] font-black">
-                {stats.mistakesVault.filter(m => !m.mastered).length} câu
-              </span>
-            )}
-          </button>
-        )}
-
-        {/* AI Learning Coach & Planner */}
-        {onOpenCoach && (
-          <button
-            onClick={() => {
-              playSound('click');
-              onOpenCoach();
-            }}
-            className="w-full text-left p-2.5 rounded-xl hover:bg-sky-50 text-slate-800 transition-colors flex items-center gap-2.5 cursor-pointer group"
-          >
-            <span className="text-base group-hover:scale-110 transition-transform">🧭</span>
-            <div>
-              <div className="text-xs font-black text-slate-800">Huấn Luyện Viên AI</div>
-              <div className="text-[10px] text-slate-400">Định hướng & Lên lịch học tuần</div>
-            </div>
-          </button>
-        )}
-
-        {/* Diagnostic Placement Test */}
-        {onOpenPlacementTest && (
-          <button
-            onClick={() => {
-              playSound('click');
-              onOpenPlacementTest();
-            }}
-            className="w-full text-left p-2.5 rounded-xl hover:bg-emerald-50 text-slate-800 transition-colors flex items-center gap-2.5 cursor-pointer group"
-          >
-            <span className="text-base group-hover:scale-110 transition-transform">📝</span>
-            <div>
-              <div className="text-xs font-black text-slate-800">Test Chuẩn 4 Kỹ Năng</div>
-              <div className="text-[10px] text-slate-400">Quy đổi chuẩn TOEIC / Cambridge</div>
-            </div>
-          </button>
-        )}
-
-        <button
-          onClick={() => {
-            playSound('click');
-            onOpenSOS();
-          }}
-          className="w-full text-left p-2.5 rounded-xl hover:bg-rose-50 text-slate-800 transition-colors flex items-center gap-2.5 cursor-pointer group"
-        >
-          <span className="text-base group-hover:scale-110 transition-transform">🚨</span>
-          <div>
-            <div className="text-xs font-black text-slate-800">Cẩm Nang SOS 60 Giây</div>
-            <div className="text-[10px] text-slate-400">Cứu nguy trước đàm phán VIP</div>
-          </div>
-        </button>
-
-        <button
-          onClick={() => {
-            playSound('click');
-            onOpenCommute();
-          }}
-          className="w-full text-left p-2.5 rounded-xl hover:bg-sky-50 text-slate-800 transition-colors flex items-center gap-2.5 cursor-pointer group"
-        >
-          <Headphones className="w-4 h-4 text-sky-600 group-hover:scale-110 transition-transform" />
-          <div>
-            <div className="text-xs font-black text-slate-800">Luyện Nghe Rảnh Tay</div>
-            <div className="text-[10px] text-slate-400">Tự động phát khi đi xe</div>
-          </div>
-        </button>
-
-        <button
-          onClick={() => {
-            playSound('click');
-            onOpenSearch();
-          }}
-          className="w-full text-left p-2.5 rounded-xl hover:bg-indigo-50 text-slate-800 transition-colors flex items-center gap-2.5 cursor-pointer group"
-        >
-          <Search className="w-4 h-4 text-indigo-600 group-hover:scale-110 transition-transform" />
-          <div>
-            <div className="text-xs font-black text-slate-800">Tra Cứu Bỏ Túi</div>
-            <div className="text-[10px] text-slate-400">Thuật ngữ mỏ khoáng & B2B</div>
-          </div>
-        </button>
-
-        <button
-          onClick={() => {
-            playSound('click');
-            onOpenPortfolio();
-          }}
-          className="w-full text-left p-2.5 rounded-xl hover:bg-amber-50 text-slate-800 transition-colors flex items-center gap-2.5 cursor-pointer group"
-        >
-          <Award className="w-4 h-4 text-amber-600 group-hover:scale-110 transition-transform" />
-          <div>
-            <div className="text-xs font-black text-slate-800">Chứng Chỉ Số CEO</div>
-            <div className="text-[10px] text-slate-400">Ghi âm & Chứng nhận hoàn tất</div>
-          </div>
-        </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* 4. Audio & Office Stealth Settings */}
-      <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-2xs space-y-2 text-xs font-bold text-slate-700">
+      {/* 3. DAILY QUESTS (NHIỆM VỤ HÀNG NGÀY - DUOLINGO STYLE) */}
+      <div className="bg-white p-4 rounded-3xl border-2 border-slate-200 border-b-4 border-b-slate-300 shadow-xs space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">Âm Thanh & Giọng Đọc</span>
-          <button
-            onClick={() => setIsVoiceModalOpen(true)}
-            className="text-[10px] font-bold text-[#0070D1] hover:underline"
-          >
-            Đổi giọng
-          </button>
+          <div className="text-xs font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+            <Target className="w-3.5 h-3.5 text-indigo-500" />
+            <span>Nhiệm Vụ Hôm Nay</span>
+          </div>
+          <span className="text-[10px] font-extrabold text-amber-600">3/3 mở rương</span>
         </div>
 
-        <div className="flex items-center justify-between pt-1">
-          <span className="text-xs truncate max-w-[150px]">{activeVoiceOption.flag} {activeVoiceOption.name}</span>
-          <button
-            onClick={toggleStealth}
-            className={`p-1.5 rounded-lg border flex items-center gap-1 text-[11px] cursor-pointer ${
-              isStealth 
-                ? 'bg-rose-50 text-rose-600 border-rose-200' 
-                : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100'
-            }`}
-          >
-            {isStealth ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-            <span>{isStealth ? 'Tắt tiếng' : 'Bật tiếng'}</span>
-          </button>
+        {/* Quest 1 */}
+        <div className="space-y-1">
+          <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+            <span className="truncate">Kiếm 20 XP hôm nay</span>
+            <span className="text-[10px] text-slate-400 shrink-0">+{stats.xp % 20}/20 XP</span>
+          </div>
+          <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+            <div 
+              className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-300"
+              style={{ width: `${quest1Progress}%` }}
+            />
+          </div>
         </div>
+
+        {/* Quest 2 */}
+        <div className="space-y-1">
+          <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+            <span className="truncate">Hoàn thành 1 bài học</span>
+            <span className="text-[10px] text-slate-400 shrink-0">1 bài</span>
+          </div>
+          <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+            <div 
+              className="h-full bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full transition-all duration-300"
+              style={{ width: `${quest2Progress}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Quest 3 */}
+        <div className="space-y-1">
+          <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+            <span className="truncate">Thách đấu 1 trận 1v1</span>
+            <span className="text-[10px] text-slate-400 shrink-0">1 trận</span>
+          </div>
+          <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+            <div 
+              className="h-full bg-gradient-to-r from-rose-400 to-rose-500 rounded-full transition-all duration-300"
+              style={{ width: `${quest3Progress}%` }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* 4. COMPANY LEAGUE RANK WIDGET (BẢNG THI ĐUA DOANH NGHIỆP) */}
+      <div className="bg-gradient-to-br from-indigo-50 to-sky-50 p-4 rounded-3xl border-2 border-indigo-200 border-b-4 border-b-indigo-300 shadow-xs space-y-2.5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-white flex items-center justify-center text-base shadow-xs">
+              🏆
+            </div>
+            <div>
+              <div className="text-xs font-black text-indigo-950 uppercase tracking-wide">
+                Bảng Vàng Tuần
+              </div>
+              <div className="text-[10px] text-indigo-700 font-bold">
+                {profile.department || 'Phòng Kinh Doanh'}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p className="text-xs text-slate-600 leading-snug">
+          Bạn đang xếp hạng <span className="font-black text-indigo-700">#3</span> trong bảng thi đua nội bộ tuần này!
+        </p>
+
+        <button
+          onClick={() => {
+            playSound('click');
+            onOpenLeaderboard();
+          }}
+          className="w-full py-2 rounded-xl bg-white hover:bg-indigo-50 text-indigo-900 font-black text-xs border border-indigo-200 shadow-2xs active:scale-98 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+        >
+          <span>Xem Bảng Xếp Hạng</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </button>
       </div>
 
       <VoiceSelectorModal
         isOpen={isVoiceModalOpen}
         onClose={() => setIsVoiceModalOpen(false)}
+        onSelectVoice={(vId) => setCurrentVoice(vId)}
       />
+
     </aside>
   );
 };

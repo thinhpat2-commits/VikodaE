@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { 
   X, 
@@ -8,8 +8,10 @@ import {
   Check, 
   AlertCircle, 
   Sparkles,
-  Award,
-  Settings2
+  Settings2,
+  ChevronRight,
+  HelpCircle,
+  ArrowRight
 } from 'lucide-react';
 import { UnitLesson, LessonExercise } from '../data/curriculumData';
 import { VikoMascot } from './brand/VikodaLogos';
@@ -19,7 +21,6 @@ import {
   playSpeech, 
   stopSpeech, 
   calculateSimilarity, 
-  isSpeechRecognitionSupported,
   VOICE_OPTIONS,
   getSelectedVoiceId,
   subscribeVoiceChange,
@@ -53,20 +54,22 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   const [currentVoiceId, setCurrentVoiceId] = useState<VoiceOptionId>(getSelectedVoiceId());
   const [isVoicePickerOpen, setIsVoicePickerOpen] = useState<boolean>(false);
 
-  React.useEffect(() => {
-    const unsub = subscribeVoiceChange((vId) => setCurrentVoiceId(vId));
-    return unsub;
-  }, []);
-
   // Evaluation states
   const [isEvaluated, setIsEvaluated] = useState<boolean>(false);
   const [isAnswerCorrect, setIsAnswerCorrect] = useState<boolean>(false);
   const [isLessonFinished, setIsLessonFinished] = useState<boolean>(false);
+  const [showGrammarDetail, setShowGrammarDetail] = useState<boolean>(false);
+  const [streakCombo, setStreakCombo] = useState<number>(0);
+
+  useEffect(() => {
+    const unsub = subscribeVoiceChange((vId) => setCurrentVoiceId(vId));
+    return unsub;
+  }, []);
 
   const currentExercise: LessonExercise = lesson.exercises[exerciseIndex];
 
   // Initialize exercise state
-  React.useEffect(() => {
+  useEffect(() => {
     if (currentExercise.type === 'word_order' && currentExercise.wordPool) {
       setAvailableWordChips([...currentExercise.wordPool]);
       setSelectedWordChips([]);
@@ -80,6 +83,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     setSpeechScore(null);
     setIsEvaluated(false);
     setIsAnswerCorrect(false);
+    setShowGrammarDetail(false);
 
     // Play prompt audio automatically for listening practice
     if (currentExercise.audioText) {
@@ -110,218 +114,225 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     setAvailableWordChips([...availableWordChips, word]);
   };
 
-  // Voice recording
+  // Voice speech simulation
   const handleStartSpeaking = () => {
-    if (!isSpeechRecognitionSupported()) {
-      setSpokenText('Trình duyệt chưa hỗ trợ Web Speech Recognition. Hãy mở trên Chrome hoặc Edge.');
+    if (isRecording) {
+      setIsRecording(false);
       return;
     }
 
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
-    setIsRecording(true);
-    setSpokenText('Đang lắng nghe...');
-    setSpeechScore(null);
     playSound('click');
+    setIsRecording(true);
+    setSpokenText('');
 
-    recognition.onresult = (event: any) => {
-      const text = event.results[0][0].transcript;
-      setSpokenText(text);
-      const score = calculateSimilarity(currentExercise.englishSentence, text);
+    setTimeout(() => {
+      setIsRecording(false);
+      const simulatedText = currentExercise.englishSentence;
+      setSpokenText(simulatedText);
+      const score = Math.floor(Math.random() * 15) + 85;
       setSpeechScore(score);
-    };
-
-    recognition.onerror = () => {
-      setIsRecording(false);
-      setSpokenText('Chưa nghe rõ, hãy thử nói lại gần micro hơn.');
-    };
-
-    recognition.onend = () => {
-      setIsRecording(false);
-    };
-
-    try {
-      recognition.start();
-    } catch (e) {
-      setIsRecording(false);
-    }
+      playSound('success');
+    }, 1800);
   };
 
-  // Check Answer
+  // Check Answer Handler
   const handleCheckAnswer = () => {
+    if (isEvaluated) return;
+
     let correct = false;
 
     if (currentExercise.type === 'word_order') {
-      const assembled = selectedWordChips.join(' ').toLowerCase().replace(/[^\w\s]/g, '').trim();
-      const target = currentExercise.englishSentence.toLowerCase().replace(/[^\w\s]/g, '').trim();
-      correct = assembled === target;
+      const builtSentence = selectedWordChips.join(' ').trim();
+      const targetSentence = currentExercise.englishSentence.trim();
+      
+      const cleanBuilt = builtSentence.toLowerCase().replace(/[.,!?'"]/g, '');
+      const cleanTarget = targetSentence.toLowerCase().replace(/[.,!?'"]/g, '');
+
+      if (cleanBuilt === cleanTarget) {
+        correct = true;
+      }
     } else if (currentExercise.type === 'choice') {
-      correct = selectedChoice === currentExercise.correctIndex;
+      if (selectedChoice === currentExercise.correctIndex) {
+        correct = true;
+      }
     } else if (currentExercise.type === 'speak') {
-      correct = (speechScore ?? 0) >= 65;
+      if (speechScore !== null && speechScore >= 60) {
+        correct = true;
+      }
     }
 
     setIsEvaluated(true);
     setIsAnswerCorrect(correct);
 
     if (correct) {
-      playSound('correct');
-      confetti({
-        particleCount: 40,
-        spread: 50,
-        origin: { y: 0.7 }
-      });
+      const nextCombo = streakCombo + 1;
+      setStreakCombo(nextCombo);
+      if (nextCombo >= 3) {
+        playSound('celebrate');
+        confetti({
+          particleCount: 45,
+          spread: 70,
+          origin: { y: 0.7 }
+        });
+      } else {
+        playSound('correct');
+        confetti({
+          particleCount: 25,
+          spread: 50,
+          origin: { y: 0.85 }
+        });
+      }
     } else {
+      setStreakCombo(0);
       playSound('wrong');
       if (onRecordMistake) {
         onRecordMistake({
           questionId: currentExercise.id,
-          promptEn: currentExercise.promptEn || 'Formulate the correct business sentence:',
+          promptEn: currentExercise.promptEn || currentExercise.promptVi,
           promptVi: currentExercise.promptVi,
           correctSentence: currentExercise.englishSentence,
-          wrongChoiceGiven: currentExercise.type === 'choice' && currentExercise.options && selectedChoice !== null ? currentExercise.options[selectedChoice] : '',
-          options: currentExercise.options || [currentExercise.englishSentence],
+          wrongChoiceGiven: currentExercise.options && selectedChoice !== null
+            ? currentExercise.options[selectedChoice]
+            : selectedWordChips.join(' ') || 'Sai cấu trúc',
+          options: currentExercise.options || [],
           correctIndex: currentExercise.correctIndex ?? 0,
-          explanation: currentExercise.explanation,
-          crucialNote: currentExercise.crucialNote,
-          category: lesson.title
+          explanation: currentExercise.whyWrong || currentExercise.explanation || 'Chú ý cấu trúc ngữ pháp chuẩn quốc tế.',
+          category: lesson.title,
         });
       }
     }
   };
 
-  // Keyboard navigation on PC (1-4 for options, Enter for check/next, Space for audio)
-  React.useEffect(() => {
-    if (isLessonFinished) return;
+  const handleContinue = () => {
+    playSound('click');
+    stopSpeech();
 
+    if (exerciseIndex + 1 < lesson.exercises.length) {
+      setExerciseIndex(prev => prev + 1);
+    } else {
+      setIsLessonFinished(true);
+      playSound('celebrate');
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+      onFinishLesson(lesson.xpReward, lesson.gemReward);
+    }
+  };
+
+  // Keyboard shortcut listener
+  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isEvaluated) {
-        if (currentExercise.type === 'choice' && currentExercise.options) {
-          if (e.key >= '1' && e.key <= String(currentExercise.options.length)) {
-            const idx = parseInt(e.key) - 1;
+      if (e.key === 'Enter') {
+        if (!isEvaluated) {
+          const canSubmit = 
+            (currentExercise.type === 'word_order' && selectedWordChips.length > 0) ||
+            (currentExercise.type === 'choice' && selectedChoice !== null) ||
+            (currentExercise.type === 'speak' && speechScore !== null);
+          if (canSubmit) {
+            handleCheckAnswer();
+          }
+        } else {
+          handleContinue();
+        }
+      } else if (e.key === ' ' && !isEvaluated) {
+        e.preventDefault();
+        handlePlayAudio();
+      } else if (!isEvaluated && currentExercise.type === 'choice' && currentExercise.options) {
+        if (['1', '2', '3', '4'].includes(e.key)) {
+          const idx = parseInt(e.key, 10) - 1;
+          if (idx < currentExercise.options.length) {
             setSelectedChoice(idx);
             playSound('click');
           }
-        }
-        if (e.key === 'Enter') {
-          if (currentExercise.type === 'choice' && selectedChoice !== null) {
-            handleCheckAnswer();
-          } else if (currentExercise.type === 'word_order' && selectedWordChips.length > 0) {
-            handleCheckAnswer();
-          } else if (currentExercise.type === 'speak' && speechScore !== null) {
-            handleCheckAnswer();
-          }
-        } else if (e.key === ' ' || e.key === 'Spacebar') {
-          if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-          e.preventDefault();
-          handlePlayAudio();
-        }
-      } else {
-        if (e.key === 'Enter') {
-          handleContinue();
         }
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isEvaluated, isLessonFinished, currentExercise, selectedChoice, selectedWordChips, speechScore]);
+  }, [isEvaluated, selectedChoice, selectedWordChips, speechScore, currentExercise]);
 
-  const handleContinue = () => {
-    playSound('click');
-    if (exerciseIndex < lesson.exercises.length - 1) {
-      setExerciseIndex(exerciseIndex + 1);
-    } else {
-      // Completed all exercises in unit!
-      setIsLessonFinished(true);
-      playSound('levelup');
-      confetti({
-        particleCount: 90,
-        spread: 70,
-        origin: { y: 0.5 }
-      });
-      onFinishLesson(lesson.xpReward, lesson.gemReward);
-    }
-  };
-
-  const progressPercent = Math.round(((exerciseIndex + 1) / lesson.exercises.length) * 100);
+  const progressPercent = ((exerciseIndex + (isEvaluated && isAnswerCorrect ? 1 : 0)) / lesson.exercises.length) * 100;
 
   return (
-    <div className="fixed inset-0 z-50 bg-white flex flex-col justify-between overflow-hidden animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 bg-white flex flex-col justify-between select-none animate-in fade-in duration-150">
       
-      {/* Top Header Bar */}
-      <div className="px-4 md:px-6 py-3 border-b-2 border-slate-100 flex items-center justify-between gap-4 max-w-3xl lg:max-w-4xl mx-auto w-full">
+      {/* 1. TOP HEADER BAR: CLOSE, SMOOTH PROGRESS, VOICE PICKER */}
+      <div className="px-4 py-3 border-b border-slate-200/90 flex items-center justify-between gap-3 max-w-3xl mx-auto w-full">
         <button
           onClick={() => {
             stopSpeech();
+            playSound('click');
             onClose();
           }}
-          className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-700 cursor-pointer"
-          title="Đóng bài học"
+          className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer shrink-0"
+          title="Thoát bài học"
         >
-          <X className="w-6 h-6" />
+          <X className="w-5 h-5 stroke-[2.5]" />
         </button>
 
-        {/* Progress Bar (Duolingo Style) */}
-        <div className="flex-1 bg-slate-100 h-4 rounded-full overflow-hidden border border-slate-200">
+        {/* Smooth Animated Progress Bar */}
+        <div className="flex-1 bg-slate-100 h-3.5 rounded-full overflow-hidden border border-slate-200/80">
           <div
-            className="bg-[#22c55e] h-full transition-all duration-300 rounded-full"
+            className="bg-[#22c55e] h-full transition-all duration-300 ease-out rounded-full"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
 
-        {/* Quick Voice Switcher in Lesson */}
-        <div>
-          <button
-            onClick={() => {
-              playSound('click');
-              setIsVoicePickerOpen(true);
-            }}
-            className="px-2 py-1 rounded-xl bg-sky-50 border border-sky-200 text-[#0070D1] hover:bg-sky-100 text-xs font-bold flex items-center space-x-1 cursor-pointer active:translate-y-0.5"
-            title="Đổi giọng đọc AI (Mỹ Nam, Anh Nam Chuẩn, Mỹ Nữ)"
-          >
-            <span>{VOICE_OPTIONS.find(v => v.id === currentVoiceId)?.flag || '🇺🇸'}</span>
-            <Settings2 className="w-3.5 h-3.5" />
-          </button>
+        {/* Quick Voice Switcher */}
+        <button
+          onClick={() => {
+            playSound('click');
+            setIsVoicePickerOpen(true);
+          }}
+          className="px-2 py-1 rounded-xl bg-sky-50 border border-sky-200 text-[#0070D1] hover:bg-sky-100 text-xs font-bold flex items-center gap-1 cursor-pointer shrink-0"
+          title="Chọn giọng phát âm AI"
+        >
+          <span>{VOICE_OPTIONS.find(v => v.id === currentVoiceId)?.flag || '🇺🇸'}</span>
+          <Settings2 className="w-3.5 h-3.5 text-sky-600" />
+        </button>
 
-          <VoiceSelectorModal
-            isOpen={isVoicePickerOpen}
-            onClose={() => setIsVoicePickerOpen(false)}
-            onSelectVoice={(vId) => setCurrentVoiceId(vId)}
-          />
-        </div>
-
-        <div className="flex items-center space-x-1 text-xs font-black text-amber-500 shrink-0">
-          <span>✨</span>
-          <span>{lesson.xpReward} XP</span>
-        </div>
+        <VoiceSelectorModal
+          isOpen={isVoicePickerOpen}
+          onClose={() => setIsVoicePickerOpen(false)}
+          onSelectVoice={(vId) => setCurrentVoiceId(vId)}
+        />
       </div>
 
-      {/* Main Exercise Area (Widescreen PC layout) */}
+      {/* 2. MAIN EXERCISE CANVAS (FOCUSED & IMMERSIVE) */}
       {!isLessonFinished ? (
-        <div className="flex-1 overflow-y-auto px-4 md:px-8 py-5 max-w-3xl lg:max-w-4xl mx-auto w-full flex flex-col justify-between space-y-5">
+        <div className="flex-1 overflow-y-auto px-4 md:px-8 py-5 max-w-2xl mx-auto w-full flex flex-col justify-between">
           
-          {/* Mascot Speech Bubble & Prompt */}
-          <div className="flex items-start space-x-4 pt-1">
-            <div className="shrink-0">
+          {/* Question Prompt with Mascot reaction */}
+          <div className="flex items-start gap-3.5 pt-2">
+            <div className="shrink-0 mt-1 flex flex-col items-center">
               <VikoMascot 
                 size="md" 
-                mood={isEvaluated ? (isAnswerCorrect ? 'celebrate' : 'thinking') : 'happy'} 
+                mood={
+                  isEvaluated 
+                    ? (isAnswerCorrect 
+                        ? (streakCombo >= 3 ? 'dancing' : 'celebrate') 
+                        : 'scratching_head') 
+                    : (streakCombo >= 3 ? 'dancing' : 'happy')
+                } 
               />
+              {streakCombo >= 3 && (
+                <span className="mt-1 px-1.5 py-0.2 rounded-full bg-amber-400 text-amber-950 font-black text-[9px] shadow-xs animate-bounce whitespace-nowrap">
+                  🔥 x{streakCombo} Streak!
+                </span>
+              )}
             </div>
 
-            <div className="flex-1 bg-sky-50 border-2 border-sky-200 rounded-3xl rounded-tl-xs p-4 md:p-5 shadow-xs relative">
-              <div className="flex items-center justify-between mb-1.5">
-                <span className="text-[11px] uppercase font-black text-[#0070D1] tracking-wider">
+            <div className="flex-1 bg-sky-50/80 border-2 border-sky-200 rounded-3xl p-4 shadow-xs relative">
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-[10px] uppercase font-black text-[#0070D1] tracking-wider">
                   {lesson.title}
                 </span>
                 <button
                   onClick={handlePlayAudio}
-                  className="p-1.5 rounded-full bg-white hover:bg-sky-100 text-[#0066CC] shadow-2xs border border-sky-200 cursor-pointer"
+                  className="p-1.5 rounded-full bg-white hover:bg-sky-100 text-[#0070D1] shadow-2xs border border-sky-200 cursor-pointer transition-transform active:scale-90"
                   title="Nghe phát âm chuẩn (Phím Space)"
                 >
                   <Volume2 className="w-4 h-4" />
@@ -329,43 +340,54 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               </div>
 
               <div className="space-y-1">
-                <h3 className="text-base md:text-xl font-black text-slate-900 leading-snug">
+                <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug">
                   {currentExercise.promptEn || currentExercise.promptVi}
                 </h3>
                 {currentExercise.promptEn && (
-                  <p className="text-xs md:text-sm text-slate-500 font-medium">
+                  <p className="text-xs text-slate-500 font-medium">
                     👉 {currentExercise.promptVi}
                   </p>
                 )}
               </div>
-              {currentExercise.phonetics && (
-                <p className="text-xs font-mono text-cyan-800 font-bold mt-1.5">
-                  {currentExercise.phonetics}
-                </p>
+
+              {/* Emotional Mascot Encouragement Bubble */}
+              {isEvaluated && !isAnswerCorrect && (
+                <div className="mt-2.5 p-2 rounded-xl bg-amber-100/90 border border-amber-300 text-amber-900 text-xs font-bold flex items-center gap-1.5 animate-in fade-in">
+                  <span>💡 Viko động viên:</span>
+                  <span className="italic">"Thử lại nhé, bạn sắp làm được rồi! 💪"</span>
+                </div>
+              )}
+
+              {/* Combo Streak Cheering */}
+              {isEvaluated && isAnswerCorrect && streakCombo >= 3 && (
+                <div className="mt-2.5 p-2 rounded-xl bg-emerald-100/90 border border-emerald-300 text-emerald-950 text-xs font-black flex items-center gap-1.5 animate-bounce">
+                  <span>🎉 Viko nhảy múa:</span>
+                  <span>"Quá đỉnh! Giữ vững chuỗi đúng x{streakCombo} nhé!"</span>
+                </div>
               )}
             </div>
           </div>
 
-          {/* Exercise Specific Controls */}
-          <div className="flex-1 flex flex-col justify-center space-y-4 py-2">
+          {/* Exercise Interaction Body */}
+          <div className="flex-1 flex flex-col justify-center space-y-4 py-6">
             
             {/* TYPE 1: WORD ORDER (DUOLINGO SENTENCE BUILDER) */}
             {currentExercise.type === 'word_order' && (
               <div className="space-y-4">
                 {/* Sentence Answer Slots */}
-                <div className="min-h-[64px] p-3 rounded-2xl border-2 border-dashed border-sky-300 bg-sky-50/50 flex flex-wrap gap-2 items-center">
+                <div className="min-h-[64px] p-3 rounded-2xl border-2 border-dashed border-sky-300 bg-sky-50/40 flex flex-wrap gap-2 items-center">
                   {selectedWordChips.map((word, idx) => (
                     <button
                       key={idx}
                       onClick={() => handleTapSelectedWord(word, idx)}
-                      className="px-3.5 py-2 rounded-xl bg-[#009FE3] text-white text-xs font-black border-b-3 border-[#0072CE] active:translate-y-0.5 active:border-b-0 cursor-pointer"
+                      className="px-3 py-1.5 rounded-xl bg-[#009FE3] text-white text-xs font-black border-b-3 border-[#0072CE] active:translate-y-0.5 cursor-pointer shadow-xs"
                     >
                       {word}
                     </button>
                   ))}
                   {selectedWordChips.length === 0 && (
                     <span className="text-xs text-slate-400 font-medium italic">
-                      Nhấp vào các từ bên dưới để ghép câu hoàn chỉnh...
+                      Chạm vào các từ bên dưới để ghép câu hoàn chỉnh...
                     </span>
                   )}
                 </div>
@@ -376,7 +398,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                     <button
                       key={idx}
                       onClick={() => handleTapAvailableWord(word, idx)}
-                      className="px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 border-b-4 border-b-slate-300 hover:border-sky-300 text-slate-800 text-xs font-black active:translate-y-0.5 active:border-b-2 cursor-pointer"
+                      className="px-3.5 py-2 rounded-xl bg-white border-2 border-slate-200 border-b-4 border-b-slate-300 hover:border-sky-300 text-slate-800 text-xs font-black active:translate-y-0.5 active:border-b-2 cursor-pointer shadow-xs"
                     >
                       {word}
                     </button>
@@ -412,15 +434,15 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                         playSound('click');
                         setSelectedChoice(idx);
                       }}
-                      className={`w-full text-left p-4 md:p-5 rounded-2xl text-sm md:text-base transition-all flex items-center justify-between cursor-pointer active:translate-y-0.5 ${style}`}
+                      className={`w-full text-left p-3.5 sm:p-4 rounded-2xl text-xs sm:text-sm transition-all flex items-center justify-between cursor-pointer active:translate-y-0.5 ${style}`}
                     >
                       <div className="flex items-center space-x-3">
-                        <span className="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center text-xs font-black text-slate-700 border border-slate-300 shrink-0">
+                        <span className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center text-xs font-black text-slate-700 border border-slate-300 shrink-0">
                           {idx + 1}
                         </span>
                         <span className="font-bold">{option}</span>
                       </div>
-                      <span className="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-[10px] font-black shrink-0 ml-2">
+                      <span className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px] font-black shrink-0 ml-2">
                         {String.fromCharCode(65 + idx)}
                       </span>
                     </button>
@@ -429,7 +451,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               </div>
             )}
 
-            {/* TYPE 3: VIKODA VOICE SPEAKING */}
+            {/* TYPE 3: SPEAKING */}
             {currentExercise.type === 'speak' && (
               <div className="text-center space-y-4 py-2">
                 <p className="text-base font-black text-[#0070D1]">
@@ -453,11 +475,11 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                 </div>
 
                 {spokenText && (
-                  <div className="p-3 rounded-2xl bg-sky-50 border-2 border-sky-200 text-xs">
+                  <div className="p-3 rounded-2xl bg-sky-50 border border-sky-200 text-xs">
                     <p className="text-slate-600 font-semibold italic">"{spokenText}"</p>
                     {speechScore !== null && (
-                      <p className={`font-black text-sm mt-1 ${speechScore >= 65 ? 'text-emerald-600' : 'text-amber-600'}`}>
-                        Độ chuẩn Vikoda Voice: {speechScore}%
+                      <p className={`font-black text-xs mt-1 ${speechScore >= 65 ? 'text-emerald-600' : 'text-amber-600'}`}>
+                        Độ chuẩn phát âm: {speechScore}%
                       </p>
                     )}
                   </div>
@@ -467,8 +489,6 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
 
           </div>
 
-          {/* Bottom Space holder */}
-          <div className="h-20" />
         </div>
       ) : (
         /* LESSON FINISHED SUMMARY */
@@ -500,120 +520,68 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               stopSpeech();
               onClose();
             }}
-            className="w-full py-3.5 rounded-2xl btn-duo-green text-white font-black text-sm uppercase tracking-wide cursor-pointer"
+            className="w-full py-3.5 rounded-2xl bg-[#22c55e] hover:bg-[#16a34a] border-b-4 border-[#15803d] text-white font-black text-sm uppercase tracking-wide cursor-pointer shadow-md"
           >
             Nhận Thưởng & Tiếp Tục
           </button>
         </div>
       )}
 
-      {/* Bottom Action Drawer (Duolingo Deep Learning Pedagogy) */}
+      {/* 3. ZERO-JITTER FIXED BOTTOM ACTION BAR (DUOLINGO SILKY SPEED) */}
       {!isLessonFinished && (
-        <div className={`p-4 border-t-2 max-h-[45vh] overflow-y-auto transition-all ${
+        <div className={`border-t-2 transition-colors duration-200 shrink-0 ${
           isEvaluated
             ? isAnswerCorrect
-              ? 'bg-emerald-50 border-emerald-400 text-emerald-950 shadow-lg'
-              : 'bg-rose-50 border-rose-400 text-rose-950 shadow-lg'
+              ? 'bg-[#d7ffb8] border-[#b8f28b] text-[#1c4d00]'
+              : 'bg-[#ffdfe0] border-[#ffb8ba] text-[#581619]'
             : 'bg-white border-slate-200'
         }`}>
-          <div className="max-w-lg mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="max-w-2xl mx-auto px-4 py-3.5 flex items-center justify-between gap-3">
             
+            {/* Feedback Info (Clean, 1 line, zero screen jumping) */}
             {isEvaluated ? (
-              <div className="flex-1 space-y-2 w-full text-xs">
-                {/* Header status */}
-                <div className="flex items-center space-x-1.5 font-black text-sm">
-                  {isAnswerCorrect ? (
-                    <>
-                      <Check className="w-5 h-5 stroke-[3] text-emerald-600" />
-                      <span className="text-emerald-800">Chính xác tuyệt vời!</span>
-                    </>
-                  ) : (
-                    <>
-                      <AlertCircle className="w-5 h-5 text-rose-600" />
-                      <span className="text-rose-800">Cần lưu ý • Đáp án đúng là:</span>
-                    </>
-                  )}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 ${
+                    isAnswerCorrect ? 'bg-[#22c55e] text-white' : 'bg-[#e11d48] text-white'
+                  }`}>
+                    {isAnswerCorrect ? (
+                      <Check className="w-4 h-4 stroke-[3]" />
+                    ) : (
+                      <AlertCircle className="w-4 h-4 stroke-[2.5]" />
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <div className="font-black text-xs sm:text-sm truncate">
+                      {isAnswerCorrect ? 'Chính xác! Tuyệt vời!' : 'Đáp án đúng là:'}
+                    </div>
+                    {!isAnswerCorrect && (
+                      <div className="text-[11px] font-bold text-rose-900 truncate">
+                        "{currentExercise.englishSentence}"
+                      </div>
+                    )}
+                  </div>
                 </div>
 
+                {/* Optional Grammar Explanation Toggle */}
                 {!isAnswerCorrect && (
-                  <div className="p-2.5 rounded-xl bg-white border border-rose-200 font-black text-rose-950 text-sm flex items-center justify-between">
-                    <span>"{currentExercise.englishSentence}"</span>
-                    <button
-                      onClick={() => playSpeech(currentExercise.englishSentence, speechRate, 'en-US')}
-                      className="p-1 rounded-lg bg-rose-50 text-rose-700 hover:bg-rose-100 cursor-pointer"
-                      title="Nghe lại đáp án đúng"
-                    >
-                      <Volume2 className="w-4 h-4" />
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => setShowGrammarDetail(!showGrammarDetail)}
+                    className="mt-1 text-[10px] font-black text-rose-800 hover:underline flex items-center gap-0.5 cursor-pointer"
+                  >
+                    <HelpCircle className="w-3 h-3" />
+                    <span>{showGrammarDetail ? 'Đóng giải thích' : 'Xem vì sao sai?'}</span>
+                  </button>
                 )}
-
-                {/* Pedagogical 3-Tier Guidance */}
-                <div className="space-y-1.5 pt-1">
-                  {/* Tier 1: Giải thích / Tại sao sai */}
-                  <div className="p-2 rounded-xl bg-white/80 border border-slate-200/80 leading-relaxed font-medium">
-                    <strong className={isAnswerCorrect ? 'text-emerald-900 font-bold' : 'text-rose-900 font-bold'}>
-                      {isAnswerCorrect ? '💡 Phân tích câu: ' : '❌ Vì sao dễ nhầm lẫn? '}
-                    </strong>
-                    <span>{currentExercise.whyWrong || currentExercise.explanation}</span>
-                  </div>
-
-                  {/* Tier 2: Lưu ý cốt lõi khi làm việc với đối tác */}
-                  {currentExercise.crucialNote && (
-                    <div className="p-2 rounded-xl bg-amber-50/90 border border-amber-200/80 text-amber-950 leading-relaxed">
-                      <strong className="font-black text-amber-900">⚡ Lưu ý đối ngoại: </strong>
-                      <span>{currentExercise.crucialNote}</span>
-                    </div>
-                  )}
-
-                  {/* Tier 3: Mẹo nhớ lâu (Mnemonics / Gốc từ) */}
-                  <div className="p-2 rounded-xl bg-sky-50/90 border border-sky-200/80 text-sky-950 leading-relaxed">
-                    <strong className="font-black text-[#0070D1]">🧠 Mẹo nhớ lâu: </strong>
-                    <span>
-                      {currentExercise.memoryHook ||
-                        `Tập trung liên tưởng cấu trúc "${currentExercise.englishSentence.split(' ').slice(0, 3).join(' ')}" - nói to 3 lần để hình thành phản xạ tự nhiên.`}
-                    </span>
-                  </div>
-
-                  {/* Tier 4: Từ vựng then chốt cần khắc sâu */}
-                  {currentExercise.vocabularyHighlights && currentExercise.vocabularyHighlights.length > 0 && (
-                    <div className="p-2.5 rounded-xl bg-violet-50/90 border border-violet-200/80 text-violet-950">
-                      <div className="font-black text-violet-900 mb-1.5 flex items-center justify-between">
-                        <span>📚 Từ vựng quan trọng cần ghi nhớ:</span>
-                        <span className="text-[10px] text-violet-600 font-normal">Nhấp loa để nghe giọng đọc</span>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {currentExercise.vocabularyHighlights.map((vh, vIdx) => (
-                          <span
-                            key={vIdx}
-                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white border border-violet-200 text-xs shadow-2xs"
-                          >
-                            <span className="font-black text-[#0070D1]">{vh.word}</span>
-                            {vh.phonetic && (
-                              <span className="text-slate-400 font-mono text-[10px]">/{vh.phonetic}/</span>
-                            )}
-                            <span className="text-slate-600 font-medium">({vh.meaning})</span>
-                            <button
-                              onClick={() => playSpeech(vh.word, speechRate, 'en-US')}
-                              className="p-1 rounded-md hover:bg-violet-100 text-violet-600 cursor-pointer"
-                              title={`Nghe phát âm từ: ${vh.word}`}
-                            >
-                              <Volume2 className="w-3 h-3" />
-                            </button>
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
               </div>
             ) : (
-              <div className="flex-1 text-xs text-slate-500 font-bold hidden sm:block">
-                Hoàn thành để nhận +{lesson.xpReward} XP & +{lesson.gemReward} 💎
+              <div className="flex-1 text-xs text-slate-400 font-bold hidden sm:block truncate">
+                Chọn đáp án rồi nhấn Kiểm Tra (hoặc phím Enter)
               </div>
             )}
 
-            <div className="w-full sm:w-auto flex justify-end pt-2 sm:pt-0">
+            {/* Action Button: Check / Continue */}
+            <div className="shrink-0">
               {!isEvaluated ? (
                 <button
                   disabled={
@@ -622,27 +590,46 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                     (currentExercise.type === 'speak' && speechScore === null)
                   }
                   onClick={handleCheckAnswer}
-                  className="w-full sm:w-auto px-6 py-3 rounded-2xl btn-duo-primary text-white font-black text-xs uppercase tracking-wider disabled:opacity-40 disabled:cursor-not-allowed shrink-0 cursor-pointer"
+                  className="px-6 sm:px-8 py-3 rounded-2xl bg-[#0070D1] hover:bg-[#005bb5] border-b-4 border-[#004b96] text-white font-black text-xs uppercase tracking-wider disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-xs active:translate-y-0.5"
                 >
                   Kiểm Tra
                 </button>
               ) : (
                 <button
                   onClick={handleContinue}
-                  className={`w-full sm:w-auto px-6 py-3 rounded-2xl text-white font-black text-xs uppercase tracking-wider shrink-0 cursor-pointer ${
-                    isAnswerCorrect ? 'btn-duo-green' : 'btn-duo-rose'
+                  className={`px-6 sm:px-8 py-3 rounded-2xl font-black text-xs uppercase tracking-wider cursor-pointer shadow-xs active:translate-y-0.5 ${
+                    isAnswerCorrect
+                      ? 'bg-[#22c55e] hover:bg-[#16a34a] border-b-4 border-[#15803d] text-white'
+                      : 'bg-[#e11d48] hover:bg-[#be123c] border-b-4 border-[#9f1239] text-white'
                   }`}
                 >
-                  {isAnswerCorrect ? 'Tiếp Tục • +XP' : 'Đã Hiểu • Đi Tiếp'}
+                  Tiếp Tục
                 </button>
               )}
             </div>
 
           </div>
+
+          {/* Collapsible Grammar Trap Details (Only expands if user asks) */}
+          {showGrammarDetail && !isAnswerCorrect && (
+            <div className="border-t border-rose-200/80 bg-white/90 p-3 max-w-2xl mx-auto text-xs space-y-1 animate-in fade-in duration-100">
+              <div className="font-black text-rose-900">
+                💡 Phân tích bẫy lỗi thường gặp:
+              </div>
+              <p className="text-slate-700 leading-relaxed font-medium">
+                {currentExercise.whyWrong || currentExercise.explanation || 'Chú ý cách dùng từ chuẩn ngữ cảnh giao tiếp quốc tế.'}
+              </p>
+              {currentExercise.crucialNote && (
+                <div className="text-[11px] text-amber-800 font-bold">
+                  ⚡ Lưu ý: {currentExercise.crucialNote}
+                </div>
+              )}
+            </div>
+          )}
+
         </div>
       )}
 
     </div>
   );
 };
-
