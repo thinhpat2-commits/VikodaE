@@ -84,55 +84,79 @@ export default function App() {
   const [isPlacementTestOpen, setIsPlacementTestOpen] = useState<boolean>(false);
   const [isCoachOpen, setIsCoachOpen] = useState<boolean>(false);
 
-  // Employee Profile State (Synchronous restoration from localStorage & session)
+  // Employee Profile State (Restored strictly from current active user session)
   const [profile, setProfile] = useState<EmployeeProfile>(() => {
     if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem(STORAGE_KEY_PROFILE);
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (parsed && parsed.fullName) return parsed;
-        } catch (e) {}
-      }
       const session = getPersistedSession();
       if (session) {
+        const savedScoped = localStorage.getItem(`vikoda_profile_${session.userId}`);
+        if (savedScoped) {
+          try {
+            const parsed = JSON.parse(savedScoped);
+            if (parsed && parsed.email) return parsed;
+          } catch (e) {}
+        }
         return {
           employeeCode: session.userId.toUpperCase().replace('USR_', 'VKD-'),
           fullName: session.displayName || 'Nhân Viên Vikoda',
           email: session.email,
           department: session.department || 'Phòng Kinh Doanh & Xuất Khẩu',
           title: session.role === 'admin' ? '👑 Quản Trị Viên Hệ Thống' : 'Chuyên Viên Kinh Doanh',
-          avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-          highestDrillScore: 560,
-          totalPracticeCount: 8,
+          avatarUrl: session.avatarUrl || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+          highestDrillScore: session.highestDrillScore || 200,
+          totalPracticeCount: 1,
           isLoggedIn: true,
-          isAdmin: session.email?.toLowerCase().trim() === 'thinh.pat2@gmail.com',
+          isAdmin: isUserAdmin(session.email),
         };
       }
     }
     return {
-      employeeCode: 'VKD-1957',
-      fullName: 'Trần Văn Minh',
-      email: 'minh.sales@vikoda.com.vn',
-      department: 'Phòng Kinh Doanh & Xuất Khẩu',
-      title: 'Chuyên Viên Kinh Doanh Quốc Tế',
+      employeeCode: 'VKD-GUEST',
+      fullName: '',
+      email: '',
+      department: '',
+      title: '',
       avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-      highestDrillScore: 560,
-      totalPracticeCount: 8,
-      isLoggedIn: false
+      highestDrillScore: 0,
+      totalPracticeCount: 0,
+      isLoggedIn: false,
+      isAdmin: false
     };
   });
 
   // Gamification state: XP, Gems, Energy, Streak, Completed Nodes, Highest Drill Score
-  const [gamificationState, setGamificationState] = useState<GamificationState>({
-    xp: 240,
-    gems: 65,
-    energy: 5,
-    streakDays: 6,
-    rank: 'Chiến Binh Vikoda',
-    completedNodeIds: ['unit-1', 'unit-2'],
-    lastActiveDate: new Date().toISOString().split('T')[0],
-    highestDrillScore: 560
+  const [gamificationState, setGamificationState] = useState<GamificationState>(() => {
+    if (typeof window !== 'undefined') {
+      const session = getPersistedSession();
+      if (session) {
+        const savedScopedStats = localStorage.getItem(`vikoda_stats_${session.userId}`);
+        if (savedScopedStats) {
+          try {
+            return JSON.parse(savedScopedStats);
+          } catch (e) {}
+        }
+        return {
+          xp: session.xp || 200,
+          gems: session.gems || 50,
+          energy: 5,
+          streakDays: session.streak || 1,
+          rank: 'Chiến Binh Vikoda',
+          completedNodeIds: session.completedLessons && session.completedLessons.length > 0 ? session.completedLessons : ['unit-1'],
+          lastActiveDate: new Date().toISOString().split('T')[0],
+          highestDrillScore: session.highestDrillScore || 200
+        };
+      }
+    }
+    return {
+      xp: 0,
+      gems: 0,
+      energy: 5,
+      streakDays: 0,
+      rank: 'Tân Binh Đảnh Thạnh',
+      completedNodeIds: [],
+      lastActiveDate: new Date().toISOString().split('T')[0],
+      highestDrillScore: 0
+    };
   });
 
   // 1. Check persistent remembered session on boot (Log in ONCE, device auto-remembers)
@@ -143,28 +167,22 @@ export default function App() {
       setIsAuthModalOpen(false);
       setIsCloudSynced(true);
 
-      const savedLocalProfile = localStorage.getItem(STORAGE_KEY_PROFILE);
-      let localName = session.displayName;
-      let localDept = session.department;
-      if (savedLocalProfile) {
-        try {
-          const parsed = JSON.parse(savedLocalProfile);
-          if (parsed.fullName) localName = parsed.fullName;
-          if (parsed.department) localDept = parsed.department;
-        } catch (e) {}
-      }
-
-      setProfile((prev) => ({
-        ...prev,
-        fullName: localName || prev.fullName,
-        email: session.email || prev.email,
-        department: localDept || prev.department,
+      const userProfile: EmployeeProfile = {
+        employeeCode: session.userId.toUpperCase().replace('USR_', 'VKD-'),
+        fullName: session.displayName || 'Nhân Viên Vikoda',
+        email: session.email,
+        department: session.department || 'Phòng Kinh Doanh & Xuất Khẩu',
+        title: session.role === 'admin' ? '👑 Quản Trị Viên Hệ Thống' : 'Chuyên Viên Kinh Doanh',
+        avatarUrl: session.avatarUrl || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+        highestDrillScore: session.highestDrillScore || 200,
+        totalPracticeCount: 1,
         isLoggedIn: true,
-        isAdmin: session.email?.toLowerCase().trim() === 'thinh.pat2@gmail.com',
-      }));
+        isAdmin: isUserAdmin(session.email),
+      };
+      setProfile(userProfile);
 
-      // Restore from IndexedDB first (0ms latency)
-      loadGamificationStateOffline().then((offlineStats) => {
+      // Restore user-scoped stats from IndexedDB/localStorage
+      loadGamificationStateOffline(session.userId).then((offlineStats) => {
         if (offlineStats) {
           setGamificationState((prev) => ({
             ...prev,
@@ -183,26 +201,21 @@ export default function App() {
           if (snap.exists()) {
             const remote = snap.data() as UserCloudProfile;
             if (remote.displayName) {
-              setProfile((prev) => {
-                const nextP = {
-                  ...prev,
-                  fullName: remote.displayName,
-                  department: remote.department || prev.department,
-                };
-                localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(nextP));
-                return nextP;
-              });
+              setProfile((prev) => ({
+                ...prev,
+                fullName: remote.displayName,
+                department: remote.department || prev.department,
+              }));
             }
             setGamificationState((local) => {
               const merged = resolveStateConflict(local as any, remote);
-              saveGamificationStateOffline(merged);
-              localStorage.setItem(STORAGE_KEY_VIKODA_STATS, JSON.stringify(merged));
+              saveGamificationStateOffline(merged, session.userId);
               return merged;
             });
           }
         })
         .catch((err) => {
-          console.warn('Background sync notice (running on IndexedDB offline storage):', err);
+          console.warn('Background sync notice:', err);
         });
     } else {
       // First time opening app: require login
@@ -210,35 +223,12 @@ export default function App() {
     }
   }, []);
 
-  // 2. Load cached local state
-  useEffect(() => {
-    try {
-      const savedStats = localStorage.getItem(STORAGE_KEY_VIKODA_STATS);
-      if (savedStats) {
-        setGamificationState(JSON.parse(savedStats));
-      }
-      const savedLevel = localStorage.getItem(STORAGE_KEY_LEVEL);
-      if (savedLevel) {
-        setSelectedLevel(savedLevel as CourseLevel);
-      }
-      const savedProfile = localStorage.getItem(STORAGE_KEY_PROFILE);
-      if (savedProfile) {
-        setProfile(JSON.parse(savedProfile));
-      }
-    } catch (e) {
-      console.warn('Error loading gamification state', e);
-    }
-  }, []);
-
   const saveGamificationState = (newState: GamificationState) => {
     setGamificationState(newState);
-    localStorage.setItem(STORAGE_KEY_VIKODA_STATS, JSON.stringify(newState));
-    saveGamificationStateOffline(newState); // Write to IndexedDB offline layer
 
-    // Continuous Cloud Auto-Backup
-    const session = getPersistedSession();
-    if (session) {
-      saveProgressToCloud(session.userId, {
+    if (currentUserProfile) {
+      saveGamificationStateOffline(newState, currentUserProfile.userId);
+      saveProgressToCloud(currentUserProfile.userId, {
         xp: newState.xp,
         streak: newState.streakDays,
         gems: newState.gems,
@@ -252,36 +242,38 @@ export default function App() {
     setCurrentUserProfile(cloudProfile);
     setIsAuthModalOpen(false);
     setIsCloudSynced(true);
-    setProfile((prev) => ({
-      ...prev,
+
+    const userProfile: EmployeeProfile = {
+      employeeCode: cloudProfile.userId.toUpperCase().replace('USR_', 'VKD-'),
       fullName: cloudProfile.displayName,
       email: cloudProfile.email,
-      department: cloudProfile.department,
+      department: cloudProfile.department || 'Phòng Kinh Doanh & Xuất Khẩu',
+      title: cloudProfile.role === 'admin' ? '👑 Quản Trị Viên Hệ Thống' : 'Chuyên Viên Kinh Doanh',
+      avatarUrl: cloudProfile.avatarUrl || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+      highestDrillScore: cloudProfile.highestDrillScore || 200,
+      totalPracticeCount: 1,
       isLoggedIn: true,
-      isAdmin: cloudProfile.email?.toLowerCase().trim() === 'thinh.pat2@gmail.com',
-    }));
-    setGamificationState((prev) => {
-      const updated = {
-        ...prev,
-        xp: cloudProfile.xp,
-        streakDays: cloudProfile.streak,
-        gems: cloudProfile.gems,
-        completedNodeIds: cloudProfile.completedLessons || prev.completedNodeIds,
-      };
-      saveGamificationStateOffline(updated);
-      return updated;
-    });
-    showToast(`Chào mừng ${cloudProfile.displayName}! Máy đã tự động ghi nhớ tài khoản ☁️`);
+      isAdmin: isUserAdmin(cloudProfile.email),
+    };
+    setProfile(userProfile);
+    saveProfileOffline(userProfile, cloudProfile.userId);
 
-    // First-time placement test trigger (Mandatory 4-skills assessment)
-    if (typeof window !== 'undefined') {
-      const hasCompletedTest = localStorage.getItem('vikoda_placement_test_completed_v3') === 'true' || Boolean(cloudProfile.placementTest);
-      if (!hasCompletedTest) {
-        setTimeout(() => {
-          setIsPlacementTestOpen(true);
-        }, 800);
-      }
-    }
+    const userStats: GamificationState = {
+      xp: cloudProfile.xp || 200,
+      gems: cloudProfile.gems || 50,
+      energy: 5,
+      streakDays: cloudProfile.streak || 1,
+      rank: 'Chiến Binh Vikoda',
+      completedNodeIds: cloudProfile.completedLessons && cloudProfile.completedLessons.length > 0
+        ? cloudProfile.completedLessons
+        : ['unit-1'],
+      lastActiveDate: new Date().toISOString().split('T')[0],
+      highestDrillScore: cloudProfile.highestDrillScore || 200,
+    };
+    setGamificationState(userStats);
+    saveGamificationStateOffline(userStats, cloudProfile.userId);
+
+    showToast(`Chào mừng ${cloudProfile.displayName}! Máy đã ghi nhớ tài khoản ☁️`);
   };
 
   const handleLogout = async () => {
@@ -289,48 +281,61 @@ export default function App() {
     await logoutUser();
     setCurrentUserProfile(null);
     setIsProfileModalOpen(false);
+
+    // Completely wipe in-memory state so subsequent logins are 100% clean
+    setProfile({
+      employeeCode: 'VKD-GUEST',
+      fullName: '',
+      email: '',
+      department: '',
+      title: '',
+      avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+      highestDrillScore: 0,
+      totalPracticeCount: 0,
+      isLoggedIn: false,
+      isAdmin: false,
+    });
+
+    setGamificationState({
+      xp: 0,
+      gems: 0,
+      energy: 5,
+      streakDays: 0,
+      rank: 'Tân Binh Đảnh Thạnh',
+      completedNodeIds: [],
+      lastActiveDate: new Date().toISOString().split('T')[0],
+      highestDrillScore: 0,
+    });
+
     setIsAuthModalOpen(true);
     showToast('Đã đăng xuất tài khoản an toàn.');
   };
 
   const handleSaveProfile = async (updated: EmployeeProfile) => {
     setProfile(updated);
-    localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(updated));
-    await saveProfileOffline(updated);
+    if (!currentUserProfile) return;
 
-    const session = getPersistedSession();
-    const effectiveEmail = session?.email || currentUserProfile?.email || updated.email || 'thinh.pat2@gmail.com';
-    const effectiveUserId = session?.userId || currentUserProfile?.userId || emailToUserId(effectiveEmail);
+    const userId = currentUserProfile.userId;
+    await saveProfileOffline(updated, userId);
 
     const updatedSession: UserCloudProfile = {
-      userId: effectiveUserId,
-      email: effectiveEmail,
+      ...currentUserProfile,
       displayName: updated.fullName,
-      role: isUserAdmin(effectiveEmail) ? 'admin' : 'employee',
       department: updated.department,
-      xp: gamificationState.xp,
-      streak: gamificationState.streakDays,
-      gems: gamificationState.gems,
-      completedLessons: gamificationState.completedNodeIds,
-      completedUnits: gamificationState.completedNodeIds,
-      mistakesCount: 0,
-      vocabLearned: 15,
-      dailyGoal: 50,
-      currentLevel: selectedLevel || 'Đại sứ Khoáng Kiềm',
-      createdAt: session?.createdAt || new Date().toISOString(),
-      lastActive: new Date().toISOString(),
+      avatarUrl: updated.avatarUrl,
+      updatedAt: Date.now(),
     };
 
     setCurrentUserProfile(updatedSession);
     persistSession(updatedSession);
 
-    await updateUserProfileInCloud(effectiveUserId, {
+    await updateUserProfileInCloud(userId, {
       displayName: updated.fullName,
       department: updated.department,
       avatarUrl: updated.avatarUrl,
     });
 
-    showToast(`Đã đồng bộ mây thành công: ${updated.fullName} ☁️`);
+    showToast(`Đã đồng bộ mây: ${updated.fullName} ☁️`);
   };
 
   const handleLevelSelect = (lvl: CourseLevel) => {

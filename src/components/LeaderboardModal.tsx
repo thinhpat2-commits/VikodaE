@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, 
   Trophy, 
@@ -8,13 +8,14 @@ import {
   Crown, 
   Zap, 
   Award, 
-  ChevronRight,
-  TrendingUp,
-  Users
+  TrendingUp, 
+  RefreshCw,
+  UserCheck
 } from 'lucide-react';
 import { LeaderboardEntry, EmployeeProfile, GamificationState } from '../types';
 import { CompanyEmblem } from './brand/VikodaLogos';
 import { playSound } from '../services/soundEffects';
+import { fetchAllUsersAdmin, UserCloudProfile } from '../services/firebase';
 
 interface LeaderboardModalProps {
   isOpen: boolean;
@@ -31,155 +32,174 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
   stats,
   onStartDrill
 }) => {
-  const [filterTab, setFilterTab] = useState<'drill' | 'xp' | 'streak'>('drill');
+  const [filterTab, setFilterTab] = useState<'xp' | 'streak' | 'drill'>('xp');
+  const [cloudUsers, setCloudUsers] = useState<UserCloudProfile[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // Fetch real users from Cloud Firestore
+  const loadLeaderboardData = async () => {
+    setIsLoading(true);
+    try {
+      const users = await fetchAllUsersAdmin();
+      setCloudUsers(users);
+    } catch (e) {
+      console.warn('Leaderboard cloud fetch notice:', e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      loadLeaderboardData();
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
-  // Mock Vikoda Enterprise Leaderboard with real employees & department avatars
-  const mockEntries: LeaderboardEntry[] = [
+  // Build combined real + corporate benchmark list
+  const entries: LeaderboardEntry[] = [];
+  const registeredEmails = new Set<string>();
+
+  // 1. Add all real users from Cloud Firestore
+  cloudUsers.forEach((u) => {
+    const isMe = 
+      (currentUser.email && u.email.toLowerCase() === currentUser.email.toLowerCase()) ||
+      u.userId === ('usr_' + (currentUser.email || '').replace(/[^a-z0-9]/g, '_'));
+
+    registeredEmails.add(u.email.toLowerCase().trim());
+
+    entries.push({
+      id: u.userId,
+      name: isMe ? `${currentUser.fullName || u.displayName} (Bạn)` : u.displayName,
+      code: u.userId.toUpperCase().replace('USR_', 'VKD-'),
+      dept: isMe ? currentUser.department : (u.department || 'Nhân Viên Vikoda'),
+      avatar: isMe ? currentUser.avatarUrl : (u.avatarUrl || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80'),
+      drillScore: isMe ? Math.max(currentUser.highestDrillScore || 0, stats.highestDrillScore || 0) : (u.highestDrillScore || 300),
+      xp: isMe ? Math.max(stats.xp, u.xp || 0) : (u.xp || 0),
+      streak: isMe ? Math.max(stats.streakDays, u.streak || 0) : (u.streak || 0),
+      rankBadge: u.role === 'admin' ? '👑 Admin' : 'Học Viên',
+      isCurrentUser: isMe,
+    });
+  });
+
+  // 2. Ensure current user is in entries if not found in cloud
+  if (currentUser.email && !registeredEmails.has(currentUser.email.toLowerCase().trim())) {
+    entries.push({
+      id: 'current_user',
+      name: `${currentUser.fullName} (Bạn)`,
+      code: currentUser.employeeCode || 'VKD-USER',
+      dept: currentUser.department || 'Phòng Kinh Doanh & Xuất Khẩu',
+      avatar: currentUser.avatarUrl,
+      drillScore: Math.max(currentUser.highestDrillScore || 0, stats.highestDrillScore || 0),
+      xp: stats.xp,
+      streak: stats.streakDays,
+      rankBadge: currentUser.isAdmin ? '👑 Admin' : 'Học Viên',
+      isCurrentUser: true,
+    });
+    registeredEmails.add(currentUser.email.toLowerCase().trim());
+  }
+
+  // 3. Add Corporate Benchmarks if fewer than 5 users so the board is always lively
+  const BENCHMARKS: LeaderboardEntry[] = [
     {
-      id: 'vkd-top-1',
+      id: 'vkd-bm-1',
       name: 'Nguyễn Thu Trang',
       code: 'VKD-0824',
       dept: 'Kinh Doanh Quốc Tế',
       avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&auto=format&fit=crop&q=80',
-      drillScore: 980,
-      xp: 2450,
-      streak: 28,
-      rankBadge: '🥇 Quán Quân Tuần'
+      drillScore: 880,
+      xp: 1850,
+      streak: 15,
+      rankBadge: 'Top 5',
     },
     {
-      id: 'vkd-top-2',
+      id: 'vkd-bm-2',
       name: 'Phạm Hoàng Nam',
       code: 'VKD-1092',
       dept: 'HORECA 5-Star Lead',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
-      drillScore: 920,
-      xp: 2180,
-      streak: 21,
-      rankBadge: '🥈 Á Quân'
-    },
-    {
-      id: 'vkd-top-3',
-      name: 'Lê Hoàng Anh',
-      code: 'VKD-0315',
-      dept: 'Quản Lý Chất Lượng QA/QC',
       avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
-      drillScore: 860,
-      xp: 1950,
-      streak: 19,
-      rankBadge: '🥉 Top 3'
-    },
-    {
-      id: 'vkd-top-4',
-      name: 'Trần Thị Mai',
-      code: 'VKD-2204',
-      dept: 'Marketing & Brand',
-      avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&auto=format&fit=crop&q=80',
-      drillScore: 780,
-      xp: 1640,
-      streak: 14,
-      rankBadge: 'Top 5'
-    },
-    {
-      id: 'vkd-top-5',
-      name: 'Vũ Đức Thịnh',
-      code: 'VKD-1957',
-      dept: 'Ban Giám Đốc (CEO Office)',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
-      drillScore: 750,
-      xp: 1520,
+      drillScore: 720,
+      xp: 1420,
       streak: 12,
-      rankBadge: 'Top 5'
-    },
-    {
-      id: 'current-user-slot',
-      name: currentUser.fullName || 'Bạn (Tôi)',
-      code: currentUser.employeeCode || 'VKD-USER',
-      dept: currentUser.department || 'Nhân Viên Vikoda',
-      avatar: currentUser.avatarUrl,
-      drillScore: Math.max(currentUser.highestDrillScore || 0, stats.highestDrillScore || 0, 480),
-      xp: stats.xp,
-      streak: stats.streakDays,
-      rankBadge: 'Của Bạn',
-      isCurrentUser: true
-    },
-    {
-      id: 'vkd-top-7',
-      name: 'Đặng Tuấn Kiệt',
-      code: 'VKD-3301',
-      dept: 'Sản Xuất Mỏ Đảnh Thạnh',
-      avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100&auto=format&fit=crop&q=80',
-      drillScore: 420,
-      xp: 980,
-      streak: 7,
-      rankBadge: 'Top 10'
+      rankBadge: 'Top 5',
     }
   ];
 
-  // Sort based on current filter
-  const sortedEntries = [...mockEntries].sort((a, b) => {
-    if (filterTab === 'drill') return b.drillScore - a.drillScore;
-    if (filterTab === 'xp') return b.xp - a.xp;
-    return b.streak - a.streak;
+  BENCHMARKS.forEach(bm => {
+    if (entries.length < 5 && !entries.some(e => e.id === bm.id)) {
+      entries.push(bm);
+    }
   });
 
+  // Sort based on current filter
+  const sortedEntries = [...entries].sort((a, b) => {
+    if (filterTab === 'xp') return (b.xp || 0) - (a.xp || 0);
+    if (filterTab === 'streak') return (b.streak || 0) - (a.streak || 0);
+    return (b.drillScore || 0) - (a.drillScore || 0);
+  });
+
+  const currentUserRankIndex = sortedEntries.findIndex((e) => e.isCurrentUser);
+
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto animate-fade-in">
-      <div className="bg-white rounded-3xl max-w-lg w-full border border-sky-100 shadow-2xl overflow-hidden my-auto">
+    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-150">
+      <div className="bg-white rounded-3xl max-w-md w-full border border-sky-100 shadow-2xl overflow-hidden my-auto flex flex-col max-h-[92vh]">
         
-        {/* Header Bar */}
-        <div className="bg-gradient-to-r from-amber-500 via-[#0066CC] to-[#0072CE] p-4 text-white flex items-center justify-between">
-          <div className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 rounded-2xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-amber-300">
-              <Trophy className="w-5 h-5 fill-amber-300" />
-            </div>
+        {/* Header Banner */}
+        <div className="bg-gradient-to-r from-[#005A9C] via-[#0072CE] to-[#0284C7] p-4 text-white flex items-center justify-between shrink-0">
+          <div className="flex items-center space-x-2">
+            <CompanyEmblem className="w-8 h-8" />
             <div>
-              <h3 className="text-sm font-black tracking-tight">Bảng Xếp Hạng Thi Đua Vikoda</h3>
-              <p className="text-[10px] text-sky-100 font-medium">Vinh danh cao thủ luyện tập tiếng Anh toàn công ty</p>
+              <div className="flex items-center gap-1.5">
+                <h3 className="text-sm font-black tracking-tight">Bảng Vàng Thi Đua Vikoda</h3>
+                <span className="text-[9px] bg-white/20 px-1.5 py-0.2 rounded-md font-bold text-sky-100">
+                  Cloud Live
+                </span>
+              </div>
+              <p className="text-[10px] text-sky-100 font-medium">Bảng xếp hạng thời gian thực toàn công ty</p>
             </div>
           </div>
-          <button
-            onClick={() => {
-              playSound('click');
-              onClose();
-            }}
-            className="p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer"
-          >
-            <X className="w-5 h-5" />
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => {
+                playSound('click');
+                loadLeaderboardData();
+              }}
+              disabled={isLoading}
+              className={`p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer ${
+                isLoading ? 'animate-spin' : ''
+              }`}
+              title="Làm mới bảng xếp hạng"
+            >
+              <RefreshCw className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => {
+                playSound('click');
+                onClose();
+              }}
+              className="p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
-        {/* Tab Filter */}
-        <div className="bg-slate-100 p-1.5 flex gap-1 border-b border-slate-200">
-          <button
-            onClick={() => {
-              playSound('click');
-              setFilterTab('drill');
-            }}
-            className={`flex-1 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center space-x-1 ${
-              filterTab === 'drill'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
-            }`}
-          >
-            <Zap className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
-            <span>Điểm Luyện Cao Nhất</span>
-          </button>
-
+        {/* Filter Pills */}
+        <div className="p-3 bg-slate-50 border-b border-slate-200 flex items-center gap-1.5 shrink-0">
           <button
             onClick={() => {
               playSound('click');
               setFilterTab('xp');
             }}
-            className={`flex-1 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center space-x-1 ${
+            className={`flex-1 py-1.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 cursor-pointer ${
               filterTab === 'xp'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'bg-[#0070D1] text-white shadow-xs'
+                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
             }`}
           >
-            <Sparkles className="w-3.5 h-3.5 text-sky-500" />
-            <span>Tổng XP Tích Lũy</span>
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Kinh Nghiệm XP</span>
           </button>
 
           <button
@@ -187,130 +207,140 @@ export const LeaderboardModal: React.FC<LeaderboardModalProps> = ({
               playSound('click');
               setFilterTab('streak');
             }}
-            className={`flex-1 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center space-x-1 ${
+            className={`flex-1 py-1.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 cursor-pointer ${
               filterTab === 'streak'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'bg-amber-500 text-white shadow-xs'
+                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
             }`}
           >
-            <Flame className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
+            <Flame className="w-3.5 h-3.5 fill-current" />
             <span>Chuỗi Streak</span>
+          </button>
+
+          <button
+            onClick={() => {
+              playSound('click');
+              setFilterTab('drill');
+            }}
+            className={`flex-1 py-1.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1 cursor-pointer ${
+              filterTab === 'drill'
+                ? 'bg-emerald-600 text-white shadow-xs'
+                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            <Trophy className="w-3.5 h-3.5" />
+            <span>Điểm Đấu</span>
           </button>
         </div>
 
-        {/* List of Rankings */}
-        <div className="p-4 space-y-2 max-h-[60vh] overflow-y-auto">
+        {/* Leaderboard User List */}
+        <div className="flex-1 overflow-y-auto p-3 space-y-2">
           {sortedEntries.map((entry, index) => {
-            const rankPos = index + 1;
-            const isTop3 = rankPos <= 3;
-            const isMe = entry.isCurrentUser;
+            const rank = index + 1;
+            let rankColor = 'bg-slate-100 text-slate-700 border-slate-200';
+            let rankIcon = null;
+
+            if (rank === 1) {
+              rankColor = 'bg-amber-400 text-amber-950 border-amber-500 shadow-xs';
+              rankIcon = <Crown className="w-3.5 h-3.5 fill-amber-950 text-amber-950 inline ml-0.5" />;
+            } else if (rank === 2) {
+              rankColor = 'bg-slate-200 text-slate-900 border-slate-300';
+              rankIcon = <Medal className="w-3.5 h-3.5 text-slate-700 inline ml-0.5" />;
+            } else if (rank === 3) {
+              rankColor = 'bg-amber-700/20 text-amber-900 border-amber-700/30';
+              rankIcon = <Medal className="w-3.5 h-3.5 text-amber-800 inline ml-0.5" />;
+            }
 
             return (
               <div
                 key={entry.id}
-                className={`p-3 rounded-2xl flex items-center justify-between transition-all ${
-                  isMe
-                    ? 'bg-sky-50 border-2 border-sky-400 shadow-sm'
-                    : isTop3
-                    ? 'bg-gradient-to-r from-amber-50/70 to-white border border-amber-200'
-                    : 'bg-white border border-slate-200 hover:bg-slate-50'
+                className={`p-2.5 rounded-2xl border transition-all flex items-center justify-between gap-2.5 ${
+                  entry.isCurrentUser
+                    ? 'bg-sky-50/90 border-[#0070D1] ring-2 ring-sky-200'
+                    : 'bg-white border-slate-200/90 hover:border-slate-300'
                 }`}
               >
-                {/* Left: Position & Avatar & Info */}
-                <div className="flex items-center space-x-3">
-                  <div className="w-7 text-center font-black">
-                    {rankPos === 1 ? (
-                      <span className="text-xl">🥇</span>
-                    ) : rankPos === 2 ? (
-                      <span className="text-xl">🥈</span>
-                    ) : rankPos === 3 ? (
-                      <span className="text-xl">🥉</span>
-                    ) : (
-                      <span className="text-xs text-slate-400 font-extrabold">{rankPos}</span>
-                    )}
+                {/* Left: Rank + Avatar + Name */}
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className={`w-6 h-6 rounded-xl border flex items-center justify-center font-black text-xs shrink-0 ${rankColor}`}>
+                    <span>{rank}</span>
                   </div>
 
                   <img
                     src={entry.avatar}
                     alt={entry.name}
-                    className="w-10 h-10 rounded-xl object-cover border border-slate-200"
+                    className="w-10 h-10 rounded-xl object-cover border border-slate-200 shrink-0 bg-white"
                   />
 
-                  <div>
-                    <div className="flex items-center space-x-1.5">
-                      <span className="text-xs font-black text-slate-900">
+                  <div className="min-w-0 truncate">
+                    <div className="flex items-center gap-1.5 truncate">
+                      <span className="font-black text-slate-900 text-xs truncate">
                         {entry.name}
                       </span>
-                      {isMe && (
-                        <span className="text-[9px] font-black px-1.5 py-0.2 rounded-full bg-cyan-500 text-white">
-                          BẠN
-                        </span>
-                      )}
+                      {rankIcon}
                     </div>
-                    <div className="text-[10px] text-slate-500 font-medium">
+                    <div className="text-[10px] text-slate-400 truncate">
                       {entry.code} • {entry.dept}
                     </div>
                   </div>
                 </div>
 
-                {/* Right: Scores */}
-                <div className="text-right">
-                  {filterTab === 'drill' && (
-                    <div>
-                      <div className="text-sm font-black text-amber-600 flex items-center justify-end space-x-1">
-                        <Zap className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-                        <span>{entry.drillScore} pts</span>
-                      </div>
-                      <span className="text-[9px] text-slate-400 font-semibold">Điểm kỷ lục</span>
-                    </div>
-                  )}
-
+                {/* Right: Score/Stats */}
+                <div className="text-right shrink-0">
                   {filterTab === 'xp' && (
                     <div>
-                      <div className="text-sm font-black text-[#0066CC] flex items-center justify-end space-x-1">
-                        <Sparkles className="w-3.5 h-3.5 text-cyan-500" />
-                        <span>{entry.xp} XP</span>
+                      <div className="text-xs font-black text-[#0070D1] flex items-center justify-end gap-0.5">
+                        <Sparkles className="w-3 h-3" />
+                        <span>{entry.xp}</span>
                       </div>
-                      <span className="text-[9px] text-slate-400 font-semibold">Cấp bậc tinh hoa</span>
+                      <span className="text-[9px] text-slate-400">Tổng XP</span>
                     </div>
                   )}
 
                   {filterTab === 'streak' && (
                     <div>
-                      <div className="text-sm font-black text-rose-600 flex items-center justify-end space-x-1">
-                        <Flame className="w-3.5 h-3.5 fill-rose-500 text-rose-500" />
-                        <span>{entry.streak} ngày</span>
+                      <div className="text-xs font-black text-amber-600 flex items-center justify-end gap-0.5">
+                        <Flame className="w-3 h-3 fill-amber-500" />
+                        <span>{entry.streak}</span>
                       </div>
-                      <span className="text-[9px] text-slate-400 font-semibold">Học liên tục</span>
+                      <span className="text-[9px] text-slate-400">Ngày streak</span>
+                    </div>
+                  )}
+
+                  {filterTab === 'drill' && (
+                    <div>
+                      <div className="text-xs font-black text-emerald-600 flex items-center justify-end gap-0.5">
+                        <Trophy className="w-3 h-3" />
+                        <span>{entry.drillScore}</span>
+                      </div>
+                      <span className="text-[9px] text-slate-400">Điểm kỷ lục</span>
                     </div>
                   )}
                 </div>
-
               </div>
             );
           })}
         </div>
 
-        {/* Bottom CTA: Start Endless Drill to boost score */}
-        <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-3">
-          <div>
-            <div className="text-xs font-bold text-slate-800">
-              Muốn bứt phá leo Top 1?
-            </div>
-            <div className="text-[10px] text-slate-500">
-              Luyện phản xạ nhanh với chế độ Luyện Tập Bất Tận
-            </div>
+        {/* Current User Fixed Status Bar at Bottom */}
+        <div className="p-3 bg-slate-50 border-t border-slate-200 shrink-0 flex items-center justify-between gap-2">
+          <div className="text-xs">
+            <span className="text-slate-500 font-medium">Hạng của bạn: </span>
+            <strong className="text-[#0070D1] font-black">
+              #{currentUserRankIndex !== -1 ? currentUserRankIndex + 1 : '—'}
+            </strong>
           </div>
+
           <button
             onClick={() => {
               playSound('click');
               onClose();
               onStartDrill();
             }}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-xs font-black shadow-md flex items-center space-x-1.5 cursor-pointer active:scale-95 transition-all"
+            className="py-1.5 px-3 rounded-xl bg-[#0070D1] hover:bg-[#005bb5] text-white font-black text-xs flex items-center gap-1 cursor-pointer transition-all active:scale-95 shadow-xs"
           >
-            <Zap className="w-4 h-4 fill-white" />
-            <span>Vào Luyện Ngay</span>
+            <Trophy className="w-3 h-3" />
+            <span>Cày Điểm Leo Rank</span>
           </button>
         </div>
 

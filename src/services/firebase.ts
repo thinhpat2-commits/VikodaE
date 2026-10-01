@@ -15,6 +15,8 @@ import firebaseConfig from '../../firebase-applet-config.json';
 import { 
   saveGamificationStateOffline, 
   saveProfileOffline, 
+  loadProfileOffline,
+  loadGamificationStateOffline,
   enqueueOfflineMutation,
   getOfflineQueue,
   clearOfflineQueueItem,
@@ -50,6 +52,7 @@ export interface UserCloudProfile {
   displayName: string;
   role: 'employee' | 'admin';
   department: string;
+  avatarUrl?: string;
   xp: number;
   streak: number;
   gems: number;
@@ -59,6 +62,7 @@ export interface UserCloudProfile {
   vocabLearned: number;
   dailyGoal: number;
   currentLevel: string;
+  highestDrillScore?: number;
   createdAt: string;
   lastActive: string;
   updatedAt?: number;
@@ -66,6 +70,11 @@ export interface UserCloudProfile {
   placementTest?: any;
   studyPlanner?: any;
   arenaStats?: any;
+  lastResetByAdmin?: {
+    adminEmail: string;
+    timestamp: string;
+    reason: string;
+  };
 }
 
 const STORAGE_KEY_AUTH_SESSION = 'vikoda_auth_session_v4';
@@ -81,8 +90,8 @@ export const emailToUserId = (email: string): string => {
 export const isUserAdmin = (emailOrProfile?: string | UserCloudProfile | null): boolean => {
   if (!emailOrProfile) return false;
   const email = typeof emailOrProfile === 'string'
-    ? emailOrProfile.toLowerCase()
-    : (emailOrProfile.email || '').toLowerCase();
+    ? emailOrProfile.toLowerCase().trim()
+    : (emailOrProfile.email || '').toLowerCase().trim();
 
   if (email === 'thinh.pat2@gmail.com') return true;
   if (email.includes('admin') && (email.endsWith('@vikoda.com.vn') || email.endsWith('@gmail.com'))) return true;
@@ -108,6 +117,33 @@ export const getPersistedSession = (): UserCloudProfile | null => {
 export const persistSession = (profile: UserCloudProfile) => {
   if (typeof window !== 'undefined') {
     localStorage.setItem(STORAGE_KEY_AUTH_SESSION, JSON.stringify(profile));
+    
+    // Store user-scoped cached profile
+    localStorage.setItem(`vikoda_profile_${profile.userId}`, JSON.stringify({
+      employeeCode: profile.userId.toUpperCase().replace('USR_', 'VKD-'),
+      fullName: profile.displayName,
+      email: profile.email,
+      department: profile.department,
+      title: profile.role === 'admin' ? '👑 Quản Trị Viên Hệ Thống' : 'Chuyên Viên Kinh Doanh',
+      avatarUrl: profile.avatarUrl || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+      highestDrillScore: profile.highestDrillScore || 200,
+      totalPracticeCount: 1,
+      isLoggedIn: true,
+      isAdmin: isUserAdmin(profile.email),
+    }));
+
+    // Store user-scoped cached stats
+    localStorage.setItem(`vikoda_stats_${profile.userId}`, JSON.stringify({
+      xp: profile.xp,
+      gems: profile.gems,
+      energy: 5,
+      streakDays: profile.streak,
+      rank: 'Chiến Binh Vikoda',
+      completedNodeIds: profile.completedLessons || ['unit-1'],
+      lastActiveDate: new Date().toISOString().split('T')[0],
+      highestDrillScore: profile.highestDrillScore || 200,
+      updatedAt: Date.now(),
+    }));
   }
 };
 
@@ -136,8 +172,9 @@ export async function registerWithEmail(
     email: cleanEmail,
     displayName: displayName || cleanEmail.split('@')[0],
     role,
-    department: department || 'Vikodaer',
-    xp: 150, // Welcome gift
+    department: department || 'Phòng Kinh Doanh & Xuất Khẩu',
+    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    xp: 200, // Welcome gift
     streak: 1,
     gems: 50,
     completedLessons: ['unit-1'],
@@ -146,30 +183,43 @@ export async function registerWithEmail(
     vocabLearned: 15,
     dailyGoal: 50,
     currentLevel: 'Đại sứ Khoáng Kiềm',
+    highestDrillScore: 200,
     createdAt: new Date().toISOString(),
     lastActive: new Date().toISOString(),
     updatedAt: Date.now(),
   };
 
-  // 1. Save locally in IndexedDB & LocalStorage immediately
+  // 1. Save locally in IndexedDB & LocalStorage scoped to this userId
   persistSession(newProfile);
   await saveProfileOffline({
     employeeCode: userId.toUpperCase().replace('USR_', 'VKD-'),
     fullName: newProfile.displayName,
     email: newProfile.email,
     department: newProfile.department,
-    title: role === 'admin' ? 'Quản Trị Viên Hệ Thống' : 'Đại Sứ Khoáng Kiềm',
-    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    title: role === 'admin' ? '👑 Quản Trị Viên Hệ Thống' : 'Chuyên Viên Kinh Doanh',
+    avatarUrl: newProfile.avatarUrl!,
     highestDrillScore: 200,
     totalPracticeCount: 1,
     isLoggedIn: true,
-  });
+    isAdmin: role === 'admin',
+  }, userId);
 
-  // 2. Sync to Cloud Firestore if online
+  await saveGamificationStateOffline({
+    xp: newProfile.xp,
+    gems: newProfile.gems,
+    energy: 5,
+    streakDays: newProfile.streak,
+    rank: 'Chiến Binh Vikoda',
+    completedNodeIds: newProfile.completedLessons,
+    lastActiveDate: new Date().toISOString().split('T')[0],
+    highestDrillScore: 200,
+  }, userId);
+
+  // 2. Sync to Cloud Firestore immediately
   try {
     await setDoc(doc(db, 'users', userId), {
       ...newProfile,
-      passwordHash: btoa(pass), // Basic hashed store for corporate roster
+      passwordHash: btoa(pass),
     }, { merge: true });
   } catch (err) {
     console.warn('Network offline during register, queued in IndexedDB:', err);
@@ -181,7 +231,7 @@ export async function registerWithEmail(
 
 /**
  * Login with Email + Password
- * Works seamlessly online and offline
+ * Works seamlessly online and offline without overwriting another employee's session
  */
 export async function loginWithEmail(email: string, pass: string): Promise<UserCloudProfile> {
   const cleanEmail = email.trim().toLowerCase();
@@ -192,20 +242,54 @@ export async function loginWithEmail(email: string, pass: string): Promise<UserC
     const snap = await getDoc(doc(db, 'users', userId));
     if (snap.exists()) {
       const data = snap.data() as UserCloudProfile;
-      const updated = {
+      const updated: UserCloudProfile = {
         ...data,
+        email: cleanEmail,
+        userId,
+        role: isUserAdmin(cleanEmail) ? 'admin' : (data.role || 'employee'),
         lastActive: new Date().toISOString(),
         updatedAt: Date.now(),
       };
       persistSession(updated);
-      await setDoc(doc(db, 'users', userId), { lastActive: updated.lastActive }, { merge: true }).catch(() => {});
+      await setDoc(doc(db, 'users', userId), { lastActive: updated.lastActive, role: updated.role }, { merge: true }).catch(() => {});
       return updated;
     }
   } catch (err) {
     console.warn('Firestore fetch notice (offline or connecting):', err);
   }
 
-  // 2. If user document does not exist yet or offline, create and log them in
+  // 2. Check user-scoped local offline storage
+  const offlineProfile = await loadProfileOffline(userId);
+  const offlineStats = await loadGamificationStateOffline(userId);
+  if (offlineProfile) {
+    const role: 'employee' | 'admin' = isUserAdmin(cleanEmail) ? 'admin' : 'employee';
+    const profile: UserCloudProfile = {
+      userId,
+      email: cleanEmail,
+      displayName: offlineProfile.fullName || cleanEmail.split('@')[0],
+      role,
+      department: offlineProfile.department || 'Phòng Kinh Doanh & Xuất Khẩu',
+      avatarUrl: offlineProfile.avatarUrl,
+      xp: offlineStats?.xp || 200,
+      streak: offlineStats?.streakDays || 1,
+      gems: offlineStats?.gems || 50,
+      completedLessons: offlineStats?.completedNodeIds || ['unit-1'],
+      completedUnits: offlineStats?.completedNodeIds || ['unit-1'],
+      mistakesCount: 0,
+      vocabLearned: 15,
+      dailyGoal: 50,
+      currentLevel: 'Đại sứ Khoáng Kiềm',
+      highestDrillScore: offlineStats?.highestDrillScore || 200,
+      createdAt: new Date().toISOString(),
+      lastActive: new Date().toISOString(),
+      updatedAt: Date.now(),
+    };
+    persistSession(profile);
+    setDoc(doc(db, 'users', userId), { ...profile, passwordHash: btoa(pass) }, { merge: true }).catch(() => {});
+    return profile;
+  }
+
+  // 3. Brand new account on first login
   const role: 'employee' | 'admin' = isUserAdmin(cleanEmail) ? 'admin' : 'employee';
   const profile: UserCloudProfile = {
     userId,
@@ -213,15 +297,17 @@ export async function loginWithEmail(email: string, pass: string): Promise<UserC
     displayName: cleanEmail.split('@')[0],
     role,
     department: 'Phòng Kinh Doanh & Xuất Khẩu',
+    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
     xp: 200,
     streak: 1,
-    gems: 60,
+    gems: 50,
     completedLessons: ['unit-1'],
     completedUnits: ['unit-1'],
     mistakesCount: 0,
     vocabLearned: 15,
     dailyGoal: 50,
     currentLevel: 'Đại sứ Khoáng Kiềm',
+    highestDrillScore: 200,
     createdAt: new Date().toISOString(),
     lastActive: new Date().toISOString(),
     updatedAt: Date.now(),
@@ -229,7 +315,7 @@ export async function loginWithEmail(email: string, pass: string): Promise<UserC
 
   persistSession(profile);
 
-  // Try to write to Cloud in background
+  // Write to Firestore in background
   setDoc(doc(db, 'users', userId), {
     ...profile,
     passwordHash: btoa(pass),
@@ -241,7 +327,7 @@ export async function loginWithEmail(email: string, pass: string): Promise<UserC
 }
 
 /**
- * Continuous Cloud & IndexedDB Auto-Backup
+ * Continuous Cloud & IndexedDB Auto-Backup (Scoped by userId)
  */
 export async function saveProgressToCloud(
   userId: string,
@@ -256,13 +342,28 @@ export async function saveProgressToCloud(
     updatedAt: now,
   };
 
-  // 1. Always update local session immediately
+  // 1. Always update local session immediately if matching current user
   const cur = getPersistedSession();
   if (cur && cur.userId === userId) {
-    persistSession({ ...cur, ...payload });
+    const merged = { ...cur, ...payload };
+    persistSession(merged);
   }
 
-  // 2. Write to Firestore Cloud if online
+  // 2. Also save to user-scoped offline storage
+  if (progress.xp !== undefined || progress.streak !== undefined || progress.gems !== undefined || progress.completedLessons !== undefined) {
+    saveGamificationStateOffline({
+      xp: progress.xp || 200,
+      gems: progress.gems || 50,
+      energy: 5,
+      streakDays: progress.streak || 1,
+      rank: 'Chiến Binh Vikoda',
+      completedNodeIds: progress.completedLessons || ['unit-1'],
+      lastActiveDate: new Date().toISOString().split('T')[0],
+      highestDrillScore: 200,
+    }, userId);
+  }
+
+  // 3. Write to Firestore Cloud
   if (typeof navigator !== 'undefined' && navigator.onLine) {
     try {
       await setDoc(doc(db, 'users', userId), payload, { merge: true });
@@ -271,7 +372,6 @@ export async function saveProgressToCloud(
       await enqueueOfflineMutation('update_progress', { userId, ...payload });
     }
   } else {
-    // Queued in IndexedDB
     await enqueueOfflineMutation('update_progress', { userId, ...payload });
   }
 }
@@ -347,19 +447,43 @@ if (typeof window !== 'undefined') {
 }
 
 /**
- * ADMIN: Fetch all registered users from Cloud Firestore
+ * ADMIN & LEADERBOARD: Fetch all registered users from Cloud Firestore
  */
 export async function fetchAllUsersAdmin(): Promise<UserCloudProfile[]> {
   try {
     const snap = await getDocs(collection(db, 'users'));
     const list: UserCloudProfile[] = [];
     snap.forEach((d) => {
-      list.push(d.data() as UserCloudProfile);
+      const data = d.data() as UserCloudProfile;
+      if (data && data.email) {
+        list.push(data);
+      }
     });
+
+    // Ensure current active user is always represented
+    const currentSession = getPersistedSession();
+    if (currentSession && currentSession.email) {
+      const idx = list.findIndex(u => u.email.toLowerCase() === currentSession.email.toLowerCase());
+      if (idx === -1) {
+        list.push(currentSession);
+        setDoc(doc(db, 'users', currentSession.userId), currentSession, { merge: true }).catch(() => {});
+      } else {
+        // Merge latest real-time session numbers
+        list[idx] = {
+          ...list[idx],
+          xp: Math.max(list[idx].xp || 0, currentSession.xp || 0),
+          streak: Math.max(list[idx].streak || 0, currentSession.streak || 0),
+          gems: Math.max(list[idx].gems || 0, currentSession.gems || 0),
+          displayName: currentSession.displayName || list[idx].displayName,
+        };
+      }
+    }
+
     return list;
   } catch (err) {
     console.warn('Fetch all users notice:', err);
-    return [];
+    const currentSession = getPersistedSession();
+    return currentSession ? [currentSession] : [];
   }
 }
 
@@ -372,11 +496,12 @@ export async function adminResetUserProgress(
   reason: string = 'Yêu cầu thi lại hoặc đánh giá lại năng lực từ Admin'
 ): Promise<boolean> {
   const adminSession = getPersistedSession();
-  const adminEmail = adminSession?.email || 'admin@vikoda.com.vn';
+  const adminEmail = adminSession?.email || 'thinh.pat2@gmail.com';
 
   const resetData = {
     xp: 0,
     streak: 0,
+    gems: 0,
     completedLessons: [],
     completedUnits: [],
     mistakesCount: 0,
@@ -390,7 +515,7 @@ export async function adminResetUserProgress(
     },
   };
 
-  const actualUserId = emailToUserId(targetEmail) || targetUserId;
+  const actualUserId = targetUserId || emailToUserId(targetEmail);
 
   // 1. Update Firestore
   try {
@@ -442,7 +567,8 @@ export async function adminCreateOrUpdateUser(
     displayName: employeeData.displayName,
     role,
     department: employeeData.department || 'Phòng Kinh Doanh & Xuất Khẩu',
-    xp: employeeData.xp || 150,
+    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    xp: employeeData.xp || 200,
     streak: employeeData.streak || 1,
     gems: employeeData.gems || 50,
     completedLessons: ['unit-1'],
@@ -483,12 +609,8 @@ export async function adminDeleteUser(email: string): Promise<boolean> {
 }
 
 /**
- * Sign out
+ * Sign out (Safely clears active session without wiping other employees' stored data)
  */
 export async function logoutUser() {
   clearSession();
-  if (typeof window !== 'undefined') {
-    localStorage.removeItem('vikoda_employee_profile_v3');
-    localStorage.removeItem('vikoda_auth_session_v4');
-  }
 }
