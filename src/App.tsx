@@ -349,7 +349,7 @@ export default function App() {
     setTimeout(() => setToastMessage(null), 3500);
   };
 
-  const handleCompleteUnit = (unitId: string, xpGain: number, gemGain: number) => {
+  const handleCompleteUnit = (unitId: string, xpGain: number, gemGain: number, starsEarned: number = 3) => {
     const isNew = !gamificationState.completedNodeIds.includes(unitId);
     const updatedNodes = isNew
       ? [...gamificationState.completedNodeIds, unitId]
@@ -357,6 +357,11 @@ export default function App() {
 
     const newXp = gamificationState.xp + xpGain;
     const newGems = gamificationState.gems + gemGain;
+
+    const updatedUnitStars = {
+      ...(gamificationState.unitStars || {}),
+      [unitId]: Math.max(gamificationState.unitStars?.[unitId] || 0, starsEarned),
+    };
 
     let newRank = gamificationState.rank;
     if (updatedNodes.length >= 8) {
@@ -371,10 +376,15 @@ export default function App() {
       gems: newGems,
       rank: newRank,
       completedNodeIds: updatedNodes,
+      unitStars: updatedUnitStars,
     };
 
     saveGamificationState(updatedState);
-    showToast(`+${xpGain} XP • +${gemGain} 💎 Hoàn thành xuất sắc bài học!`);
+    if (starsEarned === 3) {
+      showToast(`+${xpGain} XP • +${gemGain} 💎 Hoàn hảo 3/3 sao! 🌟`);
+    } else {
+      showToast(`+${xpGain} XP • +${gemGain} 💎 Đạt ${starsEarned}/3 sao. Luyện lại để lấy 3 sao nhé! ⭐`);
+    }
   };
 
   const handleAwardXpAndGems = (xpGain: number, gemGain: number) => {
@@ -551,6 +561,7 @@ export default function App() {
             setIsCoachOpen(true);
           }}
           streakDays={gamificationState.streakDays}
+          unitStars={gamificationState.unitStars}
         />
       )}
 

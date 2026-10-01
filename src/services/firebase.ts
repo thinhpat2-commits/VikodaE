@@ -58,6 +58,7 @@ export interface UserCloudProfile {
   gems: number;
   completedLessons: string[];
   completedUnits: string[];
+  unitStars?: Record<string, number>;
   mistakesCount: number;
   vocabLearned: number;
   dailyGoal: number;

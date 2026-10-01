@@ -29,6 +29,7 @@ export interface GamificationState {
   streakDays: number;
   rank: VikodaRank;
   completedNodeIds: string[];
+  unitStars?: Record<string, number>;
   lastActiveDate: string;
   highestDrillScore: number;
   mistakesVault?: MistakeVaultItem[];

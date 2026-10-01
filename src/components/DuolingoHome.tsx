@@ -25,7 +25,7 @@ interface DuolingoHomeProps {
   selectedLevel: CourseLevel;
   setSelectedLevel: (lvl: CourseLevel) => void;
   completedUnitIds: string[];
-  onCompleteUnit: (unitId: string, xp: number, gems: number) => void;
+  onCompleteUnit: (unitId: string, xp: number, gems: number, stars?: number) => void;
   speechRate: number;
   onGoToVoiceCoach: () => void;
   onGoToPitchDeck: () => void;
@@ -38,6 +38,7 @@ interface DuolingoHomeProps {
   onOpenDailyReview?: () => void;
   onOpenCoach?: () => void;
   streakDays?: number;
+  unitStars?: Record<string, number>;
 }
 
 export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
@@ -57,6 +58,7 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
   onOpenDailyReview,
   onOpenCoach,
   streakDays = 1,
+  unitStars = {},
 }) => {
   const [activeLesson, setActiveLesson] = useState<UnitLesson | null>(null);
   const [isGuidebookOpen, setIsGuidebookOpen] = useState<boolean>(false);
@@ -340,11 +342,19 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                     </div>
                   )}
 
-                  {/* 3-Star Rating for completed */}
+                  {/* Dynamic Star Rating for completed (Accurately reflects mistakes) */}
                   {isCompleted && (
-                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-0.5 bg-amber-400 px-1.5 py-0.2 rounded-full border-2 border-white text-[9px] text-amber-950 font-black shadow-xs whitespace-nowrap pointer-events-none">
-                      <Star className="w-2.5 h-2.5 fill-amber-950" />
-                      <span>3/3</span>
+                    <div className={`absolute -bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-0.5 px-2 py-0.5 rounded-full border-2 border-white text-[9px] font-black shadow-xs whitespace-nowrap pointer-events-none ${
+                      (unitStars[lesson.id] ?? 3) === 3
+                        ? 'bg-amber-400 text-amber-950 ring-1 ring-amber-500/40'
+                        : (unitStars[lesson.id] ?? 3) === 2
+                        ? 'bg-amber-200 text-amber-900 border-amber-300'
+                        : 'bg-slate-200 text-slate-700 border-slate-300'
+                    }`}>
+                      <Star className={`w-2.5 h-2.5 ${
+                        (unitStars[lesson.id] ?? 3) === 3 ? 'fill-amber-950 text-amber-950' : 'fill-amber-600 text-amber-600'
+                      }`} />
+                      <span>{unitStars[lesson.id] ?? 3}/3</span>
                     </div>
                   )}
                 </div>
@@ -519,8 +529,8 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
         <DuolingoGameArena
           lesson={activeLesson}
           onClose={() => setActiveLesson(null)}
-          onFinishLesson={(xp, gems) => {
-            onCompleteUnit(activeLesson.id, xp, gems);
+          onFinishLesson={(xp, gems, stars) => {
+            onCompleteUnit(activeLesson.id, xp, gems, stars);
           }}
           speechRate={speechRate}
           onRecordMistake={onRecordMistake}
