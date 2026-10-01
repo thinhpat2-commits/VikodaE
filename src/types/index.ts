@@ -31,6 +31,64 @@ export interface GamificationState {
   completedNodeIds: string[];
   lastActiveDate: string;
   highestDrillScore: number;
+  mistakesVault?: MistakeVaultItem[];
+  placementTest?: PlacementTestResult;
+  studyPlanner?: StudyPlannerSettings;
+  arenaStats?: PvPArenaStats;
+}
+
+export interface MistakeVaultItem {
+  id: string;
+  questionId: string;
+  promptEn: string;
+  promptVi: string;
+  correctSentence: string;
+  wrongChoiceGiven?: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+  crucialNote?: string;
+  category: string;
+  failedCount: number;
+  mastered: boolean;
+  addedAt: number;
+}
+
+export interface PlacementTestResult {
+  score: number;
+  totalQuestions: number;
+  recommendedLevel: 'A1' | 'A2-B1' | 'B2-C1' | 'C2';
+  skills: {
+    reading: number; // 0 - 100
+    listening: number; // 0 - 100
+    writing: number; // 0 - 100
+    speaking: number; // 0 - 100
+  };
+  feedback: string;
+  nextSteps: string[];
+  toeicEquivalent?: string;
+  cambridgeEquivalent?: string;
+  completedAt?: string;
+}
+
+export interface StudyPlannerSettings {
+  dailyGoalMinutes: number;
+  activeDays: string[];
+  targetLevel: 'A1' | 'A2-B1' | 'B2-C1' | 'C2';
+  targetGoalDays: number;
+  weeklyTargetLessons: number;
+}
+
+export interface PvPArenaStats {
+  eloRating: number;
+  rankTitle: string;
+  matchesPlayed: number;
+  wins: number;
+  losses: number;
+  draws: number;
+  currentWinStreak: number;
+  highestStreak: number;
+  favoriteOpponent?: string;
 }
 
 export interface LeaderboardEntry {

@@ -43,6 +43,10 @@ interface VikodaHeaderProps {
   onOpenSearch?: () => void;
   onOpenPortfolio?: () => void;
   onOpenAdmin?: () => void;
+  onOpenPvPArena?: () => void;
+  onOpenDailyReview?: () => void;
+  onOpenCoach?: () => void;
+  onOpenPlacementTest?: () => void;
   isCloudSynced?: boolean;
   onLogout?: () => void;
 }
@@ -61,6 +65,10 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
   onOpenSearch = () => {},
   onOpenPortfolio = () => {},
   onOpenAdmin = () => {},
+  onOpenPvPArena,
+  onOpenDailyReview,
+  onOpenCoach,
+  onOpenPlacementTest,
   isCloudSynced = false,
   onLogout,
 }) => {
@@ -279,6 +287,85 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
                       <div className="text-[10px] text-sky-600 font-normal">Hỏi đáp từ vựng & sửa lỗi giao tiếp</div>
                     </div>
                   </button>
+
+                  <div className="px-2.5 pt-1 text-[10px] font-black uppercase tracking-wider text-slate-400">
+                    Bộ Tiện Ích Đào Tạo & Thi Đấu
+                  </div>
+
+                  {/* 0.1 1v1 PvP Arena */}
+                  {onOpenPvPArena && (
+                    <button
+                      onClick={() => {
+                        playSound('click');
+                        setIsMasterMenuOpen(false);
+                        onOpenPvPArena();
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-rose-900 bg-rose-50/70 hover:bg-rose-100 transition-colors flex items-center gap-2.5 cursor-pointer"
+                    >
+                      <span className="text-sm">⚔️</span>
+                      <div>
+                        <div className="leading-tight flex items-center gap-1.5">
+                          <span>Đấu Trường 1v1 PvP</span>
+                          <span className="px-1.5 py-0.2 rounded-full bg-rose-600 text-white text-[9px] font-bold">HOT</span>
+                        </div>
+                        <div className="text-[10px] text-rose-700 font-normal">Thách đấu đối kháng với đồng nghiệp</div>
+                      </div>
+                    </button>
+                  )}
+
+                  {/* 0.2 Daily Quick Review */}
+                  {onOpenDailyReview && (
+                    <button
+                      onClick={() => {
+                        playSound('click');
+                        setIsMasterMenuOpen(false);
+                        onOpenDailyReview();
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-amber-900 bg-amber-50/70 hover:bg-amber-100 transition-colors flex items-center gap-2.5 cursor-pointer"
+                    >
+                      <span className="text-sm">🔁</span>
+                      <div>
+                        <div className="leading-tight">Ôn Tập Nhanh 3 Phút</div>
+                        <div className="text-[10px] text-amber-700 font-normal">Sửa các câu hay nhầm lẫn trong giao tiếp</div>
+                      </div>
+                    </button>
+                  )}
+
+                  {/* 0.3 AI Learning Coach & Planner */}
+                  {onOpenCoach && (
+                    <button
+                      onClick={() => {
+                        playSound('click');
+                        setIsMasterMenuOpen(false);
+                        onOpenCoach();
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-sky-900 hover:bg-sky-50 transition-colors flex items-center gap-2.5 cursor-pointer"
+                    >
+                      <span className="text-sm">🧭</span>
+                      <div>
+                        <div className="leading-tight">Huấn Luyện Viên AI & Lịch Học</div>
+                        <div className="text-[10px] text-sky-600 font-normal">Định hướng mục tiêu học tập theo tuần</div>
+                      </div>
+                    </button>
+                  )}
+
+                  {/* 0.4 Placement Test 4 Skills */}
+                  {onOpenPlacementTest && (
+                    <button
+                      onClick={() => {
+                        playSound('click');
+                        setIsMasterMenuOpen(false);
+                        onOpenPlacementTest();
+                      }}
+                      className="w-full text-left px-3 py-2 rounded-xl text-xs font-bold text-emerald-900 hover:bg-emerald-50 transition-colors flex items-center gap-2.5 cursor-pointer"
+                    >
+                      <span className="text-sm">📝</span>
+                      <div>
+                        <div className="leading-tight">Test Xếp Lớp Chuẩn Quốc Tế</div>
+                        <div className="text-[10px] text-emerald-700 font-normal">Đánh giá 4 kỹ năng & quy đổi TOEIC</div>
+                      </div>
+                    </button>
+                  )}
 
                   <div className="px-2.5 pt-1 text-[10px] font-black uppercase tracking-wider text-slate-400">
                     Bộ Tiện Ích Doanh Nghiệp

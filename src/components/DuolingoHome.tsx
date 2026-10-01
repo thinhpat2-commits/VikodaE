@@ -35,6 +35,10 @@ interface DuolingoHomeProps {
   onOpenEndlessDrill: () => void;
   onOpenLeaderboard: () => void;
   highestDrillScore: number;
+  onRecordMistake?: (mistake: any) => void;
+  onOpenPvPArena?: () => void;
+  onOpenDailyReview?: () => void;
+  onOpenCoach?: () => void;
 }
 
 export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
@@ -48,7 +52,11 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
   onGoToBattle = () => {},
   onOpenEndlessDrill,
   onOpenLeaderboard,
-  highestDrillScore
+  highestDrillScore,
+  onRecordMistake,
+  onOpenPvPArena,
+  onOpenDailyReview,
+  onOpenCoach
 }) => {
   const [activeLesson, setActiveLesson] = useState<UnitLesson | null>(null);
   const [isGuidebookOpen, setIsGuidebookOpen] = useState<boolean>(false);
@@ -176,9 +184,54 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
 
         {/* 2. CÓ THỂ LÀM GÌ (Secondary quick activities) */}
         <div className="mt-2 pt-2 border-t border-slate-100 flex items-center justify-between gap-1 text-[10px] font-bold">
-          <span className="text-slate-400 shrink-0">Có thể làm:</span>
+          <span className="text-slate-400 shrink-0">Hôm nay:</span>
           
           <div className="flex items-center gap-1.5 overflow-x-auto">
+            {/* 1v1 PvP Arena */}
+            {onOpenPvPArena && (
+              <button
+                onClick={() => {
+                  playSound('click');
+                  onOpenPvPArena();
+                }}
+                className="px-2 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 flex items-center gap-1 shrink-0 transition-colors cursor-pointer font-black"
+                title="Thách đấu 1v1 đối kháng"
+              >
+                <span>⚔️</span>
+                <span>Đấu 1v1</span>
+              </button>
+            )}
+
+            {/* Daily Quick Review */}
+            {onOpenDailyReview && (
+              <button
+                onClick={() => {
+                  playSound('click');
+                  onOpenDailyReview();
+                }}
+                className="px-2 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 flex items-center gap-1 shrink-0 transition-colors cursor-pointer font-black"
+                title="Ôn tập nhanh các câu hay sai"
+              >
+                <span>🔁</span>
+                <span>Ôn 3p</span>
+              </button>
+            )}
+
+            {/* AI Coach */}
+            {onOpenCoach && (
+              <button
+                onClick={() => {
+                  playSound('click');
+                  onOpenCoach();
+                }}
+                className="px-2 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 flex items-center gap-1 shrink-0 transition-colors cursor-pointer font-black"
+                title="Huấn luyện viên AI & Lịch học"
+              >
+                <span>🧭</span>
+                <span>Coach</span>
+              </button>
+            )}
+
             {/* Arena 60s */}
             <button
               onClick={() => {
@@ -709,6 +762,7 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
             onCompleteUnit(activeLesson.id, xp, gems);
           }}
           speechRate={speechRate}
+          onRecordMistake={onRecordMistake}
         />
       )}
 

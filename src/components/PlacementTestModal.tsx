@@ -340,12 +340,14 @@ interface PlacementTestModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSaveResult: (result: PlacementTestResult) => void;
+  speechRate?: number;
 }
 
 export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
   isOpen,
   onClose,
   onSaveResult,
+  speechRate = 1.0,
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [timeLeft, setTimeLeft] = useState<number>(1200); // 20 minutes countdown (1200s)
@@ -585,25 +587,45 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
       }}
     >
       <div 
-        className="bg-white w-full max-w-xl rounded-3xl border-2 border-slate-200 border-b-6 border-b-sky-600 shadow-2xl overflow-hidden flex flex-col max-h-[95dvh] animate-in zoom-in-95 duration-150"
+        className="bg-white w-full max-w-2xl md:max-w-3xl rounded-3xl border-2 border-slate-200 border-b-6 border-b-sky-600 shadow-2xl overflow-hidden flex flex-col max-h-[95dvh] animate-in zoom-in-95 duration-150"
       >
         {/* ================= IF TEST COMPLETED: SHOW 4-SKILL SCORECARD ================= */}
         {testResult ? (
-          <div className="p-6 overflow-y-auto space-y-5 text-center my-auto">
+          <div className="p-6 md:p-8 overflow-y-auto space-y-5 text-center my-auto">
             <div className="w-16 h-16 rounded-3xl bg-emerald-100 text-emerald-600 border-2 border-emerald-300 flex items-center justify-center mx-auto text-2xl shadow-md">
               <Trophy className="w-8 h-8" />
             </div>
 
             <div className="space-y-1">
               <span className="text-[10px] font-black uppercase tracking-widest bg-emerald-400 text-slate-950 px-3 py-0.5 rounded-full inline-block">
-                KẾT QUẢ ĐÁNH GIÁ 4 KỸ NĂNG THỰC CHIẾN
+                KẾT QUẢ ĐÁNH GIÁ 4 KỸ NĂNG THỰC CHIẾN CHUẨN QUỐC TẾ
               </span>
-              <h2 className="text-xl font-black text-slate-900">
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900">
                 Cấp Độ Khuyến Nghị: {testResult.recommendedLevel}
               </h2>
-              <p className="text-xs text-slate-500 font-medium max-w-md mx-auto">
+              <p className="text-xs md:text-sm text-slate-500 font-medium max-w-md mx-auto">
                 {testResult.feedback}
               </p>
+            </div>
+
+            {/* TOEIC & Cambridge Equivalent Banner */}
+            <div className="grid grid-cols-2 gap-3 max-w-lg mx-auto">
+              <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 text-center">
+                <span className="text-[10px] uppercase font-black text-amber-700">Quy Đổi Chuẩn TOEIC</span>
+                <div className="text-base md:text-lg font-black text-amber-900 mt-0.5">
+                  {testResult.recommendedLevel === 'A1' ? '250 - 400 TOEIC' :
+                   testResult.recommendedLevel === 'A2-B1' ? '450 - 650 TOEIC' :
+                   testResult.recommendedLevel === 'B2-C1' ? '700 - 850 TOEIC' : '900+ TOEIC'}
+                </div>
+              </div>
+              <div className="p-3.5 rounded-2xl bg-sky-50 border border-sky-200 text-center">
+                <span className="text-[10px] uppercase font-black text-[#005A9C]">Cambridge Business (BEC)</span>
+                <div className="text-base md:text-lg font-black text-[#0072CE] mt-0.5">
+                  {testResult.recommendedLevel === 'A1' ? 'A2 Key (KET)' :
+                   testResult.recommendedLevel === 'A2-B1' ? 'B1 Business Preliminary' :
+                   testResult.recommendedLevel === 'B2-C1' ? 'B2 Business Vantage' : 'C1 Business Higher'}
+                </div>
+              </div>
             </div>
 
             {/* 4 Skills Radar Bars */}

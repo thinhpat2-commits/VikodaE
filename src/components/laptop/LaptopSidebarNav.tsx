@@ -28,6 +28,9 @@ interface LaptopSidebarNavProps {
   onOpenLeaderboard: () => void;
   onOpenAi: () => void;
   onOpenAdmin: () => void;
+  onOpenPvPArena?: () => void;
+  onOpenDailyReview?: () => void;
+  onOpenCoach?: () => void;
   onLogout?: () => void;
   isCloudSynced?: boolean;
 }
@@ -42,6 +45,9 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
   onOpenLeaderboard,
   onOpenAi,
   onOpenAdmin,
+  onOpenPvPArena,
+  onOpenDailyReview,
+  onOpenCoach,
   onLogout,
   isCloudSynced = false,
 }) => {
@@ -129,16 +135,63 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
             );
           })}
 
-          {/* Quick AI Coach in Sidebar */}
+          {/* 1v1 PvP Arena */}
+          {onOpenPvPArena && (
+            <button
+              onClick={() => {
+                playSound('click');
+                onOpenPvPArena();
+              }}
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-bold text-xs text-rose-900 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-colors cursor-pointer mt-2"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="text-sm">⚔️</span>
+                <span>Đấu Trường 1v1 PvP</span>
+              </div>
+              <span className="text-[9px] font-extrabold px-1.5 py-0.5 rounded-md bg-rose-200 text-rose-900">
+                HOT
+              </span>
+            </button>
+          )}
+
+          {/* Daily Quick Review */}
+          {onOpenDailyReview && (
+            <button
+              onClick={() => {
+                playSound('click');
+                onOpenDailyReview();
+              }}
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl font-bold text-xs text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors cursor-pointer mt-1"
+            >
+              <span className="text-sm">🔁</span>
+              <span>Ôn Tập Nhanh (Hay Sai)</span>
+            </button>
+          )}
+
+          {/* Personal AI Learning Coach & Planner */}
+          {onOpenCoach && (
+            <button
+              onClick={() => {
+                playSound('click');
+                onOpenCoach();
+              }}
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl font-bold text-xs text-sky-900 bg-sky-50 hover:bg-sky-100 border border-sky-200 transition-colors cursor-pointer mt-1"
+            >
+              <span className="text-sm">🧭</span>
+              <span>AI Coach & Lịch Học</span>
+            </button>
+          )}
+
+          {/* Quick AI Boardroom Assistant in Sidebar */}
           <button
             onClick={() => {
               playSound('click');
               onOpenAi();
             }}
-            className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl font-bold text-xs text-sky-900 bg-sky-50 hover:bg-sky-100 transition-colors cursor-pointer border border-sky-100 mt-2"
+            className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl font-bold text-xs text-slate-700 hover:bg-slate-50 transition-colors cursor-pointer border border-slate-200 mt-1"
           >
             <Sparkles className="w-4 h-4 text-[#0070D1]" />
-            <span>Trợ Lý AI Vikoda</span>
+            <span>Trợ Lý Dịch Thuật AI</span>
           </button>
 
           {/* Leaderboard in Sidebar */}

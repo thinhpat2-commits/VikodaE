@@ -22,10 +22,14 @@ import { PocketSearchModal } from './components/PocketSearchModal';
 import { VikodaExecutivePortfolioModal } from './components/VikodaExecutivePortfolioModal';
 import { AdminPortalModal } from './components/AdminPortalModal';
 import { AuthModal } from './components/AuthModal';
+import { PvPArenaModal } from './components/PvPArenaModal';
+import { DailyQuickReviewModal } from './components/DailyQuickReviewModal';
+import { PlacementTestModal, PlacementTestResult } from './components/PlacementTestModal';
+import { PersonalCoachModal } from './components/PersonalCoachModal';
 import { useDeviceDetect } from './hooks/useDeviceDetect';
 import { LaptopSidebarNav } from './components/laptop/LaptopSidebarNav';
 import { LaptopRightPanel } from './components/laptop/LaptopRightPanel';
-import { GamificationState, EmployeeProfile } from './types';
+import { GamificationState, EmployeeProfile, MistakeVaultItem, PvPArenaStats, StudyPlannerSettings } from './types';
 import { CourseLevel } from './data/curriculumData';
 import { playSound } from './services/soundEffects';
 import { 
@@ -74,6 +78,10 @@ export default function App() {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
   const [isPortfolioModalOpen, setIsPortfolioModalOpen] = useState<boolean>(false);
   const [isAdminPortalOpen, setIsAdminPortalOpen] = useState<boolean>(false);
+  const [isPvPArenaOpen, setIsPvPArenaOpen] = useState<boolean>(false);
+  const [isDailyReviewOpen, setIsDailyReviewOpen] = useState<boolean>(false);
+  const [isPlacementTestOpen, setIsPlacementTestOpen] = useState<boolean>(false);
+  const [isCoachOpen, setIsCoachOpen] = useState<boolean>(false);
 
   // Employee Profile State (Synchronous restoration from localStorage & session)
   const [profile, setProfile] = useState<EmployeeProfile>(() => {
@@ -263,6 +271,16 @@ export default function App() {
       return updated;
     });
     showToast(`Chào mừng ${cloudProfile.displayName}! Máy đã tự động ghi nhớ tài khoản ☁️`);
+
+    // First-time placement test trigger (Mandatory 4-skills assessment)
+    if (typeof window !== 'undefined') {
+      const hasCompletedTest = localStorage.getItem('vikoda_placement_test_completed_v3') === 'true' || Boolean(cloudProfile.placementTest);
+      if (!hasCompletedTest) {
+        setTimeout(() => {
+          setIsPlacementTestOpen(true);
+        }, 800);
+      }
+    }
   };
 
   const handleLogout = async () => {
@@ -390,6 +408,98 @@ export default function App() {
     }
   };
 
+  const handleRecordMistake = (mistakeData: {
+    questionId: string;
+    promptEn: string;
+    promptVi: string;
+    correctSentence: string;
+    wrongChoiceGiven: string;
+    options: string[];
+    correctIndex: number;
+    explanation: string;
+    category: string;
+  }) => {
+    setGamificationState((prev) => {
+      const existingVault = prev.mistakesVault || [];
+      const existingIdx = existingVault.findIndex((m) => m.questionId === mistakeData.questionId);
+      let updatedVault: MistakeVaultItem[];
+      if (existingIdx >= 0) {
+        updatedVault = existingVault.map((item, idx) =>
+          idx === existingIdx
+            ? {
+                ...item,
+                failedCount: item.failedCount + 1,
+                mastered: false,
+                addedAt: Date.now(),
+              }
+            : item
+        );
+      } else {
+        const newItem: MistakeVaultItem = {
+          id: `mis_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+          ...mistakeData,
+          failedCount: 1,
+          mastered: false,
+          addedAt: Date.now(),
+        };
+        updatedVault = [newItem, ...existingVault];
+      }
+      const nextState: GamificationState = { ...prev, mistakesVault: updatedVault };
+      saveGamificationState(nextState);
+      return nextState;
+    });
+  };
+
+  const handleMasterMistake = (mistakeId: string) => {
+    setGamificationState((prev) => {
+      const existingVault = prev.mistakesVault || [];
+      const updatedVault = existingVault.map((m) =>
+        m.id === mistakeId ? { ...m, mastered: true } : m
+      );
+      const nextState: GamificationState = { ...prev, mistakesVault: updatedVault };
+      saveGamificationState(nextState);
+      return nextState;
+    });
+    showToast('✨ Tuyệt vời! Bạn đã chinh phục được câu bẫy này!');
+  };
+
+  const handleUpdateArenaStats = (newStats: PvPArenaStats, xpGain: number, gemsGain: number) => {
+    const updatedState: GamificationState = {
+      ...gamificationState,
+      xp: gamificationState.xp + xpGain,
+      gems: gamificationState.gems + gemsGain,
+      arenaStats: newStats,
+    };
+    saveGamificationState(updatedState);
+    showToast(`⚔️ Đấu Trường: +${xpGain} XP · +${gemsGain} 💎 · Hạng Elo: ${newStats.eloRating}`);
+  };
+
+  const handleSavePlanner = (planner: StudyPlannerSettings) => {
+    const updatedState: GamificationState = {
+      ...gamificationState,
+      studyPlanner: planner,
+    };
+    saveGamificationState(updatedState);
+    showToast(`📅 Đã lưu lịch học & mục tiêu ${planner.targetLevel} thành công!`);
+  };
+
+  const handleSavePlacementResult = (result: PlacementTestResult) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('vikoda_placement_test_completed_v3', 'true');
+    }
+    setSelectedLevel(result.recommendedLevel);
+    localStorage.setItem(STORAGE_KEY_LEVEL, result.recommendedLevel);
+    const updatedState: GamificationState = {
+      ...gamificationState,
+      xp: gamificationState.xp + 50,
+      gems: gamificationState.gems + 20,
+      placementTest: result,
+    };
+    saveGamificationState(updatedState);
+    setIsPlacementTestOpen(false);
+    showToast(`🎯 Hoàn thành Đánh Giá 4 Kỹ Năng! Xếp lớp: ${result.recommendedLevel}`);
+  };
+
   const renderTabContent = () => (
     <>
       {/* TAB 1: DUOLINGO PATH (Interactive Units) */}
@@ -421,6 +531,19 @@ export default function App() {
             setIsLeaderboardOpen(true);
           }}
           highestDrillScore={profile.highestDrillScore || gamificationState.highestDrillScore || 0}
+          onRecordMistake={handleRecordMistake}
+          onOpenPvPArena={() => {
+            playSound('click');
+            setIsPvPArenaOpen(true);
+          }}
+          onOpenDailyReview={() => {
+            playSound('click');
+            setIsDailyReviewOpen(true);
+          }}
+          onOpenCoach={() => {
+            playSound('click');
+            setIsCoachOpen(true);
+          }}
         />
       )}
 
@@ -492,6 +615,18 @@ export default function App() {
               playSound('click');
               setIsAdminPortalOpen(true);
             }}
+            onOpenPvPArena={() => {
+              playSound('click');
+              setIsPvPArenaOpen(true);
+            }}
+            onOpenDailyReview={() => {
+              playSound('click');
+              setIsDailyReviewOpen(true);
+            }}
+            onOpenCoach={() => {
+              playSound('click');
+              setIsCoachOpen(true);
+            }}
             onLogout={handleLogout}
             isCloudSynced={isCloudSynced}
           />
@@ -508,6 +643,22 @@ export default function App() {
             onOpenArena={() => {
               playSound('click');
               setIsEndlessDrillOpen(true);
+            }}
+            onOpenPvPArena={() => {
+              playSound('click');
+              setIsPvPArenaOpen(true);
+            }}
+            onOpenDailyReview={() => {
+              playSound('click');
+              setIsDailyReviewOpen(true);
+            }}
+            onOpenCoach={() => {
+              playSound('click');
+              setIsCoachOpen(true);
+            }}
+            onOpenPlacementTest={() => {
+              playSound('click');
+              setIsPlacementTestOpen(true);
             }}
             onOpenSOS={() => {
               playSound('click');
@@ -579,6 +730,22 @@ export default function App() {
             onOpenAdmin={() => {
               playSound('click');
               setIsAdminPortalOpen(true);
+            }}
+            onOpenPvPArena={() => {
+              playSound('click');
+              setIsPvPArenaOpen(true);
+            }}
+            onOpenDailyReview={() => {
+              playSound('click');
+              setIsDailyReviewOpen(true);
+            }}
+            onOpenCoach={() => {
+              playSound('click');
+              setIsCoachOpen(true);
+            }}
+            onOpenPlacementTest={() => {
+              playSound('click');
+              setIsPlacementTestOpen(true);
             }}
             isCloudSynced={isCloudSynced}
             onLogout={handleLogout}
@@ -703,6 +870,76 @@ export default function App() {
           }
         }}
       />
+
+      {/* 1v1 Real PvP Arena Modal */}
+      {isPvPArenaOpen && (
+        <PvPArenaModal
+          isOpen={isPvPArenaOpen}
+          onClose={() => setIsPvPArenaOpen(false)}
+          currentUserProfile={profile}
+          arenaStats={gamificationState.arenaStats || {
+            eloRating: 1200,
+            rankTitle: 'Đấu Sĩ Vikoda',
+            matchesPlayed: 0,
+            wins: 0,
+            losses: 0,
+            draws: 0,
+            currentWinStreak: 0,
+            highestStreak: 0,
+          }}
+          onUpdateArenaStats={handleUpdateArenaStats}
+          onRecordMistake={handleRecordMistake}
+          speechRate={speechRate}
+        />
+      )}
+
+      {/* Daily Quick Review (Mistakes Vault) 3-Minute Modal */}
+      {isDailyReviewOpen && (
+        <DailyQuickReviewModal
+          isOpen={isDailyReviewOpen}
+          onClose={() => setIsDailyReviewOpen(false)}
+          mistakesVault={gamificationState.mistakesVault || []}
+          onMasterMistake={handleMasterMistake}
+          onAwardReviewXp={(xp, gems) => {
+            handleAwardXpAndGems(xp, gems);
+          }}
+          speechRate={speechRate}
+        />
+      )}
+
+      {/* 4-Skills Placement Test Diagnostic Modal */}
+      {isPlacementTestOpen && (
+        <PlacementTestModal
+          isOpen={isPlacementTestOpen}
+          onClose={() => setIsPlacementTestOpen(false)}
+          onSaveResult={handleSavePlacementResult}
+          speechRate={speechRate}
+        />
+      )}
+
+      {/* AI Personal Coach & Study Planner Modal */}
+      {isCoachOpen && (
+        <PersonalCoachModal
+          isOpen={isCoachOpen}
+          onClose={() => setIsCoachOpen(false)}
+          currentUserProfile={profile}
+          gamificationState={gamificationState}
+          selectedLevel={selectedLevel}
+          onSavePlanner={handleSavePlanner}
+          onJumpToUnit={(unitId) => {
+            setIsCoachOpen(false);
+            setActiveTab('path');
+          }}
+          onOpenArena={() => {
+            setIsCoachOpen(false);
+            setIsPvPArenaOpen(true);
+          }}
+          onOpenDailyReview={() => {
+            setIsCoachOpen(false);
+            setIsDailyReviewOpen(true);
+          }}
+        />
+      )}
 
       {/* Mandatory Corporate Auth Modal on First Open */}
       <AuthModal

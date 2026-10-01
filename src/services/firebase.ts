@@ -62,6 +62,10 @@ export interface UserCloudProfile {
   createdAt: string;
   lastActive: string;
   updatedAt?: number;
+  mistakesVault?: any[];
+  placementTest?: any;
+  studyPlanner?: any;
+  arenaStats?: any;
 }
 
 const STORAGE_KEY_AUTH_SESSION = 'vikoda_auth_session_v4';

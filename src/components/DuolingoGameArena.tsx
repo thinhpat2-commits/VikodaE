@@ -31,13 +31,15 @@ interface DuolingoGameArenaProps {
   onClose: () => void;
   onFinishLesson: (xpGain: number, gemGain: number) => void;
   speechRate: number;
+  onRecordMistake?: (mistakeData: any) => void;
 }
 
 export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   lesson,
   onClose,
   onFinishLesson,
-  speechRate
+  speechRate,
+  onRecordMistake
 }) => {
   const [exerciseIndex, setExerciseIndex] = useState<number>(0);
   const [selectedWordChips, setSelectedWordChips] = useState<string[]>([]);
@@ -175,8 +177,59 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
       });
     } else {
       playSound('wrong');
+      if (onRecordMistake) {
+        onRecordMistake({
+          questionId: currentExercise.id,
+          promptEn: currentExercise.promptEn || 'Formulate the correct business sentence:',
+          promptVi: currentExercise.promptVi,
+          correctSentence: currentExercise.englishSentence,
+          wrongChoiceGiven: currentExercise.type === 'choice' && currentExercise.options && selectedChoice !== null ? currentExercise.options[selectedChoice] : '',
+          options: currentExercise.options || [currentExercise.englishSentence],
+          correctIndex: currentExercise.correctIndex ?? 0,
+          explanation: currentExercise.explanation,
+          crucialNote: currentExercise.crucialNote,
+          category: lesson.title
+        });
+      }
     }
   };
+
+  // Keyboard navigation on PC (1-4 for options, Enter for check/next, Space for audio)
+  React.useEffect(() => {
+    if (isLessonFinished) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isEvaluated) {
+        if (currentExercise.type === 'choice' && currentExercise.options) {
+          if (e.key >= '1' && e.key <= String(currentExercise.options.length)) {
+            const idx = parseInt(e.key) - 1;
+            setSelectedChoice(idx);
+            playSound('click');
+          }
+        }
+        if (e.key === 'Enter') {
+          if (currentExercise.type === 'choice' && selectedChoice !== null) {
+            handleCheckAnswer();
+          } else if (currentExercise.type === 'word_order' && selectedWordChips.length > 0) {
+            handleCheckAnswer();
+          } else if (currentExercise.type === 'speak' && speechScore !== null) {
+            handleCheckAnswer();
+          }
+        } else if (e.key === ' ' || e.key === 'Spacebar') {
+          if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+          e.preventDefault();
+          handlePlayAudio();
+        }
+      } else {
+        if (e.key === 'Enter') {
+          handleContinue();
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isEvaluated, isLessonFinished, currentExercise, selectedChoice, selectedWordChips, speechScore]);
 
   const handleContinue = () => {
     playSound('click');
@@ -201,7 +254,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     <div className="fixed inset-0 z-50 bg-white flex flex-col justify-between overflow-hidden animate-in fade-in duration-200">
       
       {/* Top Header Bar */}
-      <div className="px-4 py-3 border-b-2 border-slate-100 flex items-center justify-between gap-3 max-w-lg mx-auto w-full">
+      <div className="px-4 md:px-6 py-3 border-b-2 border-slate-100 flex items-center justify-between gap-4 max-w-3xl lg:max-w-4xl mx-auto w-full">
         <button
           onClick={() => {
             stopSpeech();
@@ -248,12 +301,12 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
         </div>
       </div>
 
-      {/* Main Exercise Area */}
+      {/* Main Exercise Area (Widescreen PC layout) */}
       {!isLessonFinished ? (
-        <div className="flex-1 overflow-y-auto px-4 py-4 max-w-lg mx-auto w-full flex flex-col justify-between space-y-4">
+        <div className="flex-1 overflow-y-auto px-4 md:px-8 py-5 max-w-3xl lg:max-w-4xl mx-auto w-full flex flex-col justify-between space-y-5">
           
           {/* Mascot Speech Bubble & Prompt */}
-          <div className="flex items-start space-x-3 pt-2">
+          <div className="flex items-start space-x-4 pt-1">
             <div className="shrink-0">
               <VikoMascot 
                 size="md" 
@@ -261,25 +314,32 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               />
             </div>
 
-            <div className="flex-1 bg-sky-50 border-2 border-sky-200 rounded-2xl rounded-tl-xs p-3.5 shadow-xs relative">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] uppercase font-black text-[#0070D1]">
+            <div className="flex-1 bg-sky-50 border-2 border-sky-200 rounded-3xl rounded-tl-xs p-4 md:p-5 shadow-xs relative">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[11px] uppercase font-black text-[#0070D1] tracking-wider">
                   {lesson.title}
                 </span>
                 <button
                   onClick={handlePlayAudio}
-                  className="p-1 rounded-full bg-white hover:bg-sky-100 text-[#0066CC] shadow-2xs border border-sky-200 cursor-pointer"
-                  title="Nghe phát âm chuẩn"
+                  className="p-1.5 rounded-full bg-white hover:bg-sky-100 text-[#0066CC] shadow-2xs border border-sky-200 cursor-pointer"
+                  title="Nghe phát âm chuẩn (Phím Space)"
                 >
                   <Volume2 className="w-4 h-4" />
                 </button>
               </div>
 
-              <h3 className="text-sm font-black text-slate-900 leading-snug">
-                {currentExercise.promptVi}
-              </h3>
+              <div className="space-y-1">
+                <h3 className="text-base md:text-xl font-black text-slate-900 leading-snug">
+                  {currentExercise.promptEn || currentExercise.promptVi}
+                </h3>
+                {currentExercise.promptEn && (
+                  <p className="text-xs md:text-sm text-slate-500 font-medium">
+                    👉 {currentExercise.promptVi}
+                  </p>
+                )}
+              </div>
               {currentExercise.phonetics && (
-                <p className="text-[11px] font-mono text-cyan-800 font-bold mt-1">
+                <p className="text-xs font-mono text-cyan-800 font-bold mt-1.5">
                   {currentExercise.phonetics}
                 </p>
               )}
@@ -352,9 +412,14 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                         playSound('click');
                         setSelectedChoice(idx);
                       }}
-                      className={`w-full text-left p-3.5 rounded-2xl text-xs transition-all flex items-center justify-between cursor-pointer active:translate-y-0.5 ${style}`}
+                      className={`w-full text-left p-4 md:p-5 rounded-2xl text-sm md:text-base transition-all flex items-center justify-between cursor-pointer active:translate-y-0.5 ${style}`}
                     >
-                      <span className="font-bold">{option}</span>
+                      <div className="flex items-center space-x-3">
+                        <span className="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center text-xs font-black text-slate-700 border border-slate-300 shrink-0">
+                          {idx + 1}
+                        </span>
+                        <span className="font-bold">{option}</span>
+                      </div>
                       <span className="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-[10px] font-black shrink-0 ml-2">
                         {String.fromCharCode(65 + idx)}
                       </span>

@@ -27,6 +27,10 @@ interface LaptopRightPanelProps {
   stats: GamificationState;
   profile: EmployeeProfile;
   onOpenArena: () => void;
+  onOpenPvPArena?: () => void;
+  onOpenDailyReview?: () => void;
+  onOpenCoach?: () => void;
+  onOpenPlacementTest?: () => void;
   onOpenSOS: () => void;
   onOpenCommute: () => void;
   onOpenSearch: () => void;
@@ -38,6 +42,10 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
   stats,
   profile,
   onOpenArena,
+  onOpenPvPArena,
+  onOpenDailyReview,
+  onOpenCoach,
+  onOpenPlacementTest,
   onOpenSOS,
   onOpenCommute,
   onOpenSearch,
@@ -133,8 +141,89 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
       {/* 3. Executive Toolset Shortcuts */}
       <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs space-y-2">
         <div className="text-[10px] font-black uppercase tracking-wider text-slate-400">
-          Công Cụ Điều Hành Bổ Trợ
+          Công Cụ Đào Tạo Chiến Lược
         </div>
+
+        {/* 1v1 PvP Arena */}
+        {onOpenPvPArena && (
+          <button
+            onClick={() => {
+              playSound('click');
+              onOpenPvPArena();
+            }}
+            className="w-full text-left p-2.5 rounded-xl bg-gradient-to-r from-rose-50 to-red-50 hover:from-rose-100 hover:to-red-100 border border-rose-200 text-slate-800 transition-all flex items-center justify-between cursor-pointer group shadow-2xs"
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="text-base group-hover:scale-110 transition-transform">⚔️</span>
+              <div>
+                <div className="text-xs font-black text-rose-950 flex items-center gap-1.5">
+                  <span>Đấu Trường 1v1 PvP</span>
+                  <span className="px-1.5 py-0.2 rounded-full bg-rose-600 text-white text-[9px] font-bold">HOT</span>
+                </div>
+                <div className="text-[10px] text-rose-700">Thách đấu đối kháng đồng nghiệp</div>
+              </div>
+            </div>
+            <span className="text-xs font-black text-rose-700">Elo {stats.arenaStats?.eloRating || 1200}</span>
+          </button>
+        )}
+
+        {/* Daily Quick Review (Mistakes Vault) */}
+        {onOpenDailyReview && (
+          <button
+            onClick={() => {
+              playSound('click');
+              onOpenDailyReview();
+            }}
+            className="w-full text-left p-2.5 rounded-xl bg-gradient-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 border border-amber-200 text-slate-800 transition-all flex items-center justify-between cursor-pointer group shadow-2xs"
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="text-base group-hover:scale-110 transition-transform">🔁</span>
+              <div>
+                <div className="text-xs font-black text-amber-950">Ôn Tập Nhanh 3 Phút</div>
+                <div className="text-[10px] text-amber-700">Sửa triệt để các câu hay sai</div>
+              </div>
+            </div>
+            {stats.mistakesVault && stats.mistakesVault.filter(m => !m.mastered).length > 0 && (
+              <span className="px-2 py-0.5 rounded-full bg-amber-500 text-white text-[10px] font-black">
+                {stats.mistakesVault.filter(m => !m.mastered).length} câu
+              </span>
+            )}
+          </button>
+        )}
+
+        {/* AI Learning Coach & Planner */}
+        {onOpenCoach && (
+          <button
+            onClick={() => {
+              playSound('click');
+              onOpenCoach();
+            }}
+            className="w-full text-left p-2.5 rounded-xl hover:bg-sky-50 text-slate-800 transition-colors flex items-center gap-2.5 cursor-pointer group"
+          >
+            <span className="text-base group-hover:scale-110 transition-transform">🧭</span>
+            <div>
+              <div className="text-xs font-black text-slate-800">Huấn Luyện Viên AI</div>
+              <div className="text-[10px] text-slate-400">Định hướng & Lên lịch học tuần</div>
+            </div>
+          </button>
+        )}
+
+        {/* Diagnostic Placement Test */}
+        {onOpenPlacementTest && (
+          <button
+            onClick={() => {
+              playSound('click');
+              onOpenPlacementTest();
+            }}
+            className="w-full text-left p-2.5 rounded-xl hover:bg-emerald-50 text-slate-800 transition-colors flex items-center gap-2.5 cursor-pointer group"
+          >
+            <span className="text-base group-hover:scale-110 transition-transform">📝</span>
+            <div>
+              <div className="text-xs font-black text-slate-800">Test Chuẩn 4 Kỹ Năng</div>
+              <div className="text-[10px] text-slate-400">Quy đổi chuẩn TOEIC / Cambridge</div>
+            </div>
+          </button>
+        )}
 
         <button
           onClick={() => {
