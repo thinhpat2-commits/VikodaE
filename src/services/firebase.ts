@@ -5,6 +5,7 @@ import {
   getDoc, 
   setDoc, 
   updateDoc, 
+  deleteDoc,
   collection, 
   getDocs, 
   addDoc, 
@@ -272,6 +273,39 @@ export async function saveProgressToCloud(
 }
 
 /**
+ * Update User Name, Department and Avatar in Cloud Firestore and Local Session
+ */
+export async function updateUserProfileInCloud(
+  userId: string,
+  profileData: { displayName: string; department?: string; avatarUrl?: string }
+): Promise<void> {
+  if (!userId) return;
+
+  const now = Date.now();
+  const payload = {
+    displayName: profileData.displayName,
+    ...(profileData.department && { department: profileData.department }),
+    ...(profileData.avatarUrl && { avatarUrl: profileData.avatarUrl }),
+    updatedAt: now,
+    lastActive: new Date().toISOString(),
+  };
+
+  // 1. Immediately update persisted session
+  const cur = getPersistedSession();
+  if (cur && cur.userId === userId) {
+    persistSession({ ...cur, ...payload });
+  }
+
+  // 2. Write to Firestore Cloud
+  try {
+    await setDoc(doc(db, 'users', userId), payload, { merge: true });
+  } catch (e) {
+    console.warn('Profile sync delayed, queued in IndexedDB:', e);
+    await enqueueOfflineMutation('update_profile', { userId, ...payload });
+  }
+}
+
+/**
  * Background Queue Sync Worker
  * Flushes all offline mutations to Firebase Firestore as soon as network is restored
  */
@@ -352,17 +386,19 @@ export async function adminResetUserProgress(
     },
   };
 
+  const actualUserId = emailToUserId(targetEmail) || targetUserId;
+
   // 1. Update Firestore
   try {
-    await updateDoc(doc(db, 'users', targetUserId), resetData);
+    await setDoc(doc(db, 'users', actualUserId), resetData, { merge: true });
   } catch (err) {
-    await setDoc(doc(db, 'users', targetUserId), resetData, { merge: true }).catch(() => {});
+    console.warn('Reset error in Firestore:', err);
   }
 
   // 2. Audit Trail
   try {
     await addDoc(collection(db, 'audit_resets'), {
-      targetUserId,
+      targetUserId: actualUserId,
       targetUserEmail: targetEmail,
       adminEmail,
       reason,
@@ -371,7 +407,7 @@ export async function adminResetUserProgress(
   } catch (e) {}
 
   // 3. If target user is the currently logged in session, reset local session as well
-  if (adminSession && (adminSession.userId === targetUserId || adminSession.email.toLowerCase() === targetEmail.toLowerCase())) {
+  if (adminSession && (adminSession.userId === actualUserId || adminSession.email.toLowerCase() === targetEmail.toLowerCase())) {
     persistSession({ ...adminSession, ...resetData });
   }
 
@@ -379,8 +415,76 @@ export async function adminResetUserProgress(
 }
 
 /**
+ * ADMIN: Create or Update an employee record directly in Cloud Firestore
+ */
+export async function adminCreateOrUpdateUser(
+  employeeData: {
+    email: string;
+    displayName: string;
+    department?: string;
+    level?: string;
+    xp?: number;
+    streak?: number;
+    gems?: number;
+  }
+): Promise<UserCloudProfile> {
+  const cleanEmail = employeeData.email.trim().toLowerCase();
+  const userId = emailToUserId(cleanEmail);
+  const role: 'employee' | 'admin' = isUserAdmin(cleanEmail) ? 'admin' : 'employee';
+
+  const userDoc: UserCloudProfile = {
+    userId,
+    email: cleanEmail,
+    displayName: employeeData.displayName,
+    role,
+    department: employeeData.department || 'Phòng Kinh Doanh & Xuất Khẩu',
+    xp: employeeData.xp || 150,
+    streak: employeeData.streak || 1,
+    gems: employeeData.gems || 50,
+    completedLessons: ['unit-1'],
+    completedUnits: ['unit-1'],
+    mistakesCount: 0,
+    vocabLearned: 15,
+    dailyGoal: 50,
+    currentLevel: employeeData.level || 'Đại sứ Khoáng Kiềm',
+    createdAt: new Date().toISOString(),
+    lastActive: new Date().toISOString(),
+    updatedAt: Date.now(),
+  };
+
+  try {
+    await setDoc(doc(db, 'users', userId), userDoc, { merge: true });
+  } catch (err) {
+    console.warn('adminCreateOrUpdateUser offline notice:', err);
+    await enqueueOfflineMutation('update_profile', userDoc);
+  }
+
+  return userDoc;
+}
+
+/**
+ * ADMIN: Delete an employee record from Cloud Firestore
+ */
+export async function adminDeleteUser(email: string): Promise<boolean> {
+  const cleanEmail = email.trim().toLowerCase();
+  const userId = emailToUserId(cleanEmail);
+
+  try {
+    await deleteDoc(doc(db, 'users', userId));
+    return true;
+  } catch (err) {
+    console.warn('adminDeleteUser error:', err);
+    return false;
+  }
+}
+
+/**
  * Sign out
  */
 export async function logoutUser() {
   clearSession();
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('vikoda_employee_profile_v3');
+    localStorage.removeItem('vikoda_auth_session_v4');
+  }
 }

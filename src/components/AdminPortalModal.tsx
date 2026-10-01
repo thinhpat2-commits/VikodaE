@@ -31,7 +31,14 @@ import {
 } from 'lucide-react';
 import { EmployeeProfile, GamificationState } from '../types';
 import { playSound } from '../services/soundEffects';
-import { fetchAllUsersAdmin, adminResetUserProgress } from '../services/firebase';
+import { 
+  fetchAllUsersAdmin, 
+  adminResetUserProgress, 
+  updateUserProfileInCloud, 
+  emailToUserId, 
+  adminCreateOrUpdateUser, 
+  adminDeleteUser 
+} from '../services/firebase';
 
 interface AdminPortalModalProps {
   isOpen: boolean;
@@ -185,8 +192,16 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
   currentUserStats,
   onResetUserProgress,
 }) => {
-  // Authentication State
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  // Authentication State: Auto-authenticate verified Super Admin (thinh.pat2@gmail.com or role admin)
+  const isSuperAdmin = currentUserProfile.email?.toLowerCase().trim() === 'thinh.pat2@gmail.com' || Boolean(currentUserProfile.isAdmin);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => isSuperAdmin);
+
+  useEffect(() => {
+    if (isSuperAdmin) {
+      setIsAuthenticated(true);
+    }
+  }, [isSuperAdmin, isOpen]);
+
   const [inputPin, setInputPin] = useState<string>('');
   const [pinError, setPinError] = useState<string | null>(null);
   const [showPin, setShowPin] = useState<boolean>(false);
@@ -274,26 +289,100 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
     }
   }, [employees]);
 
-  // Sync current user's active session stats into the employee list
+  // Cloud Sync: Fetch real registered users from Firestore when Admin Portal opens
   useEffect(() => {
-    setEmployees((prev) =>
-      prev.map((emp) => {
-        if (emp.code === currentUserProfile.employeeCode) {
-          return {
-            ...emp,
-            name: currentUserProfile.fullName || emp.name,
-            dept: currentUserProfile.department || emp.dept,
-            title: currentUserProfile.title || emp.title,
-            xp: Math.max(emp.xp, currentUserStats.xp),
-            gems: Math.max(emp.gems, currentUserStats.gems),
-            streak: Math.max(emp.streak, currentUserStats.streakDays),
-            highestScore: Math.max(emp.highestScore, currentUserProfile.highestDrillScore || 0),
-            lastActive: 'Đang hoạt động'
-          };
+    if (isOpen) {
+      fetchAllUsersAdmin().then((cloudUsers) => {
+        if (cloudUsers && cloudUsers.length > 0) {
+          setEmployees((prev) => {
+            const updated = [...prev];
+            cloudUsers.forEach((cu) => {
+              const cleanEmail = cu.email.toLowerCase().trim();
+              const idx = updated.findIndex((e) => e.email.toLowerCase().trim() === cleanEmail);
+              const rec: EmployeeRecord = {
+                id: cu.userId,
+                code: cu.userId.toUpperCase().replace('USR_', 'VKD-'),
+                name: cu.displayName,
+                email: cu.email,
+                dept: cu.department || 'Phòng Kinh Doanh & Xuất Khẩu',
+                title: cu.role === 'admin' ? '👑 Quản Trị Viên Hệ Thống' : 'Chuyên Viên Kinh Doanh',
+                level: (cu.currentLevel as any) || 'B1',
+                xp: cu.xp || 0,
+                streak: cu.streak || 0,
+                gems: cu.gems || 0,
+                highestScore: 500,
+                completedUnits: (cu.completedUnits || []).length,
+                certified: cu.role === 'admin',
+                lastActive: cu.lastActive ? 'Gần đây' : 'Hôm nay',
+              };
+              if (idx !== -1) {
+                updated[idx] = {
+                  ...updated[idx],
+                  name: cu.displayName || updated[idx].name,
+                  dept: cu.department || updated[idx].dept,
+                  xp: Math.max(updated[idx].xp, cu.xp || 0),
+                  streak: Math.max(updated[idx].streak, cu.streak || 0),
+                  gems: Math.max(updated[idx].gems, cu.gems || 0),
+                };
+              } else {
+                updated.push(rec);
+              }
+            });
+            return updated;
+          });
         }
-        return emp;
-      })
-    );
+      });
+    }
+  }, [isOpen]);
+
+  // Sync current user's active session and custom name into the employee list
+  useEffect(() => {
+    if (!currentUserProfile?.email) return;
+
+    setEmployees((prev) => {
+      const cleanEmail = currentUserProfile.email.toLowerCase().trim();
+      const existingIndex = prev.findIndex(
+        (emp) =>
+          emp.email.toLowerCase().trim() === cleanEmail ||
+          (currentUserProfile.employeeCode && emp.code === currentUserProfile.employeeCode)
+      );
+
+      const userRecord: EmployeeRecord = {
+        id: currentUserProfile.employeeCode || 'emp-current-admin',
+        code: currentUserProfile.employeeCode || 'VKD-ADMIN',
+        name: currentUserProfile.fullName || 'Quản Trị Viên (Admin)',
+        email: currentUserProfile.email,
+        dept: currentUserProfile.department || 'Ban Giám Đốc & Quản Trị',
+        title: currentUserProfile.isAdmin ? '👑 Quản Trị Viên Hệ Thống' : (currentUserProfile.title || 'Chuyên Viên Kinh Doanh'),
+        level: 'C2',
+        xp: Math.max(currentUserStats.xp, 250),
+        gems: Math.max(currentUserStats.gems, 60),
+        streak: Math.max(currentUserStats.streakDays, 1),
+        highestScore: Math.max(currentUserProfile.highestDrillScore || 0, currentUserStats.highestDrillScore || 0),
+        completedUnits: (currentUserStats.completedNodeIds || []).length,
+        certified: true,
+        lastActive: 'Đang hoạt động (Hiện tại)',
+      };
+
+      if (existingIndex !== -1) {
+        const nextList = [...prev];
+        nextList[existingIndex] = {
+          ...nextList[existingIndex],
+          name: currentUserProfile.fullName || nextList[existingIndex].name,
+          dept: currentUserProfile.department || nextList[existingIndex].dept,
+          title: currentUserProfile.isAdmin ? '👑 Quản Trị Viên Hệ Thống' : (currentUserProfile.title || nextList[existingIndex].title),
+          xp: Math.max(nextList[existingIndex].xp, currentUserStats.xp),
+          gems: Math.max(nextList[existingIndex].gems, currentUserStats.gems),
+          streak: Math.max(nextList[existingIndex].streak, currentUserStats.streakDays),
+          highestScore: Math.max(nextList[existingIndex].highestScore, currentUserProfile.highestDrillScore || 0),
+          lastActive: 'Đang hoạt động (Hiện tại)',
+        };
+        return nextList;
+      } else {
+        // Prepend current user at the top of the employee roster
+        return [userRecord, ...prev];
+      }
+    });
   }, [currentUserProfile, currentUserStats]);
 
   // Unique departments for filter
@@ -357,31 +446,57 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
   };
 
   // Save edited employee
-  const handleSaveEdit = (e: React.FormEvent) => {
+  const handleSaveEdit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingEmployee) return;
 
     setEmployees((prev) =>
       prev.map((emp) => (emp.id === editingEmployee.id ? editingEmployee : emp))
     );
+
+    // If it's a registered cloud user, sync directly to Firestore
+    try {
+      const cleanEmail = editingEmployee.email.toLowerCase().trim();
+      const userId = emailToUserId(cleanEmail);
+      await updateUserProfileInCloud(userId, {
+        displayName: editingEmployee.name,
+        department: editingEmployee.dept,
+      });
+      // Also update local storage if it's the current user
+      if (cleanEmail === currentUserProfile.email?.toLowerCase().trim()) {
+        const saved = localStorage.getItem('vikoda_employee_profile_v3');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          parsed.fullName = editingEmployee.name;
+          parsed.department = editingEmployee.dept;
+          localStorage.setItem('vikoda_employee_profile_v3', JSON.stringify(parsed));
+        }
+      }
+    } catch (err) {
+      console.warn('Sync edited employee notice:', err);
+    }
+
     playSound('success');
     setEditingEmployee(null);
-    setToastMessage(`Đã cập nhật thông tin nhân sự ${editingEmployee.name} (${editingEmployee.code})!`);
+    setToastMessage(`Đã cập nhật thông tin nhân sự ${editingEmployee.name} (${editingEmployee.code}) và đồng bộ mây!`);
     setTimeout(() => setToastMessage(null), 3500);
   };
 
-  // Delete employee
-  const handleDeleteEmployee = (id: string) => {
+  // Delete employee (Local state + Cloud Firestore)
+  const handleDeleteEmployee = async (id: string) => {
     const target = employees.find((e) => e.id === id);
     setEmployees((prev) => prev.filter((e) => e.id !== id));
+    if (target?.email) {
+      await adminDeleteUser(target.email);
+    }
     playSound('click');
     setDeletingEmployeeId(null);
-    setToastMessage(`Đã xóa tài khoản nhân sự ${target?.name || ''} khỏi hệ thống đào tạo!`);
+    setToastMessage(`Đã xóa tài khoản nhân sự ${target?.name || ''} khỏi hệ thống và đồng bộ mây!`);
     setTimeout(() => setToastMessage(null), 3500);
   };
 
-  // Create new employee
-  const handleCreateEmployee = (e: React.FormEvent) => {
+  // Create new employee (Local state + Cloud Firestore)
+  const handleCreateEmployee = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newEmployeeData.code || !newEmployeeData.name) {
       setToastMessage('Vui lòng điền đủ Mã NV và Họ Tên!');
@@ -389,11 +504,12 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
       return;
     }
 
+    const email = newEmployeeData.email?.trim() || `${newEmployeeData.code.toLowerCase().replace(/[^a-z0-9]/g, '')}@vikoda.com.vn`;
     const created: EmployeeRecord = {
       id: `emp-${Date.now()}`,
       code: newEmployeeData.code.trim().toUpperCase(),
       name: newEmployeeData.name.trim(),
-      email: newEmployeeData.email?.trim() || `${newEmployeeData.code.toLowerCase()}@vikoda.com.vn`,
+      email,
       dept: newEmployeeData.dept || 'Phòng Kinh Doanh & Xuất Khẩu',
       title: newEmployeeData.title || 'Chuyên Viên Kinh Doanh',
       level: newEmployeeData.level || 'B1',
@@ -407,6 +523,22 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
     };
 
     setEmployees((prev) => [created, ...prev]);
+
+    // Save directly to Cloud Firestore
+    try {
+      await adminCreateOrUpdateUser({
+        email,
+        displayName: created.name,
+        department: created.dept,
+        level: created.level,
+        xp: created.xp,
+        streak: created.streak,
+        gems: created.gems,
+      });
+    } catch (err) {
+      console.warn('Error creating employee in cloud:', err);
+    }
+
     playSound('success');
     setIsCreatingNew(false);
     setNewEmployeeData({
