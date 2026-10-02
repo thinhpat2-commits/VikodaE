@@ -16,11 +16,16 @@ import { CourseLevel } from '../data/curriculumData';
 import { VikoMascot } from './brand/VikodaLogos';
 import { VoiceSelectorModal } from './VoiceSelectorModal';
 import { playSound } from '../services/soundEffects';
+import { LiveCircularMicButton } from './LiveCircularMicButton';
 import { 
   playSpeech, 
   stopSpeech, 
-  calculateSimilarity, 
+  evaluatePronunciationDetails, 
+  DetailedSpeechEvaluation,
   isSpeechRecognitionSupported,
+  startSpeechRecognition,
+  finishSpeechRecognition,
+  stopSpeechRecognition,
   VOICE_OPTIONS,
   getSelectedVoiceId,
   subscribeVoiceChange,
@@ -394,7 +399,11 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
 
   React.useEffect(() => {
     const unsub = subscribeVoiceChange((vId) => setCurrentVoiceId(vId));
-    return unsub;
+    return () => {
+      unsub();
+      stopSpeech();
+      stopSpeechRecognition();
+    };
   }, []);
 
   const currentItem = items[currentIndex % items.length];
@@ -411,55 +420,52 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
   };
 
   const handleStartSpeaking = () => {
+    if (isRecording) {
+      finishSpeechRecognition();
+      return;
+    }
+
     if (!isSpeechRecognitionSupported()) {
       setSpokenText('Trình duyệt chưa hỗ trợ Web Speech Recognition. Hãy mở trên Chrome hoặc Edge.');
       return;
     }
 
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
     setIsRecording(true);
-    setSpokenText('Đang lắng nghe giọng bạn...');
+    setSpokenText('Đang lắng nghe... Hãy đọc to câu tiếng Anh ở trên!');
     setScore(null);
     playSound('click');
 
-    recognition.onresult = (event: any) => {
-      const text = event.results[0][0].transcript;
-      setSpokenText(text);
-      const accuracy = calculateSimilarity(currentItem.english, text);
-      setScore(accuracy);
+    startSpeechRecognition(
+      (finalText) => {
+        setSpokenText(finalText);
+        const evalResult = evaluatePronunciationDetails(currentItem.english, finalText);
+        setScore(evalResult.score);
+        setIsRecording(false);
 
-      if (accuracy >= 75) {
-        playSound('correct');
-        onAwardXpAndGems(30, 10);
-        confetti({
-          particleCount: 50,
-          spread: 60,
-          origin: { y: 0.6 }
-        });
-      } else {
-        playSound('wrong');
-      }
-    };
-
-    recognition.onerror = () => {
-      setIsRecording(false);
-      setSpokenText('Chưa nhận rõ giọng. Hãy thử nói lại to và gần micro hơn nhé.');
-    };
-
-    recognition.onend = () => {
-      setIsRecording(false);
-    };
-
-    try {
-      recognition.start();
-    } catch (e) {
-      setIsRecording(false);
-    }
+        if (evalResult.score >= 60) {
+          playSound('correct');
+          onAwardXpAndGems(30, 10);
+          confetti({
+            particleCount: 50,
+            spread: 60,
+            origin: { y: 0.6 }
+          });
+        } else {
+          playSound('wrong');
+        }
+      },
+      () => {
+        setIsRecording(false);
+      },
+      (errorMsg) => {
+        setIsRecording(false);
+        setSpokenText(errorMsg || 'Chưa nhận rõ giọng. Hãy thử nói lại to và gần micro hơn nhé.');
+      },
+      (interim) => {
+        setSpokenText(interim);
+      },
+      'en-US'
+    );
   };
 
   return (
@@ -553,22 +559,29 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
           </button>
         </div>
 
-        {/* Big Mic Button */}
-        <div className="py-2">
-          <button
+        {/* Live Circular Mic Button with Real-Time Acoustic Ripple Waves */}
+        <div className="py-2 space-y-2 text-center">
+          <LiveCircularMicButton
+            isRecording={isRecording}
             onClick={handleStartSpeaking}
-            className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center transition-all cursor-pointer ${
-              isRecording
-                ? 'bg-rose-500 text-white animate-pulse scale-110 border-b-4 border-rose-700 shadow-lg'
-                : 'btn-duo-primary text-white hover:scale-105 active:scale-95 shadow-md'
-            }`}
-            title="Lý do: Bấm để đọc và nhận phản hồi tức thì từ AI"
-          >
-            {isRecording ? <MicOff className="w-8 h-8" /> : <Mic className="w-8 h-8" />}
-          </button>
-          <p className="text-xs text-slate-500 font-bold mt-2">
-            {isRecording ? 'Đang lắng nghe... Nói ngay!' : 'Bấm micro và đọc to câu trên'}
-          </p>
+            size="lg"
+          />
+
+          {isRecording ? (
+            <div className="space-y-1 animate-in fade-in">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-black">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                <span>Micro đang nghe! Hãy đọc to câu ở trên</span>
+              </div>
+              <p className="text-[11px] text-slate-500 font-medium">
+                ⚡ Đọc xong hệ thống sẽ <strong>tự động chấm điểm và phân tích âm</strong>
+              </p>
+            </div>
+          ) : (
+            <p className="text-xs text-slate-500 font-bold text-center">
+              Bấm micro và đọc to câu trên (Nói xong tự động chấm điểm)
+            </p>
+          )}
         </div>
 
         {/* Score Feedback & Color-Coded Phonetic Diagnostics */}

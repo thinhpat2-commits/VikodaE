@@ -23,7 +23,14 @@ import {
   Award,
   Send
 } from 'lucide-react';
-import { playSpeech, stopSpeech, startSpeechRecognition, isSpeechRecognitionSupported, calculateSimilarity } from '../services/speechService';
+import { 
+  playSpeech, 
+  stopSpeech, 
+  startSpeechRecognition, 
+  finishSpeechRecognition,
+  isSpeechRecognitionSupported, 
+  calculateSimilarity 
+} from '../services/speechService';
 import { playSound } from '../services/soundEffects';
 import { CourseLevel } from '../data/curriculumData';
 
@@ -51,22 +58,23 @@ export interface IntegratedQuestion {
   type: 'choice' | 'fill' | 'dictation' | 'reorder' | 'email_compose' | 'read_aloud' | 'situational_reflex';
   promptVi: string;
   englishContext?: string;
-  audioPrompt?: string; // audio to play
-  targetAnswer?: string; // for dictation, fill, reorder
+  audioPrompt?: string;
+  targetAnswer?: string;
   options?: { text: string; isCorrect: boolean; explanation: string }[];
-  scrambledWords?: string[]; // for reorder
-  speakingTargetText?: string; // for read_aloud
-  minWords?: number; // for email_compose
+  scrambledWords?: string[];
+  speakingTargetText?: string;
+  minWords?: number;
   maxWords?: number;
   hint?: string;
 }
 
-const INTEGRATED_15_QUESTIONS: IntegratedQuestion[] = [
-  // ================= PHẦN 1: ĐỌC - NGHE (8 CÂU) =================
+// 8 Standardized Questions: Streamlined, diverse across 4 CEFR levels and 4 skills
+const STANDARDIZED_8_QUESTIONS: IntegratedQuestion[] = [
+  // ================= KỸ NĂNG 1: ĐỌC (READING) =================
   {
     id: 1,
     section: 'reading_listening',
-    sectionTitle: 'Phần 1: Đọc - Nghe (Reading & Listening)',
+    sectionTitle: 'Phần 1: Đọc Hiểu Sản Phẩm (Reading - Cấp độ A1)',
     skillType: 'reading',
     type: 'choice',
     promptVi: 'Đọc thông báo sản phẩm và chọn đặc tính cốt lõi phân biệt nước khoáng Vikoda với nước lọc thông thường:',
@@ -92,124 +100,7 @@ const INTEGRATED_15_QUESTIONS: IntegratedQuestion[] = [
   {
     id: 2,
     section: 'reading_listening',
-    sectionTitle: 'Phần 1: Đọc - Nghe (Reading & Listening)',
-    skillType: 'reading',
-    type: 'choice',
-    promptVi: 'Đọc thông báo xuất khẩu và chọn thời hạn chót nộp chứng từ thông quan (Customs Clearance):',
-    englishContext: 'Internal Logistics Memo: "For all FOB Cat Lai port shipments departing on Friday, all shipping documents including Bill of Lading and Certificate of Origin must be finalized no later than 5:00 PM this Wednesday."',
-    options: [
-      {
-        text: 'Trước 17:00 chiều Thứ Tư tuần này',
-        isCorrect: true,
-        explanation: 'Chính xác! "no later than 5:00 PM this Wednesday".'
-      },
-      {
-        text: 'Sáng Thứ Sáu ngay trước giờ tàu rời cảng',
-        isCorrect: false,
-        explanation: 'Sai! Thứ Sáu là ngày tàu chạy (departing on Friday).'
-      },
-      {
-        text: 'Bất kỳ lúc nào trước khi hàng đến cảng đích',
-        isCorrect: false,
-        explanation: 'Sai! Không nộp kịp thứ tư sẽ bị trễ chuyến tàu.'
-      }
-    ]
-  },
-  {
-    id: 3,
-    section: 'reading_listening',
-    sectionTitle: 'Phần 1: Đọc - Nghe (Reading & Listening)',
-    skillType: 'reading',
-    type: 'fill',
-    promptVi: 'Điền từ thích hợp vào chỗ trống trong câu đàm phán hợp đồng phân phối độc quyền:',
-    englishContext: 'We are pleased to grant your company the __________ distribution rights for Vikoda products in Singapore, subject to meeting the quarterly sales volume.',
-    options: [
-      {
-        text: 'exclusive',
-        isCorrect: true,
-        explanation: 'Chính xác! "exclusive distribution rights" là quyền phân phối độc quyền.'
-      },
-      {
-        text: 'expensive',
-        isCorrect: false,
-        explanation: 'Sai nghĩa! "expensive" là đắt đỏ.'
-      },
-      {
-        text: 'excessive',
-        isCorrect: false,
-        explanation: 'Sai nghĩa! "excessive" là quá mức/thái quá.'
-      }
-    ]
-  },
-  {
-    id: 4,
-    section: 'reading_listening',
-    sectionTitle: 'Phần 1: Đọc - Nghe (Reading & Listening)',
-    skillType: 'listening',
-    type: 'choice',
-    promptVi: 'Bấm nghe đoạn đối thoại công sở và cho biết đối tác đề xuất gì về điều kiện thanh toán:',
-    audioPrompt: 'Could we proceed with thirty percent advance deposit and the remaining seventy percent against the bill of lading copy?',
-    englishContext: '🎧 Bấm nút Loa để nghe câu đề xuất từ đại diện đối tác.',
-    options: [
-      {
-        text: 'Đặt cọc 30% trước, 70% còn lại thanh toán khi xuất trình bản sao Vận đơn (B/L)',
-        isCorrect: true,
-        explanation: 'Chính xác! "30% advance deposit and the remaining 70% against the bill of lading copy".'
-      },
-      {
-        text: 'Thanh toán toàn bộ 100% sau khi nhận hàng tại kho',
-        isCorrect: false,
-        explanation: 'Sai! Đối tác đồng ý đặt cọc trước 30%.'
-      },
-      {
-        text: 'Yêu cầu mở thư tín dụng L/C trả chậm 180 ngày',
-        isCorrect: false,
-        explanation: 'Không được nhắc đến trong đoạn ghi âm.'
-      }
-    ]
-  },
-  {
-    id: 5,
-    section: 'reading_listening',
-    sectionTitle: 'Phần 1: Đọc - Nghe (Reading & Listening)',
-    skillType: 'listening',
-    type: 'dictation',
-    promptVi: 'Chép chính tả (Dictation): Nghe câu thông điệp xuất khẩu và gõ lại chính xác các từ còn thiếu:',
-    audioPrompt: 'Vikoda natural alkaline mineral water is bottled directly at the source.',
-    englishContext: 'Vikoda natural alkaline mineral water is __________ __________ at the __________.',
-    targetAnswer: 'bottled directly source',
-    hint: 'Gõ 3 từ còn thiếu cách nhau bằng dấu cách (VD: bottled directly source)'
-  },
-  {
-    id: 6,
-    section: 'reading_listening',
-    sectionTitle: 'Phần 1: Đọc - Nghe (Reading & Listening)',
-    skillType: 'reading',
-    type: 'choice',
-    promptVi: 'Đọc email yêu cầu chào giá CIF của đối tác Nhật Bản và xác định cảng đích (Destination Port):',
-    englishContext: 'Email from Tokyo Buyer: "Dear Vikoda Export Team, Please provide your best CIF quotation for two 40-foot containers of 500ml glass bottles delivered to Yokohama Port by next month."',
-    options: [
-      {
-        text: 'Cảng Yokohama (Yokohama Port, Nhật Bản)',
-        isCorrect: true,
-        explanation: 'Chính xác! Email nêu rõ: "delivered to Yokohama Port".'
-      },
-      {
-        text: 'Cảng Tokyo',
-        isCorrect: false,
-        explanation: 'Sai! Người gửi ở Tokyo nhưng chỉ định giao tới cảng Yokohama.'
-      },
-      {
-        text: 'Cảng Cát Lái (TP.HCM)',
-        isCorrect: false,
-        explanation: 'Sai! Cát Lái là cảng đi (Origin Port), không phải cảng đích.'
-      }
-    ]
-  },
-  {
-    id: 7,
-    section: 'reading_listening',
-    sectionTitle: 'Phần 1: Đọc - Nghe (Reading & Listening)',
+    sectionTitle: 'Phần 1: Đọc & Thuật Ngữ (Reading - Cấp độ A2)',
     skillType: 'reading',
     type: 'fill',
     promptVi: 'Điền thuật ngữ khoa học vào chỗ trống trong báo cáo kiểm nghiệm chất lượng nước khoáng Đảnh Thạnh:',
@@ -232,27 +123,55 @@ const INTEGRATED_15_QUESTIONS: IntegratedQuestion[] = [
       }
     ]
   },
+
+  // ================= KỸ NĂNG 2: NGHE (LISTENING) =================
   {
-    id: 8,
+    id: 3,
     section: 'reading_listening',
-    sectionTitle: 'Phần 1: Đọc - Nghe (Reading & Listening)',
+    sectionTitle: 'Phần 2: Nghe Hiểu (Listening - Cấp độ A2)',
+    skillType: 'listening',
+    type: 'choice',
+    promptVi: 'Bấm nghe thông điệp âm thanh từ Giám đốc nhà máy Đảnh Thạnh và chọn nhiệt độ vòi phun tại nguồn:',
+    audioPrompt: 'Welcome to the natural hot spring of Danh Thanh. Our mineral water emerges naturally at seventy-two degrees Celsius, completely sterile and ready for bottling.',
+    options: [
+      {
+        text: '72°C (Seventy-two degrees Celsius) vô trùng tự nhiên tại nguồn',
+        isCorrect: true,
+        explanation: 'Chính xác! Giám đốc phát biểu: "emerges naturally at seventy-two degrees Celsius".'
+      },
+      {
+        text: '20°C (Twenty degrees Celsius) mát lạnh mùa đông',
+        isCorrect: false,
+        explanation: 'Sai! Nhiệt độ nguồn nước ngầm Đảnh Thạnh tự nhiên đạt 72°C.'
+      },
+      {
+        text: '100°C nước sôi sùng sục',
+        isCorrect: false,
+        explanation: 'Sai! Nguồn không phải 100°C.'
+      }
+    ]
+  },
+  {
+    id: 4,
+    section: 'reading_listening',
+    sectionTitle: 'Phần 2: Chép Chính Tả (Listening & Dictation - Cấp độ B1)',
     skillType: 'listening',
     type: 'dictation',
-    promptVi: 'Chép chính tả (Dictation): Nghe câu khẳng định chất lượng từ Giám đốc nhà máy và gõ lại các từ còn thiếu:',
+    promptVi: 'Nghe câu khẳng định tiêu chuẩn xuất khẩu quốc tế và gõ lại 2 từ còn thiếu vào ô trống:',
     audioPrompt: 'We maintain strict quality control standards for all international shipments.',
     englishContext: 'We maintain strict quality __________ standards for all international __________.',
     targetAnswer: 'control shipments',
-    hint: 'Gõ 2 từ còn thiếu cách nhau dấu cách (VD: control shipments)'
+    hint: 'Gõ 2 từ còn thiếu cách nhau dấu cách: control shipments'
   },
 
-  // ================= PHẦN 2: VIẾT (3 CÂU) =================
+  // ================= KỸ NĂNG 3: VIẾT (WRITING) =================
   {
-    id: 9,
+    id: 5,
     section: 'writing',
-    sectionTitle: 'Phần 2: Viết (Writing)',
+    sectionTitle: 'Phần 3: Ghép Câu Viết (Writing - Cấp độ B1)',
     skillType: 'writing',
     type: 'reorder',
-    promptVi: 'Sắp xếp các cụm từ xáo trộn thành câu đàm phán lịch giao hàng chuẩn ngữ pháp thương mại:',
+    promptVi: 'Sắp xếp các cụm từ xáo trộn thành câu đàm phán lịch giao hàng chuẩn thương mại quốc tế:',
     englishContext: 'Câu hoàn chỉnh có nghĩa: "Chúng tôi có thể đẩy nhanh tiến độ giao hàng nếu quý khách xác nhận đơn hàng vào tuần này."',
     targetAnswer: 'We can expedite the delivery schedule if you confirm the order this week.',
     scrambledWords: [
@@ -264,73 +183,36 @@ const INTEGRATED_15_QUESTIONS: IntegratedQuestion[] = [
     ]
   },
   {
-    id: 10,
+    id: 6,
     section: 'writing',
-    sectionTitle: 'Phần 2: Viết (Writing)',
-    skillType: 'writing',
-    type: 'reorder',
-    promptVi: 'Sắp xếp các cụm từ thành câu giải thích bảo chứng chất lượng nước khoáng kiềm Vikoda:',
-    englishContext: 'Câu hoàn chỉnh có nghĩa: "Nước của chúng tôi có tính kiềm tự nhiên và không qua bất kỳ xử lý hóa chất nhân tạo nào."',
-    targetAnswer: 'Our water is naturally alkaline without any artificial chemical treatment.',
-    scrambledWords: [
-      'Our water is',
-      'naturally alkaline',
-      'without any',
-      'artificial chemical',
-      'treatment.'
-    ]
-  },
-  {
-    id: 11,
-    section: 'writing',
-    sectionTitle: 'Phần 2: Viết (Writing)',
+    sectionTitle: 'Phần 3: Viết Email Thương Mại (Writing - Cấp độ B1/B2)',
     skillType: 'writing',
     type: 'email_compose',
-    promptVi: 'Viết email phản hồi ngắn (30 - 40 từ) xử lý tình huống thực tế sau:',
-    englishContext: 'Tình huống: Đối tác gửi email thông báo sẽ đến thăm mỏ khoáng Đảnh Thạnh vào thứ Hai tuần tới. Hãy viết email ngắn (30-40 từ) gồm 3 ý: (1) Chào đón nồng nhiệt, (2) Xác nhận xe công ty sẽ đón họ tại sân bay Cam Ranh, (3) Hẹn gặp tại nhà máy.',
-    minWords: 25,
+    promptVi: 'Viết email phản hồi ngắn (20 - 45 từ) cho tình huống thực tế sau:',
+    englishContext: 'Tình huống: Đối tác VIP thông báo sẽ đến thăm nhà máy mỏ Đảnh Thạnh vào thứ Hai tuần tới. Viết email ngắn (20-45 từ) gồm 3 ý: (1) Chào đón nồng nhiệt, (2) Xe công ty sẽ đón tại sân bay Cam Ranh, (3) Hẹn gặp tại nhà máy.',
+    minWords: 20,
     maxWords: 45,
-    hint: 'Gợi ý mẫu câu: Dear Mr. Smith, We look forward to welcoming you to Vikoda next Monday. Our company car will pick you up at Cam Ranh Airport. See you soon!'
+    hint: 'Mẫu: Dear Mr. Smith, We look forward to welcoming you to Vikoda next Monday. Our company car will pick you up at Cam Ranh Airport. See you soon!'
   },
 
-  // ================= PHẦN 3: NÓI (4 CÂU) =================
+  // ================= KỸ NĂNG 4: NÓI (SPEAKING) =================
   {
-    id: 12,
+    id: 7,
     section: 'speaking',
-    sectionTitle: 'Phần 3: Nói (Speaking - AI Chấm Phát Âm)',
+    sectionTitle: 'Phần 4: Luyện Nói Phát Âm Chuẩn (Speaking - Cấp độ B2)',
     skillType: 'speaking',
     type: 'read_aloud',
-    promptVi: 'Đọc to đoạn giới thiệu mở đầu (Bấm Mic để thu âm - AI chấm phát âm chuẩn Mỹ & độ nối âm):',
+    promptVi: 'Bấm Micro và đọc to đoạn giới thiệu đặc tính sản phẩm (AI chấm độ trôi chảy & trọng âm):',
     speakingTargetText: 'Welcome to Vikoda. Our water is naturally alkaline at pH nine point oh, bottled directly at the source.',
-    hint: 'Lưu ý đọc: "naturally alkaline", pH 9.0 đọc là "nine point oh", ngắt nhịp tự tin.'
+    hint: 'Lưu ý đọc: "naturally alkaline", pH 9.0 đọc là "nine point oh".'
   },
   {
-    id: 13,
+    id: 8,
     section: 'speaking',
-    sectionTitle: 'Phần 3: Nói (Speaking - AI Chấm Phát Âm)',
-    skillType: 'speaking',
-    type: 'read_aloud',
-    promptVi: 'Đọc to cam kết tiêu chuẩn xuất khẩu quốc tế (AI chấm độ trôi chảy & trọng âm):',
-    speakingTargetText: 'We strictly adhere to international export standards with zero artificial chemical treatment.',
-    hint: 'Nhấn trọng âm vào: strictly, international, standards, artificial.'
-  },
-  {
-    id: 14,
-    section: 'speaking',
-    sectionTitle: 'Phần 3: Nói (Speaking - AI Phản Xạ Nhanh)',
+    sectionTitle: 'Phần 4: Phản Xạ Đàm Phán Tình Huống (Speaking - Cấp độ C1)',
     skillType: 'speaking',
     type: 'situational_reflex',
-    promptVi: 'Phản xạ tình huống 1: Khách VIP đối tác bước vào sảnh lễ tân. Hãy bấm Mic nói câu chào đón tiếng Anh và mời họ một chai nước Vikoda ướp lạnh:',
-    speakingTargetText: 'Good morning, welcome to Vikoda. Please have a seat and enjoy our chilled natural alkaline water.',
-    hint: 'Bạn có thể nói: "Good morning, welcome to Vikoda! Please enjoy a chilled bottle of natural mineral water."'
-  },
-  {
-    id: 15,
-    section: 'speaking',
-    sectionTitle: 'Phần 3: Nói (Speaking - AI Phản Xạ Nhanh)',
-    skillType: 'speaking',
-    type: 'situational_reflex',
-    promptVi: 'Phản xạ tình huống 2: Trong cuộc họp, đối tác hỏi: "Can your factory supply five containers per month?". Hãy bấm Mic trả lời khẳng định năng lực nhà máy đáp ứng tốt:',
+    promptVi: 'Tình huống đối tác hỏi: "Can your factory supply five containers per month?". Hãy bấm Mic khẳng định năng lực nhà máy đáp ứng xuất sắc:',
     speakingTargetText: 'Yes, our modern automated bottling line can easily accommodate five containers per month with consistent high quality.',
     hint: 'Bạn có thể nói: "Yes, our factory has ample capacity to supply five containers per month without any delay."'
   }
@@ -350,7 +232,7 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
   speechRate = 1.0,
 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [timeLeft, setTimeLeft] = useState<number>(1200); // 20 minutes countdown (1200s)
+  const [timeLeft, setTimeLeft] = useState<number>(600); // 10 minutes countdown (600s)
   const [isPlayingAudio, setIsPlayingAudio] = useState<boolean>(false);
   const [testResult, setTestResult] = useState<PlacementTestResult | null>(null);
 
@@ -367,7 +249,7 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
   const [questionScores, setQuestionScores] = useState<Record<number, number>>({});
   const [isAnswerConfirmed, setIsAnswerConfirmed] = useState<boolean>(false);
 
-  // 20-minute timer
+  // 10-minute timer
   useEffect(() => {
     if (!isOpen || testResult) return;
     const timer = setInterval(() => {
@@ -385,7 +267,7 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
 
   // Sync state when moving to a new question
   useEffect(() => {
-    const q = INTEGRATED_15_QUESTIONS[currentIndex];
+    const q = STANDARDIZED_8_QUESTIONS[currentIndex];
     setSelectedOption(null);
     setDictationInput('');
     setEmailText('');
@@ -394,58 +276,60 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
     setSpeechScore(null);
     setIsAnswerConfirmed(false);
 
-    if (q.type === 'reorder' && q.scrambledWords) {
-      setReorderedList([...q.scrambledWords].sort(() => Math.random() - 0.5));
+    if (q && q.type === 'reorder' && q.scrambledWords) {
+      setReorderedList([...q.scrambledWords].sort(() => 0.5 - Math.random()));
+    } else {
+      setReorderedList([]);
     }
   }, [currentIndex]);
 
-  if (!isOpen || typeof document === 'undefined') return null;
+  const currentQ = STANDARDIZED_8_QUESTIONS[currentIndex] || STANDARDIZED_8_QUESTIONS[0];
 
-  const currentQ = INTEGRATED_15_QUESTIONS[currentIndex];
-
-  // Format countdown mm:ss
-  const formatTime = (secs: number) => {
-    const m = Math.floor(secs / 60);
-    const s = secs % 60;
-    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-  };
-
-  const handlePlayAudio = () => {
-    if (isPlayingAudio) {
-      stopSpeech();
+  // Audio playback handler
+  const handlePlayAudioPrompt = () => {
+    if (!currentQ.audioPrompt) return;
+    setIsPlayingAudio(true);
+    playSpeech(currentQ.audioPrompt, speechRate, 'en-US');
+    setTimeout(() => {
       setIsPlayingAudio(false);
-    } else if (currentQ.audioPrompt) {
-      setIsPlayingAudio(true);
-      playSpeech(currentQ.audioPrompt, 0.95, 'en-US', () => {
-        setIsPlayingAudio(false);
-      });
-    }
+    }, 4500);
   };
 
-  const handleStartSpeechRecording = () => {
+  // Real Speech Recognition handler
+  const handleToggleSpeech = () => {
+    if (isRecording) {
+      finishSpeechRecognition();
+      return;
+    }
+
     if (!isSpeechRecognitionSupported()) {
-      alert('Trình duyệt chưa bật nhận diện giọng nói. Hãy cấp quyền Microphone.');
+      alert('Trình duyệt chưa hỗ trợ Web Speech API. Vui lòng sử dụng Google Chrome hoặc Edge để luyện nói!');
       return;
     }
 
     playSound('click');
     setIsRecording(true);
-    setSpokenText('Đang lắng nghe giọng phát âm của bạn...');
+    setSpokenText('Đang mở micro... Hãy nói to rõ ràng!');
 
     startSpeechRecognition(
       (transcript) => {
         setSpokenText(transcript);
         setIsRecording(false);
 
-        // Calculate score based on similarity to target text
         const target = currentQ.speakingTargetText || '';
         const similarity = calculateSimilarity(target, transcript);
-        const adjustedScore = Math.max(50, Math.min(100, Math.round(similarity * 1.15)));
-        setSpeechScore(adjustedScore);
-        playSound(adjustedScore >= 70 ? 'correct' : 'click');
+        setSpeechScore(similarity);
+        playSound(similarity >= 60 ? 'correct' : 'click');
       },
       () => {
         setIsRecording(false);
+      },
+      (errorMsg) => {
+        setSpokenText(`⚠️ ${errorMsg}`);
+        setIsRecording(false);
+      },
+      (interim) => {
+        setSpokenText(`🎙️ Đang nghe: "${interim}"`);
       },
       'en-US'
     );
@@ -471,27 +355,28 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
       const target = (currentQ.targetAnswer || '').toLowerCase().replace(/[^\w\s]/g, '').trim();
       score = joined === target ? 100 : calculateSimilarity(target, joined);
     } else if (currentQ.type === 'email_compose') {
-      // Evaluation based on word count and business keywords
       const hasGreeting = /dear|hi|hello/i.test(emailText);
       const hasClosing = /regards|sincerely|thanks|best/i.test(emailText);
-      const hasKeyTerms = /vikoda|cam ranh|airport|welcome|factory|visit/i.test(emailText);
       let emailScore = 50;
-      if (wordCount >= (currentQ.minWords || 25) && wordCount <= (currentQ.maxWords || 45)) emailScore += 25;
-      if (hasGreeting && hasClosing) emailScore += 15;
-      if (hasKeyTerms) emailScore += 10;
+      if (wordCount >= (currentQ.minWords || 20) && wordCount <= (currentQ.maxWords || 45)) emailScore += 30;
+      if (hasGreeting && hasClosing) emailScore += 20;
       score = Math.min(100, emailScore);
     } else if (currentQ.type === 'read_aloud' || currentQ.type === 'situational_reflex') {
-      score = speechScore !== null ? speechScore : (spokenText.length > 10 ? 75 : 50);
+      score = speechScore !== null ? speechScore : 65;
     }
 
-    setQuestionScores((prev) => ({ ...prev, [currentQ.id]: score }));
+    setQuestionScores((prev) => ({
+      ...prev,
+      [currentQ.id]: score,
+    }));
     setIsAnswerConfirmed(true);
-    playSound(score >= 70 ? 'correct' : 'wrong');
   };
 
+  // Next Question Handler
   const handleNextQuestion = () => {
     playSound('click');
-    if (currentIndex < INTEGRATED_15_QUESTIONS.length - 1) {
+    stopSpeech();
+    if (currentIndex < STANDARDIZED_8_QUESTIONS.length - 1) {
       setCurrentIndex((prev) => prev + 1);
     } else {
       handleSubmitTest();
@@ -502,11 +387,11 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
   const handleSubmitTest = () => {
     playSound('celebrate');
 
-    // Aggregate by 4 skills
-    const readingScores = [questionScores[1] || 0, questionScores[2] || 0, questionScores[3] || 0, questionScores[6] || 0, questionScores[7] || 0];
-    const listeningScores = [questionScores[4] || 0, questionScores[5] || 0, questionScores[8] || 0];
-    const writingScores = [questionScores[9] || 0, questionScores[10] || 0, questionScores[11] || 0];
-    const speakingScores = [questionScores[12] || 0, questionScores[13] || 0, questionScores[14] || 0, questionScores[15] || 0];
+    // Aggregate by 4 skills (2 questions per skill)
+    const readingScores = [questionScores[1] || 0, questionScores[2] || 0];
+    const listeningScores = [questionScores[3] || 0, questionScores[4] || 0];
+    const writingScores = [questionScores[5] || 0, questionScores[6] || 0];
+    const speakingScores = [questionScores[7] || 0, questionScores[8] || 0];
 
     const avg = (arr: number[]) => Math.round(arr.reduce((a, b) => a + b, 0) / arr.length);
 
@@ -526,12 +411,12 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
       feedback = 'Xuất sắc! Bạn sở hữu phản xạ thương mại quốc tế sắc bén, phát âm chuẩn xác và nắm vững nghệ thuật đàm phán cao cấp.';
       nextSteps = [
         'Mở khóa Cấp độ C2: Bản Ngữ & Đàm Phán Cấp CEO',
-        'Luyện thành ngữ thương trường và ứng biến phản biện với buyer khó tính',
+        'Luyện thành ngữ thương trường và ứng biến phản biện với buyer quốc tế',
         'Nhận Chứng Nhận Đại Sứ Toàn Cầu Vikoda'
       ];
     } else if (overallScore >= 70) {
       recommendedLevel = 'B2-C1';
-      feedback = 'Rất tốt! Khả năng đọc hiểu hợp đồng xuất khẩu và đàm phán CIF/FOB của bạn rất vững vàng. Cần rèn luyện thêm độ nhấn nhá khi phát biểu trước hội đồng đối tác.';
+      feedback = 'Rất tốt! Khả năng đọc hiểu hợp đồng xuất khẩu và đàm phán CIF/FOB của bạn rất vững vàng.';
       nextSteps = [
         'Mở khóa Cấp độ C1: Xuất Khẩu & Đàm Phán B2B Quốc Tế',
         'Thực chiến giả lập 12 Tình Huống Buyer Ép Giá trong Hộp Đấu Trí',
@@ -551,13 +436,13 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
       nextSteps = [
         'Mở khóa Cấp độ A1: Đón Tiếp & Giao Tiếp Văn Phòng Cơ Bản',
         'Luyện phát âm chuẩn "Naturally Alkaline" và "pH nine point oh"',
-        'Tham gia đấu trường Endless Drill 60s mỗi ngày'
+        'Tham gia đấu trường Endless Drill mỗi ngày'
       ];
     }
 
     const result: PlacementTestResult = {
       score: overallScore,
-      totalQuestions: 15,
+      totalQuestions: 8,
       recommendedLevel,
       skills: {
         reading,
@@ -573,32 +458,28 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
     onSaveResult(result);
   };
 
+  const formatTime = (secs: number) => {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
+  if (!isOpen) return null;
+
   const modalContent = (
-    <div 
-      className="fixed inset-0 z-[999999] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 select-none animate-in fade-in duration-200"
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        width: '100vw',
-        height: '100dvh',
-      }}
-    >
-      <div 
-        className="bg-white w-full max-w-2xl md:max-w-3xl rounded-3xl border-2 border-slate-200 border-b-6 border-b-sky-600 shadow-2xl overflow-hidden flex flex-col max-h-[95dvh] animate-in zoom-in-95 duration-150"
-      >
-        {/* ================= IF TEST COMPLETED: SHOW 4-SKILL SCORECARD ================= */}
+    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 select-none animate-in fade-in duration-150">
+      <div className="bg-white w-full max-w-2xl rounded-3xl border border-sky-100 shadow-2xl overflow-hidden flex flex-col max-h-[94vh] my-auto">
+        
         {testResult ? (
-          <div className="p-6 md:p-8 overflow-y-auto space-y-5 text-center my-auto">
-            <div className="w-16 h-16 rounded-3xl bg-emerald-100 text-emerald-600 border-2 border-emerald-300 flex items-center justify-center mx-auto text-2xl shadow-md">
-              <Trophy className="w-8 h-8" />
+          /* ================= RESULT SCREEN ================= */
+          <div className="p-6 md:p-8 space-y-6 overflow-y-auto text-center">
+            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-md">
+              <Award className="w-8 h-8" />
             </div>
 
             <div className="space-y-1">
               <span className="text-[10px] font-black uppercase tracking-widest bg-emerald-400 text-slate-950 px-3 py-0.5 rounded-full inline-block">
-                KẾT QUẢ ĐÁNH GIÁ 4 KỸ NĂNG THỰC CHIẾN CHUẨN QUỐC TẾ
+                KẾT QUẢ ĐÁNH GIÁ 4 KỸ NĂNG CHUẨN QUỐC TẾ
               </span>
               <h2 className="text-2xl md:text-3xl font-black text-slate-900">
                 Cấp Độ Khuyến Nghị: {testResult.recommendedLevel}
@@ -656,7 +537,7 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
 
               <div>
                 <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                  <span className="flex items-center gap-1.5"><PenTool className="w-3.5 h-3.5 text-amber-600" /> Viết công sở (Writing)</span>
+                  <span className="flex items-center gap-1.5"><PenTool className="w-3.5 h-3.5 text-amber-600" /> Viết thương mại (Writing)</span>
                   <span className="text-amber-700 font-black">{testResult.skills.writing}%</span>
                 </div>
                 <div className="w-full h-2.5 rounded-full bg-slate-200 overflow-hidden">
@@ -675,21 +556,6 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
               </div>
             </div>
 
-            {/* Next Steps */}
-            <div className="p-3.5 rounded-2xl bg-sky-50 border border-sky-200 text-left space-y-1.5">
-              <span className="text-[10px] font-black uppercase text-[#0070D1] tracking-wider block">
-                Lộ Trình Được Cá Nhân Hóa Dành Riêng Cho Bạn:
-              </span>
-              <ul className="text-xs text-slate-700 space-y-1">
-                {testResult.nextSteps.map((step, idx) => (
-                  <li key={idx} className="flex items-start gap-1.5 font-medium">
-                    <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                    <span>{step}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
             <button
               onClick={() => {
                 playSound('click');
@@ -704,21 +570,21 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
         ) : (
           /* ================= ACTIVE TEST SCREEN ================= */
           <>
-            {/* Header: Progress, 20:00 Countdown Timer & Close */}
+            {/* Header: Progress, 10:00 Countdown Timer & Close */}
             <div className="bg-slate-900 text-white p-3.5 flex items-center justify-between shrink-0">
               <div className="flex items-center space-x-2">
                 <span className="px-2 py-0.5 rounded-md bg-sky-500 text-white font-black text-xs">
-                  Câu {currentQ.id} / 15
+                  Câu {currentQ.id} / 8
                 </span>
                 <span className="text-xs text-sky-200 font-bold hidden sm:inline">
                   {currentQ.sectionTitle}
                 </span>
               </div>
 
-              {/* 20-Minute Countdown Clock */}
+              {/* 10-Minute Countdown Clock */}
               <div className="flex items-center space-x-3">
                 <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-xl font-mono text-xs font-black border ${
-                  timeLeft <= 300 
+                  timeLeft <= 180 
                     ? 'bg-rose-500/20 text-rose-300 border-rose-500/50 animate-pulse'
                     : 'bg-slate-800 text-amber-300 border-slate-700'
                 }`}>
@@ -728,189 +594,99 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
 
                 <button
                   onClick={() => {
+                    playSound('click');
                     stopSpeech();
                     onClose();
                   }}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                  className="p-1 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
             </div>
 
-            {/* Visual Progress Bar (15 segments) */}
-            <div className="w-full bg-slate-200 h-1.5 shrink-0">
-              <div 
-                className="bg-[#0070D1] h-full transition-all duration-300"
-                style={{ width: `${(currentQ.id / 15) * 100}%` }}
-              />
-            </div>
-
             {/* Question Body */}
-            <div className="p-4 sm:p-5 overflow-y-auto flex-1 space-y-4">
-              {/* Prompt Vi */}
-              <div className="space-y-1">
-                <span className="text-[10px] font-black uppercase text-[#0070D1] tracking-wider block">
-                  {currentQ.skillType === 'reading' && '📖 KỸ NĂNG ĐỌC HIỂU'}
-                  {currentQ.skillType === 'listening' && '🎧 KỸ NĂNG NGHE BẮT Ý'}
-                  {currentQ.skillType === 'writing' && '✍️ KỸ NĂNG VIẾT DOANH NGHIỆP'}
-                  {currentQ.skillType === 'speaking' && '🗣️ KỸ NĂNG NÓI & PHẢN XẠ AI'}
-                </span>
-                <h3 className="text-sm sm:text-base font-black text-slate-900 leading-snug">
+            <div className="p-4 md:p-6 overflow-y-auto space-y-4 flex-1">
+              <div className="space-y-2">
+                <h3 className="text-sm md:text-base font-black text-slate-900 leading-snug">
                   {currentQ.promptVi}
                 </h3>
+
+                {currentQ.englishContext && (
+                  <div className="p-3 rounded-2xl bg-sky-50/80 border border-sky-200 text-xs sm:text-sm font-medium text-slate-800 italic leading-relaxed">
+                    {currentQ.englishContext}
+                  </div>
+                )}
               </div>
 
-              {/* English Context Box or Dialogue */}
-              {currentQ.englishContext && (
-                <div className="p-3.5 rounded-2xl bg-sky-50/80 border border-sky-200 text-xs text-slate-800 leading-relaxed font-medium">
-                  {currentQ.englishContext}
-                </div>
-              )}
-
-              {/* Audio Player Button (For Listening & Dictation) */}
+              {/* Audio Prompt button for Listening questions */}
               {currentQ.audioPrompt && (
-                <div className="flex items-center gap-2">
+                <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200 flex items-center justify-between">
+                  <span className="text-xs font-bold text-amber-900">
+                    🎧 Bấm để nghe phát âm mẫu từ chuyên gia:
+                  </span>
                   <button
                     type="button"
-                    onClick={handlePlayAudio}
-                    className="px-4 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-xs cursor-pointer shadow-xs transition-transform active:scale-95 flex items-center gap-2"
+                    onClick={handlePlayAudioPrompt}
+                    className={`px-3 py-1.5 rounded-xl font-black text-xs flex items-center gap-1.5 cursor-pointer shadow-xs transition-all ${
+                      isPlayingAudio ? 'bg-amber-600 text-white animate-pulse' : 'bg-white text-amber-700 border border-amber-300'
+                    }`}
                   >
-                    <Volume2 className={`w-4 h-4 ${isPlayingAudio ? 'animate-bounce' : ''}`} />
-                    <span>{isPlayingAudio ? 'Đang phát âm...' : 'Bấm Nghe Hội Thoại'}</span>
+                    <Volume2 className="w-4 h-4" />
+                    <span>{isPlayingAudio ? 'Đang phát...' : 'Phát âm thanh'}</span>
                   </button>
-                  <span className="text-[11px] text-slate-500">Giọng chuẩn đàm phán quốc tế (Michael AI)</span>
                 </div>
               )}
 
-              {/* ================= RENDER INTERACTIVE QUESTION TYPES ================= */}
-
-              {/* 1. Multiple Choice / Fill */}
+              {/* 1. Multiple Choice & Fill-in-blank */}
               {(currentQ.type === 'choice' || currentQ.type === 'fill') && currentQ.options && (
-                <div className="space-y-2 pt-1">
+                <div className="space-y-2">
                   {currentQ.options.map((opt, idx) => {
                     const isSelected = selectedOption === idx;
+                    let style = 'bg-white border-2 border-slate-200 hover:border-sky-300 text-slate-800';
+
+                    if (isAnswerConfirmed) {
+                      if (opt.isCorrect) {
+                        style = 'bg-emerald-50 border-2 border-emerald-500 text-emerald-950 font-bold';
+                      } else if (isSelected) {
+                        style = 'bg-rose-50 border-2 border-rose-500 text-rose-950 font-medium';
+                      } else {
+                        style = 'opacity-40 border-slate-200';
+                      }
+                    } else if (isSelected) {
+                      style = 'bg-sky-50 border-2 border-[#009FE3] text-[#0070D1] font-bold shadow-xs';
+                    }
+
                     return (
-                      <div
+                      <button
                         key={idx}
+                        disabled={isAnswerConfirmed}
                         onClick={() => {
-                          if (!isAnswerConfirmed) {
-                            playSound('click');
-                            setSelectedOption(idx);
-                          }
+                          playSound('click');
+                          setSelectedOption(idx);
                         }}
-                        className={`p-3 rounded-2xl border-2 transition-all cursor-pointer flex items-start gap-2.5 active:scale-98 ${
-                          isSelected
-                            ? isAnswerConfirmed
-                              ? opt.isCorrect
-                                ? 'bg-emerald-50 border-emerald-500 text-emerald-950 shadow-xs'
-                                : 'bg-rose-50 border-rose-500 text-rose-950 shadow-xs'
-                              : 'bg-sky-50 border-[#0070D1] text-slate-900 shadow-xs'
-                            : isAnswerConfirmed && opt.isCorrect
-                              ? 'bg-emerald-50/60 border-emerald-400 text-emerald-900'
-                              : 'bg-white border-slate-200 hover:border-slate-300'
-                        }`}
+                        className={`w-full text-left p-3.5 rounded-2xl text-xs sm:text-sm transition-all flex items-start gap-2.5 cursor-pointer ${style}`}
                       >
-                        <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5 ${
-                          isSelected
-                            ? 'bg-[#0070D1] text-white'
-                            : 'bg-slate-100 text-slate-600'
-                        }`}>
+                        <span className="w-5 h-5 rounded-full border border-current flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">
                           {String.fromCharCode(65 + idx)}
                         </span>
-                        <div className="text-xs font-semibold leading-relaxed">
-                          {opt.text}
-                          {isAnswerConfirmed && isSelected && (
-                            <p className="text-[11px] font-normal text-slate-600 mt-1">
-                              💡 {opt.explanation}
-                            </p>
-                          )}
-                        </div>
-                      </div>
+                        <span className="flex-1">{opt.text}</span>
+                      </button>
                     );
                   })}
                 </div>
               )}
 
-              {/* 2. Dictation Typing */}
+              {/* 2. Dictation Input */}
               {currentQ.type === 'dictation' && (
-                <div className="space-y-2 pt-1">
-                  <label className="block text-xs font-bold text-slate-700">
-                    Gõ lại từ còn thiếu bạn vừa nghe được:
-                  </label>
+                <div className="space-y-2">
                   <input
                     type="text"
                     disabled={isAnswerConfirmed}
                     value={dictationInput}
                     onChange={(e) => setDictationInput(e.target.value)}
-                    placeholder={currentQ.hint || 'Nhập từ nghe được...'}
-                    className="w-full p-3 rounded-2xl border-2 border-slate-300 font-bold text-sm text-slate-900 focus:outline-none focus:border-[#0070D1] bg-slate-50"
-                  />
-                  {isAnswerConfirmed && (
-                    <div className="p-2.5 rounded-xl bg-slate-100 text-xs font-semibold text-slate-800">
-                      Đáp án chính xác: <span className="font-mono text-emerald-700 font-bold">{currentQ.targetAnswer}</span>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* 3. Word Reordering */}
-              {currentQ.type === 'reorder' && (
-                <div className="space-y-3 pt-1">
-                  <p className="text-xs text-slate-600 font-medium">
-                    Nhấp vào các cụm từ để di chuyển đổi chỗ thứ tự sao cho đúng ngữ pháp:
-                  </p>
-                  <div className="flex flex-wrap gap-2 p-3 rounded-2xl bg-slate-100 border border-slate-200 min-h-[50px]">
-                    {reorderedList.map((chunk, idx) => (
-                      <span
-                        key={idx}
-                        onClick={() => {
-                          if (isAnswerConfirmed) return;
-                          playSound('click');
-                          // Swap with next element
-                          const nextIdx = (idx + 1) % reorderedList.length;
-                          const copy = [...reorderedList];
-                          const temp = copy[idx];
-                          copy[idx] = copy[nextIdx];
-                          copy[nextIdx] = temp;
-                          setReorderedList(copy);
-                        }}
-                        className="px-3 py-1.5 rounded-xl bg-white border border-slate-300 hover:border-[#0070D1] font-bold text-xs text-slate-800 shadow-2xs cursor-pointer active:scale-95 transition-all"
-                        title="Bấm để đổi vị trí"
-                      >
-                        {chunk}
-                      </span>
-                    ))}
-                  </div>
-                  {isAnswerConfirmed && (
-                    <div className="p-2.5 rounded-xl bg-slate-100 text-xs font-semibold text-slate-800">
-                      Câu hoàn chỉnh chuẩn: <br />
-                      <span className="font-bold text-emerald-700">{currentQ.targetAnswer}</span>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* 4. Short Business Email Compose */}
-              {currentQ.type === 'email_compose' && (
-                <div className="space-y-2 pt-1">
-                  <div className="flex items-center justify-between text-xs font-bold text-slate-700">
-                    <span>Gõ email phản hồi trực tiếp:</span>
-                    <span className={`px-2 py-0.5 rounded-full font-mono text-[11px] font-black ${
-                      wordCount >= (currentQ.minWords || 25) && wordCount <= (currentQ.maxWords || 45)
-                        ? 'bg-emerald-100 text-emerald-800'
-                        : 'bg-amber-100 text-amber-800'
-                    }`}>
-                      Số từ: {wordCount} / {currentQ.minWords}-{currentQ.maxWords} từ
-                    </span>
-                  </div>
-                  <textarea
-                    rows={4}
-                    disabled={isAnswerConfirmed}
-                    value={emailText}
-                    onChange={(e) => setEmailText(e.target.value)}
-                    placeholder="Dear Mr. ..., We look forward to welcoming you..."
-                    className="w-full p-3 rounded-2xl border-2 border-slate-300 font-medium text-xs text-slate-900 focus:outline-none focus:border-[#0070D1] bg-slate-50 resize-none leading-relaxed"
+                    placeholder="Gõ từ còn thiếu vào đây (ví dụ: control shipments)..."
+                    className="w-full p-3.5 rounded-2xl border-2 border-slate-300 focus:border-[#009FE3] text-sm font-bold text-slate-900 outline-hidden bg-white"
                   />
                   {currentQ.hint && (
                     <p className="text-[11px] text-slate-500 italic">
@@ -920,33 +696,93 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
                 </div>
               )}
 
-              {/* 5. Speaking: Read Aloud or Situational Reflex */}
-              {(currentQ.type === 'read_aloud' || currentQ.type === 'situational_reflex') && (
-                <div className="space-y-3 pt-1">
-                  {currentQ.speakingTargetText && (
-                    <div className="p-3 rounded-2xl bg-amber-50 border border-amber-300 text-xs font-bold text-amber-950 leading-relaxed">
-                      "{currentQ.speakingTargetText}"
+              {/* 3. Reorder scrambled words */}
+              {currentQ.type === 'reorder' && (
+                <div className="space-y-3">
+                  <div className="p-3.5 min-h-[50px] rounded-2xl border-2 border-dashed border-sky-300 bg-sky-50/40 flex flex-wrap gap-2 items-center">
+                    {reorderedList.map((chunk, idx) => (
+                      <span key={idx} className="px-2.5 py-1 rounded-xl bg-sky-500 text-white text-xs font-bold shadow-2xs">
+                        {chunk}
+                      </span>
+                    ))}
+                  </div>
+
+                  {!isAnswerConfirmed && (
+                    <div className="flex flex-wrap gap-1.5 justify-center">
+                      {reorderedList.map((chunk, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => {
+                            playSound('click');
+                            // Move chunk left on click
+                            const next = [...reorderedList];
+                            if (idx > 0) {
+                              [next[idx - 1], next[idx]] = [next[idx], next[idx - 1]];
+                              setReorderedList(next);
+                            }
+                          }}
+                          className="px-2.5 py-1.5 rounded-xl bg-white border border-slate-300 hover:border-sky-400 text-slate-700 text-xs font-bold cursor-pointer active:scale-95"
+                          title="Bấm để di chuyển lên trước"
+                        >
+                          ← {chunk}
+                        </button>
+                      ))}
                     </div>
                   )}
+                </div>
+              )}
 
-                  <div className="flex flex-col sm:flex-row items-center gap-3">
+              {/* 4. Email Compose */}
+              {currentQ.type === 'email_compose' && (
+                <div className="space-y-2">
+                  <textarea
+                    rows={4}
+                    disabled={isAnswerConfirmed}
+                    value={emailText}
+                    onChange={(e) => setEmailText(e.target.value)}
+                    placeholder="Dear Mr. Smith, We look forward to welcoming you to Vikoda..."
+                    className="w-full p-3.5 rounded-2xl border-2 border-slate-300 focus:border-[#009FE3] text-xs sm:text-sm font-medium text-slate-900 outline-hidden bg-white resize-none"
+                  />
+                  <div className="flex justify-between text-[11px] text-slate-500 font-bold">
+                    <span>Số từ đã viết: {wordCount} từ</span>
+                    <span>Yêu cầu: {currentQ.minWords} - {currentQ.maxWords} từ</span>
+                  </div>
+                  {currentQ.hint && (
+                    <p className="text-[11px] text-slate-500 italic">
+                      💡 {currentQ.hint}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              {/* 5. Speaking Read Aloud & Situational Reflex */}
+              {(currentQ.type === 'read_aloud' || currentQ.type === 'situational_reflex') && (
+                <div className="space-y-3 text-center">
+                  <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-bold text-slate-800">
+                    "{currentQ.speakingTargetText}"
+                  </div>
+
+                  <div className="flex flex-col items-center justify-center py-2">
                     <button
                       type="button"
                       disabled={isAnswerConfirmed}
-                      onClick={handleStartSpeechRecording}
-                      className={`w-full sm:w-auto px-5 py-3 rounded-2xl font-black text-xs cursor-pointer shadow-md transition-all active:scale-95 flex items-center justify-center gap-2 ${
-                        isRecording
-                          ? 'bg-rose-600 text-white animate-pulse'
-                          : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white'
+                      onClick={handleToggleSpeech}
+                      className={`w-16 h-16 rounded-full flex items-center justify-center shadow-md transition-all cursor-pointer ${
+                        isRecording 
+                          ? 'bg-rose-500 text-white animate-pulse scale-105' 
+                          : 'bg-[#009FE3] hover:bg-[#0072CE] text-white active:scale-95'
                       }`}
                     >
-                      {isRecording ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-                      <span>{isRecording ? 'Đang Thu Âm (Nói ngay)...' : 'Bấm Mic Thu Âm (AI Chấm)'}</span>
+                      {isRecording ? <MicOff className="w-7 h-7" /> : <Mic className="w-7 h-7" />}
                     </button>
+                    <span className="text-[11px] text-slate-500 font-bold mt-2">
+                      {isRecording ? 'Đang lắng nghe... Hãy nói ngay!' : 'Bấm micro và đọc câu tiếng Anh trên'}
+                    </span>
 
                     {speechScore !== null && (
-                      <div className="px-3 py-1.5 rounded-xl bg-emerald-100 text-emerald-800 text-xs font-black flex items-center gap-1.5">
-                        <Award className="w-4 h-4 text-emerald-600" />
+                      <div className="mt-2 text-xs font-black text-emerald-600 flex items-center gap-1 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                        <Check className="w-3.5 h-3.5" />
                         <span>AI Chấm: {speechScore}/100 Điểm</span>
                       </div>
                     )}
@@ -988,7 +824,7 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
                   onClick={handleNextQuestion}
                   className="px-5 py-2.5 rounded-xl bg-[#0070D1] hover:bg-[#005bb5] text-white font-black text-xs cursor-pointer shadow-md flex items-center gap-1.5 active:scale-95 transition-all"
                 >
-                  <span>{currentIndex === 14 ? 'Nộp Bài & Xem Đánh Giá' : 'Sang Câu Tiếp Theo'}</span>
+                  <span>{currentIndex === STANDARDIZED_8_QUESTIONS.length - 1 ? 'Nộp Bài & Xem Đánh Giá' : 'Sang Câu Tiếp Theo'}</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               )}

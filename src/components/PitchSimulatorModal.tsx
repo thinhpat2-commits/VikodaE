@@ -14,7 +14,7 @@ import {
   ShieldCheck,
   Star
 } from 'lucide-react';
-import { playSpeech, startSpeechRecognition, stopSpeech } from '../services/speechService';
+import { playSpeech, startSpeechRecognition, finishSpeechRecognition, stopSpeech } from '../services/speechService';
 import { playSound } from '../services/soundEffects';
 import { CompanyEmblem } from './brand/VikodaLogos';
 
@@ -395,7 +395,7 @@ export const PitchSimulatorModal: React.FC<PitchSimulatorModalProps> = ({
 
   const handleToggleMic = () => {
     if (isRecording) {
-      setIsRecording(false);
+      finishSpeechRecognition();
     } else {
       setIsRecording(true);
       startSpeechRecognition(

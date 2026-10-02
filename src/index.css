@@ -183,3 +183,21 @@
   background: rgba(14, 165, 233, 0.6);
 }
 
+/* GPU-Accelerated Pure CSS Audio Waveform Animation (0% React re-render, 60fps) */
+@keyframes audioWaveBar {
+  0%, 100% {
+    height: 18%;
+  }
+  50% {
+    height: 96%;
+  }
+}
+
+.wave-bar-1 { animation: audioWaveBar 0.75s ease-in-out infinite 0.1s; }
+.wave-bar-2 { animation: audioWaveBar 0.65s ease-in-out infinite 0.3s; }
+.wave-bar-3 { animation: audioWaveBar 0.85s ease-in-out infinite 0.05s; }
+.wave-bar-4 { animation: audioWaveBar 0.55s ease-in-out infinite 0.25s; }
+.wave-bar-5 { animation: audioWaveBar 0.80s ease-in-out infinite 0.15s; }
+.wave-bar-6 { animation: audioWaveBar 0.70s ease-in-out infinite 0.35s; }
+.wave-bar-7 { animation: audioWaveBar 0.90s ease-in-out infinite 0.2s; }
+

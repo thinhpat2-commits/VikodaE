@@ -562,6 +562,11 @@ export default function App() {
           }}
           streakDays={gamificationState.streakDays}
           unitStars={gamificationState.unitStars}
+          onOpenPlacementTest={() => {
+            playSound('click');
+            setIsPlacementTestOpen(true);
+          }}
+          placementTestResult={gamificationState.placementTest || currentUserProfile?.placementTest}
         />
       )}
 

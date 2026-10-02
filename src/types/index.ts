@@ -1,6 +1,8 @@
+import { CourseLevel } from '../data/curriculumData';
+
 export type IndustryTrack = 'all' | 'vikoda' | 'horeca' | 'export' | 'general' | 'tech' | 'marketing' | 'finance' | 'hr';
 
-export type UserLevel = 'A1' | 'A2-B1' | 'B2' | 'C1';
+export type UserLevel = CourseLevel;
 
 export type VikodaRank = 
   | 'Tân Binh Đảnh Thạnh' 
@@ -58,7 +60,7 @@ export interface MistakeVaultItem {
 export interface PlacementTestResult {
   score: number;
   totalQuestions: number;
-  recommendedLevel: 'A1' | 'A2-B1' | 'B2-C1' | 'C2';
+  recommendedLevel: CourseLevel;
   skills: {
     reading: number; // 0 - 100
     listening: number; // 0 - 100
@@ -75,7 +77,7 @@ export interface PlacementTestResult {
 export interface StudyPlannerSettings {
   dailyGoalMinutes: number;
   activeDays: string[];
-  targetLevel: 'A1' | 'A2-B1' | 'B2-C1' | 'C2';
+  targetLevel: CourseLevel;
   targetGoalDays: number;
   weeklyTargetLessons: number;
 }

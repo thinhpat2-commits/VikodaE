@@ -211,9 +211,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   </span>
                 </div>
                 <p className="text-xs text-slate-300">
-                  {userLevel === 'A2-B1' && 'Tập trung: Email xin phép, báo cáo tiến độ, từ vựng công sở thông dụng.'}
-                  {userLevel === 'B2' && 'Tập trung: Phản biện cuộc họp, thương thảo deadline, trình bày số liệu rõ ràng.'}
-                  {userLevel === 'C1' && 'Tập trung: Đàm phán chiến lược, giải quyết mâu thuẫn, thuyết trình trước ban điều hành.'}
+                  {userLevel === 'A1' && 'Tập trung: Giao tiếp văn phòng cơ bản, chào hỏi, tiếp khách, mời nước khoáng.'}
+                  {(userLevel === 'A2' || userLevel === 'A2-B1') && 'Tập trung: Tiếng Anh đa phòng ban, ngày phép, email nội bộ.'}
+                  {(userLevel === 'B1' || userLevel === 'B2') && 'Tập trung: Đại sứ Vikoda, dẫn tour mỏ khoáng Đảnh Thạnh, bán hàng HORECA.'}
+                  {(userLevel === 'C1-C2' || userLevel === 'B2-C1' || userLevel === 'C2') && 'Tập trung: Đàm phán quốc tế, Incoterms 2020, FDA, ESG và Pitch Deck C-Suite.'}
                 </p>
               </div>
 

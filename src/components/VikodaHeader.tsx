@@ -44,6 +44,7 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
   profile,
   onOpenProfile,
   onGoHome,
+  onOpenPlacementTest,
   isCloudSynced = false,
 }) => {
   const [isLevelDropdownOpen, setIsLevelDropdownOpen] = useState<boolean>(false);
@@ -165,6 +166,20 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
           >
             <Sparkles className="w-4 h-4 text-[#0070D1]" />
           </button>
+
+          {/* Quick Placement Test Shortcut */}
+          {onOpenPlacementTest && (
+            <button
+              onClick={() => {
+                playSound('click');
+                onOpenPlacementTest();
+              }}
+              className="hidden md:inline-flex items-center gap-1 px-2.5 py-1 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-amber-950 font-black text-xs transition-all shadow-xs cursor-pointer active:scale-95 border-b-2 border-amber-600"
+              title="Làm bài kiểm tra đánh giá năng lực 4 kỹ năng"
+            >
+              <span>🎯 Test CEFR</span>
+            </button>
+          )}
 
           {/* Stealth Mode Mute/Unmute */}
           <button

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import confetti from 'canvas-confetti';
 import { 
   X, 
@@ -14,7 +14,9 @@ import {
   Brain,
   Zap,
   HelpCircle,
-  Trophy
+  Trophy,
+  ArrowRight,
+  Check
 } from 'lucide-react';
 import { MistakeVaultItem } from '../types';
 import { playSound } from '../services/soundEffects';
@@ -30,6 +32,62 @@ interface DailyQuickReviewModalProps {
   speechRate: number;
 }
 
+// Build 3 distinct choices with guaranteed unique strings and exact correctIndex
+const normalizeReviewItem = (item: MistakeVaultItem): MistakeVaultItem => {
+  // If item already has valid options and valid correctIndex
+  if (
+    item.options && 
+    item.options.length >= 2 && 
+    typeof item.correctIndex === 'number' && 
+    item.correctIndex >= 0 && 
+    item.correctIndex < item.options.length
+  ) {
+    return item;
+  }
+
+  const correct = (item.correctSentence || '').trim() || 'We provide natural alkaline mineral water.';
+  const wrongGiven = (item.wrongChoiceGiven || '').trim();
+
+  // Create clean grammatical distractors
+  const distractors: string[] = [];
+  if (wrongGiven && wrongGiven !== correct && wrongGiven.length > 5) {
+    distractors.push(wrongGiven);
+  }
+
+  // Preposition and verb form variations
+  const d1 = correct.replace(/\bhave\b/i, 'has').replace(/\bare\b/i, 'is').replace(/\bwe\b/i, 'us');
+  if (d1 !== correct) distractors.push(d1);
+
+  const d2 = correct.replace(/\bto\b/i, 'for').replace(/\bin\b/i, 'at').replace(/\bwater\b/i, 'waters');
+  if (d2 !== correct && d2 !== d1) distractors.push(d2);
+
+  const d3 = correct.replace(/\bnaturally\b/i, 'natural').replace(/\balkaline\b/i, 'acidic');
+  if (d3 !== correct && d3 !== d2 && d3 !== d1) distractors.push(d3);
+
+  // Filter out any duplicates
+  const uniqueDistractors = Array.from(new Set(distractors.filter(d => d !== correct))).slice(0, 3);
+  if (uniqueDistractors.length === 0) {
+    uniqueDistractors.push('This statement is grammatically incorrect in diplomatic context.');
+    uniqueDistractors.push('We do not recommend this expression for international clients.');
+  }
+
+  const allOpts = [correct, ...uniqueDistractors];
+
+  // Stable random shuffle
+  for (let i = allOpts.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [allOpts[i], allOpts[j]] = [allOpts[j], allOpts[i]];
+  }
+
+  const correctIdx = allOpts.indexOf(correct);
+
+  return {
+    ...item,
+    options: allOpts,
+    correctIndex: correctIdx >= 0 ? correctIdx : 0,
+  };
+};
+
 export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
   isOpen,
   onClose,
@@ -38,7 +96,6 @@ export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
   onAwardReviewXp,
   speechRate
 }) => {
-  // Active review questions (from user's real mistakes or default common pitfalls)
   const [questions, setQuestions] = useState<MistakeVaultItem[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -47,46 +104,52 @@ export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
   const [correctCount, setCorrectCount] = useState<number>(0);
   const [isFinished, setIsFinished] = useState<boolean>(false);
 
-  // Initialize review session
+  // Initialize review session ONLY ONCE when modal is opened (not on mistakesVault update)
   useEffect(() => {
     if (!isOpen) return;
 
     // Filter unmastered user mistakes
-    const unmastered = mistakesVault.filter(m => !m.mastered);
+    const unmastered = (mistakesVault || []).filter(m => !m.mastered);
+    let sessionPool: MistakeVaultItem[] = [];
 
     if (unmastered.length > 0) {
-      // Shuffle & pick up to 5-8 questions
-      const shuffled = [...unmastered].sort(() => 0.5 - Math.random()).slice(0, 8);
-      setQuestions(shuffled);
-    } else {
-      // Fallback to top corporate common mistakes from official handbook
-      const fallbackItems: MistakeVaultItem[] = COMMON_MISTAKES.slice(0, 6).map((cm, idx) => ({
-        id: `fb-${cm.id || idx}`,
+      sessionPool = [...unmastered].sort(() => 0.5 - Math.random()).slice(0, 6);
+    }
+
+    // Supplement with high-frequency corporate mistakes
+    if (sessionPool.length < 5) {
+      const needed = 5 - sessionPool.length;
+      const fallbackItems: MistakeVaultItem[] = COMMON_MISTAKES.slice(0, 10).map((cm, idx) => ({
+        id: `cm-fix-${cm.id || idx}`,
         questionId: cm.id,
-        promptEn: 'Choose the grammatically and diplomatically correct sentence:',
+        promptEn: 'Chọn câu tiếng Anh chính xác và chuẩn ngoại giao nhất:',
         promptVi: cm.vietnameseMeaning,
         correctSentence: cm.correctSentence,
         options: cm.options,
         correctIndex: cm.correctOptionIndex,
-        explanation: cm.explanation || cm.ruleExplanation || 'Chuẩn xác theo ngữ pháp thương mại quốc tế.',
-        crucialNote: cm.whyVietnameseMakeIt || 'Lỗi bẫy người Việt rất hay dịch thô word-by-word.',
+        explanation: cm.explanation || 'Chuẩn xác theo ngữ pháp thương mại quốc tế.',
+        crucialNote: cm.whyVietnameseMakeIt || 'Lỗi bẫy người Việt rất hay dịch thô từng từ.',
         category: cm.category || 'Business English',
         failedCount: 1,
         mastered: false,
         addedAt: Date.now()
       }));
-      setQuestions(fallbackItems);
+
+      const added = fallbackItems.slice(0, needed);
+      sessionPool = [...sessionPool, ...added];
     }
 
+    const preparedQuestions = sessionPool.map(normalizeReviewItem);
+    setQuestions(preparedQuestions);
     setCurrentIndex(0);
     setSelectedOption(null);
     setIsEvaluated(false);
     setIsCorrect(false);
     setCorrectCount(0);
     setIsFinished(false);
-  }, [isOpen, mistakesVault]);
+  }, [isOpen]); // CRITICAL FIX: Only run on isOpen change, not mistakesVault
 
-  // Keyboard navigation on PC (1, 2, 3, 4, Enter, Space)
+  // Keyboard navigation on PC (1, 2, 3, 4, Enter)
   useEffect(() => {
     if (!isOpen || isFinished || questions.length === 0) return;
 
@@ -95,15 +158,13 @@ export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
       if (!q) return;
 
       if (!isEvaluated) {
-        if (e.key >= '1' && e.key <= String(q.options.length)) {
-          const idx = parseInt(e.key) - 1;
+        if (e.key >= '1' && e.key <= String((q.options || []).length)) {
+          const idx = parseInt(e.key, 10) - 1;
           handleSelectOption(idx);
-        } else if (e.key === ' ' || e.key === 'Spacebar') {
-          e.preventDefault();
-          playSpeech(q.correctSentence, speechRate, 'en-US');
         }
       } else {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
           handleNextQuestion();
         }
       }
@@ -123,14 +184,15 @@ export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
     setSelectedOption(idx);
     setIsEvaluated(true);
 
-    const right = idx === currentQ.correctIndex;
-    setIsCorrect(right);
+    const isAnswerRight = idx === currentQ.correctIndex;
+    setIsCorrect(isAnswerRight);
 
-    if (right) {
+    if (isAnswerRight) {
       playSound('success');
       setCorrectCount(prev => prev + 1);
-      onMasterMistake(currentQ.id);
-      playSpeech(currentQ.correctSentence, speechRate, 'en-US');
+      if (currentQ.id) {
+        onMasterMistake(currentQ.id);
+      }
     } else {
       playSound('wrong');
     }
@@ -148,10 +210,11 @@ export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
       const earnedXp = Math.max(30, correctCount * 15);
       const earnedGems = Math.max(5, correctCount * 3);
       onAwardReviewXp(earnedXp, earnedGems);
+      playSound('celebrate');
       try {
         confetti({
-          particleCount: 120,
-          spread: 80,
+          particleCount: 100,
+          spread: 70,
           origin: { y: 0.6 }
         });
       } catch (e) {}
@@ -159,39 +222,40 @@ export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-3 md:p-6 overflow-y-auto animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl w-full max-w-4xl border border-sky-100 shadow-2xl overflow-hidden flex flex-col my-auto max-h-[92vh]">
+    <div className="fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 overflow-y-auto animate-in fade-in duration-150">
+      <div className="bg-white rounded-3xl w-full max-w-2xl border border-sky-100 shadow-2xl overflow-hidden flex flex-col my-auto max-h-[94vh]">
         
         {/* Top Header Bar */}
-        <div className="px-6 py-4 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white flex items-center justify-between shadow-sm">
-          <div className="flex items-center space-x-3">
-            <div className="p-2 bg-white/20 rounded-2xl backdrop-blur-xs">
-              <Brain className="w-6 h-6 text-white" />
+        <div className="px-4 sm:px-6 py-3.5 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white flex items-center justify-between shadow-xs shrink-0">
+          <div className="flex items-center space-x-2.5">
+            <div className="p-2 bg-white/20 rounded-2xl backdrop-blur-xs shrink-0">
+              <Brain className="w-5 h-5 text-white" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <h2 className="text-lg md:text-xl font-black tracking-tight">Daily Quick Review</h2>
-                <span className="px-2 py-0.5 rounded-full bg-white/20 text-xs font-bold uppercase tracking-wider">
-                  3-Min Spaced Repetition
+                <h2 className="text-sm sm:text-base font-black tracking-tight">Ôn Tập Nhanh 3 Phút</h2>
+                <span className="px-2 py-0.2 rounded-full bg-white/20 text-[10px] font-black uppercase tracking-wider">
+                  Spaced Repetition
                 </span>
               </div>
-              <p className="text-xs text-amber-100 font-medium">
-                Ôn tập nhanh các câu hay nhầm lẫn để ghi nhớ vĩnh viễn
+              <p className="text-[11px] text-amber-100 font-medium hidden sm:block">
+                Khắc phục triệt để các bẫy ngữ pháp và câu hay nhầm lẫn
               </p>
             </div>
           </div>
 
-          <div className="flex items-center space-x-3">
-            <div className="hidden sm:flex items-center space-x-1 px-3 py-1 bg-white/15 rounded-full text-xs font-bold">
-              <Flame className="w-4 h-4 text-amber-200" />
-              <span>{correctCount}/{questions.length} Mastered</span>
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 px-2.5 py-1 bg-white/20 rounded-full text-xs font-black">
+              <Flame className="w-3.5 h-3.5 text-amber-200 fill-current" />
+              <span>{correctCount}/{questions.length} Đúng</span>
             </div>
             <button
               onClick={() => {
                 playSound('click');
                 onClose();
               }}
-              className="p-2 rounded-full hover:bg-white/20 text-white transition-all cursor-pointer"
+              className="p-1.5 rounded-full hover:bg-white/20 text-white transition-all cursor-pointer"
+              title="Đóng ôn tập"
             >
               <X className="w-5 h-5" />
             </button>
@@ -199,55 +263,57 @@ export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
         </div>
 
         {/* Progress Bar */}
-        <div className="w-full bg-slate-100 h-2">
+        <div className="w-full bg-slate-100 h-2 shrink-0">
           <div 
-            className="bg-amber-500 h-full transition-all duration-300"
+            className="bg-amber-500 h-full transition-all duration-300 rounded-r-full"
             style={{ width: `${((currentIndex + (isEvaluated ? 1 : 0)) / (questions.length || 1)) * 100}%` }}
           />
         </div>
 
         {/* Main Body */}
         {!isFinished && currentQ ? (
-          <div className="p-6 md:p-8 flex-1 overflow-y-auto space-y-6">
+          <div className="p-4 sm:p-6 flex-1 overflow-y-auto space-y-4">
             
             {/* Question Card */}
-            <div className="bg-gradient-to-br from-amber-50/60 to-orange-50/30 rounded-2xl p-5 md:p-6 border border-amber-200/60 shadow-xs">
-              <div className="flex items-center justify-between mb-3">
-                <span className="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-xs font-black uppercase tracking-wider">
-                  Question {currentIndex + 1} of {questions.length} • {currentQ.category}
+            <div className="bg-gradient-to-br from-amber-50/70 to-orange-50/40 rounded-2xl p-4 sm:p-5 border border-amber-200 shadow-2xs space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="px-2.5 py-0.5 bg-amber-100 text-amber-900 rounded-full text-[10px] font-black uppercase tracking-wider">
+                  Câu {currentIndex + 1} / {questions.length} • {currentQ.category || 'Business English'}
                 </span>
-                <span className="hidden md:inline-block text-xs font-semibold text-slate-500 bg-white/80 px-2.5 py-1 rounded-lg border border-slate-200">
-                  ⌨️ Bấm phím 1 - {currentQ.options.length} để chọn
+                <span className="text-[11px] text-slate-400 font-semibold hidden sm:inline">
+                  (Bấm phím 1 - {(currentQ.options || []).length})
                 </span>
               </div>
 
-              {/* Prompt En / Vi */}
-              <h3 className="text-lg md:text-2xl font-black text-slate-900 leading-snug">
-                {currentQ.promptEn || 'Select the most professional business response:'}
+              <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug">
+                {currentQ.promptVi || 'Chọn câu tiếng Anh chuẩn xác nhất:'}
               </h3>
-              <p className="text-sm md:text-base text-slate-600 font-medium mt-1">
-                👉 Ngữ cảnh tiếng Việt: <span className="font-bold text-slate-800">{currentQ.promptVi}</span>
-              </p>
+
+              {currentQ.promptEn && currentQ.promptEn !== currentQ.promptVi && (
+                <p className="text-xs text-slate-600 font-medium">
+                  👉 {currentQ.promptEn}
+                </p>
+              )}
             </div>
 
-            {/* Options Grid (Large PC buttons) */}
-            <div className="grid grid-cols-1 gap-3.5">
-              {currentQ.options.map((opt, idx) => {
+            {/* Options List with Deterministic Highlighting */}
+            <div className="space-y-2.5">
+              {(currentQ.options || []).map((opt, idx) => {
                 const isSelected = selectedOption === idx;
-                const isThisCorrect = idx === currentQ.correctIndex;
+                const isThisTheCorrectAnswer = idx === currentQ.correctIndex;
 
-                let btnStyle = "bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-800 hover:border-amber-300";
+                let btnStyle = "bg-white hover:bg-slate-50 border-2 border-slate-200 border-b-4 border-b-slate-300 text-slate-800 hover:border-amber-300";
                 
                 if (isEvaluated) {
-                  if (isThisCorrect) {
-                    btnStyle = "bg-emerald-50 border-2 border-emerald-500 text-emerald-900 shadow-sm";
-                  } else if (isSelected && !isThisCorrect) {
-                    btnStyle = "bg-rose-50 border-2 border-rose-500 text-rose-900";
+                  if (isThisTheCorrectAnswer) {
+                    btnStyle = "bg-emerald-50 border-2 border-emerald-500 border-b-4 border-b-emerald-600 text-emerald-950 font-black shadow-xs ring-2 ring-emerald-200";
+                  } else if (isSelected && !isThisTheCorrectAnswer) {
+                    btnStyle = "bg-rose-50 border-2 border-rose-500 border-b-4 border-b-rose-600 text-rose-950 font-bold";
                   } else {
-                    btnStyle = "bg-slate-50 border-2 border-slate-200 text-slate-400 opacity-60";
+                    btnStyle = "bg-slate-50 border-2 border-slate-200 border-b-2 text-slate-400 opacity-40";
                   }
                 } else if (isSelected) {
-                  btnStyle = "bg-amber-50 border-2 border-amber-500 text-amber-900";
+                  btnStyle = "bg-amber-50 border-2 border-amber-500 border-b-4 border-b-amber-600 text-amber-950 font-black";
                 }
 
                 return (
@@ -255,55 +321,61 @@ export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
                     key={idx}
                     disabled={isEvaluated}
                     onClick={() => handleSelectOption(idx)}
-                    className={`w-full text-left p-4 md:p-5 rounded-2xl font-bold transition-all flex items-start space-x-4 cursor-pointer text-base md:text-lg ${btnStyle}`}
+                    className={`w-full text-left p-3.5 sm:p-4 rounded-2xl transition-all flex items-start space-x-3 cursor-pointer text-xs sm:text-sm active:translate-y-0.5 ${btnStyle}`}
                   >
-                    <span className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center font-black text-sm shrink-0 border border-slate-300">
+                    <span className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center font-black text-xs shrink-0 border border-slate-300 mt-0.5">
                       {idx + 1}
                     </span>
-                    <span className="flex-1 pt-0.5 leading-relaxed">{opt}</span>
-                    {isEvaluated && isThisCorrect && (
-                      <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0 mt-0.5" />
+                    <span className="flex-1 leading-snug break-words">{opt}</span>
+                    {isEvaluated && isThisTheCorrectAnswer && (
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                     )}
-                    {isEvaluated && isSelected && !isThisCorrect && (
-                      <XCircle className="w-6 h-6 text-rose-600 shrink-0 mt-0.5" />
+                    {isEvaluated && isSelected && !isThisTheCorrectAnswer && (
+                      <XCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
                     )}
                   </button>
                 );
               })}
             </div>
 
-            {/* Explanation & Pedagogy Card */}
+            {/* Explanation & Audio Replay Card */}
             {isEvaluated && (
-              <div className={`rounded-2xl p-5 md:p-6 border animate-in slide-in-from-bottom-2 duration-200 ${
-                isCorrect ? 'bg-emerald-50/70 border-emerald-300 text-emerald-950' : 'bg-rose-50/70 border-rose-300 text-rose-950'
+              <div className={`rounded-2xl p-4 border animate-in slide-in-from-bottom-2 duration-150 space-y-2 ${
+                isCorrect ? 'bg-emerald-50/80 border-emerald-300 text-emerald-950' : 'bg-rose-50/80 border-rose-300 text-rose-950'
               }`}>
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     {isCorrect ? (
-                      <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                     ) : (
-                      <XCircle className="w-6 h-6 text-rose-600" />
+                      <XCircle className="w-5 h-5 text-rose-600" />
                     )}
-                    <span className="font-black text-base md:text-lg">
-                      {isCorrect ? 'Tuyệt vời! Bạn đã làm chủ câu hỏi này.' : 'Chưa chính xác! Hãy lưu ý phân tích bên dưới:'}
+                    <span className="font-black text-xs sm:text-sm">
+                      {isCorrect ? 'Chính xác! Bạn đã ghi nhớ chuẩn!' : 'Chưa đúng! Đáp án chuẩn là:'}
                     </span>
                   </div>
                   <button
                     onClick={() => playSpeech(currentQ.correctSentence, speechRate, 'en-US')}
-                    className="px-3 py-1.5 rounded-xl bg-white shadow-xs border border-slate-200 text-slate-700 hover:text-amber-600 flex items-center space-x-1.5 text-xs font-bold cursor-pointer"
+                    className="px-2.5 py-1 rounded-xl bg-white shadow-2xs border border-slate-200 text-slate-700 hover:text-amber-600 flex items-center space-x-1 text-xs font-bold cursor-pointer"
                   >
-                    <Volume2 className="w-4 h-4" />
-                    <span>Nghe câu chuẩn</span>
+                    <Volume2 className="w-3.5 h-3.5" />
+                    <span>Nghe</span>
                   </button>
                 </div>
 
-                <p className="text-sm md:text-base font-medium text-slate-800 mb-2 leading-relaxed">
-                  💡 <span className="font-bold">Giải thích:</span> {currentQ.explanation}
+                {!isCorrect && (
+                  <p className="text-xs sm:text-sm font-black text-rose-950 break-words">
+                    "{currentQ.correctSentence}"
+                  </p>
+                )}
+
+                <p className="text-xs text-slate-800 leading-relaxed font-medium">
+                  💡 <span className="font-bold">Phân tích:</span> {currentQ.explanation}
                 </p>
 
                 {currentQ.crucialNote && (
-                  <div className="mt-3 p-3.5 bg-white/80 rounded-xl border border-amber-200/80 text-xs md:text-sm text-slate-700">
-                    <span className="font-extrabold text-amber-800">⚠️ Bẫy giao tiếp & Lưu ý thương mại:</span> {currentQ.crucialNote}
+                  <div className="p-2.5 bg-white/90 rounded-xl border border-amber-200 text-[11px] text-amber-900 font-bold">
+                    ⚡ <span className="underline">Lưu ý:</span> {currentQ.crucialNote}
                   </div>
                 )}
               </div>
@@ -312,29 +384,29 @@ export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
           </div>
         ) : isFinished ? (
           /* Finished Screen */
-          <div className="p-8 md:p-12 text-center space-y-6 flex-1 flex flex-col items-center justify-center">
-            <div className="w-20 h-20 rounded-full bg-amber-100 border-4 border-amber-300 flex items-center justify-center text-amber-600 shadow-lg animate-bounce">
-              <Trophy className="w-10 h-10" />
+          <div className="p-6 sm:p-8 text-center space-y-5 flex-1 flex flex-col items-center justify-center">
+            <div className="w-16 h-16 rounded-full bg-amber-100 border-4 border-amber-400 flex items-center justify-center text-amber-600 shadow-md">
+              <Trophy className="w-8 h-8" />
             </div>
 
-            <div className="space-y-2">
-              <h3 className="text-2xl md:text-3xl font-black text-slate-900">
-                Hoàn Thành Phiên Ôn Tập Nhanh!
+            <div className="space-y-1">
+              <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+                Hoàn Thành Phiên Ôn Tập 3 Phút!
               </h3>
-              <p className="text-slate-600 text-sm md:text-base max-w-md mx-auto">
-                Bạn đã xử lý <span className="font-bold text-amber-600">{correctCount}/{questions.length} câu</span> lỗi sai. 
-                Lặp lại hằng ngày là bí quyết ghi nhớ vĩnh viễn của chuyên gia!
+              <p className="text-slate-600 text-xs sm:text-sm max-w-sm mx-auto">
+                Bạn đã trả lời đúng <strong className="text-amber-600 font-black">{correctCount}/{questions.length} câu</strong> bẫy.
+                Lặp lại ngắt quãng hằng ngày sẽ giúp bạn phản xạ tự nhiên không bao giờ sai!
               </p>
             </div>
 
-            <div className="flex items-center justify-center space-x-6">
-              <div className="px-5 py-3 rounded-2xl bg-amber-50 border border-amber-200 text-center">
-                <div className="text-xs uppercase font-extrabold text-amber-700">Điểm thưởng</div>
-                <div className="text-xl md:text-2xl font-black text-amber-600">+{Math.max(30, correctCount * 15)} XP</div>
+            <div className="grid grid-cols-2 gap-3 w-full max-w-xs">
+              <div className="p-3 rounded-2xl bg-amber-50 border-2 border-amber-200 text-center">
+                <div className="text-[10px] uppercase font-black text-amber-800">Điểm thưởng</div>
+                <div className="text-xl font-black text-amber-600">+{Math.max(30, correctCount * 15)} XP</div>
               </div>
-              <div className="px-5 py-3 rounded-2xl bg-sky-50 border border-sky-200 text-center">
-                <div className="text-xs uppercase font-extrabold text-[#005A9C]">Ngọc khoáng</div>
-                <div className="text-xl md:text-2xl font-black text-[#0072CE]">+{Math.max(5, correctCount * 3)} Gems</div>
+              <div className="p-3 rounded-2xl bg-sky-50 border-2 border-sky-200 text-center">
+                <div className="text-[10px] uppercase font-black text-sky-800">Ngọc khoáng</div>
+                <div className="text-xl font-black text-[#0070D1]">+{Math.max(5, correctCount * 3)} 💎</div>
               </div>
             </div>
 
@@ -343,35 +415,31 @@ export const DailyQuickReviewModal: React.FC<DailyQuickReviewModalProps> = ({
                 playSound('success');
                 onClose();
               }}
-              className="px-8 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-base shadow-lg hover:shadow-xl hover:from-amber-600 hover:to-orange-600 transition-all cursor-pointer active:translate-y-0.5"
+              className="w-full max-w-xs py-3.5 rounded-2xl bg-[#22c55e] hover:bg-[#16a34a] border-b-4 border-[#15803d] text-white font-black text-xs uppercase tracking-wider cursor-pointer shadow-md active:translate-y-0.5"
             >
-              Tiếp tục học lộ trình chính
+              Tiếp Tục Lộ Trình
             </button>
           </div>
         ) : null}
 
-        {/* Bottom Footer Actions */}
-        {!isFinished && (
-          <div className="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
-            <span className="text-xs text-slate-400 font-medium hidden sm:inline-block">
-              {isEvaluated ? 'Nhấn Enter hoặc nút bên phải để sang câu kế tiếp' : 'Chọn đáp án bằng chuột hoặc bấm phím số'}
-            </span>
-
-            <div className="flex items-center space-x-3 ml-auto">
-              {isEvaluated ? (
-                <button
-                  onClick={handleNextQuestion}
-                  className="px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-black text-sm md:text-base flex items-center space-x-2 shadow-md hover:shadow-lg transition-all cursor-pointer active:translate-y-0.5"
-                >
-                  <span>{currentIndex < questions.length - 1 ? 'Next Question' : 'Finish Review'}</span>
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              ) : (
-                <span className="text-xs font-semibold text-slate-500">
-                  Hãy chọn một phương án để kiểm tra
-                </span>
-              )}
+        {/* BOTTOM ACTION BAR */}
+        {!isFinished && isEvaluated && (
+          <div className="p-3 sm:p-4 bg-slate-50 border-t border-slate-200 shrink-0 flex items-center justify-between gap-3 animate-in slide-in-from-bottom-2 duration-150">
+            <div className="text-xs text-slate-500 font-bold hidden sm:block">
+              {isCorrect ? '✅ Đã chọn chính xác!' : '❌ Hãy ghi nhớ giải thích bên trên.'}
             </div>
+
+            <button
+              onClick={handleNextQuestion}
+              className={`w-full sm:w-auto min-w-[200px] py-3.5 px-6 rounded-2xl font-black text-xs uppercase tracking-wider cursor-pointer shadow-md flex items-center justify-center gap-2 active:translate-y-0.5 ml-auto text-white ${
+                isCorrect
+                  ? 'bg-[#22c55e] hover:bg-[#16a34a] border-b-4 border-[#15803d]'
+                  : 'bg-[#0070D1] hover:bg-[#005bb5] border-b-4 border-[#004b96]'
+              }`}
+            >
+              <span>{currentIndex < questions.length - 1 ? 'Câu Tiếp Theo' : 'Xem Kết Quả Ôn Tập'}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
         )}
 

@@ -71,28 +71,39 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
           </div>
         </div>
 
-        {/* Level Switcher (Pill Matrix) */}
+        {/* Level Switcher (5 Progressive Tiers) */}
         <div className="px-1">
-          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5 px-1">
-            Cấp Độ Khóa Học
+          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1.5 px-1 flex items-center justify-between">
+            <span>5 CẤP ĐỘ LỘ TRÌNH</span>
+            <span className="text-[#0070D1]">{selectedLevel}</span>
           </div>
-          <div className="grid grid-cols-4 gap-1 p-1 bg-slate-100 rounded-2xl border border-slate-200">
-            {(['A1', 'A2-B1', 'B2-C1', 'C2'] as CourseLevel[]).map((lvl) => (
-              <button
-                key={lvl}
-                onClick={() => {
-                  playSound('click');
-                  setSelectedLevel(lvl);
-                }}
-                className={`py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
-                  selectedLevel === lvl
-                    ? 'bg-[#0070D1] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
-              >
-                {lvl === 'A2-B1' ? 'B1' : lvl === 'B2-C1' ? 'C1' : lvl}
-              </button>
-            ))}
+          <div className="grid grid-cols-5 gap-1 p-1 bg-slate-100 rounded-2xl border border-slate-200">
+            {(['A1', 'A2', 'B1', 'B2', 'C1-C2'] as CourseLevel[]).map((lvl) => {
+              const label = lvl === 'C1-C2' ? 'C1' : lvl;
+              const title = 
+                lvl === 'A1' ? 'A1: Giao Tiếp Văn Phòng Cơ Bản' :
+                lvl === 'A2' ? 'A2: Tiếng Anh Đa Phòng Ban' :
+                lvl === 'B1' ? 'B1: Đại Sứ Vikoda & Mỏ Đảnh Thạnh' :
+                lvl === 'B2' ? 'B2: Bán Hàng B2B & HORECA' :
+                'C1-C2: Xuất Khẩu Toàn Cầu & C-Suite';
+              return (
+                <button
+                  key={lvl}
+                  onClick={() => {
+                    playSound('click');
+                    setSelectedLevel(lvl);
+                  }}
+                  title={title}
+                  className={`py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer ${
+                    selectedLevel === lvl
+                      ? 'bg-[#0070D1] text-white shadow-xs'
+                      : 'text-slate-600 hover:text-slate-900'
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
         </div>
 

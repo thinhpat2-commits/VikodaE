@@ -12,17 +12,27 @@ import {
   ChevronRight,
   HelpCircle,
   ArrowRight,
-  Star
+  Star,
+  Headphones,
+  BookOpen,
+  Edit3,
+  Puzzle,
+  RotateCcw
 } from 'lucide-react';
 import { UnitLesson, LessonExercise } from '../data/curriculumData';
 import { VikoMascot } from './brand/VikodaLogos';
 import { playSound } from '../services/soundEffects';
 import { VoiceSelectorModal } from './VoiceSelectorModal';
+import { LiveCircularMicButton } from './LiveCircularMicButton';
 import { 
   playSpeech, 
   stopSpeech, 
   calculateSimilarity, 
+  evaluatePronunciationDetails,
+  DetailedSpeechEvaluation,
   startSpeechRecognition,
+  stopSpeechRecognition,
+  finishSpeechRecognition,
   isSpeechRecognitionSupported,
   VOICE_OPTIONS,
   getSelectedVoiceId,
@@ -98,22 +108,44 @@ const generateChallengingWordPool = (targetSentence: string, originalPool?: stri
     if (GRAMMAR_DISTRACTORS[clean]) {
       const candidates = GRAMMAR_DISTRACTORS[clean];
       for (const cand of candidates) {
-        if (!poolSet.has(cand) && result.length < targetWords.length + 4) {
+        if (!poolSet.has(cand.toLowerCase()) && result.length < targetWords.length + 3) {
           result.push(cand);
-          poolSet.add(cand);
+          poolSet.add(cand.toLowerCase());
           break;
         }
       }
     }
   });
 
-  // Fisher-Yates Shuffle
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
+  // Randomize word pool order
+  return result.sort(() => 0.5 - Math.random());
+};
 
-  return result;
+// Intelligently prepare session exercises with randomized order and randomized option positions
+const prepareSessionExercises = (exercises: LessonExercise[]): LessonExercise[] => {
+  const cloned: LessonExercise[] = JSON.parse(JSON.stringify(exercises));
+
+  // 1. For choice, listen_choice, fill_blank: shuffle options and recalculate correctIndex
+  const processed = cloned.map((ex) => {
+    if ((ex.type === 'choice' || ex.type === 'listen_choice' || ex.type === 'fill_blank') && ex.options && ex.options.length > 1) {
+      const correctIdx = ex.correctIndex ?? 0;
+      const correctOptionText = ex.options[correctIdx];
+      
+      // Shuffle options copy
+      const shuffledOptions = [...ex.options].sort(() => 0.5 - Math.random());
+      const newCorrectIdx = shuffledOptions.findIndex(opt => opt === correctOptionText);
+
+      return {
+        ...ex,
+        options: shuffledOptions,
+        correctIndex: newCorrectIdx >= 0 ? newCorrectIdx : 0
+      };
+    }
+    return ex;
+  });
+
+  // 2. Shuffle exercises sequence so learners don't face identical order every session
+  return [...processed].sort(() => 0.5 - Math.random());
 };
 
 export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
@@ -123,6 +155,11 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   speechRate,
   onRecordMistake
 }) => {
+  // Session exercises: pre-shuffled once per session to avoid predictable patterns
+  const [sessionExercises, setSessionExercises] = useState<LessonExercise[]>(() => 
+    prepareSessionExercises(lesson.exercises)
+  );
+
   const [exerciseIndex, setExerciseIndex] = useState<number>(0);
   const [selectedWordChips, setSelectedWordChips] = useState<string[]>([]);
   const [availableWordChips, setAvailableWordChips] = useState<string[]>([]);
@@ -131,10 +168,16 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   // Voice speaking & settings states
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [spokenText, setSpokenText] = useState<string>('');
+  const [liveInterimText, setLiveInterimText] = useState<string>('');
+  const [micErrorMessage, setMicErrorMessage] = useState<string>('');
+  const [pronunciationDetails, setPronunciationDetails] = useState<DetailedSpeechEvaluation | null>(null);
   const [speechScore, setSpeechScore] = useState<number | null>(null);
   const [speechFeedback, setSpeechFeedback] = useState<string>('');
   const [currentVoiceId, setCurrentVoiceId] = useState<VoiceOptionId>(getSelectedVoiceId());
   const [isVoicePickerOpen, setIsVoicePickerOpen] = useState<boolean>(false);
+
+  // Audio listening states
+  const [isPlayingAudio, setIsPlayingAudio] = useState<boolean>(false);
 
   // Evaluation & Star Scoring states
   const [isEvaluated, setIsEvaluated] = useState<boolean>(false);
@@ -144,17 +187,30 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   const [streakCombo, setStreakCombo] = useState<number>(0);
   const [lessonMistakeCount, setLessonMistakeCount] = useState<number>(0);
 
-  const silenceTimeoutRef = useRef<any>(null);
-
   useEffect(() => {
     const unsub = subscribeVoiceChange((vId) => setCurrentVoiceId(vId));
-    return unsub;
+    return () => {
+      unsub();
+      stopSpeech();
+      stopSpeechRecognition();
+    };
   }, []);
 
-  const currentExercise: LessonExercise = lesson.exercises[exerciseIndex];
+  // When lesson changes or restarts, prepare fresh randomized exercises
+  useEffect(() => {
+    setSessionExercises(prepareSessionExercises(lesson.exercises));
+    setExerciseIndex(0);
+    setLessonMistakeCount(0);
+    setStreakCombo(0);
+    setIsLessonFinished(false);
+  }, [lesson.id]);
+
+  const currentExercise: LessonExercise = sessionExercises[exerciseIndex] || sessionExercises[0] || lesson.exercises[0];
 
   // Initialize exercise state
   useEffect(() => {
+    if (!currentExercise) return;
+
     if (currentExercise.type === 'word_order') {
       const challengingPool = generateChallengingWordPool(
         currentExercise.englishSentence,
@@ -170,23 +226,34 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     setSelectedChoice(null);
     setIsRecording(false);
     setSpokenText('');
+    setLiveInterimText('');
+    setMicErrorMessage('');
+    setPronunciationDetails(null);
     setSpeechScore(null);
     setSpeechFeedback('');
     setIsEvaluated(false);
     setIsAnswerCorrect(false);
     setShowGrammarDetail(false);
+    setIsPlayingAudio(false);
 
-    // Auto-play audio only for listening comprehension
+    // Auto-play audio only for listening comprehension with true onEnd callback
     if (currentExercise.type === 'listen_choice') {
-      playSpeech(currentExercise.audioText, speechRate, 'en-US');
+      const textToPlay = currentExercise.audioText || currentExercise.englishSentence || '';
+      if (textToPlay) {
+        setIsPlayingAudio(true);
+        playSpeech(textToPlay, speechRate, 'en-US', () => setIsPlayingAudio(false));
+      }
     }
   }, [exerciseIndex, currentExercise]);
 
-  const handlePlayAudio = () => {
-    playSpeech(currentExercise.audioText, speechRate, 'en-US');
+  const handlePlayAudio = (rate: number = speechRate) => {
+    const textToPlay = currentExercise.audioText || currentExercise.englishSentence || '';
+    if (!textToPlay) return;
+    setIsPlayingAudio(true);
+    playSpeech(textToPlay, rate, 'en-US', () => setIsPlayingAudio(false));
   };
 
-  // Word tap actions
+  // Word tap actions for word_order
   const handleTapAvailableWord = (word: string, index: number) => {
     if (isEvaluated) return;
     playSound('click');
@@ -205,69 +272,61 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     setAvailableWordChips([...availableWordChips, word]);
   };
 
-  // REAL SPEECH RECOGNITION
+  // REAL SPEECH RECOGNITION (TỰ ĐỘNG CHẤM ĐIỂM, KHÔNG CẦN BẤM NỘP)
   const handleStartSpeaking = () => {
     if (isRecording) {
-      setIsRecording(false);
-      if (silenceTimeoutRef.current) clearTimeout(silenceTimeoutRef.current);
+      // Optional manual stop if user wants to evaluate immediately
+      finishSpeechRecognition();
       return;
     }
 
     if (!isSpeechRecognitionSupported()) {
-      setSpeechFeedback('Trình duyệt chưa hỗ trợ micro trực tiếp. Vui lòng sử dụng Google Chrome hoặc Microsoft Edge!');
+      setMicErrorMessage('Trình duyệt chưa hỗ trợ micro trực tiếp. Vui lòng sử dụng Google Chrome hoặc Microsoft Edge!');
       return;
     }
 
     playSound('click');
     setIsRecording(true);
     setSpokenText('');
+    setLiveInterimText('');
+    setMicErrorMessage('');
+    setPronunciationDetails(null);
     setSpeechScore(null);
-    setSpeechFeedback('Đang lắng nghe... Hãy đọc to câu tiếng Anh ở trên!');
-
-    let receivedSpeech = false;
-
-    if (silenceTimeoutRef.current) clearTimeout(silenceTimeoutRef.current);
-    silenceTimeoutRef.current = setTimeout(() => {
-      if (!receivedSpeech) {
-        setIsRecording(false);
-        setSpokenText('(Không có âm thanh)');
-        setSpeechScore(0);
-        setSpeechFeedback('⚠️ Không ghi nhận được giọng nói. Bạn hãy kiểm tra micro và đọc to rõ nhé!');
-        playSound('wrong');
-      }
-    }, 6000);
+    setSpeechFeedback('Đang mở micro... Hãy đọc to câu tiếng Anh ở trên!');
 
     startSpeechRecognition(
+      // On Final Result (Tự động nộp bài và chấm điểm ngay khi đọc xong)
       (transcript) => {
-        receivedSpeech = true;
-        if (silenceTimeoutRef.current) clearTimeout(silenceTimeoutRef.current);
+        setSpokenText(transcript);
+        setLiveInterimText('');
         setIsRecording(false);
 
-        const cleanTranscript = (transcript || '').trim();
-        if (!cleanTranscript) {
-          setSpokenText('(Không nghe rõ)');
-          setSpeechScore(0);
-          setSpeechFeedback('⚠️ Chưa nghe rõ âm thanh. Hãy bấm lại micro và đọc to câu trên!');
-          playSound('wrong');
-          return;
-        }
+        const details = evaluatePronunciationDetails(
+          currentExercise.englishSentence,
+          transcript
+        );
+        setPronunciationDetails(details);
+        setSpeechScore(details.score);
+        setSpeechFeedback(details.feedback);
 
-        setSpokenText(cleanTranscript);
-        const score = calculateSimilarity(currentExercise.englishSentence, cleanTranscript);
-        setSpeechScore(score);
-
-        if (score >= 65) {
-          setSpeechFeedback(`🎉 Xuất sắc! Phát âm chuẩn ${score}% so với người bản ngữ.`);
-          playSound('success');
-        } else if (score >= 40) {
-          setSpeechFeedback(`👍 Đạt ${score}%. Chú ý phát âm rõ trọng âm và âm đuôi để nâng điểm nhé!`);
+        if (details.passed) {
+          playSound('correct');
         } else {
-          setSpeechFeedback(`❌ Chỉ đạt ${score}%. Bạn cần đọc sát với câu tiếng Anh mẫu ở trên.`);
           playSound('wrong');
         }
       },
+      // On End
       () => {
         setIsRecording(false);
+      },
+      // On Error
+      (errorMsg) => {
+        setMicErrorMessage(errorMsg);
+        setIsRecording(false);
+      },
+      // On Interim Streaming (Live Words)
+      (interim) => {
+        setLiveInterimText(interim);
       },
       'en-US'
     );
@@ -280,21 +339,26 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     let correct = false;
 
     if (currentExercise.type === 'word_order') {
-      const builtSentence = selectedWordChips.join(' ').trim();
-      const targetSentence = currentExercise.englishSentence.trim();
-      
-      const cleanBuilt = builtSentence.toLowerCase().replace(/[.,!?'"]/g, '');
-      const cleanTarget = targetSentence.toLowerCase().replace(/[.,!?'"]/g, '');
+      const normalizeSentence = (s: string) => 
+        s.toLowerCase()
+         .replace(/[’‘`]/g, "'")
+         .replace(/[“”]/g, '"')
+         .replace(/[.,!?'"–—\-]/g, '')
+         .replace(/\s+/g, ' ')
+         .trim();
+
+      const cleanBuilt = normalizeSentence(selectedWordChips.join(' '));
+      const cleanTarget = normalizeSentence(currentExercise.englishSentence);
 
       if (cleanBuilt === cleanTarget) {
         correct = true;
       }
-    } else if (currentExercise.type === 'choice') {
+    } else if (currentExercise.type === 'choice' || currentExercise.type === 'listen_choice' || currentExercise.type === 'fill_blank') {
       if (selectedChoice === currentExercise.correctIndex) {
         correct = true;
       }
     } else if (currentExercise.type === 'speak') {
-      if (speechScore !== null && speechScore >= 60) {
+      if (speechScore !== null && speechScore >= 55) {
         correct = true;
       }
     }
@@ -314,29 +378,31 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
         });
       } else {
         playSound('correct');
-        confetti({
-          particleCount: 25,
-          spread: 50,
-          origin: { y: 0.85 }
-        });
       }
     } else {
       setStreakCombo(0);
       setLessonMistakeCount(prev => prev + 1);
       playSound('wrong');
+
+      // Record mistake for Daily Quick Review Vault
       if (onRecordMistake) {
         onRecordMistake({
-          questionId: currentExercise.id,
-          promptEn: currentExercise.promptEn || currentExercise.promptVi,
+          id: `mistake-${Date.now()}-${currentExercise.id}`,
+          exerciseId: currentExercise.id,
+          unitId: lesson.id,
+          unitTitle: lesson.title,
           promptVi: currentExercise.promptVi,
-          correctSentence: currentExercise.englishSentence,
-          wrongChoiceGiven: currentExercise.options && selectedChoice !== null
-            ? currentExercise.options[selectedChoice]
-            : selectedWordChips.join(' ') || (spokenText || 'Chưa đúng'),
-          options: currentExercise.options || [],
-          correctIndex: currentExercise.correctIndex ?? 0,
-          explanation: currentExercise.whyWrong || currentExercise.explanation || 'Chú ý cấu trúc ngữ pháp chuẩn quốc tế.',
-          category: lesson.title,
+          correctEnglish: currentExercise.englishSentence,
+          userAnswer: currentExercise.type === 'word_order' 
+            ? selectedWordChips.join(' ') 
+            : currentExercise.options && selectedChoice !== null 
+            ? currentExercise.options[selectedChoice] 
+            : spokenText,
+          explanation: currentExercise.explanation,
+          whyWrong: currentExercise.whyWrong,
+          crucialNote: currentExercise.crucialNote,
+          timestamp: Date.now(),
+          mastered: false,
         });
       }
     }
@@ -352,7 +418,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     playSound('click');
     stopSpeech();
 
-    if (exerciseIndex + 1 < lesson.exercises.length) {
+    if (exerciseIndex + 1 < sessionExercises.length) {
       setExerciseIndex(prev => prev + 1);
     } else {
       setIsLessonFinished(true);
@@ -373,7 +439,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
         if (!isEvaluated) {
           const canSubmit = 
             (currentExercise.type === 'word_order' && selectedWordChips.length > 0) ||
-            (currentExercise.type === 'choice' && selectedChoice !== null) ||
+            ((currentExercise.type === 'choice' || currentExercise.type === 'listen_choice' || currentExercise.type === 'fill_blank') && selectedChoice !== null) ||
             (currentExercise.type === 'speak' && speechScore !== null && speechScore > 0);
           if (canSubmit) {
             handleCheckAnswer();
@@ -384,7 +450,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
       } else if (e.key === ' ' && isEvaluated) {
         e.preventDefault();
         handlePlayAudio();
-      } else if (!isEvaluated && currentExercise.type === 'choice' && currentExercise.options) {
+      } else if (!isEvaluated && (currentExercise.type === 'choice' || currentExercise.type === 'listen_choice' || currentExercise.type === 'fill_blank') && currentExercise.options) {
         if (['1', '2', '3', '4'].includes(e.key)) {
           const idx = parseInt(e.key, 10) - 1;
           if (idx < currentExercise.options.length) {
@@ -399,27 +465,63 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isEvaluated, selectedChoice, selectedWordChips, speechScore, currentExercise]);
 
-  const progressPercent = ((exerciseIndex + (isEvaluated && isAnswerCorrect ? 1 : 0)) / lesson.exercises.length) * 100;
+  const progressPercent = ((exerciseIndex + (isEvaluated && isAnswerCorrect ? 1 : 0)) / sessionExercises.length) * 100;
 
-  // Determine Question Prompt & Instruction
+  // Determine Question Skill Badge
+  const getSkillBadge = () => {
+    switch (currentExercise.type) {
+      case 'listen_choice':
+        return {
+          icon: Headphones,
+          label: 'Luyện Nghe Phản Xạ',
+          color: 'bg-indigo-100 text-indigo-800 border-indigo-200'
+        };
+      case 'speak':
+        return {
+          icon: Mic,
+          label: 'Luyện Phát Âm AI',
+          color: 'bg-emerald-100 text-emerald-800 border-emerald-200'
+        };
+      case 'choice':
+        return {
+          icon: BookOpen,
+          label: 'Đọc Hiểu Tình Huống',
+          color: 'bg-sky-100 text-sky-800 border-sky-200'
+        };
+      case 'fill_blank':
+        return {
+          icon: Puzzle,
+          label: 'Điền Từ Chỗ Trống',
+          color: 'bg-amber-100 text-amber-800 border-amber-200'
+        };
+      case 'word_order':
+      default:
+        return {
+          icon: Edit3,
+          label: 'Ghép Câu & Ngữ Pháp',
+          color: 'bg-purple-100 text-purple-800 border-purple-200'
+        };
+    }
+  };
+
+  const skillBadge = getSkillBadge();
+  const SkillIcon = skillBadge.icon;
+
+  // Question Instruction Text
   const getQuestionInstruction = () => {
     if (currentExercise.type === 'word_order') {
       return 'Dịch và ghép câu tiếng Anh hoàn chỉnh:';
     }
     if (currentExercise.type === 'choice') {
-      return 'Chọn câu tiếng Anh chính xác nhất:';
+      return 'Chọn câu tiếng Anh chuẩn mực nhất:';
     }
     if (currentExercise.type === 'speak') {
       return 'Luyện phát âm câu sau vào micro:';
     }
-    return 'Lắng nghe và chọn đáp án đúng:';
-  };
-
-  const getMainQuestionText = () => {
-    if (currentExercise.type === 'word_order' || currentExercise.type === 'choice') {
-      return currentExercise.promptVi;
+    if (currentExercise.type === 'fill_blank') {
+      return 'Chọn từ thích hợp điền vào ô trống:';
     }
-    return currentExercise.englishSentence;
+    return 'Lắng nghe đoạn ghi âm và chọn câu trả lời đúng:';
   };
 
   return (
@@ -492,41 +594,109 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
             </div>
 
             <div className="flex-1 bg-sky-50/80 border-2 border-sky-200 rounded-3xl p-3.5 sm:p-4 shadow-xs relative">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] uppercase font-black text-[#0070D1] tracking-wider">
-                  {getQuestionInstruction()}
-                </span>
+              <div className="flex items-center justify-between mb-1.5 flex-wrap gap-1">
+                <div className="flex items-center gap-1.5">
+                  <div className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider border ${skillBadge.color}`}>
+                    <SkillIcon className="w-3 h-3" />
+                    <span>{skillBadge.label}</span>
+                  </div>
+                  <span className="text-[10px] uppercase font-black text-[#0070D1] tracking-wider hidden sm:inline">
+                    • {getQuestionInstruction()}
+                  </span>
+                </div>
                 
                 {/* Audio Button */}
-                {(currentExercise.type === 'speak' || isEvaluated) ? (
+                {(currentExercise.type === 'speak' || currentExercise.type === 'listen_choice' || isEvaluated) && (
                   <button
-                    onClick={handlePlayAudio}
+                    onClick={() => handlePlayAudio(speechRate)}
                     className="p-1.5 rounded-full bg-white hover:bg-sky-100 text-[#0070D1] shadow-2xs border border-sky-200 cursor-pointer transition-transform active:scale-90"
                     title="Nghe phát âm chuẩn (Phím Space)"
                   >
                     <Volume2 className="w-4 h-4" />
                   </button>
-                ) : (
-                  <span className="text-[9px] text-slate-400 italic">
-                    (Nghe sau khi trả lời)
-                  </span>
                 )}
               </div>
 
+              {/* Main question prompt */}
               <div className="space-y-1">
-                <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug break-words">
-                  {getMainQuestionText()}
-                </h3>
+                {currentExercise.type === 'listen_choice' ? (
+                  <div className="space-y-2">
+                    <p className="text-xs sm:text-sm font-bold text-slate-600">
+                      {currentExercise.promptVi}
+                    </p>
+                    {/* Audio Player Card for Listening Questions */}
+                    <div className="p-3 bg-white rounded-2xl border-2 border-indigo-200 shadow-xs flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={() => handlePlayAudio(speechRate)}
+                          className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all cursor-pointer ${
+                            isPlayingAudio 
+                              ? 'bg-indigo-600 text-white scale-105 shadow-md animate-pulse' 
+                              : 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200'
+                          }`}
+                          title="Bấm để nghe âm thanh"
+                        >
+                          <Volume2 className="w-5 h-5" />
+                        </button>
+                        <div>
+                          <div className="text-xs font-black text-slate-800">Đoạn Hội Thoại Âm Thanh</div>
+                          <div className="text-[11px] text-slate-500 font-medium">Bấm loa để nghe rõ từng từ</div>
+                        </div>
+                      </div>
 
-                {currentExercise.type === 'speak' && (
-                  <p className="text-xs text-slate-500 font-medium">
-                    👉 {currentExercise.promptVi}
-                  </p>
-                )}
-                {currentExercise.type === 'speak' && currentExercise.phonetics && (
-                  <p className="text-[11px] font-mono text-cyan-800 font-bold">
-                    {currentExercise.phonetics}
-                  </p>
+                      <button
+                        onClick={() => handlePlayAudio(0.75)}
+                        className="px-2.5 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-[10px] cursor-pointer"
+                        title="Nghe tốc độ chậm 0.75x"
+                      >
+                        🐢 0.75x
+                      </button>
+                    </div>
+                  </div>
+                ) : currentExercise.type === 'fill_blank' ? (
+                  <div className="space-y-2">
+                    <p className="text-xs sm:text-sm font-bold text-slate-600">
+                      {currentExercise.promptVi}
+                    </p>
+                    {/* Sentence with Blank Highlight */}
+                    <div className="p-3.5 bg-white rounded-2xl border-2 border-amber-200 shadow-xs text-sm sm:text-base font-black text-slate-900 leading-relaxed">
+                      {currentExercise.englishSentence.split(/\[\s*_{2,}\s*\]|_{3,}/).map((chunk, idx, arr) => (
+                        <React.Fragment key={idx}>
+                          <span>{chunk}</span>
+                          {idx < arr.length - 1 && (
+                            <span className={`inline-block px-3 py-1 mx-1.5 rounded-xl border-2 transition-all font-black text-xs sm:text-sm ${
+                              selectedChoice !== null && currentExercise.options
+                                ? 'bg-sky-100 border-[#009FE3] text-[#0070D1] shadow-2xs'
+                                : 'bg-amber-100/70 border-dashed border-amber-400 text-amber-800 animate-pulse'
+                            }`}>
+                              {selectedChoice !== null && currentExercise.options
+                                ? currentExercise.options[selectedChoice]
+                                : '❓ [ _____ ]'}
+                            </span>
+                          )}
+                        </React.Fragment>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug break-words">
+                      {currentExercise.type === 'word_order' || currentExercise.type === 'choice' 
+                        ? currentExercise.promptVi 
+                        : currentExercise.englishSentence}
+                    </h3>
+
+                    {currentExercise.type === 'speak' && (
+                      <p className="text-xs text-slate-500 font-medium mt-1">
+                        👉 {currentExercise.promptVi}
+                      </p>
+                    )}
+                    {currentExercise.type === 'speak' && currentExercise.phonetics && (
+                      <p className="text-[11px] font-mono text-cyan-800 font-bold mt-0.5">
+                        {currentExercise.phonetics}
+                      </p>
+                    )}
+                  </div>
                 )}
               </div>
 
@@ -587,8 +757,8 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               </div>
             )}
 
-            {/* TYPE 2: MULTIPLE CHOICE */}
-            {currentExercise.type === 'choice' && currentExercise.options && (
+            {/* TYPE 2: MULTIPLE CHOICE, LISTEN_CHOICE & FILL_BLANK */}
+            {(currentExercise.type === 'choice' || currentExercise.type === 'listen_choice' || currentExercise.type === 'fill_blank') && currentExercise.options && (
               <div className="space-y-2.5">
                 {currentExercise.options.map((option, idx) => {
                   const isSelected = selectedChoice === idx;
@@ -631,42 +801,160 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               </div>
             )}
 
-            {/* TYPE 3: REAL VOICE SPEAKING */}
+            {/* TYPE 3: REAL VOICE SPEAKING (STUDIO GRADE EVALUATION) */}
             {currentExercise.type === 'speak' && (
-              <div className="text-center space-y-4 py-2">
-                <div className="py-2">
+              <div className="space-y-4 py-2 max-w-lg mx-auto w-full">
+                
+                {/* Control bar: Sample listen + Live Circular Mic with real-time acoustic wave rings */}
+                <div className="flex items-center justify-center gap-6 py-3">
+                  {/* Listen to Sample Audio Button */}
                   <button
-                    onClick={handleStartSpeaking}
-                    className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center shadow-lg transition-all cursor-pointer ${
-                      isRecording
-                        ? 'bg-rose-500 text-white animate-pulse scale-110 border-b-4 border-rose-700'
-                        : 'bg-[#009FE3] border-b-4 border-[#0072CE] text-white hover:scale-105 active:scale-95'
-                    }`}
+                    onClick={() => handlePlayAudio(speechRate)}
+                    className="w-14 h-14 rounded-2xl bg-sky-50 hover:bg-sky-100 text-[#0070D1] border-2 border-sky-200 active:scale-95 transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer shadow-2xs"
+                    title="Nghe phát âm chuẩn của người bản xứ trước khi đọc"
                   >
-                    {isRecording ? <MicOff className="w-8 h-8" /> : <Mic className="w-8 h-8" />}
+                    <Volume2 className="w-5 h-5" />
+                    <span className="text-[9px] font-black uppercase tracking-tight">Nghe Mẫu</span>
                   </button>
-                  <p className="text-xs text-slate-500 font-bold mt-2">
-                    {isRecording ? 'Đang lắng nghe... Hãy nói ngay!' : 'Nhấn vào micro và đọc câu tiếng Anh ở trên'}
-                  </p>
+
+                  {/* Circular Live Mic Button with Real-Time Acoustic Ripple Waves */}
+                  <LiveCircularMicButton
+                    isRecording={isRecording}
+                    onClick={handleStartSpeaking}
+                    size="lg"
+                  />
+
+                  {/* Slow Sample Listen (0.75x) */}
+                  <button
+                    onClick={() => handlePlayAudio(0.75)}
+                    className="w-14 h-14 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-700 border-2 border-slate-200 active:scale-95 transition-all flex flex-col items-center justify-center gap-0.5 cursor-pointer shadow-2xs"
+                    title="Nghe phát âm tốc độ chậm 0.75x"
+                  >
+                    <span className="text-base leading-none">🐢</span>
+                    <span className="text-[9px] font-black uppercase tracking-tight">Chậm 0.75x</span>
+                  </button>
                 </div>
 
-                {spokenText && (
-                  <div className="p-3 rounded-2xl bg-sky-50 border border-sky-200 text-xs max-w-md mx-auto">
-                    <p className="text-slate-600 font-semibold italic">Giọng bạn: "{spokenText}"</p>
-                    {speechScore !== null && (
-                      <p className={`font-black text-sm mt-1.5 ${
-                        speechScore >= 65 ? 'text-emerald-600' : speechScore > 0 ? 'text-amber-600' : 'text-rose-600'
-                      }`}>
-                        Độ chuẩn phát âm: {speechScore}%
-                      </p>
+                {/* Status Guidance & Live Word Streaming (Clean, No Box) */}
+                {isRecording ? (
+                  <div className="text-center space-y-2 animate-in fade-in">
+                    {liveInterimText ? (
+                      <div className="inline-block px-4 py-2 rounded-2xl bg-amber-50 border-2 border-amber-300 text-amber-950 font-bold text-xs shadow-xs animate-pulse">
+                        <span className="text-[10px] text-amber-700 uppercase block font-black mb-0.5">🎙️ Đang nghe giọng bạn:</span>
+                        "{liveInterimText}"
+                      </div>
+                    ) : (
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-black shadow-2xs">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                        <span>Micro đang mở! Hãy đọc to câu tiếng Anh ở trên</span>
+                      </div>
                     )}
-                    {speechFeedback && (
-                      <p className="text-[11px] text-slate-500 mt-1 font-medium">
-                        {speechFeedback}
-                      </p>
-                    )}
+                    <p className="text-[11px] text-slate-500 font-medium">
+                      ⚡ Đọc xong hệ thống sẽ <strong>tự động chấm điểm</strong> (không cần bấm nộp)
+                    </p>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <p className="text-xs text-slate-500 font-bold">
+                      Nhấn vào biểu tượng Micro tròn để đọc (Nói xong hệ thống tự chấm)
+                    </p>
                   </div>
                 )}
+
+                {/* Live Interim Recognition Streaming Bubble */}
+                {isRecording && liveInterimText && (
+                  <div className="p-3 rounded-2xl bg-amber-50 border-2 border-amber-200 text-xs text-amber-950 font-bold animate-pulse text-center">
+                    <span className="text-[10px] uppercase font-black text-amber-800 block mb-0.5">
+                      🎙️ Đang nghe giọng bạn:
+                    </span>
+                    "{liveInterimText}"
+                  </div>
+                )}
+
+                {/* Error Message Warning Box */}
+                {micErrorMessage && (
+                  <div className="p-3 rounded-2xl bg-rose-50 border-2 border-rose-200 text-xs text-rose-900 font-medium space-y-1 text-center animate-in fade-in">
+                    <p className="font-bold">⚠️ {micErrorMessage}</p>
+                    <p className="text-[11px] text-slate-500">
+                      Gợi ý: Dùng Google Chrome hoặc Microsoft Edge trên máy tính/điện thoại để micro hoạt động tối ưu nhất.
+                    </p>
+                  </div>
+                )}
+
+                {/* Pronunciation Evaluation & Word-by-Word Breakdown */}
+                {spokenText && (
+                  <div className="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200 space-y-3">
+                    
+                    {/* Header Score & Feedback */}
+                    <div className="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-slate-200">
+                      <div className="flex items-center gap-2">
+                        <span className={`text-base font-black px-2.5 py-0.5 rounded-xl border ${
+                          speechScore !== null && speechScore >= 75
+                            ? 'bg-emerald-100 text-emerald-800 border-emerald-300'
+                            : speechScore !== null && speechScore >= 55
+                            ? 'bg-amber-100 text-amber-900 border-amber-300'
+                            : 'bg-rose-100 text-rose-900 border-rose-300'
+                        }`}>
+                          Độ chuẩn: {speechScore}%
+                        </span>
+                        <span className="text-xs font-bold text-slate-600">
+                          {speechScore !== null && speechScore >= 55 ? '✅ Đạt Yêu Cầu' : '❌ Chưa Đạt (>= 55%)'}
+                        </span>
+                      </div>
+
+                      <span className="text-[10px] text-slate-400 font-bold">
+                        Chuẩn CEFR Business
+                      </span>
+                    </div>
+
+                    {/* Word-by-Word Visual Analysis */}
+                    {pronunciationDetails && pronunciationDetails.words.length > 0 && (
+                      <div className="space-y-1.5 text-left">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
+                          Chi tiết từng từ bạn đã phát âm:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5 pt-0.5">
+                          {pronunciationDetails.words.map((item, wIdx) => (
+                            <span
+                              key={wIdx}
+                              className={`px-2.5 py-1 rounded-xl text-xs font-bold border transition-all ${
+                                item.status === 'correct'
+                                  ? 'bg-emerald-100 text-emerald-900 border-emerald-300 shadow-2xs'
+                                  : item.status === 'close'
+                                  ? 'bg-amber-100 text-amber-900 border-amber-300'
+                                  : 'bg-rose-100 text-rose-900 border-rose-300 line-through opacity-80'
+                              }`}
+                              title={
+                                item.status === 'correct'
+                                  ? 'Phát âm chuẩn xác!'
+                                  : item.status === 'close'
+                                  ? `Gần đúng (nhận được: "${item.spokenMatch || ''}")`
+                                  : 'Từ này bị thiếu hoặc chưa nhận diện được'
+                              }
+                            >
+                              {item.word}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Spoken Text Transcript */}
+                    <div className="text-left text-xs bg-white p-2.5 rounded-xl border border-slate-200">
+                      <span className="text-[10px] font-bold text-slate-400 block">Văn bản máy nghe được:</span>
+                      <p className="text-slate-800 font-medium italic mt-0.5">"{spokenText}"</p>
+                    </div>
+
+                    {/* Feedback message */}
+                    {speechFeedback && (
+                      <p className="text-xs font-bold text-[#0070D1] text-left">
+                        💡 {speechFeedback}
+                      </p>
+                    )}
+
+                  </div>
+                )}
+
               </div>
             )}
 
@@ -730,7 +1018,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
         </div>
       )}
 
-      {/* 3. CENTERED & BALANCED BOTTOM ACTION BAR (FIXES BUTTON SKEWED TO ONE SIDE) */}
+      {/* 3. CENTERED & BALANCED BOTTOM ACTION BAR */}
       {!isLessonFinished && (
         <div className={`border-t-2 transition-colors duration-200 shrink-0 ${
           isEvaluated
@@ -784,13 +1072,13 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               </div>
             )}
 
-            {/* Action Button: Full-width on mobile, neatly aligned on desktop */}
+            {/* Action Button */}
             <div className="w-full sm:w-auto shrink-0 flex justify-center sm:justify-end">
               {!isEvaluated ? (
                 <button
                   disabled={
                     (currentExercise.type === 'word_order' && selectedWordChips.length === 0) ||
-                    (currentExercise.type === 'choice' && selectedChoice === null) ||
+                    ((currentExercise.type === 'choice' || currentExercise.type === 'listen_choice' || currentExercise.type === 'fill_blank') && selectedChoice === null) ||
                     (currentExercise.type === 'speak' && (speechScore === null || speechScore === 0))
                   }
                   onClick={handleCheckAnswer}
@@ -818,7 +1106,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
         </div>
       )}
 
-      {/* 4. EXPANDED DETAILED EXPLANATION BOTTOM SHEET (SOLVES: "chỗ giải thích bị dài quá ko đọc dc") */}
+      {/* 4. EXPANDED DETAILED EXPLANATION BOTTOM SHEET */}
       {showGrammarDetail && (
         <div className="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-150">
           <div className="bg-white rounded-t-3xl sm:rounded-3xl max-w-lg w-full p-5 sm:p-6 border-2 border-slate-200 shadow-2xl space-y-4 max-h-[85vh] overflow-y-auto animate-in slide-in-from-bottom-6 duration-200">

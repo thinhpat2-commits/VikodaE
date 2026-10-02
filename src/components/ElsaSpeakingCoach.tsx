@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 import { 
   Mic, 
@@ -14,11 +14,16 @@ import {
 import { SPEAKING_CHALLENGES } from '../data/vikodaData';
 import { SpeakingChallenge } from '../types';
 import { playSound } from '../services/soundEffects';
+import { LiveCircularMicButton } from './LiveCircularMicButton';
 import { 
   playSpeech, 
   stopSpeech, 
-  calculateSimilarity, 
-  isSpeechRecognitionSupported 
+  evaluatePronunciationDetails, 
+  DetailedSpeechEvaluation,
+  isSpeechRecognitionSupported,
+  startSpeechRecognition,
+  finishSpeechRecognition,
+  stopSpeechRecognition
 } from '../services/speechService';
 
 interface ElsaSpeakingCoachProps {
@@ -35,8 +40,16 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
   const [spokenTranscript, setSpokenTranscript] = useState<string>('');
   const [speechScore, setSpeechScore] = useState<number | null>(null);
   const [isPlayingNative, setIsPlayingNative] = useState<boolean>(false);
+  const [evaluation, setEvaluation] = useState<DetailedSpeechEvaluation | null>(null);
 
   const currentChallenge: SpeakingChallenge = SPEAKING_CHALLENGES[currentIndex];
+
+  useEffect(() => {
+    return () => {
+      stopSpeech();
+      stopSpeechRecognition();
+    };
+  }, []);
 
   const handlePlayNative = (slow: boolean = false) => {
     if (isPlayingNative) {
@@ -50,57 +63,54 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
   };
 
   const handleStartSpeaking = () => {
+    if (isRecording) {
+      finishSpeechRecognition();
+      return;
+    }
+
     if (!isSpeechRecognitionSupported()) {
       setSpokenTranscript('Trình duyệt chưa hỗ trợ Web Speech Recognition. Hãy mở trên Chrome hoặc Edge.');
       return;
     }
 
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
     setIsRecording(true);
-    setSpokenTranscript('Đang lắng nghe giọng bạn...');
+    setSpokenTranscript('Đang lắng nghe... Hãy đọc to câu trên!');
     setSpeechScore(null);
+    setEvaluation(null);
     playSound('click');
 
-    recognition.onresult = (event: any) => {
-      const text = event.results[0][0].transcript;
-      setSpokenTranscript(text);
-      const score = calculateSimilarity(currentChallenge.englishSentence, text);
-      setSpeechScore(score);
+    startSpeechRecognition(
+      (finalText) => {
+        setSpokenTranscript(finalText);
+        const evalResult = evaluatePronunciationDetails(currentChallenge.englishSentence, finalText);
+        setEvaluation(evalResult);
+        setSpeechScore(evalResult.score);
+        setIsRecording(false);
 
-      if (score >= 80) {
-        playSound('correct');
-        onAwardXpAndGems(30, 10);
-        confetti({
-          particleCount: 50,
-          spread: 60,
-          origin: { y: 0.6 }
-        });
-      } else {
-        playSound('wrong');
-      }
-    };
-
-    recognition.onerror = (e: any) => {
-      console.warn('Speech error', e);
-      setIsRecording(false);
-      setSpokenTranscript('Chưa nhận rõ giọng. Hãy nói to và gần micro hơn nhé.');
-    };
-
-    recognition.onend = () => {
-      setIsRecording(false);
-    };
-
-    try {
-      recognition.start();
-    } catch (e) {
-      console.warn(e);
-      setIsRecording(false);
-    }
+        if (evalResult.score >= 60) {
+          playSound('correct');
+          onAwardXpAndGems(30, 10);
+          confetti({
+            particleCount: 50,
+            spread: 60,
+            origin: { y: 0.6 }
+          });
+        } else {
+          playSound('wrong');
+        }
+      },
+      () => {
+        setIsRecording(false);
+      },
+      (errorMsg) => {
+        setIsRecording(false);
+        setSpokenTranscript(errorMsg || 'Chưa nhận rõ giọng. Hãy nói to và gần micro hơn nhé.');
+      },
+      (interim) => {
+        setSpokenTranscript(interim);
+      },
+      'en-US'
+    );
   };
 
   const nextChallenge = () => {
@@ -189,21 +199,29 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
           </button>
         </div>
 
-        {/* ELSA-Style Big Mic Button */}
-        <div className="py-2">
-          <button
+        {/* ELSA-Style Live Circular Mic Button with Real-Time Acoustic Ripple Waves */}
+        <div className="py-2 space-y-2 text-center">
+          <LiveCircularMicButton
+            isRecording={isRecording}
             onClick={handleStartSpeaking}
-            className={`w-20 h-20 rounded-full mx-auto flex items-center justify-center transition-all cursor-pointer shadow-lg ${
-              isRecording
-                ? 'bg-rose-500 text-white animate-pulse shadow-rose-500/50 scale-110'
-                : 'bg-gradient-to-tr from-[#0066CC] to-[#00A3E0] hover:scale-105 text-white shadow-sky-500/40'
-            }`}
-          >
-            {isRecording ? <MicOff className="w-8 h-8" /> : <Mic className="w-8 h-8" />}
-          </button>
-          <p className="text-xs text-slate-400 font-medium mt-2">
-            {isRecording ? 'Đang lắng nghe... Hãy nói ngay!' : 'Nhấn vào micro để luyện nói'}
-          </p>
+            size="lg"
+          />
+
+          {isRecording ? (
+            <div className="space-y-1 animate-in fade-in">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-black">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+                <span>Micro đang nghe! Hãy đọc to câu ở trên</span>
+              </div>
+              <p className="text-[11px] text-slate-500 font-medium">
+                ⚡ Đọc xong hệ thống sẽ <strong>tự động chấm điểm ELSA</strong>
+              </p>
+            </div>
+          ) : (
+            <p className="text-xs text-slate-500 font-medium">
+              Nhấn vào micro để luyện nói (Nói xong tự động chấm điểm)
+            </p>
+          )}
         </div>
 
         {/* Speech Recognition Feedback Gauge */}

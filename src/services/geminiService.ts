@@ -263,6 +263,7 @@ const aiSpeechCache = new Map<string, string>();
 /**
  * Generate natural studio-grade AI speech audio using Gemini 3.8 Flash Lite TTS
  * Returns a local Blob URL (audio/wav, 24kHz) that plays natively on all devices.
+ * Safely returns null on quota exhaustion to allow seamless native speech fallback.
  */
 export const generateGeminiSpeechAudio = async (
   text: string,
@@ -324,8 +325,9 @@ export const generateGeminiSpeechAudio = async (
 
     aiSpeechCache.set(cacheKey, blobUrl);
     return blobUrl;
-  } catch (err) {
-    console.warn('Gemini TTS audio generation failed, falling back to browser speech:', err);
+  } catch (err: any) {
+    // If quota is exceeded (429) or offline, return null so client immediately falls back to native voice
+    console.warn('Gemini TTS unavailable, falling back to instant native voice:', err?.message || err);
     return null;
   }
 };

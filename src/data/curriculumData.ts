@@ -1,9 +1,10 @@
 import { LEVEL_A1_UNITS } from './curriculumLevels/levelA1';
-import { LEVEL_A2B1_UNITS } from './curriculumLevels/levelA2B1';
-import { LEVEL_B2C1_UNITS } from './curriculumLevels/levelB2C1';
-import { LEVEL_C2_UNITS } from './curriculumLevels/levelC2';
+import { LEVEL_A2_UNITS } from './curriculumLevels/levelA2';
+import { LEVEL_B1_UNITS } from './curriculumLevels/levelB1';
+import { LEVEL_B2_UNITS } from './curriculumLevels/levelB2';
+import { LEVEL_C1C2_UNITS } from './curriculumLevels/levelC1C2';
 
-export type CourseLevel = 'A1' | 'A2-B1' | 'B2-C1' | 'C2';
+export type CourseLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1-C2' | 'A2-B1' | 'B2-C1' | 'C2';
 
 export interface VocabularyHighlight {
   word: string;
@@ -13,15 +14,16 @@ export interface VocabularyHighlight {
 
 export interface LessonExercise {
   id: string;
-  type: 'word_order' | 'speak' | 'choice' | 'listen_choice';
+  type: 'word_order' | 'speak' | 'choice' | 'listen_choice' | 'fill_blank';
   promptVi: string;
   promptEn?: string;
   englishSentence: string;
   phonetics?: string;
   audioText: string;
   wordPool?: string[]; // for word_order
-  options?: string[]; // for choice
+  options?: string[]; // for choice, listen_choice, fill_blank
   correctIndex?: number;
+  blankWord?: string; // the word to be filled in for fill_blank
   explanation: string;
   // Deep learning pedagogical fields:
   whyWrong?: string; // Tại sao sai & lỗi phổ biến người Việt hay mắc
@@ -69,12 +71,13 @@ export interface UnitLesson {
   exercises: LessonExercise[];
 }
 
-// 40 Comprehensive Units across 4 CEFR & Cambridge Business Levels
+// 40 Comprehensive Units across 5 Progressive Workplace & Business Levels
 export const VIKODA_CURRICULUM: UnitLesson[] = [
   ...LEVEL_A1_UNITS,
-  ...LEVEL_A2B1_UNITS,
-  ...LEVEL_B2C1_UNITS,
-  ...LEVEL_C2_UNITS
+  ...LEVEL_A2_UNITS,
+  ...LEVEL_B1_UNITS,
+  ...LEVEL_B2_UNITS,
+  ...LEVEL_C1C2_UNITS
 ];
 
 export const VIKODA_SIDE_QUESTS: SideQuestItem[] = [

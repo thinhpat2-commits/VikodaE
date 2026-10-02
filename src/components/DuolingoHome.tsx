@@ -11,7 +11,10 @@ import {
   Crown, 
   Gift, 
   Flame,
-  Play
+  Play,
+  Target,
+  Award,
+  ChevronRight
 } from 'lucide-react';
 import { VIKODA_CURRICULUM, UnitLesson, CourseLevel } from '../data/curriculumData';
 import { VikoMascot } from './brand/VikodaLogos';
@@ -39,6 +42,8 @@ interface DuolingoHomeProps {
   onOpenCoach?: () => void;
   streakDays?: number;
   unitStars?: Record<string, number>;
+  onOpenPlacementTest?: () => void;
+  placementTestResult?: any;
 }
 
 export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
@@ -59,6 +64,8 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
   onOpenCoach,
   streakDays = 1,
   unitStars = {},
+  onOpenPlacementTest,
+  placementTestResult,
 }) => {
   const [activeLesson, setActiveLesson] = useState<UnitLesson | null>(null);
   const [isGuidebookOpen, setIsGuidebookOpen] = useState<boolean>(false);
@@ -176,10 +183,15 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
   return (
     <div className="space-y-4 pb-24 max-w-md mx-auto w-full select-none animate-in fade-in duration-200">
       
-      {/* 1. COMPACT LEVEL SELECTOR PILLS */}
-      <div className="flex items-center justify-between gap-1 p-1 bg-slate-200/60 rounded-2xl">
-        {(['A1', 'A2-B1', 'B2-C1', 'C2'] as CourseLevel[]).map((lvl) => {
+      {/* 1. COMPACT 5-TIER LEVEL SELECTOR PILLS */}
+      <div className="flex items-center justify-between gap-1 p-1 bg-slate-200/60 rounded-2xl overflow-x-auto">
+        {(['A1', 'A2', 'B1', 'B2', 'C1-C2'] as CourseLevel[]).map((lvl) => {
           const isLvlActive = selectedLevel === lvl;
+          const displayLabel = 
+            lvl === 'A1' ? 'A1 Cơ Bản' :
+            lvl === 'A2' ? 'A2 Phòng Ban' :
+            lvl === 'B1' ? 'B1 Mỏ Đảnh Thạnh' :
+            lvl === 'B2' ? 'B2 Bán Hàng' : 'C1-C2 Lãnh Đạo';
           return (
             <button
               key={lvl}
@@ -188,13 +200,14 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                 setSelectedLevel(lvl);
                 setPopoverNodeIndex(null);
               }}
-              className={`flex-1 py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer truncate ${
+              className={`flex-1 py-1.5 px-1.5 rounded-xl text-[11px] sm:text-xs font-black transition-all cursor-pointer whitespace-nowrap text-center ${
                 isLvlActive
                   ? 'bg-white text-[#0070D1] shadow-2xs'
                   : 'text-slate-500 hover:text-slate-800'
               }`}
+              title={displayLabel}
             >
-              {lvl === 'A2-B1' ? 'B1' : lvl === 'B2-C1' ? 'C1' : lvl}
+              {lvl}
             </button>
           );
         })}
@@ -206,7 +219,13 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
           <div className="text-[10px] font-black uppercase tracking-widest text-sky-100 flex items-center gap-1.5">
             <span>CẤP ĐỘ {selectedLevel}</span>
             <span>•</span>
-            <span>PHẦN {selectedLevel === 'A1' ? '1' : selectedLevel === 'A2-B1' ? '2' : selectedLevel === 'B2-C1' ? '3' : '4'}</span>
+            <span>{
+              selectedLevel === 'A1' ? 'PHẦN 1: GIAO TIẾP VĂN PHÒNG CƠ BẢN' :
+              selectedLevel === 'A2' ? 'PHẦN 2: TIẾNG ANH ĐA PHÒNG BAN' :
+              selectedLevel === 'B1' ? 'PHẦN 3: ĐẠI SỨ VIKODA & MỎ ĐẢNH THẠNH' :
+              selectedLevel === 'B2' ? 'PHẦN 4: BÁN HÀNG B2B & HORECA' :
+              'PHẦN 5: XUẤT KHẨU TOÀN CẦU & C-SUITE'
+            }</span>
           </div>
           <h2 className="text-sm font-black truncate leading-snug">
             {activeLessonInfo ? activeLessonInfo.title : 'Chương Trình Vikoda'}
@@ -225,6 +244,77 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
           <span>SỔ TAY</span>
         </button>
       </div>
+
+      {/* 2.5 PLACEMENT TEST CARD (Voluntary, unmissable, non-intrusive) */}
+      {!placementTestResult ? (
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#003865] via-[#005A9C] to-[#0070D1] p-4 sm:p-5 text-white shadow-lg border-2 border-sky-400/40 border-b-4 border-b-sky-800">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 relative z-10">
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400 text-amber-950 font-black text-[10px] uppercase tracking-wider shadow-xs">
+                <Target className="w-3 h-3" />
+                <span>ĐÁNH GIÁ NĂNG LỰC • 8-10 PHÚT (8 CÂU GỌN GÀNG)</span>
+              </div>
+              <h3 className="text-base sm:text-lg font-black tracking-tight leading-snug">
+                Kiểm Tra Trình Độ Tiếng Anh 4 Kỹ Năng
+              </h3>
+              <p className="text-xs text-sky-100 max-w-md font-medium leading-relaxed">
+                Làm bài test 8 câu chuẩn hóa để định vị chính xác cấp độ CEFR quốc tế (A1 - C2), nhận chứng chỉ phân lớp và mở khóa lộ trình phù hợp.
+              </p>
+            </div>
+
+            <div className="shrink-0 flex items-center gap-2">
+              <button
+                onClick={() => {
+                  playSound('click');
+                  if (onOpenPlacementTest) onOpenPlacementTest();
+                  else setIsPlacementTestOpen(true);
+                }}
+                className="w-full sm:w-auto px-5 py-2.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-amber-950 font-black text-xs uppercase tracking-wider shadow-md hover:scale-102 active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer border-b-3 border-amber-600"
+              >
+                <Sparkles className="w-4 h-4 fill-amber-950" />
+                <span>Làm Bài Test Ngay</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="absolute -right-4 -bottom-6 text-white/10 pointer-events-none">
+            <Award className="w-32 h-32" />
+          </div>
+        </div>
+      ) : (
+        <div className="rounded-2xl bg-sky-50 border-2 border-sky-200 p-3 flex items-center justify-between gap-3 shadow-2xs">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-9 h-9 rounded-xl bg-[#0070D1] text-white flex items-center justify-center font-black text-sm shrink-0 shadow-xs">
+              {placementTestResult.level || 'B1'}
+            </div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <span className="text-xs font-black text-slate-900 truncate">
+                  Chứng chỉ phân lớp: Cấp độ {placementTestResult.level || 'B1'}
+                </span>
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.2 rounded-md">
+                  Đạt {placementTestResult.overallScore || 80}/100đ
+                </span>
+              </div>
+              <p className="text-[10px] text-slate-500 truncate">
+                {placementTestResult.recommendedPath || 'Lộ trình tối ưu cho chuyên viên Vikoda'}
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => {
+              playSound('click');
+              if (onOpenPlacementTest) onOpenPlacementTest();
+              else setIsPlacementTestOpen(true);
+            }}
+            className="px-3 py-1.5 rounded-xl bg-white hover:bg-sky-100 text-[#0070D1] text-[11px] font-black border border-sky-300 transition-all cursor-pointer shrink-0 shadow-2xs whitespace-nowrap"
+          >
+            Test Lại ↺
+          </button>
+        </div>
+      )}
 
       {/* 3. THE TRUE CURVING COBBLESTONE SNAKE PATH (NO GREY POLE, SMOOTH S-CURVE) */}
       <div ref={containerRef} className="relative py-6 px-4 w-full flex flex-col items-center">

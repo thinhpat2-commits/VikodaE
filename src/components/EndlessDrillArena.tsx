@@ -14,9 +14,10 @@ import {
   Shield,
   Clock,
   BookOpen,
-  Settings2
+  Settings2,
+  Check,
+  XCircle
 } from 'lucide-react';
-import { VIKODA_CURRICULUM, LessonExercise } from '../data/curriculumData';
 import { VikoMascot } from './brand/VikodaLogos';
 import { VoiceSelectorModal } from './VoiceSelectorModal';
 import { 
@@ -28,66 +29,415 @@ import {
 } from '../services/speechService';
 import { playSound } from '../services/soundEffects';
 
-export type ArenaTier = 'bronze' | 'silver' | 'gold' | 'diamond';
+export type ArenaTier = 'basic' | 'intermediate' | 'advanced';
 
 interface ArenaTierConfig {
   id: ArenaTier;
   title: string;
   badge: string;
+  level: string;
   questionCount: number;
-  timePerQuestion: number; // in seconds
+  timePerQuestion: number;
   description: string;
   xpMultiplier: number;
   bgBorder: string;
   accentColor: string;
 }
 
-const ARENA_TIERS: ArenaTierConfig[] = [
+const ARENA_3_TIERS: ArenaTierConfig[] = [
   {
-    id: 'bronze',
-    title: 'Đấu Trường Đồng (Tân Binh)',
-    badge: '🥉 CƠ BẢN',
+    id: 'basic',
+    title: 'Cơ Bản (Tân Binh)',
+    badge: '🥉 CƠ BẢN A1',
+    level: 'A1',
     questionCount: 5,
     timePerQuestion: 15,
-    description: '5 câu giao tiếp chào đón & mời nước cơ bản • 15 giây/câu',
+    description: '5 câu giao tiếp chào hỏi, mời nước khoáng Đảnh Thạnh pH 9.0 & hướng dẫn phòng họp • 15s/câu',
     xpMultiplier: 1.0,
     bgBorder: 'border-amber-300 hover:border-amber-500',
     accentColor: '#D97706',
   },
   {
-    id: 'silver',
-    title: 'Đấu Trường Bạc (Chiến Binh Văn Phòng)',
-    badge: '🥈 VĂN PHÒNG',
+    id: 'intermediate',
+    title: 'Trung Cấp (Văn Phòng & HORECA)',
+    badge: '🥈 TRUNG CẤP B1',
+    level: 'B1',
+    questionCount: 8,
+    timePerQuestion: 12,
+    description: '8 câu xử lý đơn hàng B2B, khách sạn 5 sao & đặc tính khoáng kiềm tự nhiên • 12s/câu',
+    xpMultiplier: 1.5,
+    bgBorder: 'border-sky-300 hover:border-sky-500',
+    accentColor: '#0070D1',
+  },
+  {
+    id: 'advanced',
+    title: 'Nâng Cao (Đàm Phán Quốc Tế)',
+    badge: '🥇 NÂNG CAO C1',
+    level: 'C1',
     questionCount: 10,
     timePerQuestion: 10,
-    description: '10 câu hỏi tốc độ về mỏ Đảnh Thạnh & giao tiếp công sở • 10 giây/câu',
-    xpMultiplier: 1.5,
-    bgBorder: 'border-slate-300 hover:border-slate-500',
-    accentColor: '#64748B',
-  },
-  {
-    id: 'gold',
-    title: 'Đấu Trường Vàng (Chuyên Gia Đàm Phán)',
-    badge: '🥇 THƯƠNG THẢO',
-    questionCount: 15,
-    timePerQuestion: 8,
-    description: '15 câu hỏi xử lý phản bác B2B & đặc tính nước kiềm • 8 giây/câu',
+    description: '10 câu đỉnh cao Incoterms (FOB/CIF), thanh toán L/C & phản bác Evian/Fiji • 10s/câu',
     xpMultiplier: 2.0,
-    bgBorder: 'border-yellow-400 hover:border-yellow-600',
-    accentColor: '#CA8A04',
-  },
-  {
-    id: 'diamond',
-    title: 'Đấu Trường Kim Cương (Đại Sứ Toàn Cầu)',
-    badge: '💎 TOÀN CẦU',
-    questionCount: 20,
-    timePerQuestion: 6,
-    description: '20 câu đỉnh cao CIF/FOB, kiểm định FDA & chốt hợp đồng • 6 giây/câu',
-    xpMultiplier: 3.0,
-    bgBorder: 'border-cyan-400 hover:border-cyan-600',
-    accentColor: '#009FE3',
+    bgBorder: 'border-emerald-300 hover:border-emerald-500',
+    accentColor: '#059669',
   },
 ];
+
+export interface DrillQuestion {
+  id: string;
+  promptVi: string;
+  promptEn: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+  category: string;
+}
+
+// Curated question bank categorized by exactly 3 levels
+const DRILL_QUESTIONS_BANK: Record<ArenaTier, DrillQuestion[]> = {
+  basic: [
+    {
+      id: 'b-1',
+      promptVi: 'Chào đối tác vào văn phòng và mời họ dùng nước khoáng kiềm mát lạnh:',
+      promptEn: 'Welcome the guest and offer chilled natural mineral water:',
+      options: [
+        'Welcome to Vikoda! Please have a seat and enjoy our chilled natural alkaline water.',
+        'You must sit down and drink water right now.',
+        'Sit here and wait until our boss comes.',
+        'Drink this water if you are thirsty.'
+      ],
+      correctIndex: 0,
+      explanation: 'Cách diễn đạt ngoại giao: "Please have a seat and enjoy..." thể hiện sự hiếu khách chuẩn mực Vikoda.',
+      category: 'Chào Hỏi & Tiếp Khách'
+    },
+    {
+      id: 'b-2',
+      promptVi: 'Giới thiệu độ sâu khai thác đặc biệt của mỏ khoáng Đảnh Thạnh:',
+      promptEn: 'State the natural extraction depth of Vikoda:',
+      options: [
+        'Vikoda is extracted from a pristine deep aquifer at 220 meters below ground.',
+        'Vikoda is taken from a surface river near Nha Trang city.',
+        'Vikoda is filtered municipal tap water with artificial salt.',
+        'Vikoda is pumped from a shallow 5-meter well.'
+      ],
+      correctIndex: 0,
+      explanation: 'Nguồn khoáng Đảnh Thạnh được khai thác ở độ sâu 220m trong lòng địa chất vô trùng.',
+      category: 'Nguồn Gốc Sản Phẩm'
+    },
+    {
+      id: 'b-3',
+      promptVi: 'Chỉ đường cho đối tác quốc tế đến phòng họp chính:',
+      promptEn: 'Guide the client to the executive meeting room:',
+      options: [
+        'Please follow me to the boardroom on the second floor.',
+        'Go upstairs yourself and find room two.',
+        'You can walk around until you see a room.',
+        'Meeting is somewhere on top floor.'
+      ],
+      correctIndex: 0,
+      explanation: '"Please follow me to..." là mẫu câu lịch sự và chuyên nghiệp nhất khi dẫn khách.',
+      category: 'Chỉ Đường Công Sở'
+    },
+    {
+      id: 'b-4',
+      promptVi: 'Hỏi đối tác xem họ muốn dùng nước có ga hay không ga:',
+      promptEn: 'Ask if they prefer sparkling or still mineral water:',
+      options: [
+        'Would you prefer still or sparkling mineral water today?',
+        'Do you want fizzy drink or normal water?',
+        'Drink still or drink gas water?',
+        'Which water do you take now?'
+      ],
+      correctIndex: 0,
+      explanation: 'Thuật ngữ chuẩn ngành F&B: Still water (nước khoáng không ga) và Sparkling water (nước khoáng có ga).',
+      category: 'Thuật Ngữ F&B'
+    },
+    {
+      id: 'b-5',
+      promptVi: 'Khẳng định độ pH kiềm tự nhiên hoàn hảo của nước khoáng Vikoda:',
+      promptEn: 'Highlight the natural pH level of Vikoda:',
+      options: [
+        'Our water naturally possesses an ideal alkaline pH of 9.0 directly at the source.',
+        'Our water has pH 2.0 and is very acidic.',
+        'Our water has neutral pH 5.0 with added sugar.',
+        'Our water has no pH value at all.'
+      ],
+      correctIndex: 0,
+      explanation: 'Vikoda sở hữu độ kiềm tự nhiên hiếm có pH 9.0 nguyên bản từ lòng đất.',
+      category: 'Đặc Tính Sản Phẩm'
+    },
+    {
+      id: 'b-6',
+      promptVi: 'Cảm ơn khách hàng sau buổi gặp gỡ đầu tiên:',
+      promptEn: 'Thank the customer after an initial meeting:',
+      options: [
+        'Thank you very much for your valuable time with Vikoda today.',
+        'Meeting is over, you can leave now.',
+        'Thanks for coming to talk.',
+        'We finished, good bye.'
+      ],
+      correctIndex: 0,
+      explanation: '"Thank you very much for your valuable time..." là chuẩn mực văn hóa doanh nghiệp FIT & Vikoda.',
+      category: 'Ngoại Giao'
+    }
+  ],
+  intermediate: [
+    {
+      id: 'i-1',
+      promptVi: 'Giải thích tại sao nước kiềm thiên nhiên Vikoda không gây sỏi thận:',
+      promptEn: 'Explain why Vikoda does not cause kidney stones:',
+      options: [
+        'All mineral ions are completely dissolved in trace amounts, and magnesium actively assists excretion.',
+        'Because Vikoda has zero calcium or minerals of any kind.',
+        'Because customers only drink one bottle per month.',
+        'Because we add vinegar to dissolve all stones.'
+      ],
+      correctIndex: 0,
+      explanation: 'Các ion khoáng chất ở dạng vi lượng hòa tan hoàn toàn, magiê tự nhiên còn hỗ trợ thận bài tiết cặn bã.',
+      category: 'Khoa Học Khoáng Kiềm'
+    },
+    {
+      id: 'i-2',
+      promptVi: 'Thuyết phục khách sạn 5 sao sử dụng chai thủy tinh bảo vệ môi trường:',
+      promptEn: 'Pitch the luxury eco-friendly glass bottle line to a 5-star resort:',
+      options: [
+        'Our premium glass bottles elevate guest experience while supporting your resort’s zero-plastic ESG goals.',
+        'Glass bottles are heavy and dangerous for guests.',
+        'You should buy plastic because it is cheaper.',
+        'We only have tap water in big buckets.'
+      ],
+      correctIndex: 0,
+      explanation: 'Đánh trúng xu hướng phát triển bền vững (ESG) và đẳng cấp trải nghiệm khách hàng cao cấp.',
+      category: 'Bán Hàng HORECA'
+    },
+    {
+      id: 'i-3',
+      promptVi: 'Xác nhận số lượng đặt hàng tối thiểu (MOQ) cho đơn hàng nội địa:',
+      promptEn: 'Confirm the Minimum Order Quantity (MOQ) for corporate delivery:',
+      options: [
+        'Our minimum order quantity for complimentary delivery is twenty cartons.',
+        'You can buy half a bottle and we ship for free.',
+        'We never accept orders below one thousand pallets.',
+        'MOQ depends on your mood today.'
+      ],
+      correctIndex: 0,
+      explanation: 'MOQ (Minimum Order Quantity): Số lượng đặt hàng tối thiểu để được hưởng chính sách giao hàng miễn phí.',
+      category: 'Quy Trình Bán Hàng'
+    },
+    {
+      id: 'i-4',
+      promptVi: 'Đề xuất thời gian giao hàng sau khi nhận tạm ứng hợp đồng:',
+      promptEn: 'Propose delivery lead time after deposit confirmation:',
+      options: [
+        'We can dispatch the shipment within three business days upon receipt of the deposit.',
+        'We will ship whenever we have time next month.',
+        'Delivery takes one year after full payment.',
+        'Shipment cannot be delivered to your area.'
+      ],
+      correctIndex: 0,
+      explanation: 'Mẫu câu chuẩn: "within [number] business days upon receipt of [condition]".',
+      category: 'Hợp Đồng Thương Mại'
+    },
+    {
+      id: 'i-5',
+      promptVi: 'Khẳng định cam kết đóng chai trực tiếp tại nguồn 72°C:',
+      promptEn: 'Highlight bottling directly at source with zero chemical treatment:',
+      options: [
+        'Vikoda is bottled directly at the 72°C spring source to preserve 100% natural mineral vitality.',
+        'We transport water in open trucks to Hanoi before bottling.',
+        'We boil the water with chemicals to create artificial steam.',
+        'Bottling is done at dirty room without inspection.'
+      ],
+      correctIndex: 0,
+      explanation: 'Đóng chai ngay tại nguồn nước ngầm nhiệt độ 72°C giúp giữ nguyên sinh khí khoáng.',
+      category: 'Công Nghệ Đóng Chai'
+    },
+    {
+      id: 'i-6',
+      promptVi: 'Báo giá chiết khấu cho chuỗi nhà hàng ký hợp đồng năm:',
+      promptEn: 'Quote volume rebate for an annual HORECA contract:',
+      options: [
+        'We are pleased to offer a tiered volume rebate of up to 15% for annual exclusivity.',
+        'We never discount even if you buy one million bottles.',
+        'We cut the price to zero for your company.',
+        'Price is secret and cannot be told.'
+      ],
+      correctIndex: 0,
+      explanation: 'Volume rebate: Chiết khấu sản lượng lũy tiến theo cam kết hợp đồng dài hạn.',
+      category: 'Chính Sách Giá'
+    },
+    {
+      id: 'i-7',
+      promptVi: 'Nhắc khách hàng về thời hạn bảo quản của chai nước khoáng:',
+      promptEn: 'Inform the client about product shelf life:',
+      options: [
+        'Our natural mineral water retains optimal quality for 24 months from the bottling date.',
+        'The water expires in two hours after opening.',
+        'Water never expires and can last 100 years.',
+        'Shelf life is only three days in hot weather.'
+      ],
+      correctIndex: 0,
+      explanation: 'Hạn sử dụng tiêu chuẩn của sản phẩm nước khoáng đóng chai Vikoda là 24 tháng.',
+      category: 'Tiêu Chuẩn Sản Phẩm'
+    },
+    {
+      id: 'i-8',
+      promptVi: 'Phản hồi khi khách hàng hỏi về chứng nhận an toàn thực phẩm:',
+      promptEn: 'Respond to inquiry regarding food safety certifications:',
+      options: [
+        'Our factory strictly complies with ISO 22000 and HACCP international food safety standards.',
+        'We do not have any papers or certifications.',
+        'Food safety is not important for drinking water.',
+        'We only test water by tasting it ourselves.'
+      ],
+      correctIndex: 0,
+      explanation: 'ISO 22000 & HACCP là hai bảo chứng quốc tế cao nhất về an toàn vệ sinh thực phẩm.',
+      category: 'Chứng Nhận Chất Lượng'
+    }
+  ],
+  advanced: [
+    {
+      id: 'a-1',
+      promptVi: 'Phân tích điểm chuyển giao rủi ro theo điều kiện Incoterms FOB Cảng Cát Lái:',
+      promptEn: 'Define seller risk transfer point under FOB terms:',
+      options: [
+        'The risk transfers to the buyer once the goods are safely loaded on board the vessel at the port of origin.',
+        'The seller remains responsible until the bottles are consumed in Tokyo.',
+        'Risk transfers when the invoice is signed at the factory gate.',
+        'Buyer takes risk only when goods reach their warehouse.'
+      ],
+      correctIndex: 0,
+      explanation: 'FOB (Free on Board): Rủi ro chuyển từ người bán sang người mua ngay khi hàng được xếp an toàn lên boong tàu.',
+      category: 'Incoterms Xuất Khẩu'
+    },
+    {
+      id: 'a-2',
+      promptVi: 'Phản bác đẳng cấp khi đối tác so sánh giá Vikoda với Evian:',
+      promptEn: 'Professionally position Vikoda against French imported brand Evian:',
+      options: [
+        'While Evian offers neutral pH 7.2, Vikoda delivers rare natural pH 9.0 alongside zero carbon glass logistics.',
+        'Evian is a terrible product and nobody drinks it anymore.',
+        'We will match whatever cheap price you want.',
+        'We cannot compete with European brands.'
+      ],
+      correctIndex: 0,
+      explanation: 'Định vị giá trị vượt trội: Evian là khoáng trung tính pH 7.2, Vikoda là kiềm tự nhiên pH 9.0 hiếm có kèm lợi thế logistics xanh.',
+      category: 'Chiến Thuật Cạnh Tranh'
+    },
+    {
+      id: 'a-3',
+      promptVi: 'Quy định phương thức thanh toán thư tín dụng không hủy ngang (Irrevocable L/C):',
+      promptEn: 'Specify international payment terms via Irrevocable L/C at sight:',
+      options: [
+        'Payment shall be secured by an Irrevocable Letter of Credit at sight issued by a first-class international bank.',
+        'You can pay us cash whenever your ship arrives.',
+        'Send money via personal digital wallet after six months.',
+        'We ship goods first and hope you will pay later.'
+      ],
+      correctIndex: 0,
+      explanation: 'Irrevocable L/C at sight: Thư tín dụng không thể hủy ngang trả ngay là phương thức thanh toán chuẩn hóa an toàn nhất trong xuất khẩu.',
+      category: 'Thanh Toán Quốc Tế'
+    },
+    {
+      id: 'a-4',
+      promptVi: 'Cam kết chất lượng đạt chuẩn Cục Quản Lý Thực Phẩm & Dược Phẩm Hoa Kỳ (FDA):',
+      promptEn: 'Confirm compliance with US FDA regulations for US shipments:',
+      options: [
+        'Our export products have completed official US FDA registration and full third-party laboratory panel testing.',
+        'FDA registration is optional and not needed for America.',
+        'We do not know what FDA stands for.',
+        'We only test water according to local village rules.'
+      ],
+      correctIndex: 0,
+      explanation: 'Sản phẩm xuất khẩu của Vikoda hoàn tất đăng ký FDA và kiểm nghiệm độc lập SGS/Eurofins.',
+      category: 'Tiêu Chuẩn FDA'
+    },
+    {
+      id: 'a-5',
+      promptVi: 'Giải thích tính kiềm tự nhiên vượt trội so với nước kiềm nhân tạo nhân tạo:',
+      promptEn: 'Articulate the clinical difference between natural vs artificially ionized alkaline water:',
+      options: [
+        'Vikoda’s pH 9.0 is 100% geology-derived and stable, unlike artificial alkaline water which rapidly drops pH after bottling.',
+        'All alkaline water is made by dissolving soap powders.',
+        'Artificial water is always better than nature.',
+        'There is no scientific difference between natural and machine water.'
+      ],
+      correctIndex: 0,
+      explanation: 'Nước kiềm nhân tạo dùng máy điện phân nhân tạo thường mất độ kiềm sau vài ngày; Vikoda kiềm tự nhiên ổn định vĩnh cửu theo thời gian.',
+      category: 'Lợi Thế Cạnh Tranh'
+    },
+    {
+      id: 'a-6',
+      promptVi: 'Xử lý tình huống đối tác yêu cầu độc quyền thị trường nhưng không cam kết sản lượng:',
+      promptEn: 'Handle a distributor requesting exclusivity without volume commitment:',
+      options: [
+        'We can grant exclusivity subject to quarterly performance milestones and a confirmed annual volume quota.',
+        'We sign exclusivity immediately without any conditions.',
+        'We reject your company and cancel all future communications.',
+        'Exclusivity is free for all customers.'
+      ],
+      correctIndex: 0,
+      explanation: 'Quyền độc quyền thương mại luôn phải gắn liền với chỉ tiêu sản lượng cam kết (Quarterly volume quota).',
+      category: 'Đàm Phán Độc Quyền'
+    },
+    {
+      id: 'a-7',
+      promptVi: 'Xác định trách nhiệm mua bảo hiểm hàng hải theo điều kiện CIF cảng Tokyo:',
+      promptEn: 'Clarify marine cargo insurance obligation under CIF Incoterms:',
+      options: [
+        'Under CIF terms, the seller must procure marine insurance covering minimum Institute Cargo Clauses (C).',
+        'Buyer must buy all insurance before vessel leaves Vietnam.',
+        'No insurance is required if the sea is calm.',
+        'The shipping line pays for all damages automatically.'
+      ],
+      correctIndex: 0,
+      explanation: 'CIF (Cost, Insurance and Freight): Người bán chịu chi phí vận tải biển và bắt buộc mua bảo hiểm hàng hải cho lô hàng.',
+      category: 'Incoterms Xuất Khẩu'
+    },
+    {
+      id: 'a-8',
+      promptVi: 'Giải thích tác dụng trung hòa axit dạ dày từ khoáng kiềm Đảnh Thạnh:',
+      promptEn: 'Explain stomach acid neutralization mechanism of Vikoda pH 9.0:',
+      options: [
+        'Natural bicarbonate ions in Vikoda gently buffer excess gastric acid without causing acid rebound.',
+        'Vikoda stops all digestive processes completely.',
+        'Vikoda makes stomach 100% acidic.',
+        'Stomach acid cannot react with alkaline water.'
+      ],
+      correctIndex: 0,
+      explanation: 'Bicarbonate (HCO3-) tự nhiên trung hòa axit dạ dày dư thừa một cách dịu nhẹ, phòng ngừa trào ngược hiệu quả.',
+      category: 'Y Học & Sức Khỏe'
+    },
+    {
+      id: 'a-9',
+      promptVi: 'Thương lượng thời gian lưu container tại bãi cảng (Demurrage & Detention):',
+      promptEn: 'Negotiate free container demurrage days with the shipping line:',
+      options: [
+        'We request fourteen days of combined demurrage and detention at the destination port to facilitate smooth customs clearance.',
+        'We will leave containers at the port for five years.',
+        'Demurrage is zero dollars forever.',
+        'We do not need any free time at destination port.'
+      ],
+      correctIndex: 0,
+      explanation: '14 days combined demurrage & detention là quyền lợi quan trọng hỗ trợ đối tác làm thủ tục hải quan nước nhập khẩu.',
+      category: 'Logistics Xuất Khẩu'
+    },
+    {
+      id: 'a-10',
+      promptVi: 'Chốt hợp đồng bằng cam kết đồng hành dài hạn cùng tập đoàn FIT & Vikoda:',
+      promptEn: 'Deliver executive closing statement pledging sustainable partnership:',
+      options: [
+        'Vikoda pledges stable product availability, world-class quality assurance, and dedicated marketing support for your market.',
+        'Sign now or we will sell to your rival tomorrow.',
+        'This is our only deal, take it or leave it.',
+        'We make no guarantees regarding future supply.'
+      ],
+      correctIndex: 0,
+      explanation: 'Nghệ thuật chốt hợp đồng cao cấp: Cam kết 3 chân kiềng (Nguồn hàng ổn định - Chất lượng quốc tế - Đồng hành tiếp thị).',
+      category: 'Nghệ Thuật Đàm Phán'
+    }
+  ]
+};
 
 interface EndlessDrillArenaProps {
   onClose: () => void;
@@ -102,8 +452,6 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
   bestScore,
   speechRate
 }) => {
-  const allExercises = VIKODA_CURRICULUM.flatMap((u) => u.exercises);
-
   const [selectedTier, setSelectedTier] = useState<ArenaTier | null>(null);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [currentScore, setCurrentScore] = useState(0);
@@ -112,26 +460,45 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-  const [drillQuestions, setDrillQuestions] = useState<LessonExercise[]>([]);
+  const [drillQuestions, setDrillQuestions] = useState<DrillQuestion[]>([]);
   const [isFinished, setIsFinished] = useState(false);
-  const [timeLeft, setTimeLeft] = useState<number>(10);
-  const [missedQuestions, setMissedQuestions] = useState<LessonExercise[]>([]);
+  const [timeLeft, setTimeLeft] = useState<number>(15);
+  const [missedQuestions, setMissedQuestions] = useState<DrillQuestion[]>([]);
   const [currentVoiceId, setCurrentVoiceId] = useState<VoiceOptionId>(getSelectedVoiceId());
   const [isVoicePickerOpen, setIsVoicePickerOpen] = useState<boolean>(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const unsub = subscribeVoiceChange((vId) => setCurrentVoiceId(vId));
     return unsub;
   }, []);
 
-  const tierConfig = ARENA_TIERS.find((t) => t.id === selectedTier) || ARENA_TIERS[1];
+  const tierConfig = ARENA_3_TIERS.find((t) => t.id === selectedTier) || ARENA_3_TIERS[0];
 
-  // Start a new drill with chosen tier
+  // Start selected Tier
   const startTier = (tier: ArenaTier) => {
     setSelectedTier(tier);
-    const cfg = ARENA_TIERS.find((t) => t.id === tier) || ARENA_TIERS[1];
-    const shuffled = [...allExercises].sort(() => 0.5 - Math.random()).slice(0, cfg.questionCount);
-    setDrillQuestions(shuffled);
+    const cfg = ARENA_3_TIERS.find((t) => t.id === tier) || ARENA_3_TIERS[0];
+    const sourceQuestions = DRILL_QUESTIONS_BANK[tier] || DRILL_QUESTIONS_BANK.basic;
+    
+    // Pick and shuffle questions once when tier starts
+    const shuffled = [...sourceQuestions].sort(() => 0.5 - Math.random()).slice(0, cfg.questionCount);
+    
+    // Pre-shuffle options and find exact correctIndex for each question in state
+    const prepared = shuffled.map((q) => {
+      const correctText = q.options[q.correctIndex];
+      const optsCopy = [...q.options];
+      for (let i = optsCopy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [optsCopy[i], optsCopy[j]] = [optsCopy[j], optsCopy[i]];
+      }
+      return {
+        ...q,
+        options: optsCopy,
+        correctIndex: optsCopy.indexOf(correctText),
+      };
+    });
+
+    setDrillQuestions(prepared);
     setQuestionIndex(0);
     setCurrentScore(0);
     setCombo(0);
@@ -151,7 +518,6 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
     if (!selectedTier || isFinished || hasAnswered) return;
 
     if (timeLeft <= 0) {
-      // Time expired! Mark as wrong
       handleSelectOption(-1);
       return;
     }
@@ -163,25 +529,17 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
     return () => clearInterval(timer);
   }, [selectedTier, isFinished, hasAnswered, timeLeft]);
 
-  // Fallback options
-  const options = currentExercise?.options || [
-    currentExercise?.englishSentence,
-    'This option is completely incorrect and inappropriate for Vikoda.',
-    'We avoid using this casual phrasing in export negotiations.'
-  ].sort(() => 0.5 - Math.random());
-
-  const correctIndex = currentExercise?.correctIndex ?? options.indexOf(currentExercise?.englishSentence || '');
-
+  // Deterministic option selection
   const handleSelectOption = (idx: number) => {
-    if (hasAnswered) return;
+    if (hasAnswered || !currentExercise) return;
 
     setSelectedOption(idx);
     setHasAnswered(true);
 
-    const correct = idx === correctIndex;
-    setIsCorrect(correct);
+    const isAnswerRight = idx === currentExercise.correctIndex;
+    setIsCorrect(isAnswerRight);
 
-    if (correct) {
+    if (isAnswerRight) {
       playSound('success');
       const newCombo = combo + 1;
       setCombo(newCombo);
@@ -191,9 +549,7 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
     } else {
       playSound('wrong');
       setCombo(0);
-      if (currentExercise) {
-        setMissedQuestions((prev) => [...prev, currentExercise]);
-      }
+      setMissedQuestions((prev) => [...prev, currentExercise]);
     }
   };
 
@@ -206,7 +562,6 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
       setIsCorrect(false);
       setTimeLeft(tierConfig.timePerQuestion);
     } else {
-      // Completed drill!
       setIsFinished(true);
       playSound('celebrate');
       confetti({
@@ -218,401 +573,247 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
   };
 
   const handleSaveAndExit = () => {
-    const xpGain = Math.round(currentScore / 8);
-    const gemGain = Math.round(currentScore / 40);
+    playSound('click');
+    const xpGain = Math.round(currentScore * 0.5);
+    const gemGain = Math.max(5, Math.floor(currentScore / 100));
     onFinishDrill(currentScore, xpGain, gemGain);
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl border-2 border-slate-200 border-b-6 border-b-slate-300 w-full max-w-lg shadow-2xl flex flex-col max-h-[92vh] overflow-hidden">
+    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 select-none animate-in fade-in duration-150">
+      <div className="bg-white w-full max-w-xl rounded-3xl border border-sky-100 shadow-2xl overflow-hidden flex flex-col max-h-[95vh] my-auto">
         
-        {/* Arena Top Navigation */}
-        <div className="px-5 py-3.5 border-b-2 border-slate-100 flex items-center justify-between bg-slate-50/80">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-black shadow-xs">
-              <Zap className="w-5 h-5 fill-white" />
-            </div>
-            <div>
-              <h3 className="text-sm font-black text-slate-900 leading-tight">
-                Arena Đấu Trường Phản Xạ
-              </h3>
-              <p className="text-[10px] text-slate-500 font-bold">
-                {selectedTier ? tierConfig.title : 'Chọn cấp bậc đấu trường để thử thách'}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            {/* Quick Voice Switcher */}
-            <div>
+        {/* ================= STAGE 1: 3-TIER LEVEL SELECTION ================= */}
+        {!selectedTier ? (
+          <div className="p-5 sm:p-6 space-y-4 overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div className="flex items-center space-x-2.5">
+                <div className="w-10 h-10 rounded-2xl bg-amber-100 flex items-center justify-center text-amber-600 shadow-xs">
+                  <Zap className="w-6 h-6 fill-current" />
+                </div>
+                <div>
+                  <h2 className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
+                    Đấu Trường Phản Xạ Nhanh
+                  </h2>
+                  <p className="text-xs text-slate-500 font-medium">
+                    Chọn 1 trong 3 cấp độ thi đấu phù hợp với bạn
+                  </p>
+                </div>
+              </div>
               <button
                 onClick={() => {
                   playSound('click');
-                  setIsVoicePickerOpen(true);
+                  onClose();
                 }}
-                className="px-2 py-1 rounded-xl bg-sky-50 border border-sky-200 text-[#0070D1] hover:bg-sky-100 text-xs font-bold flex items-center space-x-1 cursor-pointer active:translate-y-0.5"
-                title="Đổi giọng đọc AI (Mỹ Nam, Anh Nam Chuẩn, Mỹ Nữ)"
+                className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
               >
-                <span>{VOICE_OPTIONS.find(v => v.id === currentVoiceId)?.flag || '🇺🇸'}</span>
-                <Settings2 className="w-3.5 h-3.5" />
+                <X className="w-5 h-5" />
               </button>
-
-              <VoiceSelectorModal
-                isOpen={isVoicePickerOpen}
-                onClose={() => setIsVoicePickerOpen(false)}
-                onSelectVoice={(vId) => setCurrentVoiceId(vId)}
-              />
             </div>
 
-            <button
-              onClick={onClose}
-              className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200 cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* 1. TIER SELECTION SCREEN */}
-        {!selectedTier ? (
-          <div className="p-5 overflow-y-auto space-y-4">
-            <div className="text-center space-y-1">
-              <VikoMascot size="md" mood="cheering" className="mx-auto" />
-              <h2 className="text-base font-black text-slate-900">
-                Thử Thách Phản Xạ Tiếng Anh B2B
-              </h2>
-              <p className="text-xs text-slate-500 font-medium">
-                Càng lên cấp bậc cao, câu hỏi càng đa dạng và thời gian càng gấp rút!
-              </p>
-            </div>
-
-            <div className="space-y-2.5">
-              {ARENA_TIERS.map((tier) => (
+            {/* 3 Tier Cards */}
+            <div className="space-y-3">
+              {ARENA_3_TIERS.map((tier) => (
                 <button
                   key={tier.id}
                   onClick={() => startTier(tier.id)}
-                  className={`w-full p-4 rounded-2xl bg-white border-2 ${tier.bgBorder} border-b-4 shadow-xs hover:shadow-md text-left transition-all active:translate-y-0.5 cursor-pointer flex items-center justify-between group`}
+                  className={`w-full p-4 rounded-2xl border-2 text-left transition-all cursor-pointer bg-white hover:bg-slate-50/80 active:scale-98 shadow-xs flex items-center justify-between gap-3 ${tier.bgBorder}`}
                 >
-                  <div className="space-y-1">
+                  <div className="space-y-1 min-w-0">
                     <div className="flex items-center space-x-2">
-                      <span className="text-[10px] font-black px-2 py-0.5 rounded-md bg-slate-100 text-slate-700">
+                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase text-white shadow-2xs" style={{ backgroundColor: tier.accentColor }}>
                         {tier.badge}
                       </span>
-                      <h4 className="text-xs font-black text-slate-900 group-hover:text-[#0070D1]">
+                      <h3 className="font-black text-xs sm:text-sm text-slate-900 truncate">
                         {tier.title}
-                      </h4>
+                      </h3>
                     </div>
-                    <p className="text-[11px] text-slate-500 font-medium leading-snug">
+                    <p className="text-xs text-slate-500 font-medium leading-relaxed">
                       {tier.description}
                     </p>
                   </div>
-                  <div className="text-right shrink-0 ml-3">
-                    <span className="text-xs font-black text-amber-600 block">
-                      x{tier.xpMultiplier} XP
-                    </span>
-                    <span className="text-[10px] font-bold text-slate-400">
-                      {tier.questionCount} câu
-                    </span>
+                  <div className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center shrink-0 text-slate-600">
+                    <ArrowRight className="w-4 h-4" />
                   </div>
                 </button>
               ))}
             </div>
 
-            <div className="p-3 rounded-2xl bg-sky-50 border border-sky-200 text-xs text-slate-600 flex items-center space-x-2">
-              <Trophy className="w-5 h-5 text-amber-500 shrink-0" />
-              <span>
-                Điểm kỷ lục cá nhân của bạn: <strong>{bestScore} điểm</strong>. Tham gia đấu trường để thăng hạng!
+            {/* Best score badge */}
+            <div className="p-3 bg-amber-50 rounded-2xl border border-amber-200 flex items-center justify-between text-xs text-amber-900 font-black">
+              <span className="flex items-center gap-1.5">
+                <Trophy className="w-4 h-4 text-amber-600" />
+                <span>Kỷ lục cao nhất của bạn:</span>
               </span>
+              <span className="text-sm font-black text-amber-700">{bestScore} điểm</span>
             </div>
           </div>
-        ) : !isFinished ? (
-          /* 2. IN-GAME ARENA QUESTION */
-          <div className="p-5 overflow-y-auto space-y-4 flex-1 flex flex-col justify-between">
+        ) : !isFinished && currentExercise ? (
+          /* ================= STAGE 2: LIVE QUESTION CANVAS ================= */
+          <div className="flex flex-col h-full overflow-hidden">
             
-            {/* HUD Status Bar: Question Index, Timer, Combo, Score */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-xs font-black">
-                <span className="text-slate-500">
-                  Câu {questionIndex + 1} / {drillQuestions.length}
+            {/* Header: Progress, Timer & Score */}
+            <div className="p-3.5 sm:p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between gap-2 shrink-0">
+              <div className="flex items-center space-x-2 min-w-0">
+                <span className="px-2 py-0.5 rounded-full bg-slate-200 text-slate-800 text-[10px] font-black">
+                  Câu {questionIndex + 1}/{drillQuestions.length}
                 </span>
-
-                {/* Countdown Timer with Warning Color */}
-                <div className={`flex items-center space-x-1 px-2.5 py-0.5 rounded-full font-black text-xs ${
-                  timeLeft <= 3
-                    ? 'bg-rose-100 text-rose-700 animate-pulse border border-rose-300'
-                    : 'bg-amber-50 text-amber-700 border border-amber-200'
-                }`}>
-                  <Clock className="w-3.5 h-3.5" />
-                  <span>{timeLeft}s</span>
-                </div>
-
-                <div className="flex items-center space-x-1 text-amber-500">
-                  <Flame className="w-4 h-4 fill-amber-500" />
-                  <span>Combo x{combo}</span>
-                </div>
-
-                <span className="text-[#0070D1] tabular-nums font-black text-sm">
-                  {currentScore} pts
+                <span className="text-xs font-black text-slate-900 truncate">
+                  {tierConfig.title}
                 </span>
               </div>
 
-              {/* Timer Progress Bar */}
-              <div className="h-2 rounded-full bg-slate-100 overflow-hidden border border-slate-200">
-                <div
-                  className={`h-full transition-all duration-1000 ${
-                    timeLeft <= 3 ? 'bg-rose-500' : 'bg-amber-400'
-                  }`}
-                  style={{ width: `${(timeLeft / tierConfig.timePerQuestion) * 100}%` }}
-                />
+              {/* Center Timer */}
+              <div className={`flex items-center gap-1 px-3 py-1 rounded-full font-black text-xs border ${
+                timeLeft <= 3
+                  ? 'bg-rose-100 text-rose-700 border-rose-300 animate-pulse'
+                  : 'bg-white text-slate-800 border-slate-300'
+              }`}>
+                <Clock className="w-3.5 h-3.5" />
+                <span>{timeLeft}s</span>
+              </div>
+
+              {/* Score */}
+              <div className="text-right">
+                <div className="text-xs font-black text-amber-600">{currentScore} pts</div>
+                {combo >= 2 && (
+                  <div className="text-[10px] text-amber-700 font-black flex items-center justify-end gap-0.5">
+                    <Flame className="w-3 h-3 fill-current" />
+                    <span>x{combo} Combo</span>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Question Card */}
-            <div className="p-4 rounded-2xl bg-sky-50/70 border-2 border-sky-200 space-y-2 relative">
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black uppercase text-[#0070D1] tracking-wide">
-                  Tình Huống Đối Ngoại
+            {/* Question Body */}
+            <div className="p-4 sm:p-6 overflow-y-auto space-y-4 flex-1">
+              <div className="bg-sky-50/80 border-2 border-sky-200 rounded-2xl p-4 space-y-1">
+                <span className="text-[10px] font-black uppercase text-[#0070D1] tracking-wider">
+                  {currentExercise.category || 'Tình Huống Thương Mại'}
                 </span>
-                <button
-                  onClick={() => playSpeech(currentExercise?.audioText || currentExercise?.englishSentence, speechRate, 'en-US')}
-                  className="p-1 rounded-lg bg-white border border-sky-200 text-[#0070D1] hover:bg-sky-100 cursor-pointer"
-                  title="Nghe phát âm chuẩn"
-                >
-                  <Volume2 className="w-4 h-4" />
-                </button>
+                <h3 className="text-sm sm:text-base font-black text-slate-900 leading-snug">
+                  {currentExercise.promptVi}
+                </h3>
+                {currentExercise.promptEn && (
+                  <p className="text-xs text-slate-600 font-medium">
+                    👉 {currentExercise.promptEn}
+                  </p>
+                )}
               </div>
 
-              <h3 className="text-sm font-black text-slate-900 leading-snug">
-                {currentExercise?.promptVi}
-              </h3>
-              {currentExercise?.phonetics && (
-                <p className="text-[11px] font-mono text-cyan-800 font-bold">
-                  {currentExercise.phonetics}
-                </p>
+              {/* Options List with Deterministic Highlighting */}
+              <div className="space-y-2.5">
+                {currentExercise.options.map((option, idx) => {
+                  const isSelected = selectedOption === idx;
+                  const isCorrectAnswer = idx === currentExercise.correctIndex;
+
+                  let style = "bg-white hover:bg-slate-50 border-2 border-slate-200 border-b-4 border-b-slate-300 text-slate-800";
+
+                  if (hasAnswered) {
+                    if (isCorrectAnswer) {
+                      style = "bg-emerald-50 border-2 border-emerald-500 border-b-4 border-b-emerald-600 text-emerald-950 font-black shadow-xs ring-2 ring-emerald-200";
+                    } else if (isSelected && !isCorrectAnswer) {
+                      style = "bg-rose-50 border-2 border-rose-500 border-b-4 border-b-rose-600 text-rose-950 font-bold";
+                    } else {
+                      style = "bg-slate-50 border-2 border-slate-200 border-b-2 text-slate-400 opacity-40";
+                    }
+                  } else if (isSelected) {
+                    style = "bg-sky-50 border-2 border-[#009FE3] border-b-4 border-b-[#0072CE] text-[#0070D1] font-black";
+                  }
+
+                  return (
+                    <button
+                      key={idx}
+                      disabled={hasAnswered}
+                      onClick={() => handleSelectOption(idx)}
+                      className={`w-full text-left p-3.5 rounded-2xl text-xs sm:text-sm transition-all flex items-start space-x-3 cursor-pointer active:translate-y-0.5 ${style}`}
+                    >
+                      <span className="w-6 h-6 rounded-lg bg-slate-100 flex items-center justify-center font-black text-xs shrink-0 border border-slate-300 mt-0.5">
+                        {String.fromCharCode(65 + idx)}
+                      </span>
+                      <span className="flex-1 leading-snug break-words">{option}</span>
+                      {hasAnswered && isCorrectAnswer && (
+                        <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                      )}
+                      {hasAnswered && isSelected && !isCorrectAnswer && (
+                        <XCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Explanation Card upon Answer */}
+              {hasAnswered && (
+                <div className={`p-3.5 rounded-2xl border text-xs animate-in slide-in-from-bottom-2 duration-150 space-y-1.5 ${
+                  isCorrect ? 'bg-emerald-50 border-emerald-300 text-emerald-950' : 'bg-rose-50 border-rose-300 text-rose-950'
+                }`}>
+                  <div className="flex items-center justify-between">
+                    <span className="font-black text-xs sm:text-sm">
+                      {isCorrect ? '🎉 Chính xác!' : '❌ Chưa chính xác!'}
+                    </span>
+                    <button
+                      onClick={() => playSpeech(currentExercise.options[currentExercise.correctIndex], speechRate, 'en-US')}
+                      className="px-2 py-0.5 bg-white rounded-lg border border-slate-200 text-slate-700 flex items-center gap-1 font-bold cursor-pointer"
+                    >
+                      <Volume2 className="w-3 h-3" />
+                      <span>Nghe</span>
+                    </button>
+                  </div>
+                  <p className="font-medium text-slate-800 leading-relaxed">
+                    💡 {currentExercise.explanation}
+                  </p>
+                </div>
               )}
             </div>
 
-            {/* Options List */}
-            <div className="space-y-2 py-1">
-              {options.map((option, idx) => {
-                const isSelected = selectedOption === idx;
-                let btnStyle = 'bg-white border-2 border-slate-200 border-b-4 border-b-slate-300 text-slate-800 hover:border-sky-300';
-
-                if (hasAnswered) {
-                  if (idx === correctIndex) {
-                    btnStyle = 'bg-emerald-50 border-2 border-emerald-500 border-b-4 border-b-emerald-600 text-emerald-950 font-black';
-                  } else if (isSelected) {
-                    btnStyle = 'bg-rose-50 border-2 border-rose-500 border-b-4 border-b-rose-600 text-rose-950 font-bold';
-                  } else {
-                    btnStyle = 'opacity-40 border-slate-200 border-b-2';
-                  }
-                }
-
-                return (
-                  <button
-                    key={idx}
-                    disabled={hasAnswered}
-                    onClick={() => handleSelectOption(idx)}
-                    className={`w-full text-left p-3.5 rounded-2xl text-xs transition-all flex items-center justify-between cursor-pointer active:translate-y-0.5 ${btnStyle}`}
-                  >
-                    <span className="font-bold flex-1">{option}</span>
-                    <span className="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-[10px] font-black shrink-0 ml-2">
-                      {String.fromCharCode(65 + idx)}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Deep Learning Pedagogical Feedback Drawer */}
+            {/* Bottom Action Button */}
             {hasAnswered && (
-              <div className="p-3.5 rounded-2xl bg-white border-2 border-slate-200 border-b-4 border-b-slate-300 space-y-2 text-xs animate-in fade-in">
-                <div className="flex items-center space-x-1.5 font-black text-sm">
-                  {isCorrect ? (
-                    <>
-                      <CheckCircle2 className="w-5 h-5 text-emerald-600" />
-                      <span className="text-emerald-700">Rất sắc bén! (+100 Combo)</span>
-                    </>
-                  ) : (
-                    <>
-                      <AlertCircle className="w-5 h-5 text-rose-600" />
-                      <span className="text-rose-700">
-                        {selectedOption === -1 ? 'Hết giờ!' : 'Cần lưu ý!'}
-                      </span>
-                    </>
-                  )}
-                </div>
-
-                <div className="p-2 rounded-xl bg-slate-50 border border-slate-200 leading-relaxed font-medium">
-                  <strong className={isCorrect ? 'text-emerald-900 font-bold' : 'text-rose-900 font-bold'}>
-                    {isCorrect ? '💡 Điểm cộng: ' : '❌ Vì sao sai? '}
-                  </strong>
-                  <span>{currentExercise?.whyWrong || currentExercise?.explanation}</span>
-                </div>
-
-                {/* Crucial Note & Memory Hook */}
-                {currentExercise?.crucialNote && (
-                  <div className="p-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-950 leading-relaxed">
-                    <strong className="font-black text-amber-900">⚡ Lưu ý đối ngoại: </strong>
-                    <span>{currentExercise.crucialNote}</span>
-                  </div>
-                )}
-
-                {/* Memory Hook */}
-                <div className="p-2 rounded-xl bg-sky-50 border border-sky-200 text-sky-950 leading-relaxed">
-                  <strong className="font-black text-[#0070D1]">🧠 Mẹo nhớ lâu: </strong>
-                  <span>
-                    {currentExercise?.memoryHook ||
-                      `Ghi nhớ cụm từ: "${currentExercise?.englishSentence.split(' ').slice(0, 3).join(' ')}" - luyện nói to 2 lần để khắc sâu phản xạ.`}
-                  </span>
-                </div>
-
-                {/* Vocabulary Highlights */}
-                {currentExercise?.vocabularyHighlights && currentExercise.vocabularyHighlights.length > 0 && (
-                  <div className="p-2 rounded-xl bg-violet-50 border border-violet-200 text-violet-950 space-y-1">
-                    <div className="font-black text-violet-900 text-[11px]">📚 Từ vựng then chốt:</div>
-                    <div className="flex flex-wrap gap-1">
-                      {currentExercise.vocabularyHighlights.map((vh, vi) => (
-                        <span key={vi} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-white border border-violet-200 text-[11px]">
-                          <strong className="text-[#0070D1]">{vh.word}</strong>
-                          <span className="text-slate-500">({vh.meaning})</span>
-                          <button
-                            onClick={() => playSpeech(vh.word, speechRate, 'en-US')}
-                            className="text-violet-600 hover:text-violet-800"
-                            title="Nghe phát âm"
-                          >
-                            <Volume2 className="w-2.5 h-2.5" />
-                          </button>
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
+              <div className="p-3.5 sm:p-4 bg-slate-50 border-t border-slate-200 shrink-0">
                 <button
                   onClick={handleNext}
-                  className="w-full py-2.5 rounded-xl btn-duo-primary text-white font-black text-xs uppercase tracking-wider cursor-pointer mt-1"
+                  className="w-full py-3.5 rounded-2xl bg-[#0070D1] hover:bg-[#005bb5] border-b-4 border-[#004b96] text-white font-black text-xs sm:text-sm uppercase tracking-wider cursor-pointer shadow-md flex items-center justify-center gap-2 active:translate-y-0.5"
                 >
-                  {questionIndex + 1 < drillQuestions.length ? 'Câu Tiếp Theo • Đi Tiếp' : 'Xem Kết Quả Đấu Trường'}
+                  <span>{questionIndex < drillQuestions.length - 1 ? 'Câu Tiếp Theo' : 'Xem Kết Quả Vòng Đấu'}</span>
+                  <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             )}
 
           </div>
         ) : (
-          /* 3. ARENA COMPLETED REVIEW SCREEN */
-          <div className="p-5 overflow-y-auto space-y-4 text-center">
-            <VikoMascot size="lg" mood="celebrate" className="mx-auto" />
+          /* ================= STAGE 3: FINISHED SUMMARY ================= */
+          <div className="p-6 sm:p-8 text-center space-y-5 overflow-y-auto">
+            <VikoMascot size="lg" mood="celebrate" />
 
             <div className="space-y-1">
-              <h2 className="text-xl font-black text-slate-900">
-                Hoàn Thành {tierConfig.title}!
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900">
+                Hoàn Thành Vòng Đấu!
               </h2>
               <p className="text-xs text-slate-500 font-medium">
-                Bạn đã vượt qua đấu trường phản xạ với phong độ xuất sắc
+                Cấp độ: <strong>{tierConfig.title}</strong>
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-2">
-              <div className="p-3 rounded-2xl bg-amber-50 border-2 border-amber-200 text-center">
-                <div className="text-lg font-black text-amber-600">{currentScore}</div>
-                <div className="text-[9px] text-amber-800 font-bold uppercase">Tổng Điểm</div>
+            {/* Score Grid */}
+            <div className="grid grid-cols-2 gap-3 max-w-xs mx-auto">
+              <div className="p-3 rounded-2xl bg-amber-50 border-2 border-amber-200">
+                <div className="text-[10px] font-black uppercase text-amber-800">Điểm Đấu</div>
+                <div className="text-2xl font-black text-amber-600">{currentScore}</div>
               </div>
-              <div className="p-3 rounded-2xl bg-cyan-50 border-2 border-cyan-200 text-center">
-                <div className="text-lg font-black text-[#0070D1]">x{maxCombo}</div>
-                <div className="text-[9px] text-cyan-800 font-bold uppercase">Combo Tối Đa</div>
-              </div>
-              <div className="p-3 rounded-2xl bg-purple-50 border-2 border-purple-200 text-center">
-                <div className="text-lg font-black text-purple-600">+{Math.round(currentScore / 8)}</div>
-                <div className="text-[9px] text-purple-800 font-bold uppercase">Kinh Nghiệm XP</div>
+              <div className="p-3 rounded-2xl bg-sky-50 border-2 border-sky-200">
+                <div className="text-[10px] font-black uppercase text-sky-800">Max Combo</div>
+                <div className="text-2xl font-black text-[#0070D1]">x{maxCombo}</div>
               </div>
             </div>
 
-            {/* Review Section: Mẹo Nhớ Lâu Cho Các Câu Sai */}
-            {missedQuestions.length > 0 && (
-              <div className="text-left space-y-2 pt-2">
-                <div className="flex items-center space-x-1.5 text-xs font-black text-rose-800">
-                  <BookOpen className="w-4 h-4 text-rose-600" />
-                  <span>Ôn Tập & Mẹo Nhớ {missedQuestions.length} Câu Cần Lưu Ý:</span>
-                </div>
-
-                <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
-                  {missedQuestions.map((q, i) => (
-                    <div key={i} className="p-3 rounded-2xl bg-rose-50/70 border border-rose-200 text-xs space-y-1.5">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="font-bold text-slate-800">"{q.englishSentence}"</div>
-                        <button
-                          onClick={() => playSpeech(q.audioText || q.englishSentence, speechRate, 'en-US')}
-                          className="p-1 rounded-lg bg-white border border-rose-200 text-rose-700 hover:bg-rose-100 cursor-pointer shrink-0"
-                          title="Nghe lại"
-                        >
-                          <Volume2 className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                      <div className="text-[11px] text-slate-600">{q.promptVi}</div>
-                      
-                      {/* Reason / Why wrong */}
-                      <div className="text-[11px] text-slate-700 bg-white p-2 rounded-xl border border-rose-100 font-medium">
-                        <strong className="text-rose-900">❌ Vì sao dễ nhầm: </strong>
-                        <span>{q.whyWrong || q.explanation}</span>
-                      </div>
-
-                      {/* Crucial note */}
-                      {q.crucialNote && (
-                        <div className="text-[11px] text-amber-900 bg-amber-50 p-2 rounded-xl border border-amber-200 font-medium">
-                          <strong>⚡ Lưu ý đối ngoại: </strong>
-                          <span>{q.crucialNote}</span>
-                        </div>
-                      )}
-
-                      {/* Memory hook */}
-                      <div className="text-[11px] text-[#0070D1] bg-sky-50 p-2 rounded-xl border border-sky-200 font-semibold">
-                        <strong>🧠 Mẹo nhớ lâu: </strong>
-                        <span>
-                          {q.memoryHook ||
-                            `Khắc sâu cụm từ "${q.englishSentence.split(' ').slice(0, 3).join(' ')}" - luyện nói 2 lần để tạo phản xạ.`}
-                        </span>
-                      </div>
-
-                      {/* Vocab if available */}
-                      {q.vocabularyHighlights && q.vocabularyHighlights.length > 0 && (
-                        <div className="flex flex-wrap gap-1 pt-0.5">
-                          {q.vocabularyHighlights.map((vh, vi) => (
-                            <span key={vi} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-white border border-violet-200 text-[10px]">
-                              <strong className="text-[#0070D1]">{vh.word}</strong>
-                              <span className="text-slate-500">({vh.meaning})</span>
-                              <button
-                                onClick={() => playSpeech(vh.word, speechRate, 'en-US')}
-                                className="text-violet-600 hover:text-violet-800"
-                              >
-                                <Volume2 className="w-2.5 h-2.5" />
-                              </button>
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            <div className="flex gap-2 pt-2">
-              <button
-                onClick={() => setSelectedTier(null)}
-                className="flex-1 py-3 rounded-2xl btn-duo-white text-slate-700 font-black text-xs uppercase cursor-pointer"
-              >
-                Đổi Cấp Bậc
-              </button>
-              <button
-                onClick={handleSaveAndExit}
-                className="flex-1 py-3 rounded-2xl btn-duo-green text-white font-black text-xs uppercase cursor-pointer"
-              >
-                Lưu & Nhận Thưởng
-              </button>
-            </div>
+            <button
+              onClick={handleSaveAndExit}
+              className="w-full max-w-xs py-3.5 rounded-2xl bg-[#22c55e] hover:bg-[#16a34a] border-b-4 border-[#15803d] text-white font-black text-xs sm:text-sm uppercase tracking-wider cursor-pointer shadow-md active:translate-y-0.5 mx-auto block"
+            >
+              Lưu Điểm & Hoàn Tất
+            </button>
           </div>
         )}
 

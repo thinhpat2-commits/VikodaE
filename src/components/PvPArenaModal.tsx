@@ -219,6 +219,118 @@ const ARENA_BATTLE_QUESTIONS: ArenaQuestion[] = [
     ],
     correctIndex: 0,
     explanation: 'Chữ A trong V-I-K-O-D-A là ACTION: Hành động dứt khoát, chốt đơn hàng cụ thể về số lượng thùng/két và thời gian giao hàng.'
+  },
+  {
+    id: 'arena-q8',
+    category: 'Export Compliance',
+    promptEn: 'What is the mandatory legal requirement under QCVN 6-1:2010/BYT to label water as "Natural Mineral Water"?',
+    promptVi: 'Quy định bắt buộc theo QCVN 6-1:2010/BYT để được ghi "Nước khoáng thiên nhiên" lên nhãn mác là gì?',
+    options: [
+      'It must be extracted and bottled immediately at the natural underground spring source.',
+      'It can be transported by road in open tank trucks to a distant city for bottling.',
+      'It must contain added artificial mineral salts and synthetic flavoring.',
+      'It can be municipal tap water boiled in large open kettles.'
+    ],
+    correctIndex: 0,
+    explanation: 'Theo QCVN 6-1:2010/BYT, chỉ những nguồn nước được khai thác và đóng chai trực tiếp tại nguồn mới có tư cách pháp lý mang nhãn "Nước khoáng thiên nhiên".'
+  },
+  {
+    id: 'arena-q9',
+    category: 'International Payment',
+    promptEn: 'Which international payment method offers the highest security for both buyer and seller in container exports?',
+    promptVi: 'Phương thức thanh toán quốc tế nào đảm bảo tính an toàn cao nhất cho cả người mua và người bán khi xuất khẩu container?',
+    options: [
+      'Irrevocable Letter of Credit (L/C) at sight confirmed by a first-class international bank',
+      'Open account payment with 180 days credit without bank guarantee',
+      'Informal cash transfer through an unregistered money dealer',
+      'Verbal promise to wire money after selling all products to consumers'
+    ],
+    correctIndex: 0,
+    explanation: 'Thư tín dụng không thể hủy ngang trả ngay (Irrevocable L/C at sight) là phương thức chuẩn mực bảo vệ người xuất khẩu khỏi rủi ro thanh toán.'
+  },
+  {
+    id: 'arena-q10',
+    category: 'Maritime Logistics',
+    promptEn: 'Under CIF terms (Incoterms 2020), which party is responsible for purchasing marine cargo insurance?',
+    promptVi: 'Theo điều kiện CIF (Incoterms 2020), bên nào có nghĩa vụ mua bảo hiểm hàng hải cho lô hàng?',
+    options: [
+      'The seller must procure marine cargo insurance covering minimum Institute Cargo Clauses (C).',
+      'The buyer is solely responsible for procuring all transit insurance policies.',
+      'No insurance is required if the shipping route has calm weather.',
+      'The port authority provides free automatic maritime damage reimbursement.'
+    ],
+    correctIndex: 0,
+    explanation: 'CIF (Cost, Insurance and Freight): Người bán chịu chi phí, cước vận tải biển và bắt buộc phải mua bảo hiểm hàng hải tối thiểu loại C cho người mua.'
+  },
+  {
+    id: 'arena-q11',
+    category: 'US FDA Regulations',
+    promptEn: 'What certification is mandatory for Vikoda before entering the United States commercial market?',
+    promptVi: 'Chứng nhận pháp lý bắt buộc phải hoàn tất trước khi đưa nước khoáng Vikoda vào thị trường Hoa Kỳ là gì?',
+    options: [
+      'Official US Food and Drug Administration (FDA) facility registration and product listing',
+      'Only a local provincial business registration certificate from Vietnam',
+      'A personal letter of recommendation from an airline pilot',
+      'No registration is necessary because bottled water is exempt from all laws'
+    ],
+    correctIndex: 0,
+    explanation: 'Mọi cơ sở sản xuất và sản phẩm thực phẩm, đồ uống nhập khẩu vào Hoa Kỳ bắt buộc phải đăng ký cơ sở và kiểm nghiệm chỉ tiêu theo chuẩn US FDA.'
+  },
+  {
+    id: 'arena-q12',
+    category: 'Scientific Differentiation',
+    promptEn: 'How does natural alkaline water fundamentally differ from artificially ionized alkaline water?',
+    promptVi: 'Nước khoáng kiềm thiên nhiên khác biệt căn bản như thế nào so với nước kiềm nhân tạo qua máy điện giải?',
+    options: [
+      'Vikoda’s pH 9.0 is stably preserved through subterranean geology, whereas artificial water drops pH rapidly after bottling.',
+      'Artificial water contains real gold, whereas natural water contains plastic.',
+      'There is no scientific difference whatsoever between nature and machines.',
+      'Natural water loses all minerals within two minutes of exposure to air.'
+    ],
+    correctIndex: 0,
+    explanation: 'Kiềm tự nhiên từ tầng địa chất magma có độ ổn định pH 9.0 vĩnh cửu theo thời gian, trong khi kiềm nhân tạo điện phân phân rã nhanh sau khi đóng nắp.'
+  },
+  {
+    id: 'arena-q13',
+    category: 'Trade Negotiation',
+    promptEn: 'In export shipping contracts, what does the term "Demurrage" officially refer to?',
+    promptVi: 'Trong hợp đồng vận tải biển xuất khẩu, thuật ngữ "Demurrage" chính thức đề cập đến chi phí gì?',
+    options: [
+      'Fee payable for container retention beyond the agreed free time inside the port terminal',
+      'Commission paid to the foreign sales broker for finding buyers',
+      'Cost of printing export product labels in foreign languages',
+      'Discount provided to the buyer for paying cash upfront'
+    ],
+    correctIndex: 0,
+    explanation: 'Demurrage (Phí lưu bãi/lưu container tại cảng) phát sinh khi người nhập khẩu không nhận hàng ra khỏi bãi cảng trong thời gian miễn phí cho phép.'
+  },
+  {
+    id: 'arena-q14',
+    category: 'HORECA Partnership',
+    promptEn: 'Why do luxury hotel resorts prefer returnable glass bottles over disposable single-use plastic?',
+    promptVi: 'Tại sao các khu nghỉ dưỡng cao cấp ưa chuộng chai thủy tinh thu hồi vỏ hơn chai nhựa dùng một lần?',
+    options: [
+      'It aligns with global corporate ESG goals and enhances guest banquet dining aesthetics.',
+      'Glass bottles are lighter and cheaper to dispose of in regular garbage bins.',
+      'Because hotel guests dislike drinking clear pure water.',
+      'Because plastic bottles are completely illegal in all countries worldwide.'
+    ],
+    correctIndex: 0,
+    explanation: 'Chai thủy tinh đáp ứng cam kết ESG loại bỏ rác thải nhựa của các tập đoàn khách sạn 5 sao quốc tế và nâng tầm đẳng cấp bàn tiệc ẩm thực.'
+  },
+  {
+    id: 'arena-q15',
+    category: 'Brand Value',
+    promptEn: 'What does the brand philosophy "Jade in Stone" (Ngọc Trong Đá) signify at Vikoda?',
+    promptVi: 'Triết lý thương hiệu "Ngọc Trong Đá" của Vikoda mang ý nghĩa biểu tượng sâu sắc nào?',
+    options: [
+      'Precious mineral water preserved pristine within ancient rocks, unleashed through discipline to bring wellness to the world.',
+      'A decorative stone figurine gifted to tourists at the factory gate.',
+      'An ordinary stone dropped into bottled water to enhance mineral taste.',
+      'A fictional fairy tale without any connection to the company’s business operations.'
+    ],
+    correctIndex: 0,
+    explanation: 'Triết lý "Ngọc Trong Đá": Chắt chiu giọt ngọc khoáng tinh túy ẩn sâu trong lòng đá magma núi Hòn Chuông, mài giũa bản lĩnh doanh nhân mang sức khỏe đến muôn nơi.'
   }
 ];
 
@@ -279,8 +391,23 @@ export const PvPArenaModal: React.FC<PvPArenaModalProps> = ({
     setSelectedRival(targetRival);
     setGameState('matchmaking');
 
-    // Shuffle questions
-    const shuffled = [...ARENA_BATTLE_QUESTIONS].sort(() => 0.5 - Math.random()).slice(0, 5);
+    // Pick 5 questions and pre-shuffle options once with accurate correctIndex
+    const shuffled = [...ARENA_BATTLE_QUESTIONS]
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 5)
+      .map((q) => {
+        const correctText = q.options[q.correctIndex];
+        const optsCopy = [...q.options];
+        for (let i = optsCopy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [optsCopy[i], optsCopy[j]] = [optsCopy[j], optsCopy[i]];
+        }
+        return {
+          ...q,
+          options: optsCopy,
+          correctIndex: optsCopy.indexOf(correctText),
+        };
+      });
     setMatchQuestions(shuffled);
 
     setTimeout(() => {

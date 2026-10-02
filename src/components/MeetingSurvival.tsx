@@ -13,7 +13,15 @@ import {
 } from 'lucide-react';
 import { MEETING_PHRASES } from '../data/meetingPhrases';
 import { MeetingPhrase } from '../types';
-import { playSpeech, stopSpeech, calculateSimilarity, isSpeechRecognitionSupported } from '../services/speechService';
+import { 
+  playSpeech, 
+  stopSpeech, 
+  evaluatePronunciationDetails, 
+  isSpeechRecognitionSupported,
+  startSpeechRecognition,
+  finishSpeechRecognition,
+  stopSpeechRecognition
+} from '../services/speechService';
 
 interface MeetingSurvivalProps {
   speechRate: number;
@@ -60,52 +68,43 @@ export const MeetingSurvival: React.FC<MeetingSurvivalProps> = ({
   };
 
   const handleStartRecording = (phrase: MeetingPhrase) => {
+    if (recordingId === phrase.id) {
+      finishSpeechRecognition();
+      return;
+    }
+
     if (!isSpeechRecognitionSupported()) {
       setRecordingId(phrase.id);
       setSpokenTranscript('Trình duyệt chưa hỗ trợ Web Speech Recognition. Hãy mở trên Chrome hoặc Edge.');
       return;
     }
 
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
     setRecordingId(phrase.id);
     setSpokenTranscript('Đang lắng nghe bạn nói...');
     setScoreResult(null);
 
-    recognition.onstart = () => {
-      // recording started
-    };
-
-    recognition.onresult = (event: any) => {
-      const speechToText = event.results[0][0].transcript;
-      setSpokenTranscript(speechToText);
-      const similarity = calculateSimilarity(phrase.english, speechToText);
-      setScoreResult({ id: phrase.id, score: similarity });
-      if (similarity >= 70) {
-        onPhraseLearned(phrase);
-      }
-    };
-
-    recognition.onerror = (e: any) => {
-      console.warn('Speech recognition error', e);
-      setRecordingId(null);
-      setSpokenTranscript('Không nghe rõ âm thanh. Hãy thử nói lại gần mic hơn nhé.');
-    };
-
-    recognition.onend = () => {
-      setRecordingId(null);
-    };
-
-    try {
-      recognition.start();
-    } catch (e) {
-      console.warn(e);
-      setRecordingId(null);
-    }
+    startSpeechRecognition(
+      (finalText) => {
+        setSpokenTranscript(finalText);
+        const evalResult = evaluatePronunciationDetails(phrase.english, finalText);
+        setScoreResult({ id: phrase.id, score: evalResult.score });
+        if (evalResult.score >= 60) {
+          onPhraseLearned(phrase);
+        }
+        setRecordingId(null);
+      },
+      () => {
+        setRecordingId(null);
+      },
+      (errorMsg) => {
+        setRecordingId(null);
+        setSpokenTranscript(errorMsg || 'Không nghe rõ âm thanh. Hãy thử nói lại gần mic hơn nhé.');
+      },
+      (interim) => {
+        setSpokenTranscript(interim);
+      },
+      'en-US'
+    );
   };
 
   return (

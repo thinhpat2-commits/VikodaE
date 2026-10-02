@@ -110,10 +110,10 @@ export const VoiceSelectorModal: React.FC<VoiceSelectorModalProps> = ({
             </div>
             <div>
               <h3 className="text-sm font-black text-slate-900 leading-tight">
-                Chọn Giọng Đọc AI
+                Cài Đặt Giọng Phát Âm
               </h3>
               <p className="text-[10px] text-slate-500 font-medium">
-                2 giọng đọc chuẩn phát âm Mỹ rõ nét (Michael & Emma)
+                Khuyên dùng: Giọng Bản Ngữ Tức Thì (0ms, bấm nghe ngay)
               </p>
             </div>
           </div>
@@ -129,7 +129,7 @@ export const VoiceSelectorModal: React.FC<VoiceSelectorModalProps> = ({
           </button>
         </div>
 
-        {/* 3 Voice Options */}
+        {/* Voice Options */}
         <div className="space-y-2">
           {VOICE_OPTIONS.map((voice) => {
             const isSelected = currentVoice === voice.id;
@@ -153,9 +153,18 @@ export const VoiceSelectorModal: React.FC<VoiceSelectorModalProps> = ({
                       <span className="text-xs font-black text-slate-900 leading-tight">
                         {voice.name}
                       </span>
+                      {voice.mode === 'instant' ? (
+                        <span className="text-[9px] font-black text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded-md leading-none border border-emerald-300">
+                          ⚡ 0ms Không Lag
+                        </span>
+                      ) : (
+                        <span className="text-[9px] font-black text-purple-800 bg-purple-100 px-1.5 py-0.5 rounded-md leading-none border border-purple-300">
+                          🤖 Cloud AI
+                        </span>
+                      )}
                       {isSelected && (
                         <span className="text-[9px] font-black text-[#0070D1] bg-sky-100 px-1.5 py-0.5 rounded-md leading-none">
-                          Đang chọn
+                          Đang dùng
                         </span>
                       )}
                     </div>
