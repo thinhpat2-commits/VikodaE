@@ -3,6 +3,7 @@ import confetti from 'canvas-confetti';
 import { 
   X, 
   Volume2, 
+  VolumeX,
   Mic, 
   MicOff, 
   Check, 
@@ -17,13 +18,16 @@ import {
   BookOpen,
   Edit3,
   Puzzle,
-  RotateCcw
+  RotateCcw,
+  ShieldAlert
 } from 'lucide-react';
 import { UnitLesson, LessonExercise } from '../data/curriculumData';
 import { VikoMascot } from './brand/VikodaLogos';
 import { playSound } from '../services/soundEffects';
 import { VoiceSelectorModal } from './VoiceSelectorModal';
 import { LiveCircularMicButton } from './LiveCircularMicButton';
+import { InteractiveSentenceViewer } from './InteractiveSentenceViewer';
+import { MicPermissionHelpModal } from './MicPermissionHelpModal';
 import { 
   playSpeech, 
   stopSpeech, 
@@ -37,7 +41,8 @@ import {
   VOICE_OPTIONS,
   getSelectedVoiceId,
   subscribeVoiceChange,
-  VoiceOptionId
+  VoiceOptionId,
+  triggerHaptic
 } from '../services/speechService';
 
 interface DuolingoGameArenaProps {
@@ -187,6 +192,16 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   const [streakCombo, setStreakCombo] = useState<number>(0);
   const [lessonMistakeCount, setLessonMistakeCount] = useState<number>(0);
 
+  // Quiet Office Study Mode & Mic Permission Modal states
+  const [isQuietModeActive, setIsQuietModeActive] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('vikoda_quiet_study_mode') === 'true';
+    } catch (e) {
+      return false;
+    }
+  });
+  const [showMicPermissionHelp, setShowMicPermissionHelp] = useState<boolean>(false);
+
   useEffect(() => {
     const unsub = subscribeVoiceChange((vId) => setCurrentVoiceId(vId));
     return () => {
@@ -197,15 +212,45 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   }, []);
 
   // When lesson changes or restarts, prepare fresh randomized exercises
+  const [skippedSpeakingSentences, setSkippedSpeakingSentences] = useState<string[]>([]);
+  const [isSkippedNeutral, setIsSkippedNeutral] = useState<boolean>(false);
+
   useEffect(() => {
     setSessionExercises(prepareSessionExercises(lesson.exercises));
     setExerciseIndex(0);
     setLessonMistakeCount(0);
     setStreakCombo(0);
+    setSkippedSpeakingSentences([]);
     setIsLessonFinished(false);
   }, [lesson.id]);
 
   const currentExercise: LessonExercise = sessionExercises[exerciseIndex] || sessionExercises[0] || lesson.exercises[0];
+
+  // Quiet Mode Pass Handler (Nhân viên ở văn phòng / không tiện nói / pass khi không đạt điểm)
+  // ĐÚNG CHUẨN SƯ PHẠM: KHÔNG CỘNG KHÔNG TRỪ (0 điểm, 0 XP, 0 ngọc, không trừ tim, lưu lại học sau)
+  const handlePassSpeakingQuietly = (reason: 'quiet_office' | 'low_score_override') => {
+    playSound('click');
+    triggerHaptic('light');
+    setIsRecording(false);
+    stopSpeech();
+    stopSpeechRecognition();
+
+    // Lưu vào danh sách để luyện nói sau khi rảnh tay
+    if (!skippedSpeakingSentences.includes(currentExercise.englishSentence)) {
+      setSkippedSpeakingSentences((prev) => [...prev, currentExercise.englishSentence]);
+    }
+
+    setSpeechScore(null); // Không chấm điểm giả
+    setIsSkippedNeutral(true);
+    setSpeechFeedback(
+      reason === 'quiet_office'
+        ? '🤫 Đã lưu câu này để luyện nói sau (Không cộng/trừ điểm). Bạn có thể tiếp tục câu tiếp theo mà không bị trừ tim!'
+        : '🤝 Đã lưu câu này để luyện lại sau khi rảnh tay (Không cộng/trừ điểm hay tim).'
+    );
+    setIsAnswerCorrect(false);
+    setIsEvaluated(true);
+    // Giữ nguyên chuỗi combo hiện tại, không tăng ảo và không reset
+  };
 
   // Initialize exercise state
   useEffect(() => {
@@ -233,6 +278,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     setSpeechFeedback('');
     setIsEvaluated(false);
     setIsAnswerCorrect(false);
+    setIsSkippedNeutral(false);
     setShowGrammarDetail(false);
     setIsPlayingAudio(false);
 
@@ -286,6 +332,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     }
 
     playSound('click');
+    triggerHaptic('light');
     setIsRecording(true);
     setSpokenText('');
     setLiveInterimText('');
@@ -311,8 +358,10 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
 
         if (details.passed) {
           playSound('correct');
+          triggerHaptic('success');
         } else {
           playSound('wrong');
+          triggerHaptic('warning');
         }
       },
       // On End
@@ -323,12 +372,16 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
       (errorMsg) => {
         setMicErrorMessage(errorMsg);
         setIsRecording(false);
+        if (errorMsg.includes('quyền') || errorMsg.includes('not-allowed')) {
+          setShowMicPermissionHelp(true);
+        }
       },
       // On Interim Streaming (Live Words)
       (interim) => {
         setLiveInterimText(interim);
       },
-      'en-US'
+      'en-US',
+      currentExercise.englishSentence
     );
   };
 
@@ -562,6 +615,30 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
           <Settings2 className="w-3.5 h-3.5 text-sky-600" />
         </button>
 
+        {/* Quiet Office Mode Toggle (Dành cho nhân viên cần im lặng) */}
+        <button
+          onClick={() => {
+            playSound('click');
+            const next = !isQuietModeActive;
+            setIsQuietModeActive(next);
+            try {
+              localStorage.setItem('vikoda_quiet_study_mode', String(next));
+            } catch (e) {}
+            if (next && currentExercise.type === 'speak' && !isEvaluated) {
+              handlePassSpeakingQuietly('quiet_office');
+            }
+          }}
+          className={`px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shrink-0 border ${
+            isQuietModeActive
+              ? 'bg-amber-100 border-amber-300 text-amber-900 shadow-xs'
+              : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-600'
+          }`}
+          title={isQuietModeActive ? 'Chế độ im lặng đang BẬT (Tự động bỏ qua bài nói)' : 'Bấm để bật Chế độ im lặng (Khi ở văn phòng, nơi công cộng)'}
+        >
+          {isQuietModeActive ? <VolumeX className="w-3.5 h-3.5 text-amber-600" /> : <Volume2 className="w-3.5 h-3.5 text-slate-500" />}
+          <span className="hidden sm:inline">{isQuietModeActive ? 'Đang Im Lặng' : 'Im Lặng'}</span>
+        </button>
+
         <VoiceSelectorModal
           isOpen={isVoicePickerOpen}
           onClose={() => setIsVoicePickerOpen(false)}
@@ -678,6 +755,13 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                       ))}
                     </div>
                   </div>
+                ) : currentExercise.type === 'speak' ? (
+                  <div className="space-y-1">
+                    <InteractiveSentenceViewer
+                      sentence={currentExercise.englishSentence}
+                      translation={currentExercise.promptVi}
+                    />
+                  </div>
                 ) : (
                   <div>
                     <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug break-words">
@@ -685,17 +769,6 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                         ? currentExercise.promptVi 
                         : currentExercise.englishSentence}
                     </h3>
-
-                    {currentExercise.type === 'speak' && (
-                      <p className="text-xs text-slate-500 font-medium mt-1">
-                        👉 {currentExercise.promptVi}
-                      </p>
-                    )}
-                    {currentExercise.type === 'speak' && currentExercise.phonetics && (
-                      <p className="text-[11px] font-mono text-cyan-800 font-bold mt-0.5">
-                        {currentExercise.phonetics}
-                      </p>
-                    )}
                   </div>
                 )}
               </div>
@@ -854,30 +927,48 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                     </p>
                   </div>
                 ) : (
-                  <div className="text-center">
+                  <div className="text-center space-y-2">
                     <p className="text-xs text-slate-500 font-bold">
                       Nhấn vào biểu tượng Micro tròn để đọc (Nói xong hệ thống tự chấm)
                     </p>
-                  </div>
-                )}
 
-                {/* Live Interim Recognition Streaming Bubble */}
-                {isRecording && liveInterimText && (
-                  <div className="p-3 rounded-2xl bg-amber-50 border-2 border-amber-200 text-xs text-amber-950 font-bold animate-pulse text-center">
-                    <span className="text-[10px] uppercase font-black text-amber-800 block mb-0.5">
-                      🎙️ Đang nghe giọng bạn:
-                    </span>
-                    "{liveInterimText}"
+                    {/* Quiet Study Pass Button (Dành cho nhân viên cần im lặng) */}
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => handlePassSpeakingQuietly('quiet_office')}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-800 border border-slate-300 text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95"
+                        title="Nhân viên đang ở văn phòng, nơi đông người hoặc không tiện nói"
+                      >
+                        <VolumeX className="w-3.5 h-3.5 text-slate-500" />
+                        <span>🤫 Tôi không tiện nói lúc này (Bỏ qua & không trừ tim)</span>
+                      </button>
+                    </div>
                   </div>
                 )}
 
                 {/* Error Message Warning Box */}
                 {micErrorMessage && (
-                  <div className="p-3 rounded-2xl bg-rose-50 border-2 border-rose-200 text-xs text-rose-900 font-medium space-y-1 text-center animate-in fade-in">
+                  <div className="p-3.5 rounded-2xl bg-rose-50 border-2 border-rose-200 text-xs text-rose-900 font-medium space-y-1.5 text-center animate-in fade-in">
                     <p className="font-bold">⚠️ {micErrorMessage}</p>
-                    <p className="text-[11px] text-slate-500">
-                      Gợi ý: Dùng Google Chrome hoặc Microsoft Edge trên máy tính/điện thoại để micro hoạt động tối ưu nhất.
-                    </p>
+                    <div className="flex items-center justify-center gap-2 pt-1">
+                      <button
+                        type="button"
+                        onClick={() => setShowMicPermissionHelp(true)}
+                        className="inline-flex items-center gap-1 px-3 py-1 rounded-xl bg-rose-200/80 hover:bg-rose-300 text-rose-900 font-bold text-[11px] cursor-pointer"
+                      >
+                        <ShieldAlert className="w-3.5 h-3.5" />
+                        <span>Xem cách mở khóa micro</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handlePassSpeakingQuietly('quiet_office')}
+                        className="inline-flex items-center gap-1 px-3 py-1 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-[11px] cursor-pointer"
+                      >
+                        <VolumeX className="w-3.5 h-3.5" />
+                        <span>Bỏ qua bài nói này</span>
+                      </button>
+                    </div>
                   </div>
                 )}
 
@@ -939,6 +1030,21 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                       </div>
                     )}
 
+                    {/* Ending Sound Alerts (ELSA Standard) */}
+                    {pronunciationDetails && pronunciationDetails.endingSoundAlerts && pronunciationDetails.endingSoundAlerts.length > 0 && (
+                      <div className="space-y-1 text-left">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-amber-800 block">
+                          ⚡ Góp ý âm đuôi (Ending Sounds):
+                        </span>
+                        {pronunciationDetails.endingSoundAlerts.map((alert, aIdx) => (
+                          <div key={aIdx} className="p-2 bg-amber-50 border border-amber-300 text-amber-950 text-xs font-bold rounded-xl flex items-center gap-1.5">
+                            <span className="text-sm">⚠️</span>
+                            <span>{alert}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
                     {/* Spoken Text Transcript */}
                     <div className="text-left text-xs bg-white p-2.5 rounded-xl border border-slate-200">
                       <span className="text-[10px] font-bold text-slate-400 block">Văn bản máy nghe được:</span>
@@ -950,6 +1056,23 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                       <p className="text-xs font-bold text-[#0070D1] text-left">
                         💡 {speechFeedback}
                       </p>
+                    )}
+
+                    {/* Override / Pass Button for low score so employee never gets stuck */}
+                    {speechScore !== null && speechScore < 55 && (
+                      <div className="pt-2 border-t border-slate-200 space-y-1.5">
+                        <button
+                          type="button"
+                          onClick={() => handlePassSpeakingQuietly('low_score_override')}
+                          className="w-full py-2.5 px-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-black text-xs uppercase tracking-wide flex items-center justify-center gap-1.5 cursor-pointer shadow-md transition-all active:scale-98"
+                        >
+                          <Check className="w-4 h-4 stroke-[3]" />
+                          <span>Chấp nhận kết quả & Tiếp tục (Không trừ tim)</span>
+                        </button>
+                        <p className="text-[10px] text-slate-500 text-center">
+                          Dành cho nhân viên đang học trong môi trường ồn hoặc micro bắt âm yếu.
+                        </p>
+                      </div>
                     )}
 
                   </div>
@@ -1006,6 +1129,13 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
             </div>
           </div>
 
+          {skippedSpeakingSentences.length > 0 && (
+            <div className="p-3 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900 font-bold flex items-center gap-2 text-left w-full">
+              <VolumeX className="w-5 h-5 text-amber-600 shrink-0" />
+              <span>Đã lưu {skippedSpeakingSentences.length} câu nói vào Sổ tay để bạn luyện nói lại khi thuận tiện!</span>
+            </div>
+          )}
+
           <button
             onClick={() => {
               stopSpeech();
@@ -1022,7 +1152,9 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
       {!isLessonFinished && (
         <div className={`border-t-2 transition-colors duration-200 shrink-0 ${
           isEvaluated
-            ? isAnswerCorrect
+            ? isSkippedNeutral
+              ? 'bg-slate-100 border-slate-300 text-slate-800'
+              : isAnswerCorrect
               ? 'bg-[#d7ffb8] border-[#b8f28b] text-[#1c4d00]'
               : 'bg-[#ffdfe0] border-[#ffb8ba] text-[#581619]'
             : 'bg-white border-slate-200'
@@ -1034,9 +1166,15 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               <div className="flex-1 min-w-0">
                 <div className="flex items-start gap-2.5">
                   <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
-                    isAnswerCorrect ? 'bg-[#22c55e] text-white' : 'bg-[#e11d48] text-white'
+                    isSkippedNeutral
+                      ? 'bg-slate-600 text-white'
+                      : isAnswerCorrect
+                      ? 'bg-[#22c55e] text-white'
+                      : 'bg-[#e11d48] text-white'
                   }`}>
-                    {isAnswerCorrect ? (
+                    {isSkippedNeutral ? (
+                      <VolumeX className="w-4 h-4" />
+                    ) : isAnswerCorrect ? (
                       <Check className="w-4 h-4 stroke-[3]" />
                     ) : (
                       <AlertCircle className="w-4 h-4 stroke-[2.5]" />
@@ -1044,15 +1182,23 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="font-black text-xs sm:text-sm">
-                      {isAnswerCorrect ? 'Chính xác! Tuyệt vời!' : 'Đáp án đúng là:'}
+                      {isSkippedNeutral
+                        ? 'Đã lưu vào sổ tay luyện nói sau'
+                        : isAnswerCorrect
+                        ? 'Chính xác! Tuyệt vời!'
+                        : 'Đáp án đúng là:'}
                     </div>
-                    {!isAnswerCorrect && (
+                    {isSkippedNeutral ? (
+                      <div className="text-xs text-slate-500 font-medium mt-0.5">
+                        Bỏ qua câu này (không cộng/trừ điểm hay tim).
+                      </div>
+                    ) : !isAnswerCorrect ? (
                       <div className="text-xs sm:text-sm font-bold text-rose-950 break-words mt-0.5 leading-snug">
                         "{currentExercise.englishSentence}"
                       </div>
-                    )}
+                    ) : null}
                     {/* Clear Button To Open Detailed Explanation Modal */}
-                    {!isAnswerCorrect && (
+                    {!isAnswerCorrect && !isSkippedNeutral && (
                       <button
                         onClick={() => setShowGrammarDetail(true)}
                         className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-black text-rose-900 bg-rose-200/80 hover:bg-rose-300 px-2.5 py-1 rounded-xl transition-all cursor-pointer shadow-2xs border border-rose-300 active:scale-95"
@@ -1091,7 +1237,9 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                 <button
                   onClick={handleContinue}
                   className={`w-full sm:w-auto min-w-[180px] px-8 py-3.5 sm:py-3 rounded-2xl font-black text-sm uppercase tracking-wider cursor-pointer shadow-md active:translate-y-0.5 text-center flex items-center justify-center gap-2 ${
-                    isAnswerCorrect
+                    isSkippedNeutral
+                      ? 'bg-slate-700 hover:bg-slate-800 border-b-4 border-slate-900 text-white'
+                      : isAnswerCorrect
                       ? 'bg-[#22c55e] hover:bg-[#16a34a] border-b-4 border-[#15803d] text-white'
                       : 'bg-[#e11d48] hover:bg-[#be123c] border-b-4 border-[#9f1239] text-white'
                   }`}
@@ -1179,6 +1327,13 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
           </div>
         </div>
       )}
+
+      {/* Mic Permission Guidance Modal */}
+      <MicPermissionHelpModal
+        isOpen={showMicPermissionHelp}
+        onClose={() => setShowMicPermissionHelp(false)}
+        onRetry={handleStartSpeaking}
+      />
 
     </div>
   );

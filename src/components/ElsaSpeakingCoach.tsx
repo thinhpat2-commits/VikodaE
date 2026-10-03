@@ -4,6 +4,7 @@ import {
   Mic, 
   MicOff, 
   Volume2, 
+  VolumeX,
   Sparkles, 
   Award, 
   ChevronRight, 
@@ -15,6 +16,7 @@ import { SPEAKING_CHALLENGES } from '../data/vikodaData';
 import { SpeakingChallenge } from '../types';
 import { playSound } from '../services/soundEffects';
 import { LiveCircularMicButton } from './LiveCircularMicButton';
+import { InteractiveSentenceViewer } from './InteractiveSentenceViewer';
 import { 
   playSpeech, 
   stopSpeech, 
@@ -23,7 +25,8 @@ import {
   isSpeechRecognitionSupported,
   startSpeechRecognition,
   finishSpeechRecognition,
-  stopSpeechRecognition
+  stopSpeechRecognition,
+  triggerHaptic
 } from '../services/speechService';
 
 interface ElsaSpeakingCoachProps {
@@ -78,6 +81,7 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
     setSpeechScore(null);
     setEvaluation(null);
     playSound('click');
+    triggerHaptic('light');
 
     startSpeechRecognition(
       (finalText) => {
@@ -89,6 +93,7 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
 
         if (evalResult.score >= 60) {
           playSound('correct');
+          triggerHaptic('success');
           onAwardXpAndGems(30, 10);
           confetti({
             particleCount: 50,
@@ -97,6 +102,7 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
           });
         } else {
           playSound('wrong');
+          triggerHaptic('warning');
         }
       },
       () => {
@@ -109,7 +115,8 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
       (interim) => {
         setSpokenTranscript(interim);
       },
-      'en-US'
+      'en-US',
+      currentChallenge.englishSentence
     );
   };
 
@@ -163,24 +170,19 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
           </span>
         </div>
 
-        {/* English Sentence */}
-        <div className="space-y-2 py-2">
-          <p className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight leading-snug">
-            "{currentChallenge.englishSentence}"
-          </p>
-          <p className="text-xs font-mono text-cyan-700 font-semibold bg-cyan-50/70 inline-block px-3 py-1 rounded-full">
-            {currentChallenge.phonetics}
-          </p>
-          <p className="text-xs text-slate-500 font-medium">
-            {currentChallenge.vietnameseMeaning}
-          </p>
+        {/* Interactive Sentence & Word Explorer */}
+        <div className="py-2">
+          <InteractiveSentenceViewer
+            sentence={currentChallenge.englishSentence}
+            translation={currentChallenge.vietnameseMeaning}
+          />
         </div>
 
         {/* Native Audio Controls */}
         <div className="flex items-center justify-center space-x-3">
           <button
             onClick={() => handlePlayNative(false)}
-            className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-xs font-extrabold transition-all ${
+            className={`flex items-center space-x-1.5 px-4 py-2 rounded-full text-xs font-extrabold transition-all cursor-pointer ${
               isPlayingNative
                 ? 'bg-[#0066CC] text-white shadow-md'
                 : 'bg-sky-50 hover:bg-sky-100 text-[#0066CC]'
@@ -192,7 +194,7 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
 
           <button
             onClick={() => handlePlayNative(true)}
-            className="flex items-center space-x-1 px-3 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors"
+            className="flex items-center space-x-1 px-3 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-colors cursor-pointer"
             title="Nghe tốc độ chậm"
           >
             <span>🐢 Chậm</span>
@@ -218,15 +220,39 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
               </p>
             </div>
           ) : (
-            <p className="text-xs text-slate-500 font-medium">
-              Nhấn vào micro để luyện nói (Nói xong tự động chấm điểm)
-            </p>
+            <div className="space-y-2">
+              <p className="text-xs text-slate-500 font-medium">
+                Nhấn vào micro để luyện nói (Nói xong tự động chấm điểm)
+              </p>
+
+              {/* Quiet Office Pass */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound('click');
+                    triggerHaptic('light');
+                    setSpeechScore(null);
+                    setSpokenTranscript('');
+                    setEvaluation(null);
+                    if (currentIndex + 1 < SPEAKING_CHALLENGES.length) {
+                      setCurrentIndex((prev) => prev + 1);
+                    }
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold border border-slate-300 transition-all cursor-pointer shadow-2xs active:scale-95"
+                  title="Dành cho nhân viên đang ở văn phòng, nơi cần giữ im lặng (Không cộng/trừ điểm)"
+                >
+                  <VolumeX className="w-3.5 h-3.5 text-slate-500" />
+                  <span>🤫 Tôi không tiện nói lúc này (Luyện nói sau)</span>
+                </button>
+              </div>
+            </div>
           )}
         </div>
 
         {/* Speech Recognition Feedback Gauge */}
         {speechScore !== null && (
-          <div className="p-4 rounded-2xl bg-sky-50/60 border border-sky-100 space-y-2 animate-fadeIn text-left">
+          <div className="p-4 rounded-2xl bg-sky-50/60 border border-sky-100 space-y-2.5 animate-fadeIn text-left">
             <div className="flex items-center justify-between">
               <span className="text-xs font-bold text-slate-700">Độ chuẩn phát âm ELSA:</span>
               <span className={`text-base font-extrabold px-3 py-0.5 rounded-full ${
@@ -244,14 +270,54 @@ export const ElsaSpeakingCoach: React.FC<ElsaSpeakingCoachProps> = ({
               Bạn vừa nói: "{spokenTranscript}"
             </p>
 
+            {/* Ending Sound Alerts */}
+            {evaluation?.endingSoundAlerts && evaluation.endingSoundAlerts.length > 0 && (
+              <div className="space-y-1 pt-1">
+                <span className="text-[10px] font-black uppercase text-amber-800 block">
+                  ⚡ Góp ý âm đuôi (Ending Sounds):
+                </span>
+                {evaluation.endingSoundAlerts.map((alert, aIdx) => (
+                  <div key={aIdx} className="p-2 bg-amber-50 border border-amber-300 text-amber-950 text-xs font-bold rounded-xl flex items-center gap-1.5">
+                    <span>⚠️</span>
+                    <span>{alert}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
             {speechScore >= 80 ? (
               <p className="text-xs text-emerald-700 font-bold flex items-center space-x-1">
                 <span>🎉 Xuất sắc! Ngữ điệu rất tự tin và chuẩn phong thái đại sứ Vikoda.</span>
               </p>
             ) : (
-              <p className="text-xs text-amber-700 font-semibold">
-                💡 Gợi ý: Hãy chú ý nhấn mạnh các từ khoá chính: {currentChallenge.keyWords.join(', ')}.
-              </p>
+              <div className="space-y-2">
+                <p className="text-xs text-amber-700 font-semibold">
+                  💡 Gợi ý: Hãy chú ý nhấn mạnh các từ khoá chính: {currentChallenge.keyWords.join(', ')}.
+                </p>
+                {/* Override Pass for Low Score */}
+                <div className="pt-1 border-t border-amber-200">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playSound('click');
+                      triggerHaptic('light');
+                      setSpeechScore(null);
+                      setSpokenTranscript('');
+                      setEvaluation(null);
+                      if (currentIndex + 1 < SPEAKING_CHALLENGES.length) {
+                        setCurrentIndex((prev) => prev + 1);
+                      }
+                    }}
+                    className="w-full py-2 px-3 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-xs transition-all active:scale-98"
+                  >
+                    <VolumeX className="w-4 h-4 text-slate-600" />
+                    <span>Lưu câu này để luyện lại sau & Sang câu tiếp</span>
+                  </button>
+                  <p className="text-[10px] text-slate-500 text-center mt-0.5">
+                    Không trừ điểm/tim. Bạn có thể luyện lại bất cứ khi nào thuận tiện.
+                  </p>
+                </div>
+              </div>
             )}
           </div>
         )}

@@ -501,6 +501,8 @@ export interface WordEvaluationResult {
   word: string;
   status: 'correct' | 'close' | 'missed';
   spokenMatch?: string;
+  ipa?: string;
+  endingSoundNote?: string;
 }
 
 export interface DetailedSpeechEvaluation {
@@ -508,7 +510,128 @@ export interface DetailedSpeechEvaluation {
   passed: boolean;
   feedback: string;
   words: WordEvaluationResult[];
+  endingSoundAlerts?: string[];
+  fluencyNote?: string;
 }
+
+// Common Business & Vikoda Vocabulary IPA & Phonetic Guide
+export const COMMON_IPA_MAP: Record<string, { ipa: string; tip?: string }> = {
+  vikoda: { ipa: '/viːˈkoʊdə/', tip: 'Âm "o" dài nhẹ, trọng âm âm tiết 2' },
+  natural: { ipa: '/ˈnætʃ.ər.əl/', tip: 'Âm đầu là /nætʃ/, không đọc na-tu-ral' },
+  alkaline: { ipa: '/ˈæl.kə.laɪn/', tip: 'Trọng âm rơi vào âm tiết đầu AL-kə-laɪn' },
+  mineral: { ipa: '/ˈmɪn.ər.əl/', tip: 'Âm đầu /mɪn/' },
+  water: { ipa: '/ˈwɔː.tər/', tip: 'Âm đuôi nhẹ /tər/' },
+  ph: { ipa: '/ˌpiːˈeɪtʃ/', tip: 'Đọc từng chữ cái P - H' },
+  health: { ipa: '/helθ/', tip: 'Đặt đầu lưỡi giữa 2 hàm răng phát âm /θ/' },
+  healthy: { ipa: '/ˈhel.θi/', tip: 'Lưu ý âm /θ/' },
+  bottle: { ipa: '/ˈbɒt.əl/', tip: 'Âm bật nhẹ /təl/' },
+  drink: { ipa: '/drɪŋk/', tip: 'Chú ý âm đuôi /ŋk/' },
+  drinking: { ipa: '/ˈdrɪŋ.kɪŋ/' },
+  product: { ipa: '/ˈprɒd.ʌkt/', tip: 'Chú ý âm đuôi /kt/' },
+  products: { ipa: '/ˈprɒd.ʌkts/', tip: 'Bật rõ âm đuôi /kts/' },
+  quality: { ipa: '/ˈkwɒl.ə.ti/', tip: 'Âm đầu /kwɒ/' },
+  maintain: { ipa: '/meɪnˈteɪn/' },
+  maintains: { ipa: '/meɪnˈteɪnz/', tip: 'Bật rõ âm đuôi /z/' },
+  daily: { ipa: '/ˈdeɪ.li/' },
+  energy: { ipa: '/ˈen.ə.dʒi/' },
+  balance: { ipa: '/ˈbæl.əns/', tip: 'Âm đuôi /s/' },
+  pure: { ipa: '/pjʊər/' },
+  wellness: { ipa: '/ˈwel.nəs/', tip: 'Âm đuôi /s/' },
+  refreshing: { ipa: '/rɪˈfreʃ.ɪŋ/' },
+  benefit: { ipa: '/ˈben.ɪ.fɪt/', tip: 'Âm đuôi /t/' },
+  benefits: { ipa: '/ˈben.ɪ.fɪts/', tip: 'Bật rõ âm đuôi /ts/' },
+  customer: { ipa: '/ˈkʌs.tə.mər/' },
+  customers: { ipa: '/ˈkʌs.tə.mərz/', tip: 'Âm đuôi /z/' },
+  market: { ipa: '/ˈmɑː.kɪt/' },
+  export: { ipa: '/ˈek.spɔːt/' },
+  partner: { ipa: '/ˈpɑːt.nər/' },
+  partners: { ipa: '/ˈpɑːt.nərz/', tip: 'Âm đuôi /z/' },
+  contract: { ipa: '/ˈkɒn.trækt/', tip: 'Âm đuôi /kt/' },
+  agreement: { ipa: '/əˈɡriː.mənt/' },
+  meeting: { ipa: '/ˈmiː.tɪŋ/' },
+  presentation: { ipa: '/ˌprez.ənˈteɪ.ʃən/' },
+  sales: { ipa: '/seɪlz/', tip: 'Bật rõ âm /z/' },
+  revenue: { ipa: '/ˈrev.ən.juː/' },
+  growth: { ipa: '/ɡrəʊθ/', tip: 'Âm cuối /θ/ đặt lưỡi giữa 2 răng' },
+  team: { ipa: '/tiːm/' },
+  company: { ipa: '/ˈkʌm.pə.ni/' },
+  office: { ipa: '/ˈɒf.ɪs/', tip: 'Âm đuôi /s/' },
+  brand: { ipa: '/brænd/', tip: 'Âm đuôi /nd/' },
+  success: { ipa: '/səkˈses/', tip: 'Âm đuôi /s/' },
+  source: { ipa: '/sɔːs/', tip: 'Âm đuôi /s/' },
+  fizz: { ipa: '/fɪz/', tip: 'Âm đuôi /z/' },
+  sparkling: { ipa: '/ˈspɑː.klɪŋ/' },
+  naturalness: { ipa: '/ˈnætʃ.ər.əl.nəs/' }
+};
+
+export const getWordPhonetic = (rawWord: string): { ipa: string; tip?: string } => {
+  const clean = rawWord.toLowerCase().replace(/[^a-z]/g, '');
+  if (COMMON_IPA_MAP[clean]) {
+    return COMMON_IPA_MAP[clean];
+  }
+  // Fallback simplified phonetics based on word ending
+  if (clean.endsWith('tion')) return { ipa: `/-ʃən/` };
+  if (clean.endsWith('ment')) return { ipa: `/-mənt/` };
+  if (clean.endsWith('ing')) return { ipa: `/-ɪŋ/` };
+  if (clean.endsWith('ly')) return { ipa: `/-li/` };
+  return { ipa: `/${clean}/` };
+};
+
+// Check for missing ending sounds (/s/, /z/, /t/, /d/, /ed/)
+export const detectEndingSoundIssues = (
+  targetWord: string,
+  spokenWord?: string
+): string | null => {
+  const cleanT = targetWord.toLowerCase().replace(/[^a-z]/g, '');
+  const cleanS = spokenWord ? spokenWord.toLowerCase().replace(/[^a-z]/g, '') : '';
+
+  if (!cleanT || !cleanS) return null;
+
+  // Plural/3rd person -s/-es check
+  if ((cleanT.endsWith('s') || cleanT.endsWith('es')) && !cleanS.endsWith('s') && !cleanS.endsWith('z')) {
+    return `Từ "${targetWord}": Thiếu âm đuôi /s/ hoặc /z/`;
+  }
+
+  // Past tense -ed check
+  if (cleanT.endsWith('ed') && !cleanS.endsWith('d') && !cleanS.endsWith('t')) {
+    return `Từ "${targetWord}": Thiếu âm đuôi /t/ hoặc /d/ (đuôi -ed)`;
+  }
+
+  // Ending -t or -d check
+  if (cleanT.length >= 4 && cleanT.endsWith('t') && !cleanS.endsWith('t')) {
+    return `Từ "${targetWord}": Rơi mất âm bật hơi /t/ ở cuối`;
+  }
+
+  if (cleanT.length >= 4 && cleanT.endsWith('d') && !cleanS.endsWith('d')) {
+    return `Từ "${targetWord}": Thiếu âm đuôi /d/`;
+  }
+
+  return null;
+};
+
+// Instant single word pronunciation playback
+export const playSingleWord = (word: string, rate: number = 0.85): void => {
+  const clean = word.replace(/[^a-zA-Z0-9']/g, '').trim();
+  if (!clean) return;
+  playSpeech(clean, rate, 'en-US');
+};
+
+// Haptic tactile feedback for mobile devices
+export const triggerHaptic = (type: 'light' | 'success' | 'warning' | 'error' = 'light') => {
+  if (typeof window !== 'undefined' && 'navigator' in window && typeof navigator.vibrate === 'function') {
+    try {
+      if (type === 'light') {
+        navigator.vibrate(25);
+      } else if (type === 'success') {
+        navigator.vibrate([35, 50, 40]);
+      } else if (type === 'warning') {
+        navigator.vibrate([40, 60, 40]);
+      } else if (type === 'error') {
+        navigator.vibrate([60, 80, 60]);
+      }
+    } catch (e) {}
+  }
+};
 
 export const evaluatePronunciationDetails = (
   targetSentence: string,
@@ -529,13 +652,17 @@ export const evaluatePronunciationDetails = (
       score: 0,
       passed: false,
       feedback: 'Chưa nghe thấy giọng đọc. Hãy kiểm tra micro và đọc to hơn nhé!',
-      words: targetWords.map((w) => ({ word: w, status: 'missed' }))
+      words: targetWords.map((w) => {
+        const { ipa } = getWordPhonetic(w);
+        return { word: w, status: 'missed', ipa };
+      })
     };
   }
 
   let totalQuality = 0;
   const usedSpokenIndices = new Set<number>();
   const evaluatedWords: WordEvaluationResult[] = [];
+  const endingSoundAlerts: string[] = [];
 
   targetWords.forEach((tWord) => {
     let bestQuality = 0;
@@ -551,18 +678,31 @@ export const evaluatePronunciationDetails = (
       }
     }
 
+    const { ipa } = getWordPhonetic(tWord);
+
     if (bestSpokenIdx >= 0) {
       usedSpokenIndices.add(bestSpokenIdx);
       totalQuality += bestQuality;
+
+      const matchedSpoken = spokenWords[bestSpokenIdx];
+      const endingIssue = detectEndingSoundIssues(tWord, matchedSpoken);
+      if (endingIssue) {
+        endingSoundAlerts.push(endingIssue);
+      }
+
       evaluatedWords.push({
         word: tWord,
         status: bestQuality >= 0.85 ? 'correct' : 'close',
-        spokenMatch: spokenWords[bestSpokenIdx]
+        spokenMatch: matchedSpoken,
+        ipa,
+        endingSoundNote: endingIssue || undefined
       });
     } else {
+      const { ipa } = getWordPhonetic(tWord);
       evaluatedWords.push({
         word: tWord,
-        status: 'missed'
+        status: 'missed',
+        ipa
       });
     }
   });
@@ -586,7 +726,8 @@ export const evaluatePronunciationDetails = (
     score: adjustedScore,
     passed,
     feedback,
-    words: evaluatedWords
+    words: evaluatedWords,
+    endingSoundAlerts: endingSoundAlerts.slice(0, 3)
   };
 };
 
@@ -634,7 +775,8 @@ export const startSpeechRecognition = (
   onEnd?: () => void,
   onError?: (errorMessage: string) => void,
   onInterim?: (interimTranscript: string) => void,
-  lang: string = 'en-US'
+  lang: string = 'en-US',
+  targetSentence?: string
 ) => {
   if (typeof window === 'undefined') return;
 
@@ -696,16 +838,35 @@ export const startSpeechRecognition = (
       }
     };
 
-    // TỰ ĐỘNG NỘP: Khi người dùng dừng đọc 850ms sau khi đã có từ, tự động nộp bài!
-    const triggerAutoSubmitOnSilence = () => {
+    // SMART DYNAMIC SILENCE: Điều chỉnh thời gian chờ dựa trên tiến độ câu
+    const triggerAutoSubmitOnSilence = (currentSpeech: string) => {
       if (autoSubmitTimer) clearTimeout(autoSubmitTimer);
+
+      let waitMs = 850;
+      if (targetSentence) {
+        const targetWords = targetSentence.trim().split(/\s+/).filter(Boolean).length;
+        const spokenWords = currentSpeech.trim().split(/\s+/).filter(Boolean).length;
+        const progress = spokenWords / Math.max(1, targetWords);
+
+        if (progress >= 0.8) {
+          // Đã đọc gần hết câu -> Chốt bài nhanh 850ms
+          waitMs = 850;
+        } else if (progress >= 0.4) {
+          // Đang đọc dở giữa câu -> Cho học viên 1.5 giây thở và tiếp tục
+          waitMs = 1500;
+        } else {
+          // Mới đọc 1-2 từ đầu của câu dài -> Cho học viên 2.2 giây để lấy hơi
+          waitMs = 2200;
+        }
+      }
+
       autoSubmitTimer = setTimeout(() => {
         try {
           recognition.stop();
         } catch (e) {
           finalizeAndEmit();
         }
-      }, 850);
+      }, waitMs);
     };
 
     recognition.onresult = (event: any) => {
@@ -727,7 +888,7 @@ export const startSpeechRecognition = (
       }
 
       if (latestInterim) {
-        triggerAutoSubmitOnSilence();
+        triggerAutoSubmitOnSilence(latestInterim);
       }
     };
 

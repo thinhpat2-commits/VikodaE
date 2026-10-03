@@ -4,6 +4,7 @@ import {
   Mic, 
   MicOff, 
   Volume2, 
+  VolumeX,
   Sparkles, 
   ChevronRight, 
   ChevronLeft,
@@ -17,6 +18,7 @@ import { VikoMascot } from './brand/VikodaLogos';
 import { VoiceSelectorModal } from './VoiceSelectorModal';
 import { playSound } from '../services/soundEffects';
 import { LiveCircularMicButton } from './LiveCircularMicButton';
+import { InteractiveSentenceViewer } from './InteractiveSentenceViewer';
 import { 
   playSpeech, 
   stopSpeech, 
@@ -29,7 +31,8 @@ import {
   VOICE_OPTIONS,
   getSelectedVoiceId,
   subscribeVoiceChange,
-  VoiceOptionId
+  VoiceOptionId,
+  triggerHaptic
 } from '../services/speechService';
 
 interface VoicePracticeItem {
@@ -434,6 +437,7 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
     setSpokenText('Đang lắng nghe... Hãy đọc to câu tiếng Anh ở trên!');
     setScore(null);
     playSound('click');
+    triggerHaptic('light');
 
     startSpeechRecognition(
       (finalText) => {
@@ -444,6 +448,7 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
 
         if (evalResult.score >= 60) {
           playSound('correct');
+          triggerHaptic('success');
           onAwardXpAndGems(30, 10);
           confetti({
             particleCount: 50,
@@ -452,6 +457,7 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
           });
         } else {
           playSound('wrong');
+          triggerHaptic('warning');
         }
       },
       () => {
@@ -464,7 +470,8 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
       (interim) => {
         setSpokenText(interim);
       },
-      'en-US'
+      'en-US',
+      currentItem.english
     );
   };
 
@@ -526,17 +533,12 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
           </span>
         </div>
 
-        {/* English Sentence Display */}
-        <div className="space-y-2 py-1">
-          <p className="text-lg sm:text-xl font-black text-slate-900 leading-snug">
-            "{currentItem.english}"
-          </p>
-          <p className="text-xs font-mono text-cyan-800 font-bold bg-cyan-50 px-3 py-1 rounded-full inline-block border border-cyan-200">
-            {currentItem.phonetics}
-          </p>
-          <p className="text-xs text-slate-500 font-medium">
-            {currentItem.vietnamese}
-          </p>
+        {/* Interactive Sentence & Word Explorer */}
+        <div className="py-1">
+          <InteractiveSentenceViewer
+            sentence={currentItem.english}
+            translation={currentItem.vietnamese}
+          />
         </div>
 
         {/* Audio Listen Buttons (Mọi nút bấm đều có lý do) */}
@@ -578,9 +580,32 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
               </p>
             </div>
           ) : (
-            <p className="text-xs text-slate-500 font-bold text-center">
-              Bấm micro và đọc to câu trên (Nói xong tự động chấm điểm)
-            </p>
+            <div className="space-y-2">
+              <p className="text-xs text-slate-500 font-bold text-center">
+                Bấm micro và đọc to câu trên (Nói xong tự động chấm điểm)
+              </p>
+
+              {/* Quiet Office Pass Button */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound('click');
+                    triggerHaptic('light');
+                    setScore(null);
+                    setSpokenText('');
+                    if (currentIndex + 1 < VOICE_PRACTICE_ITEMS.length) {
+                      setCurrentIndex((prev) => prev + 1);
+                    }
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 text-xs font-bold border border-slate-300 transition-all cursor-pointer shadow-2xs active:scale-95"
+                  title="Dành cho nhân viên đang ở văn phòng, nơi đông người cần giữ im lặng (Không cộng/trừ điểm)"
+                >
+                  <VolumeX className="w-3.5 h-3.5 text-slate-500" />
+                  <span>🤫 Tôi không tiện nói lúc này (Luyện nói sau)</span>
+                </button>
+              </div>
+            </div>
           )}
         </div>
 
@@ -649,9 +674,32 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
                 🎉 Rất tốt! Giọng đọc tròn vành rõ chữ, tự tin như đại sứ Vikoda! (+30 XP • +10 💎)
               </p>
             ) : (
-              <p className="text-xs text-amber-800 font-bold">
-                💡 Lời khuyên: {currentItem.proTip}
-              </p>
+              <div className="space-y-2">
+                <p className="text-xs text-amber-800 font-bold">
+                  💡 Lời khuyên: {currentItem.proTip}
+                </p>
+                <div className="pt-1.5 border-t border-amber-200/80">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      playSound('click');
+                      triggerHaptic('light');
+                      setScore(null);
+                      setSpokenText('');
+                      if (currentIndex + 1 < VOICE_PRACTICE_ITEMS.length) {
+                        setCurrentIndex((prev) => prev + 1);
+                      }
+                    }}
+                    className="w-full py-2 px-3 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-xs transition-all active:scale-98"
+                  >
+                    <VolumeX className="w-4 h-4 text-slate-600" />
+                    <span>Lưu câu này để luyện lại sau & Sang câu tiếp</span>
+                  </button>
+                  <p className="text-[10px] text-slate-500 text-center mt-0.5">
+                    Không trừ điểm/tim. Bạn có thể luyện lại bất cứ khi nào thuận tiện.
+                  </p>
+                </div>
+              </div>
             )}
           </div>
         )}

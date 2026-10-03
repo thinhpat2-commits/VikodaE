@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { LiveCircularMicButton } from './LiveCircularMicButton';
 import { 
   Sparkles, 
   Volume2, 
@@ -764,26 +765,50 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
                   </div>
 
                   <div className="flex flex-col items-center justify-center py-2">
-                    <button
-                      type="button"
-                      disabled={isAnswerConfirmed}
+                    <LiveCircularMicButton
+                      isRecording={isRecording}
                       onClick={handleToggleSpeech}
-                      className={`w-16 h-16 rounded-full flex items-center justify-center shadow-md transition-all cursor-pointer ${
-                        isRecording 
-                          ? 'bg-rose-500 text-white animate-pulse scale-105' 
-                          : 'bg-[#009FE3] hover:bg-[#0072CE] text-white active:scale-95'
-                      }`}
-                    >
-                      {isRecording ? <MicOff className="w-7 h-7" /> : <Mic className="w-7 h-7" />}
-                    </button>
-                    <span className="text-[11px] text-slate-500 font-bold mt-2">
-                      {isRecording ? 'Đang lắng nghe... Hãy nói ngay!' : 'Bấm micro và đọc câu tiếng Anh trên'}
+                      size="md"
+                    />
+                    <span className="text-[11px] text-slate-500 font-bold mt-1">
+                      {isRecording ? 'Đang lắng nghe... Hãy nói ngay (Nói xong tự chấm)!' : 'Bấm micro và đọc câu tiếng Anh trên'}
                     </span>
 
                     {speechScore !== null && (
                       <div className="mt-2 text-xs font-black text-emerald-600 flex items-center gap-1 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
                         <Check className="w-3.5 h-3.5" />
                         <span>AI Chấm: {speechScore}/100 Điểm</span>
+                      </div>
+                    )}
+
+                    {/* Quiet pass option */}
+                    <div className="pt-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSpeechScore(null);
+                          setSpokenText('🤫 Đã bỏ qua do ở nơi cần giữ im lặng (Chưa chấm câu này).');
+                          setIsAnswerConfirmed(true);
+                        }}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 text-[11px] font-bold border border-slate-300 transition-all cursor-pointer shadow-2xs active:scale-95"
+                        title="Dành cho nhân viên đang ở văn phòng cần giữ im lặng"
+                      >
+                        <span>🤫 Tôi không tiện nói lúc này (Bỏ qua câu nói)</span>
+                      </button>
+                    </div>
+
+                    {/* Override low score pass */}
+                    {speechScore !== null && speechScore < 50 && (
+                      <div className="pt-1">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsAnswerConfirmed(true);
+                          }}
+                          className="px-3 py-1.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-xs cursor-pointer shadow-xs"
+                        >
+                          Bỏ qua câu này & Sang câu tiếp
+                        </button>
                       </div>
                     )}
                   </div>

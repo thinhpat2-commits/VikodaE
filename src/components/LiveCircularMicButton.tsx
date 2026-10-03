@@ -181,7 +181,7 @@ export const LiveCircularMicButton: React.FC<LiveCircularMicButtonProps> = ({
 
   return (
     <div className="relative inline-flex items-center justify-center select-none my-2">
-      {/* Wave Ring 3: Outermost explosive peak ring */}
+      {/* Wave Ring 3: Outermost expansive acoustic shockwave */}
       <div
         ref={ring3Ref}
         aria-hidden="true"
@@ -189,17 +189,18 @@ export const LiveCircularMicButton: React.FC<LiveCircularMicButtonProps> = ({
           isRecording ? 'block' : 'hidden'
         }`}
         style={{
-          width: size === 'lg' ? '120px' : '96px',
-          height: size === 'lg' ? '120px' : '96px',
-          backgroundColor: 'rgba(52, 211, 153, 0.25)',
-          boxShadow: '0 0 25px rgba(52, 211, 153, 0.45)',
+          width: size === 'lg' ? '128px' : '100px',
+          height: size === 'lg' ? '128px' : '100px',
+          backgroundColor: 'rgba(0, 163, 224, 0.15)',
+          border: '1.5px solid rgba(56, 189, 248, 0.4)',
+          boxShadow: '0 0 30px rgba(0, 163, 224, 0.35)',
           opacity: 0,
           transform: 'scale(1)',
           willChange: 'transform, opacity',
         }}
       />
 
-      {/* Wave Ring 2: Medium pulsating ring */}
+      {/* Wave Ring 2: Medium pulsating acoustic wave */}
       <div
         ref={ring2Ref}
         aria-hidden="true"
@@ -207,17 +208,18 @@ export const LiveCircularMicButton: React.FC<LiveCircularMicButtonProps> = ({
           isRecording ? 'block' : 'hidden'
         }`}
         style={{
-          width: size === 'lg' ? '104px' : '82px',
-          height: size === 'lg' ? '104px' : '82px',
-          backgroundColor: 'rgba(16, 185, 129, 0.35)',
-          boxShadow: '0 0 18px rgba(16, 185, 129, 0.6)',
+          width: size === 'lg' ? '110px' : '88px',
+          height: size === 'lg' ? '110px' : '88px',
+          backgroundColor: 'rgba(0, 112, 209, 0.25)',
+          border: '2px solid rgba(56, 189, 248, 0.6)',
+          boxShadow: '0 0 20px rgba(0, 112, 209, 0.5)',
           opacity: 0,
           transform: 'scale(1)',
           willChange: 'transform, opacity',
         }}
       />
 
-      {/* Wave Ring 1: Immediate tight glowing halo */}
+      {/* Wave Ring 1: Immediate tight glowing ripple */}
       <div
         ref={ring1Ref}
         aria-hidden="true"
@@ -225,10 +227,11 @@ export const LiveCircularMicButton: React.FC<LiveCircularMicButtonProps> = ({
           isRecording ? 'block' : 'hidden'
         }`}
         style={{
-          width: size === 'lg' ? '92px' : '72px',
-          height: size === 'lg' ? '92px' : '72px',
-          backgroundColor: 'rgba(5, 150, 105, 0.5)',
-          boxShadow: '0 0 14px rgba(52, 211, 153, 0.9)',
+          width: size === 'lg' ? '96px' : '76px',
+          height: size === 'lg' ? '96px' : '76px',
+          backgroundColor: 'rgba(56, 189, 248, 0.35)',
+          border: '2.5px solid rgba(14, 165, 233, 0.8)',
+          boxShadow: '0 0 15px rgba(56, 189, 248, 0.8)',
           opacity: 0,
           transform: 'scale(1)',
           willChange: 'transform, opacity',
@@ -247,7 +250,7 @@ export const LiveCircularMicButton: React.FC<LiveCircularMicButtonProps> = ({
         aria-label={isRecording ? 'Dừng thu âm' : 'Bắt đầu đọc'}
       >
         {isRecording ? (
-          <MicOff className={`${iconSize} animate-bounce`} />
+          <MicOff className={iconSize} />
         ) : (
           <Mic className={iconSize} />
         )}
