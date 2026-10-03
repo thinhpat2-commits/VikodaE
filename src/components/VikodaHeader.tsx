@@ -5,12 +5,14 @@ import {
   Sparkles, 
   ChevronDown, 
   Volume2, 
-  VolumeX 
+  VolumeX,
+  Award
 } from 'lucide-react';
 import { HeaderBrandLogo } from './brand/VikodaLogos';
 import { CourseLevel } from '../data/curriculumData';
 import { EmployeeProfile, GamificationState } from '../types';
 import { playSound, isStealthOfficeMode, setStealthOfficeMode, subscribeStealthMode } from '../services/soundEffects';
+import { calculateProficiency } from './GlobalProficiencyDashboard';
 
 interface VikodaHeaderProps {
   stats: GamificationState;
@@ -32,6 +34,7 @@ interface VikodaHeaderProps {
   onOpenDailyReview?: () => void;
   onOpenCoach?: () => void;
   onOpenPlacementTest?: () => void;
+  onOpenProficiency?: () => void;
   isCloudSynced?: boolean;
   onLogout?: () => void;
 }
@@ -45,11 +48,14 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
   onOpenProfile,
   onGoHome,
   onOpenPlacementTest,
+  onOpenProficiency,
   isCloudSynced = false,
 }) => {
   const [isLevelDropdownOpen, setIsLevelDropdownOpen] = useState<boolean>(false);
   const [isStealth, setIsStealth] = useState<boolean>(() => isStealthOfficeMode());
   const levelRef = useRef<HTMLDivElement>(null);
+
+  const { currentTier, estimatedToeic } = calculateProficiency(stats);
 
   useEffect(() => {
     const unsubStealth = subscribeStealthMode((enabled) => setIsStealth(enabled));
@@ -142,6 +148,28 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
         {/* ================= RIGHT: STREAK + GEMS + SOUND + AVATAR ================= */}
         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           
+          {/* Global Proficiency Benchmark Pill (CEFR • TOEIC • IELTS) */}
+          <button
+            type="button"
+            onClick={() => {
+              playSound('click');
+              if (onOpenProficiency) {
+                onOpenProficiency();
+              } else {
+                onOpenProfile();
+              }
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 via-[#005A9C] to-[#0070D1] hover:from-amber-400 hover:to-[#004B87] text-white text-xs font-black shadow-md cursor-pointer active:scale-95 transition-all border border-amber-300/60 ring-1 ring-amber-400/40"
+            title="Bấm để xem ngay Bảng Đo Lường Thành Tích Quốc Tế (TOEIC • IELTS • CEFR)"
+          >
+            <span className="flex items-center gap-0.5 text-amber-200">
+              <Award className="w-3.5 h-3.5 fill-amber-400 text-amber-300 shrink-0" />
+              <span className="font-black">{currentTier.cefr}</span>
+            </span>
+            <span className="text-[11px] font-black text-amber-300 hidden xs:inline">• ~{estimatedToeic}</span>
+            <span className="text-[9px] text-sky-100 hidden sm:inline uppercase font-bold">TOEIC</span>
+          </button>
+
           {/* Streak & Gems Pill */}
           <div className="flex items-center gap-2 px-2.5 py-1 rounded-xl bg-slate-50 border border-slate-200 text-xs font-black text-slate-700 select-none">
             <span className="flex items-center gap-0.5 text-amber-600" title="Chuỗi ngày học liên tục">

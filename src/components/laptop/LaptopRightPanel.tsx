@@ -23,6 +23,7 @@ import {
   VoiceOptionId 
 } from '../../services/speechService';
 import { VoiceSelectorModal } from '../VoiceSelectorModal';
+import { calculateProficiency } from '../GlobalProficiencyDashboard';
 
 interface LaptopRightPanelProps {
   stats: GamificationState;
@@ -33,6 +34,7 @@ interface LaptopRightPanelProps {
   onOpenDailyReview?: () => void;
   onOpenCoach?: () => void;
   onOpenPlacementTest?: () => void;
+  onOpenProfile?: () => void;
   onOpenSOS?: () => void;
   onOpenCommute?: () => void;
   onOpenSearch?: () => void;
@@ -48,6 +50,7 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
   onOpenDailyReview,
   onOpenCoach,
   onOpenPlacementTest,
+  onOpenProfile,
   onOpenSOS,
 }) => {
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
@@ -70,6 +73,8 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
   };
 
   const activeVoiceOption = VOICE_OPTIONS.find((v) => v.id === currentVoice) || VOICE_OPTIONS[0];
+
+  const { currentTier, estimatedToeic, estimatedIelts } = calculateProficiency(stats);
 
   // 7-day streak calendar calculations (Monday to Sunday)
   const daysOfWeek = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
@@ -118,6 +123,53 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
             <Volume2 className="w-4 h-4 text-slate-500" />
           )}
         </button>
+      </div>
+
+      {/* GLOBAL PROFICIENCY SPOTLIGHT CARD */}
+      <div 
+        onClick={() => {
+          playSound('click');
+          if (onOpenProfile) {
+            onOpenProfile();
+          } else if (onOpenPlacementTest) {
+            onOpenPlacementTest();
+          }
+        }}
+        className="group bg-gradient-to-br from-[#004B87] via-[#0070D1] to-[#009FE3] p-4 rounded-3xl text-white shadow-md border border-sky-300/40 relative overflow-hidden cursor-pointer hover:shadow-lg transition-all active:scale-98"
+        title="Bấm để xem chi tiết Bảng Đo Lường Trình Độ Quốc Tế"
+      >
+        <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none" />
+        
+        <div className="flex items-center justify-between relative z-10">
+          <div className="flex items-center gap-2.5">
+            <div className="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex flex-col items-center justify-center text-white shrink-0 shadow-xs">
+              <span className="text-base font-black">{currentTier.cefr}</span>
+              <span className="text-[7px] font-black uppercase text-sky-200">CEFR</span>
+            </div>
+            <div>
+              <div className="text-[10px] font-black uppercase tracking-wider text-amber-300 flex items-center gap-1">
+                <Award className="w-3 h-3" />
+                <span>Thành Tích Quốc Tế</span>
+              </div>
+              <div className="text-xs font-black text-white truncate max-w-[140px]">
+                {currentTier.title.split('(')[0]}
+              </div>
+            </div>
+          </div>
+
+          <div className="text-right">
+            <span className="text-xs font-black text-amber-300 block">~{estimatedToeic}</span>
+            <span className="text-[9px] text-sky-100 font-medium">TOEIC Eq.</span>
+          </div>
+        </div>
+
+        <div className="mt-2.5 pt-2 border-t border-white/20 flex items-center justify-between text-[11px] font-bold text-sky-100">
+          <span>IELTS: <strong className="text-emerald-300">Band {estimatedIelts}</strong></span>
+          <span className="flex items-center gap-0.5 text-amber-300 group-hover:translate-x-0.5 transition-transform">
+            <span>Chi tiết</span>
+            <ChevronRight className="w-3.5 h-3.5" />
+          </span>
+        </div>
       </div>
 
       {/* 2. STREAK CALENDAR CARD (DUOLINGO STYLE) */}

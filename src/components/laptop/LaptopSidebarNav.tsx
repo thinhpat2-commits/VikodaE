@@ -37,6 +37,7 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
   selectedLevel,
   setSelectedLevel,
   profile,
+  stats,
   onOpenProfile,
   onOpenLeaderboard,
   onOpenAi,
@@ -50,9 +51,9 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
   // Duolingo Proven 4-Pillar Core Navigation
   const navItems = [
     { id: 'path', label: 'LỘ TRÌNH HỌC', icon: Compass, badge: 'Chính' },
-    { id: 'practice', label: 'LUYỆN TẬP & ĐẤU TRƯỜNG', icon: Swords, badge: 'Thực Chiến' },
+    { id: 'practice', label: 'LUYỆN TẬP & THỰC CHIẾN', icon: Swords, badge: '8 Chế Độ' },
     { id: 'leaderboard', label: 'BẢNG XẾP HẠNG', icon: Trophy, badge: 'Thi Đua' },
-    { id: 'profile', label: 'HỒ SƠ & MỤC TIÊU', icon: User, badge: 'Tiến Độ' },
+    { id: 'profile', label: 'HỒ SƠ & THÀNH TÍCH', icon: User, badge: 'Chi Tiết' },
   ];
 
   return (

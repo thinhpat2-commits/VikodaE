@@ -3,6 +3,7 @@ import { LEVEL_A2_UNITS } from './curriculumLevels/levelA2';
 import { LEVEL_B1_UNITS } from './curriculumLevels/levelB1';
 import { LEVEL_B2_UNITS } from './curriculumLevels/levelB2';
 import { LEVEL_C1C2_UNITS } from './curriculumLevels/levelC1C2';
+import { LEVEL_C2_UNITS } from './curriculumLevels/levelC2';
 
 export type CourseLevel = 'A1' | 'A2' | 'B1' | 'B2' | 'C1-C2' | 'A2-B1' | 'B2-C1' | 'C2';
 
@@ -71,14 +72,25 @@ export interface UnitLesson {
   exercises: LessonExercise[];
 }
 
-// 40 Comprehensive Units across 5 Progressive Workplace & Business Levels
-export const VIKODA_CURRICULUM: UnitLesson[] = [
+import { EXPANDED_LESSON_EXERCISES } from './curriculumExtensions/globalCurriculumExpansion';
+
+// 40 Comprehensive Units across 5 Progressive Workplace & Business Levels (Units 1 to 40)
+const BASE_CURRICULUM: UnitLesson[] = [
   ...LEVEL_A1_UNITS,
   ...LEVEL_A2_UNITS,
   ...LEVEL_B1_UNITS,
   ...LEVEL_B2_UNITS,
-  ...LEVEL_C1C2_UNITS
+  ...LEVEL_C2_UNITS
 ];
+
+// VIKODA_CURRICULUM: Enriched with 120+ elite business exercises (Zero deletion of old content)
+export const VIKODA_CURRICULUM: UnitLesson[] = BASE_CURRICULUM.map((unit) => {
+  const bonus = EXPANDED_LESSON_EXERCISES[unit.id] || [];
+  return {
+    ...unit,
+    exercises: [...unit.exercises, ...bonus]
+  };
+});
 
 export const VIKODA_SIDE_QUESTS: SideQuestItem[] = [
   {

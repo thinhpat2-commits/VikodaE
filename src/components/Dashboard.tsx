@@ -114,6 +114,43 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </div>
       </div>
 
+      {/* Global Proficiency Benchmark (CEFR / TOEIC / IELTS) Card */}
+      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-indigo-950 border-2 border-indigo-500/30 rounded-2xl p-5 shadow-xl">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-3.5">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#005A9C] to-[#009FE3] border border-sky-300/40 flex flex-col items-center justify-center text-white shrink-0 shadow-md">
+              <span className="text-xl font-black">{userLevel || 'A1'}</span>
+              <span className="text-[9px] font-black uppercase text-sky-200">CEFR</span>
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-black uppercase tracking-wider text-amber-400">
+                  Thước Đo Năng Lực Toàn Cầu
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-[10px] font-bold">
+                  {userLevel === 'A1' ? 'Tân Binh Văn Phòng' : userLevel === 'A2' ? 'Tiếp Thị Viên Tự Tin' : userLevel === 'B1' ? 'Đại Sứ Kinh Doanh' : userLevel === 'B2' ? 'Chuyên Gia Đàm Phán' : 'Lãnh Đạo Ngoại Giao'}
+                </span>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 mt-1 text-sm font-bold text-white">
+                <span>Ước lượng: <strong className="text-amber-300 font-black">{userLevel === 'A1' ? 'TOEIC 320 - 400' : userLevel === 'A2' ? 'TOEIC 450 - 550' : userLevel === 'B1' ? 'TOEIC 600 - 700' : userLevel === 'B2' ? 'TOEIC 750 - 850' : 'TOEIC 880 - 990'}</strong></span>
+                <span className="text-slate-500">•</span>
+                <span><strong className="text-emerald-300 font-black">{userLevel === 'A1' ? 'IELTS 3.5' : userLevel === 'A2' ? 'IELTS 4.5' : userLevel === 'B1' ? 'IELTS 5.5' : userLevel === 'B2' ? 'IELTS 6.5' : 'IELTS 7.5+'}</strong></span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setActiveTab('path')}
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-black text-xs uppercase tracking-wide flex items-center gap-1.5 cursor-pointer shadow-md transition-all active:scale-95"
+            >
+              <TrendingUp className="w-4 h-4" />
+              <span>Lộ Trình Nâng Hạng</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Daily Routine: 3 Micro-tasks for Busy Professionals */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         

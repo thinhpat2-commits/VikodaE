@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   X, 
   Upload, 
@@ -11,11 +11,14 @@ import {
   LogOut,
   Trophy,
   Edit3,
-  Award
+  Award,
+  Globe,
+  UserCheck
 } from 'lucide-react';
 import { EmployeeProfile, GamificationState } from '../types';
 import { CompanyEmblem, VikoMascot } from './brand/VikodaLogos';
 import { playSound } from '../services/soundEffects';
+import { GlobalProficiencyDashboard } from './GlobalProficiencyDashboard';
 
 interface EmployeeProfileModalProps {
   isOpen: boolean;
@@ -24,6 +27,8 @@ interface EmployeeProfileModalProps {
   onSaveProfile: (updated: EmployeeProfile) => void;
   stats: GamificationState;
   onLogout?: () => void;
+  onOpenPlacementTest?: () => void;
+  initialTab?: 'card' | 'proficiency';
 }
 
 const PRESET_AVATARS = [
@@ -42,8 +47,17 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
   onSaveProfile,
   stats,
   onLogout,
+  onOpenPlacementTest,
+  initialTab,
 }) => {
+  const [activeTab, setActiveTab] = useState<'card' | 'proficiency'>(initialTab || 'card');
   const [isEditing, setIsEditing] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isOpen && initialTab) {
+      setActiveTab(initialTab);
+    }
+  }, [isOpen, initialTab]);
   const [employeeCode, setEmployeeCode] = useState(profile.employeeCode || 'VKD-1957');
   const [fullName, setFullName] = useState(profile.fullName || 'Trần Văn Minh');
   const [department, setDepartment] = useState(profile.department || 'Phòng Kinh Doanh & Xuất Khẩu');
@@ -97,13 +111,13 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-150">
-      <div className="bg-white rounded-3xl max-w-sm sm:max-w-md w-full border border-sky-100 shadow-2xl overflow-hidden my-auto flex flex-col max-h-[92vh]">
+      <div className="bg-white rounded-3xl max-w-md sm:max-w-lg w-full border border-sky-100 shadow-2xl overflow-hidden my-auto flex flex-col max-h-[92vh]">
         
         {/* Compact Header Bar */}
         <div className="bg-gradient-to-r from-[#005A9C] via-[#0072CE] to-[#0284C7] px-4 py-3 text-white flex items-center justify-between shrink-0">
           <div className="flex items-center space-x-2">
             <CompanyEmblem className="w-6 h-6" />
-            <h3 className="text-xs sm:text-sm font-black tracking-tight">Thẻ Nhân Viên Vikoda</h3>
+            <h3 className="text-xs sm:text-sm font-black tracking-tight">Hồ Sơ & Thẻ Nhân Viên Vikoda</h3>
           </div>
           <button
             onClick={() => {
@@ -116,8 +130,52 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
           </button>
         </div>
 
-        {/* Modal Body: Compact, Fits on Mobile screen */}
+        {/* Navigation Tabs */}
+        <div className="flex border-b border-slate-200 bg-slate-50 px-4 pt-2 shrink-0 gap-2">
+          <button
+            type="button"
+            onClick={() => {
+              playSound('click');
+              setActiveTab('card');
+            }}
+            className={`pb-2.5 px-3 text-xs font-black border-b-2 flex items-center gap-1.5 transition-all cursor-pointer ${
+              activeTab === 'card'
+                ? 'border-[#0070D1] text-[#0070D1]'
+                : 'border-transparent text-slate-500 hover:text-slate-700'
+            }`}
+          >
+            <UserCheck className="w-3.5 h-3.5" />
+            <span>Thẻ Nhân Viên</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              playSound('click');
+              setActiveTab('proficiency');
+            }}
+            className={`pb-2.5 px-3 text-xs font-black border-b-2 flex items-center gap-1.5 transition-all cursor-pointer ${
+              activeTab === 'proficiency'
+                ? 'border-[#0070D1] text-[#0070D1]'
+                : 'border-transparent text-slate-500 hover:text-slate-700'
+            }`}
+          >
+            <Globe className="w-3.5 h-3.5" />
+            <span>Thước Đo Quốc Tế (TOEIC / IELTS)</span>
+          </button>
+        </div>
+
+        {/* Modal Body */}
         <div className="p-4 space-y-3.5 overflow-y-auto">
+          {activeTab === 'proficiency' ? (
+            <GlobalProficiencyDashboard
+              stats={stats}
+              profile={profile}
+              onOpenPlacementTest={onOpenPlacementTest}
+              onNavigateToStudy={() => onClose()}
+            />
+          ) : (
+            <>
           
           {/* DIGITAL BADGE CARD */}
           <div className="relative rounded-2xl p-4 text-white overflow-hidden shadow-md border border-sky-300/40 bg-gradient-to-br from-[#005A9C] via-[#0072CE] to-[#0369A1]">
@@ -325,6 +383,9 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
                 </button>
               )}
             </div>
+          )}
+
+            </>
           )}
 
         </div>

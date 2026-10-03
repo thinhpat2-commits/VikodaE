@@ -71,6 +71,7 @@ export default function App() {
 
   // Modals for requested features
   const [isProfileModalOpen, setIsProfileModalOpen] = useState<boolean>(false);
+  const [profileModalTab, setProfileModalTab] = useState<'card' | 'proficiency'>('card');
   const [isLeaderboardOpen, setIsLeaderboardOpen] = useState<boolean>(false);
   const [isEndlessDrillOpen, setIsEndlessDrillOpen] = useState<boolean>(false);
   const [isPitchSimulatorOpen, setIsPitchSimulatorOpen] = useState<boolean>(false);
@@ -567,6 +568,11 @@ export default function App() {
             setIsPlacementTestOpen(true);
           }}
           placementTestResult={gamificationState.placementTest || currentUserProfile?.placementTest}
+          onOpenProfile={() => {
+            playSound('click');
+            setProfileModalTab('proficiency');
+            setIsProfileModalOpen(true);
+          }}
         />
       )}
 
@@ -618,6 +624,11 @@ export default function App() {
           onOpenPlacementTest={() => {
             playSound('click');
             setIsPlacementTestOpen(true);
+          }}
+          onOpenProfile={() => {
+            playSound('click');
+            setProfileModalTab('proficiency');
+            setIsProfileModalOpen(true);
           }}
         />
       )}
@@ -727,6 +738,11 @@ export default function App() {
               playSound('click');
               setIsPlacementTestOpen(true);
             }}
+            onOpenProfile={() => {
+              playSound('click');
+              setProfileModalTab('proficiency');
+              setIsProfileModalOpen(true);
+            }}
             onOpenSOS={() => {
               playSound('click');
               setIsSOSModalOpen(true);
@@ -766,6 +782,12 @@ export default function App() {
             profile={profile}
             onOpenProfile={() => {
               playSound('click');
+              setProfileModalTab('card');
+              setIsProfileModalOpen(true);
+            }}
+            onOpenProficiency={() => {
+              playSound('click');
+              setProfileModalTab('proficiency');
               setIsProfileModalOpen(true);
             }}
             onOpenLeaderboard={() => {
@@ -853,14 +875,19 @@ export default function App() {
         speechRate={speechRate}
       />
 
-      {/* Employee Profile Modal */}
+      {/* Employee Profile & Global Proficiency Benchmark Modal */}
       <EmployeeProfileModal
         isOpen={isProfileModalOpen}
         onClose={() => setIsProfileModalOpen(false)}
         profile={profile}
         onSaveProfile={handleSaveProfile}
         stats={gamificationState}
+        initialTab={profileModalTab}
         onLogout={handleLogout}
+        onOpenPlacementTest={() => {
+          setIsProfileModalOpen(false);
+          setIsPlacementTestOpen(true);
+        }}
       />
 
       {/* Leaderboard (BXH) Modal */}

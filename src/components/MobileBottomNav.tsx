@@ -43,7 +43,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           <span className="text-[10px] mt-0.5 tracking-tight font-black">Lộ Trình</span>
         </button>
 
-        {/* Tab 2: Practice Hub (Luyện Tập) */}
+        {/* Tab 2: Practice Hub (Kho Luyện Tập & Thực Chiến) */}
         <button
           onClick={() => {
             playSound('click');
@@ -54,6 +54,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
               ? 'text-[#0070D1] font-black'
               : 'text-slate-400 hover:text-slate-700 font-bold'
           }`}
+          title="Kho Luyện Tập & Thực Chiến Toàn Năng"
         >
           <div className={`p-1.5 rounded-xl transition-all ${
             activeTab === 'practice' 
@@ -62,7 +63,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           }`}>
             <Zap className={`w-5 h-5 ${activeTab === 'practice' ? 'stroke-[2.5]' : 'stroke-2'}`} />
           </div>
-          <span className="text-[10px] mt-0.5 tracking-tight font-black">Luyện Tập</span>
+          <span className="text-[10px] mt-0.5 tracking-tight font-black whitespace-nowrap">Luyện Tập</span>
         </button>
 
         {/* Tab 3: 1v1 PvP Arena (Đấu Trường) */}
