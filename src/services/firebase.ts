@@ -20,7 +20,8 @@ import {
   enqueueOfflineMutation,
   getOfflineQueue,
   clearOfflineQueueItem,
-  resolveStateConflict
+  resolveStateConflict,
+  resetOfflineUserData
 } from './offlineStorage';
 import { GamificationState } from '../types';
 
@@ -469,12 +470,13 @@ export async function fetchAllUsersAdmin(): Promise<UserCloudProfile[]> {
         list.push(currentSession);
         setDoc(doc(db, 'users', currentSession.userId), currentSession, { merge: true }).catch(() => {});
       } else {
-        // Merge latest real-time session numbers
+        // Sync current session values if not reset
+        const isResetSession = currentSession.xp === 0 && currentSession.streak === 0;
         list[idx] = {
           ...list[idx],
-          xp: Math.max(list[idx].xp || 0, currentSession.xp || 0),
-          streak: Math.max(list[idx].streak || 0, currentSession.streak || 0),
-          gems: Math.max(list[idx].gems || 0, currentSession.gems || 0),
+          xp: isResetSession ? 0 : (list[idx].xp ?? currentSession.xp ?? 0),
+          streak: isResetSession ? 0 : (list[idx].streak ?? currentSession.streak ?? 0),
+          gems: isResetSession ? 0 : (list[idx].gems ?? currentSession.gems ?? 0),
           displayName: currentSession.displayName || list[idx].displayName,
         };
       }
@@ -498,6 +500,7 @@ export async function adminResetUserProgress(
 ): Promise<boolean> {
   const adminSession = getPersistedSession();
   const adminEmail = adminSession?.email || 'thinh.pat2@gmail.com';
+  const now = Date.now() + 86400000;
 
   const resetData = {
     xp: 0,
@@ -507,8 +510,9 @@ export async function adminResetUserProgress(
     completedUnits: [],
     mistakesCount: 0,
     vocabLearned: 0,
-    lastActive: new Date().toISOString(),
-    updatedAt: Date.now(),
+    highestDrillScore: 0,
+    lastActive: 'Vừa reset bởi Admin',
+    updatedAt: now,
     lastResetByAdmin: {
       adminEmail,
       timestamp: new Date().toISOString(),
@@ -525,7 +529,7 @@ export async function adminResetUserProgress(
     console.warn('Reset error in Firestore:', err);
   }
 
-  // 2. Audit Trail
+  // 2. Audit Trail in Firestore
   try {
     await addDoc(collection(db, 'audit_resets'), {
       targetUserId: actualUserId,
@@ -536,9 +540,60 @@ export async function adminResetUserProgress(
     });
   } catch (e) {}
 
-  // 3. If target user is the currently logged in session, reset local session as well
-  if (adminSession && (adminSession.userId === actualUserId || adminSession.email.toLowerCase() === targetEmail.toLowerCase())) {
-    persistSession({ ...adminSession, ...resetData });
+  // 3. Clear IndexedDB completely for this user
+  await resetOfflineUserData(actualUserId);
+
+  // 4. Clear and reset all local storage keys so F5 cannot restore old state
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(`vikoda_stats_${actualUserId}`);
+    localStorage.removeItem(`vikoda_stats_${emailToUserId(targetEmail)}`);
+    localStorage.removeItem(`vikoda_profile_${actualUserId}`);
+    localStorage.removeItem(`vikoda_profile_${emailToUserId(targetEmail)}`);
+
+    // If this target user is currently logged in, update active session & stats
+    if (adminSession && (adminSession.userId === actualUserId || adminSession.email.toLowerCase() === targetEmail.toLowerCase())) {
+      persistSession({ ...adminSession, ...resetData });
+      
+      const freshZeroStats = {
+        xp: 0,
+        gems: 0,
+        energy: 5,
+        streakDays: 0,
+        rank: 'Tân Binh Đảnh Thạnh',
+        completedNodeIds: [],
+        lastActiveDate: new Date().toISOString().split('T')[0],
+        highestDrillScore: 0,
+        practiceStats: {
+          totalPracticeCount: 0,
+          repetitionCount: 0,
+          speakingExercisesCompleted: 0,
+          listeningExercisesCompleted: 0,
+          perfectThreeStarUnits: 0,
+          totalDrillsCompleted: 0,
+          totalVoiceSessions: 0,
+          lastPracticeTimestamp: now,
+        },
+        updatedAt: now,
+      };
+
+      localStorage.setItem('vikoda_gamification_state_v3', JSON.stringify(freshZeroStats));
+      localStorage.setItem('vikoda_user_stats', JSON.stringify(freshZeroStats));
+      localStorage.setItem(`vikoda_stats_${actualUserId}`, JSON.stringify(freshZeroStats));
+    }
+
+    // Also update corporate employees list in localStorage
+    const savedEmployees = localStorage.getItem('vikoda_corporate_employees_v2');
+    if (savedEmployees) {
+      try {
+        const empList = JSON.parse(savedEmployees);
+        const updatedList = empList.map((emp: any) =>
+          emp.id === actualUserId || emp.email.toLowerCase().trim() === targetEmail.toLowerCase().trim()
+            ? { ...emp, xp: 0, streak: 0, completedUnits: 0, highestScore: 0, lastActive: 'Vừa reset bởi Admin' }
+            : emp
+        );
+        localStorage.setItem('vikoda_corporate_employees_v2', JSON.stringify(updatedList));
+      } catch (e) {}
+    }
   }
 
   return true;

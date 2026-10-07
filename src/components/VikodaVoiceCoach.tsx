@@ -46,15 +46,15 @@ interface VoicePracticeItem {
 }
 
 const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
-  // LEVEL A1: 10 ITEMS (Giao tiếp cơ bản, đón khách & văn phòng)
+  // LEVEL A1: 10 ITEMS (Giao tiếp cơ bản & Nhập môn văn phòng)
   {
     id: 'vp-1',
     level: 'A1',
-    title: 'Chào đón khách quốc tế',
+    title: 'Chào hỏi lịch thiệp tại văn phòng',
     english: 'Good morning! Welcome to Vikoda.',
     phonetics: '/gʊd ˈmɔːrnɪŋ! ˈwɛlkəm tuː vɪˈkoʊdə/',
     vietnamese: 'Chào buổi sáng! Chào mừng quý khách đến với Vikoda.',
-    proTip: 'Nói với giọng ấm áp, tự tin và ngẩng cao đầu khi chào đối tác.'
+    proTip: 'Nói với giọng ấm áp, thân thiện và tươi cười khi mở lời chào.'
   },
   {
     id: 'vp-2',
@@ -138,10 +138,10 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
     proTip: 'Cúi đầu nhẹ 15 độ và bắt tay ấm áp khi tiễn đối tác rời bàn đàm phán.'
   },
 
-  // LEVEL A2-B1: 10 ITEMS (Khoa học nguồn khoáng Đảnh Thạnh & Dinh dưỡng)
+  // LEVEL A2: 10 ITEMS (Khoa học nguồn khoáng Đảnh Thạnh & Dinh dưỡng)
   {
     id: 'vp-11',
-    level: 'A2-B1',
+    level: 'A2',
     title: 'Độ sâu mỏ 220 mét',
     english: 'We bottle directly at the Danh Thanh spring at a depth of 220 meters.',
     phonetics: '/wiː ˈbɒtl dəˈrɛktli æt ðə dɑːɲ tʰaɪɲ sprɪŋ æt ə dɛpθ əv tuː ˈhʌndrəd ˈtwɛnti ˈmiːtərz/',
@@ -150,7 +150,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-12',
-    level: 'A2-B1',
+    level: 'A2',
     title: 'Nhiệt độ 72°C tại vòi phun',
     english: 'The spring water emerges naturally at a temperature of 72 degrees Celsius.',
     phonetics: '/ðə sprɪŋ ˈwɔːtər ɪˈmɜːrdʒɪz ˈnætʃrəli æt ə ˈtɛmprətʃər əv ˈsɛvnti-tuː dɪˈɡriːz ˈsɛlsiəs/',
@@ -159,7 +159,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-13',
-    level: 'A2-B1',
+    level: 'A2',
     title: 'Cơ chế kiềm tự nhiên pH 9.0',
     english: 'Our natural pH of 9.0 helps neutralize excess stomach acid.',
     phonetics: '/aʊər ˈnætʃrəl piː-eɪtʃ əv naɪn hɛlps ˈnjuːtrəlaɪz ɪkˈsɛs ˈstʌmək ˈæsɪd/',
@@ -168,7 +168,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-14',
-    level: 'A2-B1',
+    level: 'A2',
     title: 'Vành đai sinh thái xanh 35 hecta',
     english: 'The source is strictly protected by a 35-hectare ecological green belt.',
     phonetics: '/ðə sɔːrs ɪz ˈstrɪktli prəˈtɛktɪd baɪ ə ˈθɜːrti-faɪv ˈhɛktɛər ˌiːkəˈlɒdʒɪkl ɡriːn bɛlt/',
@@ -177,7 +177,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-15',
-    level: 'A2-B1',
+    level: 'A2',
     title: 'So sánh khoáng tự nhiên vs nước cất RO',
     english: 'Unlike RO purified water which strips away electrolytes, Vikoda preserves essential natural minerals.',
     phonetics: '/ʌnˈlaɪk ɑːr-oʊ ˈpjʊrɪfaɪd ˈwɔːtər wɪtʃ strɪps əˈweɪ ɪˈlɛktrəlaɪts, vɪˈkoʊdə prɪˈzɜːrvz ɪˈsɛnʃl ˈnætʃrəl ˈmɪnərəlz/',
@@ -186,7 +186,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-16',
-    level: 'A2-B1',
+    level: 'A2',
     title: 'Axit Metasilicic & Muối Bicarbonate',
     english: 'Vikoda is rich in natural Metasilicic acid and Bicarbonate for optimal digestion and cellular hydration.',
     phonetics: '/vɪˈkoʊdə ɪz rɪtʃ ɪn ˈnætʃrəl ˌmɛtəsɪˈlɪsɪk ˈæsɪd ænd baɪˈkɑːrbənət fɔːr ˈɒptɪml daɪˈdʒɛstʃən ænd ˈsɛljələr haɪˈdreɪʃn/',
@@ -195,7 +195,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-17',
-    level: 'A2-B1',
+    level: 'A2',
     title: 'Dây chuyền tự động chuẩn HACCP',
     english: 'Our automated bottling lines meet the highest international HACCP standards.',
     phonetics: '/aʊər ˈɔːtəmeɪtɪd ˈbɒtlɪŋ laɪnz miːt ðə ˈhaɪɪst ˌɪntərˈnæʃnəl ˈhæsæp ˈstændərdz/',
@@ -204,7 +204,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-18',
-    level: 'A2-B1',
+    level: 'A2',
     title: 'Hỗ trợ trào ngược và cân bằng cơ thể',
     english: 'Regular intake of natural alkaline water supports metabolic balance and acid reflux relief.',
     phonetics: '/ˈrɛɡjələr ˈɪnteɪk əv ˈnætʃrəl ˈælkəlaɪn ˈwɔːtər səˈpɔːrts ˌmɛtəˈbɒlɪk ˈbæləns ænd ˈæsɪd ˈriːflʌks rɪˈliːf/',
@@ -213,7 +213,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-19',
-    level: 'A2-B1',
+    level: 'A2',
     title: 'Nước khoáng có ga vị trái cây',
     english: 'We offer an array of refreshing fruit flavors crafted with genuine mineral water.',
     phonetics: '/wiː ˈɒfər ən əˈreɪ əv rɪˈfrɛʃɪŋ fruːt ˈfleɪvərz ˈkræftɪd wɪð ˈdʒɛnjuɪn ˈmɪnərəl ˈwɔːtər/',
@@ -222,7 +222,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-20',
-    level: 'A2-B1',
+    level: 'A2',
     title: 'Mời đoàn khách đi tour thăm mỏ Khánh Hòa',
     english: 'We would be honored to host you for a VIP tour of our pristine spring in Khanh Hoa.',
     phonetics: '/wiː wʊd biː ˈɒnərd tuː hoʊst juː fɔːr ə viː-aɪ-piː tʊər əv aʊər ˈprɪstiːn sprɪŋ ɪn kɑːɲ hwɑː/',
@@ -230,10 +230,10 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
     proTip: 'Từ "pristine" /ˈprɪstiːn/ nghĩa là nguyên sơ, tinh khiết không tì vết.'
   },
 
-  // LEVEL B2-C1: 10 ITEMS (Đàm phán xuất khẩu B2B, HORECA 5 sao, Incoterms & ESG)
+  // LEVEL B1: 10 ITEMS (Đại sứ thương hiệu & Thuyết trình sản phẩm HORECA)
   {
     id: 'vp-21',
-    level: 'B2-C1',
+    level: 'B1',
     title: 'Phản bác kiềm nhân tạo không ổn định',
     english: 'Unlike artificial alkaline water, Vikoda preserves natural minerals without chemical additives.',
     phonetics: '/ʌnˈlaɪk ˌɑːrtɪˈfɪʃl ˈælkəlaɪn ˈwɔːtər, vɪˈkoʊdə prɪˈzɜːrvz ˈnætʃrəl ˈmɪnərəlz wɪˈðaʊt ˈkɛmɪkl ˈædɪtɪvz/',
@@ -242,7 +242,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-22',
-    level: 'B2-C1',
+    level: 'B1',
     title: 'Kiềm liên kết khoáng bền vững 3 năm',
     english: 'Vikoda is not an electrolyte machine creation; its alkalinity is naturally mineral-bonded from Mother Earth.',
     phonetics: '/vɪˈkoʊdə ɪz nɒt ən ɪˈlɛktrəlaɪt məˈʃiːn kriˈeɪʃn; ɪts ˌælkəˈlɪnəti ɪz ˈnætʃrəli ˈmɪnərəl-ˈbɒndɪd frəm ˈmʌðər ɜːrθ/',
@@ -251,7 +251,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-23',
-    level: 'B2-C1',
+    level: 'B1',
     title: 'Giải tỏa lo lắng về sỏi thận (TDS cân bằng)',
     english: 'Our light and balanced TDS ensures daily hydration without any risk of kidney stones.',
     phonetics: '/aʊər laɪt ænd ˈbælənst tiː-diː-ɛs ɪnˈʃʊrz ˈdeɪli haɪˈdreɪʃn wɪˈðaʊt ˈɛni rɪsk əv ˈkɪdni stoʊnz/',
@@ -260,7 +260,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-24',
-    level: 'B2-C1',
+    level: 'B1',
     title: 'Chai thủy tinh cao cấp chuẩn 5 sao',
     english: 'Our luxury glass bottles eliminate single-use plastics and elevate the 5-star dining experience.',
     phonetics: '/aʊər ˈlʌkʃəri ɡlæs ˈbɒtlz ɪˈlɪmɪneɪt ˈsɪŋɡl-juːs ˈplæstɪks ænd ˈɛlɪveɪt ðə faɪv-stɑːr ˈdaɪnɪŋ ɪkˈspɪəriəns/',
@@ -269,7 +269,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-25',
-    level: 'B2-C1',
+    level: 'B1',
     title: 'Lợi thế ESG: Giảm 85% phát thải Scope 3',
     english: 'Switching from imported European water to Vikoda glass bottles reduces your scope-three carbon emissions by 85%.',
     phonetics: '/ˈswɪtʃɪŋ frəm ɪmˈpɔːrtɪd ˌjʊərəˈpiːən ˈwɔːtər tuː vɪˈkoʊdə ɡlæs ˈbɒtlz rɪˈdjuːsɪz jʊər skoʊp-θriː ˈkɑːrbən ɪˈmɪʃnz baɪ ˈeɪti-faɪv pərˈsɛnt/',
@@ -278,7 +278,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-26',
-    level: 'B2-C1',
+    level: 'B1',
     title: 'Điều kiện thương mại quốc tế FOB & CIF',
     english: 'We provide full FOB and CIF trade terms with prompt shipping from Cat Lai and Hai Phong ports.',
     phonetics: '/wiː prəˈvaɪd fʊl ɛf-oʊ-biː ænd siː-aɪ-ɛf treɪd tɜːrmz wɪð prɒmpt ˈʃɪpɪŋ frəm kæt laɪ ænd haɪ fɒŋ pɔːrts/',
@@ -287,7 +287,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-27',
-    level: 'B2-C1',
+    level: 'B1',
     title: 'Quy cách MOQ container 20 feet',
     english: 'Our minimum order quantity is one 20-foot container, with flexible palletized configuration.',
     phonetics: '/aʊər ˈmɪnɪməm ˈɔːrdər ˈkwɒntəti ɪz wʌn ˈtwɛnti-fʊt kənˈteɪnər, wɪð ˈflɛksəbl ˈpælətaɪzd kənˌfɪɡjʊˈreɪʃn/',
@@ -296,7 +296,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-28',
-    level: 'B2-C1',
+    level: 'B1',
     title: 'Hồ sơ pháp lý: ISO 22000, US FDA & Halal',
     english: 'Our products are backed by ISO 22000, US FDA facility registration, and international Halal certification.',
     phonetics: '/aʊər ˈprɒdʌkts ɑːr bækt baɪ aɪ-ɛs-oʊ ˈtwɛnti-tuː ˈθaʊznd, juː-ɛs ɛf-diː-eɪ fəˈsɪləti ˌrɛdʒɪˈstreɪʃn, ænd ˌɪntərˈnæʃnəl həˈlɑːl ˌsɜːrtɪfɪˈkeɪʃn/',
@@ -305,7 +305,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-29',
-    level: 'B2-C1',
+    level: 'B1',
     title: 'Thanh toán L/C không hủy ngang trả ngay',
     english: 'We welcome irrevocable letters of credit at sight issued by top-tier international commercial banks.',
     phonetics: '/wiː ˈwɛlkəm ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt ˈɪʃuːd baɪ tɒp-tɪər ˌɪntərˈnæʃnəl kəˈmɜːrʃl bæŋks/',
@@ -314,17 +314,18 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-30',
-    level: 'B2-C1',
+    level: 'B1',
     title: 'Năng lực OEM & Bệ phóng Tập đoàn F.I.T.',
     english: 'As part of F.I.T. Group, Vikoda possesses the financial resilience and manufacturing capacity for large-scale OEM partnerships.',
     phonetics: '/æz pɑːrt əv ɛf-aɪ-tiː ɡruːp, vɪˈkoʊdə pəˈzɛsɪz ðə faɪˈnænʃl rɪˈzɪliəns ænd ˌmænjuˈfæktʃərɪŋ kəˈpæsəti fɔːr lɑːrdʒ-skeɪl oʊ-iː-ɛm ˈpɑːrtnərʃɪps/',
     vietnamese: 'Thuộc tập đoàn F.I.T., Vikoda sở hữu tiềm lực tài chính vững mạnh và công suất sản xuất quy mô lớn cho các hợp đồng OEM quốc tế.',
     proTip: 'Khẳng định uy tín tập đoàn niêm yết tạo niềm tin tuyệt đối cho các tập đoàn bán lẻ đa quốc gia.'
   },
-  // LEVEL C2: BẬC THẦY BẢN NGỮ (Executive Boardroom, Hostile Objections, Strategic Closing)
+
+  // LEVEL B2: 10 ITEMS (Đàm phán thương mại B2B, Hợp đồng xuất khẩu & Xử lý phản hồi)
   {
     id: 'vp-31',
-    level: 'C2',
+    level: 'B2',
     title: 'Đàm phán công bằng (Level Playing Field)',
     english: 'We want to ensure a level playing field for all regional distributors.',
     phonetics: '/wiː wɒnt tuː ɪnˈʃʊər ə ˈlɛvl ˈpleɪɪŋ fiːld fɔːr ɔːl ˈriːdʒənl dɪˈstrɪbjətərz/',
@@ -333,7 +334,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-32',
-    level: 'C2',
+    level: 'B2',
     title: 'Ưu đãi thúc đẩy chốt hợp đồng (Sweeten the Deal)',
     english: 'To sweeten the deal, we will subsidize your premier shelf display costs.',
     phonetics: '/tuː ˈswiːtn ðə diːl, wiː wɪl ˈsʌbsɪdaɪz jɔːr ˈprɛmiər ʃɛlf dɪˈspleɪ kɒsts/',
@@ -342,7 +343,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-33',
-    level: 'C2',
+    level: 'B2',
     title: 'Công thức phản hồi Harvard Feel-Felt-Found',
     english: 'I understand how you feel, other buyers felt the same, but they found that Vikoda drove higher retention.',
     phonetics: '/aɪ ˌʌndərˈstænd haʊ juː fiːl, ˈʌðər ˈbaɪərz fɛlt ðə seɪm, bʌt ðeɪ faʊnd ðæt vɪˈkoʊdə droʊv ˈhaɪər rɪˈtɛnʃn/',
@@ -351,7 +352,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-34',
-    level: 'C2',
+    level: 'B2',
     title: 'Độc bản kiềm tự nhiên đối đầu Evian / San Pellegrino',
     english: 'While European brands offer history, Vikoda provides a rare natural pH 9.0 synergy that no imported water can replicate at source.',
     phonetics: '/waɪl ˌjʊərəˈpiːən brændz ˈɒfər ˈhɪstəri, vɪˈkoʊdə prəˈvaɪdz ə rɛər ˈnætʃrəl piː-eɪtʃ naɪn pɔɪnt oʊ ˈsɪnərdʒi/',
@@ -360,7 +361,7 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-35',
-    level: 'C2',
+    level: 'B2',
     title: 'Khoa học khoáng kiềm đệm axit tế bào',
     english: 'Vikoda’s abundant natural bicarbonate buffers metabolic acidity and optimizes cellular hydration.',
     phonetics: '/vɪˈkoʊdəz əˈbʌndənt ˈnætʃrəl baɪˈkɑːrbənət ˈbʌfərz ˌmɛtəˈbɒlɪk əˈsɪdəti ænd ˈɒptɪmaɪzɪz ˈsɛljələr haɪˈdreɪʃn/',
@@ -369,12 +370,140 @@ const VOICE_PRACTICE_ITEMS: VoicePracticeItem[] = [
   },
   {
     id: 'vp-36',
-    level: 'C2',
+    level: 'B2',
     title: 'Khai mở kỷ nguyên mới tại lễ ký kết',
     english: 'Today we do not merely sign a contract, we inaugurate a new era for natural alkaline wellness.',
     phonetics: '/təˈdeɪ wiː duː nɒt ˈmɪərli saɪn ə ˈkɒntrækt, wiː ɪˈnɔːgjəreɪt ə njuː ˈɪərə fɔːr ˈnætʃrəl ˈælkəlaɪn ˈwɛlnɪs/',
     vietnamese: 'Hôm nay chúng ta không đơn thuần ký kết một hợp đồng, chúng ta cùng nhau khai mở một kỷ nguyên mới cho sức khỏe khoáng kiềm tự nhiên.',
     proTip: 'Lời phát biểu nâng ly (toast) đầy cảm hứng với âm lượng vang và phong thái đĩnh đạc.'
+  },
+  {
+    id: 'vp-37',
+    level: 'B2',
+    title: 'Thương lượng Incoterms CIF Tokyo',
+    english: 'Our CIF Tokyo quotation includes marine insurance and container freight charges.',
+    phonetics: '/aʊər siː-aɪ-ɛf ˈtoʊkioʊ kwoʊˈteɪʃn ɪnˈkluːdz məˈriːn ɪnˈʃʊərəns ænd kənˈteɪnər freɪt ˈtʃɑːrdʒɪz/',
+    vietnamese: 'Báo giá CIF Tokyo của chúng tôi đã bao gồm bảo hiểm hàng hải và cước vận tải container.',
+    proTip: 'Phát âm chuẩn thuật ngữ thương mại "marine insurance" và "freight charges".'
+  },
+  {
+    id: 'vp-38',
+    level: 'B2',
+    title: 'Điều kiện mở tín dụng thư L/C trả ngay',
+    english: 'We accept payment by irrevocable Letter of Credit at sight confirmed by a prime bank.',
+    phonetics: '/wiː əkˈsɛpt ˈpeɪmənt baɪ ɪˈrɛvəkəbl ˈlɛtər əv ˈkrɛdɪt æt saɪt kənˈfɜːrmd baɪ ə praɪm bæŋk/',
+    vietnamese: 'Chúng tôi chấp nhận thanh toán bằng Thư tín dụng không thể hủy ngang trả ngay xác nhận bởi ngân hàng hạng nhất.',
+    proTip: 'Trọng âm từ "irrevocable" /ɪˈrɛvəkəbl/ rơi vào âm tiết thứ hai.'
+  },
+  {
+    id: 'vp-39',
+    level: 'B2',
+    title: 'Hạn mức chiết khấu theo sản lượng container',
+    english: 'A volume rebate of five percent applies once your annual orders exceed fifty TEUs.',
+    phonetics: '/ə ˈvɒljuːm ˈriːbeɪt əv faɪv pərˈsɛnt əˈplaɪz wʌns jɔːr ˈænjuəl ˈɔːrdərz ɪkˈsiːd ˈfɪfti tiː-iː-juːz/',
+    vietnamese: 'Mức chiết khấu sản lượng 5% sẽ được áp dụng khi tổng đơn hàng năm của quý vị vượt 50 container tiêu chuẩn.',
+    proTip: 'TEU đọc là /tiː-iː-juː/ — đơn vị đo lường tương đương container 20 feet.'
+  },
+  {
+    id: 'vp-40',
+    level: 'B2',
+    title: 'Đảm bảo thời hạn lưu kho 24 tháng',
+    english: 'Our high-grade glass bottles ensure a twenty-four-month shelf life with intact mineral balance.',
+    phonetics: '/aʊər haɪ-ɡreɪd ɡlæs ˈbɒtlz ɪnˈʃʊər ə ˈtwɛnti-fɔːr-mʌnθ ʃɛlf laɪf wɪð ɪnˈtækt ˈmɪnərəl ˈbæləns/',
+    vietnamese: 'Chai thủy tinh cao cấp của chúng tôi đảm bảo hạn sử dụng 24 tháng với hàm lượng khoáng kiềm nguyên vẹn.',
+    proTip: 'Từ "intact" /ɪnˈtækt/ nghĩa là nguyên vẹn, giữ trọn chất lượng.'
+  },
+
+  // LEVEL C1-C2: 10 ITEMS (Chiến lược toàn cầu, C-Suite, Thẩm định ESG & Hợp tác quốc tế)
+  {
+    id: 'vp-41',
+    level: 'C1-C2',
+    title: 'Chứng chỉ kiểm định phòng thí nghiệm Tokyo',
+    english: 'Our mineral analysis has been independently certified by Japan Food Research Laboratories.',
+    phonetics: '/aʊər ˈmɪnərəl əˈnæləsɪs hæz biːn ˌɪndɪˈpɛndəntli ˈsɜːrtɪfaɪd baɪ dʒəˈpæn fuːd rɪˈsɜːrtʃ ləˈbɒrətɔːriz/',
+    vietnamese: 'Bản phân tích khoáng chất của chúng tôi đã được chứng nhận độc lập bởi Phòng Thí nghiệm Nghiên cứu Thực phẩm Nhật Bản (JFRL).',
+    proTip: 'Nhấn mạnh "independently certified" để khẳng định độ tin cậy tuyệt đối với đối tác Nhật.'
+  },
+  {
+    id: 'vp-42',
+    level: 'C1-C2',
+    title: 'Bảo vệ giá trị thương hiệu Vikoda trên thị trường quốc tế',
+    english: 'We do not engage in price-slashing wars; we compete on unmatched pristine purity and clinical efficacy.',
+    phonetics: '/wiː duː nɒt ɪnˈɡeɪdʒ ɪn praɪs-ˈslæʃɪŋ wɔːrz; wiː kəmˈpiːt ɒn ʌnˈmætʃt ˈprɪstiːn ˈpjʊərəti ænd ˈklɪnɪkl ˈɛfɪkəsi/',
+    vietnamese: 'Chúng tôi không tham gia vào các cuộc chiến phá giá; chúng tôi cạnh tranh bằng độ tinh khiết nguyên sơ và hiệu quả sinh học vượt trội.',
+    proTip: 'Cụm "clinical efficacy" /ˈklɪnɪkl ˈɛfɪkəsi/ nghĩa là hiệu quả lâm sàng đã được y học kiểm chứng.'
+  },
+  {
+    id: 'vp-43',
+    level: 'C1-C2',
+    title: 'Hợp tác phân phối độc quyền theo vùng lãnh thổ',
+    english: 'Exclusive territorial distribution rights are contingent upon meeting our quarterly volume milestones.',
+    phonetics: '/ɪkˈskluːsɪv ˌtɛrɪˈtɔːriəl ˌdɪstrɪˈbjuːʃn raɪts ɑːr kənˈtɪndʒənt əˈpɒn ˈmiːtɪŋ aʊər ˈkwɔːrtərli ˈvɒljuːm ˈmaɪlstoʊnz/',
+    vietnamese: 'Quyền phân phối độc quyền theo lãnh thổ sẽ phụ thuộc vào việc hoàn thành các mốc sản lượng định kỳ hàng quý.',
+    proTip: 'Cụm "contingent upon" /kənˈtɪndʒənt əˈpɒn/ mang phong thái hợp đồng pháp lý chuyên nghiệp.'
+  },
+  {
+    id: 'vp-44',
+    level: 'C1-C2',
+    title: 'Chiến lược phát triển bền vững ESG & Kinh tế tuần hoàn',
+    english: 'Our circular economy initiatives reduce carbon footprint through solar-powered bottling and returnable glass packaging.',
+    phonetics: '/aʊər ˈsɜːrkjələr ɪˈkɒnəmi ɪˈnɪʃətɪvz rɪˈdjuːs ˈkɑːrbən ˈfʊtprɪnt θruː ˈsoʊlər-ˈpaʊərd ˈbɒtlɪŋ ænd rɪˈtɜːrnəbl ɡlæs ˈpækɪdʒɪŋ/',
+    vietnamese: 'Các sáng kiến kinh tế tuần hoàn của chúng tôi giảm phát thải carbon nhờ chiết rót bằng năng lượng mặt trời và bao bì thủy tinh tái sử dụng.',
+    proTip: 'Cụm "circular economy initiatives" ghi điểm tuyệt đối trong các vòng thẩm định ESG của đối tác đa quốc gia.'
+  },
+  {
+    id: 'vp-45',
+    level: 'C1-C2',
+    title: 'Chiến lược định vị phân khúc siêu cao cấp',
+    english: 'Vikoda is positioned not merely as hydration, but as an indispensable wellness lifestyle statement.',
+    phonetics: '/vɪˈkoʊdə ɪz pəˈzɪʃnd nɒt ˈmɪərli æz haɪˈdreɪʃn, bʌt æz ən ˌɪndɪˈspɛnsəbl ˈwɛlnɪs ˈlaɪfstaɪl ˈsteɪtmənt/',
+    vietnamese: 'Vikoda được định vị không đơn thuần là nước giải khát, mà là tuyên ngôn phong cách sống chăm sóc sức khỏe không thể thiếu.',
+    proTip: 'Từ "indispensable" /ˌɪndɪˈspɛnsəbl/ nghĩa là thiết yếu, không thể thiếu.'
+  },
+  {
+    id: 'vp-46',
+    level: 'C1-C2',
+    title: 'Cam kết trách nhiệm xã hội và cộng đồng địa phương',
+    english: 'Every bottle sold directly reinvests into preserving the pristine ecosystem of Khanh Hoa province.',
+    phonetics: '/ˈɛvri ˈbɒtl soʊld dəˈrɛktli ˌriːɪnˈvɛsts ˈɪntuː prɪˈzɜːrvɪŋ ðə ˈprɪstiːn ˈiːkoʊˌsɪstəm əv kɑːɲ hwɑː ˈprɒvɪns/',
+    vietnamese: 'Mỗi chai nước được bán ra đóng góp trực tiếp tái đầu tư vào việc bảo tồn hệ sinh thái nguyên sinh của tỉnh Khánh Hòa.',
+    proTip: 'Tạo cảm xúc gắn kết đạo đức kinh doanh sâu sắc với các đối tác phát triển bền vững.'
+  },
+  {
+    id: 'vp-47',
+    level: 'C1-C2',
+    title: 'Cam kết đồng hành marketing và truyền thông thương hiệu',
+    english: 'We co-invest in regional brand-building campaigns and provide comprehensive sales collateral in your native language.',
+    phonetics: '/wiː koʊ-ɪnˈvɛst ɪn ˈriːdʒənl brænd-ˈbɪldɪŋ kæmˈpeɪnz ænd prəˈvaɪd ˌkɒmprɪˈhɛnsɪv seɪlz kəˈlætərəl ɪn jʊər ˈneɪtɪv ˈlæŋɡwɪdʒ/',
+    vietnamese: 'Chúng tôi đồng đầu tư vào các chiến dịch xây dựng thương hiệu khu vực và cung cấp toàn bộ tài liệu bán hàng bằng ngôn ngữ bản địa của quý vị.',
+    proTip: 'Cụm "sales collateral" nghĩa là bộ công cụ ấn phẩm bán hàng hỗ trợ đại lý.'
+  },
+  {
+    id: 'vp-48',
+    level: 'C1-C2',
+    title: 'Cơ chế giải quyết tranh chấp trọng tài quốc tế',
+    english: 'Any dispute arising under this agreement shall be settled through expedited arbitration under SIAC rules.',
+    phonetics: '/ˈɛni dɪˈspjuːt əˈraɪzɪŋ ˈʌndər ðɪs əˈɡriːmənt ʃæl biː ˈsɛtld θruː ˈɛkspədaɪtɪd ˌɑːrbɪˈtreɪʃn ˈʌndər ɛs-aɪ-eɪ-siː ruːlz/',
+    vietnamese: 'Mọi tranh chấp phát sinh từ thỏa thuận này sẽ được giải quyết qua trọng tài rút gọn theo quy tắc của Trung tâm Trọng tài Quốc tế Singapore (SIAC).',
+    proTip: 'Thể hiện sự minh bạch và chuẩn mực thương mại quốc tế cao nhất.'
+  },
+  {
+    id: 'vp-49',
+    level: 'C1-C2',
+    title: 'Chu kỳ kiểm tra chất lượng lô hàng xuất xưởng',
+    english: 'Batch-by-batch microbiological and physicochemical testing is performed prior to customs clearance release.',
+    phonetics: '/bætʃ-baɪ-bætʃ ˌmaɪkroʊˌbaɪəˈlɒdʒɪkl ænd ˌfɪzɪkoʊˈkɛmɪkl ˈtɛstɪŋ ɪz pərˈfɔːrmd ˈpraɪər tuː ˈkʌstəmz ˈklɪərəns rɪˈliːs/',
+    vietnamese: 'Kiểm nghiệm vi sinh và lý hóa từng lô hàng được thực hiện nghiêm ngặt trước khi thông quan xuất khẩu.',
+    proTip: 'Cụm "microbiological and physicochemical testing" đảm bảo tiêu chuẩn kiểm dịch khắt khe.'
+  },
+  {
+    id: 'vp-50',
+    level: 'C1-C2',
+    title: 'Tầm nhìn liên minh chiến lược toàn cầu',
+    english: 'Together we are establishing a global benchmark for pristine natural alkaline hydration across international markets.',
+    phonetics: '/təˈɡɛðər wiː ɑːr ɪˈstæblɪʃɪŋ ə ˈɡloʊbl ˈbɛntʃmɑːrk fɔːr ˈprɪstiːn ˈnætʃrəl ˈælkəlaɪn haɪˈdreɪʃn əˈkrɒs ˌɪntərˈnæʃnəl ˈmɑːrkɪts/',
+    vietnamese: 'Cùng nhau, chúng ta đang thiết lập một chuẩn mực toàn cầu mới về nguồn nước khoáng kiềm tự nhiên nguyên sinh trên các thị trường quốc tế.',
+    proTip: 'Lời kết hoàn hảo cho các bài phát biểu hợp tác cấp cao giữa các tập đoàn hàng đầu.'
   }
 ];
 
@@ -382,12 +511,14 @@ interface VikodaVoiceCoachProps {
   speechRate: number;
   onAwardXpAndGems: (xp: number, gems: number) => void;
   selectedLevel: CourseLevel;
+  onBack?: () => void;
 }
 
 export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
   speechRate,
   onAwardXpAndGems,
-  selectedLevel
+  selectedLevel,
+  onBack
 }) => {
   const filteredItems = VOICE_PRACTICE_ITEMS.filter((i) => i.level === selectedLevel);
   const items = filteredItems.length > 0 ? filteredItems : VOICE_PRACTICE_ITEMS;
@@ -478,9 +609,21 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
   return (
     <div className="space-y-4 pb-24 max-w-lg mx-auto">
       
-      {/* Header with Viko Mascot */}
+      {/* Header with Viko Mascot & Back button */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
+          {onBack && (
+            <button
+              onClick={() => {
+                playSound('click');
+                onBack();
+              }}
+              className="p-2 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 transition-all cursor-pointer shadow-2xs active:scale-95 mr-1"
+              title="Quay lại Trung tâm Luyện tập"
+            >
+              <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
+            </button>
+          )}
           <VikoMascot size="sm" mood="cheering" />
           <div>
             <h2 className="text-base font-black text-slate-900 leading-tight">
@@ -570,17 +713,28 @@ export const VikodaVoiceCoach: React.FC<VikodaVoiceCoachProps> = ({
           />
 
           {isRecording ? (
-            <div className="space-y-1 animate-in fade-in">
+            <div className="space-y-2 animate-in fade-in">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-black">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                <span>Micro đang nghe! Hãy đọc to câu ở trên</span>
+                <span>Micro đang nghe... Hãy đọc to câu ở trên!</span>
               </div>
+              {spokenText && !spokenText.includes('Đang lắng nghe') && (
+                <div className="p-2.5 rounded-2xl bg-sky-50 border border-sky-200 text-xs font-bold text-[#0070D1] animate-in fade-in max-w-sm mx-auto">
+                  <span className="text-[10px] text-slate-500 uppercase block font-black mb-0.5">AI đang nghe bạn đọc:</span>
+                  <p className="font-semibold text-slate-900">"{spokenText}"</p>
+                </div>
+              )}
               <p className="text-[11px] text-slate-500 font-medium">
-                ⚡ Đọc xong hệ thống sẽ <strong>tự động chấm điểm và phân tích âm</strong>
+                ⚡ Đọc xong dừng lại 1-2 giây hệ thống sẽ <strong>tự động chấm điểm</strong> (hoặc bấm lại micro để chốt bài)
               </p>
             </div>
           ) : (
             <div className="space-y-2">
+              {!isRecording && score === null && spokenText && !spokenText.includes('Đang lắng nghe') && (
+                <div className="p-2.5 rounded-2xl bg-amber-50 border border-amber-200 text-xs font-bold text-amber-900 animate-in fade-in max-w-sm mx-auto">
+                  <span>{spokenText}</span>
+                </div>
+              )}
               <p className="text-xs text-slate-500 font-bold text-center">
                 Bấm micro và đọc to câu trên (Nói xong tự động chấm điểm)
               </p>

@@ -80,8 +80,21 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
   const daysOfWeek = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
   const todayDayIndex = (new Date().getDay() + 6) % 7; // 0 for Mon, 6 for Sun
 
-  // Quests progress simulations based on actual state
-  const quest1Progress = Math.min(100, Math.round(((stats.xp % 50) / 30) * 100));
+  // Quests progress simulations based on actual state and Admin dailyXpGoal
+  const dailyGoalTarget = (() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const raw = localStorage.getItem('vikoda_admin_training_settings_v1');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed.dailyXpGoal) return Number(parsed.dailyXpGoal);
+        }
+      } catch (e) {}
+    }
+    return 50;
+  })();
+
+  const quest1Progress = Math.min(100, Math.round(((stats.xp % dailyGoalTarget) / dailyGoalTarget) * 100));
   const quest2Progress = stats.completedNodeIds.length > 0 ? 100 : 0;
   const quest3Progress = stats.arenaStats?.matchesPlayed ? Math.min(100, stats.arenaStats.matchesPlayed * 50) : 0;
 
@@ -164,9 +177,9 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
         </div>
 
         <div className="mt-2.5 pt-2 border-t border-white/20 flex items-center justify-between text-[11px] font-bold text-sky-100">
-          <span>IELTS: <strong className="text-emerald-300">Band {estimatedIelts}</strong></span>
+          <span>Lộ trình: <strong className="text-amber-300">100 Bài • 700+ Câu</strong></span>
           <span className="flex items-center gap-0.5 text-amber-300 group-hover:translate-x-0.5 transition-transform">
-            <span>Chi tiết</span>
+            <span>Năng lực ➜</span>
             <ChevronRight className="w-3.5 h-3.5" />
           </span>
         </div>
@@ -239,8 +252,8 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
         {/* Quest 1 */}
         <div className="space-y-1">
           <div className="flex items-center justify-between text-xs font-bold text-slate-700">
-            <span className="truncate">Kiếm 20 XP hôm nay</span>
-            <span className="text-[10px] text-slate-400 shrink-0">+{stats.xp % 20}/20 XP</span>
+            <span className="truncate">Kiếm {dailyGoalTarget} XP hôm nay</span>
+            <span className="text-[10px] text-slate-400 shrink-0">+{stats.xp % dailyGoalTarget}/{dailyGoalTarget} XP</span>
           </div>
           <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
             <div 
@@ -279,7 +292,7 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
         </div>
       </div>
 
-      {/* 4. COMPANY LEAGUE RANK WIDGET (BẢNG THI ĐUA DOANH NGHIỆP) */}
+      {/* 4. COMPANY LEAGUE RANK WIDGET (BẢNG THI ĐUA DOANH NGHIỆP THEO CẤP ĐỘ CEFR) */}
       <div className="bg-gradient-to-br from-indigo-50 to-sky-50 p-4 rounded-3xl border-2 border-indigo-200 border-b-4 border-b-indigo-300 shadow-xs space-y-2.5">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -287,18 +300,21 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
               🏆
             </div>
             <div>
-              <div className="text-xs font-black text-indigo-950 uppercase tracking-wide">
-                Bảng Vàng Tuần
+              <div className="text-xs font-black text-indigo-950 uppercase tracking-wide flex items-center gap-1.5">
+                <span>Bảng Vàng Thi Đua</span>
+                <span className="text-[9px] px-1.5 py-0.2 rounded-md bg-indigo-200 text-indigo-900 font-extrabold">
+                  {currentTier.cefr}
+                </span>
               </div>
-              <div className="text-[10px] text-indigo-700 font-bold">
-                {profile.department || 'Phòng Kinh Doanh'}
+              <div className="text-[10px] text-indigo-700 font-bold truncate max-w-[150px]">
+                {currentTier.title}
               </div>
             </div>
           </div>
         </div>
 
         <p className="text-xs text-slate-600 leading-snug">
-          Bạn đang xếp hạng <span className="font-black text-indigo-700">#3</span> trong bảng thi đua nội bộ tuần này!
+          Bạn đang tranh tài tại <span className="font-black text-indigo-700">Bảng {currentTier.cefr}</span> cùng các đồng nghiệp cùng năng lực!
         </p>
 
         <button
@@ -308,7 +324,7 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
           }}
           className="w-full py-2 rounded-xl bg-white hover:bg-indigo-50 text-indigo-900 font-black text-xs border border-indigo-200 shadow-2xs active:scale-98 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
         >
-          <span>Xem Bảng Xếp Hạng</span>
+          <span>Xem Bảng Xếp Hạng {currentTier.cefr}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </button>
       </div>

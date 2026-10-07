@@ -8,9 +8,6 @@ import { VikodaHeader } from './components/VikodaHeader';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { DuolingoHome } from './components/DuolingoHome';
 import { VikodaVoiceCoach } from './components/VikodaVoiceCoach';
-import { VikodaPitchDeck } from './components/VikodaPitchDeck';
-import { BuyerObjectionsBattle } from './components/BuyerObjectionsBattle';
-import { ExportEmailStudio } from './components/ExportEmailStudio';
 import { AIAssistantModal } from './components/AIAssistantModal';
 import { EmployeeProfileModal } from './components/EmployeeProfileModal';
 import { LeaderboardModal } from './components/LeaderboardModal';
@@ -30,7 +27,7 @@ import { PracticeHub } from './components/PracticeHub';
 import { useDeviceDetect } from './hooks/useDeviceDetect';
 import { LaptopSidebarNav } from './components/laptop/LaptopSidebarNav';
 import { LaptopRightPanel } from './components/laptop/LaptopRightPanel';
-import { GamificationState, EmployeeProfile, MistakeVaultItem, PvPArenaStats, StudyPlannerSettings } from './types';
+import { GamificationState, EmployeeProfile, MistakeVaultItem, PvPArenaStats, StudyPlannerSettings, ContinuousPracticeStats } from './types';
 import { CourseLevel } from './data/curriculumData';
 import { playSound } from './services/soundEffects';
 import { 
@@ -128,23 +125,38 @@ export default function App() {
   // Gamification state: XP, Gems, Energy, Streak, Completed Nodes, Highest Drill Score
   const [gamificationState, setGamificationState] = useState<GamificationState>(() => {
     if (typeof window !== 'undefined') {
+      // 1. Check globally saved state first
+      const globalSaved = localStorage.getItem(STORAGE_KEY_VIKODA_STATS);
+      if (globalSaved) {
+        try {
+          const parsed = JSON.parse(globalSaved);
+          if (parsed && typeof parsed.xp === 'number') {
+            return parsed;
+          }
+        } catch (e) {}
+      }
+
+      // 2. Check scoped session stats
       const session = getPersistedSession();
       if (session) {
         const savedScopedStats = localStorage.getItem(`vikoda_stats_${session.userId}`);
         if (savedScopedStats) {
           try {
-            return JSON.parse(savedScopedStats);
+            const parsed = JSON.parse(savedScopedStats);
+            if (parsed && typeof parsed.xp === 'number') {
+              return parsed;
+            }
           } catch (e) {}
         }
         return {
-          xp: session.xp || 200,
-          gems: session.gems || 50,
+          xp: session.xp !== undefined ? session.xp : 200,
+          gems: session.gems !== undefined ? session.gems : 50,
           energy: 5,
-          streakDays: session.streak || 1,
+          streakDays: session.streak !== undefined ? session.streak : 1,
           rank: 'Chiến Binh Vikoda',
-          completedNodeIds: session.completedLessons && session.completedLessons.length > 0 ? session.completedLessons : ['unit-1'],
+          completedNodeIds: session.completedLessons ? session.completedLessons : [],
           lastActiveDate: new Date().toISOString().split('T')[0],
-          highestDrillScore: session.highestDrillScore || 200
+          highestDrillScore: session.highestDrillScore !== undefined ? session.highestDrillScore : 0
         };
       }
     }
@@ -175,8 +187,8 @@ export default function App() {
         department: session.department || 'Phòng Kinh Doanh & Xuất Khẩu',
         title: session.role === 'admin' ? '👑 Quản Trị Viên Hệ Thống' : 'Chuyên Viên Kinh Doanh',
         avatarUrl: session.avatarUrl || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-        highestDrillScore: session.highestDrillScore || 200,
-        totalPracticeCount: 1,
+        highestDrillScore: session.highestDrillScore !== undefined ? session.highestDrillScore : 0,
+        totalPracticeCount: (session as any).totalPracticeCount !== undefined ? (session as any).totalPracticeCount : 0,
         isLoggedIn: true,
         isAdmin: isUserAdmin(session.email),
       };
@@ -364,12 +376,40 @@ export default function App() {
       [unitId]: Math.max(gamificationState.unitStars?.[unitId] || 0, starsEarned),
     };
 
+    // Rank progression based on 100 units curriculum
     let newRank = gamificationState.rank;
-    if (updatedNodes.length >= 8) {
+    if (updatedNodes.length >= 80) {
+      newRank = 'Lãnh Đạo Xuất Sắc';
+    } else if (updatedNodes.length >= 60) {
+      newRank = 'Bậc Thầy Đàm Phán';
+    } else if (updatedNodes.length >= 40) {
       newRank = 'Đại Sứ Toàn Cầu';
-    } else if (updatedNodes.length >= 4) {
+    } else if (updatedNodes.length >= 20) {
       newRank = 'Chiến Binh Vikoda';
+    } else {
+      newRank = 'Tân Binh Đảnh Thạnh';
     }
+
+    const currentPractice = gamificationState.practiceStats || {
+      totalPracticeCount: profile.totalPracticeCount || 0,
+      repetitionCount: 0,
+      speakingExercisesCompleted: 0,
+      listeningExercisesCompleted: 0,
+      perfectThreeStarUnits: 0,
+      totalDrillsCompleted: 0,
+      totalVoiceSessions: 0,
+      lastPracticeTimestamp: Date.now(),
+    };
+
+    const newPracticeStats: ContinuousPracticeStats = {
+      ...currentPractice,
+      totalPracticeCount: currentPractice.totalPracticeCount + 1,
+      repetitionCount: currentPractice.repetitionCount + (isNew ? 0 : 1),
+      perfectThreeStarUnits: Object.values(updatedUnitStars).filter((s) => s === 3).length,
+      speakingExercisesCompleted: currentPractice.speakingExercisesCompleted + 2,
+      listeningExercisesCompleted: currentPractice.listeningExercisesCompleted + 1,
+      lastPracticeTimestamp: Date.now(),
+    };
 
     const updatedState: GamificationState = {
       ...gamificationState,
@@ -378,10 +418,22 @@ export default function App() {
       rank: newRank,
       completedNodeIds: updatedNodes,
       unitStars: updatedUnitStars,
+      practiceStats: newPracticeStats,
     };
 
     saveGamificationState(updatedState);
-    if (starsEarned === 3) {
+
+    const updatedProf: EmployeeProfile = {
+      ...profile,
+      totalPracticeCount: newPracticeStats.totalPracticeCount,
+      practiceStats: newPracticeStats,
+    };
+    setProfile(updatedProf);
+    localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(updatedProf));
+
+    if (!isNew) {
+      showToast(`🔁 Ôn tập thành công: +${xpGain} XP! Lần luyện thứ ${newPracticeStats.totalPracticeCount} 🎯`);
+    } else if (starsEarned === 3) {
       showToast(`+${xpGain} XP • +${gemGain} 💎 Hoàn hảo 3/3 sao! 🌟`);
     } else {
       showToast(`+${xpGain} XP • +${gemGain} 💎 Đạt ${starsEarned}/3 sao. Luyện lại để lấy 3 sao nhé! ⭐`);
@@ -389,12 +441,41 @@ export default function App() {
   };
 
   const handleAwardXpAndGems = (xpGain: number, gemGain: number) => {
+    const currentPractice = gamificationState.practiceStats || {
+      totalPracticeCount: profile.totalPracticeCount || 0,
+      repetitionCount: 0,
+      speakingExercisesCompleted: 0,
+      listeningExercisesCompleted: 0,
+      perfectThreeStarUnits: 0,
+      totalDrillsCompleted: 0,
+      totalVoiceSessions: 0,
+      lastPracticeTimestamp: Date.now(),
+    };
+
+    const newPracticeStats: ContinuousPracticeStats = {
+      ...currentPractice,
+      totalPracticeCount: currentPractice.totalPracticeCount + 1,
+      totalVoiceSessions: currentPractice.totalVoiceSessions + 1,
+      speakingExercisesCompleted: currentPractice.speakingExercisesCompleted + 1,
+      lastPracticeTimestamp: Date.now(),
+    };
+
     const updatedState: GamificationState = {
       ...gamificationState,
       xp: gamificationState.xp + xpGain,
       gems: gamificationState.gems + gemGain,
+      practiceStats: newPracticeStats,
     };
     saveGamificationState(updatedState);
+
+    const updatedProf: EmployeeProfile = {
+      ...profile,
+      totalPracticeCount: newPracticeStats.totalPracticeCount,
+      practiceStats: newPracticeStats,
+    };
+    setProfile(updatedProf);
+    localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(updatedProf));
+
     showToast(`+${xpGain} XP • +${gemGain} 💎 Phát âm rất chuẩn!`);
   };
 
@@ -402,18 +483,38 @@ export default function App() {
     const isNewBest = score > (gamificationState.highestDrillScore || 0);
     const updatedBest = Math.max(score, gamificationState.highestDrillScore || 0);
 
+    const currentPractice = gamificationState.practiceStats || {
+      totalPracticeCount: profile.totalPracticeCount || 0,
+      repetitionCount: 0,
+      speakingExercisesCompleted: 0,
+      listeningExercisesCompleted: 0,
+      perfectThreeStarUnits: 0,
+      totalDrillsCompleted: 0,
+      totalVoiceSessions: 0,
+      lastPracticeTimestamp: Date.now(),
+    };
+
+    const newPracticeStats: ContinuousPracticeStats = {
+      ...currentPractice,
+      totalPracticeCount: currentPractice.totalPracticeCount + 1,
+      totalDrillsCompleted: currentPractice.totalDrillsCompleted + 1,
+      lastPracticeTimestamp: Date.now(),
+    };
+
     const updatedState: GamificationState = {
       ...gamificationState,
       xp: gamificationState.xp + xpGain,
       gems: gamificationState.gems + gemGain,
       highestDrillScore: updatedBest,
+      practiceStats: newPracticeStats,
     };
     saveGamificationState(updatedState);
 
     const updatedProf: EmployeeProfile = {
       ...profile,
       highestDrillScore: updatedBest,
-      totalPracticeCount: (profile.totalPracticeCount || 0) + 1,
+      totalPracticeCount: newPracticeStats.totalPracticeCount,
+      practiceStats: newPracticeStats,
     };
     setProfile(updatedProf);
     localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(updatedProf));
@@ -531,14 +632,6 @@ export default function App() {
             playSound('click');
             setActiveTab('speaking');
           }}
-          onGoToPitchDeck={() => {
-            playSound('click');
-            setActiveTab('pitch');
-          }}
-          onGoToBattle={() => {
-            playSound('click');
-            setActiveTab('battle');
-          }}
           onOpenEndlessDrill={() => {
             playSound('click');
             setIsEndlessDrillOpen(true);
@@ -597,55 +690,6 @@ export default function App() {
             playSound('click');
             setActiveTab('speaking');
           }}
-          onGoToPitchDeck={() => {
-            playSound('click');
-            setActiveTab('pitch');
-          }}
-          onGoToBuyerBattle={() => {
-            playSound('click');
-            setActiveTab('battle');
-          }}
-          onGoToEmailStudio={() => {
-            playSound('click');
-            setActiveTab('email');
-          }}
-          onOpenSOS={() => {
-            playSound('click');
-            setIsSOSModalOpen(true);
-          }}
-          onOpenCommute={() => {
-            playSound('click');
-            setIsCommuteModalOpen(true);
-          }}
-          onOpenSearch={() => {
-            playSound('click');
-            setIsSearchModalOpen(true);
-          }}
-          onOpenPlacementTest={() => {
-            playSound('click');
-            setIsPlacementTestOpen(true);
-          }}
-          onOpenProfile={() => {
-            playSound('click');
-            setProfileModalTab('proficiency');
-            setIsProfileModalOpen(true);
-          }}
-        />
-      )}
-
-      {/* SUB-TAB: VIKOVOICE AI (Pronunciation Coach) */}
-      {activeTab === 'speaking' && (
-        <VikodaVoiceCoach
-          speechRate={speechRate}
-          onAwardXpAndGems={handleAwardXpAndGems}
-          selectedLevel={selectedLevel}
-        />
-      )}
-
-      {/* TAB 3: VIKODA PITCH DECK & SIMULATOR */}
-      {activeTab === 'pitch' && (
-        <VikodaPitchDeck 
-          speechRate={speechRate} 
           onOpenPitchSimulator={() => {
             playSound('click');
             setIsPitchSimulatorOpen(true);
@@ -653,17 +697,17 @@ export default function App() {
         />
       )}
 
-      {/* TAB 4: BUYER OBJECTIONS BATTLE (Đấu Trí Đối Tác) */}
-      {activeTab === 'battle' && (
-        <BuyerObjectionsBattle
+      {/* DEEP PRACTICE: VIKOVOICE AI (Pronunciation Coach) */}
+      {activeTab === 'speaking' && (
+        <VikodaVoiceCoach
           speechRate={speechRate}
           onAwardXpAndGems={handleAwardXpAndGems}
+          selectedLevel={selectedLevel}
+          onBack={() => {
+            playSound('click');
+            setActiveTab('practice');
+          }}
         />
-      )}
-
-      {/* TAB 5: EMAIL STUDIO (Mẫu Thư Xuất Khẩu & Công Sở) */}
-      {activeTab === 'email' && (
-        <ExportEmailStudio speechRate={speechRate} />
       )}
     </>
   );
@@ -884,6 +928,10 @@ export default function App() {
         stats={gamificationState}
         initialTab={profileModalTab}
         onLogout={handleLogout}
+        onOpenAdmin={() => {
+          playSound('click');
+          setIsAdminPortalOpen(true);
+        }}
         onOpenPlacementTest={() => {
           setIsProfileModalOpen(false);
           setIsPlacementTestOpen(true);
@@ -957,19 +1005,50 @@ export default function App() {
         currentUserProfile={profile}
         currentUserStats={gamificationState}
         onResetUserProgress={(targetEmail) => {
-          if (targetEmail.toLowerCase() === profile.email.toLowerCase() || (currentUserProfile && targetEmail.toLowerCase() === currentUserProfile.email?.toLowerCase())) {
+          const cleanTarget = targetEmail.toLowerCase().trim();
+          const isMe = cleanTarget === profile.email.toLowerCase().trim() || (currentUserProfile && cleanTarget === currentUserProfile.email?.toLowerCase().trim());
+          if (isMe && currentUserProfile) {
+            const now = Date.now();
             const resetStats: GamificationState = {
               xp: 0,
               gems: 0,
               energy: 5,
               streakDays: 0,
-              rank: 'Chiến Binh Vikoda',
+              rank: 'Tân Binh Đảnh Thạnh',
               completedNodeIds: [],
               lastActiveDate: new Date().toISOString().split('T')[0],
               highestDrillScore: 0,
+              practiceStats: {
+                totalPracticeCount: 0,
+                repetitionCount: 0,
+                speakingExercisesCompleted: 0,
+                listeningExercisesCompleted: 0,
+                perfectThreeStarUnits: 0,
+                totalDrillsCompleted: 0,
+                totalVoiceSessions: 0,
+                lastPracticeTimestamp: now,
+              }
             };
             setGamificationState(resetStats);
+            setProfile(prev => ({ ...prev, highestDrillScore: 0, totalPracticeCount: 0 }));
+            saveGamificationStateOffline(resetStats, currentUserProfile.userId);
             localStorage.setItem(STORAGE_KEY_VIKODA_STATS, JSON.stringify(resetStats));
+            localStorage.setItem(`vikoda_stats_${currentUserProfile.userId}`, JSON.stringify(resetStats));
+            const updatedUserProf = {
+              ...profile,
+              highestDrillScore: 0,
+              totalPracticeCount: 0,
+            };
+            localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(updatedUserProf));
+            persistSession({
+              ...currentUserProfile,
+              xp: 0,
+              gems: 0,
+              streak: 0,
+              completedLessons: [],
+              highestDrillScore: 0,
+              updatedAt: now,
+            });
             showToast('⚠️ Admin đã reset toàn bộ tiến độ của tài khoản này về 0 để thi lại.');
           } else {
             showToast(`✅ Đã reset toàn bộ tiến độ của tài khoản ${targetEmail} về 0.`);

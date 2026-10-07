@@ -20,6 +20,7 @@ import {
 import { PvPArenaStats, EmployeeProfile } from '../types';
 import { playSound } from '../services/soundEffects';
 import { playSpeech } from '../services/speechService';
+import { getRandomArenaPvPQuestions } from '../data/arenaQuestionPool';
 
 interface PvPArenaModalProps {
   isOpen: boolean;
@@ -69,7 +70,7 @@ const VIKODA_RIVALS: RivalProfile[] = [
     name: 'Nguyễn Thu Trang',
     title: 'Brand Manager',
     dept: 'Phòng Tiếp Thị & Thương Hiệu',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&auto=format&fit=crop&q=80',
     elo: 1280,
     accuracy: 0.80,
     minResponseSec: 3,
@@ -80,7 +81,7 @@ const VIKODA_RIVALS: RivalProfile[] = [
     name: 'Phạm Quốc Duy',
     title: 'Key Account Manager',
     dept: 'Kênh Khách Sạn & Resort HORECA',
-    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150',
+    avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&auto=format&fit=crop&q=80',
     elo: 1340,
     accuracy: 0.85,
     minResponseSec: 2.5,
@@ -91,7 +92,7 @@ const VIKODA_RIVALS: RivalProfile[] = [
     name: 'Lê Hoàng Yến',
     title: 'Chuyên Viên Xuất Khẩu',
     dept: 'Phòng Kinh Doanh Quốc Tế',
-    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150',
+    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&auto=format&fit=crop&q=80',
     elo: 1420,
     accuracy: 0.88,
     minResponseSec: 2,
@@ -102,7 +103,7 @@ const VIKODA_RIVALS: RivalProfile[] = [
     name: 'Vũ Minh Quân',
     title: 'Giám Sát Vận Hành',
     dept: 'Nhà Máy Mỏ Khoáng Đảnh Thạnh',
-    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150',
+    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&auto=format&fit=crop&q=80',
     elo: 1190,
     accuracy: 0.75,
     minResponseSec: 3.5,
@@ -113,7 +114,7 @@ const VIKODA_RIVALS: RivalProfile[] = [
     name: 'Trần Bích Phương',
     title: 'Chuyên Viên Kiểm Định QC',
     dept: 'Phòng Quản Lý Chất Lượng',
-    avatar: 'https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=150',
+    avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&auto=format&fit=crop&q=80',
     elo: 1310,
     accuracy: 0.82,
     minResponseSec: 3,
@@ -391,28 +392,13 @@ export const PvPArenaModal: React.FC<PvPArenaModalProps> = ({
     setSelectedRival(targetRival);
     setGameState('matchmaking');
 
-    // Pick 5 questions and pre-shuffle options once with accurate correctIndex
-    const shuffled = [...ARENA_BATTLE_QUESTIONS]
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 5)
-      .map((q) => {
-        const correctText = q.options[q.correctIndex];
-        const optsCopy = [...q.options];
-        for (let i = optsCopy.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [optsCopy[i], optsCopy[j]] = [optsCopy[j], optsCopy[i]];
-        }
-        return {
-          ...q,
-          options: optsCopy,
-          correctIndex: optsCopy.indexOf(correctText),
-        };
-      });
-    setMatchQuestions(shuffled);
+    // Pick 5 dynamic questions from the full 700 curriculum questions pool
+    const selectedQuestions = getRandomArenaPvPQuestions(5);
+    setMatchQuestions(selectedQuestions);
 
     setTimeout(() => {
       playSound('success');
-      startBattle(shuffled);
+      startBattle(selectedQuestions);
     }, 2200);
   };
 
@@ -841,10 +827,10 @@ export const PvPArenaModal: React.FC<PvPArenaModalProps> = ({
 
             {/* Question Card */}
             <div className="bg-gradient-to-br from-indigo-50/70 to-sky-50/40 rounded-2xl p-6 border-2 border-indigo-100 shadow-xs space-y-2">
-              <h3 className="text-xl md:text-2xl font-black text-slate-900 leading-snug">
+              <h3 className="text-xl md:text-2xl font-black text-slate-900 leading-snug break-words">
                 {currentQ.promptEn}
               </h3>
-              <p className="text-sm md:text-base text-slate-600 font-medium">
+              <p className="text-sm md:text-base text-slate-600 font-medium break-words">
                 👉 {currentQ.promptVi}
               </p>
             </div>
@@ -878,7 +864,7 @@ export const PvPArenaModal: React.FC<PvPArenaModalProps> = ({
                     <span className="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center font-black text-sm shrink-0 border border-slate-300">
                       {idx + 1}
                     </span>
-                    <span className="flex-1 pt-0.5 leading-relaxed">{opt}</span>
+                    <span className="flex-1 min-w-0 pt-0.5 leading-relaxed break-words">{opt}</span>
                     
                     {/* Status badges */}
                     {isRoundAnswered && isCorrect && (

@@ -71,8 +71,8 @@ export const DailyActionCoach: React.FC<DailyActionCoachProps> = ({
   const pitchMeter = Math.min(96, 42 + completedCount * 4 + (selectedLevel === 'C2' ? 25 : 10));
 
   // Determine current Milestone Title
-  let milestoneRank = 'Tân Binh Đón Khách';
-  let nextMilestoneGoal = 'Đại Sứ Khoáng Kiềm (Cần thêm 3 bài)';
+  let milestoneRank = '🌱 Nhập Môn Văn Phòng (A1)';
+  let nextMilestoneGoal = 'Tự tin phản xạ công sở (Cần thêm 3 bài)';
   let milestonePercent = 25;
   if (completedCount >= 12 || selectedLevel === 'C2') {
     milestoneRank = 'Bậc Thầy Bản Ngữ & Dealmaker';
@@ -83,7 +83,7 @@ export const DailyActionCoach: React.FC<DailyActionCoachProps> = ({
     nextMilestoneGoal = 'Bậc Thầy Bản Ngữ (Cần xong Cửa C2)';
     milestonePercent = 75;
   } else if (completedCount >= 4 || selectedLevel === 'A2-B1') {
-    milestoneRank = 'Đại Sứ Khoáng Đảnh Thạnh';
+    milestoneRank = 'Đại Sứ Thương Hiệu Vikoda';
     nextMilestoneGoal = 'Chuyên Gia Đàm Phán (Cần xong Cửa B1)';
     milestonePercent = 50;
   }

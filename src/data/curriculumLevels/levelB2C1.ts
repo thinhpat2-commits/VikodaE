@@ -315,7 +315,7 @@ export const LEVEL_B2C1_UNITS: UnitLesson[] = [
           'Only local handwritten notes from friends.'
         ],
         correctIndex: 0,
-        explanation: 'Trang 25 Company Profile: Vikoda đạt đầy đủ ISO 9001:2015, ISO 14001, ISO 22000, HACCP, FDA (Mỹ) và Halal (thị trường Trung Đông).',
+        explanation: 'Hồ sơ năng lực quốc tế: Vikoda đạt đầy đủ ISO 9001:2015, ISO 14001, ISO 22000, HACCP, FDA (Mỹ) và Halal (thị trường Trung Đông).',
         whyWrong: 'Chứng chỉ FDA là giấy thông hành bắt buộc để lưu hành đồ uống tại thị trường Hoa Kỳ.',
         crucialNote: 'Halal mở toang cánh cửa xuất khẩu sang các quốc gia Hồi giáo giàu có như UAE, Dubai, Indonesia, Malaysia.',
         memoryHook: 'BỘ TỨ CHỨNG CHỈ: ISO + HACCP + FDA + HALAL.'
@@ -373,7 +373,7 @@ export const LEVEL_B2C1_UNITS: UnitLesson[] = [
           'By refusing to answer Japanese inspection letters.'
         ],
         correctIndex: 0,
-        explanation: 'Trang 20 Company Profile: IMAI Ltd. là tập đoàn nhập khẩu uy tín của Nhật Bản từ năm 1953 với hơn 70 năm kinh nghiệm phân phối chuỗi siêu thị lớn.',
+        explanation: 'Đối tác xuất khẩu chiến lược: IMAI Ltd. là tập đoàn nhập khẩu uy tín của Nhật Bản từ năm 1953 với hơn 70 năm kinh nghiệm phân phối chuỗi siêu thị lớn.',
         whyWrong: 'Nhật Bản là thị trường kiểm định khắt khe bậc nhất thế giới; việc xuất khẩu thành công sang Nhật là chứng chỉ danh giá nhất của Vikoda.',
         crucialNote: 'Các sản phẩm xuất sang Nhật: Sparkling Khoáng Chanh và Sparkling Khoáng Chanh Muối.',
         memoryHook: 'EXPORT TO JAPAN = Bảo chứng vàng chất lượng mỏ Đảnh Thạnh.'
@@ -547,7 +547,7 @@ export const LEVEL_B2C1_UNITS: UnitLesson[] = [
           'Shut up, I will not talk to you anymore.'
         ],
         correctIndex: 0,
-        explanation: 'Trang 11 Cẩm nang Tiếng Anh Doanh Nghiệp: "I see your point, but I am afraid..." ghi nhận quan điểm của họ trước khi nhẹ nhàng đưa ra góc nhìn khác.',
+        explanation: 'Kỹ năng ngoại giao chuẩn mực: "I see your point, but I am afraid..." ghi nhận quan điểm của họ trước khi nhẹ nhàng đưa ra góc nhìn khác.',
         whyWrong: 'Nói thẳng "You are wrong" là thảm họa giao tiếp phương Tây, đẩy cuộc đàm phán vào bế tắc (Deadlock).',
         crucialNote: 'Kỹ năng làm mềm lời phản bác (Softening Criticism) giữ thể diện cho đối tác.',
         memoryHook: 'I see your point, but... = Tôi hiểu ý anh, nhưng...'
@@ -561,7 +561,7 @@ export const LEVEL_B2C1_UNITS: UnitLesson[] = [
         audioText: 'Sorry to interrupt, but could I make a brief point here?',
         phonetics: '/ˈsɒri tuː ˌɪntəˈrʌpt, bʌt kʊd aɪ meɪk ə briːf pɔɪnt hɪər/',
         wordPool: ['Sorry', 'to', 'interrupt,', 'but', 'could', 'I', 'make', 'a', 'brief', 'point', 'here?', 'stop', 'quiet'],
-        explanation: 'Trang 10 Cẩm nang Cambridge: "Could I make a brief point here?" là cách xen ngang chuyên nghiệp được tôn trọng nhất.',
+        explanation: 'Kỹ năng họp chuẩn Cambridge: "Could I make a brief point here?" là cách xen ngang chuyên nghiệp được tôn trọng nhất.',
         whyWrong: 'Thể hiện sự tôn trọng không gian thảo luận chung của ban giám đốc.',
         crucialNote: 'Dùng từ "brief point" ngầm hiểu bạn sẽ phát biểu súc tích, không làm mất thời gian.',
         memoryHook: 'Make a brief point = Nêu một ý kiến ngắn gọn đắt giá.'

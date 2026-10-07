@@ -12,9 +12,13 @@ import {
   MessageSquare,
   Award,
   ShieldCheck,
-  Star
+  Star,
+  TrendingUp,
+  Percent,
+  Check,
+  AlertTriangle
 } from 'lucide-react';
-import { playSpeech, startSpeechRecognition, finishSpeechRecognition, stopSpeech } from '../services/speechService';
+import { playSpeech, startSpeechRecognition, finishSpeechRecognition, stopSpeech, evaluatePronunciationDetails } from '../services/speechService';
 import { playSound } from '../services/soundEffects';
 import { CompanyEmblem } from './brand/VikodaLogos';
 
@@ -25,6 +29,27 @@ interface PitchSimulatorModalProps {
   onAwardXpAndGems: (xp: number, gems: number) => void;
 }
 
+interface NegotiationStrategyOption {
+  id: string;
+  strategyType: 'win-win' | 'weak' | 'rigid';
+  strategyLabel: string;
+  textEn: string;
+  textVi: string;
+  score: number;
+  trustChange: number;
+  marginChange: number;
+  executiveFeedback: string;
+}
+
+interface BuyerRound {
+  roundNumber: number;
+  roundTitle: string;
+  buyerQuestionEn: string;
+  buyerQuestionVi: string;
+  buyerAudio: string;
+  options: NegotiationStrategyOption[];
+}
+
 interface BuyerPersona {
   id: string;
   name: string;
@@ -33,23 +58,7 @@ interface BuyerPersona {
   flag: string;
   avatar: string;
   objective: string;
-  rounds: {
-    roundNumber: number;
-    roundTitle: string;
-    buyerQuestionEn: string;
-    buyerQuestionVi: string;
-    buyerAudio: string;
-    suggestedPitchEn: string;
-    suggestedPitchVi: string;
-    options: {
-      id: string;
-      textEn: string;
-      textVi: string;
-      isBest: boolean;
-      score: number;
-      feedback: string;
-    }[];
-  }[];
+  rounds: BuyerRound[];
 }
 
 const BUYER_PERSONAS: BuyerPersona[] = [
@@ -59,33 +68,48 @@ const BUYER_PERSONAS: BuyerPersona[] = [
     role: 'Procurement Director',
     company: 'Tokyo Organic Wellness Corp (Japan)',
     flag: '🇯🇵',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?w=200&auto=format&fit=crop&q=80',
     objective: 'Tìm nguồn nước kiềm thiên nhiên đóng chai cao cấp cho chuỗi 200 siêu thị hữu cơ tại Tokyo.',
     rounds: [
       {
         roundNumber: 1,
-        roundTitle: 'Màn Chào Hỏi & Giới Thiệu 30 Giây (The Elevator Hook)',
+        roundTitle: 'Màn Chào Hỏi & Định Vị Cốt Lõi (The 30s Strategic Hook)',
         buyerQuestionEn: 'Good morning. We see many mineral waters in Southeast Asia. What makes Vikoda fundamentally different?',
         buyerQuestionVi: 'Chào bạn. Thị trường Đông Nam Á có rất nhiều loại nước khoáng. Điều gì tạo nên sự khác biệt cốt lõi của Vikoda?',
         buyerAudio: 'Good morning. We see many mineral waters in Southeast Asia. What makes Vikoda fundamentally different?',
-        suggestedPitchEn: 'Vikoda is Vietnam’s rare natural alkaline mineral water with a natural pH of 9.0, bottled directly at our 1957 volcanic source at 72 degrees Celsius.',
-        suggestedPitchVi: 'Vikoda là nước khoáng kiềm thiên nhiên hiếm có với độ pH 9.0 tự nhiên, đóng chai trực tiếp tại nguồn mỏ núi lửa năm 1957 ở 72 độ C.',
         options: [
           {
-            id: 'k1-best',
+            id: 'k1-winwin',
+            strategyType: 'win-win',
+            strategyLabel: 'Đỉnh Cao Ngoại Giao (Win-Win Value)',
             textEn: 'Vikoda is Vietnam’s rare natural alkaline mineral water with an innate pH of 9.0, bottled directly at our 1957 volcanic source at 72°C with zero chemical electrolysis.',
             textVi: 'Vikoda là nước khoáng kiềm thiên nhiên quý hiếm với pH 9.0 tự nhiên, đóng chai trực tiếp tại nguồn mỏ 1957 ở 72°C mà không cần điện phân.',
-            isBest: true,
             score: 100,
-            feedback: 'Xuất sắc! Đánh trúng tâm lý người Nhật coi trọng tính "nguyên bản thiên nhiên" (Natural & No artificial electrolysis).'
+            trustChange: 25,
+            marginChange: 5,
+            executiveFeedback: 'Xuất sắc! Đánh trúng tâm lý người Nhật coi trọng tính "nguyên bản thiên tạo" (Innate & No Artificial Electrolysis).'
           },
           {
-            id: 'k1-mid',
-            textEn: 'Our water is very delicious and we sell it very cheaply in Vietnam.',
-            textVi: 'Nước của chúng tôi uống rất ngon và bán rất rẻ ở Việt Nam.',
-            isBest: false,
+            id: 'k1-weak',
+            strategyType: 'weak',
+            strategyLabel: 'Nhượng Bộ Giá Sớm (Weak Concession)',
+            textEn: 'We offer very competitive wholesale prices that are substantially cheaper than Japanese domestic mineral water.',
+            textVi: 'Chúng tôi cung cấp mức giá bán sỉ rất cạnh tranh, rẻ hơn đáng kể so với nước khoáng nội địa Nhật Bản.',
             score: 50,
-            feedback: 'Quá phổ thông! Khách Nhật tìm kiếm giá trị sức khỏe và nguồn gốc di sản, không phải nước giá rẻ.'
+            trustChange: 5,
+            marginChange: -15,
+            executiveFeedback: 'Hạ thấp vị thế thương hiệu! Đưa giá rẻ ra đầu tiên khiến khách Nhật nghi ngờ chất lượng an toàn thực phẩm.'
+          },
+          {
+            id: 'k1-rigid',
+            strategyType: 'rigid',
+            strategyLabel: 'Phòng Thủ Cứng Nhắc (Rigid Posture)',
+            textEn: 'Our quality is certified by the Vietnamese government, so you do not need to compare us with other brands.',
+            textVi: 'Chất lượng của chúng tôi đã được chính phủ Việt Nam chứng nhận, ngài không cần phải so sánh với các nhãn hiệu khác.',
+            score: 30,
+            trustChange: -20,
+            marginChange: 0,
+            executiveFeedback: 'Thái độ cứng nhắc! Khách hàng quốc tế đòi hỏi dẫn chứng kiểm định khoa học chứ không chấp nhận mệnh lệnh.'
           }
         ]
       },
@@ -95,51 +119,81 @@ const BUYER_PERSONAS: BuyerPersona[] = [
         buyerQuestionEn: 'In Japan, ionized water loses its alkaline pH after 48 hours. How does Vikoda maintain pH 9.0 during ocean freight?',
         buyerQuestionVi: 'Ở Nhật, nước kiềm điện phân nhân tạo bị mất kiềm chỉ sau 48 giờ. Làm sao Vikoda giữ được pH 9.0 trong suốt quá trình vận chuyển đường biển?',
         buyerAudio: 'In Japan, ionized water loses its alkaline pH after 48 hours. How does Vikoda maintain pH 9.0 during ocean freight?',
-        suggestedPitchEn: 'Because our alkalinity comes from natural bicarbonate minerals from Mother Earth, Vikoda maintains a stable pH of 9.0 for up to three years.',
-        suggestedPitchVi: 'Vì độ kiềm của Vikoda kết tinh từ muối khoáng Bicarbonate tự nhiên trong lòng đất mẹ, nên độ pH 9.0 duy trì ổn định đến 3 năm.',
         options: [
           {
-            id: 'k2-best',
+            id: 'k2-winwin',
+            strategyType: 'win-win',
+            strategyLabel: 'Bác Học & Dẫn Chứng Khoa Học (Win-Win)',
             textEn: 'Because Vikoda’s alkalinity is naturally mineral-bonded from Mother Earth, our laboratory tests confirm a stable pH 9.0 for up to three full years across shipping temperatures.',
             textVi: 'Vì độ kiềm của Vikoda được khoáng hóa tự nhiên trong lòng đất mẹ, kiểm nghiệm thực tế khẳng định độ pH 9.0 duy trì bền bỉ suốt 3 năm bất chấp nhiệt độ vận chuyển.',
-            isBest: true,
             score: 100,
-            feedback: 'Hoàn hảo! Dập tắt ngay lo ngại về độ bền kiềm, giải thích rõ nguyên nhân "mineral-bonded".'
+            trustChange: 25,
+            marginChange: 5,
+            executiveFeedback: 'Hoàn hảo! Dập tắt ngay lo ngại về độ bền kiềm, giải thích rõ nguyên nhân "mineral-bonded" (liên kết muối khoáng tự nhiên).'
           },
           {
-            id: 'k2-mid',
-            textEn: 'We add some alkaline chemicals before closing the cap so it stays strong.',
-            textVi: 'Chúng tôi pha thêm hóa chất tạo kiềm trước khi đóng nắp để kiềm không bị mất.',
-            isBest: false,
-            score: 20,
-            feedback: 'Thảm họa! Vikoda cam kết 100% thiên nhiên, việc nói pha hóa chất sẽ làm mất hợp đồng ngay lập tức.'
+            id: 'k2-weak',
+            strategyType: 'weak',
+            strategyLabel: 'Chấp Nhận Rủi Ro Thay Khách (Weak Guarantee)',
+            textEn: 'If the pH drops below 9.0 during shipping, we will refund 100% of your order unconditionally without testing.',
+            textVi: 'Nếu độ pH giảm dưới 9.0 trong lúc vận chuyển, chúng tôi sẽ hoàn tiền 100% vô điều kiện mà không cần kiểm tra.',
+            score: 55,
+            trustChange: 10,
+            marginChange: -20,
+            executiveFeedback: 'Nhượng bộ tài chính nguy hiểm! Phải bảo vệ giá trị bằng kiểm định mẫu độc lập thay vì cam kết hoàn tiền tùy tiện.'
+          },
+          {
+            id: 'k2-rigid',
+            strategyType: 'rigid',
+            strategyLabel: 'Gạt Bỏ Nghi Vấn (Dismissive Tone)',
+            textEn: 'We have sold millions of bottles in Vietnam and nobody has ever questioned our pH stability before.',
+            textVi: 'Chúng tôi đã bán hàng triệu chai ở Việt Nam và chưa từng có ai thắc mắc về độ bền pH trước đây.',
+            score: 35,
+            trustChange: -15,
+            marginChange: 0,
+            executiveFeedback: 'Thiếu tính chuyên nghiệp B2B! Thị trường Nhật khắt khe về kỹ thuật, không thể trả lời kiểu cảm tính.'
           }
         ]
       },
       {
         roundNumber: 3,
-        roundTitle: 'Chốt Deal Hợp Tác (The Closing Ask & Logistics)',
+        roundTitle: 'Chốt Điều Kiện Hàng Mẫu & Đơn Thử Nghiệm (The Closing Protocol)',
         buyerQuestionEn: 'We are interested in testing this with our QA lab. What are your terms for sending samples and initial trial orders?',
         buyerQuestionVi: 'Chúng tôi rất hứng thú kiểm định mẫu tại phòng lab Tokyo. Điều kiện gửi hàng mẫu và đơn thử nghiệm ban đầu ra sao?',
         buyerAudio: 'We are interested in testing this with our QA lab. What are your terms for sending samples and initial trial orders?',
-        suggestedPitchEn: 'We are pleased to air-freight complimentary sample cartons with our certified lab reports, and we welcome your team to inspect our spring.',
-        suggestedPitchVi: 'Chúng tôi hân hạnh gửi tặng thùng mẫu qua đường hàng không kèm phiếu kiểm nghiệm vi sinh, và kính mời đoàn Nhật Bản thăm mỏ Đảnh Thạnh.',
         options: [
           {
-            id: 'k3-best',
+            id: 'k3-winwin',
+            strategyType: 'win-win',
+            strategyLabel: 'Ngoại Giao Cấp Cao & Thăm Mỏ (Win-Win)',
             textEn: 'We will dispatch complimentary sample cases via air freight today alongside our ISO and HACCP dossiers. We also warmly invite you to visit our Danh Thanh sanctuary.',
             textVi: 'Chúng tôi sẽ gửi ngay mẫu thử bằng đường hàng không hôm nay cùng bộ hồ sơ ISO và HACCP. Chúng tôi cũng nồng nhiệt mời ngài đến thăm mỏ Đảnh Thạnh.',
-            isBest: true,
             score: 100,
-            feedback: 'Đỉnh cao đàm phán! Mời khách sang thăm mỏ nước khoáng là đòn tâm lý mạnh nhất khẳng định sự minh bạch và đẳng cấp của Vikoda.'
+            trustChange: 30,
+            marginChange: 10,
+            executiveFeedback: 'Đỉnh cao đàm phán! Mời đối tác sang tận mỏ Đảnh Thạnh 220m là đòn tâm lý mạnh nhất tạo niềm tin sắt đá.'
           },
           {
-            id: 'k3-mid',
-            textEn: 'You must transfer 100,000 dollars before we send anything.',
-            textVi: 'Quý ngài phải chuyển khoản 100,000 đô trước khi chúng tôi gửi bất cứ thứ gì.',
-            isBest: false,
+            id: 'k3-weak',
+            strategyType: 'weak',
+            strategyLabel: 'Miễn Phí Quá Mức (Over-Concession)',
+            textEn: 'We will give you the entire first container for free just to prove that we want your partnership.',
+            textVi: 'Chúng tôi sẽ tặng ngài nguyên container đầu tiên miễn phí chỉ để chứng minh thiện chí hợp tác.',
+            score: 40,
+            trustChange: -10,
+            marginChange: -30,
+            executiveFeedback: 'Làm mất giá trị hàng hóa! Khách lớn nghi ngờ tại sao sản phẩm cao cấp lại tặng không cả container.'
+          },
+          {
+            id: 'k3-rigid',
+            strategyType: 'rigid',
+            strategyLabel: 'Yêu Cầu Tiền Trước Cộc Lốc (Rigid Demand)',
+            textEn: 'Samples are not free. You must pay 500 dollars shipping cost upfront before we pack anything.',
+            textVi: 'Hàng mẫu không miễn phí. Ngài phải thanh toán trước 500 đô la phí vận chuyển thì chúng tôi mới đóng hàng.',
             score: 30,
-            feedback: 'Quá thô lỗ trong giao thương quốc tế! Luôn bắt đầu bằng mẫu thử chuyên nghiệp.'
+            trustChange: -25,
+            marginChange: 0,
+            executiveFeedback: 'Đánh mất thương vụ! Trong ngoại thương B2B, mẫu thử ban đầu luôn là khoản đầu tư tiếp thị chính đáng.'
           }
         ]
       }
@@ -160,208 +214,81 @@ const BUYER_PERSONAS: BuyerPersona[] = [
         buyerQuestionEn: 'Our 5-star properties currently serve San Pellegrino and Evian. How can Vikoda match that dining table prestige?',
         buyerQuestionVi: 'Các khách sạn 5 sao của chúng tôi hiện dùng San Pellegrino và Evian. Làm sao Vikoda sánh được sự sang trọng trên bàn tiệc?',
         buyerAudio: 'Our 5-star properties currently serve San Pellegrino and Evian. How can Vikoda match that dining table prestige?',
-        suggestedPitchEn: 'Vikoda offers luxury embossed glass bottles paired with 1957 heritage, reducing your carbon footprint by 85% at a far more competitive cost.',
-        suggestedPitchVi: 'Vikoda mang đến chai thủy tinh cao cấp kết hợp di sản 1957, giảm 85% khí thải vận chuyển với mức giá cạnh tranh vượt trội.',
         options: [
           {
-            id: 's1-best',
+            id: 's1-winwin',
+            strategyType: 'win-win',
+            strategyLabel: 'Tôn Trọng Di Sản & Nêu Bật ESG (Win-Win)',
             textEn: 'Our bespoke luxury glass bottles are designed for Michelin-level fine dining, offering European-grade natural pH 9.0 while slashing your freight carbon footprint by 85%.',
             textVi: 'Dòng chai thủy tinh cao cấp của chúng tôi được thiết kế riêng cho chuẩn bàn tiệc Michelin, chất lượng khoáng kiềm pH 9.0 ngang tầm Châu Âu nhưng giảm 85% phát thải CO2.',
-            isBest: true,
             score: 100,
-            feedback: 'Tuyệt đỉnh! Đánh trúng cả 3 điểm: thẩm mỹ sang trọng, chất lượng tương đương và tiêu chí ESG xanh.'
+            trustChange: 25,
+            marginChange: 10,
+            executiveFeedback: 'Tuyệt đỉnh! Đánh trúng cả 3 điểm then chốt: thẩm mỹ sang trọng, chất lượng tương đương và tiêu chí xanh ESG.'
           },
           {
-            id: 's1-mid',
-            textEn: 'Imported water is too expensive, you should use our cheap plastic bottles.',
-            textVi: 'Nước nhập khẩu đắt quá, bà nên dùng chai nhựa giá rẻ của chúng tôi.',
-            isBest: false,
+            id: 's1-weak',
+            strategyType: 'weak',
+            strategyLabel: 'Giảm Giá Trị Thành Hàng Bình Dân (Weak Positioning)',
+            textEn: 'European water is too expensive for your guests, so our cheap price will help your hotel save substantial budget.',
+            textVi: 'Nước Châu Âu quá đắt đỏ với khách của bà, giá rẻ của chúng tôi sẽ giúp khách sạn tiết kiệm nhiều chi phí.',
+            score: 45,
+            trustChange: -10,
+            marginChange: -15,
+            executiveFeedback: 'Sai lệch định vị! Khách sạn 5 sao không bao giờ muốn khách nghĩ mình phục vụ "nước giá rẻ" (cheap price).'
+          },
+          {
+            id: 's1-rigid',
+            strategyType: 'rigid',
+            strategyLabel: 'Công Kích Đối Thủ Châu Âu (Aggressive Attack)',
+            textEn: 'European brands are just marketing hype and their water quality is actually inferior to Vikoda.',
+            textVi: 'Các thương hiệu Châu Âu chỉ là quảng cáo thổi phồng và chất lượng nước của họ thực ra thua kém Vikoda.',
             score: 30,
-            feedback: 'Khách sạn 5 sao cấm dùng chai nhựa trên bàn tiệc cao cấp! Phải luôn pitch chai thủy tinh (Glass bottle).'
+            trustChange: -25,
+            marginChange: 0,
+            executiveFeedback: 'Vi phạm quy tắc ứng xử thương mại! Công kích trực tiếp đối thủ uy tín làm giảm đẳng cấp của chính mình.'
           }
         ]
       },
       {
         roundNumber: 2,
-        roundTitle: 'Kinh Tế Tuần Hoàn & Thu Hồi Vỏ Chai (Circular Economy)',
-        buyerQuestionEn: 'What is your operational policy regarding empty glass bottle collection and sustainability?',
-        buyerQuestionVi: 'Chính sách vận hành của Vikoda về thu hồi vỏ chai rỗng và phát triển bền vững như thế nào?',
-        buyerAudio: 'What is your operational policy regarding empty glass bottle collection and sustainability?',
-        suggestedPitchEn: 'We operate a complete circular bottle-return program, sanitizing and recycling containers to help you achieve your Zero-Waste certification.',
-        suggestedPitchVi: 'Chúng tôi có quy trình thu hồi vỏ chai khép kín, khử khuẩn và tái tuần hoàn để giúp khách sạn đạt chứng chỉ Không Rác Thải.',
+        roundTitle: 'Đàm Phán Đổi Chai Rỗng & Hậu Cần Xanh (Circular Glass Logistics)',
+        buyerQuestionEn: 'Glass bottles are heavy and require break-safe handling. How do you support our reverse logistics for recycling?',
+        buyerQuestionVi: 'Chai thủy tinh rất nặng và dễ vỡ. Vikoda hỗ trợ quy trình thu hồi vỏ chai và vận hành xanh như thế nào?',
+        buyerAudio: 'Glass bottles are heavy and require break-safe handling. How do you support our reverse logistics for recycling?',
         options: [
           {
-            id: 's2-best',
-            textEn: 'We provide a seamless circular bottle-return logistics network, directly assisting your hotels in achieving strict Net-Zero and global green hospitality certifications.',
-            textVi: 'Chúng tôi cung cấp mạng lưới logistics thu hồi vỏ chai tuần hoàn trọn gói, trực tiếp hỗ trợ khách sạn đạt chứng chỉ Net-Zero và Du lịch Xanh quốc tế.',
-            isBest: true,
+            id: 's2-winwin',
+            strategyType: 'win-win',
+            strategyLabel: 'Giải Pháp Thu Hồi Khép Kín (Circular Loop)',
+            textEn: 'We implement a scheduled reverse-logistics collection with custom protective crates, returning a quarterly sustainability credit to your procurement ledger.',
+            textVi: 'Chúng tôi triển khai lịch trình thu hồi vỏ chai định kỳ bằng thùng chuyên dụng chống vỡ, hoàn lại khoản tín dụng xanh định kỳ vào tài khoản thu mua của quý vị.',
             score: 100,
-            feedback: 'Quá thông minh! Khách sạn 5 sao toàn cầu đang chịu sức ép lớn về ESG, đề xuất này chốt đơn tức khắc.'
+            trustChange: 30,
+            marginChange: 5,
+            executiveFeedback: 'Giải pháp hoàn hảo! Biến khó khăn thu hồi vỏ chai thành lợi ích tài chính và điểm số phát triển bền vững ESG.'
           },
           {
-            id: 's2-mid',
-            textEn: 'Once we deliver, we do not care about the empty bottles. Throw them in the trash.',
-            textVi: 'Giao xong thì vỏ chai các vị tự vứt vào thùng rác, chúng tôi không quan tâm.',
-            isBest: false,
-            score: 20,
-            feedback: 'Vi phạm nghiêm trọng chính sách bảo vệ môi trường của các chuỗi resort quốc tế.'
-          }
-        ]
-      },
-      {
-        roundNumber: 3,
-        roundTitle: 'Chốt Thử Nghiệm Tại 3 Khách Sạn Flagship (The Pilot Rollout)',
-        buyerQuestionEn: 'We want to test Vikoda at our flagship rooftop restaurants before full chain rollout. Can you support staff training and sommelier tasting?',
-        buyerQuestionVi: 'Chúng tôi muốn thử nghiệm Vikoda tại 3 nhà hàng tầng thượng trước khi nhân rộng toàn chuỗi. Vikoda có hỗ trợ đào tạo nhân viên và nếm thử cùng chuyên gia sommelier không?',
-        buyerAudio: 'We want to test Vikoda at our flagship rooftop restaurants before full chain rollout. Can you support staff training and sommelier tasting?',
-        suggestedPitchEn: 'Absolutely! Our brand ambassadors will conduct masterclasses for your staff and provide bespoke tasting kits for your sommeliers.',
-        suggestedPitchVi: 'Chắc chắn rồi! Đại sứ thương hiệu của chúng tôi sẽ đào tạo trực tiếp nhân viên và cung cấp bộ thử nếm chuyên nghiệp cho các chuyên gia rượu vang.',
-        options: [
-          {
-            id: 's3-best',
-            textEn: 'Absolutely! Our senior brand ambassadors will conduct on-site masterclasses for your service staff and provide complimentary sommelier pairing kits for your wine directors.',
-            textVi: 'Chắc chắn rồi! Đại sứ thương hiệu cấp cao của chúng tôi sẽ đào tạo trực tiếp tại chỗ cho nhân viên phục vụ và tặng bộ công cụ thử nếm chuyên biệt cho các giám đốc rượu vang.',
-            isBest: true,
-            score: 100,
-            feedback: 'Đẳng cấp dịch vụ vượt trội! Hỗ trợ đào tạo tại chỗ là chìa khóa mở toang cánh cửa các chuỗi khách sạn 5 sao quốc tế.'
+            id: 's2-weak',
+            strategyType: 'weak',
+            strategyLabel: 'Gánh Toàn Bộ Chi Phí Vỡ Hỏng (Weak Terms)',
+            textEn: 'We will compensate any broken bottles with double the quantity without asking for any verification.',
+            textVi: 'Chúng tôi sẽ đền bù gấp đôi số lượng bất kỳ chai nào bị vỡ mà không cần kiểm tra xác minh.',
+            score: 50,
+            trustChange: 5,
+            marginChange: -20,
+            executiveFeedback: 'Rủi ro tài chính cao! Điều khoản đền bù vô căn cứ dễ bị lợi dụng và làm xói mòn lợi nhuận giao nhận.'
           },
           {
-            id: 's3-mid',
-            textEn: 'No, we only sell bottles. Training staff is your internal responsibility.',
-            textVi: 'Không, chúng tôi chỉ bán chai nước. Đào tạo nhân viên là trách nhiệm nội bộ của bà.',
-            isBest: false,
-            score: 20,
-            feedback: 'Thái độ thiếu hợp tác sẽ đánh mất hợp đồng triệu đô với chuỗi khách sạn 5 sao.'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'michael',
-    name: 'Mr. Michael Chang',
-    role: 'Beverage Director',
-    company: 'Marina Bay Hospitality Group (Singapore)',
-    flag: '🇸🇬',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&auto=format&fit=crop&q=80',
-    objective: 'Tìm kiếm dòng nước khoáng cao cấp cho chuỗi nhà hàng fine dining tại Singapore, yêu cầu thời gian giao hàng nhanh dưới 5 ngày.',
-    rounds: [
-      {
-        roundNumber: 1,
-        roundTitle: 'Thời Gian Vận Chuyển Hàng Hải Tuyến Cát Lái - Singapore',
-        buyerQuestionEn: 'Singapore relies heavily on quick restocking. How fast can you deliver from Vietnam to Jurong port?',
-        buyerQuestionVi: 'Singapore phụ thuộc vào nguồn hàng bổ sung nhanh. Vikoda vận chuyển từ cảng Việt Nam đến cảng Jurong mất bao lâu?',
-        buyerAudio: 'Singapore relies heavily on quick restocking. How fast can you deliver from Vietnam to Jurong port?',
-        suggestedPitchEn: 'Shipping from Cat Lai port to Singapore takes only 3 to 4 days, with multiple feeder departures every single week.',
-        suggestedPitchVi: 'Vận chuyển từ cảng Cát Lái sang Singapore chỉ mất từ 3 đến 4 ngày, với nhiều chuyến tàu khởi hành hàng tuần.',
-        options: [
-          {
-            id: 'm1-best',
-            textEn: 'Shipping from Cat Lai port to Singapore takes merely 3 to 4 days with weekly feeder departures, guaranteeing zero supply disruptions.',
-            textVi: 'Hàng xuất từ cảng Cát Lái sang Singapore chỉ mất từ 3 đến 4 ngày đường biển với lịch tàu hàng tuần, cam kết không bao giờ đứt gãy chuỗi cung ứng.',
-            isBest: true,
-            score: 100,
-            feedback: 'Cực kỳ chính xác! Lợi thế địa lý sát Singapore của Việt Nam là ưu thế áp đảo so với nguồn hàng mất 40 ngày lênh đênh từ Châu Âu.'
-          },
-          {
-            id: 'm1-mid',
-            textEn: 'Maybe one or two months, we are not very sure about ocean ships.',
-            textVi: 'Có thể mất một hoặc hai tháng, chúng tôi không chắc lắm về tàu biển.',
-            isBest: false,
-            score: 30,
-            feedback: 'Buyer Singapore sẽ hủy đàm phán ngay nếu bạn không nắm vững lịch tàu đường biển tuyến Đông Nam Á.'
-          }
-        ]
-      },
-      {
-        roundNumber: 2,
-        roundTitle: 'Hương Vị Tự Nhiên & Kết Hợp Ẩm Thực Châu Á Cao Cấp',
-        buyerQuestionEn: 'Many Asian diners dislike strong sulfur or heavy mineral aftertaste. What is Vikoda’s mouthfeel profile?',
-        buyerQuestionVi: 'Nhiều thực khách Châu Á không thích vị khoáng gắt hoặc mùi lưu huỳnh nồng. Cảm nhận vòm họng của Vikoda như thế nào?',
-        buyerAudio: 'Many Asian diners dislike strong sulfur or heavy mineral aftertaste. What is Vikoda’s mouthfeel profile?',
-        suggestedPitchEn: 'Vikoda features a silky, naturally sweet, light mouthfeel that refreshes the palate without masking delicate culinary flavors.',
-        suggestedPitchVi: 'Vikoda sở hữu hậu vị ngọt dịu thanh tao, êm ái tự nhiên giúp làm sạch vòm họng mà không át đi hương vị tinh tế của món ăn.',
-        options: [
-          {
-            id: 'm2-best',
-            textEn: 'Vikoda delivers a silky-smooth, naturally sweet mouthfeel with balanced bicarbonate minerality that gently cleanses the palate between rich Asian dishes.',
-            textVi: 'Vikoda mang đến cảm giác thanh thoát mượt mà vòm họng, vị ngọt dịu tự nhiên với khoáng kiềm Bicarbonate giúp làm sạch vị giác hoàn hảo giữa các món ăn Châu Á.',
-            isBest: true,
-            score: 100,
-            feedback: 'Chuẩn xác thuật ngữ F&B chuyên nghiệp: "cleanses the palate" (làm sạch vị giác) là từ khóa vàng của các sommelier.'
-          },
-          {
-            id: 'm2-mid',
-            textEn: 'Water is just water, it tastes the same as tap water.',
-            textVi: 'Nước nào chả là nước, vị nó cũng giống như nước máy thôi.',
-            isBest: false,
-            score: 20,
-            feedback: 'Tuyệt đối tránh nói "nước nào cũng giống nhau"; Vikoda là tinh hoa khoáng kiềm tự nhiên 1957.'
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: 'fatima',
-    name: 'Ms. Fatima Al-Mansoor',
-    role: 'Chief Sourcing Officer',
-    company: 'Gulf Wellness Trading (Dubai, UAE)',
-    flag: '🇦🇪',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&auto=format&fit=crop&q=80',
-    objective: 'Tìm kiếm nguồn nước khoáng thiên nhiên đạt chuẩn Halal, chịu được nhiệt độ lưu kho 45°C tại Trung Đông mà không suy giảm chất lượng.',
-    rounds: [
-      {
-        roundNumber: 1,
-        roundTitle: 'Chứng Chỉ Halal Quốc Tế & Quy Chuẩn Đóng Chai Vô Trùng',
-        buyerQuestionEn: 'For Gulf markets, Halal compliance and sterile bottling are strictly audited. How do you certify your facilities?',
-        buyerQuestionVi: 'Đối với thị trường Vùng Vịnh, chứng nhận Halal và quy trình chiết rót vô trùng được kiểm toán rất khắt khe. Vikoda chứng minh như thế nào?',
-        buyerAudio: 'For Gulf markets, Halal compliance and sterile bottling are strictly audited. How do you certify your facilities?',
-        suggestedPitchEn: 'Vikoda holds international Halal certification and operates sterile German bottling technology with zero human touch.',
-        suggestedPitchVi: 'Vikoda đạt chứng nhận Halal quốc tế và vận hành dây chuyền công nghệ Đức vô trùng tuyệt đối không chạm tay người.',
-        options: [
-          {
-            id: 'f1-best',
-            textEn: 'Our spring sanctuary and automated German bottling plants hold full international Halal certification, operating in a sterile closed-loop with zero human contamination.',
-            textVi: 'Mỏ khoáng và nhà máy tự động công nghệ Đức của chúng tôi đạt chứng chỉ Halal quốc tế đầy đủ, vận hành khép kín vô trùng 100% không tiếp xúc bàn tay người.',
-            isBest: true,
-            score: 100,
-            feedback: 'Xuất sắc! Khẳng định chứng chỉ Halal và công nghệ khép kín không chạm (zero human contamination) tạo niềm tin tuyệt đối với các nhà nhập khẩu Trung Đông.'
-          },
-          {
-            id: 'f1-mid',
-            textEn: 'Water does not need Halal because it is liquid.',
-            textVi: 'Nước là chất lỏng nên không cần chứng chỉ Halal.',
-            isBest: false,
-            score: 30,
-            feedback: 'Sai lầm nghiêm trọng! Tại UAE và Saudi Arabia, nước đóng chai bắt buộc phải có chứng chỉ Halal về quy trình nguồn gốc và đóng nắp.'
-          }
-        ]
-      },
-      {
-        roundNumber: 2,
-        roundTitle: 'Độ Bền Kiềm & Ổn Định Khoáng Chất Dưới Nhiệt Độ Cao 45°C',
-        buyerQuestionEn: 'Warehouse temperatures in Dubai can reach 45°C during summer. Will the mineral profile or pH degrade?',
-        buyerQuestionVi: 'Nhiệt độ kho bãi tại Dubai vào mùa hè có thể chạm 45°C. Thành phần khoáng chất hoặc độ pH có bị biến tính không?',
-        buyerAudio: 'Warehouse temperatures in Dubai can reach 45 degrees Celsius during summer. Will the mineral profile or pH degrade?',
-        suggestedPitchEn: 'Since Vikoda naturally erupts at 72°C from deep underground, it easily withstands 45°C desert storage with zero chemical degradation.',
-        suggestedPitchVi: 'Vì nước khoáng Vikoda vốn phun trào tự nhiên từ lòng đất ở 72°C, nước hoàn toàn chịu được nhiệt độ sa mạc 45°C mà không bị biến tính hóa học.',
-        options: [
-          {
-            id: 'f2-best',
-            textEn: 'Our mineral water naturally emerges from 220 meters at 72°C, meaning its mineral structure has been heat-stabilized by Mother Earth and easily withstands 45°C summer warehousing.',
-            textVi: 'Nước khoáng của chúng tôi phun trào từ lòng đất 220m ở 72°C, nghĩa là cấu trúc khoáng đã được tôi luyện nhiệt tự nhiên bởi Đất Mẹ và chịu được nhiệt độ kho bãi 45°C hoàn hảo.',
-            isBest: true,
-            score: 100,
-            feedback: 'Lý lẽ khoa học không thể thuyết phục hơn! Dùng chính nhiệt độ tự nhiên 72°C của nguồn Đảnh Thạnh để đập tan nỗi lo nhiệt độ 45°C của sa mạc Dubai.'
-          },
-          {
-            id: 'f2-mid',
-            textEn: 'You must store it in an air-conditioned room or it will turn sour.',
-            textVi: 'Bà phải cất nước trong phòng bật điều hòa nếu không nước sẽ bị chua.',
-            isBest: false,
-            score: 30,
-            feedback: 'Chi phí bảo quản điều hòa sẽ khiến khách hàng từ chối nhập khẩu ngay lập tức.'
+            id: 's2-rigid',
+            strategyType: 'rigid',
+            strategyLabel: 'Đổ Trách Nhiệm Cho Khách Sạn (Rigid Terms)',
+            textEn: 'Once delivered to your dock, bottle handling and broken glass are entirely your hotel’s problem.',
+            textVi: 'Một khi hàng đã giao tới cầu cảng, việc quản lý và chai vỡ là hoàn toàn trách nhiệm của khách sạn bà.',
+            score: 25,
+            trustChange: -30,
+            marginChange: 0,
+            executiveFeedback: 'Phá vỡ quan hệ đối tác! Khách sạn 5 sao cần giải pháp chuỗi cung ứng đồng hành chứ không phải thái độ phủi tay.'
           }
         ]
       }
@@ -376,337 +303,408 @@ export const PitchSimulatorModal: React.FC<PitchSimulatorModalProps> = ({
   onAwardXpAndGems
 }) => {
   const [selectedPersona, setSelectedPersona] = useState<BuyerPersona>(BUYER_PERSONAS[0]);
-  const [roundIdx, setRoundIdx] = useState(0);
+  const [currentRoundIdx, setCurrentRoundIdx] = useState<number>(0);
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(null);
-  const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [isRecording, setIsRecording] = useState(false);
-  const [recognizedVoiceText, setRecognizedVoiceText] = useState('');
-  const [totalScore, setTotalScore] = useState(0);
-  const [isDealClosed, setIsDealClosed] = useState(false);
+  const [isAnswered, setIsAnswered] = useState<boolean>(false);
+  const [buyerTrust, setBuyerTrust] = useState<number>(50); // Starts at 50%
+  const [profitMargin, setProfitMargin] = useState<number>(30); // Starts at 30%
+  const [totalNegotiationScore, setTotalNegotiationScore] = useState<number>(0);
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+
+  // Speech practice state
+  const [isRecording, setIsRecording] = useState<boolean>(false);
+  const [speechScore, setSpeechScore] = useState<number | null>(null);
+  const [recognizedText, setRecognizedText] = useState<string>('');
 
   if (!isOpen) return null;
 
-  const currentRound = selectedPersona.rounds[roundIdx];
+  const currentRound = selectedPersona.rounds[currentRoundIdx];
+  const selectedOption = currentRound?.options.find(o => o.id === selectedOptionId);
 
-  const handlePlayBuyerSpeech = () => {
+  const handleSelectOption = (option: NegotiationStrategyOption) => {
+    if (isAnswered) return;
     playSound('click');
-    playSpeech(currentRound.buyerAudio, speechRate, 'en-US');
+    setSelectedOptionId(option.id);
   };
 
-  const handleToggleMic = () => {
-    if (isRecording) {
-      finishSpeechRecognition();
-    } else {
-      setIsRecording(true);
-      startSpeechRecognition(
-        (text) => {
-          setRecognizedVoiceText(text);
-          setIsRecording(false);
-          // auto-select best option if keyword matches
-          setSelectedOptionId(currentRound.options[0].id);
-          playSound('success');
-        },
-        () => setIsRecording(false)
-      );
-    }
-  };
+  const handleConfirmDecision = () => {
+    if (!selectedOption || isAnswered) return;
+    setIsAnswered(true);
 
-  const handleSelectOption = (optId: string) => {
-    if (hasSubmitted) return;
-    playSound('click');
-    setSelectedOptionId(optId);
-  };
+    const newTrust = Math.max(0, Math.min(100, buyerTrust + selectedOption.trustChange));
+    const newMargin = Math.max(5, Math.min(50, profitMargin + selectedOption.marginChange));
+    setBuyerTrust(newTrust);
+    setProfitMargin(newMargin);
+    setTotalNegotiationScore(prev => prev + selectedOption.score);
 
-  const handleSubmitRound = () => {
-    if (!selectedOptionId) return;
-    setHasSubmitted(true);
-    const chosen = currentRound.options.find((o) => o.id === selectedOptionId);
-    if (chosen?.isBest) {
-      playSound('success');
-      setTotalScore((prev) => prev + chosen.score);
+    if (selectedOption.strategyType === 'win-win') {
+      playSound('correct');
+      confetti({ particleCount: 40, spread: 60, origin: { y: 0.6 } });
+    } else if (selectedOption.strategyType === 'weak') {
+      playSound('wrong');
     } else {
       playSound('wrong');
-      setTotalScore((prev) => prev + (chosen?.score || 30));
     }
   };
 
   const handleNextRound = () => {
-    playSound('click');
-    if (roundIdx + 1 < selectedPersona.rounds.length) {
-      setRoundIdx((prev) => prev + 1);
+    if (currentRoundIdx + 1 < selectedPersona.rounds.length) {
+      setCurrentRoundIdx(prev => prev + 1);
       setSelectedOptionId(null);
-      setHasSubmitted(false);
-      setRecognizedVoiceText('');
+      setIsAnswered(false);
+      setSpeechScore(null);
+      setRecognizedText('');
+      playSound('click');
     } else {
-      // Finished all rounds -> Deal Closed!
-      setIsDealClosed(true);
+      // Completed negotiation
+      setIsCompleted(true);
+      const earnedXp = Math.round((totalNegotiationScore / (selectedPersona.rounds.length * 100)) * 60) + 20;
+      const earnedGems = buyerTrust >= 70 ? 25 : 10;
+      onAwardXpAndGems(earnedXp, earnedGems);
       playSound('celebrate');
-      confetti({
-        particleCount: 120,
-        spread: 80,
-        origin: { y: 0.6 }
-      });
-      onAwardXpAndGems(150, 40);
     }
   };
 
   const handleRestart = () => {
-    setRoundIdx(0);
+    setCurrentRoundIdx(0);
     setSelectedOptionId(null);
-    setHasSubmitted(false);
-    setRecognizedVoiceText('');
-    setTotalScore(0);
-    setIsDealClosed(false);
+    setIsAnswered(false);
+    setBuyerTrust(50);
+    setProfitMargin(30);
+    setTotalNegotiationScore(0);
+    setIsCompleted(false);
+    setSpeechScore(null);
+    setRecognizedText('');
+    playSound('click');
+  };
+
+  const handleMicPractice = (targetText: string) => {
+    if (isRecording) {
+      finishSpeechRecognition();
+      return;
+    }
+
+    setIsRecording(true);
+    setSpeechScore(null);
+    setRecognizedText('Đang lắng nghe... Hãy đọc to câu tiếng Anh bạn đã chọn!');
+    playSound('click');
+
+    startSpeechRecognition(
+      (finalText) => {
+        setRecognizedText(finalText);
+        const evalResult = evaluatePronunciationDetails(targetText, finalText);
+        setSpeechScore(evalResult.score);
+        setIsRecording(false);
+        if (evalResult.score >= 60) {
+          playSound('correct');
+        } else {
+          playSound('wrong');
+        }
+      },
+      () => setIsRecording(false),
+      () => setIsRecording(false),
+      undefined,
+      'en-US',
+      targetText
+    );
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-md flex items-center justify-center p-4 animate-fade-in overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-xl w-full border border-sky-100 shadow-2xl overflow-hidden my-auto">
+    <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 animate-in fade-in duration-150 select-none">
+      <div className="bg-white w-full max-w-2xl rounded-3xl border-2 border-slate-200 border-b-6 border-b-slate-400 shadow-2xl flex flex-col overflow-hidden max-h-[94vh]">
         
-        {/* Header Bar */}
-        <div className="bg-gradient-to-r from-[#005A9C] via-[#0072CE] to-cyan-500 p-4 text-white flex items-center justify-between">
-          <div className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 rounded-2xl bg-white/20 flex items-center justify-center text-white">
-              <Sparkles className="w-5 h-5 text-amber-300" />
+        {/* 1. Modal Top Bar */}
+        <div className="px-5 py-3.5 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800 shrink-0">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-400 to-amber-600 flex items-center justify-center text-slate-950 font-black text-sm">
+              💼
             </div>
             <div>
-              <h3 className="text-sm font-black tracking-tight">Giả Lập Pitching Quốc Tế Thực Chiến</h3>
-              <p className="text-[10px] text-sky-100 font-semibold">Tập dượt đàm phán trực tiếp với Buyer & Đối Tác Ngoại Quốc</p>
+              <div className="text-xs font-black uppercase tracking-wider text-amber-400">
+                Sàn Đàm Phán B2B Quốc Tế
+              </div>
+              <div className="text-[11px] text-slate-400 font-medium">
+                Đối đầu trực tiếp • Đo lường Buyer Trust & Biên lợi nhuận
+              </div>
             </div>
           </div>
+
           <button
             onClick={() => {
               stopSpeech();
-              playSound('click');
               onClose();
             }}
-            className="p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer"
+            className="p-1.5 rounded-full hover:bg-slate-800 text-slate-400 hover:text-white cursor-pointer transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Persona Selector Tabs: Horizontally scrollable on mobile */}
-        {!isDealClosed && (
-          <div className="bg-slate-100/90 p-2 flex gap-2 border-b border-slate-200 overflow-x-auto no-scrollbar select-none">
-            {BUYER_PERSONAS.map((p) => {
-              const isSel = selectedPersona.id === p.id;
-              return (
-                <button
-                  key={p.id}
-                  onClick={() => {
-                    playSound('click');
-                    setSelectedPersona(p);
-                    handleRestart();
-                  }}
-                  className={`py-2 px-3 rounded-xl text-xs font-bold transition-all flex items-center space-x-2 shrink-0 min-w-[130px] sm:flex-1 cursor-pointer ${
-                    isSel 
-                      ? 'bg-white text-slate-900 shadow-xs ring-1 ring-sky-300 font-black' 
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
-                  }`}
-                >
-                  <span className="text-xl shrink-0">{p.flag}</span>
-                  <div className="text-left min-w-0">
-                    <span className="block text-[11px] font-black truncate">{p.name}</span>
-                    <span className="text-[9px] text-slate-500 block truncate">{p.company}</span>
-                  </div>
-                </button>
-              );
-            })}
+        {/* 2. Live Negotiation Scorecard (Buyer Trust & Profit Margin) */}
+        <div className="bg-slate-100/90 px-5 py-2.5 border-b border-slate-200 flex items-center justify-between gap-4 shrink-0 text-xs">
+          {/* Buyer Trust Meter */}
+          <div className="flex-1 space-y-1">
+            <div className="flex items-center justify-between font-bold">
+              <span className="text-slate-600 flex items-center gap-1">
+                <ShieldCheck className="w-3.5 h-3.5 text-sky-600" />
+                <span>Buyer Trust:</span>
+              </span>
+              <span className={`font-black ${buyerTrust >= 70 ? 'text-emerald-600' : buyerTrust >= 40 ? 'text-amber-600' : 'text-rose-600'}`}>
+                {buyerTrust}% {buyerTrust >= 70 ? '• Rất Tin Cậy' : buyerTrust >= 40 ? '• Đang Dè Chừng' : '• Nguy Cơ Đổ Vỡ'}
+              </span>
+            </div>
+            <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div 
+                className={`h-full transition-all duration-500 rounded-full ${
+                  buyerTrust >= 70 ? 'bg-emerald-500' : buyerTrust >= 40 ? 'bg-amber-500' : 'bg-rose-500'
+                }`}
+                style={{ width: `${buyerTrust}%` }}
+              />
+            </div>
           </div>
-        )}
 
-        {/* MAIN BODY */}
-        <div className="p-5">
-          {!isDealClosed ? (
-            <div className="space-y-4">
-              
-              {/* Buyer Question Card */}
-              <div className="bg-sky-50/80 rounded-2xl p-4 border border-sky-200/70 space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2.5">
-                    <img
-                      src={selectedPersona.avatar}
-                      alt={selectedPersona.name}
-                      className="w-10 h-10 rounded-full object-cover border-2 border-sky-400 shadow-xs"
-                    />
-                    <div>
-                      <div className="flex items-center space-x-1.5">
-                        <span className="text-xs font-black text-slate-900">{selectedPersona.name}</span>
-                        <span className="text-xs">{selectedPersona.flag}</span>
-                      </div>
-                      <span className="text-[10px] text-slate-500 font-semibold">{selectedPersona.role}</span>
-                    </div>
+          {/* Profit Margin Meter */}
+          <div className="flex-1 space-y-1">
+            <div className="flex items-center justify-between font-bold">
+              <span className="text-slate-600 flex items-center gap-1">
+                <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Biên Lợi Nhuận:</span>
+              </span>
+              <span className={`font-black ${profitMargin >= 25 ? 'text-emerald-600' : 'text-amber-600'}`}>
+                {profitMargin}%
+              </span>
+            </div>
+            <div className="h-2 bg-slate-200 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-emerald-500 transition-all duration-500 rounded-full"
+                style={{ width: `${(profitMargin / 50) * 100}%` }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* 3. Main Stage Content */}
+        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+          
+          {!isCompleted ? (
+            <>
+              {/* Buyer Persona Card */}
+              <div className="bg-sky-50/70 rounded-2xl p-4 border border-sky-100 flex items-start gap-3">
+                <img 
+                  src={selectedPersona.avatar} 
+                  alt={selectedPersona.name} 
+                  className="w-13 h-13 rounded-2xl object-cover border-2 border-white shadow-xs shrink-0" 
+                />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-black text-slate-900 truncate">{selectedPersona.name}</span>
+                    <span className="text-sm">{selectedPersona.flag}</span>
+                    <span className="px-2 py-0.5 rounded-md bg-white border border-sky-200 text-sky-700 text-[10px] font-black uppercase">
+                      Hiệp {currentRoundIdx + 1}/{selectedPersona.rounds.length}
+                    </span>
                   </div>
-
-                  <button
-                    onClick={handlePlayBuyerSpeech}
-                    className="p-2 rounded-xl bg-white text-[#0066CC] hover:bg-sky-100 shadow-2xs border border-sky-200 flex items-center space-x-1 text-xs font-bold cursor-pointer"
-                    title="Nghe đối tác nói"
-                  >
-                    <Volume2 className="w-4 h-4" />
-                    <span className="text-[10px]">Nghe câu hỏi</span>
-                  </button>
-                </div>
-
-                <div className="space-y-1">
-                  <span className="text-[9px] font-black text-[#0072CE] uppercase tracking-wider block">
-                    Vòng {roundIdx + 1}/{selectedPersona.rounds.length}: {currentRound.roundTitle}
-                  </span>
-                  <p className="text-sm font-black text-slate-900 leading-snug">
-                    "{currentRound.buyerQuestionEn}"
-                  </p>
-                  <p className="text-xs text-slate-600 font-medium">
-                    {currentRound.buyerQuestionVi}
-                  </p>
+                  <div className="text-xs text-slate-600 font-bold">
+                    {selectedPersona.role} • {selectedPersona.company}
+                  </div>
+                  <div className="text-[11px] text-slate-500 mt-1 line-clamp-1 italic">
+                    Mục tiêu: {selectedPersona.objective}
+                  </div>
                 </div>
               </div>
 
-              {/* Your Pitch Response Area */}
-              <div className="space-y-2">
+              {/* Buyer Question / Inquiry */}
+              <div className="bg-slate-900 rounded-2xl p-4 text-white space-y-2 shadow-sm relative">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center space-x-1">
-                    <MessageSquare className="w-3.5 h-3.5 text-cyan-600" />
-                    <span>Lựa chọn phương án Pitching tối ưu:</span>
+                  <span className="text-[10px] font-black uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+                    <MessageSquare className="w-3.5 h-3.5" />
+                    <span>{currentRound.roundTitle}</span>
                   </span>
-
-                  {/* Speech to text practice button */}
                   <button
-                    onClick={handleToggleMic}
-                    className={`px-2.5 py-1 rounded-xl text-[10px] font-bold flex items-center space-x-1 transition-all cursor-pointer ${
-                      isRecording
-                        ? 'bg-rose-500 text-white animate-pulse'
-                        : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                    onClick={() => playSpeech(currentRound.buyerAudio, speechRate, 'en-US')}
+                    className="p-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-amber-300 cursor-pointer flex items-center gap-1 text-xs font-bold"
+                    title="Nghe giọng đối tác ngoại quốc"
+                  >
+                    <Volume2 className="w-3.5 h-3.5" />
+                    <span>Nghe</span>
+                  </button>
+                </div>
+
+                <div className="text-sm sm:text-base font-bold text-sky-100 leading-snug break-words">
+                  "{currentRound.buyerQuestionEn}"
+                </div>
+                <div className="text-xs text-slate-400 font-medium pt-1 border-t border-slate-800 break-words">
+                  {currentRound.buyerQuestionVi}
+                </div>
+              </div>
+
+              {/* 3 Strategy Decision Options (Non-Caricature) */}
+              <div className="space-y-2.5">
+                <div className="text-xs font-black uppercase tracking-wider text-slate-500">
+                  Chọn Đối Sách Thương Lượng Của Bạn:
+                </div>
+
+                {currentRound.options.map((opt) => {
+                  const isSelected = selectedOptionId === opt.id;
+                  return (
+                    <div
+                      key={opt.id}
+                      onClick={() => handleSelectOption(opt)}
+                      className={`p-3.5 rounded-2xl border-2 transition-all cursor-pointer relative ${
+                        isSelected
+                          ? 'border-[#0070D1] bg-sky-50/50 shadow-xs'
+                          : 'border-slate-200 hover:border-slate-300 bg-white'
+                      } ${isAnswered && opt.strategyType === 'win-win' ? 'ring-2 ring-emerald-400 border-emerald-400' : ''}`}
+                    >
+                      <div className="flex items-start justify-between gap-2 mb-1.5">
+                        <span className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider ${
+                          opt.strategyType === 'win-win' 
+                            ? 'bg-emerald-100 text-emerald-800' 
+                            : opt.strategyType === 'weak'
+                            ? 'bg-amber-100 text-amber-800'
+                            : 'bg-rose-100 text-rose-800'
+                        }`}>
+                          {opt.strategyLabel}
+                        </span>
+
+                        <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                          isSelected ? 'border-[#0070D1] bg-[#0070D1] text-white' : 'border-slate-300'
+                        }`}>
+                          {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
+                        </div>
+                      </div>
+
+                      <div className="text-xs font-bold text-slate-900 leading-relaxed mb-1 break-words">
+                        "{opt.textEn}"
+                      </div>
+                      <div className="text-[11px] text-slate-500 leading-normal break-words">
+                        {opt.textVi}
+                      </div>
+
+                      {/* Feedback after confirmation */}
+                      {isAnswered && isSelected && (
+                        <div className={`mt-3 pt-2.5 border-t text-xs font-medium space-y-1 animate-in fade-in duration-200 ${
+                          opt.strategyType === 'win-win' ? 'text-emerald-800 border-emerald-200' : 'text-slate-700 border-slate-200'
+                        }`}>
+                          <div className="font-bold flex items-center gap-1.5">
+                            {opt.strategyType === 'win-win' ? '🎯 Đánh Giá Chuyên Gia:' : '⚠️ Cảnh Báo Chiến Thuật:'}
+                          </div>
+                          <p>{opt.executiveFeedback}</p>
+                          <div className="text-[11px] font-bold text-slate-500 flex items-center gap-3 pt-1">
+                            <span>Buyer Trust: <strong className={opt.trustChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}>{opt.trustChange >= 0 ? `+${opt.trustChange}%` : `${opt.trustChange}%`}</strong></span>
+                            <span>Biên Lợi Nhuận: <strong className={opt.marginChange >= 0 ? 'text-emerald-600' : 'text-rose-600'}>{opt.marginChange >= 0 ? `+${opt.marginChange}%` : `${opt.marginChange}%`}</strong></span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Speech-to-Confirm Practice Box */}
+              {selectedOption && (
+                <div className="bg-slate-50 rounded-2xl p-3 border border-slate-200 flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-black uppercase text-slate-400 block">Luyện Nói Trước Khi Chốt:</span>
+                    <p className="text-xs font-bold text-slate-700 truncate">
+                      {recognizedText || 'Bấm mic và đọc to câu tiếng Anh trên để AI chấm điểm'}
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleMicPractice(selectedOption.textEn)}
+                    className={`px-3 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1.5 cursor-pointer shrink-0 transition-all ${
+                      isRecording ? 'bg-rose-500 text-white animate-pulse' : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    <Mic className="w-3 h-3" />
-                    <span>{isRecording ? 'Đang lắng nghe...' : 'Luyện nói bằng Mic'}</span>
-                  </button>
-                </div>
-
-                {recognizedVoiceText && (
-                  <div className="p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-medium animate-fade-in">
-                    🎤 Giọng nói nhận diện: "{recognizedVoiceText}"
-                  </div>
-                )}
-
-                {/* Option Cards */}
-                <div className="space-y-2.5">
-                  {currentRound.options.map((opt) => {
-                    const isSel = selectedOptionId === opt.id;
-                    return (
-                      <button
-                        key={opt.id}
-                        disabled={hasSubmitted}
-                        onClick={() => handleSelectOption(opt.id)}
-                        className={`w-full p-3 rounded-2xl border-2 text-left transition-all cursor-pointer ${
-                          isSel
-                            ? 'border-sky-500 bg-sky-50/60 shadow-xs'
-                            : 'border-slate-200 hover:border-sky-300 bg-white'
-                        }`}
-                      >
-                        <p className="text-xs font-bold text-slate-900 leading-relaxed">
-                          {opt.textEn}
-                        </p>
-                        <p className="text-[11px] text-slate-500 mt-1">
-                          {opt.textVi}
-                        </p>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Action: Submit or Next */}
-              {!hasSubmitted ? (
-                <button
-                  disabled={!selectedOptionId}
-                  onClick={handleSubmitRound}
-                  className="w-full py-3 rounded-2xl bg-[#0072CE] hover:bg-[#005A9C] disabled:opacity-40 disabled:cursor-not-allowed text-white text-xs font-black shadow-md transition-all cursor-pointer"
-                >
-                  🚀 Trình Bày Luận Điểm Với Đối Tác
-                </button>
-              ) : (
-                <div className="space-y-3 animate-fade-in">
-                  {/* Feedback Box */}
-                  {(() => {
-                    const chosen = currentRound.options.find((o) => o.id === selectedOptionId);
-                    return (
-                      <div className={`p-3.5 rounded-2xl text-xs ${chosen?.isBest ? 'bg-emerald-50 border border-emerald-200 text-emerald-900' : 'bg-amber-50 border border-amber-200 text-amber-900'}`}>
-                        <span className="font-black block mb-0.5">
-                          {chosen?.isBest ? '🌟 Đối Tác Rất Ấn Tượng (+100 điểm)!' : '⚠️ Đối tác chưa thỏa mãn (+50 điểm)'}
-                        </span>
-                        <p className="text-[11px] leading-relaxed">{chosen?.feedback}</p>
-                      </div>
-                    );
-                  })()}
-
-                  <button
-                    onClick={handleNextRound}
-                    className="w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white text-xs font-black shadow-md flex items-center justify-center space-x-1.5 cursor-pointer active:scale-98"
-                  >
-                    <span>{roundIdx + 1 === selectedPersona.rounds.length ? 'Xem Kết Quả Đàm Phán' : 'Vòng tiếp theo'}</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <Mic className="w-3.5 h-3.5" />
+                    <span>{isRecording ? 'Đang nghe...' : speechScore ? `${speechScore}% Điểm` : 'Luyện Mic'}</span>
                   </button>
                 </div>
               )}
-
-            </div>
+            </>
           ) : (
-            /* DEAL CLOSED STATE */
-            <div className="text-center py-5 space-y-4 animate-scale-up">
-              <div className="w-18 h-18 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-4xl shadow-inner animate-bounce">
-                🤝
+            /* Completed Stage Summary */
+            <div className="text-center py-6 space-y-4 animate-in zoom-in-95 duration-200">
+              <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-amber-400 to-yellow-500 text-white flex items-center justify-center text-3xl mx-auto shadow-md">
+                🏆
               </div>
 
               <div>
-                <span className="text-[10px] font-black uppercase text-emerald-600 tracking-widest block">
-                  Negotiation Master
-                </span>
-                <h3 className="text-xl font-black text-slate-900 mt-0.5">
-                  DEAL CLOSED! CHỐT HỢP ĐỒNG THÀNH CÔNG!
+                <h3 className="text-lg font-black text-slate-900">
+                  {buyerTrust >= 70 ? 'Chốt Deal Thành Công Rực Rỡ!' : 'Đàm Phán Hoàn Tất • Cần Tinh Chỉnh Chiến Thuật'}
                 </h3>
-                <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
-                  Bạn đã thuyết phục thành công đối tác {selectedPersona.name} ({selectedPersona.company}) với tổng điểm tuyệt đối!
+                <p className="text-xs text-slate-500 max-w-md mx-auto mt-1">
+                  Bạn đã hoàn thành phiên thương thảo cùng {selectedPersona.name} ({selectedPersona.company}).
                 </p>
               </div>
 
-              {/* Deal Summary Certificate */}
-              <div className="p-4 rounded-3xl bg-gradient-to-br from-amber-50 to-sky-50 border-2 border-amber-300 max-w-xs mx-auto space-y-2">
-                <div className="flex items-center justify-center space-x-1 text-amber-500">
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
-                  <Star className="w-4 h-4 fill-current" />
+              <div className="grid grid-cols-3 gap-3 max-w-md mx-auto text-center">
+                <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                  <span className="text-[10px] font-bold text-slate-400 block uppercase">Tổng Điểm</span>
+                  <span className="text-base font-black text-[#0070D1]">{totalNegotiationScore}đ</span>
                 </div>
-                <div className="text-2xl font-black text-[#005A9C]">
-                  {totalScore} / {selectedPersona.rounds.length * 100} Điểm
+                <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                  <span className="text-[10px] font-bold text-slate-400 block uppercase">Buyer Trust</span>
+                  <span className={`text-base font-black ${buyerTrust >= 70 ? 'text-emerald-600' : 'text-amber-600'}`}>{buyerTrust}%</span>
                 </div>
-                <p className="text-[11px] font-bold text-slate-600">
-                  Thưởng: +150 XP • +40 Ngọc Khoáng 💎
-                </p>
+                <div className="bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                  <span className="text-[10px] font-bold text-slate-400 block uppercase">Biên Lợi Nhuận</span>
+                  <span className="text-base font-black text-emerald-600">{profitMargin}%</span>
+                </div>
               </div>
+            </div>
+          )}
 
-              <div className="flex space-x-2 pt-2">
-                <button
-                  onClick={handleRestart}
-                  className="flex-1 py-3 rounded-2xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center justify-center space-x-1.5 cursor-pointer"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  <span>Pitch lại với khách khác</span>
-                </button>
-                <button
-                  onClick={() => {
-                    playSound('click');
-                    onClose();
-                  }}
-                  className="flex-1 py-3 rounded-2xl bg-[#0072CE] hover:bg-[#005A9C] text-white text-xs font-black shadow-md cursor-pointer"
-                >
-                  Hoàn Thành
-                </button>
-              </div>
+        </div>
 
+        {/* 4. Footer Action Bar */}
+        <div className="p-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-3 shrink-0">
+          {!isCompleted ? (
+            <>
+              <button
+                onClick={() => {
+                  stopSpeech();
+                  onClose();
+                }}
+                className="px-4 py-2 rounded-2xl border border-slate-300 hover:bg-slate-100 text-slate-600 font-black text-xs cursor-pointer"
+              >
+                Rời Bàn Đàm Phán
+              </button>
+
+              {!isAnswered ? (
+                <button
+                  disabled={!selectedOptionId}
+                  onClick={handleConfirmDecision}
+                  className={`px-5 py-2.5 rounded-2xl font-black text-xs text-white uppercase tracking-wider cursor-pointer shadow-sm transition-all ${
+                    selectedOptionId ? 'bg-[#0070D1] hover:bg-[#005bb5]' : 'bg-slate-300 cursor-not-allowed'
+                  }`}
+                >
+                  Xác Nhận Đối Sách ➜
+                </button>
+              ) : (
+                <button
+                  onClick={handleNextRound}
+                  className="px-5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 font-black text-xs text-white uppercase tracking-wider cursor-pointer shadow-sm flex items-center gap-1.5 transition-all"
+                >
+                  <span>{currentRoundIdx + 1 < selectedPersona.rounds.length ? 'Hiệp Tiếp Theo' : 'Xem Kết Quả Deal'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              )}
+            </>
+          ) : (
+            <div className="flex items-center gap-2 w-full">
+              <button
+                onClick={handleRestart}
+                className="flex-1 py-2.5 rounded-2xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-black text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Đàm Phán Lại</span>
+              </button>
+              <button
+                onClick={onClose}
+                className="flex-1 py-2.5 rounded-2xl bg-[#0070D1] hover:bg-[#005bb5] text-white font-black text-xs cursor-pointer shadow-sm"
+              >
+                Hoàn Tất & Trở Về
+              </button>
             </div>
           )}
         </div>

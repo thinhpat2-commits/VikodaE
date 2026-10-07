@@ -11,6 +11,17 @@ export type VikodaRank =
   | 'Bậc Thầy Đàm Phán'
   | 'Lãnh Đạo Xuất Sắc';
 
+export interface ContinuousPracticeStats {
+  totalPracticeCount: number; // Tổng số lần luyện tập
+  repetitionCount: number; // Số lần làm đi làm lại ôn tập
+  speakingExercisesCompleted: number; // Số bài luyện nói hoàn thành
+  listeningExercisesCompleted: number; // Số bài nghe hoàn thành
+  perfectThreeStarUnits: number; // Số bài đạt 3/3 sao hoàn hảo
+  totalDrillsCompleted: number; // Số trận Speed Drill
+  totalVoiceSessions: number; // Số lượt luyện VikoVoice
+  lastPracticeTimestamp: number; // Thời điểm luyện gần nhất
+}
+
 export interface EmployeeProfile {
   employeeCode: string; // e.g. VKD-1957
   fullName: string;
@@ -20,6 +31,7 @@ export interface EmployeeProfile {
   title: string;
   highestDrillScore: number;
   totalPracticeCount: number;
+  practiceStats?: ContinuousPracticeStats;
   isLoggedIn: boolean;
   isAdmin?: boolean;
 }
@@ -38,6 +50,8 @@ export interface GamificationState {
   placementTest?: PlacementTestResult;
   studyPlanner?: StudyPlannerSettings;
   arenaStats?: PvPArenaStats;
+  practiceStats?: ContinuousPracticeStats;
+  updatedAt?: number;
 }
 
 export interface MistakeVaultItem {
@@ -103,6 +117,8 @@ export interface LeaderboardEntry {
   drillScore: number;
   xp: number;
   streak: number;
+  practiceCount?: number;
+  level?: CourseLevel;
   rankBadge: string;
   isCurrentUser?: boolean;
 }

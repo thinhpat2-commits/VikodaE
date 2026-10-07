@@ -14,7 +14,8 @@ import {
   Play, 
   Target, 
   Award, 
-  ChevronRight 
+  ChevronRight,
+  Megaphone
 } from 'lucide-react';
 import { VIKODA_CURRICULUM, UnitLesson, CourseLevel } from '../data/curriculumData';
 import { VikoMascot } from './brand/VikodaLogos';
@@ -23,6 +24,12 @@ import { PlacementTestModal, PlacementTestResult } from './PlacementTestModal';
 import { VikoNavigatorGuide } from './VikoNavigatorGuide';
 import { playSound } from '../services/soundEffects';
 import { playSpeech } from '../services/speechService';
+import { 
+  STORAGE_KEY_ANNOUNCEMENT, 
+  STORAGE_KEY_ADMIN_SETTINGS, 
+  CompanyAnnouncement, 
+  TrainingSystemSettings 
+} from './AdminPortalModal';
 
 interface DuolingoHomeProps {
   selectedLevel: CourseLevel;
@@ -31,7 +38,7 @@ interface DuolingoHomeProps {
   onCompleteUnit: (unitId: string, xp: number, gems: number, stars?: number) => void;
   speechRate: number;
   onGoToVoiceCoach: () => void;
-  onGoToPitchDeck: () => void;
+  onGoToPitchDeck?: () => void;
   onGoToBattle?: () => void;
   onOpenEndlessDrill: () => void;
   onOpenLeaderboard: () => void;
@@ -75,6 +82,53 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
   const [isChestClaimed, setIsChestClaimed] = useState<boolean>(false);
   const [showChestReward, setShowChestReward] = useState<boolean>(false);
   const [isPlacementTestOpen, setIsPlacementTestOpen] = useState<boolean>(false);
+
+  // Corporate announcement & training settings from Admin Portal
+  const [announcement, setAnnouncement] = useState<CompanyAnnouncement | null>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(STORAGE_KEY_ANNOUNCEMENT);
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {}
+      }
+    }
+    return null;
+  });
+  const [isAnnouncementDismissed, setIsAnnouncementDismissed] = useState<boolean>(false);
+
+  const [trainingSettings, setTrainingSettings] = useState<TrainingSystemSettings | null>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(STORAGE_KEY_ADMIN_SETTINGS);
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {}
+      }
+    }
+    return null;
+  });
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      if (typeof window !== 'undefined') {
+        const savedAnn = localStorage.getItem(STORAGE_KEY_ANNOUNCEMENT);
+        if (savedAnn) {
+          try {
+            setAnnouncement(JSON.parse(savedAnn));
+          } catch (e) {}
+        }
+        const savedSet = localStorage.getItem(STORAGE_KEY_ADMIN_SETTINGS);
+        if (savedSet) {
+          try {
+            setTrainingSettings(JSON.parse(savedSet));
+          } catch (e) {}
+        }
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -185,8 +239,39 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
   return (
     <div className="space-y-4 pb-24 max-w-md mx-auto w-full select-none animate-in fade-in duration-200">
       
-      {/* 1. COMPACT 5-TIER LEVEL SELECTOR PILLS */}
-      <div className="flex items-center justify-between gap-1 p-1 bg-slate-200/60 rounded-2xl overflow-x-auto">
+      {/* 0. COMPANY ANNOUNCEMENT BANNER (CONTROLLED BY ADMIN PORTAL) */}
+      {announcement && announcement.isActive && !isAnnouncementDismissed && (
+        <div className="p-3.5 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 rounded-3xl text-white shadow-md border-b-4 border-amber-700 flex items-start justify-between gap-3 animate-in fade-in slide-in-from-top-2">
+          <div className="flex items-start gap-2.5">
+            <div className="p-2 bg-white/20 rounded-2xl shrink-0 mt-0.5 shadow-2xs">
+              <Megaphone className="w-4 h-4 text-white" />
+            </div>
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-[9px] font-black uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded-full">
+                  {announcement.category === 'campaign' ? '🔥 Chiến Dịch Đào Tạo' : '📢 Thông Báo Toàn Công Ty'}
+                </span>
+                <span className="text-[10px] text-amber-100 font-bold">{announcement.author}</span>
+              </div>
+              <h4 className="text-xs font-black tracking-tight">{announcement.title}</h4>
+              <p className="text-[11px] text-amber-100 leading-snug">{announcement.content}</p>
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              playSound('click');
+              setIsAnnouncementDismissed(true);
+            }}
+            className="p-1 rounded-xl hover:bg-white/20 text-white/80 hover:text-white transition-all cursor-pointer shrink-0"
+            title="Đóng thông báo"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+
+      {/* 1. COMPACT 5-TIER LEVEL SELECTOR PILLS (Mobile only, on Laptop it is in Left Sidebar) */}
+      <div className="lg:hidden flex items-center justify-between gap-1 p-1 bg-slate-200/60 rounded-2xl overflow-x-auto">
         {(['A1', 'A2', 'B1', 'B2', 'C1-C2'] as CourseLevel[]).map((lvl) => {
           const isLvlActive = selectedLevel === lvl;
           const displayLabel = 
@@ -217,21 +302,24 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
 
       {/* 2. DUOLINGO SIGNATURE STICKY UNIT BANNER */}
       <div className="sticky top-2 z-30 bg-gradient-to-r from-[#0070D1] to-[#009FE3] rounded-3xl p-4 text-white shadow-md border-b-4 border-[#005bb5] flex items-center justify-between gap-3">
-        <div className="space-y-0.5 truncate">
-          <div className="text-[10px] font-black uppercase tracking-widest text-sky-100 flex items-center gap-1.5">
+        <div className="space-y-0.5 min-w-0 flex-1">
+          <div className="text-[10px] font-black uppercase tracking-widest text-sky-100 flex items-center gap-1.5 truncate">
             <span>CẤP ĐỘ {selectedLevel}</span>
             <span>•</span>
-            <span>{
-              selectedLevel === 'A1' ? 'PHẦN 1: GIAO TIẾP VĂN PHÒNG CƠ BẢN' :
-              selectedLevel === 'A2' ? 'PHẦN 2: TIẾNG ANH ĐA PHÒNG BAN' :
-              selectedLevel === 'B1' ? 'PHẦN 3: ĐẠI SỨ VIKODA & MỎ ĐẢNH THẠNH' :
-              selectedLevel === 'B2' ? 'PHẦN 4: BÁN HÀNG B2B & HORECA' :
-              'PHẦN 5: XUẤT KHẨU TOÀN CẦU & C-SUITE'
-            }</span>
+            <span>100 BÀI • 700+ CÂU HỎI</span>
           </div>
           <h2 className="text-sm font-black truncate leading-snug">
-            {activeLessonInfo ? activeLessonInfo.title : 'Chương Trình Vikoda'}
+            {activeLessonInfo ? `Bài ${activeLessonInfo.unitNumber}: ${activeLessonInfo.title}` : 'Chương Trình Vikoda'}
           </h2>
+          <div className="text-[10px] text-sky-100/90 font-medium truncate">
+            {
+              selectedLevel === 'A1' ? 'Giao Tiếp Văn Phòng & Nền Tảng (20 Bài • 140 Câu)' :
+              selectedLevel === 'A2' ? 'Tiếng Anh Vận Hành Đa Phòng Ban (20 Bài • 140 Câu)' :
+              selectedLevel === 'B1' ? 'Đại Sứ Thương Hiệu Quốc Tế (20 Bài • 140 Câu)' :
+              selectedLevel === 'B2' ? 'Bán Hàng B2B & HORECA 5 Sao (20 Bài • 140 Câu)' :
+              'Xuất Khẩu Toàn Cầu & C-Suite Leadership (20 Bài • 140 Câu)'
+            }
+          </div>
         </div>
 
         <button
@@ -281,7 +369,7 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
         <div className="relative z-10 w-full max-w-[360px]" style={{ height: `${svgHeight}px` }}>
           {displayedLessons.map((lesson, idx) => {
             const isCompleted = completedUnitIds.includes(lesson.id);
-            const isUnlocked = idx === 0 || completedUnitIds.includes(displayedLessons[idx - 1].id) || isCompleted;
+            const isUnlocked = Boolean(trainingSettings?.unlockAllUnits) || idx === 0 || completedUnitIds.includes(displayedLessons[idx - 1].id) || isCompleted;
             const isCurrent = idx === currentActiveIndex;
             const isPopoverOpen = popoverNodeIndex === idx;
 
@@ -304,14 +392,14 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                 }}
               >
                 
-                {/* Viko Mascot Standing Proudly Beside Current Node Waving */}
+                {/* Viko Mascot Standing Beside Current Node */}
                 {isCurrent && isUnlocked && (
                   <div
                     className={`absolute top-1/2 -translate-y-1/2 pointer-events-none flex items-center z-10 ${
-                      isShiftedRight ? '-left-15 sm:-left-20' : '-right-15 sm:-right-20'
+                      isShiftedRight ? '-left-14 sm:-left-16' : '-right-14 sm:-right-16'
                     }`}
                   >
-                    <div className="animate-pulse">
+                    <div className="animate-pulse drop-shadow-sm">
                       <VikoMascot size="sm" mood="waving" />
                     </div>
                   </div>
@@ -332,7 +420,7 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                   <button
                     disabled={!isUnlocked}
                     onClick={() => handleNodeClick(idx, lesson, isUnlocked)}
-                    className={`node-popover-trigger w-19 h-19 sm:w-20 sm:h-20 rounded-full flex flex-col items-center justify-center transition-all cursor-pointer select-none relative ${
+                    className={`node-popover-trigger w-20 h-20 rounded-full flex flex-col items-center justify-center transition-all cursor-pointer select-none relative ${
                       isCompleted
                         ? 'bg-[#22c55e] border-b-[6px] border-[#15803d] active:border-b-2 active:translate-y-1 text-white shadow-md hover:brightness-105'
                         : isCurrent
@@ -380,25 +468,44 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                   )}
                 </div>
 
-                {/* DUOLINGO TAP-TO-INSPECT POPOVER CARD */}
+                {/* DUOLINGO TAP-TO-INSPECT POPOVER CARD - AUTO-CLAMPED TO PREVENT OVERFLOW */}
                 {isPopoverOpen && isUnlocked && (
-                  <div className="node-popover-box absolute -top-28 left-1/2 -translate-x-1/2 z-50 animate-in fade-in zoom-in-95 duration-150 w-64">
+                  <div 
+                    className={`node-popover-box absolute -top-28 z-50 animate-in fade-in zoom-in-95 duration-150 w-64 max-w-[calc(100vw-36px)] ${
+                      xPct < 35 
+                        ? '-left-3 translate-x-0' 
+                        : xPct > 65 
+                        ? '-right-3 translate-x-0' 
+                        : 'left-1/2 -translate-x-1/2'
+                    }`}
+                  >
                     <div className="bg-white rounded-2xl p-3.5 shadow-2xl border-2 border-slate-200 border-b-4 border-b-slate-300 relative text-left">
                       {/* Triangle Pointer down */}
-                      <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-x-6 border-x-transparent border-t-8 border-t-white" />
+                      <div 
+                        className={`absolute -bottom-2 w-0 h-0 border-x-6 border-x-transparent border-t-8 border-t-white ${
+                          xPct < 35 
+                            ? 'left-10' 
+                            : xPct > 65 
+                            ? 'right-10' 
+                            : 'left-1/2 -translate-x-1/2'
+                        }`} 
+                      />
                       
-                      <div className="flex items-center justify-between mb-1">
-                        <span className="text-[10px] font-black uppercase tracking-wider text-slate-400">
-                          Bài {lesson.unitNumber}
+                      <div className="flex items-center justify-between mb-1 gap-1">
+                        <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 truncate">
+                          Bài {lesson.unitNumber}/100 • {lesson.exercises?.length || 7} câu
                         </span>
-                        <span className="text-[10px] font-extrabold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-md border border-amber-200">
+                        <span className="text-[10px] font-extrabold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-md border border-amber-200 shrink-0">
                           +{lesson.xpReward} XP • +{lesson.gemReward} 💎
                         </span>
                       </div>
 
-                      <h4 className="text-xs font-black text-slate-900 leading-snug mb-2.5 line-clamp-2">
+                      <h4 className="text-xs font-black text-slate-900 leading-snug mb-1 line-clamp-2 break-words">
                         {lesson.title}
                       </h4>
+                      <p className="text-[11px] text-slate-500 font-medium mb-2.5 line-clamp-1 break-words">
+                        {lesson.subtitle}
+                      </p>
 
                       <button
                         onClick={() => handleStartLesson(lesson)}

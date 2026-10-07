@@ -25,7 +25,7 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
           'An entrepreneur waits passively for others to do all the work.'
         ],
         correctIndex: 0,
-        explanation: 'Trang 1 Cẩm nang Quản trị: Doanh nhân là người nhận diện cơ hội để dịch chuyển nguồn lực từ nơi có năng suất thấp sang nơi có năng suất và giá trị vượt trội.',
+        explanation: 'Định nghĩa kinh điển về Doanh nhân: Doanh nhân là người nhận diện cơ hội để dịch chuyển nguồn lực từ nơi có năng suất thấp sang nơi có năng suất và giá trị vượt trội.',
         whyWrong: 'Đó chính là câu chuyện của Vikoda: Chắt chiu từng giọt nước thô dưới lòng núi lửa biến thành giọt "Ngọc Trong Đá" phục vụ sức khỏe hàng triệu người.',
         crucialNote: 'Khắc sâu tinh thần dám nghĩ, dám làm, không ngừng mài giũa để bật sáng hào quang.',
         memoryHook: 'ENTREPRENEUR = Người khai phóng tiềm năng kinh tế vô tận.'
@@ -39,7 +39,7 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
         audioText: 'Jade is fundamentally stone that endures rigorous grinding to unleash its brilliant glow.',
         phonetics: '/dʒeɪd ɪz ˌfʌndəˈmɛntli stoʊn ðæt ɪnˈdjʊərz ˈrɪɡərəs ˈɡraɪndɪŋ tuː ʌnˈliːʃ ɪts ˈbrɪljənt ɡloʊ/',
         wordPool: ['Jade', 'is', 'fundamentally', 'stone', 'that', 'endures', 'rigorous', 'grinding', 'to', 'unleash', 'its', 'brilliant', 'glow.'],
-        explanation: 'Trang 61 Cẩm nang: Con người Vikoda cũng vậy, trải qua khó khăn thử thách trên thương trường để bộc lộ khí chất và tài năng phi thường.',
+        explanation: 'Triết lý Ngọc Trong Đá: Con người Vikoda cũng vậy, trải qua khó khăn thử thách trên thương trường để bộc lộ khí chất và tài năng phi thường.',
         whyWrong: 'Triết lý nhân văn sâu sắc: Mọi cá nhân đều là một viên ngọc thô nếu chịu rèn giũa kỷ luật.',
         crucialNote: 'Dùng từ "Rigorous grinding" (mài giũa khắc nghiệt) để thể hiện sự tôi luyện bản lĩnh.',
         memoryHook: 'Rigorous grinding = Mài giũa nghiêm cẩn để bật sáng hào quang.'
@@ -52,7 +52,7 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
         englishSentence: 'Every challenge is a noble opportunity for Vikodaers to grow and shine brightly.',
         audioText: 'Every challenge is a noble opportunity for Vikodaers to grow and shine brightly.',
         phonetics: '/ˈɛvri ˈtʃælɪndʒ ɪz ə ˈnoʊbl ˌɒpərˈtjuːnəti fɔːr vɪˈkoʊdərz tuː ɡroʊ ænd ʃaɪn ˈbraɪtli/',
-        explanation: 'Lời tâm huyết trong thư ngỏ đầu trang Cẩm nang: "Không ngừng mài giũa - Không ngừng rèn luyện - Không ngừng đào tạo - Không ngừng tỏa sáng".',
+        explanation: 'Lời tâm huyết của ban lãnh đạo: "Không ngừng mài giũa - Không ngừng rèn luyện - Không ngừng đào tạo - Không ngừng tỏa sáng".',
         whyWrong: 'Tinh thần bất diệt dẫn lối cho mọi hoạt động của công ty.',
         crucialNote: 'Giọng đọc đĩnh đạc, tràn đầy năng lượng lãnh đạo kiên cường.',
         memoryHook: 'Grow and shine = Trưởng thành và tỏa sáng rực rỡ.'
@@ -73,8 +73,8 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
       {
         id: 'u32-e1',
         type: 'choice',
-        promptEn: 'In Vikoda’s Enterprise Tree Model (Trang 59-60), what do the Roots, Sap, and Leaves represent?',
-        promptVi: 'Trong Mô hình Cây Doanh Nghiệp (trang 59-60), Gốc rễ, Nhựa cây và Tán lá tượng trưng cho điều gì?',
+        promptEn: 'In Vikoda’s Enterprise Tree Model, what do the Roots, Sap, and Leaves represent?',
+        promptVi: 'Trong Mô hình Cây Doanh Nghiệp của Vikoda, Gốc rễ, Nhựa cây và Tán lá tượng trưng cho điều gì?',
         englishSentence: 'Roots are Human & Physical Resources, Sap is Corporate Culture, and Leaves are Cherished Customers.',
         audioText: 'Roots are Human and Physical Resources, Sap is Corporate Culture, and Leaves are Cherished Customers.',
         options: [
@@ -97,7 +97,7 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
         audioText: 'Corporate culture is the vital lifeblood nourishing the entire organization.',
         phonetics: '/ˈkɔːrpərət ˈkʌltʃər ɪz ðə ˈvaɪtl ˈlaɪfblʌd ˈnɜːrɪʃɪŋ ði ɪnˈtaɪər ˌɔːrɡənaɪˈzeɪʃn/',
         wordPool: ['Corporate', 'culture', 'is', 'the', 'vital', 'lifeblood', 'nourishing', 'the', 'entire', 'organization.', 'dead'],
-        explanation: 'Trang 59: Văn hóa chính là bản sắc "Who - We - Are", chất keo kết dính mọi hoài bão và chiến lược.',
+        explanation: 'Bản sắc doanh nghiệp: Văn hóa chính là "Who - We - Are", chất keo kết dính mọi hoài bão và chiến lược.',
         whyWrong: 'Đối thủ có thể sao chép sản phẩm, máy móc, nhà xưởng nhưng không bao giờ sao chép được Văn hóa doanh nghiệp.',
         crucialNote: 'Dùng từ "Nourishing" (nuôi dưỡng từng tế bào doanh nghiệp).',
         memoryHook: 'Lifeblood nourishing = Dòng nhựa sống nuôi dưỡng toàn cây.'
@@ -110,7 +110,7 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
         englishSentence: 'Our 5 core values: Sincerity, Winning desire, Perfect execution, Continuous innovation, and Compliance.',
         audioText: 'Our five core values: Sincerity, Winning desire, Perfect execution, Continuous innovation, and Compliance.',
         phonetics: '/aʊər faɪv kɔːr ˈvæljuːz: sɪnˈsɛrəti, ˈwɪnɪŋ dɪˈzaɪər, ˈpɜːrfɪkt ˌɛksɪˈkjuːʃn, kənˈtɪnjuəs ˌɪnəˈveɪʃn, ænd kəmˈplaɪəns/',
-        explanation: 'Trang 65 Cẩm nang: 5 giá trị cốt lõi là phần "âm" bất biến định hình nhân cách chiến binh Vikoda.',
+        explanation: 'Nền tảng cốt lõi: 5 giá trị là trụ cột bất biến định hình nhân cách và tinh thần chiến binh Vikoda.',
         whyWrong: 'Dẫn dắt mọi hành vi ứng xử với đồng nghiệp, đối tác và xã hội.',
         crucialNote: 'Đọc dõng dạc từng giá trị với niềm tự hào sâu sắc.',
         memoryHook: '5 CỐT LÕI: Thành tâm - Chiến thắng - Thực thi - Cải tiến - Tuân thủ.'
@@ -131,8 +131,8 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
       {
         id: 'u33-e1',
         type: 'choice',
-        promptEn: 'According to FIT Chairman Nguyen Van Sang (Trang 66), how does OGSM unlock ambitious breakthroughs?',
-        promptVi: 'Theo Chủ tịch HĐQT Nguyễn Văn Sang (trang 66), mô hình OGSM tạo nên những bước ngoặt đột phá như thế nào?',
+        promptEn: 'According to FIT Group Leadership, how does the OGSM model unlock ambitious breakthroughs?',
+        promptVi: 'Theo triết lý quản trị của Ban Lãnh Đạo, mô hình OGSM tạo nên những bước ngoặt đột phá như thế nào?',
         englishSentence: 'OGSM is driven by immense dreams and ambitious goals, not constrained by current limited resources.',
         audioText: 'OGSM is driven by immense dreams and ambitious goals, not constrained by current limited resources.',
         options: [
@@ -168,7 +168,7 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
         englishSentence: 'We transform leadership vision into consistent daily results across every business unit.',
         audioText: 'We transform leadership vision into consistent daily results across every business unit.',
         phonetics: '/wiː trænsˈfɔːrm ˈliːdərʃɪp ˈvɪʒn ˈɪntuː kənˈsɪstənt ˈdeɪli rɪˈzʌlts əˈkrɒs ˈɛvri ˈbɪznəs ˈjuːnɪt/',
-        explanation: 'Trang 69 Cẩm nang: Mỗi cá nhân là một mắt xích không thể tách rời trong guồng quay thành công của tổ chức.',
+        explanation: 'Nguyên lý đồng lòng: Mỗi cá nhân là một mắt xích không thể tách rời trong guồng quay thành công của tổ chức.',
         whyWrong: 'Tính kỷ luật và sự đồng thuận cao độ giúp tổ chức vượt qua mọi biến động thị trường.',
         crucialNote: 'Phát âm chuẩn từ "Consistent" (/kənˈsɪstənt/ - nhất quán, kiên định).',
         memoryHook: 'Vision to Results = Từ tầm nhìn biến thành hiện thực quả ngọt.'
@@ -236,10 +236,10 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
   {
     id: 'unit-35',
     unitNumber: 35,
-    title: 'Văn Hóa Bầy Sói: Đoàn Kết & Sói Đầu Đàn',
-    subtitle: 'Nắm vững quy luật di chuyển bầy sói: Sói đầu đàn đi sau cùng bảo bọc toàn đàn',
+    title: 'Văn Hóa Doanh Nghiệp: Đoàn Kết & Lãnh Đạo Phụng Sự',
+    subtitle: 'Nguyên tắc gắn kết tập thể: Lãnh đạo phụng sự và đồng hành không để ai bị bỏ lại phía sau',
     level: 'C2',
-    icon: '🐺',
+    icon: '🤝',
     color: 'amber',
     xpReward: 60,
     gemReward: 25,
@@ -247,46 +247,46 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
       {
         id: 'u35-e1',
         type: 'choice',
-        promptEn: 'In Vikoda’s Wolfpack Philosophy (Trang 70), where does the Alpha Leader walk during migration and why?',
-        promptVi: 'Trong Triết lý Bầy Sói (trang 70), con Sói Đầu Đàn (Alpha Wolf) đi ở vị trí nào và tại sao?',
-        englishSentence: 'The Alpha Leader walks last to ensure no member is left behind and to guard against rear attacks.',
-        audioText: 'The Alpha Leader walks last to ensure no member is left behind and to guard against rear attacks.',
+        promptEn: 'In Vikoda’s corporate culture, what defines the essence of servant leadership and team unity?',
+        promptVi: 'Trong văn hóa doanh nghiệp Vikoda, điều gì định hình tinh thần lãnh đạo phụng sự và gắn kết đồng đội?',
+        englishSentence: 'The leader supports and empowers the team to ensure no member is left behind and collective goals are achieved.',
+        audioText: 'The leader supports and empowers the team to ensure no member is left behind and collective goals are achieved.',
         options: [
-          'The Alpha Leader walks last to ensure no member is left behind and to guard against rear attacks.',
-          'The leader runs away first to save his own life.',
-          'The leader sleeps in the cave while others walk alone.'
+          'The leader supports and empowers the team to ensure no member is left behind and collective goals are achieved.',
+          'The leader acts alone without consulting team members.',
+          'The team works in silos without mutual support.'
         ],
         correctIndex: 0,
-        explanation: '"Con cuối cùng chính là con ĐẦU ĐÀN. Nó đi sau cùng để bảo đảm không có bất cứ thành viên nào bị tụt lại phía sau, giữ cho nhóm luôn là 1 bầy đoàn kết và sẵn sàng ứng phó trong tình huống xấu nhất."',
-        whyWrong: 'Bài học lãnh đạo phụng sự (Servant Leadership) sâu sắc nhất thế giới.',
-        crucialNote: '"Trong một tổ chức, sẽ không ai bị bỏ lại đằng sau khi mỗi cá nhân cùng cố gắng theo đúng vai trò của mình. Chỉ khi bạn từ bỏ, bạn mới tự đào thải chính mình."',
+        explanation: 'Triết lý lãnh đạo phụng sự (Servant Leadership) của Vikoda: Người dẫn đầu luôn lắng nghe, hỗ trợ và đồng hành để mọi thành viên cùng phát triển vững mạnh.',
+        whyWrong: 'Sức mạnh tập thể và sự tương trợ lẫn nhau là nền tảng giúp Vikoda phát triển bền vững từ năm 1957 đến nay.',
+        crucialNote: 'Nguyên tắc bất biến: Tôn trọng sự đa dạng, phát huy thế mạnh của từng cá nhân và đoàn kết như một khối thống nhất.',
         memoryHook: 'NO ONE LEFT BEHIND = Không một ai bị bỏ lại phía sau.'
       },
       {
         id: 'u35-e2',
         type: 'word_order',
         promptEn: 'Explain how role division protects the entire organization in extreme conditions:',
-        promptVi: 'Sắp xếp câu: "Mỗi thành viên phát huy đúng sở trường tạo nên sức mạnh phòng thủ kiên cố."',
+        promptVi: 'Sắp xếp câu: "Mỗi thành viên phát huy đúng sở trường tạo nên sức mạnh tổng hợp vượt qua mọi thách thức."',
         englishSentence: 'Coordinated teamwork unleashes invincible collective power across challenging business frontiers.',
         audioText: 'Coordinated teamwork unleashes invincible collective power across challenging business frontiers.',
         phonetics: '/koʊˈɔːrdɪneɪtɪd ˈtiːmwɜːrk ʌnˈliːʃɪz ɪnˈvɪnsəbl kəˈlɛktɪv ˈpaʊər əˈkrɒs ˈtʃælɪndʒɪŋ ˈbɪznəs frʌnˈtɪərz/',
         wordPool: ['Coordinated', 'teamwork', 'unleashes', 'invincible', 'collective', 'power', 'across', 'challenging', 'business', 'frontiers.'],
-        explanation: '3 con già yếu đi đầu để tạo nhịp độ; 5 con khỏe nhất đi mặt trước; nhóm giữa được che chở; 5 con dũng mãnh bảo vệ mặt sau.',
-        whyWrong: 'Tôn trọng vai trò của từng bộ phận: từ công nhân nhà máy, thủ kho, tài xế xe tải đến đội ngũ kinh doanh và ban giám đốc.',
-        crucialNote: 'Từ "Invincible" (Bất khả chiến bại) khẳng định sức mạnh đoàn kết.',
-        memoryHook: 'Invincible collective power = Sức mạnh tập thể vô địch.'
+        explanation: 'Sự phối hợp nhịp nhàng giữa các khối: Nhà máy sản xuất Đảnh Thạnh, Kiểm soát chất lượng QC, Chuỗi cung ứng, Tiếp thị và Kinh doanh quốc tế.',
+        whyWrong: 'Tôn trọng vai trò của từng mắt xích: từ công nhân vận hành dây chuyền Krones đến các giám sát kênh phân phối và ban giám đốc.',
+        crucialNote: 'Từ "Invincible" (Bất khả chiến bại / Kiên định) khẳng định sức mạnh của tinh thần đồng đội.',
+        memoryHook: 'Invincible collective power = Sức mạnh tập thể kiên định.'
       },
       {
         id: 'u35-e3',
         type: 'speak',
         promptEn: 'Declare the core teamwork pledge of Vikoda Warriors:',
-        promptVi: 'Luyện nói câu triết lý bầy sói khắc sâu trong tâm trí mỗi nhân viên:',
+        promptVi: 'Luyện nói câu cam kết đồng đội và tinh thần đoàn kết toàn diện của Vikoda:',
         englishSentence: 'In our organization, no one is left behind when we march forward together as one.',
         audioText: 'In our organization, no one is left behind when we march forward together as one.',
         phonetics: '/ɪn aʊər ˌɔːrɡənaɪˈzeɪʃn, noʊ wʌn ɪz lɛft bɪˈhaɪnd wɛn wiː mɑːrtʃ ˈfɔːrwərd təˈɡɛðər æz wʌn/',
-        explanation: 'Khẳng định tinh thần trung thành, tương trợ và đồng lòng tuyệt đối.',
-        whyWrong: 'Là linh hồn gắn kết 500 cán bộ công nhân viên Vikoda trên khắp 34 tỉnh thành.',
-        crucialNote: 'Đọc với âm hưởng hùng tráng, truyền cảm hứng mạnh mẽ.',
+        explanation: 'Khẳng định tinh thần đoàn kết, tương trợ và đồng lòng vì mục tiêu chung của thương hiệu Vikoda.',
+        whyWrong: 'Là tôn chỉ gắn kết hàng trăm cán bộ công nhân viên Vikoda trên toàn quốc và các đối tác toàn cầu.',
+        crucialNote: 'Phát âm rõ ràng, phong thái tự tin và mang tính truyền cảm hứng gắn kết.',
         memoryHook: 'March as one = Đồng lòng tiến bước như một khối thống nhất.'
       }
     ]
@@ -422,7 +422,7 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
         id: 'u38-e1',
         type: 'choice',
         promptEn: 'According to Herzberg’s Motivation-Hygiene Theory, what truly drives staff to achieve extraordinary excellence?',
-        promptVi: 'Theo Thuyết Động lực Herzberg (trang 5 Cẩm nang), điều gì thực sự thôi thúc nhân viên bứt phá xuất sắc?',
+        promptVi: 'Theo Thuyết Động lực Herzberg, điều gì thực sự thôi thúc nhân viên bứt phá xuất sắc?',
         englishSentence: 'Motivators such as challenging work, genuine recognition, and personal growth opportunities.',
         audioText: 'Motivators such as challenging work, genuine recognition, and personal growth opportunities.',
         options: [
@@ -432,7 +432,7 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
         ],
         correctIndex: 0,
         explanation: 'Hygiene factors (Lương, điều kiện làm việc) chỉ giúp không bất mãn; chỉ có Motivators (Sự công nhận thành tích, giao quyền tự chủ, cơ hội thăng tiến) mới thổi bùng ngọn lửa cống hiến hết mình.',
-        whyWrong: 'Trang 69 Cẩm nang nhấn mạnh: "Khen thưởng kịp thời sẽ thúc đẩy nhân viên nỗ lực hơn nữa để đạt được kết quả vượt trội."',
+        whyWrong: 'Quy tắc quản trị Vikoda: "Khen thưởng kịp thời và xứng đáng sẽ thúc đẩy nhân viên nỗ lực hơn nữa để đạt được kết quả vượt trội."',
         crucialNote: 'Lãnh đạo giỏi là người biết truyền cảm hứng và đánh thức viên ngọc sáng trong mỗi con người.',
         memoryHook: 'Motivators = Động lực nội tại bứt phá đỉnh cao.'
       },
@@ -576,7 +576,7 @@ export const LEVEL_C2_UNITS: UnitLesson[] = [
         phonetics: '/təˈɡɛðər, wiː ˈkɒŋkər njuː həˈraɪznz ænd ˈɛlɪveɪt vɪˈkoʊdə tuː ðə ˈpɪnəkl əv ˈɡloʊbl prɒˈspɛrəti/',
         explanation: '"Together, we conquer new horizons and elevate Vikoda to the pinnacle of global prosperity" (Cùng nhau, chúng ta chinh phục những chân trời mới và đưa Vikoda chạm đến đỉnh cao thịnh vượng toàn cầu).',
         whyWrong: 'Bản lĩnh tinh hoa, sẵn sàng làm chủ mọi cuộc đàm phán thương mại quốc tế.',
-        crucialNote: 'CHÚC MỪNG BẠN! Bạn đã hoàn thành xuất sắc toàn bộ 40 Bài Học Thực Chiến của Vikoda English Pro!',
+        crucialNote: 'CHÚC MỪNG BẠN! Bạn đã hoàn thành xuất sắc toàn bộ 100 Bài Học Thực Chiến của Vikoda English Pro!',
         memoryHook: 'PINNACLE OF PROSPERITY = Đỉnh cao thịnh vượng và vinh quang bất diệt.'
       }
     ]

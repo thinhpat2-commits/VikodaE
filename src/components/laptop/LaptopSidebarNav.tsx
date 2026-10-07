@@ -51,7 +51,7 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
   // Duolingo Proven 4-Pillar Core Navigation
   const navItems = [
     { id: 'path', label: 'LỘ TRÌNH HỌC', icon: Compass, badge: 'Chính' },
-    { id: 'practice', label: 'LUYỆN TẬP & THỰC CHIẾN', icon: Swords, badge: '8 Chế Độ' },
+    { id: 'practice', label: 'LUYỆN TẬP & THỰC CHIẾN', icon: Swords, badge: 'Thực Chiến' },
     { id: 'leaderboard', label: 'BẢNG XẾP HẠNG', icon: Trophy, badge: 'Thi Đua' },
     { id: 'profile', label: 'HỒ SƠ & THÀNH TÍCH', icon: User, badge: 'Chi Tiết' },
   ];
@@ -65,10 +65,7 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
         {/* Brand Logo Header */}
         <div className="px-2 pt-1 pb-1">
           <div className="flex items-center gap-2">
-            <HeaderBrandLogo className="h-8 w-auto" />
-          </div>
-          <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">
-            Enterprise English Pro
+            <HeaderBrandLogo className="w-auto" />
           </div>
         </div>
 
@@ -157,19 +154,17 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
             <span>Trợ Lý Dịch Thuật AI</span>
           </button>
 
-          {/* Admin Portal (Super Admin only) */}
-          {isAuthorizedAdmin && (
-            <button
-              onClick={() => {
-                playSound('click');
-                onOpenAdmin();
-              }}
-              className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-bold text-xs text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors cursor-pointer mt-1"
-            >
-              <ShieldCheck className="w-4 h-4 text-amber-600" />
-              <span>Cổng Quản Trị Admin</span>
-            </button>
-          )}
+          {/* Admin Portal */}
+          <button
+            onClick={() => {
+              playSound('click');
+              onOpenAdmin();
+            }}
+            className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-bold text-xs text-amber-900 bg-amber-50 hover:bg-amber-100 border border-amber-200 transition-colors cursor-pointer mt-1 shadow-2xs"
+          >
+            <ShieldCheck className="w-4 h-4 text-amber-600" />
+            <span>Cổng Quản Trị Admin</span>
+          </button>
         </nav>
       </div>
 

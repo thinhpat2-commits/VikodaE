@@ -6,7 +6,8 @@ import {
   ChevronDown, 
   Volume2, 
   VolumeX,
-  Award
+  Award,
+  ShieldCheck
 } from 'lucide-react';
 import { HeaderBrandLogo } from './brand/VikodaLogos';
 import { CourseLevel } from '../data/curriculumData';
@@ -49,6 +50,7 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
   onGoHome,
   onOpenPlacementTest,
   onOpenProficiency,
+  onOpenAdmin,
   isCloudSynced = false,
 }) => {
   const [isLevelDropdownOpen, setIsLevelDropdownOpen] = useState<boolean>(false);
@@ -117,10 +119,11 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
                   Cấp Độ Khóa Học
                 </div>
                 {[
-                  { id: 'A1', label: 'Cấp độ A1 (Nhập môn)' },
-                  { id: 'A2-B1', label: 'Cấp độ B1 (Mỏ khoáng)' },
-                  { id: 'B2-C1', label: 'Cấp độ C1 (Xuất khẩu)' },
-                  { id: 'C2', label: 'Cấp độ C2 (Bản ngữ CEO)' },
+                  { id: 'A1', label: 'A1: Cơ Bản Văn Phòng' },
+                  { id: 'A2', label: 'A2: Đa Phòng Ban' },
+                  { id: 'B1', label: 'B1: Đại Sứ Đảnh Thạnh' },
+                  { id: 'B2', label: 'B2: Bán Hàng B2B' },
+                  { id: 'C1-C2', label: 'C1-C2: Xuất Khẩu Toàn Cầu' },
                 ].map((lvl) => (
                   <button
                     key={lvl.id}
@@ -194,6 +197,20 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
           >
             <Sparkles className="w-4 h-4 text-[#0070D1]" />
           </button>
+
+          {/* Admin Portal Shortcut */}
+          {onOpenAdmin && (
+            <button
+              onClick={() => {
+                playSound('click');
+                onOpenAdmin();
+              }}
+              className="p-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 transition-transform active:scale-95 cursor-pointer"
+              title="Cổng Quản Trị Admin"
+            >
+              <ShieldCheck className="w-4 h-4 text-amber-600" />
+            </button>
+          )}
 
           {/* Quick Placement Test Shortcut */}
           {onOpenPlacementTest && (

@@ -252,6 +252,66 @@ export const clearOfflineQueueItem = async (itemId: string): Promise<void> => {
 };
 
 /**
+ * Completely purge and reset offline data for a user in IndexedDB and LocalStorage
+ * Ensures F5 cannot resurrect old progress after an Admin Reset
+ */
+export const resetOfflineUserData = async (userId: string): Promise<void> => {
+  const storeKey = `stats_${userId}`;
+  const profileKey = `profile_${userId}`;
+  const now = Date.now() + 86400000; // Future-dated timestamp to beat any stale cloud read
+
+  try {
+    const db = await openOfflineDB();
+    
+    // Purge gamification_state
+    const txStats = db.transaction('gamification_state', 'readwrite');
+    const statsStore = txStats.objectStore('gamification_state');
+    statsStore.delete(storeKey);
+    statsStore.delete('current_user_stats');
+    // Save fresh zero state
+    statsStore.put({
+      key: storeKey,
+      xp: 0,
+      gems: 0,
+      energy: 5,
+      streakDays: 0,
+      rank: 'Tân Binh Đảnh Thạnh',
+      completedNodeIds: [],
+      lastActiveDate: new Date().toISOString().split('T')[0],
+      highestDrillScore: 0,
+      practiceStats: {
+        totalPracticeCount: 0,
+        repetitionCount: 0,
+        speakingExercisesCompleted: 0,
+        listeningExercisesCompleted: 0,
+        perfectThreeStarUnits: 0,
+        totalDrillsCompleted: 0,
+        totalVoiceSessions: 0,
+        lastPracticeTimestamp: now,
+      },
+      updatedAt: now,
+      deviceId: getDeviceId(),
+    });
+
+    // Purge user_profile
+    const txProfile = db.transaction('user_profile', 'readwrite');
+    const profileStore = txProfile.objectStore('user_profile');
+    profileStore.delete(profileKey);
+    profileStore.delete('active_profile');
+  } catch (err) {
+    console.warn('IndexedDB reset notice:', err);
+  }
+
+  // Clear all localStorage keys for this user
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem(`vikoda_stats_${userId}`);
+    localStorage.removeItem(`vikoda_profile_${userId}`);
+    localStorage.removeItem('vikoda_offline_stats_backup');
+    localStorage.removeItem('vikoda_offline_profile_backup');
+  }
+};
+
+/**
  * Last-Write-Wins Conflict Resolution
  */
 export const resolveStateConflict = (
@@ -274,14 +334,15 @@ export const resolveStateConflict = (
   if (!cloud) return local!;
   if (!local) {
     return {
-      xp: cloud.xp || 200,
-      gems: cloud.gems || 50,
+      xp: cloud.xp !== undefined ? cloud.xp : 200,
+      gems: cloud.gems !== undefined ? cloud.gems : 50,
       energy: 5,
-      streakDays: cloud.streak || 1,
+      streakDays: cloud.streak !== undefined ? cloud.streak : 1,
       rank: 'Chiến Binh Vikoda',
-      completedNodeIds: cloud.completedLessons || ['unit-1'],
+      completedNodeIds: cloud.completedLessons !== undefined ? cloud.completedLessons : [],
       lastActiveDate: new Date().toISOString().split('T')[0],
-      highestDrillScore: 200,
+      highestDrillScore: (cloud as any).highestDrillScore !== undefined ? (cloud as any).highestDrillScore : 0,
+      updatedAt: cloud.updatedAt || Date.now(),
     };
   }
 
@@ -290,20 +351,20 @@ export const resolveStateConflict = (
   const cloudTime = cloud.updatedAt || 0;
 
   if (cloudTime >= localTime) {
+    // Cloud is newer (e.g. Admin reset or updated from another verified device)
     return {
       ...local,
-      xp: Math.max(local.xp, cloud.xp || 0),
-      gems: Math.max(local.gems, cloud.gems || 0),
-      streakDays: Math.max(local.streakDays, cloud.streak || 0),
-      completedNodeIds: Array.from(new Set([...local.completedNodeIds, ...(cloud.completedLessons || [])])),
+      xp: cloud.xp !== undefined ? cloud.xp : local.xp,
+      gems: cloud.gems !== undefined ? cloud.gems : local.gems,
+      streakDays: cloud.streak !== undefined ? cloud.streak : local.streakDays,
+      completedNodeIds: cloud.completedLessons !== undefined ? cloud.completedLessons : local.completedNodeIds,
+      updatedAt: cloudTime,
     };
   } else {
+    // Local has newer edits
     return {
       ...local,
-      xp: Math.max(local.xp, cloud.xp || 0),
-      gems: Math.max(local.gems, cloud.gems || 0),
-      streakDays: Math.max(local.streakDays, cloud.streak || 0),
-      completedNodeIds: Array.from(new Set([...local.completedNodeIds, ...(cloud.completedLessons || [])])),
+      updatedAt: localTime,
     };
   }
 };

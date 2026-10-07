@@ -315,17 +315,17 @@ export const PreMeetingToolkitModal: React.FC<PreMeetingToolkitModalProps> = ({
                   className="p-3.5 rounded-2xl bg-white border-2 border-slate-200 hover:border-sky-300 transition-all space-y-2 shadow-2xs"
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <div className="space-y-1 flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="w-5 h-5 rounded-full bg-[#009FE3] text-white text-[10px] font-black flex items-center justify-center shrink-0">
+                    <div className="space-y-1 flex-1 min-w-0">
+                      <div className="flex items-start gap-2">
+                        <span className="w-5 h-5 rounded-full bg-[#009FE3] text-white text-[10px] font-black flex items-center justify-center shrink-0 mt-0.5">
                           {pIdx + 1}
                         </span>
-                        <p className="text-xs font-black text-slate-900 leading-snug">
+                        <p className="text-xs font-black text-slate-900 leading-snug break-words flex-1">
                           {phrase.en}
                         </p>
                       </div>
 
-                      <p className="text-[11px] text-slate-500 font-medium pl-7 leading-relaxed">
+                      <p className="text-[11px] text-slate-500 font-medium pl-7 leading-relaxed break-words">
                         {phrase.vi}
                       </p>
                     </div>

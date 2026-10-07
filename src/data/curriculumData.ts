@@ -25,6 +25,7 @@ export interface LessonExercise {
   options?: string[]; // for choice, listen_choice, fill_blank
   correctIndex?: number;
   blankWord?: string; // the word to be filled in for fill_blank
+  vietnameseMeaning?: string; // Nghĩa tiếng Việt chuẩn xác của câu tiếng Anh
   explanation: string;
   // Deep learning pedagogical fields:
   whyWrong?: string; // Tại sao sai & lỗi phổ biến người Việt hay mắc
@@ -73,24 +74,16 @@ export interface UnitLesson {
 }
 
 import { EXPANDED_LESSON_EXERCISES } from './curriculumExtensions/globalCurriculumExpansion';
+import { COMPREHENSIVE_EXPANSION_EXERCISES } from './curriculumExtensions/comprehensiveCurriculumExpansion';
+import { LEVEL_A2B1_UNITS } from './curriculumLevels/levelA2B1';
+import { LEVEL_B2C1_UNITS } from './curriculumLevels/levelB2C1';
 
-// 40 Comprehensive Units across 5 Progressive Workplace & Business Levels (Units 1 to 40)
-const BASE_CURRICULUM: UnitLesson[] = [
-  ...LEVEL_A1_UNITS,
-  ...LEVEL_A2_UNITS,
-  ...LEVEL_B1_UNITS,
-  ...LEVEL_B2_UNITS,
-  ...LEVEL_C2_UNITS
-];
+import { MASTER_100_UNITS } from './curriculumLevels/master100Units';
 
-// VIKODA_CURRICULUM: Enriched with 120+ elite business exercises (Zero deletion of old content)
-export const VIKODA_CURRICULUM: UnitLesson[] = BASE_CURRICULUM.map((unit) => {
-  const bonus = EXPANDED_LESSON_EXERCISES[unit.id] || [];
-  return {
-    ...unit,
-    exercises: [...unit.exercises, ...bonus]
-  };
-});
+// 100 CANONICAL UNITS (UNITS 1 TO 100) ACROSS 5 PROGRESSIVE LEVELS (20 UNITS PER LEVEL)
+// A1 (1-20), A2 (21-40), B1 (41-60), B2 (61-80), C1-C2 (81-100)
+// 65% International Business/Workplace English + 35% Vikoda Danh Thanh Mineral Depth
+export const VIKODA_CURRICULUM: UnitLesson[] = MASTER_100_UNITS;
 
 export const VIKODA_SIDE_QUESTS: SideQuestItem[] = [
   {

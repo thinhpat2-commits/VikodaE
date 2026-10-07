@@ -160,26 +160,42 @@ export const PersonalCoachModal: React.FC<PersonalCoachModalProps> = ({
         {activeTab === 'daily_coach' && (
           <div className="p-6 md:p-8 overflow-y-auto space-y-6 flex-1">
             
-            {/* Mascot Greeting & Motivation */}
-            <div className="flex flex-col md:flex-row items-center gap-6 p-6 rounded-3xl bg-gradient-to-br from-sky-50 to-indigo-50/50 border border-sky-200">
-              <VikoMascot size="lg" mood="proud" />
+            {/* Executive AI Coach Greeting & Motivation */}
+            <div className="flex flex-col md:flex-row items-center gap-6 p-6 rounded-3xl bg-gradient-to-br from-slate-900 via-[#003B70] to-[#005A9C] text-white border border-sky-300/30 shadow-lg relative overflow-hidden">
+              <div className="relative shrink-0 flex items-center justify-center">
+                <div className="w-24 h-24 rounded-2xl bg-gradient-to-tr from-sky-400 to-indigo-300 p-0.5 shadow-xl">
+                  <div className="w-full h-full rounded-2xl bg-slate-900 overflow-hidden flex flex-col items-center justify-center relative">
+                    <img 
+                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&auto=format&fit=crop&q=80" 
+                      alt="AI Executive Coach"
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute bottom-1 right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-slate-900" title="Online Sẵn Sàng" />
+                  </div>
+                </div>
+              </div>
               <div className="space-y-2 text-center md:text-left flex-1">
-                <span className="px-3 py-1 bg-[#0072CE] text-white rounded-full text-xs font-black uppercase tracking-wider">
-                  Lời Khuyên Hôm Nay Từ Huấn Luyện Viên
-                </span>
-                <h3 className="text-xl md:text-2xl font-black text-slate-900">
+                <div className="flex items-center justify-center md:justify-start gap-2 flex-wrap">
+                  <span className="px-3 py-1 bg-sky-500/30 text-sky-200 border border-sky-400/40 rounded-full text-xs font-black uppercase tracking-wider">
+                    Dr. Katherine Vance • Cố Vấn Cao Cấp
+                  </span>
+                  <span className="text-[10px] font-black text-amber-300 bg-amber-400/20 px-2 py-0.5 rounded-md border border-amber-400/30">
+                    Cambridge B2B Standard
+                  </span>
+                </div>
+                <h3 className="text-xl md:text-2xl font-black text-white">
                   Chào {currentUserProfile.fullName}!
                 </h3>
-                <p className="text-sm md:text-base text-slate-700 leading-relaxed font-medium">
-                  "Với tinh thần <span className="font-extrabold text-[#005A9C]">Ngọc Trong Đá</span>, chỉ cần bạn dành đều đặn <span className="font-bold text-amber-600">{dailyMinutes} phút</span> mỗi ngày, các phản xạ đàm phán quốc tế sẽ ăn sâu vào tiềm thức."
+                <p className="text-sm md:text-base text-sky-100 leading-relaxed font-medium">
+                  "Với chiến lược chuẩn mực, chỉ cần bạn duy trì đều đặn <span className="font-bold text-amber-300">{dailyMinutes} phút</span> mỗi ngày, phản xạ đàm phán quốc tế sẽ hình thành tự nhiên và vững chắc."
                 </p>
                 <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-1">
-                  <span className="text-xs font-bold text-slate-600 bg-white px-3 py-1.5 rounded-xl border border-slate-200 flex items-center space-x-1.5">
+                  <span className="text-xs font-bold text-slate-800 bg-white/95 px-3 py-1.5 rounded-xl border border-white/40 flex items-center space-x-1.5 shadow-xs">
                     <Flame className="w-4 h-4 text-amber-500" />
                     <span>Chuỗi: {gamificationState.streakDays} ngày liên tiếp</span>
                   </span>
-                  <span className="text-xs font-bold text-slate-600 bg-white px-3 py-1.5 rounded-xl border border-slate-200 flex items-center space-x-1.5">
-                    <Award className="w-4 h-4 text-sky-600" />
+                  <span className="text-xs font-bold text-slate-800 bg-white/95 px-3 py-1.5 rounded-xl border border-white/40 flex items-center space-x-1.5 shadow-xs">
+                    <Award className="w-4 h-4 text-[#0070D1]" />
                     <span>Mục tiêu tuần: {selectedDays.length} ngày</span>
                   </span>
                 </div>

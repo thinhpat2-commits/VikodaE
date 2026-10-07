@@ -257,7 +257,7 @@ export const LEVEL_A2B1_UNITS: UnitLesson[] = [
           'Only if the water is transported by tank trucks to another city.'
         ],
         correctIndex: 0,
-        explanation: 'Trang 19 Cẩm nang đào tạo ghi rõ: Chỉ được ghi "Thiên nhiên" khi và chỉ khi "Khai thác và đóng chai trực tiếp tại nguồn".',
+        explanation: 'Quy chuẩn QCVN quy định rõ: Chỉ được ghi "Thiên nhiên" khi và chỉ khi "Khai thác và đóng chai trực tiếp tại nguồn".',
         whyWrong: 'Nhiều nhãn hiệu khác phải chở xe bồn đi xa nên mất quyền ghi chữ "Khoáng thiên nhiên" theo chuẩn QCVN 6-1:2010/BYT.',
         crucialNote: 'Đây là vũ khí pháp lý cực mạnh để chứng minh tính nguyên bản và vô trùng của Vikoda.',
         memoryHook: 'Bottled at source = Đóng chai tại nguồn - Chứng chỉ vàng chất lượng.'
@@ -315,7 +315,7 @@ export const LEVEL_A2B1_UNITS: UnitLesson[] = [
           'Only drink Vikoda if you want heavy surgery.'
         ],
         correctIndex: 0,
-        explanation: 'Trang 25 Cẩm nang đào tạo: Muối magiê trong nước khoáng giúp tăng bài tiết và đào thải canxi qua đường tiểu, chống tạo sỏi.',
+        explanation: 'Cơ chế y khoa chứng minh: Muối magiê trong nước khoáng giúp tăng bài tiết và đào thải canxi qua đường tiểu, chống tạo sỏi.',
         whyWrong: 'Canxi và magiê trong Vikoda tan hoàn toàn ở mọi nhiệt độ cơ thể dưới dạng Ca(HCO3)2 và Mg(HCO3)2.',
         crucialNote: 'Trích dẫn nghiên cứu của Giảng viên Cao học Hóa học Phạm Hữu Đức để tạo độ uy tín tối thượng.',
         memoryHook: 'Magnesium aids excretion = Magie thúc đẩy đào thải, ngăn ngừa sỏi thận.'
@@ -373,7 +373,7 @@ export const LEVEL_A2B1_UNITS: UnitLesson[] = [
           'It destroys all vitamins in the drink.'
         ],
         correctIndex: 0,
-        explanation: 'Trang 31 Cẩm nang: Tính kiềm nhẹ làm dịu vị chua gắt của nước ép cam/chanh, giữ nguyên hương vị thanh mát tự nhiên.',
+        explanation: 'Đặc tính kiềm tự nhiên làm dịu vị chua gắt của nước ép cam/chanh, giữ nguyên hương vị thanh mát tự nhiên.',
         whyWrong: 'Bọt ga CO2 tự nhiên mịn màng kích thích gai vị giác mà không gây rát họng như nước ngọt công nghiệp.',
         crucialNote: 'Các Barista và Bartender cao cấp tại các khách sạn 5 sao rất chuộng dùng Đảnh Thạnh làm chất nền pha chế.',
         memoryHook: 'Mixology base = Chất nền pha chế đồ uống đỉnh cao.'
@@ -431,7 +431,7 @@ export const LEVEL_A2B1_UNITS: UnitLesson[] = [
           'Throw away all marketing tools.'
         ],
         correctIndex: 0,
-        explanation: 'Trang 44 Cẩm nang bán hàng: Đồng bộ dữ liệu phần mềm DMS, kiểm tra hàng tồn kho NPP, các chương trình khuyến mãi và chuẩn bị Sales Tool Kit.',
+        explanation: 'Quy trình chuẩn bán hàng: Đồng bộ dữ liệu phần mềm DMS, kiểm tra hàng tồn kho NPP, các chương trình khuyến mãi và chuẩn bị Sales Tool Kit.',
         whyWrong: 'Rời kho đúng 8:00 sáng để đảm bảo tiến độ ghé thăm toàn bộ tuyến bán hàng trong ngày.',
         crucialNote: 'Check-in bằng 1 tấm hình selfie trước cửa hiệu để xác nhận lộ trình thực địa.',
         memoryHook: 'Sync DMS at 8:00 AM = Kỷ luật mở đầu ngày bán hàng thắng lợi.'
@@ -458,7 +458,7 @@ export const LEVEL_A2B1_UNITS: UnitLesson[] = [
         englishSentence: 'Good morning! I am here on schedule with an exciting profit idea.',
         audioText: 'Good morning! I am here on schedule with an exciting profit idea.',
         phonetics: '/ɡʊd ˈmɔːrnɪŋ! aɪ æm hɪər ɒn ˈskɛdʒuːl wɪð æn ɪkˈsaɪtɪŋ ˈprɒfɪt aɪˈdɪə/',
-        explanation: 'Trang 45 Cẩm nang: Chào tươi vui, nhấn mạnh "đúng lịch hẹn" và mở màn bằng lợi nhuận thay vì hỏi chung chung "hôm nay mua gì không".',
+        explanation: 'Nghệ thuật tiếp cận điểm bán: Chào tươi vui, nhấn mạnh "đúng lịch hẹn" và mở màn bằng lợi nhuận thay vì hỏi chung chung "hôm nay mua gì không".',
         whyWrong: 'Tuyệt đối tránh câu: "Hôm nay chị có mua gì không chị ơi?" - dễ bị từ chối ngay lập tức.',
         crucialNote: 'Khách hàng quan tâm đến việc kiếm thêm tiền và làm hài lòng thực khách.',
         memoryHook: 'Profit idea = Ý tưởng kiếm tiền mới giúp chủ quán gia tăng doanh số.'
@@ -480,7 +480,7 @@ export const LEVEL_A2B1_UNITS: UnitLesson[] = [
         id: 'u19-e1',
         type: 'choice',
         promptEn: 'According to Vikoda merchandising standards, what are the two ideal vertical display levels?',
-        promptVi: 'Theo chuẩn trưng bày trang 57, hai tầm độ cao nào là "vị trí vàng" kích thích mua hàng tốt nhất?',
+        promptVi: 'Theo chuẩn trưng bày chuẩn hóa của Vikoda, hai tầm độ cao nào là "vị trí vàng" kích thích mua hàng tốt nhất?',
         englishSentence: 'Eye level and reach level are the prime golden zones for merchandising.',
         audioText: 'Eye level and reach level are the prime golden zones for merchandising.',
         options: [
@@ -497,16 +497,16 @@ export const LEVEL_A2B1_UNITS: UnitLesson[] = [
       {
         id: 'u19-e2',
         type: 'word_order',
-        promptEn: 'State the rule of AVA: Make products sing on store shelves:',
-        promptVi: 'Sắp xếp câu: "Trưng bày ấn tượng tạo cảm giác sản phẩm đang ca hát trên quầy kệ."',
-        englishSentence: 'Impressive display creates a feeling that products are singing on shelves.',
-        audioText: 'Impressive display creates a feeling that products are singing on shelves.',
-        phonetics: '/ɪmˈprɛsɪv dɪsˈpleɪ kriˈeɪts ə ˈfiːlɪŋ ðæt ˈprɒdʌkts ɑːr ˈsɪŋɪŋ ɒn ʃɛlvz/',
-        wordPool: ['Impressive', 'display', 'creates', 'a', 'feeling', 'that', 'products', 'are', 'singing', 'on', 'shelves.', 'sleeping'],
-        explanation: 'Trang 55 Cẩm nang: Tiêu chuẩn Visibility đòi hỏi diện tích bố trí khoa học, sạch sẽ, mặt nhãn hướng ra ngoài như đang ca hát chào mời khách.',
+        promptEn: 'State the rule of AVA: Make products stand out prominently on store shelves:',
+        promptVi: 'Sắp xếp câu: "Trưng bày ấn tượng giúp sản phẩm nổi bật và thu hút khách hàng trên quầy kệ."',
+        englishSentence: 'Impressive display ensures products stand out prominently on shelves.',
+        audioText: 'Impressive display ensures products stand out prominently on shelves.',
+        phonetics: '/ɪmˈprɛsɪv dɪsˈpleɪ ɪnˈʃʊərz ˈprɒdʌkts stænd aʊt ˈprɒmɪnəntli ɒn ʃɛlvz/',
+        wordPool: ['Impressive', 'display', 'ensures', 'products', 'stand', 'out', 'prominently', 'on', 'shelves.', 'sleeping', 'singing'],
+        explanation: 'Tiêu chuẩn Visibility đòi hỏi diện tích bố trí khoa học, sạch sẽ, mặt nhãn hướng ra ngoài để tối đa hóa sự chú ý của khách hàng.',
         whyWrong: 'Chai nước bám bụi hoặc quay lưng sẽ khiến khách hàng có cảm giác hàng tồn đọng lâu ngày.',
         crucialNote: 'Lau chùi sạch bụi bẩn và chụp ảnh góc rộng báo cáo lên hệ thống DMS.',
-        memoryHook: 'Products singing = Sản phẩm tỏa sáng ca hát trên quầy.'
+        memoryHook: 'Prominent display = Trưng bày nổi bật, thu hút khách hàng.'
       },
       {
         id: 'u19-e3',

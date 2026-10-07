@@ -236,12 +236,12 @@ export const HandsFreeCommuteModal: React.FC<HandsFreeCommuteModalProps> = ({
           </span>
 
           {/* English Phrase */}
-          <div className="space-y-3 max-w-sm">
-            <h2 className="text-lg sm:text-xl font-black text-white leading-snug tracking-tight">
+          <div className="space-y-3 max-w-sm w-full">
+            <h2 className="text-lg sm:text-xl font-black text-white leading-snug tracking-tight break-words">
               "{currentPhrase.en}"
             </h2>
 
-            <p className="text-xs sm:text-sm text-slate-400 font-medium">
+            <p className="text-xs sm:text-sm text-slate-400 font-medium break-words">
               {currentPhrase.vi}
             </p>
           </div>

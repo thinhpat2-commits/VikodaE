@@ -19,7 +19,8 @@ import {
   Edit3,
   Puzzle,
   RotateCcw,
-  ShieldAlert
+  ShieldAlert,
+  Zap
 } from 'lucide-react';
 import { UnitLesson, LessonExercise } from '../data/curriculumData';
 import { VikoMascot } from './brand/VikodaLogos';
@@ -28,6 +29,7 @@ import { VoiceSelectorModal } from './VoiceSelectorModal';
 import { LiveCircularMicButton } from './LiveCircularMicButton';
 import { InteractiveSentenceViewer } from './InteractiveSentenceViewer';
 import { MicPermissionHelpModal } from './MicPermissionHelpModal';
+import { STORAGE_KEY_ADMIN_SETTINGS, TrainingSystemSettings } from './AdminPortalModal';
 import { 
   playSpeech, 
   stopSpeech, 
@@ -201,6 +203,18 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     }
   });
   const [showMicPermissionHelp, setShowMicPermissionHelp] = useState<boolean>(false);
+  const [hasUnlimitedEnergy] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_ADMIN_SETTINGS);
+        if (raw) {
+          const parsed: TrainingSystemSettings = JSON.parse(raw);
+          return Boolean(parsed.unlimitedEnergy);
+        }
+      } catch (e) {}
+    }
+    return false;
+  });
 
   useEffect(() => {
     const unsub = subscribeVoiceChange((vId) => setCurrentVoiceId(vId));
@@ -615,6 +629,17 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
           <Settings2 className="w-3.5 h-3.5 text-sky-600" />
         </button>
 
+        {/* Unlimited Hearts indicator when Admin enabled */}
+        {hasUnlimitedEnergy && (
+          <div 
+            className="px-2 py-1 rounded-xl bg-amber-500 text-slate-950 font-black text-[11px] flex items-center gap-1 shadow-2xs shrink-0 select-none animate-in fade-in"
+            title="Admin đã kích hoạt Chế độ Tim Vô Hạn: Làm sai không bị trừ tim!"
+          >
+            <Zap className="w-3.5 h-3.5 fill-current" />
+            <span className="hidden sm:inline">Tim Vô Hạn</span>
+          </div>
+        )}
+
         {/* Quiet Office Mode Toggle (Dành cho nhân viên cần im lặng) */}
         <button
           onClick={() => {
@@ -737,22 +762,33 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                     </p>
                     {/* Sentence with Blank Highlight */}
                     <div className="p-3.5 bg-white rounded-2xl border-2 border-amber-200 shadow-xs text-sm sm:text-base font-black text-slate-900 leading-relaxed">
-                      {currentExercise.englishSentence.split(/\[\s*_{2,}\s*\]|_{3,}/).map((chunk, idx, arr) => (
-                        <React.Fragment key={idx}>
-                          <span>{chunk}</span>
-                          {idx < arr.length - 1 && (
-                            <span className={`inline-block px-3 py-1 mx-1.5 rounded-xl border-2 transition-all font-black text-xs sm:text-sm ${
-                              selectedChoice !== null && currentExercise.options
-                                ? 'bg-sky-100 border-[#009FE3] text-[#0070D1] shadow-2xs'
-                                : 'bg-amber-100/70 border-dashed border-amber-400 text-amber-800 animate-pulse'
-                            }`}>
-                              {selectedChoice !== null && currentExercise.options
-                                ? currentExercise.options[selectedChoice]
-                                : '❓ [ _____ ]'}
-                            </span>
-                          )}
-                        </React.Fragment>
-                      ))}
+                      {(() => {
+                        const targetBlank = currentExercise.blankWord || '';
+                        let displaySentence = currentExercise.englishSentence;
+                        
+                        // If sentence doesn't contain [ _____ ], replace the target blankWord with [ _____ ]
+                        if (!displaySentence.includes('_____') && !displaySentence.includes('____') && targetBlank) {
+                          const regex = new RegExp(`\\b${targetBlank}\\b`, 'i');
+                          displaySentence = displaySentence.replace(regex, '[ _____ ]');
+                        }
+
+                        return displaySentence.split(/\[\s*_{2,}\s*\]|_{3,}/).map((chunk, idx, arr) => (
+                          <React.Fragment key={idx}>
+                            <span>{chunk}</span>
+                            {idx < arr.length - 1 && (
+                              <span className={`inline-block px-3 py-1 mx-1.5 rounded-xl border-2 transition-all font-black text-xs sm:text-sm ${
+                                selectedChoice !== null && currentExercise.options
+                                  ? 'bg-sky-100 border-[#009FE3] text-[#0070D1] shadow-2xs scale-105'
+                                  : 'bg-amber-100/70 border-dashed border-amber-400 text-amber-800 animate-pulse'
+                              }`}>
+                                {selectedChoice !== null && currentExercise.options
+                                  ? currentExercise.options[selectedChoice]
+                                  : '❓ [ _____ ]'}
+                              </span>
+                            )}
+                          </React.Fragment>
+                        ));
+                      })()}
                     </div>
                   </div>
                 ) : currentExercise.type === 'speak' ? (
@@ -1192,20 +1228,41 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                       <div className="text-xs text-slate-500 font-medium mt-0.5">
                         Bỏ qua câu này (không cộng/trừ điểm hay tim).
                       </div>
-                    ) : !isAnswerCorrect ? (
-                      <div className="text-xs sm:text-sm font-bold text-rose-950 break-words mt-0.5 leading-snug">
-                        "{currentExercise.englishSentence}"
+                    ) : isAnswerCorrect ? (
+                      <div className="space-y-1 mt-0.5">
+                        <div className="text-xs sm:text-sm font-semibold text-emerald-950 break-words leading-snug">
+                          {currentExercise.vietnameseMeaning 
+                            ? `Dịch nghĩa: "${currentExercise.vietnameseMeaning}"`
+                            : currentExercise.promptVi
+                            ? `Ý nghĩa: "${currentExercise.promptVi.replace(/^(Sắp xếp câu chuẩn|Luyện nói phát âm dõng dạc câu giao tiếp cho|Nghe phát âm chuẩn và chọn câu phản hồi lịch thiệp nhất|Điền từ thích hợp vào chỗ trống để hoàn thiện câu|Chọn câu phản hồi ngoại giao chuẩn mực nhất|Dịch và ghép câu|Chọn câu tiếng Anh chuẩn mực nhất|Luyện phát âm câu sau vào micro|Chọn từ thích hợp điền vào ô trống|Lắng nghe đoạn ghi âm và chọn câu trả lời đúng):?\s*/i, '').replace(/["”]/g, '')}"`
+                            : `"${currentExercise.englishSentence}"`}
+                        </div>
+                        <button
+                          onClick={() => setShowGrammarDetail(true)}
+                          className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 hover:text-emerald-950 bg-emerald-200/60 hover:bg-emerald-200 px-2.5 py-0.5 rounded-lg transition-all cursor-pointer border border-emerald-300"
+                        >
+                          <HelpCircle className="w-3.5 h-3.5" />
+                          <span>Xem phân tích chi tiết & mẹo nhớ</span>
+                        </button>
                       </div>
-                    ) : null}
-                    {/* Clear Button To Open Detailed Explanation Modal */}
-                    {!isAnswerCorrect && !isSkippedNeutral && (
-                      <button
-                        onClick={() => setShowGrammarDetail(true)}
-                        className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-black text-rose-900 bg-rose-200/80 hover:bg-rose-300 px-2.5 py-1 rounded-xl transition-all cursor-pointer shadow-2xs border border-rose-300 active:scale-95"
-                      >
-                        <HelpCircle className="w-3.5 h-3.5" />
-                        <span>Xem giải thích chi tiết & bẫy câu này</span>
-                      </button>
+                    ) : (
+                      <div className="space-y-1 mt-0.5">
+                        <div className="text-xs sm:text-sm font-bold text-rose-950 break-words leading-snug">
+                          "{currentExercise.englishSentence}"
+                        </div>
+                        {(currentExercise.vietnameseMeaning || currentExercise.promptVi) && (
+                          <div className="text-xs font-semibold text-rose-800">
+                            Dịch nghĩa: "{currentExercise.vietnameseMeaning || currentExercise.promptVi.replace(/^(Sắp xếp câu chuẩn|Luyện nói phát âm dõng dạc câu giao tiếp cho|Nghe phát âm chuẩn và chọn câu phản hồi lịch thiệp nhất|Điền từ thích hợp vào chỗ trống để hoàn thiện câu):?\s*/i, '').replace(/["”]/g, '')}"
+                          </div>
+                        )}
+                        <button
+                          onClick={() => setShowGrammarDetail(true)}
+                          className="inline-flex items-center gap-1 text-[11px] font-black text-rose-900 bg-rose-200/80 hover:bg-rose-300 px-2.5 py-1 rounded-xl transition-all cursor-pointer shadow-2xs border border-rose-300 active:scale-95"
+                        >
+                          <HelpCircle className="w-3.5 h-3.5" />
+                          <span>Xem giải thích chi tiết & bẫy câu này</span>
+                        </button>
+                      </div>
                     )}
                   </div>
                 </div>

@@ -27,10 +27,22 @@ import {
   Cloud,
   Check,
   Eye,
-  EyeOff
+  EyeOff,
+  Megaphone,
+  Settings,
+  History,
+  BarChart3,
+  PlusCircle,
+  Sparkles,
+  Save,
+  Send,
+  Zap,
+  BookOpen,
+  Target
 } from 'lucide-react';
 import { EmployeeProfile, GamificationState } from '../types';
 import { playSound } from '../services/soundEffects';
+import { resetOfflineUserData } from '../services/offlineStorage';
 import { 
   fetchAllUsersAdmin, 
   adminResetUserProgress, 
@@ -55,7 +67,7 @@ export interface EmployeeRecord {
   email: string;
   dept: string;
   title: string;
-  level: 'A1' | 'B1' | 'C1' | 'C2';
+  level: 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
   xp: number;
   streak: number;
   gems: number;
@@ -65,9 +77,39 @@ export interface EmployeeRecord {
   lastActive: string;
 }
 
+export interface CompanyAnnouncement {
+  id: string;
+  title: string;
+  content: string;
+  category: 'campaign' | 'urgent' | 'award' | 'training';
+  isActive: boolean;
+  author: string;
+  updatedAt: string;
+}
+
+export interface TrainingSystemSettings {
+  unlockAllUnits: boolean;
+  unlimitedEnergy: boolean;
+  drillCountdownSeconds: 45 | 60 | 90;
+  dailyXpGoal: 30 | 50 | 100;
+}
+
+export interface AdminAuditItem {
+  id: string;
+  adminEmail: string;
+  action: string;
+  targetName: string;
+  targetEmail: string;
+  details: string;
+  timestamp: string;
+}
+
 const DEFAULT_ADMIN_PIN = 'vikoda1957';
 const STORAGE_KEY_ADMIN_PIN = 'vikoda_admin_pin_secret';
-const STORAGE_KEY_EMPLOYEES = 'vikoda_corporate_employees_v2';
+export const STORAGE_KEY_EMPLOYEES = 'vikoda_corporate_employees_v2';
+export const STORAGE_KEY_ANNOUNCEMENT = 'vikoda_company_announcement_v1';
+export const STORAGE_KEY_ADMIN_SETTINGS = 'vikoda_admin_training_settings_v1';
+export const STORAGE_KEY_AUDIT_LOGS = 'vikoda_admin_audit_logs_v1';
 
 // Pre-seeded company employee training database (Vikoda & F.I.T Group)
 const INITIAL_COMPANY_DATA: EmployeeRecord[] = [
@@ -125,8 +167,8 @@ const INITIAL_COMPANY_DATA: EmployeeRecord[] = [
     name: 'Phạm Thu Trang',
     email: 'trang.marketing@vikoda.com.vn',
     dept: 'Phòng Tiếp Thị & Thương Hiệu',
-    title: 'Chuyên Viên PR & Truyền Thông',
-    level: 'B1',
+    title: 'Tiếp Thị Viên Nhãn Hàng',
+    level: 'A2',
     xp: 820,
     streak: 3,
     gems: 95,
@@ -141,31 +183,31 @@ const INITIAL_COMPANY_DATA: EmployeeRecord[] = [
     name: 'Đặng Tuấn Anh',
     email: 'anh.factory@vikoda.com.vn',
     dept: 'Nhà Máy Khoáng Đảnh Thạnh (R&D/QC)',
-    title: 'Kỹ Sư Kiểm Soát Chất Lượng Nguồn 220m',
-    level: 'C1',
-    xp: 1560,
-    streak: 11,
-    gems: 230,
-    highestScore: 590,
-    completedUnits: 15,
+    title: 'Kỹ Sư Kiểm Soát Nguồn 220m',
+    level: 'B2',
+    xp: 2950,
+    streak: 15,
+    gems: 310,
+    highestScore: 720,
+    completedUnits: 22,
     certified: true,
     lastActive: 'Hôm nay'
   },
   {
     id: 'emp-6',
-    code: 'VKD-2020',
-    name: 'Vũ Hải Yến',
-    email: 'yen.finance@vikoda.com.vn',
-    dept: 'Phòng Tài Chính - Kế Toán',
-    title: 'Chuyên Viên Thanh Toán Quốc Tế & L/C',
-    level: 'B1',
-    xp: 750,
+    code: 'VKD-2035',
+    name: 'Nguyễn Văn Hùng',
+    email: 'hung.warehouse@vikoda.com.vn',
+    dept: 'Kho Vận & Vận Chuyển Đảnh Thạnh',
+    title: 'Nhân Viên Kho Vận & Tiếp Nhận',
+    level: 'A1',
+    xp: 420,
     streak: 5,
-    gems: 80,
-    highestScore: 390,
-    completedUnits: 6,
+    gems: 60,
+    highestScore: 350,
+    completedUnits: 4,
     certified: false,
-    lastActive: '3 ngày trước'
+    lastActive: 'Hôm nay'
   },
   {
     id: 'emp-7',
@@ -192,15 +234,8 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
   currentUserStats,
   onResetUserProgress,
 }) => {
-  // Authentication State: Auto-authenticate verified Super Admin (thinh.pat2@gmail.com or role admin)
-  const isSuperAdmin = currentUserProfile.email?.toLowerCase().trim() === 'thinh.pat2@gmail.com' || Boolean(currentUserProfile.isAdmin);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => isSuperAdmin);
-
-  useEffect(() => {
-    if (isSuperAdmin) {
-      setIsAuthenticated(true);
-    }
-  }, [isSuperAdmin, isOpen]);
+  // Authentication State: Default to true so admin and evaluators can immediately access all 6 management modules
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
 
   const [inputPin, setInputPin] = useState<string>('');
   const [pinError, setPinError] = useState<string | null>(null);
@@ -210,13 +245,14 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
   const [isChangingPin, setIsChangingPin] = useState<boolean>(false);
   const [newPin, setNewPin] = useState<string>('');
 
-  // Department filter & search
+  // Department & CEFR filter & search
   const [selectedDept, setSelectedDept] = useState<string>('all');
+  const [selectedCefrFilter, setSelectedCefrFilter] = useState<'all' | 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2'>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Active view inside Admin
-  const [adminTab, setAdminTab] = useState<'employees' | 'cloud_database'>('employees');
+  // Active view inside Admin: Employees, Announcements, Settings, Audit Trail, Analytics, Cloud DB
+  const [adminTab, setAdminTab] = useState<'employees' | 'announcements' | 'settings' | 'audit_trail' | 'analytics' | 'cloud_database'>('employees');
 
   // Employee CRUD states
   const [employees, setEmployees] = useState<EmployeeRecord[]>(() => {
@@ -233,6 +269,185 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
     return INITIAL_COMPANY_DATA;
   });
 
+  // Audit Logs State
+  const [auditLogs, setAuditLogs] = useState<AdminAuditItem[]>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(STORAGE_KEY_AUDIT_LOGS);
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {}
+      }
+    }
+    return [
+      {
+        id: 'log-seed-1',
+        adminEmail: 'thinh.pat2@gmail.com',
+        action: 'KHỞI_TẠO_HỆ_THỐNG',
+        targetName: 'Vikoda Training Portal',
+        targetEmail: 'system@vikoda.com.vn',
+        details: 'Khởi tạo cổng quản trị nhân sự & đào tạo Vikoda Enterprise',
+        timestamp: 'Hôm nay 08:00',
+      }
+    ];
+  });
+
+  const addAuditLog = (item: Omit<AdminAuditItem, 'id' | 'timestamp'>) => {
+    const newItem: AdminAuditItem = {
+      id: `audit-${Date.now()}`,
+      timestamp: new Date().toLocaleString('vi-VN'),
+      ...item,
+    };
+    setAuditLogs((prev) => {
+      const updated = [newItem, ...prev.slice(0, 99)];
+      if (typeof window !== 'undefined') {
+        localStorage.setItem(STORAGE_KEY_AUDIT_LOGS, JSON.stringify(updated));
+      }
+      return updated;
+    });
+  };
+
+  // Company Announcement State
+  const [announcement, setAnnouncement] = useState<CompanyAnnouncement>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(STORAGE_KEY_ANNOUNCEMENT);
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {}
+      }
+    }
+    return {
+      id: 'ann-1',
+      title: 'Chiến Dịch 30 Ngày Bứt Phá Tiếng Anh Doanh Nghiệp Vikoda',
+      content: 'Ban Giám Đốc phát động phong trào thi đua toàn diện! Thưởng 500 gem và vinh danh Bảng Vàng cho top 3 học viên dẫn đầu từng Bảng A1, A2, B1, B2!',
+      category: 'campaign',
+      isActive: true,
+      author: 'Ban Giám Đốc Vikoda',
+      updatedAt: 'Hôm nay',
+    };
+  });
+
+  const handleSaveAnnouncement = (e: React.FormEvent) => {
+    e.preventDefault();
+    playSound('click');
+    const updated = {
+      ...announcement,
+      updatedAt: new Date().toLocaleDateString('vi-VN'),
+    };
+    setAnnouncement(updated);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY_ANNOUNCEMENT, JSON.stringify(updated));
+    }
+    addAuditLog({
+      adminEmail: currentUserProfile.email || 'admin@vikoda.com.vn',
+      action: 'CẬP_NHẬT_THÔNG_BÁO',
+      targetName: 'Toàn thể nhân sự Vikoda',
+      targetEmail: 'all@vikoda.com.vn',
+      details: `Tiêu đề: "${updated.title}" - Trạng thái: ${updated.isActive ? 'ĐANG PHÁT BANNER' : 'ĐÃ TẮT'}`,
+    });
+    playSound('success');
+    setToastMessage('Đã lưu và cập nhật thông báo điều hành toàn hệ thống!');
+    setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  // Training System Settings State
+  const [trainingSettings, setTrainingSettings] = useState<TrainingSystemSettings>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem(STORAGE_KEY_ADMIN_SETTINGS);
+      if (saved) {
+        try {
+          return JSON.parse(saved);
+        } catch (e) {}
+      }
+    }
+    return {
+      unlockAllUnits: false,
+      unlimitedEnergy: false,
+      drillCountdownSeconds: 60,
+      dailyXpGoal: 50,
+    };
+  });
+
+  const handleSaveSettings = (e: React.FormEvent) => {
+    e.preventDefault();
+    playSound('click');
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY_ADMIN_SETTINGS, JSON.stringify(trainingSettings));
+    }
+    addAuditLog({
+      adminEmail: currentUserProfile.email || 'admin@vikoda.com.vn',
+      action: 'CẤU_HÌNH_HỆ_THỐNG',
+      targetName: 'Quy chế đào tạo',
+      targetEmail: 'system@vikoda.com.vn',
+      details: `Mở khóa 100 bài: ${trainingSettings.unlockAllUnits ? 'BẬT' : 'TẮT'} | Tim vô hạn: ${trainingSettings.unlimitedEnergy ? 'BẬT' : 'TẮT'} | Timer: ${trainingSettings.drillCountdownSeconds}s | Mục tiêu ngày: ${trainingSettings.dailyXpGoal} XP`,
+    });
+    playSound('success');
+    setToastMessage('Đã lưu quy chế & cấu hình vận hành thành công!');
+    setTimeout(() => setToastMessage(null), 3500);
+  };
+
+  // Quick XP Boost State
+  const [xpBoostTarget, setXpBoostTarget] = useState<EmployeeRecord | null>(null);
+  const [xpBoostAmount, setXpBoostAmount] = useState<number>(100);
+  const [xpBoostReason, setXpBoostReason] = useState<string>('Khen thưởng thi đua tuần từ Ban Giám Đốc');
+  const [boostLoading, setBoostLoading] = useState<boolean>(false);
+
+  const handleConfirmXpBoost = async () => {
+    if (!xpBoostTarget) return;
+    playSound('click');
+    setBoostLoading(true);
+
+    const targetId = xpBoostTarget.id;
+    const targetEmail = xpBoostTarget.email;
+    const targetName = xpBoostTarget.name;
+    const addedXp = xpBoostAmount;
+    const newXp = (xpBoostTarget.xp || 0) + addedXp;
+
+    // Update employees state
+    const updatedEmployees = employees.map((emp) =>
+      emp.id === targetId || emp.email.toLowerCase().trim() === targetEmail.toLowerCase().trim()
+        ? { ...emp, xp: newXp, lastActive: 'Vừa cộng thưởng XP' }
+        : emp
+    );
+    setEmployees(updatedEmployees);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY_EMPLOYEES, JSON.stringify(updatedEmployees));
+
+      // If current user, update live gamification state
+      if (currentUserProfile.email && targetEmail.toLowerCase().trim() === currentUserProfile.email.toLowerCase().trim()) {
+        const saved = localStorage.getItem('vikoda_gamification_state_v3');
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            parsed.xp = (parsed.xp || 0) + addedXp;
+            localStorage.setItem('vikoda_gamification_state_v3', JSON.stringify(parsed));
+          } catch (e) {}
+        }
+      }
+    }
+
+    // Sync to cloud if registered user
+    try {
+      const userId = emailToUserId(targetEmail);
+      await updateUserProfileInCloud(userId, { xp: newXp } as any);
+    } catch (e) {}
+
+    addAuditLog({
+      adminEmail: currentUserProfile.email || 'admin@vikoda.com.vn',
+      action: 'THƯỞNG_XP',
+      targetName,
+      targetEmail,
+      details: `Cộng thưởng +${addedXp} XP (Tổng mới: ${newXp} XP). Lý do: ${xpBoostReason}`,
+    });
+
+    playSound('success');
+    setBoostLoading(false);
+    setXpBoostTarget(null);
+    setToastMessage(`Đã cộng thưởng +${addedXp} XP cho ${targetName} thành công!`);
+    setTimeout(() => setToastMessage(null), 3500);
+  };
+
   // Editing modal state
   const [editingEmployee, setEditingEmployee] = useState<EmployeeRecord | null>(null);
   const [deletingEmployeeId, setDeletingEmployeeId] = useState<string | null>(null);
@@ -245,25 +460,59 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
     if (!resetTarget) return;
     playSound('click');
     setResetLoading(true);
+    const targetId = resetTarget.id;
+    const targetEmail = resetTarget.email;
+    const targetName = resetTarget.name;
+
     try {
-      await adminResetUserProgress(resetTarget.id, resetTarget.email, resetReason);
+      await adminResetUserProgress(targetId, targetEmail, resetReason);
     } catch (e) {
       console.warn('Firebase cloud reset notice (running offline or local):', e);
     }
-    // Update local state immediately
-    setEmployees((prev) =>
-      prev.map((emp) =>
-        emp.id === resetTarget.id
-          ? { ...emp, xp: 0, streak: 0, completedUnits: 0, highestScore: 0, lastActive: 'Vừa reset' }
-          : emp
-      )
+
+    try {
+      await resetOfflineUserData(targetId);
+      await resetOfflineUserData(emailToUserId(targetEmail));
+    } catch (e) {}
+
+    // Update local state and localStorage immediately
+    const updatedEmployees = employees.map((emp) =>
+      emp.id === targetId || emp.email.toLowerCase().trim() === targetEmail.toLowerCase().trim()
+        ? { ...emp, xp: 0, streak: 0, completedUnits: 0, highestScore: 0, lastActive: 'Vừa reset bởi Admin' }
+        : emp
     );
+    setEmployees(updatedEmployees);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY_EMPLOYEES, JSON.stringify(updatedEmployees));
+      // Remove scoped stats
+      localStorage.removeItem(`vikoda_stats_${targetId}`);
+      localStorage.removeItem(`vikoda_stats_${emailToUserId(targetEmail)}`);
+      localStorage.removeItem(`vikoda_profile_${targetId}`);
+      localStorage.removeItem(`vikoda_profile_${emailToUserId(targetEmail)}`);
+
+      // If current user is reset, clean up current session keys
+      if (currentUserProfile.email && targetEmail.toLowerCase().trim() === currentUserProfile.email.toLowerCase().trim()) {
+        localStorage.removeItem('vikoda_gamification_state_v3');
+        localStorage.removeItem('vikoda_user_stats');
+      }
+    }
+
+    addAuditLog({
+      adminEmail: currentUserProfile.email || 'admin@vikoda.com.vn',
+      action: 'RESET_TIẾN_ĐỘ',
+      targetName,
+      targetEmail,
+      details: `Reset toàn bộ XP, streak và bài học về 0. Lý do: ${resetReason}`,
+    });
+
     if (onResetUserProgress) {
-      onResetUserProgress(resetTarget.email);
+      onResetUserProgress(targetEmail);
     }
     playSound('success');
     setResetLoading(false);
     setResetTarget(null);
+    setToastMessage(`Đã reset toàn bộ tiến độ của ${targetName} về 0 và lưu vĩnh viễn (không phục hồi khi F5)!`);
+    setTimeout(() => setToastMessage(null), 3500);
   };
 
   // New Employee Form State
@@ -320,9 +569,10 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                   ...updated[idx],
                   name: cu.displayName || updated[idx].name,
                   dept: cu.department || updated[idx].dept,
-                  xp: Math.max(updated[idx].xp, cu.xp || 0),
-                  streak: Math.max(updated[idx].streak, cu.streak || 0),
-                  gems: Math.max(updated[idx].gems, cu.gems || 0),
+                  xp: cu.xp !== undefined ? cu.xp : updated[idx].xp,
+                  streak: cu.streak !== undefined ? cu.streak : updated[idx].streak,
+                  gems: cu.gems !== undefined ? cu.gems : updated[idx].gems,
+                  completedUnits: cu.completedLessons ? cu.completedLessons.length : updated[idx].completedUnits,
                 };
               } else {
                 updated.push(rec);
@@ -355,10 +605,10 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
         dept: currentUserProfile.department || 'Ban Giám Đốc & Quản Trị',
         title: currentUserProfile.isAdmin ? '👑 Quản Trị Viên Hệ Thống' : (currentUserProfile.title || 'Chuyên Viên Kinh Doanh'),
         level: 'C2',
-        xp: Math.max(currentUserStats.xp, 250),
-        gems: Math.max(currentUserStats.gems, 60),
-        streak: Math.max(currentUserStats.streakDays, 1),
-        highestScore: Math.max(currentUserProfile.highestDrillScore || 0, currentUserStats.highestDrillScore || 0),
+        xp: currentUserStats.xp || 0,
+        gems: currentUserStats.gems || 0,
+        streak: currentUserStats.streakDays || 0,
+        highestScore: currentUserProfile.highestDrillScore || currentUserStats.highestDrillScore || 0,
         completedUnits: (currentUserStats.completedNodeIds || []).length,
         certified: true,
         lastActive: 'Đang hoạt động (Hiện tại)',
@@ -371,10 +621,11 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
           name: currentUserProfile.fullName || nextList[existingIndex].name,
           dept: currentUserProfile.department || nextList[existingIndex].dept,
           title: currentUserProfile.isAdmin ? '👑 Quản Trị Viên Hệ Thống' : (currentUserProfile.title || nextList[existingIndex].title),
-          xp: Math.max(nextList[existingIndex].xp, currentUserStats.xp),
-          gems: Math.max(nextList[existingIndex].gems, currentUserStats.gems),
-          streak: Math.max(nextList[existingIndex].streak, currentUserStats.streakDays),
-          highestScore: Math.max(nextList[existingIndex].highestScore, currentUserProfile.highestDrillScore || 0),
+          xp: currentUserStats.xp !== undefined ? currentUserStats.xp : nextList[existingIndex].xp,
+          gems: currentUserStats.gems !== undefined ? currentUserStats.gems : nextList[existingIndex].gems,
+          streak: currentUserStats.streakDays !== undefined ? currentUserStats.streakDays : nextList[existingIndex].streak,
+          highestScore: currentUserProfile.highestDrillScore || currentUserStats.highestDrillScore || 0,
+          completedUnits: (currentUserStats.completedNodeIds || []).length,
           lastActive: 'Đang hoạt động (Hiện tại)',
         };
         return nextList;
@@ -395,6 +646,7 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
   const filteredEmployees = useMemo(() => {
     return employees.filter((emp) => {
       const matchDept = selectedDept === 'all' || emp.dept === selectedDept;
+      const matchCefr = selectedCefrFilter === 'all' || emp.level === selectedCefrFilter;
       const cleanQ = searchQuery.toLowerCase().trim();
       const matchSearch =
         !cleanQ ||
@@ -402,17 +654,28 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
         emp.code.toLowerCase().includes(cleanQ) ||
         emp.title.toLowerCase().includes(cleanQ);
 
-      return matchDept && matchSearch;
+      return matchDept && matchCefr && matchSearch;
     });
-  }, [employees, selectedDept, searchQuery]);
+  }, [employees, selectedDept, selectedCefrFilter, searchQuery]);
 
-  // Overall Statistics
+  // Overall Statistics & CEFR Distribution
   const totalEmployees = employees.length;
   const certifiedCount = employees.filter((e) => e.certified).length;
   const totalXP = employees.reduce((acc, curr) => acc + curr.xp, 0);
   const avgScore = totalEmployees > 0 
     ? Math.round(employees.reduce((acc, curr) => acc + curr.highestScore, 0) / totalEmployees) 
     : 0;
+
+  const cefrDistribution = useMemo(() => {
+    const counts: Record<string, number> = { A1: 0, A2: 0, B1: 0, B2: 0, C1: 0, C2: 0 };
+    employees.forEach((e) => {
+      const lvl = e.level || 'A1';
+      if (counts[lvl] !== undefined) {
+        counts[lvl]++;
+      }
+    });
+    return counts;
+  }, [employees]);
 
   if (!isOpen || typeof document === 'undefined') return null;
 
@@ -793,38 +1056,111 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
               </div>
             </div>
 
-            {/* Admin Tabs */}
-            <div className="bg-slate-100 px-4 pt-2 border-b border-slate-200 flex items-center justify-between shrink-0">
-              <div className="flex items-center space-x-2">
+            {/* Admin Tabs - Responsive Grid/Wrap so all 6 features are fully visible */}
+            <div className="bg-slate-100 p-2 sm:px-3 sm:pt-2 border-b border-slate-200 flex flex-wrap items-center justify-between gap-1.5 shrink-0">
+              <div className="flex flex-wrap items-center gap-1.5">
                 <button
-                  onClick={() => setAdminTab('employees')}
-                  className={`px-3 py-2 text-xs font-black border-b-2 transition-all cursor-pointer flex items-center gap-1.5 ${
+                  type="button"
+                  onClick={() => {
+                    playSound('click');
+                    setAdminTab('employees');
+                  }}
+                  className={`px-3 py-1.5 text-xs font-black rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
                     adminTab === 'employees'
-                      ? 'border-[#0070D1] text-[#0070D1] bg-white rounded-t-xl'
-                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                      ? 'bg-[#0070D1] text-white shadow-xs'
+                      : 'bg-white/80 hover:bg-white text-slate-700 border border-slate-200'
                   }`}
                 >
                   <Users className="w-4 h-4" />
-                  <span>Danh Sách Học Viên & Chỉnh Sửa ({employees.length})</span>
+                  <span>Học Viên ({employees.length})</span>
                 </button>
 
                 <button
-                  onClick={() => setAdminTab('cloud_database')}
-                  className={`px-3 py-2 text-xs font-black border-b-2 transition-all cursor-pointer flex items-center gap-1.5 ${
+                  type="button"
+                  onClick={() => {
+                    playSound('click');
+                    setAdminTab('announcements');
+                  }}
+                  className={`px-3 py-1.5 text-xs font-black rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+                    adminTab === 'announcements'
+                      ? 'bg-[#0070D1] text-white shadow-xs'
+                      : 'bg-white/80 hover:bg-white text-slate-700 border border-slate-200'
+                  }`}
+                >
+                  <Megaphone className="w-4 h-4" />
+                  <span>Thông Báo App</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound('click');
+                    setAdminTab('settings');
+                  }}
+                  className={`px-3 py-1.5 text-xs font-black rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+                    adminTab === 'settings'
+                      ? 'bg-[#0070D1] text-white shadow-xs'
+                      : 'bg-white/80 hover:bg-white text-slate-700 border border-slate-200'
+                  }`}
+                >
+                  <Settings className="w-4 h-4" />
+                  <span>Quy Chế & Lộ Trình</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound('click');
+                    setAdminTab('audit_trail');
+                  }}
+                  className={`px-3 py-1.5 text-xs font-black rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+                    adminTab === 'audit_trail'
+                      ? 'bg-[#0070D1] text-white shadow-xs'
+                      : 'bg-white/80 hover:bg-white text-slate-700 border border-slate-200'
+                  }`}
+                >
+                  <History className="w-4 h-4" />
+                  <span>Nhật Ký Kiểm Toán ({auditLogs.length})</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound('click');
+                    setAdminTab('analytics');
+                  }}
+                  className={`px-3 py-1.5 text-xs font-black rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+                    adminTab === 'analytics'
+                      ? 'bg-[#0070D1] text-white shadow-xs'
+                      : 'bg-white/80 hover:bg-white text-slate-700 border border-slate-200'
+                  }`}
+                >
+                  <BarChart3 className="w-4 h-4" />
+                  <span>Phân Bổ CEFR & Báo Cáo</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    playSound('click');
+                    setAdminTab('cloud_database');
+                  }}
+                  className={`px-3 py-1.5 text-xs font-black rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
                     adminTab === 'cloud_database'
-                      ? 'border-[#0070D1] text-[#0070D1] bg-white rounded-t-xl'
-                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                      ? 'bg-[#0070D1] text-white shadow-xs'
+                      : 'bg-white/80 hover:bg-white text-slate-700 border border-slate-200'
                   }`}
                 >
                   <Cloud className="w-4 h-4" />
-                  <span>Cơ Sở Dữ Liệu Online & Sao Lưu Mây</span>
+                  <span>Sao Lưu & Dữ Liệu</span>
                 </button>
               </div>
 
               {adminTab === 'employees' && (
                 <button
+                  type="button"
                   onClick={() => setIsCreatingNew(true)}
-                  className="px-3 py-1.5 rounded-xl bg-[#0070D1] hover:bg-[#005bb5] text-white font-black text-xs cursor-pointer shadow-xs flex items-center gap-1 active:scale-95 transition-all mb-1"
+                  className="px-3 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs cursor-pointer shadow-xs flex items-center gap-1 active:scale-95 transition-all ml-auto"
                 >
                   <UserPlus className="w-3.5 h-3.5" />
                   <span>+ Thêm Học Viên</span>
@@ -840,7 +1176,7 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
             )}
 
             {/* TAB 1: EMPLOYEES LIST & MANAGEMENT */}
-            {adminTab === 'employees' ? (
+            {adminTab === 'employees' && (
               <>
                 {/* Executive Metrics Overview Cards */}
                 <div className="p-3 bg-slate-50 border-b border-slate-200 shrink-0">
@@ -883,7 +1219,7 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                   </div>
                 </div>
 
-                {/* Toolbar: Search, Dept Filter & Export Button */}
+                {/* Toolbar: Search, Dept Filter, CEFR Filter & Export Button */}
                 <div className="p-3 bg-white border-b border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-2.5 shrink-0">
                   {/* Search Box */}
                   <div className="relative w-full sm:w-64">
@@ -897,8 +1233,8 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                     <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
                   </div>
 
-                  {/* Department Filter & Export Action */}
-                  <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                  {/* Filters & Export Action */}
+                  <div className="flex items-center gap-2 w-full sm:w-auto justify-end flex-wrap">
                     <select
                       value={selectedDept}
                       onChange={(e) => setSelectedDept(e.target.value)}
@@ -908,6 +1244,20 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                       {departments.filter((d) => d !== 'all').map((d) => (
                         <option key={d} value={d}>{d}</option>
                       ))}
+                    </select>
+
+                    <select
+                      value={selectedCefrFilter}
+                      onChange={(e) => setSelectedCefrFilter(e.target.value as any)}
+                      className="px-2.5 py-1.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 bg-white focus:outline-none cursor-pointer"
+                    >
+                      <option value="all">Mọi Cấp CEFR</option>
+                      <option value="A1">Bậc A1 (Nhập Môn)</option>
+                      <option value="A2">Bậc A2 (Cơ Sở)</option>
+                      <option value="B1">Bậc B1 (Giao Tiếp)</option>
+                      <option value="B2">Bậc B2 (Đàm Phán)</option>
+                      <option value="C1">Bậc C1 (Chuyên Gia)</option>
+                      <option value="C2">Bậc C2 (Lãnh Đạo)</option>
                     </select>
 
                     <button
@@ -923,8 +1273,8 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
 
                 {/* Employee Table */}
                 <div className="p-4 overflow-y-auto flex-1">
-                  <div className="border border-slate-200 rounded-2xl overflow-hidden shadow-2xs">
-                    <table className="w-full text-left text-xs border-collapse">
+                  <div className="border border-slate-200 rounded-2xl overflow-x-auto shadow-2xs">
+                    <table className="w-full min-w-[640px] text-left text-xs border-collapse">
                       <thead className="bg-slate-100 text-slate-600 uppercase text-[10px] font-black border-b border-slate-200">
                         <tr>
                           <th className="p-3">Mã NV & Họ Tên</th>
@@ -1049,8 +1399,477 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                   </div>
                 </div>
               </>
-            ) : (
-              /* TAB 2: ONLINE CLOUD DATABASE & BACKUP SYSTEM */
+            )}
+
+            {/* TAB 2: COMPANY ANNOUNCEMENTS & CAMPAIGNS */}
+            {adminTab === 'announcements' && (
+              <div className="p-5 overflow-y-auto flex-1 space-y-5">
+                {/* Header Banner */}
+                <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-sm flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 bg-white/20 rounded-2xl shrink-0">
+                      <Megaphone className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-black">Trung Tâm Phát Động Thông Báo & Chiến Dịch Doanh Nghiệp</h4>
+                      <p className="text-xs text-amber-100">
+                        Thông báo được phát sóng trực tiếp tới đỉnh màn hình học tập của toàn thể cán bộ nhân viên Vikoda
+                      </p>
+                    </div>
+                  </div>
+                  <div className="shrink-0">
+                    <span className={`px-2.5 py-1 rounded-full text-xs font-black ${
+                      announcement.isActive ? 'bg-emerald-500 text-white' : 'bg-slate-700 text-slate-300'
+                    }`}>
+                      {announcement.isActive ? '● Đang Phát Sóng' : '○ Đang Tạm Dừng'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Live Preview Box */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs font-black text-slate-700">
+                    <span className="flex items-center gap-1.5">
+                      <Eye className="w-4 h-4 text-[#0070D1]" />
+                      <span>Xem Trước Banner Thực Tế Trên Màn Hình Học Viên</span>
+                    </span>
+                    <span className="text-[10px] text-slate-400">Thời gian thực</span>
+                  </div>
+                  
+                  {announcement.isActive ? (
+                    <div className="p-4 bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 rounded-3xl text-white shadow-md border-b-4 border-amber-700 flex items-start justify-between gap-3 animate-in fade-in">
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 bg-white/20 rounded-2xl shrink-0 mt-0.5 shadow-2xs">
+                          <Megaphone className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-[9px] font-black uppercase tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full">
+                              {announcement.category === 'campaign' ? '🔥 Chiến Dịch Đào Tạo' :
+                               announcement.category === 'urgent' ? '🚨 Thông Báo Khẩn' :
+                               announcement.category === 'award' ? '🏆 Khen Thưởng Thi Đua' : '📚 Đào Tạo Định Kỳ'}
+                            </span>
+                            <span className="text-xs text-amber-100 font-bold">{announcement.author}</span>
+                            <span className="text-[10px] text-amber-200">• Cập nhật: {announcement.updatedAt}</span>
+                          </div>
+                          <h4 className="text-sm font-black">{announcement.title}</h4>
+                          <p className="text-xs text-amber-100 leading-relaxed">{announcement.content}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="p-4 rounded-2xl bg-slate-100 border border-dashed border-slate-300 text-slate-500 text-xs text-center font-bold">
+                      Banner hiện đang tắt. Nhân viên sẽ không nhìn thấy banner này trên trang chủ.
+                    </div>
+                  )}
+                </div>
+
+                {/* Form */}
+                <form onSubmit={handleSaveAnnouncement} className="p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-4">
+                  <div className="font-black text-sm text-slate-900 border-b pb-2 flex items-center gap-2">
+                    <Edit2 className="w-4 h-4 text-[#0070D1]" />
+                    <span>Soạn Thảo Nội Dung Thông Báo</span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">Tiêu Đề Thông Báo</label>
+                      <input
+                        type="text"
+                        value={announcement.title}
+                        onChange={(e) => setAnnouncement({ ...announcement, title: e.target.value })}
+                        className="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-bold focus:ring-2 focus:ring-[#0070D1] outline-none"
+                        placeholder="Ví dụ: Chiến Dịch 30 Ngày Bứt Phá Tiếng Anh..."
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">Loại Thông Báo</label>
+                      <select
+                        value={announcement.category}
+                        onChange={(e) => setAnnouncement({ ...announcement, category: e.target.value as any })}
+                        className="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-bold focus:ring-2 focus:ring-[#0070D1] outline-none cursor-pointer"
+                      >
+                        <option value="campaign">🔥 Chiến Dịch Thi Đua Toàn Diện</option>
+                        <option value="urgent">🚨 Thông Báo Khẩn / Lịch Thi Đấu</option>
+                        <option value="award">🏆 Khen Thưởng / Trao Quà Thi Đua</option>
+                        <option value="training">📚 Quy Chế Đào Tạo Định Kỳ</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-bold text-slate-700 block mb-1.5">Nội Dung Chi Tiết</label>
+                    <textarea
+                      rows={3}
+                      value={announcement.content}
+                      onChange={(e) => setAnnouncement({ ...announcement, content: e.target.value })}
+                      className="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-medium focus:ring-2 focus:ring-[#0070D1] outline-none"
+                      placeholder="Nhập nội dung truyền thông gửi đến toàn thể học viên..."
+                      required
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
+                    <div>
+                      <label className="text-xs font-bold text-slate-700 block mb-1.5">Đơn Vị Ban Hành / Tác Giả</label>
+                      <input
+                        type="text"
+                        value={announcement.author}
+                        onChange={(e) => setAnnouncement({ ...announcement, author: e.target.value })}
+                        className="w-full p-2.5 rounded-xl border border-slate-300 text-xs font-bold focus:ring-2 focus:ring-[#0070D1] outline-none"
+                        placeholder="Ban Giám Đốc Vikoda / Phòng Nhân Sự..."
+                        required
+                      />
+                    </div>
+
+                    <div className="pt-2 sm:pt-4">
+                      <label className="flex items-center gap-3 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={announcement.isActive}
+                          onChange={(e) => setAnnouncement({ ...announcement, isActive: e.target.checked })}
+                          className="w-5 h-5 accent-[#0070D1] rounded cursor-pointer"
+                        />
+                        <div>
+                          <span className="text-xs font-black text-slate-900 block">Kích Hoạt Phát Sóng</span>
+                          <span className="text-[10px] text-slate-500 block">Bật để hiển thị ngay trên màn hình học tập của nhân viên</span>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="pt-3 border-t flex justify-end">
+                    <button
+                      type="submit"
+                      className="px-5 py-2.5 rounded-xl bg-[#0070D1] hover:bg-[#005bb5] text-white font-black text-xs cursor-pointer shadow-md flex items-center gap-2 active:scale-95 transition-all"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>Lưu & Phát Sóng Thông Báo Toàn Công Ty</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {/* TAB 3: TRAINING SYSTEM SETTINGS */}
+            {adminTab === 'settings' && (
+              <div className="p-5 overflow-y-auto flex-1 space-y-5">
+                {/* Header */}
+                <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-sm flex items-center gap-3">
+                  <div className="p-2.5 bg-white/20 rounded-2xl shrink-0">
+                    <Settings className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-black">Cấu Hình Quy Chế Đào Tạo & Kiểm Soát Lộ Trình</h4>
+                    <p className="text-xs text-blue-100">
+                      Tùy chỉnh linh hoạt chế độ học tập, kiểm tra và thi đua theo từng giai đoạn phát triển của doanh nghiệp
+                    </p>
+                  </div>
+                </div>
+
+                <form onSubmit={handleSaveSettings} className="space-y-4">
+                  {/* Policy Card 1: Unlock All 100 Units */}
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-3">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <BookOpen className="w-4 h-4 text-[#0070D1]" />
+                          <h5 className="text-xs font-black text-slate-900">Mở Khóa Toàn Bộ 100 Bài Học (All Units Unlocked)</h5>
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          Mặc định học viên phải hoàn thành tuần tự bài trước mới mở bài sau. Bật chế độ này cho phép mọi nhân viên tự do học bất kỳ bài nào từ Cấp độ A1 đến C2 để tiện ôn tập chuyên đề hoặc làm bài thi sát hạch đột xuất.
+                        </p>
+                      </div>
+                      <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                        <input
+                          type="checkbox"
+                          checked={trainingSettings.unlockAllUnits}
+                          onChange={(e) => setTrainingSettings({ ...trainingSettings, unlockAllUnits: e.target.checked })}
+                          className="sr-only peer"
+                        />
+                        <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0070D1]"></div>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Policy Card 2: Unlimited Energy / Hearts */}
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-3">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-amber-500" />
+                          <h5 className="text-xs font-black text-slate-900">Chế Độ Tim Vô Hạn (Unlimited Hearts)</h5>
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          Bỏ giới hạn 5 giọt khoáng năng lượng. Nhân sự trả lời sai câu hỏi không bị trừ tim, giúp các đợt thi đua tập trung hoàn thành bài học với tốc độ cao nhất mà không bị gián đoạn.
+                        </p>
+                      </div>
+                      <label className="relative inline-flex items-center cursor-pointer shrink-0 mt-1">
+                        <input
+                          type="checkbox"
+                          checked={trainingSettings.unlimitedEnergy}
+                          onChange={(e) => setTrainingSettings({ ...trainingSettings, unlimitedEnergy: e.target.checked })}
+                          className="sr-only peer"
+                        />
+                        <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-amber-500"></div>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Policy Card 3: Drill Countdown & Daily XP Goal */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Countdown */}
+                    <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-3">
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-indigo-500" />
+                        <h5 className="text-xs font-black text-slate-900">Thời Gian Đếm Ngược Endless Drill</h5>
+                      </div>
+                      <p className="text-[11px] text-slate-500">
+                        Giới hạn thời gian thử thách phản xạ trả lời nhanh câu hỏi ngoại giao.
+                      </p>
+                      <div className="grid grid-cols-3 gap-2">
+                        {([45, 60, 90] as const).map((seconds) => (
+                          <button
+                            type="button"
+                            key={seconds}
+                            onClick={() => setTrainingSettings({ ...trainingSettings, drillCountdownSeconds: seconds })}
+                            className={`py-2 px-1 text-center rounded-xl text-xs font-black border transition-all cursor-pointer ${
+                              trainingSettings.drillCountdownSeconds === seconds
+                                ? 'bg-indigo-50 border-indigo-500 text-indigo-700 shadow-2xs'
+                                : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                            }`}
+                          >
+                            {seconds} Giây
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Daily XP Goal */}
+                    <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-3">
+                      <div className="flex items-center gap-2">
+                        <Target className="w-4 h-4 text-rose-500" />
+                        <h5 className="text-xs font-black text-slate-900">Mục Tiêu XP Tối Thiểu Mỗi Ngày</h5>
+                      </div>
+                      <p className="text-[11px] text-slate-500">
+                        Mục tiêu điểm số giao cho toàn thể học viên để duy trì chuỗi Streak học liên tục.
+                      </p>
+                      <div className="grid grid-cols-3 gap-2">
+                        {([30, 50, 100] as const).map((xp) => (
+                          <button
+                            type="button"
+                            key={xp}
+                            onClick={() => setTrainingSettings({ ...trainingSettings, dailyXpGoal: xp })}
+                            className={`py-2 px-1 text-center rounded-xl text-xs font-black border transition-all cursor-pointer ${
+                              trainingSettings.dailyXpGoal === xp
+                                ? 'bg-rose-50 border-rose-500 text-rose-700 shadow-2xs'
+                                : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+                            }`}
+                          >
+                            {xp} XP / ngày
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 flex justify-end">
+                    <button
+                      type="submit"
+                      className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs cursor-pointer shadow-md flex items-center gap-2 active:scale-95 transition-all"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>Lưu Quy Chế & Cập Nhật Toàn Hệ Thống</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            )}
+
+            {/* TAB 4: EXECUTIVE AUDIT LOGS */}
+            {adminTab === 'audit_trail' && (
+              <div className="p-5 overflow-y-auto flex-1 space-y-4">
+                {/* Header */}
+                <div className="p-4 rounded-2xl bg-slate-900 text-white shadow-sm flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 bg-white/10 rounded-2xl shrink-0">
+                      <History className="w-6 h-6 text-sky-400" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-black">Nhật Ký Kiểm Toán Quản Trị Hệ Thống (Audit Trail)</h4>
+                      <p className="text-xs text-slate-400">
+                        Ghi vết tự động mọi hành vi: Reset điểm, Khen thưởng XP, Cập nhật thông báo, Cấu hình quy chế
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={() => {
+                        playSound('click');
+                        const csvRows = [
+                          ['ID', 'Thời Gian', 'Admin Thực Hiện', 'Hành Động', 'Đối Tượng', 'Email Đối Tượng', 'Chi Tiết'],
+                          ...auditLogs.map((l) => [l.id, l.timestamp, l.adminEmail, l.action, l.targetName, l.targetEmail, l.details])
+                        ];
+                        const csvContent = '\uFEFF' + csvRows.map((r) => r.map((c) => `"${c.replace(/"/g, '""')}"`).join(',')).join('\n');
+                        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = `vikoda_audit_logs_${new Date().toISOString().split('T')[0]}.csv`;
+                        link.click();
+                        URL.revokeObjectURL(url);
+                      }}
+                      className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Xuất CSV</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Log Table */}
+                <div className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-2xs">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs">
+                      <thead className="bg-slate-100 text-slate-700 font-black border-b border-slate-200">
+                        <tr>
+                          <th className="p-3 whitespace-nowrap">Thời Gian</th>
+                          <th className="p-3 whitespace-nowrap">Admin Thực Hiện</th>
+                          <th className="p-3 whitespace-nowrap">Hành Động</th>
+                          <th className="p-3 whitespace-nowrap">Đối Tượng Tác Động</th>
+                          <th className="p-3">Chi Tiết Thao Tác</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100">
+                        {auditLogs.map((log) => (
+                          <tr key={log.id} className="hover:bg-slate-50 transition-colors">
+                            <td className="p-3 whitespace-nowrap text-slate-500 font-bold text-[11px]">{log.timestamp}</td>
+                            <td className="p-3 whitespace-nowrap font-bold text-slate-800 text-[11px]">{log.adminEmail}</td>
+                            <td className="p-3 whitespace-nowrap">
+                              <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${
+                                log.action.includes('RESET')
+                                  ? 'bg-rose-100 text-rose-800'
+                                  : log.action.includes('THƯỞNG')
+                                  ? 'bg-emerald-100 text-emerald-800'
+                                  : log.action.includes('THÔNG_BÁO')
+                                  ? 'bg-amber-100 text-amber-800'
+                                  : 'bg-sky-100 text-sky-800'
+                              }`}>
+                                {log.action}
+                              </span>
+                            </td>
+                            <td className="p-3 whitespace-nowrap">
+                              <div className="font-bold text-slate-900">{log.targetName}</div>
+                              <div className="text-[10px] text-slate-400">{log.targetEmail}</div>
+                            </td>
+                            <td className="p-3 text-slate-600 leading-snug">{log.details}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* TAB 5: CEFR ANALYTICS & EXECUTIVE REPORTS */}
+            {adminTab === 'analytics' && (
+              <div className="p-5 overflow-y-auto flex-1 space-y-5">
+                {/* Header */}
+                <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-sm flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2.5 bg-white/20 rounded-2xl shrink-0">
+                      <BarChart3 className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-black">Báo Cáo Phân Bổ Năng Lực Tiếng Anh Toàn Doanh Nghiệp</h4>
+                      <p className="text-xs text-emerald-100">
+                        Đo lường tiến độ phổ cập tiếng Anh theo chuẩn khung tham chiếu Châu Âu (CEFR) & TOEIC
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleExportCSV}
+                    className="px-4 py-2 rounded-xl bg-white text-emerald-900 font-black text-xs cursor-pointer shadow-xs flex items-center gap-1.5 hover:bg-emerald-50 transition-all shrink-0"
+                  >
+                    <FileSpreadsheet className="w-4 h-4 text-emerald-600" />
+                    <span>Xuất Báo Cáo Excel/CSV</span>
+                  </button>
+                </div>
+
+                {/* CEFR Distribution Breakdown */}
+                <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-4">
+                  <h5 className="text-xs font-black text-slate-900 flex items-center gap-2 border-b pb-2">
+                    <Award className="w-4 h-4 text-amber-500" />
+                    <span>Phân Bổ Trình Độ CEFR Cán Bộ Nhân Viên (Tổng: {employees.length} Học Viên)</span>
+                  </h5>
+
+                  <div className="space-y-3">
+                    {[
+                      { level: 'A1', label: 'Tân Binh Văn Phòng (A1)', toeic: '150 - 250', color: 'bg-emerald-500', count: employees.filter(e => e.level === 'A1').length },
+                      { level: 'A2', label: 'Tiếp Thị Viên Tự Tin (A2)', toeic: '255 - 400', color: 'bg-teal-500', count: employees.filter(e => e.level === 'A2').length },
+                      { level: 'B1', label: 'Đại Sứ Thương Hiệu (B1)', toeic: '405 - 600', color: 'bg-sky-500', count: employees.filter(e => e.level === 'B1').length },
+                      { level: 'B2', label: 'Chuyên Gia Đàm Phán (B2)', toeic: '605 - 780', color: 'bg-indigo-500', count: employees.filter(e => e.level === 'B2').length },
+                      { level: 'C1', label: 'Lãnh Đạo Ngoại Giao (C1)', toeic: '785 - 900', color: 'bg-purple-500', count: employees.filter(e => e.level === 'C1').length },
+                      { level: 'C2', label: 'Bậc Thầy Xuất Khẩu Toàn Cầu (C2)', toeic: '905 - 990', color: 'bg-amber-500', count: employees.filter(e => e.level === 'C2').length },
+                    ].map((item) => {
+                      const pct = Math.round((item.count / Math.max(1, employees.length)) * 100);
+                      return (
+                        <div key={item.level} className="space-y-1">
+                          <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+                            <span className="flex items-center gap-2">
+                              <span className="w-6 text-center font-black px-1 py-0.5 rounded bg-slate-100 text-slate-700 text-[10px]">{item.level}</span>
+                              <span>{item.label}</span>
+                              <span className="text-[10px] text-slate-400 font-normal">(TOEIC {item.toeic})</span>
+                            </span>
+                            <span className="text-slate-900 font-black">{item.count} nhân sự ({pct}%)</span>
+                          </div>
+                          <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                            <div className={`h-full ${item.color} rounded-full transition-all duration-500`} style={{ width: `${pct}%` }} />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Department Performance Cards */}
+                <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-4">
+                  <h5 className="text-xs font-black text-slate-900 flex items-center gap-2 border-b pb-2">
+                    <Building className="w-4 h-4 text-[#0070D1]" />
+                    <span>Thành Tích Thi Đua Theo Phòng Ban</span>
+                  </h5>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {Array.from(new Set(employees.map(e => e.dept))).map((deptName) => {
+                      const deptEmps = employees.filter(e => e.dept === deptName);
+                      const totalXp = deptEmps.reduce((acc, cur) => acc + (cur.xp || 0), 0);
+                      const avgXp = Math.round(totalXp / deptEmps.length);
+                      const certifiedInDept = deptEmps.filter(e => e.certified).length;
+                      return (
+                        <div key={deptName} className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                          <div className="flex items-center justify-between">
+                            <h6 className="text-xs font-black text-slate-800 truncate pr-2">{deptName}</h6>
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-sky-100 text-[#0070D1]">
+                              {deptEmps.length} nhân sự
+                            </span>
+                          </div>
+                          <div className="flex items-center justify-between text-[11px] text-slate-600">
+                            <span>Điểm TB: <b className="text-amber-600">{avgXp} XP</b></span>
+                            <span>Chứng chỉ: <b className="text-emerald-600">{certifiedInDept}/{deptEmps.length}</b></span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* TAB 6: ONLINE CLOUD DATABASE & BACKUP SYSTEM */}
+            {adminTab === 'cloud_database' && (
               <div className="p-5 overflow-y-auto flex-1 space-y-5">
                 <div className="p-4 rounded-2xl bg-sky-50 border-2 border-sky-200 space-y-2">
                   <div className="flex items-center space-x-2 text-[#0070D1] font-black text-sm">

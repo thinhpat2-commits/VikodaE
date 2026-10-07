@@ -28,6 +28,8 @@ import {
   VoiceOptionId
 } from '../services/speechService';
 import { playSound } from '../services/soundEffects';
+import { getRandomEndlessDrillQuestions } from '../data/arenaQuestionPool';
+import { STORAGE_KEY_ADMIN_SETTINGS, TrainingSystemSettings } from './AdminPortalModal';
 
 export type ArenaTier = 'basic' | 'intermediate' | 'advanced';
 
@@ -474,31 +476,30 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
 
   const tierConfig = ARENA_3_TIERS.find((t) => t.id === selectedTier) || ARENA_3_TIERS[0];
 
-  // Start selected Tier
+  // Start selected Tier - draws dynamically from full 700-curriculum question pool
   const startTier = (tier: ArenaTier) => {
     setSelectedTier(tier);
     const cfg = ARENA_3_TIERS.find((t) => t.id === tier) || ARENA_3_TIERS[0];
-    const sourceQuestions = DRILL_QUESTIONS_BANK[tier] || DRILL_QUESTIONS_BANK.basic;
     
-    // Pick and shuffle questions once when tier starts
-    const shuffled = [...sourceQuestions].sort(() => 0.5 - Math.random()).slice(0, cfg.questionCount);
-    
-    // Pre-shuffle options and find exact correctIndex for each question in state
-    const prepared = shuffled.map((q) => {
-      const correctText = q.options[q.correctIndex];
-      const optsCopy = [...q.options];
-      for (let i = optsCopy.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [optsCopy[i], optsCopy[j]] = [optsCopy[j], optsCopy[i]];
-      }
-      return {
-        ...q,
-        options: optsCopy,
-        correctIndex: optsCopy.indexOf(correctText),
-      };
-    });
+    // Read training settings from Admin Portal if available
+    let countdownPerQuestion = cfg.timePerQuestion;
+    if (typeof window !== 'undefined') {
+      try {
+        const adminSettingsRaw = localStorage.getItem(STORAGE_KEY_ADMIN_SETTINGS);
+        if (adminSettingsRaw) {
+          const parsed: TrainingSystemSettings = JSON.parse(adminSettingsRaw);
+          if (parsed && parsed.drillCountdownSeconds) {
+            // Allocate proportionally: e.g. 45s total -> ~9s/câu, 60s total -> ~12s/câu, 90s total -> ~15s/câu
+            countdownPerQuestion = Math.max(8, Math.round(parsed.drillCountdownSeconds / cfg.questionCount * 1.5));
+          }
+        }
+      } catch (e) {}
+    }
 
-    setDrillQuestions(prepared);
+    // Dynamically pull randomized questions from corresponding CEFR levels in 700 pool
+    const prepared = getRandomEndlessDrillQuestions(tier, cfg.questionCount);
+
+    setDrillQuestions(prepared as any);
     setQuestionIndex(0);
     setCurrentScore(0);
     setCombo(0);
@@ -507,7 +508,7 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
     setHasAnswered(false);
     setIsFinished(false);
     setMissedQuestions([]);
-    setTimeLeft(cfg.timePerQuestion);
+    setTimeLeft(countdownPerQuestion);
     playSound('click');
   };
 

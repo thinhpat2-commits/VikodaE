@@ -178,7 +178,7 @@ export const DuolingoPath: React.FC<DuolingoPathProps> = ({
               Hành Trình Chinh Phục Tiếng Anh Vikoda
             </h2>
             <p className="text-xs text-sky-100 font-medium">
-              Vượt qua từng ải để tự tin đón tiếp đối tác quốc tế & xuất khẩu toàn cầu!
+              Vượt qua từng ải để tự tin làm chủ tiếng Anh doanh nghiệp từ A1 đến C2!
             </p>
           </div>
           <div className="text-4xl filter drop-shadow-md">

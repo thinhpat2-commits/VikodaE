@@ -128,7 +128,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   Thước Đo Năng Lực Toàn Cầu
                 </span>
                 <span className="px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-[10px] font-bold">
-                  {userLevel === 'A1' ? 'Tân Binh Văn Phòng' : userLevel === 'A2' ? 'Tiếp Thị Viên Tự Tin' : userLevel === 'B1' ? 'Đại Sứ Kinh Doanh' : userLevel === 'B2' ? 'Chuyên Gia Đàm Phán' : 'Lãnh Đạo Ngoại Giao'}
+                  {userLevel === 'A1' ? '🌱 Tân Binh (Đang rèn nền tảng)' : userLevel === 'A2' ? 'Tiếp Thị Viên (Hỗ trợ tiếp khách)' : userLevel === 'B1' ? 'Đại Sứ (Tiếp khách cơ bản)' : userLevel === 'B2' ? 'Chuyên Gia (Sẵn sàng tiếp khách)' : 'Lãnh Đạo (Trưởng đoàn)'}
                 </span>
               </div>
               <div className="flex flex-wrap items-center gap-3 mt-1 text-sm font-bold text-white">
@@ -248,7 +248,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   </span>
                 </div>
                 <p className="text-xs text-slate-300">
-                  {userLevel === 'A1' && 'Tập trung: Giao tiếp văn phòng cơ bản, chào hỏi, tiếp khách, mời nước khoáng.'}
+                  {userLevel === 'A1' && 'Tập trung: Giao tiếp văn phòng cơ bản, chào hỏi lịch thiệp, tự giới thiệu và mời dùng nước khoáng Vikoda.'}
                   {(userLevel === 'A2' || userLevel === 'A2-B1') && 'Tập trung: Tiếng Anh đa phòng ban, ngày phép, email nội bộ.'}
                   {(userLevel === 'B1' || userLevel === 'B2') && 'Tập trung: Đại sứ Vikoda, dẫn tour mỏ khoáng Đảnh Thạnh, bán hàng HORECA.'}
                   {(userLevel === 'C1-C2' || userLevel === 'B2-C1' || userLevel === 'C2') && 'Tập trung: Đàm phán quốc tế, Incoterms 2020, FDA, ESG và Pitch Deck C-Suite.'}

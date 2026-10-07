@@ -425,7 +425,7 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
       ];
     } else if (overallScore >= 50) {
       recommendedLevel = 'A2-B1';
-      feedback = 'Khá tốt! Bạn có nền tảng từ vựng cơ bản. Cần đào sâu 5 yếu tố nước khoáng kiềm pH 9.0 và luyện phản xạ đón tiếp khách tại nhà máy Đảnh Thạnh.';
+      feedback = 'Khá tốt! Bạn có nền tảng từ vựng cơ bản. Cần củng cố 5 đặc tính nước khoáng kiềm pH 9.0 và luyện phản xạ giới thiệu sản phẩm tại nhà máy Đảnh Thạnh.';
       nextSteps = [
         'Mở khóa Cấp độ B1: Mỏ Khoáng & Thuyết Trình Nguồn Đảnh Thạnh',
         'Học thuộc bài thuyết trình tour mỏ 220m bằng tiếng Anh',
@@ -433,9 +433,9 @@ export const PlacementTestModal: React.FC<PlacementTestModalProps> = ({
       ];
     } else {
       recommendedLevel = 'A1';
-      feedback = 'Bạn đã hoàn thành tốt bài kiểm tra định vị ban đầu! Hãy bắt đầu từ Cấp độ A1 để chuẩn hóa phát âm từng từ khóa thương hiệu Vikoda.';
+      feedback = 'Bạn đã hoàn thành tốt bài kiểm tra định vị ban đầu! Hãy bắt đầu từ Cấp độ A1 để chuẩn hóa phát âm từng từ khóa thương hiệu Vikoda và làm quen các mẫu câu văn phòng.';
       nextSteps = [
-        'Mở khóa Cấp độ A1: Đón Tiếp & Giao Tiếp Văn Phòng Cơ Bản',
+        'Mở khóa Cấp độ A1: Nhập Môn & Giao Tiếp Văn Phòng Cơ Bản',
         'Luyện phát âm chuẩn "Naturally Alkaline" và "pH nine point oh"',
         'Tham gia đấu trường Endless Drill mỗi ngày'
       ];

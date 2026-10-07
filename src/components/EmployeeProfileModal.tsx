@@ -18,7 +18,7 @@ import {
 import { EmployeeProfile, GamificationState } from '../types';
 import { CompanyEmblem, VikoMascot } from './brand/VikodaLogos';
 import { playSound } from '../services/soundEffects';
-import { GlobalProficiencyDashboard } from './GlobalProficiencyDashboard';
+import { GlobalProficiencyDashboard, calculateProficiency } from './GlobalProficiencyDashboard';
 
 interface EmployeeProfileModalProps {
   isOpen: boolean;
@@ -28,6 +28,7 @@ interface EmployeeProfileModalProps {
   stats: GamificationState;
   onLogout?: () => void;
   onOpenPlacementTest?: () => void;
+  onOpenAdmin?: () => void;
   initialTab?: 'card' | 'proficiency';
 }
 
@@ -48,6 +49,7 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
   stats,
   onLogout,
   onOpenPlacementTest,
+  onOpenAdmin,
   initialTab,
 }) => {
   const [activeTab, setActiveTab] = useState<'card' | 'proficiency'>(initialTab || 'card');
@@ -66,6 +68,7 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { currentTier } = calculateProficiency(stats);
 
   if (!isOpen) return null;
 
@@ -195,18 +198,22 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center space-x-1.5">
-                    <span className="text-[10px] font-black px-1.5 py-0.2 rounded-md bg-cyan-400 text-slate-900 tracking-wider">
+                    <span className="text-[10px] font-black px-1.5 py-0.5 rounded-md bg-cyan-400 text-slate-900 tracking-wider">
                       {employeeCode}
                     </span>
-                    <span className="text-[9px] font-bold text-sky-200">
-                      pH 9.0 Certified
+                    <span className="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-white/20 text-white border border-white/20">
+                      {currentTier.cefr} • {currentTier.readinessBadge}
                     </span>
                   </div>
-                  <h4 className="text-sm font-black tracking-tight text-white mt-0.5 truncate">
+                  <h4 className="text-sm font-black tracking-tight text-white mt-1 truncate">
                     {fullName}
                   </h4>
                   <p className="text-[11px] text-sky-100 font-semibold truncate">{title}</p>
                   <p className="text-[10px] text-sky-200/90 truncate">{department}</p>
+                  <div className="mt-1 flex items-center gap-1 text-[9px] text-cyan-200 font-bold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0 animate-pulse" />
+                    <span className="truncate">Thực chiến: {currentTier.readinessBadge} ({currentTier.readinessSub})</span>
+                  </div>
                 </div>
               </div>
 
@@ -380,6 +387,20 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
                 >
                   <LogOut className="w-3.5 h-3.5" />
                   <span>Đăng xuất</span>
+                </button>
+              )}
+
+              {onOpenAdmin && (
+                <button
+                  onClick={() => {
+                    playSound('click');
+                    onClose();
+                    onOpenAdmin();
+                  }}
+                  className="col-span-2 py-2.5 px-3 rounded-2xl bg-gradient-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 text-amber-900 border border-amber-300 font-black text-xs flex items-center justify-center gap-1.5 cursor-pointer transition-all active:scale-98 shadow-2xs"
+                >
+                  <ShieldCheck className="w-4 h-4 text-amber-600" />
+                  <span>Cổng Quản Trị Hệ Thống (HR Admin)</span>
                 </button>
               )}
             </div>

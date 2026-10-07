@@ -30,20 +30,9 @@ export const LiveCircularMicButton: React.FC<LiveCircularMicButtonProps> = ({
 
   useEffect(() => {
     if (!isRecording) {
-      // Cleanup previous stream
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
         animFrameRef.current = null;
-      }
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((t) => t.stop());
-        streamRef.current = null;
-      }
-      if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
-        try {
-          audioCtxRef.current.close();
-        } catch (e) {}
-        audioCtxRef.current = null;
       }
 
       // Reset rings
@@ -62,116 +51,49 @@ export const LiveCircularMicButton: React.FC<LiveCircularMicButtonProps> = ({
       return;
     }
 
-    // When recording starts: bind real-time AudioContext frequency analyzer
+    // High-performance 60fps Organic Acoustic Wave Simulation
+    // Does NOT invoke getUserMedia so it never locks or blocks SpeechRecognition on mobile phones!
+    let startTime = performance.now();
     let isCancelled = false;
-    let smoothedVolume = 0;
 
-    const startAudioAnalyzer = async () => {
-      try {
-        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return;
+    const renderLoop = (now: number) => {
+      if (isCancelled) return;
 
-        const stream = await navigator.mediaDevices.getUserMedia({
-          audio: {
-            echoCancellation: true,
-            noiseSuppression: true,
-            autoGainControl: true,
-          },
-        });
+      const elapsed = (now - startTime) / 1000;
+      
+      // Organic undulating harmonic waves
+      const wave1 = 0.5 + 0.5 * Math.sin(elapsed * 4.2);
+      const wave2 = 0.5 + 0.5 * Math.sin(elapsed * 3.1 + 1.2);
+      const wave3 = 0.5 + 0.5 * Math.sin(elapsed * 2.5 + 2.4);
 
-        if (isCancelled) {
-          stream.getTracks().forEach((t) => t.stop());
-          return;
-        }
-
-        streamRef.current = stream;
-
-        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-        const audioCtx = new AudioContextClass();
-        audioCtxRef.current = audioCtx;
-
-        if (audioCtx.state === 'suspended') {
-          await audioCtx.resume();
-        }
-
-        const source = audioCtx.createMediaStreamSource(stream);
-        const analyser = audioCtx.createAnalyser();
-        analyser.fftSize = 256;
-        analyser.smoothingTimeConstant = 0.35; // Fast, snappy response to speech!
-        source.connect(analyser);
-
-        const dataArray = new Uint8Array(analyser.frequencyBinCount);
-
-        const renderLoop = () => {
-          if (isCancelled) return;
-
-          analyser.getByteFrequencyData(dataArray);
-
-          // Focus on primary human speech frequency bins (approx 150Hz - 3400Hz)
-          let sum = 0;
-          const startBin = 2;
-          const endBin = Math.min(38, dataArray.length);
-          for (let i = startBin; i < endBin; i++) {
-            sum += dataArray[i];
-          }
-          const rawAvg = sum / (endBin - startBin);
-
-          // Normalize raw volume (background noise gate ~ 10, loud peak ~ 90)
-          const targetVol = Math.max(0, Math.min(1.0, (rawAvg - 8) / 70));
-
-          // Quick attack, gentle decay for natural organic expansion
-          if (targetVol > smoothedVolume) {
-            smoothedVolume = smoothedVolume * 0.4 + targetVol * 0.6;
-          } else {
-            smoothedVolume = smoothedVolume * 0.75 + targetVol * 0.25;
-          }
-
-          // Directly transform DOM rings in 60fps (ZERO React state re-render!)
-          if (ring1Ref.current) {
-            const s1 = 1 + smoothedVolume * 0.45;
-            ring1Ref.current.style.transform = `scale(${s1})`;
-            ring1Ref.current.style.opacity = `${0.35 + smoothedVolume * 0.65}`;
-          }
-
-          if (ring2Ref.current) {
-            const s2 = 1 + smoothedVolume * 0.95;
-            ring2Ref.current.style.transform = `scale(${s2})`;
-            ring2Ref.current.style.opacity = `${0.2 + smoothedVolume * 0.55}`;
-          }
-
-          if (ring3Ref.current) {
-            const s3 = 1 + smoothedVolume * 1.5;
-            ring3Ref.current.style.transform = `scale(${s3})`;
-            ring3Ref.current.style.opacity = `${smoothedVolume > 0.12 ? smoothedVolume * 0.5 : 0}`;
-          }
-
-          animFrameRef.current = requestAnimationFrame(renderLoop);
-        };
-
-        renderLoop();
-      } catch (err) {
-        // Fallback: if getUserMedia fails, gentle CSS pulse
-        if (ring1Ref.current) ring1Ref.current.style.opacity = '0.5';
-        if (ring2Ref.current) ring2Ref.current.style.opacity = '0.3';
+      if (ring1Ref.current) {
+        const s1 = 1 + wave1 * 0.25;
+        ring1Ref.current.style.transform = `scale(${s1})`;
+        ring1Ref.current.style.opacity = `${0.45 + wave1 * 0.5}`;
       }
+
+      if (ring2Ref.current) {
+        const s2 = 1.08 + wave2 * 0.45;
+        ring2Ref.current.style.transform = `scale(${s2})`;
+        ring2Ref.current.style.opacity = `${0.3 + wave2 * 0.45}`;
+      }
+
+      if (ring3Ref.current) {
+        const s3 = 1.15 + wave3 * 0.75;
+        ring3Ref.current.style.transform = `scale(${s3})`;
+        ring3Ref.current.style.opacity = `${0.18 + wave3 * 0.35}`;
+      }
+
+      animFrameRef.current = requestAnimationFrame(renderLoop);
     };
 
-    startAudioAnalyzer();
+    animFrameRef.current = requestAnimationFrame(renderLoop);
 
     return () => {
       isCancelled = true;
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
         animFrameRef.current = null;
-      }
-      if (streamRef.current) {
-        streamRef.current.getTracks().forEach((t) => t.stop());
-        streamRef.current = null;
-      }
-      if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
-        try {
-          audioCtxRef.current.close();
-        } catch (e) {}
-        audioCtxRef.current = null;
       }
     };
   }, [isRecording]);

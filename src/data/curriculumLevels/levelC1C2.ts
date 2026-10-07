@@ -432,7 +432,7 @@ export const LEVEL_C1C2_UNITS: UnitLesson[] = [
         englishSentence: 'Jade is fundamentally stone that endures rigorous grinding to unleash its brilliant glow.',
         audioText: 'Jade is fundamentally stone that endures rigorous grinding to unleash its brilliant glow.',
         phonetics: '/dʒeɪd ɪz ˌfʌndəˈmɛntli stoʊn ðæt ɪnˈdjʊərz ˈrɪɡərəs ˈɡraɪndɪŋ tuː ʌnˈliːʃ ɪts ˈbrɪljənt ɡloʊ/',
-        explanation: 'Trang 61 Cẩm nang Quản trị: Con người Vikoda cũng vậy, trải qua khó khăn thử thách trên thương trường để bộc lộ khí chất và tài năng phi thường.',
+        explanation: 'Triết lý Ngọc Trong Đá: Con người Vikoda cũng vậy, trải qua khó khăn thử thách trên thương trường để bộc lộ khí chất và tài năng phi thường.',
         whyWrong: 'Triết lý nhân văn sâu sắc: Mọi cá nhân đều là một viên ngọc thô nếu chịu rèn giũa kỷ luật.',
         crucialNote: '"Rigorous grinding" = Rèn giũa nghiêm cẩn để bật sáng hào quang.',
         memoryHook: 'Rigorous grinding = Mài giũa khắc nghiệt bật sáng ngọc quý.'

@@ -13,11 +13,21 @@ import {
   Sparkles, 
   ShieldCheck,
   Building,
-  UserCheck
+  UserCheck,
+  TrendingUp,
+  BarChart3,
+  Flame,
+  RotateCcw,
+  Target,
+  Copy,
+  FileText,
+  Zap,
+  Check
 } from 'lucide-react';
 import { EmployeeProfile, GamificationState } from '../types';
 import { playSpeech, stopSpeech } from '../services/speechService';
 import { playSound } from '../services/soundEffects';
+import { calculateProficiency } from './GlobalProficiencyDashboard';
 
 interface VikodaExecutivePortfolioModalProps {
   isOpen: boolean;
@@ -34,12 +44,54 @@ export const VikodaExecutivePortfolioModal: React.FC<VikodaExecutivePortfolioMod
   stats,
   speechRate
 }) => {
-  const [activeTab, setActiveTab] = useState<'certificate' | 'audio_diary'>('certificate');
+  const [activeTab, setActiveTab] = useState<'certificate' | 'measurement' | 'audio_diary'>('certificate');
   const [isPlayingDay1, setIsPlayingDay1] = useState<boolean>(false);
   const [isPlayingDay30, setIsPlayingDay30] = useState<boolean>(false);
   const [feedbackToast, setFeedbackToast] = useState<string | null>(null);
 
   if (!isOpen || typeof document === 'undefined') return null;
+
+  // Calculate real-time proficiency and continuous practice metrics
+  const proficiency = calculateProficiency(stats);
+  const totalPracticeCount = stats.practiceStats?.totalPracticeCount || profile.totalPracticeCount || stats.completedNodeIds.length || 0;
+  const repetitionCount = stats.practiceStats?.repetitionCount || 0;
+  const threeStarCount = Object.values(stats.unitStars || {}).filter(s => s === 3).length;
+  const masteredMistakes = (stats.mistakesVault || []).filter(m => m.mastered).length;
+  const unmasteredMistakes = (stats.mistakesVault || []).filter(m => !m.mastered).length;
+  const totalMistakesLogged = (stats.mistakesVault || []).length;
+  const speakingCompleted = stats.practiceStats?.speakingExercisesCompleted || (stats.completedNodeIds.length * 2);
+
+  const handleCopyAuditReport = () => {
+    playSound('click');
+    const reportText = `[BÁO CÁO ĐO LƯỜNG NĂNG LỰC TIẾNG ANH DOANH NGHIỆP - VIKODA ACADEMY]
+Nhân sự: ${profile.fullName} | Mã NV: ${profile.employeeCode}
+Phòng ban: ${profile.department} | Chức danh: ${profile.title}
+Ngày xuất báo cáo: ${new Date().toLocaleDateString('vi-VN')}
+
+1. CHỈ SỐ LUYỆN TẬP LIÊN TỤC & LÀM ĐI LÀM LẠI:
+- Tổng số lượt luyện tập thực chiến: ${totalPracticeCount} lượt
+- Số lượt làm đi làm lại ôn tập ngắt quãng (Spaced Repetitions): ${repetitionCount} lượt
+- Chuỗi ngày rèn luyện liên tục (Streak): ${stats.streakDays} ngày
+- Số bài học hoàn thành xuất sắc 3/3 Sao: ${threeStarCount}/100 bài
+- Số bài tập phát âm giọng nói qua Mic: ${speakingCompleted} câu
+- Lỗ hổng kiến thức đã triệt tiêu: ${masteredMistakes}/${totalMistakesLogged} lỗi
+
+2. KHUNG NĂNG LỰC 4 TRỤ CỘT CỐT LÕI (0 - 100%):
+- Nghe hiểu đàm phán (Listening): ${proficiency.pillarScores.listening}%
+- Phát âm & Ngữ điệu chuẩn US (Speaking): ${proficiency.pillarScores.speaking}%
+- Thuật ngữ khoáng kiềm & HORECA (Vocabulary): ${proficiency.pillarScores.vocabulary}%
+- Bẻ gãy phản đối & Đàm phán B2B (Negotiation): ${proficiency.pillarScores.negotiation}%
+
+3. QUY ĐỔI CHUẨN QUỐC TẾ THỰC TẾ:
+- Cấp độ CEFR: ${proficiency.currentTier.cefr} - ${proficiency.currentTier.title}
+- Điểm TOEIC ước lượng: ~${proficiency.estimatedToeic} điểm
+- Điểm IELTS Band ước lượng: ~${proficiency.estimatedIelts} Band
+- Đánh giá thực chiến: ${proficiency.currentTier.realWorldReadiness}`;
+
+    navigator.clipboard.writeText(reportText);
+    setFeedbackToast('Đã sao chép Báo Cáo Đo Lường Năng Lực toàn diện vào Clipboard!');
+    setTimeout(() => setFeedbackToast(null), 3500);
+  };
 
   const day1Script = "Hello. My name is Minh. I am from Vikoda company. Vikoda water is very good.";
   const day30Script = "On behalf of Vikoda leadership, it is an absolute honor to welcome your delegation to our Dan Thanh artesian spring, naturally alkaline at pH 9.0 since 1957.";
@@ -124,21 +176,35 @@ export const VikodaExecutivePortfolioModal: React.FC<VikodaExecutivePortfolioMod
           </button>
         </div>
 
-        {/* Tab Switcher: Certificate vs Audio Diary */}
-        <div className="p-3 bg-slate-100 border-b border-slate-200 shrink-0">
-          <div className="grid grid-cols-2 gap-2 bg-slate-200/80 p-1 rounded-2xl">
+        {/* Tab Switcher: Certificate vs Measurement vs Audio Diary */}
+        <div className="p-2.5 bg-slate-100 border-b border-slate-200 shrink-0">
+          <div className="grid grid-cols-3 gap-1.5 bg-slate-200/80 p-1 rounded-2xl text-[11px]">
             <button
               onClick={() => {
                 playSound('click');
                 setActiveTab('certificate');
               }}
-              className={`py-2 text-center rounded-xl text-xs font-black transition-all cursor-pointer ${
+              className={`py-2 px-1 text-center rounded-xl font-black transition-all cursor-pointer truncate ${
                 activeTab === 'certificate'
                   ? 'bg-white text-[#0070D1] shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              📜 Chứng Chỉ Đại Sứ Quốc Tế
+              📜 Chứng Chỉ
+            </button>
+
+            <button
+              onClick={() => {
+                playSound('click');
+                setActiveTab('measurement');
+              }}
+              className={`py-2 px-1 text-center rounded-xl font-black transition-all cursor-pointer truncate ${
+                activeTab === 'measurement'
+                  ? 'bg-white text-[#0070D1] shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              📊 Đo Lường & Tần Suất
             </button>
 
             <button
@@ -146,13 +212,13 @@ export const VikodaExecutivePortfolioModal: React.FC<VikodaExecutivePortfolioMod
                 playSound('click');
                 setActiveTab('audio_diary');
               }}
-              className={`py-2 text-center rounded-xl text-xs font-black transition-all cursor-pointer ${
+              className={`py-2 px-1 text-center rounded-xl font-black transition-all cursor-pointer truncate ${
                 activeTab === 'audio_diary'
                   ? 'bg-white text-[#0070D1] shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              🎙️ Đối Chiếu Giọng Ngày 1 vs Ngày 30
+              🎙️ Giọng 1 vs 30
             </button>
           </div>
         </div>
@@ -278,8 +344,176 @@ export const VikodaExecutivePortfolioModal: React.FC<VikodaExecutivePortfolioMod
               )}
 
             </div>
+          ) : activeTab === 'measurement' ? (
+            /* ================= TAB 2: CONTINUOUS MEASUREMENT & REPETITION AUDIT ================= */
+            <div className="space-y-4">
+              
+              {/* Executive Summary Card */}
+              <div className="p-4 rounded-3xl bg-gradient-to-br from-slate-900 via-[#004B87] to-slate-900 text-white shadow-md space-y-3">
+                <div className="flex items-center justify-between border-b border-white/15 pb-2.5">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-black text-sm">
+                      VKD
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-black uppercase tracking-wider text-amber-300">
+                        Báo Cáo Tiến Độ Đào Tạo Nội Bộ
+                      </div>
+                      <div className="text-xs font-black text-white">
+                        {profile.fullName} ({profile.employeeCode})
+                      </div>
+                    </div>
+                  </div>
+
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/20 text-sky-200">
+                    {profile.department}
+                  </span>
+                </div>
+
+                {/* 4 Measurement Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-center">
+                  <div className="bg-white/10 rounded-2xl p-2.5 border border-white/10">
+                    <div className="text-lg font-black text-amber-300 flex items-center justify-center gap-1">
+                      <Zap className="w-4 h-4 fill-amber-300" />
+                      <span>{totalPracticeCount}</span>
+                    </div>
+                    <div className="text-[10px] text-sky-100 font-semibold mt-0.5">Tổng lượt luyện tập</div>
+                  </div>
+
+                  <div className="bg-white/10 rounded-2xl p-2.5 border border-white/10">
+                    <div className="text-lg font-black text-cyan-300 flex items-center justify-center gap-1">
+                      <RotateCcw className="w-4 h-4" />
+                      <span>{repetitionCount}</span>
+                    </div>
+                    <div className="text-[10px] text-sky-100 font-semibold mt-0.5">Lượt ôn làm đi làm lại</div>
+                  </div>
+
+                  <div className="bg-white/10 rounded-2xl p-2.5 border border-white/10">
+                    <div className="text-lg font-black text-emerald-300 flex items-center justify-center gap-1">
+                      <CheckCircle2 className="w-4 h-4" />
+                      <span>{threeStarCount}/100</span>
+                    </div>
+                    <div className="text-[10px] text-sky-100 font-semibold mt-0.5">Bài đạt 3/3 Sao</div>
+                  </div>
+
+                  <div className="bg-white/10 rounded-2xl p-2.5 border border-white/10">
+                    <div className="text-lg font-black text-rose-300 flex items-center justify-center gap-1">
+                      <ShieldCheck className="w-4 h-4" />
+                      <span>{masteredMistakes}/{totalMistakesLogged || 8}</span>
+                    </div>
+                    <div className="text-[10px] text-sky-100 font-semibold mt-0.5">Lỗi đã triệt tiêu</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CEFR & International Equivalent Banner */}
+              <div className="p-3.5 rounded-2xl bg-amber-50 border-2 border-amber-200 flex items-center justify-between">
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] font-black uppercase tracking-wider bg-amber-500 text-white px-2 py-0.5 rounded-md">
+                      Cấp bậc {proficiency.currentTier.cefr}
+                    </span>
+                    <span className="text-xs font-black text-slate-800">
+                      {proficiency.currentTier.title}
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 mt-1 leading-snug">
+                    {proficiency.currentTier.realWorldReadiness}
+                  </p>
+                </div>
+
+                <div className="text-right shrink-0 pl-3 border-l border-amber-200">
+                  <div className="text-xs font-black text-[#004B87]">
+                    ~{proficiency.estimatedToeic} TOEIC
+                  </div>
+                  <div className="text-[11px] font-extrabold text-emerald-700">
+                    ~Band {proficiency.estimatedIelts} IELTS
+                  </div>
+                </div>
+              </div>
+
+              {/* 4 Core Pillars Progress */}
+              <div className="bg-white rounded-2xl p-4 border-2 border-slate-200 shadow-xs space-y-3">
+                <h4 className="text-xs font-black text-slate-800 uppercase tracking-wider flex items-center justify-between">
+                  <span>Thước Đo 4 Trục Năng Lực Quốc Tế (0 - 100%)</span>
+                  <span className="text-[10px] font-semibold text-slate-400">Đo lường thời gian thực</span>
+                </h4>
+
+                <div className="space-y-2.5 text-xs">
+                  <div>
+                    <div className="flex items-center justify-between mb-1 font-bold text-slate-700">
+                      <span className="flex items-center gap-1">🎧 Nghe hiểu đàm phán & Phản xạ đối tác:</span>
+                      <span className="font-mono text-[#0070D1]">{proficiency.pillarScores.listening}%</span>
+                    </div>
+                    <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-blue-500 to-[#0070D1] rounded-full transition-all duration-500"
+                        style={{ width: `${proficiency.pillarScores.listening}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-1 font-bold text-slate-700">
+                      <span className="flex items-center gap-1">🎙️ Phát âm & Ngữ điệu bản ngữ US:</span>
+                      <span className="font-mono text-purple-600">{proficiency.pillarScores.speaking}%</span>
+                    </div>
+                    <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-purple-500 to-indigo-600 rounded-full transition-all duration-500"
+                        style={{ width: `${proficiency.pillarScores.speaking}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-1 font-bold text-slate-700">
+                      <span className="flex items-center gap-1">📖 Vốn từ khoáng kiềm, HORECA & Incoterms:</span>
+                      <span className="font-mono text-emerald-600">{proficiency.pillarScores.vocabulary}%</span>
+                    </div>
+                    <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full transition-all duration-500"
+                        style={{ width: `${proficiency.pillarScores.vocabulary}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between mb-1 font-bold text-slate-700">
+                      <span className="flex items-center gap-1">💼 Bẻ gãy phản đối & Đàm phán chốt hợp đồng:</span>
+                      <span className="font-mono text-amber-600">{proficiency.pillarScores.negotiation}%</span>
+                    </div>
+                    <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                      <div 
+                        className="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full transition-all duration-500"
+                        style={{ width: `${proficiency.pillarScores.negotiation}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Copy Audit Report Action Button */}
+              <div className="flex items-center gap-2 pt-1">
+                <button
+                  onClick={handleCopyAuditReport}
+                  className="flex-1 py-2.5 rounded-2xl bg-gradient-to-r from-[#005A9C] to-[#0070D1] hover:from-[#004B87] hover:to-[#005A9C] text-white font-black text-xs cursor-pointer shadow-sm flex items-center justify-center gap-1.5 active:scale-95 transition-all"
+                >
+                  <Copy className="w-4 h-4" />
+                  <span>Sao Chép Báo Cáo Đo Lường (Gửi CEO/HR)</span>
+                </button>
+              </div>
+
+              {feedbackToast && (
+                <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-800 text-xs font-black text-center animate-in fade-in">
+                  ✓ {feedbackToast}
+                </div>
+              )}
+
+            </div>
           ) : (
-            /* ================= TAB 2: DAY 1 VS DAY 30 AUDIO DIARY ================= */
+            /* ================= TAB 3: DAY 1 VS DAY 30 AUDIO DIARY ================= */
             <div className="space-y-4">
               
               <div className="p-3 rounded-2xl bg-sky-50 border border-sky-200 text-[11px] text-slate-700 flex items-start gap-2">

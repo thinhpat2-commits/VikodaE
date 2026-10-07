@@ -798,8 +798,12 @@ export const startSpeechRecognition = (
     const recognition = new SpeechRecognition();
     activeRecognitionInstance = recognition;
 
+    const isMobileDevice = typeof navigator !== 'undefined' && 
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(navigator.userAgent);
+
     recognition.lang = lang || 'en-US';
-    recognition.continuous = true;
+    // CRITICAL FOR MOBILE: iOS Safari and Mobile Chrome fail or abort if continuous is true!
+    recognition.continuous = !isMobileDevice;
     recognition.interimResults = true;
     recognition.maxAlternatives = 3;
 
@@ -842,22 +846,24 @@ export const startSpeechRecognition = (
     const triggerAutoSubmitOnSilence = (currentSpeech: string) => {
       if (autoSubmitTimer) clearTimeout(autoSubmitTimer);
 
-      let waitMs = 850;
+      let waitMs = 1500;
       if (targetSentence) {
         const targetWords = targetSentence.trim().split(/\s+/).filter(Boolean).length;
         const spokenWords = currentSpeech.trim().split(/\s+/).filter(Boolean).length;
         const progress = spokenWords / Math.max(1, targetWords);
 
         if (progress >= 0.8) {
-          // Đã đọc gần hết câu -> Chốt bài nhanh 850ms
-          waitMs = 850;
-        } else if (progress >= 0.4) {
-          // Đang đọc dở giữa câu -> Cho học viên 1.5 giây thở và tiếp tục
+          // Đã đọc gần hết câu -> Chờ 1.5 giây để đảm bảo từ cuối nhận trọn vẹn
           waitMs = 1500;
+        } else if (progress >= 0.4) {
+          // Đang đọc dở giữa câu -> Cho học viên 2.0 giây thở và tiếp tục
+          waitMs = 2000;
         } else {
-          // Mới đọc 1-2 từ đầu của câu dài -> Cho học viên 2.2 giây để lấy hơi
-          waitMs = 2200;
+          // Mới đọc 1-2 từ đầu của câu dài -> Cho học viên 2.8 giây để đọc tiếp
+          waitMs = 2800;
         }
+      } else {
+        waitMs = 1800;
       }
 
       autoSubmitTimer = setTimeout(() => {
@@ -870,18 +876,24 @@ export const startSpeechRecognition = (
     };
 
     recognition.onresult = (event: any) => {
-      let interim = '';
+      let currentFinal = '';
+      let currentInterim = '';
 
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        const transcriptPart = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          accumulatedFinal += (accumulatedFinal ? ' ' : '') + transcriptPart;
-        } else {
-          interim += transcriptPart;
+      // Quét toàn bộ kết quả từ 0 -> length (Tương thích 100% iOS Safari & Android Chrome)
+      for (let i = 0; i < event.results.length; ++i) {
+        const res = event.results[i];
+        if (res && res[0]) {
+          const text = (res[0].transcript || '').trim();
+          if (res.isFinal) {
+            currentFinal += (currentFinal ? ' ' : '') + text;
+          } else {
+            currentInterim += (currentInterim ? ' ' : '') + text;
+          }
         }
       }
 
-      latestInterim = (accumulatedFinal + (interim ? ' ' + interim : '')).trim();
+      accumulatedFinal = currentFinal.trim();
+      latestInterim = (accumulatedFinal + (currentInterim ? ' ' + currentInterim : '')).trim();
 
       if (onInterim && latestInterim) {
         onInterim(latestInterim);

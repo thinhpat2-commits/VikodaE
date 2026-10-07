@@ -34,6 +34,8 @@ export interface ProficiencyTier {
   borderClass: string;
   textClass: string;
   description: string;
+  readinessBadge: string;
+  readinessSub: string;
   realWorldReadiness: string;
   requiredXp: number;
   requiredLessons: number;
@@ -42,73 +44,83 @@ export interface ProficiencyTier {
 export const PROFICIENCY_TIERS: ProficiencyTier[] = [
   {
     cefr: 'A1',
-    toeicRange: '250 - 400',
-    ieltsRange: '3.0 - 4.0',
-    title: 'Tân Binh Văn Phòng (Workplace Novice)',
+    toeicRange: '150 - 250',
+    ieltsRange: '2.5 - 3.5',
+    title: '🌱 Nhập Môn Văn Phòng (Workplace Foundation)',
     badgeColor: 'bg-emerald-500',
     accentBg: 'bg-emerald-50',
     borderClass: 'border-emerald-200',
     textClass: 'text-emerald-700',
-    description: 'Nắm vững các mẫu câu chào hỏi, tự giới thiệu tên, phòng ban và hỏi thăm đồng nghiệp cơ bản.',
-    realWorldReadiness: 'Tự tin bắt tay, trao danh thiếp và giới thiệu bản thân với khách quốc tế.',
+    description: 'Nắm vững 20 bài nhập môn: Phát âm chuẩn từ khóa Vikoda, chào hỏi lịch thiệp, tự giới thiệu bản thân, phòng ban và đếm số cơ bản.',
+    readinessBadge: 'Đang Rèn Nền Tảng',
+    readinessSub: 'Chưa Độc Lập Tiếp Khách',
+    realWorldReadiness: 'Làm quen từ vựng & phát âm căn bản công sở (Giai đoạn xây dựng nền tảng, chưa đón tiếp đối tác độc lập; cần hoàn thành ít nhất 20 bài để bắt đầu hỗ trợ tiếp khách).',
     requiredXp: 0,
     requiredLessons: 0,
   },
   {
     cefr: 'A2',
-    toeicRange: '405 - 550',
-    ieltsRange: '4.0 - 5.0',
+    toeicRange: '255 - 450',
+    ieltsRange: '3.5 - 4.5',
     title: 'Tiếp Thị Viên Tự Tin (Product Presenter)',
     badgeColor: 'bg-sky-500',
     accentBg: 'bg-sky-50',
     borderClass: 'border-sky-200',
     textClass: 'text-sky-700',
-    description: 'Thuyết minh lưu loát về nguồn khoáng Đảnh Thạnh 220m, độ kiềm tự nhiên pH 9.0 và các chứng nhận an toàn.',
-    realWorldReadiness: 'Dẫn khách tham quan nhà máy, giải thích sự khác biệt giữa nước khoáng kiềm thiên nhiên và nước lọc RO.',
-    requiredXp: 350,
-    requiredLessons: 8,
+    description: 'Hoàn thành 40 bài: Viết email công sở, lịch trình giao nhận, kiểm kê kiện hàng, nội quy an toàn lao động và phối hợp nhịp nhàng giữa các phòng ban.',
+    readinessBadge: 'Hỗ Trợ Tiếp Khách',
+    readinessSub: 'Chào Khách & Mời Nước',
+    realWorldReadiness: 'Hỗ trợ đón tiếp khách tại sảnh, mời dùng chai nước khoáng thiên nhiên Vikoda và dẫn đường cơ bản.',
+    requiredXp: 700,
+    requiredLessons: 20,
   },
   {
     cefr: 'B1',
-    toeicRange: '555 - 700',
-    ieltsRange: '5.0 - 6.0',
-    title: 'Đại Sứ Kinh Doanh (Business Ambassador)',
+    toeicRange: '455 - 650',
+    ieltsRange: '4.5 - 5.5',
+    title: 'Đại Sứ Kinh Doanh (Brand Ambassador)',
     badgeColor: 'bg-blue-600',
     accentBg: 'bg-blue-50',
     borderClass: 'border-blue-200',
     textClass: 'text-blue-800',
-    description: 'Giao tiếp độc lập qua email thương mại, xử lý từ chối về giá và giới thiệu chính sách chiết khấu phân phối.',
-    realWorldReadiness: 'Đàm phán đưa Vikoda vào các chuỗi nhà hàng, khách sạn 5 sao (HORECA) và siêu thị đối tác.',
-    requiredXp: 900,
-    requiredLessons: 18,
+    description: 'Hoàn thành 60 bài: Thuyết trình PowerPoint dự án, Small Talk ngoại giao và chứng minh độ bền kiềm pH 9.0 suốt 3 năm.',
+    readinessBadge: 'Tiếp Khách Cơ Bản',
+    readinessSub: 'Dẫn Tour & Giới Thiệu SP',
+    realWorldReadiness: 'Tự tin dẫn khách tham quan mỏ khoáng Đảnh Thạnh, giới thiệu lợi thế kiềm tự nhiên pH 9.0 và trả lời thắc mắc chuẩn mực.',
+    requiredXp: 1600,
+    requiredLessons: 40,
   },
   {
     cefr: 'B2',
-    toeicRange: '705 - 850',
+    toeicRange: '655 - 800',
     ieltsRange: '6.0 - 7.0',
-    title: 'Chuyên Gia Đàm Phán Xuất Khẩu (Export Negotiator)',
+    title: 'Chuyên Gia Đàm Phán B2B (Commercial Negotiator)',
     badgeColor: 'bg-indigo-600',
     accentBg: 'bg-indigo-50',
     borderClass: 'border-indigo-200',
     textClass: 'text-indigo-800',
-    description: 'Đàm phán hợp đồng thương mại quốc tế, Incoterms 2020 (FOB Da Nang, CIF Tokyo), thanh toán L/C và giải quyết khiếu nại.',
-    realWorldReadiness: 'Đại diện công ty đàm phán hợp đồng container xuất khẩu lớn với các nhà nhập khẩu Nhật Bản, Mỹ, Hàn Quốc.',
-    requiredXp: 1800,
-    requiredLessons: 28,
+    description: 'Hoàn thành 80 bài: Đàm phán HORECA 5 sao, hợp đồng nguyên tắc, chiết khấu volume, hóa đơn VAT, dây chuyền Krones và tiêu chuẩn ISO.',
+    readinessBadge: 'Sẵn Sàng Tiếp Khách',
+    readinessSub: 'Đàm Phán Thương Vụ B2B',
+    realWorldReadiness: 'Độc lập tiếp đón các phái đoàn đối tác, bảo vệ chính sách giá FOB/CIF và xử lý phản bác của các chuỗi phân phối lớn.',
+    requiredXp: 2800,
+    requiredLessons: 60,
   },
   {
     cefr: 'C1-C2',
-    toeicRange: '855 - 990',
-    ieltsRange: '7.5 - 9.0',
-    title: 'Lãnh Đạo Ngoại Giao Thương Hiệu (Global Strategic Leader)',
+    toeicRange: '805 - 900+',
+    ieltsRange: '7.5 - 8.5',
+    title: 'Lãnh Đạo Ngoại Giao Toàn Cầu (Global Strategic Leader)',
     badgeColor: 'bg-amber-500',
     accentBg: 'bg-amber-50',
     borderClass: 'border-amber-300',
     textClass: 'text-amber-900',
-    description: 'Diễn thuyết tại hội thảo nước uống toàn cầu, bảo vệ chiến lược giá trị thương hiệu và ký kết liên doanh quốc tế.',
-    realWorldReadiness: 'Đại sứ thương hiệu toàn quyền đại diện Vikoda trên các diễn đàn thượng đỉnh kinh tế thế giới.',
-    requiredXp: 3000,
-    requiredLessons: 38,
+    description: 'Hoàn thành trọn bộ 100 bài: Incoterms 2020, mở thư tín dụng L/C, quản trị khủng hoảng và ký kết hợp đồng xuất khẩu đa quốc gia.',
+    readinessBadge: 'Trưởng Đoàn Đối Ngoại',
+    readinessSub: 'Thương Vụ Quốc Tế & L/C',
+    realWorldReadiness: 'Đại diện toàn quyền dẫn dắt các phiên đàm phán hợp đồng container xuất khẩu sang Nhật, Mỹ, Châu Âu.',
+    requiredXp: 4500,
+    requiredLessons: 80,
   },
 ];
 
@@ -133,22 +145,24 @@ export const calculateProficiency = (stats: GamificationState): {
     : 0;
   const arenaWins = stats.arenaStats?.wins || 0;
 
-  // 1. Phân cấp bậc CEFR chuẩn xác dựa trên số bài học thực tế (42 Bài) & Điểm kinh nghiệm
+  // 1. Phân cấp bậc CEFR chuẩn xác dựa trên Lộ trình 100 Bài học thực tế
+  // Quy định chặt chẽ: Phải hoàn thành đủ bài học của cấp độ mới được lên hạng (Không nhảy cóc ảo)
   let tierIndex = 0;
-  if (completedCount >= 34 || xp >= 3000) {
-    tierIndex = 4; // C1-C2 (Lãnh Đạo Ngoại Giao Thương Hiệu)
-  } else if (completedCount >= 24 || xp >= 1800) {
-    tierIndex = 3; // B2 (Chuyên Gia Đàm Phán Xuất Khẩu)
-  } else if (completedCount >= 14 || xp >= 900) {
-    tierIndex = 2; // B1 (Đại Sứ Kinh Doanh)
-  } else if (completedCount >= 6 || xp >= 350) {
-    tierIndex = 1; // A2 (Tiếp Thị Viên Tự Tin)
+  if (completedCount >= 80) {
+    tierIndex = 4; // C1-C2 (Lãnh Đạo Ngoại Giao Toàn Cầu - Đã hoàn thành 80+ bài)
+  } else if (completedCount >= 60) {
+    tierIndex = 3; // B2 (Chuyên Gia Đàm Phán B2B - Đã hoàn thành 60+ bài)
+  } else if (completedCount >= 40) {
+    tierIndex = 2; // B1 (Đại Sứ Kinh Doanh - Đã hoàn thành 40+ bài)
+  } else if (completedCount >= 20) {
+    tierIndex = 1; // A2 (Tiếp Thị Viên Tự Tin - Đã hoàn thành 20 bài A1)
   } else {
-    tierIndex = 0; // A1 (Tân Binh Văn Phòng)
+    tierIndex = 0; // A1 (Tân Binh Văn Phòng - Dưới 20 bài)
   }
 
-  // Nếu đã làm bài thi đánh giá năng lực hợp lệ (Placement Test)
-  if (stats.placementTest?.recommendedLevel) {
+  // Nếu đã làm bài test đánh giá năng lực ban đầu (Placement Test)
+  // Chỉ công nhận nếu học viên đã học ít nhất 8 bài hoặc bài test xuất sắc
+  if (stats.placementTest?.recommendedLevel && completedCount >= 8) {
     const lvl = stats.placementTest.recommendedLevel;
     let testTier = 0;
     if (lvl === 'A1') testTier = 0;
@@ -157,10 +171,7 @@ export const calculateProficiency = (stats: GamificationState): {
     else if (lvl === 'B2' || lvl === 'B2-C1') testTier = 3;
     else if (lvl === 'C1-C2' || lvl === 'C2') testTier = 4;
 
-    // Giữ cấp độ bài test nếu học viên có năng lực sẵn, nhưng khởi điểm A1 nếu mới học
-    if (completedCount > 0 || testTier <= 1) {
-      tierIndex = Math.max(tierIndex, testTier);
-    }
+    tierIndex = Math.max(tierIndex, Math.min(testTier, tierIndex + 1));
   }
 
   const currentTier = PROFICIENCY_TIERS[tierIndex];
@@ -176,64 +187,53 @@ export const calculateProficiency = (stats: GamificationState): {
     const targetXp = nextTier.requiredXp;
     const xpRatio = (xp - prevXp) / Math.max(1, targetXp - prevXp);
 
-    const rawProgress = Math.max(0, Math.min(0.99, (lessonRatio * 0.6 + xpRatio * 0.4)));
+    const rawProgress = Math.max(0, Math.min(0.99, (lessonRatio * 0.7 + Math.max(0, xpRatio) * 0.3)));
     progressToNext = Math.round(rawProgress * 100);
   }
 
-  // Ước lượng TOEIC / IELTS bám sát tiến độ thực tế
-  const baseToeicByTier = [280, 420, 560, 720, 860];
-  const baseIeltsByTier = [3.0, 4.0, 5.0, 6.0, 7.5];
-  const bonusToeic = Math.min(100, Math.round((progressToNext / 100) * 100));
+  // Ước lượng TOEIC / IELTS bám sát tiến độ 100 bài thực tế (Workplace Speaking & Listening)
+  const baseToeicByTier = [150, 255, 455, 655, 805];
+  const baseIeltsByTier = [2.5, 3.5, 4.5, 6.0, 7.5];
+  const bonusToeic = Math.min(100, Math.round((progressToNext / 100) * 95));
   const estimatedToeic = Math.min(990, baseToeicByTier[tierIndex] + bonusToeic);
   const estimatedIelts = parseFloat((baseIeltsByTier[tierIndex] + (progressToNext >= 50 ? 0.5 : 0)).toFixed(1));
 
-  // 2. CÔNG THỨC 4 TRỤ CỘT NĂNG LỰC CHÂN THỰC (0 - 100)
-  // Xóa bỏ hoàn toàn việc cộng ảo lên 90-100 khi mới học vài bài!
-  // Điểm số phản ánh đúng số bài học (42 bài), chất lượng 3 sao, chuỗi streak và thành tích đấu trường.
-  const totalUnits = 42;
+  // 2. CÔNG THỨC 4 TRỤ CỘT NĂNG LỰC CHÂN THỰC THEO 100 BÀI (0 - 100%)
+  const totalUnits = 100;
   const progressRatio = Math.min(1, completedCount / totalUnits);
   const threeStarRatio = Math.min(1, threeStarCount / totalUnits);
 
-  // 1. Nghe hiểu (Listening): Bắt đầu từ 15đ, tích lũy theo số bài học & sao đạt được
+  // 1. Nghe hiểu (Listening): Bắt đầu từ 12%, tăng theo tỷ lệ bài học & bài 3 sao
   const listening = Math.min(
     98,
-    Math.max(15, Math.round(
-      15 + progressRatio * 55 + threeStarRatio * 20 + Math.min(10, (xp / 400))
+    Math.max(12, Math.round(
+      12 + progressRatio * 60 + threeStarRatio * 20 + Math.min(6, (xp / 1000))
     ))
   );
 
-  // 2. Phát âm & Nói (Speaking): Bắt đầu từ 12đ, tích lũy qua bài nói và luyện âm AI
+  // 2. Phát âm & Nói (Speaking): Bắt đầu từ 10%, tăng theo bài học và luyện mic AI
   const speaking = Math.min(
     98,
-    Math.max(12, Math.round(
-      12 + progressRatio * 52 + threeStarRatio * 22 + Math.min(10, completedCount * 0.3)
+    Math.max(10, Math.round(
+      10 + progressRatio * 56 + threeStarRatio * 22 + Math.min(8, completedCount * 0.2)
     ))
   );
 
-  // 3. Vốn từ vựng (Vocabulary): Bắt đầu từ 16đ, tăng theo từ vựng từng Unit và chuỗi streak
+  // 3. Vốn từ vựng (Vocabulary): Bắt đầu từ 14%, tăng theo từ vựng từng Unit và chuỗi streak
   const vocabulary = Math.min(
     98,
-    Math.max(16, Math.round(
-      16 + progressRatio * 58 + Math.min(12, (stats.streakDays || 1) * 1.5) + threeStarRatio * 10
+    Math.max(14, Math.round(
+      14 + progressRatio * 60 + Math.min(10, (stats.streakDays || 1) * 1.0) + threeStarRatio * 10
     ))
   );
 
-  // 4. Đàm phán thương vụ (Negotiation): Bắt đầu từ 10đ (người mới A1 chưa học đàm phán).
-  // Tăng mạnh khi học các bài Unit B1/B2 và có chiến thắng Đấu trường 1v1
-  const b2bRatio = Math.min(1, Math.max(0, completedCount - 6) / 36);
+  // 4. Đàm phán thương vụ (Negotiation): Bắt đầu từ 8%
   const negotiation = Math.min(
     98,
-    Math.max(10, Math.round(
-      10 + b2bRatio * 60 + Math.min(18, arenaWins * 3) + threeStarRatio * 10
+    Math.max(8, Math.round(
+      8 + (completedCount >= 60 ? (completedCount - 60) * 1.5 : 0) + Math.min(25, arenaWins * 3) + progressRatio * 40
     ))
   );
-
-  const pillarScores = {
-    listening,
-    speaking,
-    vocabulary,
-    negotiation,
-  };
 
   return {
     currentTier,
@@ -242,7 +242,12 @@ export const calculateProficiency = (stats: GamificationState): {
     progressToNext,
     estimatedToeic,
     estimatedIelts,
-    pillarScores,
+    pillarScores: {
+      listening,
+      speaking,
+      vocabulary,
+      negotiation,
+    },
   };
 };
 
@@ -311,11 +316,11 @@ export const GlobalProficiencyDashboard: React.FC<GlobalProficiencyDashboardProp
           </div>
 
           <div className="col-span-2 sm:col-span-1 bg-white/15 backdrop-blur-md rounded-2xl p-2.5 border border-white/20 text-center flex flex-col justify-center">
-            <span className="text-[10px] font-black uppercase text-sky-200 block">Trạng Thái Sẵn Sàng</span>
+            <span className="text-[10px] font-black uppercase text-sky-200 block">Trạng Thái Thực Chiến</span>
             <span className="text-xs font-black text-white mt-1 block leading-tight">
-              Sẵn Sàng Tiếp Khách
+              {currentTier.readinessBadge}
             </span>
-            <span className="text-[10px] text-sky-200 font-medium mt-0.5">Thương vụ Quốc tế</span>
+            <span className="text-[10px] text-sky-200 font-medium mt-0.5">{currentTier.readinessSub}</span>
           </div>
         </div>
 
