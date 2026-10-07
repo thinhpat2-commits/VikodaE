@@ -129,6 +129,9 @@ export const calculateProficiency = (stats: GamificationState): {
   nextTier: ProficiencyTier | null;
   currentTierIndex: number;
   progressToNext: number;
+  remainingLessons: number;
+  completedInTier: number;
+  neededInTier: number;
   estimatedToeic: number;
   estimatedIelts: number;
   pillarScores: {
@@ -178,17 +181,21 @@ export const calculateProficiency = (stats: GamificationState): {
   const nextTier = tierIndex < PROFICIENCY_TIERS.length - 1 ? PROFICIENCY_TIERS[tierIndex + 1] : null;
 
   let progressToNext = 100;
+  let remainingLessons = 0;
+  let completedInTier = 0;
+  let neededInTier = 20;
+
   if (nextTier) {
     const prevLessons = currentTier.requiredLessons;
     const targetLessons = nextTier.requiredLessons;
-    const lessonRatio = (completedCount - prevLessons) / Math.max(1, targetLessons - prevLessons);
+    completedInTier = Math.max(0, completedCount - prevLessons);
+    neededInTier = Math.max(1, targetLessons - prevLessons);
     
-    const prevXp = currentTier.requiredXp;
-    const targetXp = nextTier.requiredXp;
-    const xpRatio = (xp - prevXp) / Math.max(1, targetXp - prevXp);
+    remainingLessons = Math.max(0, targetLessons - completedCount);
 
-    const rawProgress = Math.max(0, Math.min(0.99, (lessonRatio * 0.7 + Math.max(0, xpRatio) * 0.3)));
-    progressToNext = Math.round(rawProgress * 100);
+    // Tính tỷ lệ % hoàn thành bài học thực tế của chặng hiện tại (0 - 100%)
+    const lessonRatio = Math.max(0, Math.min(1, completedInTier / neededInTier));
+    progressToNext = Math.round(lessonRatio * 100);
   }
 
   // Ước lượng TOEIC / IELTS bám sát tiến độ 100 bài thực tế (Workplace Speaking & Listening)
@@ -240,6 +247,9 @@ export const calculateProficiency = (stats: GamificationState): {
     nextTier,
     currentTierIndex: tierIndex,
     progressToNext,
+    remainingLessons,
+    completedInTier,
+    neededInTier,
     estimatedToeic,
     estimatedIelts,
     pillarScores: {
@@ -262,6 +272,9 @@ export const GlobalProficiencyDashboard: React.FC<GlobalProficiencyDashboardProp
     nextTier,
     currentTierIndex,
     progressToNext,
+    remainingLessons,
+    completedInTier,
+    neededInTier,
     estimatedToeic,
     estimatedIelts,
     pillarScores,
@@ -402,7 +415,7 @@ export const GlobalProficiencyDashboard: React.FC<GlobalProficiencyDashboardProp
                 <span>Mục tiêu tiếp theo: Thăng hạng lên {nextTier.cefr} ({nextTier.title})</span>
               </div>
               <p className="text-[11px] text-slate-600 font-medium leading-relaxed">
-                Tương đương <strong>TOEIC {nextTier.toeicRange}</strong> | <strong>IELTS {nextTier.ieltsRange}</strong>. Tiến độ hiện tại: <strong>{progressToNext}%</strong>.
+                Đã hoàn thành <strong>{completedInTier}/{neededInTier} bài</strong> cấp độ {currentTier.cefr} ({progressToNext}%). {remainingLessons > 0 ? <>Còn <strong>{remainingLessons} bài</strong> nữa để thăng hạng.</> : 'Đủ điều kiện thăng hạng!'} Tương đương <strong>TOEIC {nextTier.toeicRange}</strong> | <strong>IELTS {nextTier.ieltsRange}</strong>.
               </p>
               {/* Progress bar */}
               <div className="w-full bg-amber-200/70 h-2 rounded-full overflow-hidden mt-1.5">
