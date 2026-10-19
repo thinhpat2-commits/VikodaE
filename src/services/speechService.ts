@@ -13,7 +13,7 @@
  *    - Bộ từ điển ngữ âm Vikoda, pH 9.0, khoáng kiềm, HORECA, FOB, CIF
  */
 
-export type VoiceOptionId = 'us_male' | 'us_female' | 'ai_puck' | 'ai_kore';
+export type VoiceOptionId = 'us_male' | 'us_female' | 'uk_male';
 
 export interface VoiceOption {
   id: VoiceOptionId;
@@ -21,6 +21,7 @@ export interface VoiceOption {
   flag: string;
   accent: string;
   gender: 'female' | 'male';
+  lang: 'en-US' | 'en-GB';
   description: string;
   mode: 'instant';
   pitch: number;
@@ -30,51 +31,43 @@ export interface VoiceOption {
 export const VOICE_OPTIONS: VoiceOption[] = [
   {
     id: 'us_male',
-    name: 'Michael (Nam Bản Ngữ US • 0ms Siêu Tốc)',
+    name: 'Michael (Nam Mỹ • Bản Ngữ B2B)',
     flag: '🇺🇸',
-    accent: 'Giọng Nam Mỹ Bản Ngữ (0ms Tức Thì)',
+    accent: 'Giọng Nam Mỹ (US General American)',
     gender: 'male',
-    description: 'Phát âm tức thì 0ms, trầm ấm, chuẩn giọng đàm phán quốc tế và thương hiệu Vikoda',
+    lang: 'en-US',
+    description: 'Trầm ấm, đĩnh đạc, chuẩn phong thái đàm phán hợp đồng thương mại và lãnh đạo C-Suite',
     mode: 'instant',
-    pitch: 0.96,
+    pitch: 0.95,
     rateFactor: 0.98,
   },
   {
     id: 'us_female',
-    name: 'Emma (Nữ Bản Ngữ US • 0ms Siêu Tốc)',
+    name: 'Emma (Nữ Mỹ • Ngoại Giao Doanh Nghiệp)',
     flag: '🇺🇸',
-    accent: 'Giọng Nữ Mỹ Ấm Áp (0ms Tức Thì)',
+    accent: 'Giọng Nữ Mỹ (US Standard Clear)',
     gender: 'female',
-    description: 'Phát âm tức thì 0ms, trong trẻo, ngữ điệu tiếp khách đối ngoại chuẩn mực',
-    mode: 'instant',
-    pitch: 1.05,
-    rateFactor: 0.98,
-  },
-  {
-    id: 'ai_puck',
-    name: 'David (Nam Quốc Tế • Phát Âm Rõ Ràng)',
-    flag: '🎯',
-    accent: 'Giọng Nam Sư Phạm (0ms Tức Thì)',
-    gender: 'male',
-    description: 'Phát âm rõ ràng từng âm tiết và âm đuôi, phù hợp luyện nghe chi tiết',
-    mode: 'instant',
-    pitch: 0.92,
-    rateFactor: 0.92,
-  },
-  {
-    id: 'ai_kore',
-    name: 'Sarah (Nữ Ngoại Giao • Chuẩn Doanh Nghiệp)',
-    flag: '✨',
-    accent: 'Giọng Nữ Doanh Nghiệp (0ms Tức Thì)',
-    gender: 'female',
-    description: 'Ngữ điệu thuyết trình và đàm phán thương mại quốc tế chuẩn mực',
+    lang: 'en-US',
+    description: 'Trong trẻo, phát âm khẩu hình cực rõ từng âm tiết, chuẩn mực tiếp khách đối ngoại',
     mode: 'instant',
     pitch: 1.02,
     rateFactor: 0.96,
   },
+  {
+    id: 'uk_male',
+    name: 'James (Nam Anh • Chuẩn Oxford & SIAC)',
+    flag: '🇬🇧',
+    accent: 'Giọng Nam Anh (UK Received Pronunciation)',
+    gender: 'male',
+    lang: 'en-GB',
+    description: 'Lịch thiệp, chuẩn London / Oxford sang trọng, tối ưu cho hội nghị quốc tế và pháp lý',
+    mode: 'instant',
+    pitch: 0.96,
+    rateFactor: 0.95,
+  },
 ];
 
-const STORAGE_KEY_VOICE = 'vikoda_selected_voice_option_v5';
+const STORAGE_KEY_VOICE = 'vikoda_selected_voice_option_v6';
 
 export const getSelectedVoiceId = (): VoiceOptionId => {
   if (typeof window === 'undefined') return 'us_male';
@@ -174,46 +167,116 @@ export const cleanSpeechText = (text: string): string => {
     .trim();
 };
 
-const findBestNativeVoice = (gender: 'female' | 'male'): SpeechSynthesisVoice | undefined => {
+const findBestNativeVoice = (
+  gender: 'female' | 'male',
+  targetLang: 'en-US' | 'en-GB' = 'en-US'
+): SpeechSynthesisVoice | undefined => {
   const voices = refreshVoices();
   if (voices.length === 0) return undefined;
 
-  const enUsVoices = voices.filter((v) => v.lang === 'en-US' || v.lang === 'en_US');
-  const allEnVoices = voices.filter((v) => v.lang.startsWith('en'));
-  const pool = enUsVoices.length > 0 ? enUsVoices : allEnVoices;
-  if (pool.length === 0) return voices[0];
+  // Strict English pool: Filter out non-English (e.g. Vietnamese vi-VN) voices to prevent language distortion
+  const englishVoices = voices.filter((v) => {
+    const l = (v.lang || '').toLowerCase().replace('_', '-');
+    return l.startsWith('en');
+  });
+
+  const pool = englishVoices.length > 0 ? englishVoices : voices;
+
+  // 1. UK MALE VOICE MATCHING (en-GB)
+  if (targetLang === 'en-GB') {
+    const ukVoices = pool.filter((v) => {
+      const l = (v.lang || '').toLowerCase().replace('_', '-');
+      return l === 'en-gb' || l.startsWith('en-gb');
+    });
+
+    if (ukVoices.length > 0) {
+      // Filter out female voices for UK male if possible
+      const ukMaleOnly = ukVoices.filter(v => {
+        const n = v.name.toLowerCase();
+        return !n.includes('female') && !n.includes('hazel') && !n.includes('sonia') && !n.includes('libby');
+      });
+      const ukCandidatePool = ukMaleOnly.length > 0 ? ukMaleOnly : ukVoices;
+
+      const preferredUkMale = [
+        'ryan online (natural)',
+        'george online (natural)',
+        'oliver online (natural)',
+        'daniel',
+        'google uk english male',
+        'google uk english',
+        'george',
+        'oliver',
+        'male'
+      ];
+      for (const p of preferredUkMale) {
+        const match = ukCandidatePool.find((v) => v.name.toLowerCase().includes(p));
+        if (match) return match;
+      }
+      return ukCandidatePool[0];
+    }
+    // Fall back to best English pool if no en-GB installed
+  }
+
+  // 2. US VOICES MATCHING (en-US)
+  const usVoices = pool.filter((v) => {
+    const l = (v.lang || '').toLowerCase().replace('_', '-');
+    return l === 'en-us' || l.startsWith('en-us');
+  });
+  const searchPool = usVoices.length > 0 ? usVoices : pool;
 
   if (gender === 'male') {
+    // Exclude female names from male candidates
+    const maleOnlyPool = searchPool.filter(v => {
+      const n = v.name.toLowerCase();
+      return !n.includes('female') && !n.includes('zira') && !n.includes('jenny') && !n.includes('samantha') && !n.includes('aria') && !n.includes('victoria') && !n.includes('ava');
+    });
+    const candidatePool = maleOnlyPool.length > 0 ? maleOnlyPool : searchPool;
+
     const preferredMale = [
       'guy online (natural)',
       'christopher online (natural)',
+      'eric online (natural)',
+      'google us english male',
       'google us english',
       'alex',
-      'daniel',
+      'fred',
+      'aaron',
       'david',
+      'mark',
       'male'
     ];
     for (const p of preferredMale) {
-      const match = pool.find((v) => v.name.toLowerCase().includes(p));
+      const match = candidatePool.find((v) => v.name.toLowerCase().includes(p));
       if (match) return match;
     }
+    return candidatePool[0];
   } else {
+    // Exclude male names from female candidates
+    const femaleOnlyPool = searchPool.filter(v => {
+      const n = v.name.toLowerCase();
+      return !n.includes('male') && !n.includes('david') && !n.includes('alex') && !n.includes('guy') && !n.includes('ryan') && !n.includes('daniel') && !n.includes('george') && !n.includes('fred');
+    });
+    const candidatePool = femaleOnlyPool.length > 0 ? femaleOnlyPool : searchPool;
+
     const preferredFemale = [
       'jenny online (natural)',
       'aria online (natural)',
+      'michelle online (natural)',
+      'google us english female',
       'google us english',
       'samantha',
       'ava',
+      'victoria',
+      'allison',
       'zira',
       'female'
     ];
     for (const p of preferredFemale) {
-      const match = pool.find((v) => v.name.toLowerCase().includes(p));
+      const match = candidatePool.find((v) => v.name.toLowerCase().includes(p));
       if (match) return match;
     }
+    return candidatePool[0];
   }
-
-  return pool[0];
 };
 
 let keepAliveTimer: any = null;
@@ -229,16 +292,23 @@ const startKeepAlive = () => {
         keepAliveTimer = null;
       }
     }
-  }, 4000);
+  }, 3500);
 };
 
 export const stopSpeech = () => {
   if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
     try {
       window.speechSynthesis.cancel();
+      if (window.speechSynthesis.paused) {
+        window.speechSynthesis.resume();
+      }
     } catch (e) {}
 
     activeUtterances.clear();
+    try {
+      delete (window as any).__vikodaCurrentUtterance;
+    } catch (e) {}
+
     if (keepAliveTimer) {
       clearInterval(keepAliveTimer);
       keepAliveTimer = null;
@@ -249,8 +319,9 @@ export const stopSpeech = () => {
 };
 
 /**
- * PLAY SPEECH: 100% NATIVE, INSTANT AUDIO (< 15ms)
- * Completely eliminates slow AI TTS. Zero network latency, zero quota.
+ * PLAY SPEECH: 100% NATIVE, INSTANT AUDIO (< 10ms)
+ * Completely eliminates slow AI TTS delay.
+ * Zero network latency, zero quota, zero freeze on Chrome / Safari.
  */
 export const playSpeech = (
   text: string,
@@ -270,16 +341,23 @@ export const playSpeech = (
     return false;
   }
 
-  // Cancel prior utterance
-  stopSpeech();
+  // Cancel prior utterance & wake up paused queue immediately
+  try {
+    if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+      window.speechSynthesis.cancel();
+    }
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
+  } catch (e) {}
 
   const selectedVoiceId = voiceIdOverride || getSelectedVoiceId();
   const option = VOICE_OPTIONS.find((v) => v.id === selectedVoiceId) || VOICE_OPTIONS[0];
-  const matchedVoice = findBestNativeVoice(option.gender);
+  const matchedVoice = findBestNativeVoice(option.gender, option.lang);
 
   const utterance = new SpeechSynthesisUtterance(clean);
-  utterance.lang = lang || 'en-US';
-  utterance.rate = Math.max(0.7, Math.min(rate * option.rateFactor, 1.25));
+  utterance.lang = option.lang || lang || 'en-US';
+  utterance.rate = Math.max(0.75, Math.min(rate * option.rateFactor, 1.25));
   utterance.pitch = option.pitch;
   utterance.volume = 1.0;
 
@@ -287,13 +365,25 @@ export const playSpeech = (
     utterance.voice = matchedVoice;
   }
 
+  // Pin reference globally so V8 garbage collector does NOT drop utterance mid-sentence
   activeUtterances.add(utterance);
+  try {
+    (window as any).__vikodaCurrentUtterance = utterance;
+  } catch (e) {}
 
   let hasEnded = false;
+  let watchdogTimer: any = null;
+
   const finish = () => {
     if (hasEnded) return;
     hasEnded = true;
+    if (watchdogTimer) clearTimeout(watchdogTimer);
     activeUtterances.delete(utterance);
+    try {
+      if ((window as any).__vikodaCurrentUtterance === utterance) {
+        delete (window as any).__vikodaCurrentUtterance;
+      }
+    } catch (e) {}
     notifySpeechState(false);
     if (onEnd) onEnd();
   };
@@ -308,17 +398,19 @@ export const playSpeech = (
     finish();
   };
 
-  // Critical Chrome IPC delay: 40ms to flush cancellation queue cleanly
-  setTimeout(() => {
-    try {
-      if (window.speechSynthesis.paused) {
-        window.speechSynthesis.resume();
-      }
-      window.speechSynthesis.speak(utterance);
-    } catch (err) {
-      finish();
+  // Watchdog failsafe: automatically cleanup if browser fails to fire onend
+  const estimatedDurationMs = Math.max(1500, Math.min(30000, clean.length * 90));
+  watchdogTimer = setTimeout(finish, estimatedDurationMs + 2000);
+
+  // Synchronous invocation without setTimeout to preserve Safari iOS User Gesture token
+  try {
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
     }
-  }, 40);
+    window.speechSynthesis.speak(utterance);
+  } catch (err) {
+    finish();
+  }
 
   return true;
 };
@@ -462,11 +554,21 @@ export const preloadAudioForPhrases = async (
 };
 
 export const previewVoiceSample = (voiceId: VoiceOptionId, onEnd?: () => void) => {
-  const samplePhrase = voiceId.includes('male') || voiceId === 'ai_puck'
-    ? 'Vikoda is 100% natural alkaline mineral water at pH 9.0.'
-    : 'Welcome to Vikoda! It is a pleasure to meet you today.';
+  let samplePhrase = 'Vikoda provides 100% natural alkaline mineral water with a certified pH of 9.0 directly at the wellhead.';
+  let lang: 'en-US' | 'en-GB' = 'en-US';
 
-  playSpeech(samplePhrase, 1.0, 'en-US', onEnd, voiceId);
+  if (voiceId === 'us_male') {
+    samplePhrase = 'Vikoda provides 100% natural alkaline mineral water with a certified pH of 9.0 directly at the wellhead.';
+    lang = 'en-US';
+  } else if (voiceId === 'us_female') {
+    samplePhrase = 'Welcome to Vikoda! It is an absolute pleasure to partner with your corporation today.';
+    lang = 'en-US';
+  } else if (voiceId === 'uk_male') {
+    samplePhrase = 'Under international commercial terms, we ensure exceptional standards across our global distribution network.';
+    lang = 'en-GB';
+  }
+
+  playSpeech(samplePhrase, 1.0, lang, onEnd, voiceId);
 };
 
 // =======================================================================

@@ -16,6 +16,13 @@ import { CourseLevel } from '../data/curriculumData';
 import { EmployeeProfile, GamificationState } from '../types';
 import { playSound, isStealthOfficeMode, setStealthOfficeMode, subscribeStealthMode } from '../services/soundEffects';
 import { calculateProficiency } from './GlobalProficiencyDashboard';
+import { 
+  VOICE_OPTIONS, 
+  getSelectedVoiceId, 
+  subscribeVoiceChange, 
+  VoiceOptionId 
+} from '../services/speechService';
+import { VoiceSelectorModal } from './VoiceSelectorModal';
 
 interface VikodaHeaderProps {
   stats: GamificationState;
@@ -61,14 +68,22 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
 }) => {
   const [isLevelDropdownOpen, setIsLevelDropdownOpen] = useState<boolean>(false);
   const [isStealth, setIsStealth] = useState<boolean>(() => isStealthOfficeMode());
+  const [isVoiceModalOpen, setIsVoiceModalOpen] = useState<boolean>(false);
+  const [currentVoiceId, setCurrentVoiceId] = useState<VoiceOptionId>(getSelectedVoiceId());
   const levelRef = useRef<HTMLDivElement>(null);
 
   const { currentTier, estimatedToeic } = calculateProficiency(stats);
 
   useEffect(() => {
     const unsubStealth = subscribeStealthMode((enabled) => setIsStealth(enabled));
-    return () => unsubStealth();
+    const unsubVoice = subscribeVoiceChange((vId) => setCurrentVoiceId(vId));
+    return () => {
+      unsubStealth();
+      unsubVoice();
+    };
   }, []);
+
+  const activeVoice = VOICE_OPTIONS.find((v) => v.id === currentVoiceId) || VOICE_OPTIONS[0];
 
   // Close level dropdown on click outside
   useEffect(() => {
@@ -232,6 +247,21 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
             </button>
           )}
 
+          {/* Voice Selector Quick Switcher */}
+          <button
+            onClick={() => {
+              playSound('click');
+              setIsVoiceModalOpen(true);
+            }}
+            className="p-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-[#0070D1] border border-sky-200/80 transition-transform active:scale-95 cursor-pointer flex items-center gap-1 shadow-2xs"
+            title={`Giọng phát âm: ${activeVoice.name} (Bấm để đổi)`}
+          >
+            <span className="text-sm leading-none">{activeVoice.flag}</span>
+            <span className="text-[11px] font-black text-sky-800 hidden md:inline">
+              {activeVoice.id === 'us_male' ? 'Michael' : activeVoice.id === 'us_female' ? 'Emma' : 'James'}
+            </span>
+          </button>
+
           {/* Stealth Mode Mute/Unmute */}
           <button
             onClick={toggleStealth}
@@ -292,6 +322,13 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
         </div>
 
       </div>
+
+      {isVoiceModalOpen && (
+        <VoiceSelectorModal
+          isOpen={isVoiceModalOpen}
+          onClose={() => setIsVoiceModalOpen(false)}
+        />
+      )}
     </header>
   );
 };

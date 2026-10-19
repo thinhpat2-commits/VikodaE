@@ -95,25 +95,25 @@ export const VoiceSelectorModal: React.FC<VoiceSelectorModalProps> = ({
       }}
     >
       <div 
-        className="bg-white w-full max-w-[340px] rounded-2xl p-4 border border-slate-200 shadow-2xl space-y-3 relative m-auto animate-in fade-in zoom-in-95 duration-150"
+        className="bg-white w-full max-w-[420px] rounded-3xl p-5 border-2 border-slate-200 shadow-2xl space-y-3.5 relative m-auto animate-in fade-in zoom-in-95 duration-150"
         style={{
           maxHeight: 'calc(100dvh - 32px)',
           overflowY: 'auto',
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Compact Header */}
-        <div className="flex items-center justify-between border-b pb-2.5 border-slate-100">
-          <div className="flex items-center space-x-2">
-            <div className="w-7 h-7 rounded-lg bg-sky-100 text-[#0070D1] flex items-center justify-center shrink-0">
-              <Volume2 className="w-4 h-4" />
+        {/* Header */}
+        <div className="flex items-center justify-between border-b pb-3 border-slate-100">
+          <div className="flex items-center space-x-2.5">
+            <div className="w-8 h-8 rounded-xl bg-sky-100 text-[#0070D1] flex items-center justify-center shrink-0">
+              <Volume2 className="w-4 h-4 stroke-[2.5]" />
             </div>
             <div>
-              <h3 className="text-sm font-black text-slate-900 leading-tight">
+              <h3 className="text-sm sm:text-base font-black text-slate-900 leading-tight">
                 Cài Đặt Giọng Phát Âm
               </h3>
-              <p className="text-[10px] text-slate-500 font-medium">
-                Khuyên dùng: Giọng Bản Ngữ Tức Thì (0ms, bấm nghe ngay)
+              <p className="text-[11px] text-slate-500 font-semibold">
+                3 Giọng Bản Ngữ Chuẩn • 0ms Tức Thì • Không Độ Trễ
               </p>
             </div>
           </div>
@@ -122,7 +122,7 @@ export const VoiceSelectorModal: React.FC<VoiceSelectorModalProps> = ({
               stopSpeech();
               onClose();
             }}
-            className="p-1 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+            className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
             aria-label="Đóng"
           >
             <X className="w-4 h-4" />
@@ -130,7 +130,7 @@ export const VoiceSelectorModal: React.FC<VoiceSelectorModalProps> = ({
         </div>
 
         {/* Voice Options */}
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           {VOICE_OPTIONS.map((voice) => {
             const isSelected = currentVoice === voice.id;
             const isPlaying = playingId === voice.id;
@@ -139,58 +139,57 @@ export const VoiceSelectorModal: React.FC<VoiceSelectorModalProps> = ({
               <div
                 key={voice.id}
                 onClick={() => handleSelect(voice.id)}
-                className={`p-2.5 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-between active:scale-[0.98] ${
+                className={`p-3 rounded-2xl border-2 transition-all cursor-pointer flex items-start justify-between gap-2.5 active:scale-[0.99] ${
                   isSelected
-                    ? 'bg-sky-50/90 border-[#009FE3] shadow-xs'
+                    ? 'bg-sky-50/90 border-[#009FE3] shadow-xs ring-1 ring-sky-300'
                     : 'bg-white border-slate-200 hover:border-sky-300 hover:bg-slate-50'
                 }`}
               >
                 {/* Left: Flag & Details */}
-                <div className="flex items-center space-x-2.5 min-w-0 pr-2">
-                  <span className="text-2xl shrink-0 leading-none">{voice.flag}</span>
-                  <div className="min-w-0 text-left">
+                <div className="flex items-start space-x-3 min-w-0 flex-1">
+                  <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center shrink-0 text-2xl shadow-2xs mt-0.5">
+                    {voice.flag}
+                  </div>
+                  <div className="min-w-0 text-left flex-1">
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="text-xs font-black text-slate-900 leading-tight">
+                      <span className="text-xs sm:text-sm font-black text-slate-900 leading-tight">
                         {voice.name}
                       </span>
-                      {voice.mode === 'instant' ? (
-                        <span className="text-[9px] font-black text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded-md leading-none border border-emerald-300">
-                          ⚡ 0ms Không Lag
-                        </span>
-                      ) : (
-                        <span className="text-[9px] font-black text-purple-800 bg-purple-100 px-1.5 py-0.5 rounded-md leading-none border border-purple-300">
-                          🤖 Cloud AI
-                        </span>
-                      )}
+                      <span className="text-[9px] font-black text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded-md leading-none border border-emerald-300">
+                        ⚡ 0ms
+                      </span>
                       {isSelected && (
                         <span className="text-[9px] font-black text-[#0070D1] bg-sky-100 px-1.5 py-0.5 rounded-md leading-none">
                           Đang dùng
                         </span>
                       )}
                     </div>
-                    <div className="text-[10px] text-slate-500 font-medium leading-tight truncate mt-0.5">
+                    <div className="text-[11px] text-sky-700 font-bold leading-tight mt-0.5">
                       {voice.accent}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-medium leading-relaxed mt-1">
+                      {voice.description}
                     </div>
                   </div>
                 </div>
 
-                {/* Right: Checkmark & Preview */}
-                <div className="flex items-center space-x-1.5 shrink-0">
+                {/* Right: Preview & Radio Checkmark */}
+                <div className="flex flex-col items-center justify-between gap-2 shrink-0 self-stretch py-0.5">
                   <button
                     onClick={(e) => handlePreviewOnly(voice.id, e)}
-                    className={`p-2 rounded-lg text-xs font-bold transition-all cursor-pointer border ${
+                    className={`p-2 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
                       isPlaying
-                        ? 'bg-amber-400 text-slate-900 border-amber-500 animate-pulse'
+                        ? 'bg-amber-400 text-slate-900 border-amber-500 animate-pulse shadow-xs'
                         : 'bg-slate-50 hover:bg-sky-100 text-[#0070D1] border-slate-200'
                     }`}
-                    title="Nghe thử phát âm"
+                    title="Bấm nghe thử giọng mẫu"
                     aria-label={`Nghe thử giọng ${voice.name}`}
                   >
                     <Play className={`w-3.5 h-3.5 fill-current ${isPlaying ? 'animate-spin' : ''}`} />
                   </button>
 
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                    isSelected ? 'bg-[#0070D1] text-white' : 'border border-slate-300'
+                  <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-colors ${
+                    isSelected ? 'bg-[#0070D1] text-white shadow-xs' : 'border-2 border-slate-300'
                   }`}>
                     {isSelected && <Check className="w-3 h-3 stroke-[3]" />}
                   </div>
@@ -200,17 +199,23 @@ export const VoiceSelectorModal: React.FC<VoiceSelectorModalProps> = ({
           })}
         </div>
 
+        {/* Tip info */}
+        <div className="text-[10px] text-slate-500 bg-slate-50 rounded-xl p-2.5 border border-slate-200 flex items-center gap-1.5 leading-snug">
+          <span>💡</span>
+          <span>Phát âm tức thì ngay trên thiết bị, mượt mà 0ms và hoàn toàn không phụ thuộc mạng.</span>
+        </div>
+
         {/* Footer */}
-        <div className="pt-1">
+        <div className="pt-0.5">
           <button
             onClick={() => {
               stopSpeech();
               playSound('click');
               onClose();
             }}
-            className="w-full py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-xs uppercase cursor-pointer transition-colors"
+            className="w-full py-2.5 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-xs uppercase cursor-pointer transition-colors"
           >
-            Đóng
+            Xong & Đóng
           </button>
         </div>
       </div>

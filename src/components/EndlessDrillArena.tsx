@@ -665,6 +665,18 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
                 </span>
               </div>
 
+              {/* Quick Voice Switcher */}
+              <button
+                onClick={() => {
+                  playSound('click');
+                  setIsVoicePickerOpen(true);
+                }}
+                className="px-2 py-1 rounded-xl bg-sky-50 border border-sky-200 text-[#0070D1] hover:bg-sky-100 text-xs font-black flex items-center gap-1 cursor-pointer shrink-0"
+                title="Đổi giọng phát âm"
+              >
+                <span>{VOICE_OPTIONS.find(v => v.id === currentVoiceId)?.flag || '🇺🇸'}</span>
+              </button>
+
               {/* Center Timer */}
               <div className={`flex items-center gap-1 px-3 py-1 rounded-full font-black text-xs border ${
                 timeLeft <= 3
@@ -818,6 +830,13 @@ export const EndlessDrillArena: React.FC<EndlessDrillArenaProps> = ({
           </div>
         )}
 
+        {isVoicePickerOpen && (
+          <VoiceSelectorModal
+            isOpen={isVoicePickerOpen}
+            onClose={() => setIsVoicePickerOpen(false)}
+            onSelectVoice={(vId) => setCurrentVoiceId(vId)}
+          />
+        )}
       </div>
     </div>
   );

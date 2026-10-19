@@ -95,6 +95,21 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
           <span className="text-sm font-black">5/5</span>
         </div>
 
+        {/* Voice Selector Quick Switcher */}
+        <button
+          onClick={() => {
+            playSound('click');
+            setIsVoiceModalOpen(true);
+          }}
+          className="flex items-center gap-1 px-2 py-1 bg-white hover:bg-sky-50 rounded-xl border border-slate-200 hover:border-sky-300 text-slate-700 cursor-pointer transition-all shadow-2xs"
+          title={`Giọng phát âm: ${activeVoiceOption.name} (Bấm để đổi)`}
+        >
+          <span className="text-sm leading-none">{activeVoiceOption.flag}</span>
+          <span className="text-[11px] font-black text-slate-800">
+            {activeVoiceOption.id === 'us_male' ? 'Michael' : activeVoiceOption.id === 'us_female' ? 'Emma' : 'James'}
+          </span>
+        </button>
+
         {/* Audio Stealth Toggle */}
         <button
           onClick={toggleStealth}
