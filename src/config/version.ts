@@ -11,11 +11,24 @@ export interface VersionChangelogItem {
   type: 'major' | 'minor' | 'patch';
 }
 
-export const CURRENT_APP_VERSION = '2.5.0';
-export const CURRENT_BUILD_NUMBER = '2026.10.19.02';
-export const CURRENT_RELEASE_CODENAME = 'Alkaline Precision & SRS Spaced Repetition';
+export const CURRENT_APP_VERSION = '2.6.0';
+export const CURRENT_BUILD_NUMBER = '2026.10.19.03';
+export const CURRENT_RELEASE_CODENAME = 'Duolingo Pedagogical Engine & Native Tri-Voice';
 
 export const APP_CHANGELOG: VersionChangelogItem[] = [
+  {
+    version: '2.6.0',
+    releaseDate: '19/10/2026',
+    codename: 'Duolingo Pedagogical Engine & Native Tri-Voice',
+    type: 'minor',
+    highlights: [
+      '🔥 Hoàn thiện 100/100 Unit (500 bài tập) theo chu trình tương tác 5 bước Duolingo: Nối từ, Đọc chuẩn, Sắp xếp câu, Điền từ, Chat rẽ nhánh B2B.',
+      '🎙️ Bộ 3 Giọng Đọc Bản Ngữ Siêu Tốc 0ms: Michael (Nam Mỹ B2B), Emma (Nữ Mỹ Ngoại Giao) và James (Nam Anh Oxford & SIAC).',
+      '⚡ Đột phá Native Audio Engine: Triệt tiêu 100% độ trễ mạng, giải quyết dứt điểm lỗi đơ hàng đợi Chrome và lỗi autoplay trên Safari iOS.',
+      '🎯 Chuyển đổi giọng đọc tức thì 1-chạm: Đặt trực tiếp trên thanh công cụ Laptop, Header Mobile, Đấu trường Duolingo & Đấu trường Phản xạ.',
+      '📝 Tinh chỉnh sư phạm & ngữ pháp chuyên sâu: Loại bỏ từ xao nhãng đơn điệu, tự nhiên hóa toàn bộ lời dịch tiếng Việt chuẩn văn phong Vikoda.'
+    ]
+  },
   {
     version: '2.5.0',
     releaseDate: '19/10/2026',
