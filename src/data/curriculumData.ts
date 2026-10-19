@@ -13,9 +13,28 @@ export interface VocabularyHighlight {
   phonetic?: string;
 }
 
+export interface MatchingPair {
+  left: string;
+  right: string;
+}
+
+export interface ChatMessage {
+  speaker: string;
+  avatar?: string;
+  message: string;
+  isUser?: boolean;
+}
+
+export interface ChatBranchOption {
+  text: string;
+  trustScore: number;
+  feedback: string;
+  isCorrect: boolean;
+}
+
 export interface LessonExercise {
   id: string;
-  type: 'word_order' | 'speak' | 'choice' | 'listen_choice' | 'fill_blank';
+  type: 'word_order' | 'speak' | 'choice' | 'listen_choice' | 'fill_blank' | 'match_pairs' | 'chat_branch';
   promptVi: string;
   promptEn?: string;
   englishSentence: string;
@@ -32,6 +51,10 @@ export interface LessonExercise {
   crucialNote?: string; // Lưu ý quan trọng khi đối thoại với đối tác quốc tế
   memoryHook?: string; // Mẹo nhớ lâu (Mnemonics / liên tưởng dễ nhớ)
   vocabularyHighlights?: VocabularyHighlight[];
+  // New interactive mechanics fields:
+  pairs?: MatchingPair[]; // for match_pairs
+  chatMessages?: ChatMessage[]; // for chat_branch
+  chatOptions?: ChatBranchOption[]; // for chat_branch
 }
 
 export interface SideQuestItem {

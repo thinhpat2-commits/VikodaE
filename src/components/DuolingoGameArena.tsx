@@ -20,7 +20,9 @@ import {
   Puzzle,
   RotateCcw,
   ShieldAlert,
-  Zap
+  Zap,
+  MessageSquare,
+  CheckCheck
 } from 'lucide-react';
 import { UnitLesson, LessonExercise } from '../data/curriculumData';
 import { VikoMascot, VIKODA_ASSETS, useVikodaAssetSync } from './brand/VikodaLogos';
@@ -174,6 +176,17 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   const [availableWordChips, setAvailableWordChips] = useState<string[]>([]);
   const [selectedChoice, setSelectedChoice] = useState<number | null>(null);
   
+  // Interactive Match Pairs state (B2B Match Madness)
+  const [selectedLeftPair, setSelectedLeftPair] = useState<string | null>(null);
+  const [selectedRightPair, setSelectedRightPair] = useState<string | null>(null);
+  const [matchedPairKeys, setMatchedPairKeys] = useState<string[]>([]);
+  const [failedPair, setFailedPair] = useState<{ left: string; right: string } | null>(null);
+  const [shuffledLeftList, setShuffledLeftList] = useState<string[]>([]);
+  const [shuffledRightList, setShuffledRightList] = useState<string[]>([]);
+
+  // Interactive Chat Branch state (B2B Chat Simulation)
+  const [selectedChatBranchIndex, setSelectedChatBranchIndex] = useState<number | null>(null);
+  
   // Voice speaking & settings states
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [spokenText, setSpokenText] = useState<string>('');
@@ -299,6 +312,22 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     setShowGrammarDetail(false);
     setIsPlayingAudio(false);
 
+    // Initialize Match Pairs state
+    setSelectedLeftPair(null);
+    setSelectedRightPair(null);
+    setMatchedPairKeys([]);
+    setFailedPair(null);
+    if (currentExercise.type === 'match_pairs' && currentExercise.pairs && currentExercise.pairs.length > 0) {
+      setShuffledLeftList([...currentExercise.pairs.map(p => p.left)].sort(() => 0.5 - Math.random()));
+      setShuffledRightList([...currentExercise.pairs.map(p => p.right)].sort(() => 0.5 - Math.random()));
+    } else {
+      setShuffledLeftList([]);
+      setShuffledRightList([]);
+    }
+
+    // Initialize Chat Branch state
+    setSelectedChatBranchIndex(null);
+
     // Auto-play audio only for listening comprehension with true onEnd callback
     if (currentExercise.type === 'listen_choice') {
       const textToPlay = currentExercise.audioText || currentExercise.englishSentence || '';
@@ -333,6 +362,77 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
     newSelected.splice(index, 1);
     setSelectedWordChips(newSelected);
     setAvailableWordChips([...availableWordChips, word]);
+  };
+
+  // Match Pairs Tap Handlers (B2B Match Madness)
+  const handleTapLeftPair = (leftItem: string) => {
+    if (isEvaluated) return;
+    playSound('click');
+    setFailedPair(null);
+
+    if (selectedLeftPair === leftItem) {
+      setSelectedLeftPair(null);
+      return;
+    }
+
+    setSelectedLeftPair(leftItem);
+
+    if (selectedRightPair) {
+      checkPairMatch(leftItem, selectedRightPair);
+    }
+  };
+
+  const handleTapRightPair = (rightItem: string) => {
+    if (isEvaluated) return;
+    playSound('click');
+    setFailedPair(null);
+
+    if (selectedRightPair === rightItem) {
+      setSelectedRightPair(null);
+      return;
+    }
+
+    setSelectedRightPair(rightItem);
+
+    if (selectedLeftPair) {
+      checkPairMatch(selectedLeftPair, rightItem);
+    }
+  };
+
+  const checkPairMatch = (left: string, right: string) => {
+    const isMatch = currentExercise.pairs?.some((p) => p.left === left && p.right === right);
+
+    if (isMatch) {
+      playSound('correct');
+      triggerHaptic('light');
+      const newMatched = [...matchedPairKeys, left];
+      setMatchedPairKeys(newMatched);
+      setSelectedLeftPair(null);
+      setSelectedRightPair(null);
+
+      // If all pairs in exercise are matched, auto-finish question!
+      if (newMatched.length === (currentExercise.pairs?.length || 0)) {
+        setIsEvaluated(true);
+        setIsAnswerCorrect(true);
+        const nextCombo = streakCombo + 1;
+        setStreakCombo(nextCombo);
+        playSound('celebrate');
+        confetti({
+          particleCount: 50,
+          spread: 75,
+          origin: { y: 0.6 }
+        });
+      }
+    } else {
+      playSound('wrong');
+      triggerHaptic('error');
+      setFailedPair({ left, right });
+      setTimeout(() => {
+        setFailedPair(null);
+        setSelectedLeftPair(null);
+        setSelectedRightPair(null);
+      }, 500);
+    }
   };
 
   // REAL SPEECH RECOGNITION (TỰ ĐỘNG CHẤM ĐIỂM, KHÔNG CẦN BẤM NỘP)
@@ -431,6 +531,14 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
       if (speechScore !== null && speechScore >= 55) {
         correct = true;
       }
+    } else if (currentExercise.type === 'match_pairs') {
+      if (matchedPairKeys.length === (currentExercise.pairs?.length || 0)) {
+        correct = true;
+      }
+    } else if (currentExercise.type === 'chat_branch') {
+      if (selectedChatBranchIndex !== null && currentExercise.chatOptions) {
+        correct = Boolean(currentExercise.chatOptions[selectedChatBranchIndex]?.isCorrect);
+      }
     }
 
     setIsEvaluated(true);
@@ -512,7 +620,9 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
           const canSubmit = 
             (currentExercise.type === 'word_order' && selectedWordChips.length > 0) ||
             ((currentExercise.type === 'choice' || currentExercise.type === 'listen_choice' || currentExercise.type === 'fill_blank') && selectedChoice !== null) ||
-            (currentExercise.type === 'speak' && speechScore !== null && speechScore > 0);
+            (currentExercise.type === 'speak' && speechScore !== null && speechScore > 0) ||
+            (currentExercise.type === 'match_pairs' && matchedPairKeys.length === (currentExercise.pairs?.length || 0)) ||
+            (currentExercise.type === 'chat_branch' && selectedChatBranchIndex !== null);
           if (canSubmit) {
             handleCheckAnswer();
           }
@@ -535,7 +645,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isEvaluated, selectedChoice, selectedWordChips, speechScore, currentExercise]);
+  }, [isEvaluated, selectedChoice, selectedWordChips, speechScore, matchedPairKeys, selectedChatBranchIndex, currentExercise]);
 
   const progressPercent = ((exerciseIndex + (isEvaluated && isAnswerCorrect ? 1 : 0)) / sessionExercises.length) * 100;
 
@@ -565,6 +675,18 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
           icon: Puzzle,
           label: 'Điền Từ Chỗ Trống',
           color: 'bg-amber-100 text-amber-800 border-amber-200'
+        };
+      case 'match_pairs':
+        return {
+          icon: Zap,
+          label: 'Ghép Cặp Từ Vựng Siêu Tốc',
+          color: 'bg-amber-100 text-amber-800 border-amber-200'
+        };
+      case 'chat_branch':
+        return {
+          icon: MessageSquare,
+          label: 'Đối Thoại Doanh Nghiệp',
+          color: 'bg-teal-100 text-teal-800 border-teal-200'
         };
       case 'word_order':
       default:
@@ -817,6 +939,18 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                       translation={currentExercise.promptVi}
                     />
                   </div>
+                ) : currentExercise.type === 'match_pairs' ? (
+                  <div>
+                    <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug break-words">
+                      {currentExercise.promptVi || 'Ghép cặp thuật ngữ tiếng Anh và nghĩa tương ứng:'}
+                    </h3>
+                  </div>
+                ) : currentExercise.type === 'chat_branch' ? (
+                  <div>
+                    <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug break-words">
+                      {currentExercise.promptVi || 'Đối thoại kinh doanh ngoại giao cùng đối tác:'}
+                    </h3>
+                  </div>
                 ) : (
                   <div>
                     <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug break-words">
@@ -926,6 +1060,191 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                     </button>
                   );
                 })}
+              </div>
+            )}
+
+            {/* TYPE 4: MATCH PAIRS (B2B MATCH MADNESS - 2 COLUMNS SPEED TILE MATCHING) */}
+            {currentExercise.type === 'match_pairs' && currentExercise.pairs && (
+              <div className="space-y-4 py-2 max-w-lg mx-auto w-full select-none">
+                <div className="flex items-center justify-between px-1 text-xs">
+                  <span className="font-bold text-slate-500">
+                    Chạm một từ tiếng Anh bên trái và nghĩa bên phải
+                  </span>
+                  <div className="flex items-center gap-1.5 font-black text-amber-700 bg-amber-50 px-2.5 py-1 rounded-xl border border-amber-200">
+                    <span>⚡ Ghép đúng:</span>
+                    <span>{matchedPairKeys.length} / {currentExercise.pairs.length}</span>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 pt-1">
+                  {/* Left Column: English Terms */}
+                  <div className="space-y-2">
+                    <span className="text-[10.5px] font-black uppercase text-slate-400 block text-center">Thuật ngữ Tiếng Anh</span>
+                    {shuffledLeftList.map((item, idx) => {
+                      const isMatched = matchedPairKeys.includes(item);
+                      const isSelected = selectedLeftPair === item;
+                      const isFailed = failedPair?.left === item;
+
+                      return (
+                        <button
+                          key={`left-${idx}`}
+                          disabled={isMatched || isEvaluated}
+                          onClick={() => handleTapLeftPair(item)}
+                          className={`w-full min-h-[54px] p-3 rounded-2xl text-xs sm:text-sm font-bold border-2 transition-all cursor-pointer flex items-center justify-between text-left ${
+                            isMatched
+                              ? 'bg-emerald-50 border-emerald-400 text-emerald-800 opacity-60 scale-98 pointer-events-none'
+                              : isFailed
+                              ? 'bg-rose-100 border-rose-500 text-rose-900 animate-shake'
+                              : isSelected
+                              ? 'bg-sky-100 border-[#009FE3] text-[#0070D1] shadow-md scale-102 font-black ring-2 ring-sky-300'
+                              : 'bg-white border-slate-200 border-b-4 hover:border-sky-300 text-slate-800 hover:shadow-xs active:translate-y-0.5'
+                          }`}
+                        >
+                          <span className="truncate">{item}</span>
+                          {isMatched ? (
+                            <Check className="w-4 h-4 text-emerald-600 shrink-0 ml-1 stroke-[3]" />
+                          ) : (
+                            <span className="w-2 h-2 rounded-full bg-slate-300 shrink-0 ml-1" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Right Column: Vietnamese Meanings */}
+                  <div className="space-y-2">
+                    <span className="text-[10.5px] font-black uppercase text-slate-400 block text-center">Dịch nghĩa Tiếng Việt</span>
+                    {shuffledRightList.map((item, idx) => {
+                      const matchedPairObj = currentExercise.pairs?.find(p => p.right === item);
+                      const isMatched = matchedPairObj && matchedPairKeys.includes(matchedPairObj.left);
+                      const isSelected = selectedRightPair === item;
+                      const isFailed = failedPair?.right === item;
+
+                      return (
+                        <button
+                          key={`right-${idx}`}
+                          disabled={Boolean(isMatched) || isEvaluated}
+                          onClick={() => handleTapRightPair(item)}
+                          className={`w-full min-h-[54px] p-3 rounded-2xl text-xs sm:text-sm font-bold border-2 transition-all cursor-pointer flex items-center justify-between text-left ${
+                            isMatched
+                              ? 'bg-emerald-50 border-emerald-400 text-emerald-800 opacity-60 scale-98 pointer-events-none'
+                              : isFailed
+                              ? 'bg-rose-100 border-rose-500 text-rose-900 animate-shake'
+                              : isSelected
+                              ? 'bg-sky-100 border-[#009FE3] text-[#0070D1] shadow-md scale-102 font-black ring-2 ring-sky-300'
+                              : 'bg-white border-slate-200 border-b-4 hover:border-sky-300 text-slate-800 hover:shadow-xs active:translate-y-0.5'
+                          }`}
+                        >
+                          <span className="line-clamp-2 leading-tight">{item}</span>
+                          {isMatched ? (
+                            <Check className="w-4 h-4 text-emerald-600 shrink-0 ml-1 stroke-[3]" />
+                          ) : (
+                            <span className="w-2 h-2 rounded-full bg-slate-300 shrink-0 ml-1" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* TYPE 5: CHAT BRANCHING (B2B TEAMS/SLACK SIMULATOR) */}
+            {currentExercise.type === 'chat_branch' && (
+              <div className="space-y-4 py-2 max-w-lg mx-auto w-full">
+                {/* Chat Simulation Stream Box */}
+                <div className="rounded-3xl bg-slate-900 border border-slate-800 p-4 shadow-md space-y-3">
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-2.5">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#009FE3] to-[#005A9C] flex items-center justify-center text-white text-xs font-black shadow-xs">
+                        🏢
+                      </div>
+                      <div>
+                        <div className="text-xs font-black text-white flex items-center gap-1.5">
+                          <span>{currentExercise.chatMessages?.[0]?.speaker || 'Đối Tác Quốc Tế'}</span>
+                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        </div>
+                        <span className="text-[10px] text-slate-400">Trực tuyến • B2B Inquiries</span>
+                      </div>
+                    </div>
+                    <span className="px-2 py-0.5 rounded-full bg-slate-800 text-sky-400 text-[10px] font-mono">
+                      Teams Chat
+                    </span>
+                  </div>
+
+                  <div className="space-y-2.5 py-1">
+                    {currentExercise.chatMessages?.map((msg, mIdx) => (
+                      <div key={mIdx} className="flex items-start gap-2 animate-in fade-in">
+                        <div className="w-6 h-6 rounded-full bg-slate-800 text-[11px] flex items-center justify-center shrink-0 mt-0.5 text-slate-300">
+                          {msg.avatar || '👤'}
+                        </div>
+                        <div className="bg-slate-800 text-slate-100 p-3 rounded-2xl rounded-tl-xs text-xs sm:text-sm font-medium shadow-xs max-w-[85%] border border-slate-700/60 leading-relaxed">
+                          <span className="text-[10px] text-sky-400 font-bold block mb-1">{msg.speaker}</span>
+                          {msg.message}
+                        </div>
+                      </div>
+                    ))}
+
+                    {/* Selected Response Bubble */}
+                    {selectedChatBranchIndex !== null && currentExercise.chatOptions && (
+                      <div className="flex justify-end animate-in fade-in slide-in-from-bottom-2">
+                        <div className="bg-gradient-to-tr from-[#0070D1] to-[#009FE3] text-white p-3 rounded-2xl rounded-tr-xs text-xs sm:text-sm font-bold shadow-md max-w-[85%] leading-relaxed">
+                          <span className="text-[10px] text-sky-100 font-bold block mb-1">Bạn (Vikoda Executive)</span>
+                          {currentExercise.chatOptions[selectedChatBranchIndex]?.text}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Response Options */}
+                <div className="space-y-2 pt-1">
+                  <span className="text-xs font-black text-slate-600 uppercase tracking-wider block">
+                    {isEvaluated ? 'Phản hồi đã gửi:' : '💬 Chọn phản hồi ngoại giao của bạn:'}
+                  </span>
+                  {currentExercise.chatOptions?.map((opt, oIdx) => {
+                    const isChosen = selectedChatBranchIndex === oIdx;
+                    let optStyle = 'bg-white border-2 border-slate-200 border-b-4 hover:border-sky-300 text-slate-800';
+
+                    if (isEvaluated) {
+                      if (opt.isCorrect) {
+                        optStyle = 'bg-emerald-50 border-2 border-emerald-500 border-b-4 text-emerald-950 font-black';
+                      } else if (isChosen) {
+                        optStyle = 'bg-rose-50 border-2 border-rose-500 border-b-4 text-rose-950 font-bold';
+                      } else {
+                        optStyle = 'opacity-40 border-slate-200 border-b-2';
+                      }
+                    } else if (isChosen) {
+                      optStyle = 'bg-sky-50 border-2 border-[#009FE3] border-b-4 text-[#0070D1] font-black';
+                    }
+
+                    return (
+                      <button
+                        key={oIdx}
+                        disabled={isEvaluated}
+                        onClick={() => {
+                          playSound('click');
+                          setSelectedChatBranchIndex(oIdx);
+                        }}
+                        className={`w-full text-left p-3.5 sm:p-4 rounded-2xl text-xs sm:text-sm transition-all cursor-pointer flex flex-col gap-1 active:translate-y-0.5 ${optStyle}`}
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="font-bold">{opt.text}</span>
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-black shrink-0 ${
+                            opt.trustScore >= 20 ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-600'
+                          }`}>
+                            +{opt.trustScore} Tín Nhiệm
+                          </span>
+                        </div>
+                        {isEvaluated && isChosen && (
+                          <p className="text-[11px] font-medium mt-1 text-slate-600 border-t border-slate-200/60 pt-1.5">
+                            💡 {opt.feedback}
+                          </p>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             )}
 
@@ -1310,6 +1629,10 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               <div className="flex-1 text-xs text-slate-400 font-bold hidden sm:block truncate">
                 {currentExercise.type === 'speak' 
                   ? 'Nhấn micro và đọc to câu trên để hệ thống chấm điểm'
+                  : currentExercise.type === 'match_pairs'
+                  ? 'Chạm ghép đôi từng cặp thuật ngữ tiếng Anh và nghĩa tiếng Việt'
+                  : currentExercise.type === 'chat_branch'
+                  ? 'Chọn tin nhắn phản hồi ngoại giao gửi đối tác'
                   : 'Chọn đáp án rồi nhấn Kiểm Tra (hoặc phím Enter)'}
               </div>
             )}
@@ -1321,7 +1644,9 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
                   disabled={
                     (currentExercise.type === 'word_order' && selectedWordChips.length === 0) ||
                     ((currentExercise.type === 'choice' || currentExercise.type === 'listen_choice' || currentExercise.type === 'fill_blank') && selectedChoice === null) ||
-                    (currentExercise.type === 'speak' && (speechScore === null || speechScore === 0))
+                    (currentExercise.type === 'speak' && (speechScore === null || speechScore === 0)) ||
+                    (currentExercise.type === 'match_pairs' && matchedPairKeys.length !== (currentExercise.pairs?.length || 0)) ||
+                    (currentExercise.type === 'chat_branch' && selectedChatBranchIndex === null)
                   }
                   onClick={handleCheckAnswer}
                   className="w-full sm:w-auto min-w-[200px] px-8 py-3.5 sm:py-3 rounded-2xl bg-[#0070D1] hover:bg-[#005bb5] border-b-4 border-[#004b96] text-white font-black text-sm uppercase tracking-wider disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shadow-md active:translate-y-0.5 text-center flex items-center justify-center gap-2"
