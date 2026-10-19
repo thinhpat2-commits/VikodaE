@@ -156,17 +156,20 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
               <span>Trợ Lý Dịch Thuật AI</span>
             </button>
 
-            {/* 3D Asset Studio Modal Trigger */}
-            <button
-              onClick={() => {
-                playSound('click');
-                if (onOpenAssetStudio) onOpenAssetStudio();
-              }}
-              className="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl font-bold text-xs text-indigo-900 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-colors cursor-pointer shadow-2xs"
-            >
-              <Sparkles className="w-4 h-4 text-indigo-600" />
-              <span>Studio Asset 3D (Gemini)</span>
-            </button>
+            {/* 3D Asset Studio Modal Trigger (Chỉ dành cho Admin / Content Creator để người học không bị xao nhãng) */}
+            {isAuthorizedAdmin && onOpenAssetStudio && (
+              <button
+                onClick={() => {
+                  playSound('click');
+                  onOpenAssetStudio();
+                }}
+                className="w-full flex items-center gap-3 px-4 py-2.5 rounded-2xl font-bold text-xs text-indigo-900 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-colors cursor-pointer shadow-2xs"
+                title="Quản lý và sinh tài nguyên 3D qua Gemini Imagen (Chỉ Admin)"
+              >
+                <Sparkles className="w-4 h-4 text-indigo-600" />
+                <span>Studio Asset 3D (Admin)</span>
+              </button>
+            )}
 
             {/* Admin Portal (if admin) */}
             {isAuthorizedAdmin && (

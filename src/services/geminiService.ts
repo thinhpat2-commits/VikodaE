@@ -332,3 +332,76 @@ export const generateGeminiSpeechAudio = async (
   }
 };
 
+export interface AIPronunciationAnalysis {
+  overallScore: number;
+  fluencyScore: number;
+  wordStressAccuracy: number;
+  wordFeedback: {
+    word: string;
+    score: number;
+    status: 'correct' | 'close' | 'missed';
+    issue?: string;
+  }[];
+  endingSoundsAdvice: string;
+  mouthPositionTip: string;
+  generalVerdictVi: string;
+}
+
+/**
+ * AI-POWERED ACOUSTIC & PHONETIC DIAGNOSTIC ENGINE (ELSA SPEAK BENCHMARK)
+ * Analyzes word stress, ending sound omissions, and tongue/mouth positioning for Vietnamese professionals.
+ */
+export const analyzePronunciationAI = async (
+  targetSentence: string,
+  userSpokenText: string
+): Promise<AIPronunciationAnalysis | null> => {
+  if (!aiInstance) return null;
+  try {
+    const prompt = `You are an elite Senior Acoustic Phonetics Coach at ELSA Speak specializing in Vietnamese ESL professionals.
+Target standard sentence: "${targetSentence}"
+User's recognized utterance: "${userSpokenText}"
+
+Analyze this speech performance with high phonetic rigor:
+1. Detect typical Vietnamese learner pronunciation issues:
+   - Omitting ending sounds (/s/, /z/, /t/, /d/, /θ/, /ks/, /ed/)
+   - Consonant cluster reduction (e.g., 'spring' -> 's-ping', 'product' -> 'pro-duc')
+   - Flat intonation or missing syllable stress.
+2. Score each word from 0 to 100.
+3. Provide concise, high-value advice on mouth/tongue positioning in Vietnamese (Khẩu hình miệng & vị trí đặt lưỡi).
+
+Return ONLY valid JSON with this schema:
+{
+  "overallScore": 85,
+  "fluencyScore": 80,
+  "wordStressAccuracy": 90,
+  "wordFeedback": [
+    {
+      "word": "sample",
+      "score": 90,
+      "status": "correct",
+      "issue": null
+    }
+  ],
+  "endingSoundsAdvice": "Nhận xét chi tiết về âm đuôi bật hơi (/t/, /s/, /d/)",
+  "mouthPositionTip": "Mẹo đặt lưỡi và mở khẩu hình miệng chuẩn bản ngữ",
+  "generalVerdictVi": "Đánh giá tổng quát súc tích"
+}`;
+
+    const response = await aiInstance.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
+      config: {
+        responseMimeType: 'application/json',
+        temperature: 0.2,
+      },
+    });
+
+    if (response.text) {
+      return JSON.parse(response.text) as AIPronunciationAnalysis;
+    }
+  } catch (e) {
+    console.warn('AI Pronunciation Analysis unavailable, using local phonetic engine:', e);
+  }
+  return null;
+};
+

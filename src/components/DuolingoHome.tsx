@@ -30,6 +30,7 @@ import {
   CompanyAnnouncement, 
   TrainingSystemSettings 
 } from './AdminPortalModal';
+import { getUnitMemoryInfo, recordUnitReviewSuccess } from '../services/spacedRepetitionService';
 
 interface DuolingoHomeProps {
   selectedLevel: CourseLevel;
@@ -418,6 +419,7 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
             const isShiftedRight = xPct > 50;
 
             const isMilestone = (idx + 1) % 10 === 0;
+            const memoryInfo = getUnitMemoryInfo(lesson.id, isCompleted);
 
             // Select 3D node asset
             const nodeAsset = isCompleted 
@@ -450,6 +452,15 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                   </div>
                 )}
 
+                {/* SRS Spaced Repetition: Bouncing Memory Decay Alert Badge */}
+                {isCompleted && memoryInfo.needsReview && !isPopoverOpen && (
+                  <div className="absolute -top-8 left-1/2 -translate-x-1/2 z-20 animate-bounce pointer-events-none">
+                    <div className="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-2.5 py-0.5 rounded-full font-black text-[10px] shadow-lg border-2 border-white whitespace-nowrap flex items-center gap-1 uppercase tracking-wider">
+                      <span>💧</span> Nạp Kiềm
+                    </div>
+                  </div>
+                )}
+
                 {/* 3D Node Stepping Stone Button with Radiant Water Waves */}
                 <div className="relative flex flex-col items-center">
                   {/* Glowing Concentric Water Ripple Waves on Current Active Node */}
@@ -464,6 +475,13 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                     </div>
                   )}
 
+                  {/* Pulsing Aura if Memory Needs Review */}
+                  {isCompleted && memoryInfo.needsReview && (
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10">
+                      <span className="absolute w-20 sm:w-22 h-20 sm:h-22 rounded-full border-2 border-cyan-400 animate-ping opacity-60" style={{ animationDuration: '2s' }} />
+                    </div>
+                  )}
+
                   <button
                     disabled={!isUnlocked}
                     onClick={() => handleNodeClick(idx, lesson, isUnlocked)}
@@ -472,7 +490,9 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                     }`}
                     title={
                       isCompleted
-                        ? `Đã hoàn thành! Bấm để xem lại (+5 XP)`
+                        ? memoryInfo.needsReview
+                          ? `Độ nhớ còn ${memoryInfo.retentionScore}%! Bấm để phục hồi năng lượng kiềm (+10 XP)`
+                          : `Đã hoàn thành! Bấm để xem lại (+5 XP)`
                         : isUnlocked
                         ? `Bấm để bắt đầu: ${lesson.title}`
                         : `Cần hoàn thành bài trước để mở khóa`
@@ -489,8 +509,14 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
 
                   {/* Completed Check Badge */}
                   {isCompleted && (
-                    <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white shadow-md pointer-events-none">
-                      <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    <div className={`absolute -top-1 -right-1 w-6 h-6 rounded-full border-2 border-white flex items-center justify-center text-white shadow-md pointer-events-none ${
+                      memoryInfo.needsReview ? 'bg-cyan-500 animate-pulse' : 'bg-emerald-500'
+                    }`}>
+                      {memoryInfo.needsReview ? (
+                        <span className="text-[11px]">💧</span>
+                      ) : (
+                        <Check className="w-3.5 h-3.5 stroke-[3]" />
+                      )}
                     </div>
                   )}
 
@@ -506,7 +532,7 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                 {/* DUOLINGO TAP-TO-INSPECT POPOVER CARD - AUTO-CLAMPED TO PREVENT OVERFLOW */}
                 {isPopoverOpen && isUnlocked && (
                   <div 
-                    className={`node-popover-box absolute -top-28 z-50 animate-in fade-in zoom-in-95 duration-150 w-64 max-w-[calc(100vw-36px)] ${
+                    className={`node-popover-box absolute -top-32 z-50 animate-in fade-in zoom-in-95 duration-150 w-64 max-w-[calc(100vw-36px)] ${
                       xPct < 35 
                         ? '-left-3 translate-x-0' 
                         : xPct > 65 
@@ -528,7 +554,7 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                       
                       <div className="flex items-center justify-between mb-1 gap-1">
                         <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 truncate">
-                          Bài {lesson.unitNumber}/100 • {lesson.exercises?.length || 7} câu
+                          Bài {lesson.unitNumber}/100 • ⏱️ 3-4 phút
                         </span>
                         <span className="text-[10px] font-extrabold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded-md border border-amber-200 shrink-0">
                           +{lesson.xpReward} XP • +{lesson.gemReward} 💎
@@ -538,20 +564,40 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
                       <h4 className="text-xs font-black text-slate-900 leading-snug mb-1 line-clamp-2 break-words">
                         {lesson.title}
                       </h4>
-                      <p className="text-[11px] text-slate-500 font-medium mb-2.5 line-clamp-1 break-words">
+                      <p className="text-[11px] text-slate-500 font-medium mb-2 line-clamp-1 break-words">
                         {lesson.subtitle}
                       </p>
 
+                      {/* Memory Retention Ebbinghaus Indicator */}
+                      {isCompleted && memoryInfo.needsReview && (
+                        <div className="mb-2.5 p-2 rounded-xl bg-cyan-50 border border-cyan-200 text-cyan-950 text-[10.5px] font-bold flex items-center justify-between">
+                          <span className="flex items-center gap-1">
+                            <span>💧</span> Độ nhớ: {memoryInfo.retentionScore}%
+                          </span>
+                          <span className="text-[9.5px] text-cyan-700 bg-white px-1.5 py-0.5 rounded-md border border-cyan-200 uppercase font-black">
+                            Cần nạp khoáng
+                          </span>
+                        </div>
+                      )}
+
                       <button
                         onClick={() => handleStartLesson(lesson)}
-                        className={`w-full py-3 px-4 rounded-2xl font-black text-xs text-white uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md border-b-4 active:translate-y-1 active:border-b-2 cursor-pointer ${
+                        className={`w-full py-2.5 px-4 rounded-2xl font-black text-xs text-white uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md border-b-4 active:translate-y-1 active:border-b-2 cursor-pointer ${
                           isCompleted
-                            ? 'bg-[#22c55e] hover:bg-[#16a34a] border-[#15803d]'
+                            ? memoryInfo.needsReview
+                              ? 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:opacity-95 border-blue-800'
+                              : 'bg-[#22c55e] hover:bg-[#16a34a] border-[#15803d]'
                             : 'bg-[#009FE3] hover:bg-[#0077b6] border-[#005a9c]'
                         }`}
                       >
                         <Play className="w-4 h-4 fill-white" />
-                        <span>{isCompleted ? 'ÔN TẬP LẠI (+5 XP)' : 'BẮT ĐẦU HỌC'}</span>
+                        <span>
+                          {isCompleted
+                            ? memoryInfo.needsReview
+                              ? 'PHỤC HỒI NĂNG LƯỢNG (+10 XP)'
+                              : 'ÔN TẬP LẠI (+5 XP)'
+                            : 'BẮT ĐẦU HỌC'}
+                        </span>
                       </button>
                     </div>
                   </div>
@@ -695,6 +741,7 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
           lesson={activeLesson}
           onClose={() => setActiveLesson(null)}
           onFinishLesson={(xp, gems, stars) => {
+            recordUnitReviewSuccess(activeLesson.id, stars && stars >= 2 ? 5 : 4);
             onCompleteUnit(activeLesson.id, xp, gems, stars);
           }}
           speechRate={speechRate}
