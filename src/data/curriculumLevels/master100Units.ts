@@ -11258,7 +11258,7 @@ export const MASTER_100_UNITS: UnitLesson[] = [
       }
     ]
   },
-  {
+    {
     "id": "unit-81",
     "unitNumber": 81,
     "title": "Incoterms 2020: FOB Cảng Quy Nhơn vs CIF",
@@ -11271,104 +11271,135 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u81-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding Incoterms 2020 rules: FOB Quy Nhon versus CIF Tokyo?",
-        "options": [
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, as confirmed in our recent departmental briefing with executive management.",
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, pending formal verification from our international distribution coordinators.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Pair each maritime Incoterm and export concept with its precise definition:",
+        "promptVi": "Nối các điều khoản Incoterms và thuật ngữ xuất khẩu hàng hải với định nghĩa tương ứng:",
+        "englishSentence": "Match the 5 Incoterms 2020 maritime trade definitions.",
+        "audioText": "Match the 5 Incoterms 2020 maritime trade definitions.",
+        "explanation": "Hiểu chuẩn xác điểm chuyển giao rủi ro giữa FOB và CIF giúp bảo vệ quyền lợi tài chính và trách nhiệm bảo hiểm của doanh nghiệp xuất khẩu.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ Incoterms 2020 và vận tải đường biển quốc tế.",
+        "pairs": [
+          {
+            "left": "FOB Quy Nhon Port",
+            "right": "Giao hàng qua lan can tàu tại cảng Quy Nhơn (người bán hết rủi ro)"
+          },
+          {
+            "left": "CIF Tokyo Port",
+            "right": "Tiền hàng, phí bảo hiểm và cước tàu đến cảng đến Tokyo"
+          },
+          {
+            "left": "Transfer of Risk",
+            "right": "Điểm chuyển giao rủi ro hư hỏng hàng giữa người bán và người mua"
+          },
+          {
+            "left": "Ocean Bill of Lading",
+            "right": "Vận đơn đường biển do hãng tàu phát hành xác nhận đã nhận hàng"
+          },
+          {
+            "left": "Terminal Handling Charges",
+            "right": "Phụ phí xếp dỡ container tại cầu cảng do người bán chi trả"
+          }
+        ]
       },
       {
         "id": "u81-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Speak this executive trade statement clearly into the microphone:",
+        "promptVi": "Luyện nói câu phân định điều kiện xuất khẩu FOB chuẩn phong thái đàm phán quốc tế:",
+        "englishSentence": "Under FOB Quy Nhon terms, Vikoda bears all costs and risks until the pallets safely pass the ship's rail onto the ocean vessel.",
+        "audioText": "Under FOB Quy Nhon terms, Vikoda bears all costs and risks until the pallets safely pass the ship's rail onto the ocean vessel.",
+        "phonetics": "/ˈʌndər ɛf-oʊ-biː kwiː njən tɜːrmz, vɪˈkoʊdə bɛərz ɔːl kɒsts ænd rɪsks ənˈtɪl ðə ˈpælɪts ˈseɪfli pɑːs ðə ʃɪps reɪl ˈɒntuː ði ˈoʊʃən ˈvɛsl/",
+        "vietnameseMeaning": "Theo điều kiện FOB Quy Nhơn, Vikoda chịu mọi chi phí và rủi ro cho đến khi các kiện hàng qua lan can tàu an toàn lên tàu viễn dương.",
+        "explanation": "Phát âm rõ ràng các danh từ chuyên môn như 'ship's rail', 'ocean vessel' và ngắt nhịp sau trạng ngữ chỉ điều kiện.",
+        "whyWrong": "Cần nhấn trọng âm chính vào 'bears all costs and risks' để nhấn mạnh cam kết giới hạn trách nhiệm pháp lý.",
+        "crucialNote": "Trong Incoterms 2020, điểm chuyển giao rủi ro FOB là khi hàng được xếp an toàn trên tàu (on board).",
+        "memoryHook": "Under FOB terms, risk transfers once goods are on board the vessel."
       },
       {
         "id": "u81-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Arrange the words into a professional maritime trade proposal:",
+        "promptVi": "Sắp xếp các thẻ từ thành câu đề xuất điều kiện CIF chuyên nghiệp:",
+        "englishSentence": "We recommend CIF Yokohama so our dedicated logistics team manages the maritime insurance and ocean freight.",
+        "audioText": "We recommend CIF Yokohama so our dedicated logistics team manages the maritime insurance and ocean freight.",
         "wordPool": [
-          "Our",
-          "international",
-          "agreements",
-          "never",
-          "clear",
-          "cancel",
+          "We",
+          "recommend",
+          "CIF",
+          "Yokohama",
+          "so",
+          "our",
+          "dedicated",
+          "logistics",
+          "team",
+          "manages",
+          "the",
           "maritime",
-          "establish",
-          "terms.",
-          "under",
-          "transport",
-          "risk",
-          "commercial",
-          "division"
+          "insurance",
+          "and",
+          "ocean",
+          "freight.",
+          "cancel",
+          "abandon"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Chúng tôi đề xuất điều kiện CIF Yokohama để đội ngũ logistics chuyên trách của chúng tôi quản lý bảo hiểm hàng hải và cước biển.",
+        "explanation": "Cấu trúc đề xuất giá trị gia tăng 'We recommend CIF [Port] so that...' thể hiện năng lực điều phối logistics toàn diện của Vikoda.",
+        "whyWrong": "Tránh sắp xếp lộn xộn giữa cụm tân ngữ 'maritime insurance and ocean freight'.",
+        "crucialNote": "CIF giảm bớt gánh nặng đặt tàu cho đối tác mua nước ngoài, giúp chốt đơn xuất khẩu nhanh hơn.",
+        "memoryHook": "We recommend CIF so our logistics team manages insurance and freight."
       },
       {
         "id": "u81-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Select the precise trade term to complete the contract clause:",
+        "promptVi": "Chọn thuật ngữ thương mại chính xác để hoàn thiện điều khoản hợp đồng:",
+        "englishSentence": "Under Incoterms 2020 rules, the seller under CIF contracts must provide ocean cargo insurance with comprehensive [ _____ ] coverage.",
+        "audioText": "Under Incoterms 2020 rules, the seller under CIF contracts must provide ocean cargo insurance with comprehensive all-risks coverage.",
+        "blankWord": "all-risks",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "all-risks",
+          "unilateral",
+          "retroactive"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Theo quy tắc Incoterms 2020, người bán trong hợp đồng CIF phải cung cấp bảo hiểm hàng hóa đường biển với phạm vi bảo hiểm mọi rủi ro.",
+        "explanation": "Theo Incoterms 2020, điều kiện CIF mặc định yêu cầu người bán mua bảo hiểm hàng hóa Mức A (Institute Cargo Clauses A - all-risks), trừ khi hai bên có thỏa thuận khác.",
+        "whyWrong": "'Unilateral' (đơn phương) và 'retroactive' (hồi tố) hoàn toàn sai lệch ngữ cảnh bảo hiểm hàng hải quốc tế.",
+        "crucialNote": "Bảo hiểm 'all-risks' bảo vệ lô hàng Vikoda trước các tổn thất do thời tiết, ngấm nước biển và bốc dỡ.",
+        "memoryHook": "CIF mandates comprehensive all-risks cargo insurance coverage."
       },
       {
         "id": "u81-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Incoterms 2020: FOB Cảng Quy Nhơn vs CIF\" (Phân định rõ ranh giới rủi ro và chi phí vận chuyển đường biển). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, pending formal verification from our international distribution coordinators.",
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Executive Trade Dialogue: Respond to the Japanese importer's freight request:",
+        "promptVi": "Hội đàm thương mại cấp cao: Phản hồi đề xuất chuyển từ FOB sang CIF của đối tác Nhật Bản trên Slack:",
+        "englishSentence": "Certainly, Takahashi-san! We have long-term volume service contracts with ONE and Maersk, allowing us to offer competitive CIF Yokohama rates with full Institute Cargo Clauses (A) insurance coverage.",
+        "audioText": "Certainly, Takahashi-san! We have long-term volume service contracts with ONE and Maersk, allowing us to offer competitive CIF Yokohama rates with full Institute Cargo Clauses (A) insurance coverage.",
+        "chatMessages": [
+          {
+            "speaker": "Kenji Takahashi (Logistics Director, Tokyo Imports)",
+            "avatar": "🇯🇵",
+            "message": "Minh-san, spot container rates from Quy Nhon to Yokohama are surging. Can Vikoda quote CIF Yokohama directly, and which carrier alliance do you partner with?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Phân định rõ ranh giới rủi ro và chi phí vận chuyển đường biển",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Certainly, Takahashi-san! We have long-term volume service contracts with ONE and Maersk, allowing us to offer competitive CIF Yokohama rates with full Institute Cargo Clauses (A) insurance coverage.",
+            "trustScore": 25,
+            "feedback": "Phản hồi xuất sắc (+25 Điểm Tin Cậy)! Tận dụng hợp đồng cước số lượng lớn để cung cấp giải pháp CIF trọn gói, bảo đảm an toàn và củng cố vị thế chuyên nghiệp của Vikoda.",
+            "isCorrect": true
+          },
+          {
+            "text": "We only do FOB, booking ocean carriers is entirely your company's headache so please find a ship yourself.",
+            "trustScore": 0,
+            "feedback": "Thái độ đẩy rủi ro thô lỗ làm sụp đổ hình ảnh thương hiệu quốc tế và khiến đối tác lập tức hủy đơn hàng.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chắc chắn rồi, thưa ông Takahashi! Chúng tôi có hợp đồng dịch vụ khối lượng lớn dài hạn với ONE và Maersk, cho phép chúng tôi báo giá CIF Yokohama cạnh tranh kèm bảo hiểm mọi rủi ro theo Điều khoản Hàng hóa Mức A.",
+        "explanation": "Chủ động đề xuất giải pháp CIF dựa trên quan hệ đối tác hãng tàu lớn chứng minh năng lực chuỗi cung ứng toàn cầu vững mạnh.",
+        "crucialNote": "Hợp đồng dịch vụ cước dài hạn (service contract) là lợi thế cạnh tranh cốt lõi của nhà xuất khẩu quy mô lớn.",
+        "memoryHook": "Provide turnkey CIF solutions to win international buyers."
       }
     ]
   },
@@ -11385,104 +11416,133 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u82-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding confirmed irrevocable Letters of Credit at sight?",
-        "options": [
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, as confirmed in our recent departmental briefing with executive management.",
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, pending formal verification from our international distribution coordinators.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each trade finance and Letter of Credit term with its correct definition:",
+        "promptVi": "Nối các thuật ngữ thanh toán quốc tế và Thư tín dụng L/C với định nghĩa chuẩn xác:",
+        "englishSentence": "Match the 5 trade finance and documentary credit terms.",
+        "audioText": "Match the 5 trade finance and documentary credit terms.",
+        "explanation": "Thư tín dụng (L/C) là công cụ thanh toán an toàn nhất trong thương mại quốc tế, bảo đảm nhà xuất khẩu được ngân hàng thanh toán khi nộp đủ chứng từ hợp lệ.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ tài trợ thương mại và thư tín dụng chứng từ quốc tế.",
+        "pairs": [
+          {
+            "left": "Irrevocable Letter of Credit",
+            "right": "Thư tín dụng không thể đơn phương sửa đổi hoặc hủy ngang"
+          },
+          {
+            "left": "At-Sight Documentary Credit",
+            "right": "Thanh toán ngay khi xuất trình bộ chứng từ giao hàng hợp lệ"
+          },
+          {
+            "left": "Issuing Bank & Advising Bank",
+            "right": "Ngân hàng mở L/C (bên mua) và Ngân hàng thông báo (bên bán)"
+          },
+          {
+            "left": "UCP 600 Compliance",
+            "right": "Tuân thủ quy tắc thực hành thống nhất về tín dụng chứng từ số 600"
+          },
+          {
+            "left": "Discrepancy Fee",
+            "right": "Phí phạt do bộ chứng từ xuất khẩu có sai sót hoặc bất đồng"
+          }
+        ]
       },
       {
         "id": "u82-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this strict corporate credit policy statement:",
+        "promptVi": "Luyện nói câu khẳng định chính sách tín dụng thương mại quốc tế bằng tiếng Anh chuẩn xác:",
+        "englishSentence": "All export shipments must be secured by an irrevocable letter of credit at sight confirmed by a top-tier international bank.",
+        "audioText": "All export shipments must be secured by an irrevocable letter of credit at sight confirmed by a top-tier international bank.",
+        "phonetics": "/ɔːl ˈɛkspɔːrt ˈʃɪpmənts mʌst biː sɪˈkjʊərd baɪ ən ɪˈrɛvəkəbl ˈlɛtər əv ˈkrɛdɪt æt saɪt kənˈfɜːrmd baɪ ə tɒp-tɪər ˌɪntərˈnæʃnəl bæŋk/",
+        "vietnameseMeaning": "Mọi lô hàng xuất khẩu phải được bảo đảm bằng thư tín dụng không hủy ngang trả ngay được xác nhận bởi một ngân hàng quốc tế hàng đầu.",
+        "explanation": "Cụm 'confirmed by a top-tier international bank' loại trừ rủi ro quốc gia và rủi ro ngân hàng mở không đủ thanh khoản.",
+        "whyWrong": "Chú ý phát âm chuẩn từ 'irrevocable' với trọng âm rơi vào âm tiết thứ hai /ɪˈrɛvəkəbl/.",
+        "crucialNote": "L/C có xác nhận (confirmed L/C) chuyển trách nhiệm thanh toán cuối cùng sang ngân hàng xác nhận uy tín.",
+        "memoryHook": "Irrevocable confirmed L/C at sight guarantees 100% export payment security."
       },
       {
         "id": "u82-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Build a legally binding documentary credit undertaking sentence:",
+        "promptVi": "Sắp xếp các từ thành câu cam kết thanh toán vô điều kiện của ngân hàng phát hành:",
+        "englishSentence": "The issuing bank irrevocably undertakes to honor payment upon receipt of compliant shipping documents.",
+        "audioText": "The issuing bank irrevocably undertakes to honor payment upon receipt of compliant shipping documents.",
         "wordPool": [
-          "transport",
-          "agreements",
-          "establish",
-          "terms.",
-          "clear",
-          "risk",
-          "maritime",
-          "division",
-          "international",
-          "Our",
-          "commercial",
-          "cancel",
-          "under",
-          "never"
+          "The",
+          "issuing",
+          "bank",
+          "irrevocably",
+          "undertakes",
+          "to",
+          "honor",
+          "payment",
+          "upon",
+          "receipt",
+          "of",
+          "compliant",
+          "shipping",
+          "documents.",
+          "default",
+          "refuse"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Ngân hàng phát hành cam kết không hủy ngang sẽ thanh toán ngay khi nhận được bộ chứng từ vận chuyển hoàn toàn hợp lệ.",
+        "explanation": "Thuật ngữ 'irrevocably undertakes to honor payment' là cam kết pháp lý cốt lõi được quy định trong UCP 600 Điều 7.",
+        "whyWrong": "Tránh đảo lộn vị trí giữa động từ 'honor payment' và cụm giới từ 'upon receipt of'.",
+        "crucialNote": "'Compliant shipping documents' có nghĩa là bộ chứng từ không có bất kỳ sai lệch nào so với điều khoản L/C.",
+        "memoryHook": "Issuing bank irrevocably undertakes to honor compliant documents."
       },
       {
         "id": "u82-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Fill in the blank with the appropriate trade finance status:",
+        "promptVi": "Chọn trạng thái tài chính thương mại chuẩn xác để hoàn thiện quy định:",
+        "englishSentence": "To eliminate payment default risks, our trade finance policy mandates that international buyers open a [ _____ ] irrevocable L/C within ten business days of signing.",
+        "audioText": "To eliminate payment default risks, our trade finance policy mandates that international buyers open a confirmed irrevocable L/C within ten business days of signing.",
+        "blankWord": "confirmed",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "confirmed",
+          "revocable",
+          "provisional"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Để loại trừ rủi ro không thanh toán, chính sách tài chính thương mại của chúng tôi quy định bên mua quốc tế phải mở thư tín dụng không hủy ngang có xác nhận trong vòng mười ngày làm việc kể từ ngày ký.",
+        "explanation": "Một L/C 'confirmed' (có xác nhận) bảo vệ người xuất khẩu tối đa vì ngân hàng xác nhận tại nước người bán chịu trách nhiệm thanh toán độc lập.",
+        "whyWrong": "'Revocable' (có thể hủy) là hình thức lỗi thời và rủi ro cực cao; 'provisional' (tạm thời) không có giá trị bảo đảm thanh toán.",
+        "crucialNote": "Luôn kiểm tra kỹ thời hạn hiệu lực (expiry date) và ngày giao hàng muộn nhất (latest shipment date) trên L/C.",
+        "memoryHook": "A confirmed L/C removes cross-border insolvency risks."
       },
       {
         "id": "u82-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Thư Tín Dụng L/C Không Hủy Ngang Trả Ngay\" (Soạn thảo điều khoản thanh toán ngân hàng quốc tế bảo mật). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, pending formal verification from our international distribution coordinators.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "C-Suite Financial Negotiation: Rebuff an unsecured credit request tactfully:",
+        "promptVi": "Đàm phán tài chính cấp cao: Xử lý đề xuất thanh toán nợ mở T/T 60 ngày của đối tác Hàn Quốc:",
+        "englishSentence": "Mr. Park, to balance cash flow while safeguarding corporate credit policy, we can structure this initial shipment under a 30% advance T/T deposit with the remaining 70% paid against copy of the clean ocean B/L, or a 90-day Usance L/C backed by Shinhan Bank.",
+        "audioText": "Mr. Park, to balance cash flow while safeguarding corporate credit policy, we can structure this initial shipment under a 30% advance T/T deposit with the remaining 70% paid against copy of the clean ocean B/L, or a 90-day Usance L/C backed by Shinhan Bank.",
+        "chatMessages": [
+          {
+            "speaker": "Park Sun-woo (CFO, Seoul Distribution Hub)",
+            "avatar": "🇰🇷",
+            "message": "Minh, issuing a confirmed L/C at sight freezes our banking credit facilities. Would Vikoda accept open account T/T 60 days after Bill of Lading date for this initial 20-container order?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Soạn thảo điều khoản thanh toán ngân hàng quốc tế bảo mật",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Mr. Park, to balance cash flow while safeguarding corporate credit policy, we can structure this initial shipment under a 30% advance T/T deposit with the remaining 70% paid against copy of the clean ocean B/L, or a 90-day Usance L/C backed by Shinhan Bank.",
+            "trustScore": 25,
+            "feedback": "Đàm phán bậc thầy (+25 Điểm Tin Cậy)! Vừa kiên quyết từ chối nợ mở không bảo đảm, vừa linh hoạt đưa ra 2 giải pháp tài trợ thương mại khả thi (đặt cọc 30% hoặc L/C trả chậm do ngân hàng lớn bảo lãnh).",
+            "isCorrect": true
+          },
+          {
+            "text": "No way! We do not trust your financial liquidity at all, so pay 100% cash in advance right now or we cancel the whole export order.",
+            "trustScore": 0,
+            "feedback": "Thái độ nghi kỵ xúc phạm đối tác, phá vỡ đàm phán chiến lược mở rộng thị trường Hàn Quốc.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa ông Park, để cân đối dòng tiền trong khi vẫn tuân thủ chính sách tín dụng của tập đoàn, chúng tôi có thể cơ cấu lô hàng đầu tiên này theo hình thức đặt cọc 30% chuyển khoản trước và 70% còn lại thanh toán khi nhận bản sao Vận đơn sạch, hoặc mở L/C trả chậm 90 ngày do Ngân hàng Shinhan bảo lãnh.",
+        "explanation": "Kết hợp giữa nguyên tắc quản trị rủi ro tín dụng và công cụ Usance L/C giúp khách hàng có thời gian bán hàng mà nhà xuất khẩu vẫn được ngân hàng bảo lãnh thanh toán.",
+        "crucialNote": "Usance L/C (thư tín dụng trả chậm) cho phép nhà xuất khẩu chiết khấu chứng từ tại ngân hàng để nhận tiền ngay.",
+        "memoryHook": "Never surrender credit security; offer Usance L/C or DP against B/L."
       }
     ]
   },
@@ -11499,104 +11559,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u83-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding export documentation and ocean Bills of Lading?",
-        "options": [
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, pending formal verification from our international distribution coordinators.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Pair each shipping and customs document with its exact function:",
+        "promptVi": "Nối từng chứng từ xuất nhập khẩu và hải quan với chức năng nghiệp vụ tương ứng:",
+        "englishSentence": "Match the 5 export shipping and customs documents.",
+        "audioText": "Match the 5 export shipping and customs documents.",
+        "explanation": "Bộ chứng từ xuất khẩu hoàn chỉnh là điều kiện tiên quyết để nhà nhập khẩu thông quan suôn sẻ và ngân hàng giải ngân theo L/C.",
+        "vietnameseMeaning": "Nối đúng 5 loại chứng từ xuất khẩu cốt lõi trong bộ chứng từ thương mại quốc tế.",
+        "pairs": [
+          {
+            "left": "Clean On-Board Bill of Lading",
+            "right": "Vận đơn đường biển sạch xác nhận hàng đã xếp lên tàu nguyên vẹn"
+          },
+          {
+            "left": "Commercial Invoice & Packing List",
+            "right": "Hóa đơn giá trị hàng và phiếu đóng gói chi tiết trọng lượng"
+          },
+          {
+            "left": "Certificate of Origin (C/O Form)",
+            "right": "Giấy chứng nhận xuất xứ để bên mua được hưởng ưu đãi thuế quan"
+          },
+          {
+            "left": "Certificate of Analysis (COA)",
+            "right": "Phiếu kiểm nghiệm chỉ tiêu lý hóa vi sinh của Viện Pasteur"
+          },
+          {
+            "left": "Shipper vs Consignee",
+            "right": "Người gửi hàng xuất khẩu và Người nhận hàng nhập khẩu chỉ định"
+          }
+        ]
       },
       {
         "id": "u83-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this export documentation audit statement with clear rhythm:",
+        "promptVi": "Luyện nói câu kiểm soát chất lượng chứng từ xuất khẩu bằng tiếng Anh chuyên nghiệp:",
+        "englishSentence": "Our export documentation team cross-checks the Clean On-Board B/L against the letter of credit to prevent any documentation discrepancy.",
+        "audioText": "Our export documentation team cross-checks the Clean On-Board B/L against the letter of credit to prevent any documentation discrepancy.",
+        "phonetics": "/ˈaʊər ˈɛkspɔːrt ˌdɒkjʊmɛnˈteɪʃn tiːm krɒs-tʃɛks ðə kliːn ɒn-bɔːrd biː-ɛl əˈɡɛnst ðə ˈlɛtər əv ˈkrɛdɪt tuː prɪˈvɛnt ˈɛni ˌdɒkjʊmɛnˈteɪʃn dɪsˈkrɛpənsi/",
+        "vietnameseMeaning": "Đội ngũ chứng từ xuất khẩu của chúng tôi đối chiếu kỹ lưỡng Vận đơn sạch lên tàu với thư tín dụng nhằm ngăn chặn tuyệt đối bất kỳ sai sót chứng từ nào.",
+        "explanation": "Thuật ngữ 'documentation discrepancy' (bất đồng chứng từ) là nguyên nhân hàng đầu khiến ngân hàng từ chối thanh toán L/C.",
+        "whyWrong": "Chú ý nối âm giữa 'cross-checks' và 'the', phát âm rõ âm đuôi /s/ của 'discrepancy'.",
+        "crucialNote": "Ngân hàng chỉ kiểm tra tính hợp lệ của chứng từ trên bề mặt (on its face) chứ không kiểm tra hàng hóa thực tế.",
+        "memoryHook": "Flawless documentation ensures instant letter of credit liquidation."
       },
       {
         "id": "u83-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Construct the sentence highlighting tariff benefits under bilateral trade pacts:",
+        "promptVi": "Sắp xếp các từ thành câu cam kết cung cấp C/O hưởng ưu đãi thuế quan 0%:",
+        "englishSentence": "We provide an original Certificate of Origin Form AK to ensure zero tariff treatment under the bilateral free trade agreement.",
+        "audioText": "We provide an original Certificate of Origin Form AK to ensure zero tariff treatment under the bilateral free trade agreement.",
         "wordPool": [
-          "establish",
-          "agreements",
+          "We",
+          "provide",
+          "an",
+          "original",
+          "Certificate",
+          "of",
+          "Origin",
+          "Form",
+          "AK",
+          "to",
+          "ensure",
+          "zero",
+          "tariff",
+          "treatment",
           "under",
-          "division",
-          "international",
-          "never",
-          "transport",
-          "maritime",
-          "clear",
-          "risk",
-          "Our",
-          "cancel",
-          "terms.",
-          "commercial"
+          "the",
+          "bilateral",
+          "free",
+          "trade",
+          "agreement.",
+          "penalty",
+          "embargo"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Chúng tôi cung cấp bản gốc Giấy chứng nhận xuất xứ Form AK để bảo đảm mức thuế quan 0% theo hiệp định thương mại tự do song phương.",
+        "explanation": "Form AK (ASEAN - Korea) cho phép nước khoáng Vikoda nhập khẩu vào Hàn Quốc với thuế nhập khẩu ưu đãi 0%.",
+        "whyWrong": "Cần đặt cụm mục đích 'to ensure zero tariff treatment' ngay sau tân ngữ chính 'Form AK'.",
+        "crucialNote": "Kiểm tra kỹ tiêu chí xuất xứ (Origin Criterion) như WO (Wholly Obtained) đối với nước khoáng khai thác tự nhiên.",
+        "memoryHook": "Provide certified C/O to unlock zero import tariffs."
       },
       {
         "id": "u83-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Select the legal banking compliance verb to complete the clause:",
+        "promptVi": "Chọn động từ tuân thủ chứng từ ngân hàng chuẩn xác:",
+        "englishSentence": "The issuing bank rejected the presentation because the commercial invoice description did not strictly [ _____ ] with the exact credit terms.",
+        "audioText": "The issuing bank rejected the presentation because the commercial invoice description did not strictly comply with the exact credit terms.",
+        "blankWord": "comply",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "comply",
+          "forfeit",
+          "disclaim"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Ngân hàng phát hành từ chối thanh toán do mô tả hàng hóa trên hóa đơn thương mại không tuân thủ tuyệt đối các điều khoản chính xác của thư tín dụng.",
+        "explanation": "Theo nguyên tắc 'Strict Compliance' (tuân thủ nghiêm ngặt) của UCP 600 Điều 18, mô tả hàng hóa trên hóa đơn thương mại phải tương ứng chính xác từng từ với L/C.",
+        "whyWrong": "'Forfeit' (bị tước đoạt) và 'disclaim' (từ chối trách nhiệm) hoàn toàn sai ngữ pháp và ngữ nghĩa.",
+        "crucialNote": "Chỉ một chữ cái sai chính tả trên hóa đơn cũng có thể dẫn đến thông báo bất đồng chứng từ (discrepancy notice).",
+        "memoryHook": "Commercial invoice descriptions must strictly comply with L/C wording."
       },
       {
         "id": "u83-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Bộ Chứng Từ Xuất Khẩu & Vận Đơn B/L\" (Kiểm tra Bill of Lading, Hóa đơn thương mại và C/O form). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, pending formal verification from our international distribution coordinators.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Urgent Customs Resolution: Rectify an HS code discrepancy at Busan Port:",
+        "promptVi": "Xử lý khủng hoảng hải quan: Đại lý thông quan cảng Busan thông báo lệch mã HS trên C/O:",
+        "englishSentence": "Tae-young, our trade compliance officer is already liaising with the Ministry of Industry and Trade. We will issue an official electronic replacement C/O with corrected HS code 2201.10.20 and transmit the digital certificate within two hours!",
+        "audioText": "Tae-young, our trade compliance officer is already liaising with the Ministry of Industry and Trade. We will issue an official electronic replacement C/O with corrected HS code 2201.10.20 and transmit the digital certificate within two hours!",
+        "chatMessages": [
+          {
+            "speaker": "Kim Tae-young (Customs Broker, Busan Port)",
+            "avatar": "🇰🇷",
+            "message": "Minh, Korea Customs is holding the 5 containers! The C/O lists HS 2201.10.10 while the import manifest shows HS 2201.10.20 for sparkling natural mineral water. Can you reissue an amended C/O immediately?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Kiểm tra Bill of Lading, Hóa đơn thương mại và C/O form",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Tae-young, our trade compliance officer is already liaising with the Ministry of Industry and Trade. We will issue an official electronic replacement C/O with corrected HS code 2201.10.20 and transmit the digital certificate within two hours!",
+            "trustScore": 25,
+            "feedback": "Xử lý thần tốc (+25 Điểm Tin Cậy)! Kích hoạt quy trình cấp đổi C/O điện tử ngay lập tức với Bộ Công Thương, giải phóng container khỏi ách tắc lưu kho bãi tại cảng Busan.",
+            "isCorrect": true
+          },
+          {
+            "text": "Customs officers are too pedantic. It is all drinking water anyway, just convince them to release the containers as is.",
+            "trustScore": 0,
+            "feedback": "Coi thường quy định hải quan quốc tế dẫn đến việc bị giữ hàng, phạt tiền lưu bãi (demurrage) và đưa doanh nghiệp vào danh sách đen kiểm tra luồng đỏ.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Anh Tae-young, cán bộ tuân thủ thương mại của chúng tôi đang làm việc trực tiếp với Bộ Công Thương. Chúng tôi sẽ cấp đổi bản C/O điện tử chính thức với mã HS chuẩn xác 2201.10.20 và truyền dữ liệu chứng thực số trong vòng hai giờ tới!",
+        "explanation": "Phản ứng quyết đoán, hiểu rõ hệ thống cấp C/O điện tử (e-C/O) giúp hóa giải rủi ro giữ hàng tại cảng đến trong thời gian kỷ lục.",
+        "crucialNote": "Nước khoáng có ga (sparkling) và không ga (still) có phân nhóm mã HS 8 số khác nhau tùy biểu thuế từng quốc gia.",
+        "memoryHook": "Swift electronic C/O amendment prevents costly port demurrage."
       }
     ]
   },
@@ -11613,104 +11708,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u84-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding Institute Cargo Clauses A marine transit insurance?",
-        "options": [
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, pending formal verification from our international distribution coordinators.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each marine cargo insurance concept with its technical definition:",
+        "promptVi": "Nối các khái niệm bảo hiểm hàng hải quốc tế với định nghĩa kỹ thuật tương ứng:",
+        "englishSentence": "Match the 5 marine cargo insurance concepts.",
+        "audioText": "Match the 5 marine cargo insurance concepts.",
+        "explanation": "Bảo hiểm Hàng hóa Mức A (ICC A) mang lại phạm vi bảo vệ rộng nhất (All Risks) cho các container nước khoáng Vikoda xuất khẩu qua đại dương.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ bảo hiểm hàng hóa đường biển theo quy tắc của Hiệp hội Bảo hiểm London.",
+        "pairs": [
+          {
+            "left": "Institute Cargo Clauses (A)",
+            "right": "Điều khoản bảo hiểm hàng hóa mức A bảo hiểm mọi rủi ro rộng nhất"
+          },
+          {
+            "left": "General Average Contribution",
+            "right": "Khoản đóng góp tổn thất chung khi tàu phải hy sinh hàng vì an toàn chung"
+          },
+          {
+            "left": "Particular Average Loss",
+            "right": "Tổn thất riêng chỉ xảy ra đối với hàng của chủ hàng cụ thể"
+          },
+          {
+            "left": "Subrogation Rights",
+            "right": "Quyền thế quyền đòi người thứ ba có lỗi bồi thường sau khi đã chi trả"
+          },
+          {
+            "left": "Endorsed in Blank",
+            "right": "Ký hậu để trống đơn bảo hiểm để chuyển quyền thụ hưởng bồi thường"
+          }
+        ]
       },
       {
         "id": "u84-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this authoritative marine insurance declaration:",
+        "promptVi": "Luyện phát âm câu tuyên bố phạm vi bảo hiểm hàng hải quốc tế toàn diện:",
+        "englishSentence": "Under Institute Cargo Clauses A, our premium export shipments are fully indemnified against maritime perils, rough handling, and general average contribution.",
+        "audioText": "Under Institute Cargo Clauses A, our premium export shipments are fully indemnified against maritime perils, rough handling, and general average contribution.",
+        "phonetics": "/ˈʌndər ˈɪnstɪtjuːt ˈkɑːrɡoʊ ˈklɔːzɪz eɪ, ˈaʊər ˈpriːmiəm ˈɛkspɔːrt ˈʃɪpmənts ɑːr ˈfʊli ɪnˈdɛmnɪfaɪd əˈɡɛnst ˈmærɪtaɪm ˈpɛrəlz, rʌf ˈhændlɪŋ, ænd ˈdʒɛnərəl ˈævərɪdʒ ˌkɒntrɪˈbjuːʃn/",
+        "vietnameseMeaning": "Theo Điều khoản Bảo hiểm Hàng hóa Mức A, các lô hàng xuất khẩu cao cấp của chúng tôi được bồi thường toàn diện trước hiểm họa hàng hải, bốc dỡ thô bạo và đóng góp tổn thất chung.",
+        "explanation": "Từ 'indemnified' nghĩa là được bồi thường đầy đủ để khôi phục tình trạng tài chính như trước khi xảy ra sự kiện tổn thất.",
+        "whyWrong": "Lưu ý trọng âm của 'indemnified' rơi vào âm tiết thứ hai /ɪnˈdɛmnɪfaɪd/.",
+        "crucialNote": "ICC A bảo vệ cả rủi ro nước biển tràn vào hầm hàng làm rách thùng carton hoặc biến dạng bao bì.",
+        "memoryHook": "ICC Clause A indemnifies cargo against all risks and general average."
       },
       {
         "id": "u84-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Arrange the sentence defining mandatory insurance value under CIF contracts:",
+        "promptVi": "Sắp xếp các từ thành câu quy định giá trị bảo hiểm bắt buộc theo chuẩn quốc tế:",
+        "englishSentence": "The cargo insurance policy must be endorsed in blank and cover one hundred and ten percent of the CIF value.",
+        "audioText": "The cargo insurance policy must be endorsed in blank and cover one hundred and ten percent of the CIF value.",
         "wordPool": [
-          "division",
-          "clear",
-          "commercial",
-          "transport",
-          "maritime",
-          "Our",
-          "never",
-          "terms.",
-          "risk",
-          "establish",
-          "international",
-          "agreements",
-          "cancel",
-          "under"
+          "The",
+          "cargo",
+          "insurance",
+          "policy",
+          "must",
+          "be",
+          "endorsed",
+          "in",
+          "blank",
+          "and",
+          "cover",
+          "one",
+          "hundred",
+          "and",
+          "ten",
+          "percent",
+          "of",
+          "the",
+          "CIF",
+          "value.",
+          "void",
+          "forfeit"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Đơn bảo hiểm hàng hóa phải được ký hậu để trống và có giá trị bảo hiểm bằng một trăm mười phần trăm trị giá CIF.",
+        "explanation": "110% CIF (gồm 100% giá trị hàng cộng thêm 10% lợi nhuận kỳ vọng của người mua) là tỷ lệ bảo hiểm tiêu chuẩn theo Incoterms 2020 và UCP 600.",
+        "whyWrong": "Đảm bảo đúng trật tự liên từ 'and' kết nối hai vị ngữ 'must be endorsed in blank' và 'cover 110%'.",
+        "crucialNote": "'Endorsed in blank' (ký hậu để trống) cho phép người cầm giữ đơn bảo hiểm có quyền nộp hồ sơ yêu cầu bồi thường trực tiếp.",
+        "memoryHook": "Marine policies must cover 110% of CIF value and be endorsed in blank."
       },
       {
         "id": "u84-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Complete the maritime law scenario with the correct technical noun:",
+        "promptVi": "Hoàn thiện tình huống pháp luật hàng hải với thuật ngữ tổn thất chính xác:",
+        "englishSentence": "When a container ship faces severe storms, the captain may declare a [ _____ ] average to sacrifice cargo for the common safety of the vessel.",
+        "audioText": "When a container ship faces severe storms, the captain may declare a general average to sacrifice cargo for the common safety of the vessel.",
+        "blankWord": "general",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "general",
+          "arbitrary",
+          "retroactive"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Khi tàu container gặp bão biển dữ dội, thuyền trưởng có thể tuyên bố tổn thất chung để hy sinh một phần hàng hóa vì sự an toàn chung của con tàu.",
+        "explanation": "'General average' (tổn thất chung) là nguyên tắc hàng hải cổ xưa: khi thuyền trưởng ra quyết định hợp lý để cứu tàu, mọi chủ hàng có hàng trên tàu phải cùng đóng góp bù đắp chi phí thiệt hại.",
+        "whyWrong": "'Arbitrary' (tùy tiện) và 'retroactive' (hồi tố) không có giá trị trong luật hàng hải.",
+        "crucialNote": "Nếu không có bảo hiểm hàng hải, chủ hàng sẽ phải nộp tiền bảo lãnh hàng trăm ngàn USD bằng tiền mặt trước khi được nhận hàng.",
+        "memoryHook": "General average requires shared sacrifice for common marine survival."
       },
       {
         "id": "u84-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Bảo Hiểm Hàng Hóa Đường Biển Mức A (ICC A)\" (Bảo hiểm rủi ro toàn diện container chìm đắm hoặc thất lạc). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, pending formal verification from our international distribution coordinators.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Marine Emergency Response: Coordinate with the Lloyd's surveyor after a typhoon:",
+        "promptVi": "Xử lý khẩn cấp hàng hải: Phối hợp với giám định viên quốc tế sau khi tàu gặp bão lớn trên biển:",
+        "englishSentence": "Captain Sterling, thank you for the prompt notification. We are transmitting our Bao Viet ICC (A) policy covering 110% CIF value along with the master B/L and packing list. Our operations team is already staging an expedited replacement container from Danh Thanh to avoid buyer supply disruption.",
+        "audioText": "Captain Sterling, thank you for the prompt notification. We are transmitting our Bao Viet ICC (A) policy covering 110% CIF value along with the master B/L and packing list. Our operations team is already staging an expedited replacement container from Danh Thanh to avoid buyer supply disruption.",
+        "chatMessages": [
+          {
+            "speaker": "Captain Robert Sterling (Marine Surveyor, Lloyd's Agency)",
+            "avatar": "⚓",
+            "message": "Minh, container vessel MV Pacific Star encountered Typhoon Malakas. Two 40ft containers of Vikoda glass bottles experienced lash failure and overboard loss. We need your insurance certificate and bill of lading to initiate the survey report."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Bảo hiểm rủi ro toàn diện container chìm đắm hoặc thất lạc",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Captain Sterling, thank you for the prompt notification. We are transmitting our Bao Viet ICC (A) policy covering 110% CIF value along with the master B/L and packing list. Our operations team is already staging an expedited replacement container from Danh Thanh to avoid buyer supply disruption.",
+            "trustScore": 25,
+            "feedback": "Xử lý khủng hoảng hàng hải xuất sắc (+25 Điểm Tin Cậy)! Vừa cung cấp đầy đủ chứng từ giám định bồi thường bảo hiểm, vừa chủ động chuẩn bị container thay thế để giữ vững chuỗi cung ứng cho đối tác.",
+            "isCorrect": true
+          },
+          {
+            "text": "Why did your crew drop our water into the ocean? Go dive into the sea and retrieve our bottles right now or we will sue your shipping line!",
+            "trustScore": 0,
+            "feedback": "Phản ứng thiếu hiểu biết về luật hàng hải quốc tế, từ chối hợp tác với giám định viên khiến hồ sơ bồi thường bị đình chỉ.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa Thuyền trưởng Sterling, cảm ơn ông đã thông báo kịp thời. Chúng tôi đang gửi đơn bảo hiểm Bảo Việt ICC (A) bao bọc 110% trị giá CIF cùng với Vận đơn gốc và phiếu đóng gói. Đội ngũ vận hành của chúng tôi cũng đang gấp rút chuẩn bị một container thay thế xuất phát từ Đảnh Thạnh để bảo đảm chuỗi cung ứng của đối tác không bị gián đoạn.",
+        "explanation": "Hành động song song: giải quyết bồi thường bảo hiểm chuyên nghiệp đồng thời kích hoạt lô hàng dự phòng chứng minh năng lực quản trị rủi ro thượng thặng.",
+        "crucialNote": "Bảo hiểm ICC (A) sẽ chi trả đầy đủ 110% giá trị lô hàng bị trôi dạt trên biển theo xác nhận của giám định viên.",
+        "memoryHook": "Transmit claim files swiftly and dispatch replacement inventory immediately."
       }
     ]
   },
@@ -11727,104 +11857,137 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u85-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding Force Majeure clauses in cross-border trade?",
-        "options": [
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, as confirmed in our recent departmental briefing with executive management.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each contractual risk mitigation term with its legal meaning:",
+        "promptVi": "Nối các thuật ngữ pháp lý phòng ngừa rủi ro hợp đồng với định nghĩa chuẩn xác:",
+        "englishSentence": "Match the 5 contract risk mitigation and force majeure concepts.",
+        "audioText": "Match the 5 contract risk mitigation and force majeure concepts.",
+        "explanation": "Điều khoản Bất khả kháng (Force Majeure) và Hoàn cảnh khó khăn (Hardship) là lá chắn pháp lý tối thượng bảo vệ doanh nghiệp trước những biến động địa chính trị toàn cầu.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ pháp lý về điều khoản miễn trách và điều chỉnh hợp đồng theo mẫu ICC.",
+        "pairs": [
+          {
+            "left": "Force Majeure Event",
+            "right": "Sự kiện bất khả kháng ngoài tầm kiểm soát hợp lý của các bên"
+          },
+          {
+            "left": "Hardship Clause",
+            "right": "Điều khoản đàm phán lại khi hoàn cảnh thay đổi làm chi phí tăng đột biến"
+          },
+          {
+            "left": "Duty to Mitigate Loss",
+            "right": "Nghĩa vụ áp dụng mọi biện pháp hợp lý để giảm thiểu thiệt hại cho đối tác"
+          },
+          {
+            "left": "Notice of Occurrence",
+            "right": "Văn bản thông báo kịp thời khi sự kiện bất khả kháng phát sinh"
+          },
+          {
+            "left": "Right of Contractual Rescission",
+            "right": "Quyền chấm dứt hợp đồng nếu sự kiện cản trở kéo dài quá hạn định"
+          }
+        ]
       },
       {
         "id": "u85-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this standard ICC model force majeure clause:",
+        "promptVi": "Luyện phát âm câu điều khoản bất khả kháng chuẩn mực theo mẫu Phòng Thương Mại Quốc Tế (ICC):",
+        "englishSentence": "Neither party shall be held liable for failure or delay in performance resulting from an unforeseeable event of force majeure beyond reasonable control.",
+        "audioText": "Neither party shall be held liable for failure or delay in performance resulting from an unforeseeable event of force majeure beyond reasonable control.",
+        "phonetics": "/ˈnaɪðər ˈpɑːrti ʃæl biː hɛld ˈlaɪəbl fɔːr ˈfeɪljər ɔːr dɪˈleɪ ɪn pərˈfɔːrməns rɪˈzʌltɪŋ frɒm ən ˌʌnfɔːrˈsiːəbl ɪˈvɛnt əv fɔːrs mæˈʒɜːr bɪˈjɒnd ˈriːznəbl kənˈtroʊl/",
+        "vietnameseMeaning": "Không bên nào phải chịu trách nhiệm về việc không thực hiện hoặc chậm trễ do sự kiện bất khả kháng không thể lường trước nằm ngoài tầm kiểm soát hợp lý.",
+        "explanation": "Cấu trúc pháp lý 'Neither party shall be held liable for...' miễn trừ trách nhiệm bồi thường vi phạm hợp đồng khi sự kiện bất khả kháng xảy ra.",
+        "whyWrong": "Phát âm chuẩn cụm từ tiếng Pháp mượn trong luật thương mại 'force majeure' là /fɔːrs mæˈʒɜːr/.",
+        "crucialNote": "Sự kiện bất khả kháng phải thỏa mãn 3 yếu tố: không thể lường trước, không thể tránh khỏi và nằm ngoài tầm kiểm soát.",
+        "memoryHook": "Force majeure releases parties from contractual liability during unavoidable crises."
       },
       {
         "id": "u85-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Build the notification protocol sentence for force majeure invocations:",
+        "promptVi": "Sắp xếp các từ thành câu quy định nghĩa vụ gửi văn bản thông báo bất khả kháng:",
+        "englishSentence": "The affected party must provide prompt written notification accompanied by an official certificate from the chamber of commerce.",
+        "audioText": "The affected party must provide prompt written notification accompanied by an official certificate from the chamber of commerce.",
         "wordPool": [
-          "never",
-          "division",
-          "Our",
-          "maritime",
-          "under",
-          "international",
-          "transport",
-          "agreements",
-          "establish",
-          "cancel",
-          "clear",
-          "risk",
-          "commercial",
-          "terms."
+          "The",
+          "affected",
+          "party",
+          "must",
+          "provide",
+          "prompt",
+          "written",
+          "notification",
+          "accompanied",
+          "by",
+          "an",
+          "official",
+          "certificate",
+          "from",
+          "the",
+          "chamber",
+          "of",
+          "commerce.",
+          "rumor",
+          "speculate"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Bên bị ảnh hưởng phải gửi thông báo bằng văn bản kịp thời kèm theo chứng nhận chính thức từ phòng thương mại.",
+        "explanation": "Chứng nhận của Phòng Thương mại và Công nghiệp (VCCI hoặc tương đương) là bằng chứng pháp lý độc lập xác thực sự kiện bất khả kháng.",
+        "whyWrong": "Sắp xếp đúng cụm phân từ bị động 'accompanied by an official certificate'.",
+        "crucialNote": "Hầu hết hợp đồng quy định phải gửi thông báo trong vòng 7 đến 14 ngày kể từ ngày phát sinh sự kiện.",
+        "memoryHook": "Prompt written notice with chamber of commerce certificate validates force majeure."
       },
       {
         "id": "u85-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Choose the correct legal remedy terminology for long-term contract disruption:",
+        "promptVi": "Chọn thuật ngữ bồi thường thiệt hại để hoàn thiện điều khoản mẫu ICC:",
+        "englishSentence": "Under ICC model rules, if a force majeure event persists beyond ninety consecutive days, either party may terminate the contract without paying [ _____ ] damages.",
+        "audioText": "Under ICC model rules, if a force majeure event persists beyond ninety consecutive days, either party may terminate the contract without paying liquidated damages.",
+        "blankWord": "liquidated",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "liquidated",
+          "unilateral",
+          "gratuitous"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Theo các quy tắc mẫu của ICC, nếu sự kiện bất khả kháng kéo dài quá chín mươi ngày liên tục, bất kỳ bên nào cũng có thể chấm dứt hợp đồng mà không phải trả tiền bồi thường thiệt hại ước tính.",
+        "explanation": "'Liquidated damages' (tiền bồi thường thiệt hại được ước tính trước theo thỏa thuận hợp đồng) được miễn trừ hoàn toàn khi chấm dứt hợp đồng hợp lệ vì bất khả kháng.",
+        "whyWrong": "'Unilateral' (đơn phương) và 'gratuitous' (tùy tiện/cho không) không phải là thuật ngữ chỉ khoản tiền bồi thường.",
+        "crucialNote": "Quy định mốc thời gian 90 ngày giúp các bên tránh bị mắc kẹt vĩnh viễn trong một hợp đồng không thể thực hiện.",
+        "memoryHook": "Persistent force majeure allows contract termination free from liquidated damages."
       },
       {
         "id": "u85-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Điều Khoản Bất Khả Kháng Force Majeure\" (Bảo vệ quyền lợi pháp lý khi bão lũ, chiến tranh cản trở giao hàng). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, as confirmed in our recent departmental briefing with executive management.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Geopolitical Crisis Management: Handle sudden Red Sea canal surcharges with a German importer:",
+        "promptVi": "Đàm phán khủng hoảng địa chính trị: Phản hồi đối tác Đức đòi Vikoda chịu toàn bộ phụ phí đổi hải trình qua mũi Hảo Vọng:",
+        "englishSentence": "Herr Richter, under Section 14 (Hardship & Geopolitical Rerouting) of our Master Agreement, carrier war risk surcharges constitute unforeseeable operational hardship. We propose sharing the carrier bunker surcharge 50/50 while we expedite direct shipments to ensure your German retail distribution is uninterrupted.",
+        "audioText": "Herr Richter, under Section 14 (Hardship & Geopolitical Rerouting) of our Master Agreement, carrier war risk surcharges constitute unforeseeable operational hardship. We propose sharing the carrier bunker surcharge 50/50 while we expedite direct shipments to ensure your German retail distribution is uninterrupted.",
+        "chatMessages": [
+          {
+            "speaker": "Hans Richter (Managing Director, Hamburg Beverages)",
+            "avatar": "🇩🇪",
+            "message": "Minh, ocean carriers are rerouting around the Cape of Good Hope, adding 14 days and $2,000 per container. Under our CIF contract, you must absorb this surcharge entirely or we will claim breach of contract!"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Bảo vệ quyền lợi pháp lý khi bão lũ, chiến tranh cản trở giao hàng",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Herr Richter, under Section 14 (Hardship & Geopolitical Rerouting) of our Master Agreement, carrier war risk surcharges constitute unforeseeable operational hardship. We propose sharing the carrier bunker surcharge 50/50 while we expedite direct shipments to ensure your German retail distribution is uninterrupted.",
+            "trustScore": 25,
+            "feedback": "Nghệ thuật đàm phán khủng hoảng đỉnh cao (+25 Điểm Tin Cậy)! Vận dụng khéo léo Điều khoản Hoàn cảnh khó khăn (Hardship) để chia sẻ chi phí phát sinh công bằng, bảo toàn biên lợi nhuận và duy trì mối quan hệ liên minh bền vững.",
+            "isCorrect": true
+          },
+          {
+            "text": "Not our problem at all! Pay the carriers yourself or we will terminate your distribution contract right now!",
+            "trustScore": 0,
+            "feedback": "Phản ứng kích động dẫn đến tranh chấp pháp lý quốc tế và hủy hoại toàn bộ mạng lưới phân phối tại thị trường Đức.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa ông Richter, theo Điều 14 (Hoàn cảnh Khó khăn & Thay đổi Hải trình Địa chính trị) trong Thỏa thuận Khung, phụ phí rủi ro chiến tranh của hãng tàu cấu thành trở ngại vận hành không thể lường trước. Chúng tôi đề xuất cùng chia sẻ phụ phí nhiên liệu của hãng tàu theo tỷ lệ 50/50 đồng thời đẩy nhanh các lô hàng trực tiếp để bảo đảm mạng lưới bán lẻ tại Đức của quý công ty không bị gián đoạn.",
+        "explanation": "Kích hoạt điều khoản Hardship một cách xây dựng giúp tái cân bằng gánh nặng tài chính khi chi phí cước biển biến động do chiến tranh.",
+        "crucialNote": "Hợp đồng thương mại quốc tế chuyên nghiệp luôn kết hợp cả điều khoản Bất khả kháng lẫn điều khoản Hoàn cảnh khó khăn (Hardship).",
+        "memoryHook": "Leverage hardship clauses to share extraordinary geopolitical surcharges fairly."
       }
     ]
   },
@@ -11841,104 +12004,135 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u86-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding establishing global master distributor networks?",
-        "options": [
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, as confirmed in our recent departmental briefing with executive management.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each global master distribution strategy term with its core concept:",
+        "promptVi": "Nối các thuật ngữ thiết lập kênh phân phối tổng toàn cầu với khái niệm cốt lõi:",
+        "englishSentence": "Match the 5 global master distribution strategy terms.",
+        "audioText": "Match the 5 global master distribution strategy terms.",
+        "explanation": "Lựa chọn và quản lý Nhà phân phối Tổng (Master Distributor) là yếu tố quyết định tốc độ thâm nhập và độ phủ thương hiệu Vikoda tại các thị trường phát triển.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ then chốt trong xây dựng mạng lưới phân phối xuất khẩu độc quyền.",
+        "pairs": [
+          {
+            "left": "Master Distributor Agreement",
+            "right": "Hợp đồng nhà phân phối tổng độc quyền cấp vùng hoặc quốc gia"
+          },
+          {
+            "left": "Minimum Annual Purchase Quota",
+            "right": "Chỉ tiêu sản lượng mua hàng bắt buộc tối thiểu hàng năm"
+          },
+          {
+            "left": "Territory & Exclusivity Grant",
+            "right": "Trao quyền phân phối độc quyền theo phạm vi địa lý xác định"
+          },
+          {
+            "left": "Direct Store Delivery (DSD)",
+            "right": "Mạng lưới xe vận tải giao hàng trực tiếp đến từng điểm bán lẻ"
+          },
+          {
+            "left": "Non-Compete Undertaking",
+            "right": "Cam kết không kinh doanh bất kỳ sản phẩm nước khoáng kiềm đối thủ"
+          }
+        ]
       },
       {
         "id": "u86-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this strategic partner evaluation statement:",
+        "promptVi": "Luyện nói câu tiêu chuẩn thẩm định nhà phân phối quốc tế chuẩn phong thái C-Suite:",
+        "englishSentence": "We evaluate potential master distributors based on their cold-chain logistics footprint, premium HORECA relationships, and financial solvency.",
+        "audioText": "We evaluate potential master distributors based on their cold-chain logistics footprint, premium HORECA relationships, and financial solvency.",
+        "phonetics": "/wiː ɪˈvæljʊeɪt pəˈtɛnʃl ˈmæstər dɪsˈtrɪbjʊtərz beɪst ɒn ðeər koʊld-tʃeɪn ləˈdʒɪstɪks ˈfʊtprɪnt, ˈpriːmiəm ˈhoʊrɛkə rɪˈleɪʃnʃɪps, ænd faɪˈnænʃl ˈsɒlvənsi/",
+        "vietnameseMeaning": "Chúng tôi đánh giá các nhà phân phối tổng tiềm năng dựa trên mạng lưới logistics chuỗi cung ứng, mối quan hệ trong kênh HORECA cao cấp và năng lực tài chính lành mạnh.",
+        "explanation": "Các tiêu chí 'logistics footprint', 'HORECA relationships' và 'financial solvency' là bộ 3 tiêu chuẩn vàng để chọn mặt gửi vàng khi mở rộng xuất khẩu.",
+        "whyWrong": "Chú ý phát âm rõ trọng âm của 'solvency' (/ˈsɒlvənsi/ - khả năng thanh toán).",
+        "crucialNote": "Một đối tác có kênh HORECA mạnh sẽ giúp Vikoda định vị ngay tại các nhà hàng, khách sạn 5 sao quốc tế.",
+        "memoryHook": "Logistics footprint, HORECA network, and solvency define premier master distributors."
       },
       {
         "id": "u86-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Construct the contractual clause protecting Vikoda against sales underperformance:",
+        "promptVi": "Sắp xếp các từ thành điều khoản thu hồi quyền độc quyền khi nhà phân phối không đạt chỉ tiêu:",
+        "englishSentence": "Failure to fulfill seventy percent of the quarterly purchase quota entitles Vikoda to revoke territorial exclusivity.",
+        "audioText": "Failure to fulfill seventy percent of the quarterly purchase quota entitles Vikoda to revoke territorial exclusivity.",
         "wordPool": [
-          "Our",
-          "under",
-          "agreements",
-          "clear",
-          "maritime",
-          "division",
-          "cancel",
-          "risk",
-          "international",
-          "establish",
-          "commercial",
-          "terms.",
-          "transport",
-          "never"
+          "Failure",
+          "to",
+          "fulfill",
+          "seventy",
+          "percent",
+          "of",
+          "the",
+          "quarterly",
+          "purchase",
+          "quota",
+          "entitles",
+          "Vikoda",
+          "to",
+          "revoke",
+          "territorial",
+          "exclusivity.",
+          "reward",
+          "concede"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Việc không hoàn thành bảy mươi phần trăm chỉ tiêu mua hàng theo quý cho phép Vikoda thu hồi quyền độc quyền lãnh thổ.",
+        "explanation": "Điều khoản ràng buộc 'Failure to fulfill... entitles Vikoda to revoke territorial exclusivity' bảo vệ tập đoàn không bị khóa thị trường bởi một đối tác trì trệ.",
+        "whyWrong": "Cần đặt cụm chủ ngữ dài 'Failure to fulfill seventy percent of the quarterly purchase quota' đứng trước động từ chính 'entitles'.",
+        "crucialNote": "Luôn quy định quyền chuyển đổi từ nhà phân phối độc quyền sang không độc quyền (non-exclusive) trước khi chấm dứt hẳn.",
+        "memoryHook": "Failing quarterly quotas entitles the exporter to revoke territorial exclusivity."
       },
       {
         "id": "u86-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Complete the marketing co-investment obligation with the right retail term:",
+        "promptVi": "Chọn thuật ngữ trưng bày bán lẻ chuẩn xác để hoàn thiện điều khoản cam kết đầu tư tiếp thị:",
+        "englishSentence": "To safeguard our brand equity in Western Europe, the master distributor agrees to assign a dedicated brand manager and allocate five percent of wholesale revenue to local [ _____ ] campaigns.",
+        "audioText": "To safeguard our brand equity in Western Europe, the master distributor agrees to assign a dedicated brand manager and allocate five percent of wholesale revenue to local merchandising campaigns.",
+        "blankWord": "merchandising",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "merchandising",
+          "insolvency",
+          "subrogation"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Để bảo vệ giá trị thương hiệu tại Tây Âu, nhà phân phối tổng đồng ý chỉ định một giám đốc thương hiệu riêng và trích năm phần trăm doanh thu bán buôn cho các chiến dịch trưng bày quảng bá tại địa phương.",
+        "explanation": "'Merchandising' (hoạt động trưng bày, quảng bá điểm bán và định vị quầy kệ) bảo đảm sản phẩm Vikoda luôn xuất hiện ở những vị trí đắc địa nhất trong siêu thị.",
+        "whyWrong": "'Insolvency' (mất khả năng thanh toán) và 'subrogation' (thế quyền đòi nợ) hoàn toàn vô nghĩa trong điều khoản tiếp thị.",
+        "crucialNote": "Quy định tỷ lệ phần trăm doanh thu tái đầu tư tiếp thị (co-op marketing budget) bảo đảm ngân sách xây dựng thương hiệu đường dài.",
+        "memoryHook": "Mandate local merchandising investment to amplify international retail visibility."
       },
       {
         "id": "u86-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Thiết Lập Mạng Lưới Phân Phối Toàn Cầu\" (Chiến lược tìm đối tác Master Distributor tại Nhật và Châu Âu). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, as confirmed in our recent departmental briefing with executive management.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Global Territory Negotiation: Respond to a premature regional exclusivity demand:",
+        "promptVi": "Đàm phán nhượng quyền khu vực: Xử lý yêu cầu độc quyền toàn Đông Nam Á trong 5 năm từ đối tác Singapore:",
+        "englishSentence": "Mr. Tan, SingaFoods is our premier candidate for Southeast Asia. To align our long-term mutual growth, we propose granting Singapore exclusivity for Year 1 with a 150-container quota, and tying regional expansion into Malaysia and Indonesia to achieving agreed distribution milestones.",
+        "audioText": "Mr. Tan, SingaFoods is our premier candidate for Southeast Asia. To align our long-term mutual growth, we propose granting Singapore exclusivity for Year 1 with a 150-container quota, and tying regional expansion into Malaysia and Indonesia to achieving agreed distribution milestones.",
+        "chatMessages": [
+          {
+            "speaker": "Aaron Tan (CEO, SingaFoods Distribution Group)",
+            "avatar": "🇸🇬",
+            "message": "Minh, we represent over 800 premium supermarkets across Singapore, Malaysia, and Indonesia. We want 5-year exclusive regional rights for Vikoda natural alkaline mineral water starting next month."
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Chiến lược tìm đối tác Master Distributor tại Nhật và Châu Âu",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Mr. Tan, SingaFoods is our premier candidate for Southeast Asia. To align our long-term mutual growth, we propose granting Singapore exclusivity for Year 1 with a 150-container quota, and tying regional expansion into Malaysia and Indonesia to achieving agreed distribution milestones.",
+            "trustScore": 25,
+            "feedback": "Chiến lược phân phối bậc thầy (+25 Điểm Tin Cậy)! Vừa tôn vinh vị thế đối tác, vừa khôn khéo chia nhỏ lộ trình: trao độc quyền từng thị trường kèm định ngạch rõ ràng thay vì trao toàn quyền cả khu vực ngay lập tức.",
+            "isCorrect": true
+          },
+          {
+            "text": "Take all countries right now for free! We don't care about sales quotas or targets as long as you put our name on your catalog.",
+            "trustScore": 0,
+            "feedback": "Tự tay trói buộc doanh nghiệp vào một bản hợp đồng độc quyền nguy hiểm, mất trắng thị trường Đông Nam Á nếu đối tác không bán được hàng.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa ông Tan, SingaFoods là ứng viên hàng đầu của chúng tôi tại Đông Nam Á. Để đồng hành phát triển bền vững cùng nhau, chúng tôi đề xuất trao quyền độc quyền tại Singapore trong Năm 1 với chỉ tiêu 150 container, và gắn lộ trình mở rộng sang Malaysia cùng Indonesia với việc hoàn thành các mốc phân phối đã cam kết.",
+        "explanation": "Phương pháp 'Milestone-based Exclusivity' (trao quyền độc quyền theo từng mốc thành tựu) là quy tắc vàng của các tập đoàn đa quốc gia.",
+        "crucialNote": "Không bao giờ trao quyền độc quyền nhiều quốc gia mà không có chỉ tiêu sản lượng cam kết độc lập cho từng thị trường.",
+        "memoryHook": "Tie territorial expansion to proven sales milestones."
       }
     ]
   },
@@ -11955,104 +12149,133 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u87-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding managing ocean container condensation claims?",
-        "options": [
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, as confirmed in our recent departmental briefing with executive management.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, pending formal verification from our international distribution coordinators.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each container moisture management term with its engineering solution:",
+        "promptVi": "Nối các thuật ngữ kỹ thuật kiểm soát độ ẩm container biển với giải pháp tương ứng:",
+        "englishSentence": "Match the 5 container moisture and condensation control concepts.",
+        "audioText": "Match the 5 container moisture and condensation control concepts.",
+        "explanation": "Kiểm soát độ ẩm và chống đọng sương (container rain) trong vận tải viễn dương bảo đảm nhãn mác chai thủy tinh và thùng carton Vikoda luôn nguyên vẹn khi đến tay người tiêu dùng quốc tế.",
+        "vietnameseMeaning": "Nối đúng 5 giải pháp kỹ thuật chống ẩm và đọng sương trong vận chuyển đường biển nhiệt đới.",
+        "pairs": [
+          {
+            "left": "Container Rain & Cargo Sweat",
+            "right": "Hiện tượng ngưng tụ đọng sương trên trần và vách container do chênh lệch nhiệt độ"
+          },
+          {
+            "left": "Calcium Chloride Desiccant Poles",
+            "right": "Thanh hút ẩm canxi clorua chuyên dụng treo vách container hấp thụ 200% độ ẩm"
+          },
+          {
+            "left": "Heavy-Duty 5-Ply Cartons",
+            "right": "Thùng carton 5 lớp tráng màng kháng nước bảo vệ chai không bị móp méo"
+          },
+          {
+            "left": "Relative Humidity (RH) Data Logger",
+            "right": "Thiết bị ghi nhận dữ liệu nhiệt độ và độ ẩm tương đối trong suốt hành trình"
+          },
+          {
+            "left": "Moisture-Resistant Labels",
+            "right": "Nhãn chai công nghệ cao chống thấm nước và chống bong tróc keo dán"
+          }
+        ]
       },
       {
         "id": "u87-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this technical packaging engineering statement:",
+        "promptVi": "Luyện phát âm câu giải trình tiêu chuẩn kỹ thuật đóng gói chống ẩm viễn dương:",
+        "englishSentence": "To eliminate moisture damage across tropical shipping lanes, our export containers are fitted with high-absorption desiccant poles and humidity data loggers.",
+        "audioText": "To eliminate moisture damage across tropical shipping lanes, our export containers are fitted with high-absorption desiccant poles and humidity data loggers.",
+        "phonetics": "/tuː ɪˈlɪmɪneɪt ˈmɔɪstʃər ˈdæmɪdʒ əˈkrɒs ˈtrɒpɪkl ˈʃɪpɪŋ leɪnz, ˈaʊər ˈɛkspɔːrt kənˈteɪnərz ɑːr ˈfɪtɪd wɪð haɪ-əbˈzɔːrpʃn ˈdɛsɪkənt poʊlz ænd hjuːˈmɪdɪti ˈdeɪtə ˈlɒɡərz/",
+        "vietnameseMeaning": "Để loại bỏ hoàn toàn hư hại do độ ẩm trên các tuyến vận tải nhiệt đới, các container xuất khẩu của chúng tôi được trang bị thanh hút ẩm khả năng hấp thụ cao và thiết bị ghi nhận dữ liệu độ ẩm.",
+        "explanation": "Các thuật ngữ 'high-absorption desiccant poles' và 'humidity data loggers' chứng minh quy trình kiểm soát logistics tiêu chuẩn cao.",
+        "whyWrong": "Chú ý phát âm rõ âm /s/ trong 'desiccant' (/ˈdɛsɪkənt/) và /dʒ/ trong 'damage'.",
+        "crucialNote": "Data logger độ ẩm cung cấp bằng chứng khách quan nếu phát sinh tranh chấp bồi thường với hãng tàu hoặc công ty bảo hiểm.",
+        "memoryHook": "High-absorption desiccants and data loggers safeguard tropical maritime shipments."
       },
       {
         "id": "u87-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Assemble the root cause analysis sentence explaining maritime condensation:",
+        "promptVi": "Sắp xếp các từ thành câu phân tích nguyên nhân hiện tượng đọng sương trong vận tải biển:",
+        "englishSentence": "Temperature fluctuations during transshipment can cause condensation if carton ventilation holes are improperly aligned.",
+        "audioText": "Temperature fluctuations during transshipment can cause condensation if carton ventilation holes are improperly aligned.",
         "wordPool": [
-          "agreements",
-          "under",
-          "clear",
-          "transport",
-          "risk",
-          "establish",
-          "cancel",
-          "division",
-          "commercial",
-          "never",
-          "terms.",
-          "maritime",
-          "international",
-          "Our"
+          "Temperature",
+          "fluctuations",
+          "during",
+          "transshipment",
+          "can",
+          "cause",
+          "condensation",
+          "if",
+          "carton",
+          "ventilation",
+          "holes",
+          "are",
+          "improperly",
+          "aligned.",
+          "dryness",
+          "freeze"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Sự dao động nhiệt độ trong quá trình chuyển tải có thể gây ngưng tụ nếu các lỗ thông khí trên thùng carton không được căn chỉnh đúng cách.",
+        "explanation": "Cấu trúc điều kiện loại 1 diễn đạt mối quan hệ nhân quả vật lý giữa 'temperature fluctuations' và 'condensation'.",
+        "whyWrong": "Tránh nhầm lẫn vị trí của trạng từ 'improperly' trước quá khứ phân từ 'aligned'.",
+        "crucialNote": "Khi tàu đi từ vùng nhiệt đới sang vùng ôn đới, nhiệt độ vách vỏ thép container giảm nhanh hơn nhiệt độ không khí bên trong, gây đọng sương.",
+        "memoryHook": "Temperature fluctuations trigger condensation during container transshipment."
       },
       {
         "id": "u87-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Fill in the exact scientific measurement parameter:",
+        "promptVi": "Điền chỉ số đo lường độ ẩm môi trường chính xác vào báo cáo:",
+        "englishSentence": "Laboratory inspection confirmed that the carton softening was caused by elevated maritime [ _____ ] exceeding eighty-five percent during the equatorial crossing.",
+        "audioText": "Laboratory inspection confirmed that the carton softening was caused by elevated maritime humidity exceeding eighty-five percent during the equatorial crossing.",
+        "blankWord": "humidity",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "humidity",
+          "viscosity",
+          "solvency"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Kết quả kiểm nghiệm phòng thí nghiệm xác nhận hiện tượng thùng carton bị mềm là do độ ẩm hàng hải tăng cao vượt quá tám mươi lăm phần trăm trong quá trình tàu vượt xích đạo.",
+        "explanation": "'Maritime humidity' (độ ẩm không khí trên biển) vượt quá 85% là tác nhân chính làm giảm độ cứng nén của giấy carton nếu không có phụ gia chống thấm.",
+        "whyWrong": "'Viscosity' (độ nhớt của chất lỏng) và 'solvency' (khả năng thanh toán tài chính) hoàn toàn không liên quan đến thời tiết biển.",
+        "crucialNote": "Sử dụng giấy kraft nguyên sinh định lượng cao giúp duy trì độ cứng thùng carton ngay cả ở độ ẩm 90%.",
+        "memoryHook": "Elevated maritime humidity weakens unprotected carton packaging."
       },
       {
         "id": "u87-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Xử Lý Khiếu Nại Container Độ Ẩm Trên Biển\" (Giải quyết kỹ thuật chống đọng sương và bảo vệ nhãn chai). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, as confirmed in our recent departmental briefing with executive management.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, pending formal verification from our international distribution coordinators.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards."
+        "type": "chat_branch",
+        "promptEn": "Technical Packaging Claim: Reassure the Japanese QA Director with engineered solutions:",
+        "promptVi": "Xử lý khiếu nại kỹ thuật bao bì: Giải trình giải pháp khắc phục hiện tượng ẩm mép thùng với đối tác Tokyo:",
+        "englishSentence": "Takahashi-san, our packaging engineers have thoroughly investigated. For all subsequent shipments, we have upgraded to 5-ply waterproof virgin kraft board with double-strength wax coating, increased desiccant capacity to eight 2kg hanging poles per container, and added shrink-wrapped top covers on each wooden pallet.",
+        "audioText": "Takahashi-san, our packaging engineers have thoroughly investigated. For all subsequent shipments, we have upgraded to 5-ply waterproof virgin kraft board with double-strength wax coating, increased desiccant capacity to eight 2kg hanging poles per container, and added shrink-wrapped top covers on each wooden pallet.",
+        "chatMessages": [
+          {
+            "speaker": "Kenji Takahashi (Logistics Director, Tokyo Imports)",
+            "avatar": "🇯🇵",
+            "message": "Minh-san, we noticed minor dampness on the top tier of cartons in container TCLU4098. The glass bottles are intact, but Japanese retail standards strictly reject warped cartons. What preventive engineering upgrades are in place?"
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Giải quyết kỹ thuật chống đọng sương và bảo vệ nhãn chai",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Takahashi-san, our packaging engineers have thoroughly investigated. For all subsequent shipments, we have upgraded to 5-ply waterproof virgin kraft board with double-strength wax coating, increased desiccant capacity to eight 2kg hanging poles per container, and added shrink-wrapped top covers on each wooden pallet.",
+            "trustScore": 25,
+            "feedback": "Giải trình kỹ thuật hoàn hảo (+25 Điểm Tin Cậy)! Đưa ra giải pháp nâng cấp 3 lớp toàn diện (thùng 5 lớp phủ sáp, tăng gấp đôi thanh hút ẩm, bọc màng co nóc pallet), đáp ứng trọn vẹn tiêu chuẩn khắt khe bậc nhất của thị trường Nhật Bản.",
+            "isCorrect": true
+          },
+          {
+            "text": "A little moisture is natural on the sea, just wipe the boxes with dry towels and deliver them to your supermarkets immediately.",
+            "trustScore": 0,
+            "feedback": "Thái độ qua loa coi thường tiêu chuẩn chất lượng khiến đối tác Nhật lập tức ngừng nhập khẩu.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa ông Takahashi, các kỹ sư bao bì của chúng tôi đã điều tra kỹ lưỡng. Đối với tất cả các lô hàng tiếp theo, chúng tôi đã nâng cấp lên thùng carton 5 lớp bằng giấy kraft nguyên sinh chống thấm phủ sáp tăng cường, nâng công suất hút ẩm lên tám thanh treo 2kg mỗi container và bọc thêm màng co chống thấm trên nóc mỗi kiện pallet gỗ.",
+        "explanation": "Phản hồi bằng giải pháp kỹ thuật cụ thể và định lượng chi tiết là cách duy nhất chinh phục bộ phận đảm bảo chất lượng (QA) Nhật Bản.",
+        "crucialNote": "Thị trường Nhật Bản xem bao bì ngoài cũng quan trọng ngang với chất lượng sản phẩm bên trong.",
+        "memoryHook": "Overcome maritime moisture with 5-ply wax-coated cartons and pallet shrink covers."
       }
     ]
   },
@@ -12069,104 +12292,134 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u88-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding US FDA compliance and Japanese food sanitation clearance?",
-        "options": [
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, as confirmed in our recent departmental briefing with executive management.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, pending formal verification from our international distribution coordinators.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each food safety and international customs regulatory term:",
+        "promptVi": "Nối các thuật ngữ an toàn thực phẩm và thông quan quốc tế với định nghĩa tương ứng:",
+        "englishSentence": "Match the 5 food safety and international customs regulatory terms.",
+        "audioText": "Match the 5 food safety and international customs regulatory terms.",
+        "explanation": "Vượt qua kiểm dịch gắt gao của Bộ Y tế Nhật Bản (MHLW) và Cục FDA Hoa Kỳ là bảo chứng vàng cho đẳng cấp quốc tế của nước khoáng kiềm Vikoda.",
+        "vietnameseMeaning": "Nối đúng 5 tiêu chuẩn pháp lý thông quan và kiểm dịch thực phẩm xuất khẩu.",
+        "pairs": [
+          {
+            "left": "Japan Food Sanitation Act",
+            "right": "Đạo luật Vệ sinh Thực phẩm nghiêm ngặt của Bộ Y tế Lao động Phúc lợi Nhật"
+          },
+          {
+            "left": "US FDA Prior Notice",
+            "right": "Khai báo thông báo trước điện tử bắt buộc cho mọi lô hàng vào cảng Mỹ"
+          },
+          {
+            "left": "Microbiological Testing Protocol",
+            "right": "Quy trình xét nghiệm vi sinh nghiêm ngặt bảo đảm 0% khuẩn E. coli"
+          },
+          {
+            "left": "Heavy Metal & Radiation Screening",
+            "right": "Kiểm nghiệm sàng lọc kim loại nặng độc hại và chỉ tiêu phóng xạ"
+          },
+          {
+            "left": "Quarantine Clearance Certificate",
+            "right": "Giấy chứng nhận hoàn thành thủ tục kiểm dịch thông quan hải quan"
+          }
+        ]
       },
       {
         "id": "u88-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this international food compliance statement with authoritative conviction:",
+        "promptVi": "Luyện phát âm câu tuyên bố tuân thủ tiêu chuẩn an toàn thực phẩm khắt khe thế giới:",
+        "englishSentence": "Our natural alkaline mineral water undergoes comprehensive third-party testing to comply with both US FDA regulations and Japan MHLW food sanitation standards.",
+        "audioText": "Our natural alkaline mineral water undergoes comprehensive third-party testing to comply with both US FDA regulations and Japan MHLW food sanitation standards.",
+        "phonetics": "/ˈaʊər ˈnætʃrəl ˈælkəlaɪn ˈmɪnərəl ˈwɔːtər ˌʌndərˈɡoʊz ˌkɒmprɪˈhɛnsɪv ˈθɜːrd-ˈpɑːrti ˈtɛstɪŋ tuː kəmˈplaɪ wɪð boʊθ juː-ɛs ɛf-diː-eɪ ˌrɛɡjʊˈleɪʃnz ænd dʒəˈpæn ɛm-eɪtʃ-ɛl-dʌbljuː fuːd ˌsænɪˈteɪʃn ˈstændərdz/",
+        "vietnameseMeaning": "Nước khoáng kiềm thiên nhiên của chúng tôi trải qua kiểm nghiệm độc lập toàn diện để tuân thủ cả quy định của FDA Hoa Kỳ và tiêu chuẩn vệ sinh thực phẩm của Bộ Y tế Nhật Bản.",
+        "explanation": "Cụm từ 'comply with both US FDA regulations and Japan MHLW standards' thể hiện sự tự tin về đẳng cấp tinh khiết toàn cầu.",
+        "whyWrong": "Đọc rõ các từ viết tắt: FDA (/ɛf-diː-eɪ/) và MHLW (/ɛm-eɪtʃ-ɛl-dʌbljuː/).",
+        "crucialNote": "Nhật Bản có một trong những bộ tiêu chuẩn nhập khẩu nước khoáng đóng chai khắt khe nhất thế giới.",
+        "memoryHook": "Complying with FDA and MHLW confirms world-class water purity."
       },
       {
         "id": "u88-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Build the legal submission sentence for customs quarantine clearance:",
+        "promptVi": "Sắp xếp các từ thành câu nộp hồ sơ địa chất và vi sinh để thông quan kiểm dịch:",
+        "englishSentence": "We submitted the complete hydrogeological survey and certified microbiological analysis to expedite customs quarantine clearance.",
+        "audioText": "We submitted the complete hydrogeological survey and certified microbiological analysis to expedite customs quarantine clearance.",
         "wordPool": [
-          "transport",
-          "terms.",
-          "clear",
-          "Our",
-          "international",
-          "under",
-          "commercial",
-          "agreements",
-          "establish",
-          "division",
-          "maritime",
-          "never",
-          "cancel",
-          "risk"
+          "We",
+          "submitted",
+          "the",
+          "complete",
+          "hydrogeological",
+          "survey",
+          "and",
+          "certified",
+          "microbiological",
+          "analysis",
+          "to",
+          "expedite",
+          "customs",
+          "quarantine",
+          "clearance.",
+          "delay",
+          "falsify"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Chúng tôi đã nộp đầy đủ khảo sát địa chất thủy văn và phân tích vi sinh có chứng thực để đẩy nhanh quá trình thông quan kiểm dịch hải quan.",
+        "explanation": "Khảo sát địa chất thủy văn (hydrogeological survey) chứng minh nguồn nước có nguồn gốc tự nhiên được bảo vệ dưới lòng đất.",
+        "whyWrong": "Chú ý đặt cụm mục đích 'to expedite customs quarantine clearance' ở cuối câu để bảo đảm mạch lạc ngữ pháp.",
+        "crucialNote": "Nộp trước hồ sơ phân tích vi sinh giúp giảm thời gian lấy mẫu kiểm tra tại cảng từ 14 ngày xuống còn 2 ngày.",
+        "memoryHook": "Hydrogeological surveys and certified lab assays expedite quarantine clearance."
       },
       {
         "id": "u88-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Select the mandatory US customs regulatory filing term:",
+        "promptVi": "Chọn thuật ngữ thủ tục bắt buộc trước khi cập cảng Hoa Kỳ:",
+        "englishSentence": "Before entering US ports, every foreign food facility must register with the FDA and submit an electronic [ _____ ] Notice of shipment.",
+        "audioText": "Before entering US ports, every foreign food facility must register with the FDA and submit an electronic Prior Notice of shipment.",
+        "blankWord": "Prior",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "Prior",
+          "Provisional",
+          "Postponed"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Trước khi cập cảng Hoa Kỳ, mọi cơ sở chế biến thực phẩm nước ngoài phải đăng ký với FDA và nộp Thông báo Trước điện tử về lô hàng.",
+        "explanation": "'Prior Notice' (Thông báo trước lô hàng thực phẩm nhập khẩu theo Đạo luật Chống khủng bố Sinh học Hoa Kỳ) là thủ tục bắt buộc phải hoàn tất trước khi tàu cập cảng.",
+        "whyWrong": "'Provisional' (tạm thời) và 'postponed' (trì hoãn) không phải là tên thủ tục pháp lý của FDA.",
+        "crucialNote": "Không nộp Prior Notice sẽ khiến hàng hóa bị từ chối nhập cảnh ngay tại cầu cảng và bị giữ lại tại khu vực lưu kho ngoại quan.",
+        "memoryHook": "Electronic Prior Notice is mandatory for all food shipments entering the US."
       },
       {
         "id": "u88-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Thông Quan & Tiêu Chuẩn FDA / Nhật Bản\" (Hồ sơ kiểm dịch thực phẩm nghiêm ngặt của Bộ Y Tế Nhật). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, pending formal verification from our international distribution coordinators.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Quarantine Inquest Defense: Clarify natural mineral genesis to Tokyo quarantine officials:",
+        "promptVi": "Bảo vệ hồ sơ kiểm dịch: Giải trình nguồn gốc khoáng hóa tự nhiên với thanh tra viên Bộ Y Tế Nhật Bản:",
+        "englishSentence": "Inspector Sato, we are providing the certified hydrogeological extraction dossier from the 220-meter deep Danh Thanh aquifer, co-signed by the Pasteur Institute, confirming our mineral composition is 100% naturally dissolved through subterranean magma bedrock and bottled pristine directly at the 72°C wellhead without artificial additives.",
+        "audioText": "Inspector Sato, we are providing the certified hydrogeological extraction dossier from the 220-meter deep Danh Thanh aquifer, co-signed by the Pasteur Institute, confirming our mineral composition is 100% naturally dissolved through subterranean magma bedrock and bottled pristine directly at the 72°C wellhead without artificial additives.",
+        "chatMessages": [
+          {
+            "speaker": "Inspector Sato (MHLW Quarantine Officer, Tokyo Port)",
+            "avatar": "🇯🇵",
+            "message": "Vikoda's sample demonstrates a remarkably stable natural pH of 9.0 and rich metasilicic acid content. Japanese regulations require definitive empirical proof that these minerals originate naturally from the geothermal spring without chemical electrolyte addition."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Hồ sơ kiểm dịch thực phẩm nghiêm ngặt của Bộ Y Tế Nhật",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Inspector Sato, we are providing the certified hydrogeological extraction dossier from the 220-meter deep Danh Thanh aquifer, co-signed by the Pasteur Institute, confirming our mineral composition is 100% naturally dissolved through subterranean magma bedrock and bottled pristine directly at the 72°C wellhead without artificial additives.",
+            "trustScore": 25,
+            "feedback": "Giải trình khoa học hoàn hảo (+25 Điểm Tin Cậy)! Cung cấp đầy đủ bằng chứng địa chất thủy văn 220m mỏ Đảnh Thạnh cùng chứng thực của Viện Pasteur, đập tan mọi nghi ngờ và nhận ngay chứng nhận kiểm dịch thông quan tuyệt đối.",
+            "isCorrect": true
+          },
+          {
+            "text": "We add high-grade industrial chemicals in our blending tanks to get pH 9.0, is that not allowed in Japan?",
+            "trustScore": 0,
+            "feedback": "Khai báo sai sự thật dẫn đến việc bị xếp vào diện thực phẩm gian dối, tiêu hủy toàn bộ lô hàng và cấm xuất khẩu vĩnh viễn sang Nhật.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa Thanh tra Sato, chúng tôi xin cung cấp hồ sơ khai thác địa chất thủy văn có chứng thực từ tầng ngậm nước Đảnh Thạnh sâu 220 mét do Viện Pasteur đồng ký tên, xác nhận rằng thành phần khoáng chất của chúng tôi được hòa tan tự nhiên 100% qua các tầng đá mắc-ma ngầm và được đóng chai nguyên sơ trực tiếp tại đầu nguồn 72°C mà không qua bất kỳ chất phụ gia nhân tạo nào.",
+        "explanation": "Dữ liệu khoa học chính xác và chứng nhận quốc tế độc lập là chìa khóa mở toang cánh cửa thị trường kiểm dịch khó tính nhất hành tinh.",
+        "crucialNote": "Nhật Bản phân biệt rất rạch ròi giữa nước khoáng kiềm thiên nhiên (Natural Mineral Water) và nước kiềm nhân tạo qua máy điện phân.",
+        "memoryHook": "Scientific Pasteur data proves 100% natural subterranean mineral origin."
       }
     ]
   },
@@ -12183,104 +12436,135 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u89-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding SIAC and VIAC international commercial arbitration?",
-        "options": [
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, pending formal verification from our international distribution coordinators.",
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Pair each international commercial arbitration concept with its legal meaning:",
+        "promptVi": "Nối các thuật ngữ trọng tài thương mại quốc tế với định nghĩa pháp lý tương ứng:",
+        "englishSentence": "Match the 5 international commercial arbitration concepts.",
+        "audioText": "Match the 5 international commercial arbitration concepts.",
+        "explanation": "Chỉ định trung tâm trọng tài uy tín như SIAC (Singapore) hoặc VIAC (Việt Nam) bảo đảm mọi tranh chấp hợp đồng xuyên biên giới được giải quyết công bằng, bảo mật và chung thẩm.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ tài phán trọng tài thương mại quốc tế.",
+        "pairs": [
+          {
+            "left": "SIAC Arbitration (Singapore)",
+            "right": "Trọng tài Quốc tế Singapore - trung tâm trọng tài thương mại hàng đầu châu Á"
+          },
+          {
+            "left": "VIAC Arbitration (Vietnam)",
+            "right": "Trung tâm Trọng tài Quốc tế Việt Nam giải quyết tranh chấp thương mại"
+          },
+          {
+            "left": "Governing Law & Seat of Arbitration",
+            "right": "Luật áp dụng điều chỉnh hợp đồng và địa điểm pháp lý tiến hành trọng tài"
+          },
+          {
+            "left": "Final & Binding Arbitral Award",
+            "right": "Phán quyết trọng tài có giá trị chung thẩm và bắt buộc các bên thi hành"
+          },
+          {
+            "left": "1958 New York Convention",
+            "right": "Công ước công nhận và cho thi hành phán quyết trọng tài tại hơn 160 quốc gia"
+          }
+        ]
       },
       {
         "id": "u89-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this standard cross-border arbitration clause:",
+        "promptVi": "Luyện phát âm điều khoản trọng tài quốc tế SIAC chuẩn mực pháp lý cao cấp:",
+        "englishSentence": "Any dispute arising out of this cross-border contract shall be settled definitively by arbitration under the rules of the Singapore International Arbitration Centre.",
+        "audioText": "Any dispute arising out of this cross-border contract shall be settled definitively by arbitration under the rules of the Singapore International Arbitration Centre.",
+        "phonetics": "/ˈɛni dɪˈspjuːt əˈraɪzɪŋ aʊt əv ðɪs krɒs-ˈbɔːrdər ˈkɒntrækt ʃæl biː ˈsɛtld dɪˈfɪnətɪvli baɪ ˌɑːrbɪˈtreɪʃn ˈʌndər ðə ruːlz əv ðə ˈsɪŋəpɔːr ˌɪntərˈnæʃnəl ˌɑːrbɪˈtreɪʃn ˈsɛntər/",
+        "vietnameseMeaning": "Mọi tranh chấp phát sinh từ hợp đồng xuyên biên giới này sẽ được giải quyết chung thẩm bằng trọng tài theo quy tắc của Trung tâm Trọng tài Quốc tế Singapore.",
+        "explanation": "Mẫu điều khoản trọng tài chuẩn SIAC bảo đảm tính hợp lệ không thể tranh cãi khi đưa tranh chấp ra hội đồng trọng tài.",
+        "whyWrong": "Nhấn mạnh trọng âm của 'definitively' (/dɪˈfɪnətɪvli/ - một cách chung thẩm) và 'arbitration' (/ˌɑːrbɪˈtreɪʃn/).",
+        "crucialNote": "Giải quyết bằng trọng tài mang tính bảo mật tuyệt đối, không công khai ra tòa án công cộng, bảo vệ danh tiếng tập đoàn.",
+        "memoryHook": "SIAC arbitration delivers final, binding, and confidential dispute resolution."
       },
       {
         "id": "u89-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Arrange the words defining the arbitration tribunal composition and language:",
+        "promptVi": "Sắp xếp các từ thành câu quy định số lượng trọng tài viên và ngôn ngữ tố tụng:",
+        "englishSentence": "The tribunal shall consist of three arbitrators and the official language of arbitration shall be English.",
+        "audioText": "The tribunal shall consist of three arbitrators and the official language of arbitration shall be English.",
         "wordPool": [
-          "risk",
-          "cancel",
-          "commercial",
-          "clear",
-          "never",
-          "transport",
-          "terms.",
-          "under",
-          "maritime",
-          "establish",
-          "agreements",
-          "Our",
-          "division",
-          "international"
+          "The",
+          "tribunal",
+          "shall",
+          "consist",
+          "of",
+          "three",
+          "arbitrators",
+          "and",
+          "the",
+          "official",
+          "language",
+          "of",
+          "arbitration",
+          "shall",
+          "be",
+          "English.",
+          "bias",
+          "prolong"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Hội đồng trọng tài sẽ gồm ba trọng tài viên và ngôn ngữ chính thức của tố tụng trọng tài sẽ là tiếng Anh.",
+        "explanation": "Hội đồng ba trọng tài viên (mỗi bên chỉ định một người, hai người cùng chọn chủ tịch hội đồng) bảo đảm tính khách quan tối đa.",
+        "whyWrong": "Sử dụng trợ động từ pháp lý mang tính mệnh lệnh 'shall' trong 'shall consist of' và 'shall be English'.",
+        "crucialNote": "Quy định rõ ngôn ngữ tiếng Anh ngăn ngừa các tranh cãi về chi phí và chất lượng dịch thuật tài liệu pháp lý.",
+        "memoryHook": "Tribunals consist of three arbitrators operating under official English proceedings."
       },
       {
         "id": "u89-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Complete the international treaty enforcement clause with the appropriate adjective:",
+        "promptVi": "Chọn tính từ chính xác chỉ tư cách thành viên công ước quốc tế:",
+        "englishSentence": "Pursuant to the 1958 New York Convention, arbitral awards rendered by SIAC are enforceable across more than one hundred and sixty [ _____ ] member states.",
+        "audioText": "Pursuant to the 1958 New York Convention, arbitral awards rendered by SIAC are enforceable across more than one hundred and sixty sovereign member states.",
+        "blankWord": "sovereign",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "sovereign",
+          "unilateral",
+          "rescinded"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Theo Công ước New York năm 1958, các phán quyết trọng tài do SIAC ban hành có hiệu lực thi hành trên hơn một trăm sáu mươi quốc gia thành viên có chủ quyền.",
+        "explanation": "Công ước New York 1958 cho phép tịch biên tài sản của bên thua kiện tại bất kỳ 'sovereign member state' (quốc gia thành viên có chủ quyền) nào tham gia công ước.",
+        "whyWrong": "'Unilateral' (đơn phương) và 'rescinded' (bị hủy bỏ) hoàn toàn sai lệch thuật ngữ công pháp quốc tế.",
+        "crucialNote": "Phán quyết trọng tài quốc tế thậm chí còn dễ thi hành ở nước ngoài hơn bản án của tòa án quốc gia.",
+        "memoryHook": "New York Convention enforces arbitral awards across sovereign member nations."
       },
       {
         "id": "u89-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Trọng Tài Thương Mại Quốc Tế SIAC / VIAC\" (Điều khoản tài phán giải quyết tranh chấp hợp đồng công bằng). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, pending formal verification from our international distribution coordinators.",
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Dispute Forum Negotiation: Defend a neutral Singapore arbitration seat against foreign litigation:",
+        "promptVi": "Đàm phán cơ quan tài phán: Thuyết phục luật sư trưởng đối tác Australia chấp thuận trọng tài trung lập SIAC:",
+        "englishSentence": "Mr. O'Connor, as a global enterprise exporting across five continents, our corporate governance requires a neutral, internationally accredited forum. SIAC offers expedited commercial procedures under UNCITRAL model rules and global enforceability under the New York Convention, ensuring absolute fairness and legal certainty for both our corporations.",
+        "audioText": "Mr. O'Connor, as a global enterprise exporting across five continents, our corporate governance requires a neutral, internationally accredited forum. SIAC offers expedited commercial procedures under UNCITRAL model rules and global enforceability under the New York Convention, ensuring absolute fairness and legal certainty for both our corporations.",
+        "chatMessages": [
+          {
+            "speaker": "James O'Connor (General Counsel, Australian Beverage Alliance)",
+            "avatar": "🇦🇺",
+            "message": "Minh, our board is reluctant to arbitrate in Singapore due to foreign legal fees. Can we designate the Supreme Court of New South Wales in Sydney as our exclusive dispute jurisdiction?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Điều khoản tài phán giải quyết tranh chấp hợp đồng công bằng",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Mr. O'Connor, as a global enterprise exporting across five continents, our corporate governance requires a neutral, internationally accredited forum. SIAC offers expedited commercial procedures under UNCITRAL model rules and global enforceability under the New York Convention, ensuring absolute fairness and legal certainty for both our corporations.",
+            "trustScore": 25,
+            "feedback": "Biện luận pháp lý xuất chúng (+25 Điểm Tin Cậy)! Khéo léo viện dẫn quy tắc quản trị tập đoàn và ưu thế thi hành toàn cầu của Công ước New York để giữ vững trọng tài trung lập SIAC, bảo vệ Vikoda không bị kéo vào tòa án địa phương xa lạ của đối tác.",
+            "isCorrect": true
+          },
+          {
+            "text": "No, Australian courts are corrupt so we will only accept Vietnamese courts in Nha Trang or no deal.",
+            "trustScore": 0,
+            "feedback": "Phát ngôn xúc phạm hệ thống tư pháp đối tác, làm đổ vỡ thương vụ xuất khẩu chiến lược vào thị trường Australia.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa ông O'Connor, là một doanh nghiệp toàn cầu xuất khẩu trên năm châu lục, quản trị tập đoàn của chúng tôi bắt buộc phải chọn một cơ quan tài phán trung lập, được quốc tế công nhận. SIAC cung cấp quy trình thương mại rút gọn theo luật mẫu UNCITRAL và khả năng thi hành trên toàn thế giới theo Công ước New York, bảo đảm tính công bằng tuyệt đối và sự an toàn pháp lý cho cả hai tập đoàn chúng ta.",
+        "explanation": "Kiên định giữ lập trường trung lập (neutral forum) là nguyên tắc sống còn khi ký kết hợp đồng thương mại quốc tế trị giá lớn.",
+        "crucialNote": "Không bao giờ chấp nhận cơ quan tài phán là tòa án địa phương tại quê nhà của đối tác mua nước ngoài.",
+        "memoryHook": "Anchor cross-border contracts in neutral SIAC arbitration."
       }
     ]
   },
@@ -12297,104 +12581,135 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u90-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding negotiating international joint venture agreements?",
-        "options": [
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, pending formal verification from our international distribution coordinators.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each international joint venture term with its strategic corporate governance meaning:",
+        "promptVi": "Nối các thuật ngữ hợp đồng liên doanh quốc tế với ý nghĩa quản trị doanh nghiệp chiến lược:",
+        "englishSentence": "Match the 5 international joint venture and governance terms.",
+        "audioText": "Match the 5 international joint venture and governance terms.",
+        "explanation": "Thành lập liên doanh quốc tế (IJV) kết hợp nguồn mỏ khoáng quý giá của Vikoda với mạng lưới phân phối và công nghệ tiên tiến của đối tác toàn cầu.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ cốt lõi trong đàm phán hợp đồng liên doanh quốc tế.",
+        "pairs": [
+          {
+            "left": "International Joint Venture (IJV)",
+            "right": "Doanh nghiệp liên doanh quốc tế đồng sáng lập bởi hai tập đoàn"
+          },
+          {
+            "left": "Equity Contribution Ratio",
+            "right": "Tỷ lệ góp vốn điều lệ quyết định tỷ lệ phân chia lợi nhuận"
+          },
+          {
+            "left": "Supermajority Voting Threshold",
+            "right": "Ngưỡng biểu quyết đa số tuyệt đối (75%-80%) cho các quyết định chiến lược"
+          },
+          {
+            "left": "Technology Transfer Agreement",
+            "right": "Hợp đồng chuyển giao công nghệ và quy trình tự động hóa độc quyền"
+          },
+          {
+            "left": "Dividend Repatriation Policy",
+            "right": "Chính sách chuyển lợi nhuận và cổ tức hợp pháp về nước sở tại"
+          }
+        ]
       },
       {
         "id": "u90-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this executive joint venture governance commitment:",
+        "promptVi": "Luyện phát âm câu cam kết quản trị liên doanh cân bằng và minh bạch:",
+        "englishSentence": "Our joint venture governance structure ensures balanced board representation, transparent profit distribution, and strict intellectual property protection.",
+        "audioText": "Our joint venture governance structure ensures balanced board representation, transparent profit distribution, and strict intellectual property protection.",
+        "phonetics": "/ˈaʊər dʒɔɪnt ˈvɛntʃər ˈɡʌvərnəns ˈstrʌktʃər ɪnˈʃʊərz ˈbælənst bɔːrd ˌrɛprɪzɛnˈteɪʃn, trænsˈpærənt ˈprɒfɪt ˌdɪstrɪˈbjuːʃn, ænd strɪkt ˌɪntəˈlɛktʃuəl ˈprɒpərti prəˈtɛkʃn/",
+        "vietnameseMeaning": "Cơ cấu quản trị liên doanh của chúng tôi bảo đảm sự đại diện cân bằng trong hội đồng quản trị, phân phối lợi nhuận minh bạch và bảo hộ quyền sở hữu trí tuệ nghiêm ngặt.",
+        "explanation": "Phát âm dõng dạc cụm 'balanced board representation' và 'intellectual property protection'.",
+        "whyWrong": "Chú ý nhấn trọng âm chính vào 'governance' (/ˈɡʌvərnəns/) và 'transparent' (/trænsˈpærənt/).",
+        "crucialNote": "Quản trị liên doanh cân bằng ngăn chặn nguy cơ một bên thôn tính hoặc lạm quyền chi phối doanh nghiệp.",
+        "memoryHook": "Balanced boards and IP safeguards build enduring joint ventures."
       },
       {
         "id": "u90-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Construct the boardroom voting rule protecting strategic minority interests:",
+        "promptVi": "Sắp xếp các từ thành quy định biểu quyết đa số tuyệt đối để bảo vệ lợi ích chiến lược:",
+        "englishSentence": "Supermajority voting of eighty percent is required for strategic decisions regarding capital expenditure and brand licensing.",
+        "audioText": "Supermajority voting of eighty percent is required for strategic decisions regarding capital expenditure and brand licensing.",
         "wordPool": [
-          "division",
-          "agreements",
-          "transport",
-          "risk",
-          "maritime",
-          "commercial",
-          "never",
-          "Our",
-          "establish",
-          "clear",
-          "international",
-          "cancel",
-          "under",
-          "terms."
+          "Supermajority",
+          "voting",
+          "of",
+          "eighty",
+          "percent",
+          "is",
+          "required",
+          "for",
+          "strategic",
+          "decisions",
+          "regarding",
+          "capital",
+          "expenditure",
+          "and",
+          "brand",
+          "licensing.",
+          "veto",
+          "annul"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Tỷ lệ biểu quyết đa số tuyệt đối tám mươi phần trăm là bắt buộc đối với các quyết định chiến lược liên quan đến chi phí vốn và cấp phép thương hiệu.",
+        "explanation": "Ngưỡng 'Supermajority voting of eighty percent' trao cho bên góp vốn quyền phủ quyết thực tế đối với các quyết định mang tính sống còn.",
+        "whyWrong": "Cần đặt cụm giới từ 'regarding capital expenditure and brand licensing' bổ nghĩa chính xác cho 'strategic decisions'.",
+        "crucialNote": "Các vấn đề như tăng vốn, vay nợ lớn và chuyển nhượng cổ phần luôn phải nằm trong danh mục biểu quyết đặc biệt.",
+        "memoryHook": "Supermajority voting protects core brand assets and capital expenditures."
       },
       {
         "id": "u90-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Fill in the legal covenant term securing proprietary know-how:",
+        "promptVi": "Chọn thuật ngữ cam kết pháp lý bảo vệ bí quyết sản xuất mỏ khoáng:",
+        "englishSentence": "To safeguard proprietary production methods, the agreement includes a ten-year non-disclosure and intellectual property [ _____ ] covenant.",
+        "audioText": "To safeguard proprietary production methods, the agreement includes a ten-year non-disclosure and intellectual property indemnification covenant.",
+        "blankWord": "indemnification",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "indemnification",
+          "liquidation",
+          "forfeiture"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Để bảo vệ các phương pháp sản xuất độc quyền, thỏa thuận bao gồm cam kết bảo mật mười năm và bồi thường thiệt hại xâm phạm sở hữu trí tuệ.",
+        "explanation": "'Intellectual property indemnification' (cam kết bồi hoàn thiệt hại nếu vi phạm quyền sở hữu trí tuệ) là điều khoản bắt buộc để răn đe hành vi đánh cắp công nghệ.",
+        "whyWrong": "'Liquidation' (thanh lý giải thể) và 'forfeiture' (bị tịch thu) hoàn toàn không phù hợp trong điều khoản bảo hộ tài sản trí tuệ.",
+        "crucialNote": "Bí quyết công nghệ chiết rót ở nhiệt độ mỏ 72°C là tài sản trí tuệ vô giá của Vikoda.",
+        "memoryHook": "IP indemnification covenants protect proprietary bottling know-how."
       },
       {
         "id": "u90-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Thương Thảo Hợp Đồng Liên Doanh Quốc Tế\" (Góp vốn, chia sẻ lợi nhuận và chuyển giao công nghệ). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, as confirmed in our recent departmental briefing with executive management.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "C-Suite Equity Negotiation: Counter a foreign majority control bid skillfully:",
+        "promptVi": "Thương thảo cơ cấu vốn C-Suite: Phản hồi đề xuất thâu tóm quyền kiểm soát 51/49 của tập đoàn đầu tư Tokyo:",
+        "englishSentence": "Tanaka-san, we deeply appreciate your operational strength. In line with FIT Group's strategic governance, we propose a 50/50 joint venture with an alternating chairmanship, where unanimous board approval is mandated for core brand equity decisions, geothermal source exploitation, and major capital investments.",
+        "audioText": "Tanaka-san, we deeply appreciate your operational strength. In line with FIT Group's strategic governance, we propose a 50/50 joint venture with an alternating chairmanship, where unanimous board approval is mandated for core brand equity decisions, geothermal source exploitation, and major capital investments.",
+        "chatMessages": [
+          {
+            "speaker": "Hiroshi Tanaka (VP Corporate Development, Tokyo)",
+            "avatar": "🇯🇵",
+            "message": "Minh-san, we propose a 51/49 equity structure with our firm holding majority voting rights to streamline East Asian market distribution. How does Vikoda view this leadership model?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Góp vốn, chia sẻ lợi nhuận và chuyển giao công nghệ",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Tanaka-san, we deeply appreciate your operational strength. In line with FIT Group's strategic governance, we propose a 50/50 joint venture with an alternating chairmanship, where unanimous board approval is mandated for core brand equity decisions, geothermal source exploitation, and major capital investments.",
+            "trustScore": 25,
+            "feedback": "Bản lĩnh lãnh đạo C-Suite kiệt xuất (+25 Điểm Tin Cậy)! Kiên quyết bảo vệ chủ quyền nguồn mỏ Đảnh Thạnh và quyền bình đẳng trong liên doanh (50/50 kèm cơ chế chủ tịch luân phiên), giữ vững quyền đồng thuận 100% đối với các tài sản cốt lõi.",
+            "isCorrect": true
+          },
+          {
+            "text": "Take 51% or even 80%, we do not care about board votes as long as you pay us an upfront dividend right now.",
+            "trustScore": 0,
+            "feedback": "Bán rẻ quyền kiểm soát doanh nghiệp và tài nguyên thiên nhiên quốc gia vì cái lợi nhỏ trước mắt.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa ông Tanaka, chúng tôi đánh giá rất cao năng lực vận hành của quý công ty. Phù hợp với định hướng quản trị chiến lược của Tập đoàn FIT, chúng tôi đề xuất mô hình liên doanh 50/50 với vị trí chủ tịch hội đồng quản trị luân phiên, trong đó sự đồng thuận tuyệt đối là bắt buộc đối với các quyết định về giá trị thương hiệu cốt lõi, khai thác mỏ địa nhiệt và các khoản đầu tư vốn trọng yếu.",
+        "explanation": "Cơ cấu 50/50 với các vấn đề then chốt bắt buộc phải có sự nhất trí (unanimous consent) là cách tốt nhất để bảo vệ doanh nghiệp bản địa khi bắt tay với người khổng lồ nước ngoài.",
+        "crucialNote": "Nguồn mỏ Đảnh Thạnh là tài nguyên địa chất quý hiếm của Việt Nam, quyền khai thác luôn phải được kiểm soát chặt chẽ.",
+        "memoryHook": "50/50 joint ventures with alternating chairs protect national resource sovereignty."
       }
     ]
   },
@@ -12411,104 +12726,138 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u91-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding delivering keynote addresses at international food summits?",
-        "options": [
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, as confirmed in our recent departmental briefing with executive management.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each global keynote speech and trade showcase concept:",
+        "promptVi": "Nối các thuật ngữ diễn văn khai mạc hội nghị thượng đỉnh và triển lãm quốc tế:",
+        "englishSentence": "Match the 5 global keynote speech and trade exposition concepts.",
+        "audioText": "Match the 5 global keynote speech and trade exposition concepts.",
+        "explanation": "Bài phát biểu khai mạc (Keynote Address) tại các diễn đàn thương mại toàn cầu truyền tải tầm nhìn, sứ mệnh chăm sóc sức khỏe và niềm tự hào dân tộc của thương hiệu Vikoda.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ nghệ thuật diễn thuyết và quảng bá thương hiệu tại hội chợ quốc tế.",
+        "pairs": [
+          {
+            "left": "Keynote Address",
+            "right": "Bài diễn văn khai mạc mang tính định hướng tại hội nghị thượng đỉnh"
+          },
+          {
+            "left": "Global Beverage Exposition",
+            "right": "Triển lãm ngành đồ uống toàn cầu quy tụ các tập đoàn đa quốc gia"
+          },
+          {
+            "left": "Sustainable Wellspring Stewardship",
+            "right": "Trách nhiệm gìn giữ và bảo tồn bền vững nguồn khoáng ngầm cho muôn đời"
+          },
+          {
+            "left": "Geothermal Purity Heritage",
+            "right": "Di sản độ tinh khiết địa nhiệt 72 độ C từ tầng sâu lòng đất mẹ"
+          },
+          {
+            "left": "Standing Ovation",
+            "right": "Tràng pháo tay nhiệt liệt toàn thể cử tọa đứng dậy tán thưởng"
+          }
+        ]
       },
       {
         "id": "u91-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this inspiring international keynote speech opening:",
+        "promptVi": "Luyện phát âm đoạn mở đầu bài phát biểu khai mạc quốc tế đầy truyền cảm:",
+        "englishSentence": "Distinguished guests and global industry leaders, Vikoda proudly brings the untouched 72-degree geothermal treasure of Vietnam to elevate wellness worldwide.",
+        "audioText": "Distinguished guests and global industry leaders, Vikoda proudly brings the untouched 72-degree geothermal treasure of Vietnam to elevate wellness worldwide.",
+        "phonetics": "/dɪˈstɪŋɡwɪʃt ɡɛsts ænd ˈɡloʊbəl ˈɪndəstri ˈliːdərz, vɪˈkoʊdə ˈpraʊdli brɪŋz ði ʌnˈtʌtʃt ˈsɛvnti-tuː-dɪˈɡriː ˌdʒiːoʊˈθɜːrməl ˈtrɛʒər əv ˌvjɛtˈnɑːm tuː ˈɛlɪveɪt ˈwɛlnəs ˌwɜːrldˈwaɪd/",
+        "vietnameseMeaning": "Kính thưa các quý vị đại biểu và các nhà lãnh đạo ngành toàn cầu, Vikoda tự hào mang báu vật địa nhiệt 72 độ C nguyên bản của Việt Nam để nâng tầm sức khỏe trên toàn thế giới.",
+        "explanation": "Nhịp điệu dõng dạc, nhấn trọng âm vào 'distinguished guests', 'geothermal treasure' và 'elevate wellness worldwide'.",
+        "whyWrong": "Chú ý phát âm chuẩn từ 'geothermal' (/ˌdʒiːoʊˈθɜːrməl/) với âm /θ/ vô thanh.",
+        "crucialNote": "Mở đầu bài diễn văn bằng sự tự hào dân tộc và giá trị sức khỏe phổ quát tạo thiện cảm sâu sắc với khán giả quốc tế.",
+        "memoryHook": "Bring Vietnam's 72-degree geothermal treasure to elevate wellness worldwide."
       },
       {
         "id": "u91-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Construct the eloquent statement describing Vikoda's scientific heritage:",
+        "promptVi": "Sắp xếp các từ thành câu ca ngợi nguồn nước khoáng đóng chai trực tiếp tại mỏ nguồn:",
+        "englishSentence": "Bottled directly at the virgin wellhead, our alkaline mineral water embodies sixty-eight years of scientific reverence and geological perfection.",
+        "audioText": "Bottled directly at the virgin wellhead, our alkaline mineral water embodies sixty-eight years of scientific reverence and geological perfection.",
         "wordPool": [
-          "clear",
-          "division",
-          "risk",
-          "Our",
-          "establish",
-          "maritime",
-          "cancel",
-          "commercial",
-          "terms.",
-          "transport",
-          "under",
-          "agreements",
-          "never",
-          "international"
+          "Bottled",
+          "directly",
+          "at",
+          "the",
+          "virgin",
+          "wellhead,",
+          "our",
+          "alkaline",
+          "mineral",
+          "water",
+          "embodies",
+          "sixty-eight",
+          "years",
+          "of",
+          "scientific",
+          "reverence",
+          "and",
+          "geological",
+          "perfection.",
+          "polluted",
+          "synthetic"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Được đóng chai trực tiếp tại mỏ nguồn nguyên sinh, nước khoáng kiềm của chúng tôi kết tinh sáu mươi tám năm tôn trọng khoa học và sự hoàn hảo của địa chất.",
+        "explanation": "Cấu trúc mệnh đề phân từ quá khứ 'Bottled directly at the virgin wellhead' tạo nên phong cách diễn thuyết sang trọng, học thuật.",
+        "whyWrong": "Tránh đặt sai vị trí của cụm tính từ 'scientific reverence and geological perfection'.",
+        "crucialNote": "Đóng chai trực tiếp tại mỏ nguồn (bottled at source) là chứng nhận bảo chứng chất lượng cao nhất cho nước khoáng thiên nhiên.",
+        "memoryHook": "Bottled at the virgin wellhead, embodying scientific reverence and geological perfection."
       },
       {
         "id": "u91-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Complete the visionary CEO pledge with the appropriate environmental term:",
+        "promptVi": "Chọn thuật ngữ quản trị sinh thái bền vững để hoàn thiện cam kết:",
+        "englishSentence": "Standing on the international stage, our CEO articulated a visionary commitment to eco-friendly packaging and zero-carbon water [ _____ ].",
+        "audioText": "Standing on the international stage, our CEO articulated a visionary commitment to eco-friendly packaging and zero-carbon water stewardship.",
+        "blankWord": "stewardship",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "stewardship",
+          "depletion",
+          "stagnation"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Đứng trên vũ đài quốc tế, Tổng giám đốc của chúng tôi đã nêu bật cam kết có tầm nhìn xa về bao bì thân thiện với môi trường và quản trị nguồn nước không phát thải carbon.",
+        "explanation": "'Water stewardship' (tinh thần trách nhiệm gìn giữ và bảo vệ nguồn nước cho thế hệ mai sau) là thuật ngữ chuẩn mực của các tổ chức môi trường quốc tế.",
+        "whyWrong": "'Depletion' (sự cạn kiệt) và 'stagnation' (sự đình trệ) mang nghĩa tiêu cực, trái ngược hoàn toàn với cam kết bảo vệ môi trường.",
+        "crucialNote": "Các nhà phân phối toàn cầu ngày nay đánh giá rất cao trách nhiệm quản trị nguồn nước bền vững của nhà sản xuất.",
+        "memoryHook": "Visionary leadership commits to eco-friendly packaging and water stewardship."
       },
       {
         "id": "u91-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Phát Biểu Khai Mạc Tại Hội Chợ Quốc Tế\" (Bài diễn văn truyền cảm hứng trước cộng đồng doanh nhân toàn cầu). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, as confirmed in our recent departmental briefing with executive management.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, pending formal verification from our international distribution coordinators.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards."
+        "type": "chat_branch",
+        "promptEn": "Bloomberg Anchor Interview: Defend Vikoda's natural pH 9.0 geological authenticity:",
+        "promptVi": "Phỏng vấn trực tiếp đài truyền hình quốc tế: Thuyết phục phóng viên Bloomberg về nguồn gốc tự nhiên của độ kiềm pH 9.0:",
+        "englishSentence": "Sarah, our secret is time and geology. Rainwater filters through 220 meters of subterranean granite bedrock over hundreds of years, naturally dissolving life-giving minerals without artificial electrolysis. Discovered in 1957, our spring has been verified by the Pasteur Institute across thousands of assays to maintain an untouched, pristine pH 9.0 directly at the 72°C wellhead.",
+        "audioText": "Sarah, our secret is time and geology. Rainwater filters through 220 meters of subterranean granite bedrock over hundreds of years, naturally dissolving life-giving minerals without artificial electrolysis. Discovered in 1957, our spring has been verified by the Pasteur Institute across thousands of assays to maintain an untouched, pristine pH 9.0 directly at the 72°C wellhead.",
+        "chatMessages": [
+          {
+            "speaker": "Sarah Jenkins (Senior Anchor, Bloomberg Commodities & Wellness)",
+            "avatar": "🎙️",
+            "message": "CEO Minh, you highlighted Vikoda's natural pH 9.0 at the source. In an era of industrial electrolyzed water, why should discerning global consumers trust this geological claim?"
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Bài diễn văn truyền cảm hứng trước cộng đồng doanh nhân toàn cầu",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Sarah, our secret is time and geology. Rainwater filters through 220 meters of subterranean granite bedrock over hundreds of years, naturally dissolving life-giving minerals without artificial electrolysis. Discovered in 1957, our spring has been verified by the Pasteur Institute across thousands of assays to maintain an untouched, pristine pH 9.0 directly at the 72°C wellhead.",
+            "trustScore": 25,
+            "feedback": "Diễn ngôn truyền thông quốc tế xuất sắc (+25 Điểm Tin Cậy)! Khéo léo đối chiếu giữa 'máy điện phân công nghiệp' và 'hàng trăm năm thẩm thấu qua đá granite sâu 220m', khẳng định giá trị khoa học lịch sử 1957 và chứng thực của Viện Pasteur, lan tỏa danh tiếng Vikoda trên toàn cầu.",
+            "isCorrect": true
+          },
+          {
+            "text": "No comment, this is our proprietary trade secret, so go read our promotional flyers or don't drink it.",
+            "trustScore": 0,
+            "feedback": "Thái độ trốn tránh truyền thông quốc tế khiến dư luận nghi ngờ và làm bốc hơi uy tín thương hiệu.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Sarah, bí quyết của chúng tôi chính là thời gian và địa chất. Nước mưa thẩm thấu qua 220 mét đá hoa cương ngầm suốt hàng trăm năm, hòa tan tự nhiên các khoáng chất quý giá mà không cần máy điện phân nhân tạo. Được phát hiện từ năm 1957, nguồn mỏ của chúng tôi đã được Viện Pasteur chứng thực qua hàng ngàn xét nghiệm là duy trì độ kiềm pH 9.0 nguyên sơ trực tiếp ngay tại đầu nguồn 72°C.",
+        "explanation": "Khai thác sâu 4 con số vàng (1957, 220m, 72°C, pH 9.0) và kiểm chứng Pasteur là vũ khí truyền thông mạnh nhất biến Vikoda thành hiện tượng trong mắt báo chí quốc tế.",
+        "crucialNote": "Luôn nhấn mạnh sự khác biệt giữa kiềm tự nhiên (bền vững theo thời gian) và kiềm nhân tạo điện phân (mất kiềm nhanh chóng).",
+        "memoryHook": "Natural granite filtration over centuries creates enduring pH 9.0 purity."
       }
     ]
   },
@@ -12525,104 +12874,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u92-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding positioning Vietnam's national mineral water heritage?",
-        "options": [
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, as confirmed in our recent departmental briefing with executive management.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, pending formal verification from our international distribution coordinators.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each strategic brand positioning term with its premium market concept:",
+        "promptVi": "Nối các thuật ngữ chiến lược định vị thương hiệu cao cấp với khái niệm thị trường:",
+        "englishSentence": "Match the 5 strategic brand positioning and national heritage concepts.",
+        "audioText": "Match the 5 strategic brand positioning and national heritage concepts.",
+        "explanation": "Chiến lược định vị quốc gia đưa nước khoáng Đảnh Thạnh từ thương hiệu địa phương trở thành biểu tượng tinh hoa ẩm thực và sức khỏe sánh vai cùng Evian và San Pellegrino.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ chiến lược định vị thương hiệu di sản quốc gia.",
+        "pairs": [
+          {
+            "left": "National Heritage Brand",
+            "right": "Thương hiệu di sản quốc gia biểu tượng cho niềm tự hào đất nước"
+          },
+          {
+            "left": "Geographic Indication Protection",
+            "right": "Chỉ dẫn địa lý bảo hộ độc quyền xuất xứ mỏ khoáng Đảnh Thạnh"
+          },
+          {
+            "left": "Global Benchmark Standard",
+            "right": "Chuẩn đối sánh đẳng cấp quốc tế (sánh ngang các suối khoáng dãy Alps)"
+          },
+          {
+            "left": "Brand Equity Appreciation",
+            "right": "Sự gia tăng liên tục giá trị tài sản thương hiệu trên thị trường"
+          },
+          {
+            "left": "Sovereign Natural Resource",
+            "right": "Nguồn tài nguyên thiên nhiên quý báu thuộc chủ quyền quốc gia"
+          }
+        ]
       },
       {
         "id": "u92-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this triumphant brand positioning statement:",
+        "promptVi": "Luyện phát âm câu tuyên ngôn định vị thương hiệu quốc gia với sự tự hào sâu sắc:",
+        "englishSentence": "Our national positioning strategy establishes Vikoda as Vietnam's crown jewel mineral water, rivaling the world's most prestigious Alpine springs.",
+        "audioText": "Our national positioning strategy establishes Vikoda as Vietnam's crown jewel mineral water, rivaling the world's most prestigious Alpine springs.",
+        "phonetics": "/ˈaʊər ˈnæʃnəl pəˈzɪʃnɪŋ ˈstrætədʒi ɪsˈtæblɪʃɪz vɪˈkoʊdə æz ˌvjɛtˈnɑːmz kraʊn ˈdʒuːəl ˈmɪnərəl ˈwɔːtər, ˈraɪvlɪŋ ðə wɜːrldz moʊst prɛˈstɪdʒəs ˈælpaɪn sprɪŋz/",
+        "vietnameseMeaning": "Chiến lược định vị quốc gia của chúng tôi xác lập Vikoda là viên ngọc quý nước khoáng của Việt Nam, sánh vai cùng những nguồn suối dãy Alps danh giá nhất thế giới.",
+        "explanation": "Cụm ẩn dụ 'Vietnam's crown jewel mineral water' và 'rivaling prestigious Alpine springs' nâng tầm giá trị cảm nhận của người tiêu dùng.",
+        "whyWrong": "Phát âm chuẩn từ 'prestigious' (/prɛˈstɪdʒəs/) và 'Alpine' (/ˈælpaɪn/).",
+        "crucialNote": "Định vị sánh vai các thương hiệu toàn cầu giúp Vikoda thiết lập mức giá bán cao cấp tương xứng tại các khách sạn 5 sao.",
+        "memoryHook": "Vikoda is Vietnam's crown jewel, rivaling prestigious Alpine springs."
       },
       {
         "id": "u92-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Build the sentence defining Vikoda as a preventive health lifestyle:",
+        "promptVi": "Sắp xếp các từ thành câu định vị nước khoáng kiềm như một lối sống chăm sóc sức khỏe chủ động:",
+        "englishSentence": "We position our natural alkaline spring water not merely as a hydration commodity, but as a premium preventive health lifestyle.",
+        "audioText": "We position our natural alkaline spring water not merely as a hydration commodity, but as a premium preventive health lifestyle.",
         "wordPool": [
-          "clear",
-          "never",
-          "risk",
-          "division",
-          "under",
-          "cancel",
-          "Our",
-          "terms.",
-          "maritime",
-          "transport",
-          "international",
-          "commercial",
-          "establish",
-          "agreements"
+          "We",
+          "position",
+          "our",
+          "natural",
+          "alkaline",
+          "spring",
+          "water",
+          "not",
+          "merely",
+          "as",
+          "a",
+          "hydration",
+          "commodity,",
+          "but",
+          "as",
+          "a",
+          "premium",
+          "preventive",
+          "health",
+          "lifestyle.",
+          "harmful",
+          "cheap"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Chúng tôi định vị nước khoáng kiềm thiên nhiên của mình không đơn thuần là hàng hóa giải khát, mà là một phong cách sống chăm sóc sức khỏe chủ động cao cấp.",
+        "explanation": "Cấu trúc tương phản đắt giá 'not merely as A, but as B' thoát ly hoàn toàn khỏi cuộc chiến cạnh tranh giá của các loại nước đóng chai phổ thông.",
+        "whyWrong": "Nhớ giữ đúng vị trí của liên từ tương phản 'not merely... but as...'.",
+        "crucialNote": "Chăm sóc sức khỏe chủ động (preventive health) là xu hướng tiêu dùng bùng nổ của tầng lớp thượng lưu toàn cầu.",
+        "memoryHook": "Not merely a hydration commodity, but a premium preventive health lifestyle."
       },
       {
         "id": "u92-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Select the brand asset status term to complete the sentence:",
+        "promptVi": "Chọn thuật ngữ tài sản thương hiệu chính xác để hoàn thiện câu:",
+        "englishSentence": "Securing national brand status elevated Vikoda's market capitalization and reinforced consumer [ _____ ] across both domestic and export territories.",
+        "audioText": "Securing national brand status elevated Vikoda's market capitalization and reinforced consumer prestige across both domestic and export territories.",
+        "blankWord": "prestige",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "prestige",
+          "subrogation",
+          "obsolescence"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Việc đạt được danh hiệu Thương hiệu Quốc gia đã nâng cao giá trị vốn hóa của Vikoda và củng cố uy tín với người tiêu dùng trên cả thị trường nội địa và xuất khẩu.",
+        "explanation": "'Consumer prestige' (uy tín và sự trân trọng trong tâm trí người tiêu dùng) là tài sản vô hình lớn nhất mà danh hiệu Thương hiệu Quốc gia mang lại.",
+        "whyWrong": "'Subrogation' (thế quyền bảo hiểm) và 'obsolescence' (sự lỗi thời) hoàn toàn không phù hợp trong bối cảnh giá trị thương hiệu.",
+        "crucialNote": "Thương hiệu Quốc gia là bảo chứng cao nhất của Chính phủ về chất lượng, sự đổi mới sáng tạo và năng lực tiên phong.",
+        "memoryHook": "National brand recognition anchors enduring consumer prestige."
       },
       {
         "id": "u92-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Chiến Lược Định Vị Nước Khoáng Quốc Gia\" (Đưa thương hiệu mỏ Đảnh Thạnh sánh vai cường quốc nước khoáng). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, as confirmed in our recent departmental briefing with executive management.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "International Brand Strategy: Reject brand-diluting price discounts in East Asia:",
+        "promptVi": "Hội đồng chiến lược thương hiệu: Kiên định bảo vệ định vị cao cấp trước đề xuất giảm giá sốc tại Đài Loan:",
+        "englishSentence": "David, Vikoda's core identity is our pristine 1957 heritage and natural pH 9.0 mineral source. Competing on price with purified tap water erodes brand equity. We must anchor our narrative on health benefits, luxury eco-friendly glass packaging, and Michelin-star dining pairings to command our rightful premium tier.",
+        "audioText": "David, Vikoda's core identity is our pristine 1957 heritage and natural pH 9.0 mineral source. Competing on price with purified tap water erodes brand equity. We must anchor our narrative on health benefits, luxury eco-friendly glass packaging, and Michelin-star dining pairings to command our rightful premium tier.",
+        "chatMessages": [
+          {
+            "speaker": "David Miller (Global Brand Strategist, Geneva Advisory)",
+            "avatar": "🇨🇭",
+            "message": "Minh, some discount retail chains in Taiwan are requesting a 30% price reduction to undercut municipal RO water packers. Should we launch an economy budget label?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Đưa thương hiệu mỏ Đảnh Thạnh sánh vai cường quốc nước khoáng",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "David, Vikoda's core identity is our pristine 1957 heritage and natural pH 9.0 mineral source. Competing on price with purified tap water erodes brand equity. We must anchor our narrative on health benefits, luxury eco-friendly glass packaging, and Michelin-star dining pairings to command our rightful premium tier.",
+            "trustScore": 25,
+            "feedback": "Chiến lược thương hiệu kiệt xuất (+25 Điểm Tin Cậy)! Kiên quyết không hạ mình cạnh tranh giá với nước lọc công nghiệp, bảo vệ di sản 1957 và thúc đẩy dòng chai thủy tinh sang trọng trong hệ thống ẩm thực Michelin, bảo vệ biên lợi nhuận cao cho tập đoàn.",
+            "isCorrect": true
+          },
+          {
+            "text": "Let's slash prices by 70% and bottle in cheap plastic bags so we become the cheapest water brand in East Asia.",
+            "trustScore": 0,
+            "feedback": "Chiến lược tự sát thương hiệu, biến viên ngọc khoáng thiên nhiên thành mặt hàng thứ cấp rẻ rúng và phá hủy vị thế quốc tế.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "David, bản sắc cốt lõi của Vikoda là di sản nguyên sơ từ năm 1957 và nguồn khoáng kiềm pH 9.0 tự nhiên. Cạnh tranh về giá với nước máy lọc tinh khiết sẽ bào mòn tài sản thương hiệu. Chúng ta phải đặt nền móng câu chuyện thương hiệu trên các lợi ích sức khỏe, bao bì chai thủy tinh thân thiện môi trường sang trọng và kết hợp cùng ẩm thực gắn sao Michelin để giữ vững phân khúc cao cấp xứng đáng.",
+        "explanation": "Từ chối cuộc đua xuống đáy về giá (race to the bottom) là phẩm chất tối quan trọng của nhà lãnh đạo thương hiệu tầm vóc toàn cầu.",
+        "crucialNote": "Nước khoáng thiên nhiên quý hiếm không bao giờ được phép bán theo tư duy của nước tinh khiết đóng chai thông thường.",
+        "memoryHook": "Never discount heritage; elevate luxury glass packaging and gastronomy pairings."
       }
     ]
   },
@@ -12639,104 +13023,137 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u93-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding executive crisis communication and reputation management?",
-        "options": [
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, as confirmed in our recent departmental briefing with executive management.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, pending formal verification from our international distribution coordinators.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each corporate crisis management term with its operational response:",
+        "promptVi": "Nối các thuật ngữ quản trị khủng hoảng truyền thông quốc tế với quy trình phản ứng:",
+        "englishSentence": "Match the 5 corporate crisis communications and reputation defense concepts.",
+        "audioText": "Match the 5 corporate crisis communications and reputation defense concepts.",
+        "explanation": "Quản trị khủng hoảng truyền thông chuyên nghiệp đòi hỏi tốc độ phản ứng thần tốc, chứng cứ khoa học không thể bác bỏ và tính minh bạch tuyệt đối.",
+        "vietnameseMeaning": "Nối đúng 5 nghiệp vụ cốt lõi trong quy trình xử lý khủng hoảng truyền thông của tập đoàn.",
+        "pairs": [
+          {
+            "left": "Crisis Communications Protocol",
+            "right": "Quy trình ứng phó và xử lý khủng hoảng truyền thông được phê duyệt trước"
+          },
+          {
+            "left": "Official Press Communiqué",
+            "right": "Thông cáo báo chí chính thức nêu rõ lập trường và sự thật khoa học"
+          },
+          {
+            "left": "Third-Party Laboratory Validation",
+            "right": "Chứng thực kiểm nghiệm độc lập từ các viện nghiên cứu uy tín quốc tế"
+          },
+          {
+            "left": "Rumor Containment & Fact-Checking",
+            "right": "Khoanh vùng dập tắt tin giả và đối chiếu dữ liệu thực tế"
+          },
+          {
+            "left": "Transparent Stakeholder Accountability",
+            "right": "Trách nhiệm giải trình minh bạch trước cổ đông, khách hàng và cơ quan quản lý"
+          }
+        ]
       },
       {
         "id": "u93-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this calm and authoritative crisis spokesperson statement:",
+        "promptVi": "Luyện phát âm câu tuyên bố của người phát ngôn ban điều hành trong thời khắc khủng hoảng:",
+        "englishSentence": "In moments of crisis, we communicate with absolute transparency, grounding every public statement on empirical scientific data and certified testing.",
+        "audioText": "In moments of crisis, we communicate with absolute transparency, grounding every public statement on empirical scientific data and certified testing.",
+        "phonetics": "/ɪn ˈmoʊmənts əv ˈkraɪsɪs, wiː kəˈmjuːnɪkeɪt wɪð ˈæbsəluːt trænsˈpærənsi, ˈɡraʊndɪŋ ˈɛvri ˈpʌblɪk ˈsteɪtmənt ɒn ɛmˈpɪrɪkl ˌsaɪənˈtɪfɪk ˈdeɪtə ænd ˈsɜːrtɪfaɪd ˈtɛstɪŋ/",
+        "vietnameseMeaning": "Trong những thời khắc khủng hoảng, chúng tôi giao tiếp với sự minh bạch tuyệt đối, đặt nền tảng mỗi phát ngôn trước công chúng trên dữ liệu khoa học thực nghiệm và kiểm nghiệm có chứng thực.",
+        "explanation": "Giọng điệu điềm tĩnh, đĩnh đạc, nhấn mạnh vào 'absolute transparency' và 'empirical scientific data'.",
+        "whyWrong": "Tránh nói vội vã; duy trì tốc độ chậm rãi để truyền tải sự tự tin và kiểm soát tình hình.",
+        "crucialNote": "Sự thật và số liệu khoa học là khắc tinh duy nhất có thể dập tắt mọi tin đồn ác ý.",
+        "memoryHook": "Ground crisis communications on absolute transparency and empirical scientific data."
       },
       {
         "id": "u93-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Arrange the rapid crisis committee mobilization sentence:",
+        "promptVi": "Sắp xếp các từ thành câu kích hoạt ủy ban khủng hoảng và công bố kết quả kiểm nghiệm:",
+        "englishSentence": "Our crisis committee mobilized within one hour to publish certified water quality assays debunking unfounded social media rumors.",
+        "audioText": "Our crisis committee mobilized within one hour to publish certified water quality assays debunking unfounded social media rumors.",
         "wordPool": [
           "Our",
-          "cancel",
-          "international",
-          "agreements",
-          "risk",
-          "division",
-          "commercial",
-          "maritime",
-          "under",
-          "transport",
-          "never",
-          "clear",
-          "establish",
-          "terms."
+          "crisis",
+          "committee",
+          "mobilized",
+          "within",
+          "one",
+          "hour",
+          "to",
+          "publish",
+          "certified",
+          "water",
+          "quality",
+          "assays",
+          "debunking",
+          "unfounded",
+          "social",
+          "media",
+          "rumors.",
+          "panic",
+          "conceal"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Ủy ban khủng hoảng của chúng tôi đã kích hoạt trong vòng một giờ để công bố kết quả kiểm nghiệm chất lượng nước có chứng thực, bác bỏ những tin đồn vô căn cứ trên mạng xã hội.",
+        "explanation": "Quy tắc 'Golden Hour' (Giờ Vàng) trong xử lý khủng hoảng: phản hồi chính thức trong vòng 60 phút để giành quyền làm chủ luồng thông tin.",
+        "whyWrong": "Sắp xếp đúng cụm phân từ hiện tại 'debunking unfounded social media rumors' bổ nghĩa cho 'assays'.",
+        "crucialNote": "Im lặng trong khủng hoảng sẽ bị công chúng mặc định hiểu là thừa nhận lỗi sai.",
+        "memoryHook": "Mobilize within one hour to publish certified assays debunking rumors."
       },
       {
         "id": "u93-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Fill in the core corporate virtue restoring public trust:",
+        "promptVi": "Chọn phẩm chất quản trị cốt lõi khôi phục niềm tin của người tiêu dùng:",
+        "englishSentence": "The executive spokesperson conducted a live press conference, restoring public confidence through unwavering [ _____ ] and factual evidence.",
+        "audioText": "The executive spokesperson conducted a live press conference, restoring public confidence through unwavering integrity and factual evidence.",
+        "blankWord": "integrity",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "integrity",
+          "duplicity",
+          "negligence"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Người phát ngôn ban điều hành đã chủ trì cuộc họp báo trực tiếp, khôi phục niềm tin của công chúng thông qua sự liêm chính kiên định và bằng chứng xác thực.",
+        "explanation": "'Integrity' (sự liêm chính, chính trực không bao giờ bao che khuyết điểm) là giá trị đạo đức cao nhất giúp doanh nghiệp vượt qua mọi giông bão truyền thông.",
+        "whyWrong": "'Duplicity' (sự giả dối hai mặt) và 'negligence' (sự cẩu thả tắc trách) là những nguyên nhân trực tiếp phá hủy doanh nghiệp.",
+        "crucialNote": "Khách hàng sẵn sàng tha thứ cho một sự cố kỹ thuật nhưng không bao giờ tha thứ cho sự dối trá.",
+        "memoryHook": "Unwavering integrity and factual evidence restore public confidence."
       },
       {
         "id": "u93-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Quản Trị Khủng Hoảng Truyền Thông Quốc Tế\" (Họp báo bình tĩnh, thông cáo sự thật và bảo vệ giá trị cốt lõi). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, pending formal verification from our international distribution coordinators.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Microplastic Allegation Crisis: Neutralize a malicious viral rumor in Singapore:",
+        "promptVi": "Xử lý tin đồn ác ý: Chỉ đạo phản ứng khẩn cấp khi mạng xã hội lan truyền tin đồn nước đóng chai nhiễm vi nhựa:",
+        "englishSentence": "Victoria, let's execute Crisis Protocol Alpha immediately: 1. Release our latest SGS and Pasteur Institute microplastic-free certified laboratory reports; 2. Issue a joint press statement from our Quality Director highlighting our Krones sterile line; 3. Host a live video walk-through of our 220m enclosed wellhead for international retail buyers.",
+        "audioText": "Victoria, let's execute Crisis Protocol Alpha immediately: 1. Release our latest SGS and Pasteur Institute microplastic-free certified laboratory reports; 2. Issue a joint press statement from our Quality Director highlighting our Krones sterile line; 3. Host a live video walk-through of our 220m enclosed wellhead for international retail buyers.",
+        "chatMessages": [
+          {
+            "speaker": "Victoria Vance (Head of Global Communications, FIT Group)",
+            "avatar": "📡",
+            "message": "Minh, an unverified social media blog in Singapore claimed bottled mineral waters in Southeast Asia contain high microplastic levels. Two supermarket chains have put a temporary hold on shipments. Media is demanding a statement within the hour!"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Họp báo bình tĩnh, thông cáo sự thật và bảo vệ giá trị cốt lõi",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Victoria, let's execute Crisis Protocol Alpha immediately: 1. Release our latest SGS and Pasteur Institute microplastic-free certified laboratory reports; 2. Issue a joint press statement from our Quality Director highlighting our Krones sterile line; 3. Host a live video walk-through of our 220m enclosed wellhead for international retail buyers.",
+            "trustScore": 25,
+            "feedback": "Quản trị khủng hoảng cấp độ C-Suite xuất sắc (+25 Điểm Tin Cậy)! Kích hoạt chiến lược 3 mũi nhọn (kiểm nghiệm SGS/Pasteur khẳng định 0% vi nhựa, tuyên bố chuyên môn về dây chuyền Krones vô trùng, và phát trực tiếp mỏ nguồn 220m khép kín), giải tỏa ngay lệnh tạm giữ hàng và củng cố niềm tin tuyệt đối từ các chuỗi siêu thị.",
+            "isCorrect": true
+          },
+          {
+            "text": "Switch off all company phones, delete our social media pages, and refuse to answer any questions from supermarkets or journalists.",
+            "trustScore": 0,
+            "feedback": "Hành động bỏ trốn biến tin đồn giả thành cuộc khủng hoảng thật, khiến toàn bộ chuỗi siêu thị đồng loạt hủy hợp đồng và tịch thu hàng hóa.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Victoria, hãy kích hoạt ngay Quy trình Khủng hoảng Alpha: 1. Công bố các báo cáo xét nghiệm mới nhất của SGS và Viện Pasteur chứng nhận sản phẩm hoàn toàn không chứa vi nhựa; 2. Phát đi tuyên bố báo chí chung từ Giám đốc Chất lượng nêu bật dây chuyền đóng chai vô trùng khép kín Krones; 3. Tổ chức buổi truyền hình trực tiếp tham quan mỏ nguồn sâu 220m khép kín dành riêng cho các giám đốc thu mua siêu thị quốc tế.",
+        "explanation": "Minh bạch hóa quy trình bằng hình ảnh thực tế và chứng thực khoa học bên thứ 3 là phương thuốc đặc trị dập tắt mọi tin đồn thất thiệt.",
+        "crucialNote": "Khủng hoảng được xử lý xuất sắc thường biến thành cơ hội tiếp thị vàng chứng minh sự vượt trội về công nghệ của doanh nghiệp.",
+        "memoryHook": "Execute Protocol Alpha: release third-party lab assays and host live facility tours."
       }
     ]
   },
@@ -12753,104 +13170,135 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u94-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding closing continental multi-million case export deals?",
-        "options": [
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, as confirmed in our recent departmental briefing with executive management.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, pending formal verification from our international distribution coordinators.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each continental distribution agreement term with its commercial provision:",
+        "promptVi": "Nối các điều khoản hợp đồng phân phối quy mô châu lục với quy định thương mại tương ứng:",
+        "englishSentence": "Match the 5 continental distribution contract terms.",
+        "audioText": "Match the 5 continental distribution contract terms.",
+        "explanation": "Hợp đồng phân phối cấp châu lục là bước ngoặt đưa hàng triệu thùng nước khoáng Vikoda hiện diện trên kệ của hàng ngàn đại siêu thị trên khắp Châu Á.",
+        "vietnameseMeaning": "Nối đúng 5 điều khoản trọng yếu trong hợp đồng cung ứng phân phối cấp châu lục.",
+        "pairs": [
+          {
+            "left": "Continental Distribution Pact",
+            "right": "Hiệp ước phân phối độc quyền quy mô toàn châu lục"
+          },
+          {
+            "left": "Multi-Million Case Commitment",
+            "right": "Cam kết sản lượng tiêu thụ hàng triệu thùng theo lộ trình nhiều năm"
+          },
+          {
+            "left": "Key Performance Indicators (KPIs)",
+            "right": "Các chỉ số đo lường hiệu quả độ phủ điểm bán và doanh số bắt buộc"
+          },
+          {
+            "left": "Right of First Refusal",
+            "right": "Quyền ưu tiên xem xét trước khi chào bán cho bất kỳ đối tác mới nào"
+          },
+          {
+            "left": "Joint Executive Steering Committee",
+            "right": "Ủy ban điều hành chung cấp cao định kỳ giám sát tiến độ thực thi"
+          }
+        ]
       },
       {
         "id": "u94-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this landmark multi-million case export commitment:",
+        "promptVi": "Luyện phát âm câu xác lập cam kết cung ứng hàng triệu thùng sang thị trường quốc tế:",
+        "englishSentence": "We finalize this continental agreement with a binding commitment to supply ten million cases over the next three fiscal years.",
+        "audioText": "We finalize this continental agreement with a binding commitment to supply ten million cases over the next three fiscal years.",
+        "phonetics": "/wiː ˈfaɪnəlaɪz ðɪs ˌkɒntɪˈnɛntl əˈɡriːmənt wɪð ə ˈbaɪndɪŋ kəˈmɪtmənt tuː səˈplaɪ tɛn ˈmɪljən ˈkeɪsɪz ˈoʊvər ðə nɛkst θriː ˈfɪskl jɪərz/",
+        "vietnameseMeaning": "Chúng tôi hoàn tất hiệp ước cấp châu lục này với cam kết ràng buộc cung ứng mười triệu thùng trong vòng ba năm tài chính tiếp theo.",
+        "explanation": "Cụm 'binding commitment to supply ten million cases' thể hiện quy mô sản xuất và năng lực cung ứng tầm vóc quốc tế của nhà máy Vikoda.",
+        "whyWrong": "Phát âm rõ ràng âm đuôi /z/ của 'cases' và nhấn trọng âm của 'continental' (/ˌkɒntɪˈnɛntl/).",
+        "crucialNote": "Hợp đồng 10 triệu thùng đòi hỏi lập kế hoạch dự trữ nguyên vật liệu bao bì thủy tinh và nắp chai từ trước 6 tháng.",
+        "memoryHook": "Binding commitment to supply ten million cases over three fiscal years."
       },
       {
         "id": "u94-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Assemble the governance review clause monitoring international market penetration:",
+        "promptVi": "Sắp xếp các từ thành câu quy định cơ chế đánh giá hiệu quả và độ bền bỉ của chuỗi cung ứng:",
+        "englishSentence": "Both parties agreed to establish quarterly performance reviews to assess market penetration and supply chain resilience.",
+        "audioText": "Both parties agreed to establish quarterly performance reviews to assess market penetration and supply chain resilience.",
         "wordPool": [
-          "division",
+          "Both",
+          "parties",
+          "agreed",
+          "to",
           "establish",
-          "Our",
-          "commercial",
-          "under",
-          "maritime",
-          "transport",
-          "agreements",
-          "clear",
-          "risk",
-          "international",
-          "terms.",
-          "never",
-          "cancel"
+          "quarterly",
+          "performance",
+          "reviews",
+          "to",
+          "assess",
+          "market",
+          "penetration",
+          "and",
+          "supply",
+          "chain",
+          "resilience.",
+          "breach",
+          "dissolve"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Cả hai bên đã đồng thuận thiết lập các kỳ đánh giá hiệu quả hàng quý để thẩm định mức độ thâm nhập thị trường và khả năng chống chịu của chuỗi cung ứng.",
+        "explanation": "Cơ chế 'quarterly performance reviews' giúp hai tập đoàn kịp thời tháo gỡ các nút thắt logistics và điều chỉnh dự báo nhu cầu (demand forecasting).",
+        "whyWrong": "Chú ý đặt cụm mục đích kép 'to assess market penetration and supply chain resilience' ở cuối mệnh đề.",
+        "crucialNote": "'Supply chain resilience' (khả năng chống chịu của chuỗi cung ứng) bảo đảm hàng hóa không bao giờ bị đứt gãy giữa các mùa cao điểm vụ hè.",
+        "memoryHook": "Quarterly performance reviews assess penetration and supply chain resilience."
       },
       {
         "id": "u94-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Select the legal assignment consent term to complete the contract clause:",
+        "promptVi": "Chọn thuật ngữ chấp thuận chuyển giao nghĩa vụ hợp đồng:",
+        "englishSentence": "The continental agreement stipulates that neither party may assign its contractual obligations to a third party without prior written [ _____ ].",
+        "audioText": "The continental agreement stipulates that neither party may assign its contractual obligations to a third party without prior written consent.",
+        "blankWord": "consent",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "consent",
+          "forfeiture",
+          "coercion"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Hiệp ước cấp châu lục quy định rằng không bên nào được chuyển nhượng nghĩa vụ hợp đồng của mình cho bên thứ ba khi chưa có sự chấp thuận bằng văn bản trước.",
+        "explanation": "'Prior written consent' (sự chấp thuận trước bằng văn bản) là điều khoản tiêu chuẩn ngăn ngừa đối tác âm thầm bán lại hợp đồng độc quyền cho bên thứ ba thiếu năng lực.",
+        "whyWrong": "'Forfeiture' (sự tịch thu) và 'coercion' (sự cưỡng ép) hoàn toàn trái ngược với bản chất tự nguyện của hợp đồng thương mại.",
+        "crucialNote": "Điều khoản không chuyển nhượng (non-assignment) bảo đảm Vikoda luôn làm việc trực tiếp với pháp nhân mẹ có thực lực.",
+        "memoryHook": "No assignment of obligations without prior written consent."
       },
       {
         "id": "u94-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Đàm Phán Hợp Đồng Độc Quyền Châu Lục\" (Hợp đồng xuất khẩu triệu thùng sang hệ thống siêu thị châu Á). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, as confirmed in our recent departmental briefing with executive management.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Continental Deal Finalization: Negotiate shared marketing funds for a 15-million case rollout:",
+        "promptVi": "Chốt thương vụ thế kỷ: Đàm phán ngân sách tiếp thị đồng hành cho hợp đồng 15 triệu thùng sang toàn châu Á:",
+        "englishSentence": "Chairman Wong, a 15-million case alliance is truly transformative for both our enterprises. In the spirit of genuine risk-sharing partnership, Vikoda will commit a matching co-marketing fund of $1 Million tied directly to agreed quarterly shipment volume milestones, while providing our complete global creative brand assets free of charge.",
+        "audioText": "Chairman Wong, a 15-million case alliance is truly transformative for both our enterprises. In the spirit of genuine risk-sharing partnership, Vikoda will commit a matching co-marketing fund of $1 Million tied directly to agreed quarterly shipment volume milestones, while providing our complete global creative brand assets free of charge.",
+        "chatMessages": [
+          {
+            "speaker": "Raymond Wong (Executive Chairman, Pan-Asia Retail Consortium)",
+            "avatar": "🏬",
+            "message": "Minh, we are prepared to sign the 15-million case continental pact, but Vikoda must fund 100% of the $2 Million marketing launch across all Asian satellite television networks."
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Hợp đồng xuất khẩu triệu thùng sang hệ thống siêu thị châu Á",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Chairman Wong, a 15-million case alliance is truly transformative for both our enterprises. In the spirit of genuine risk-sharing partnership, Vikoda will commit a matching co-marketing fund of $1 Million tied directly to agreed quarterly shipment volume milestones, while providing our complete global creative brand assets free of charge.",
+            "trustScore": 25,
+            "feedback": "Đàm phán thương vụ thế kỷ siêu đẳng (+25 Điểm Tin Cậy)! Vừa khẳng định tầm vóc to lớn của hợp đồng 15 triệu thùng, vừa từ chối gánh vác 100% chi phí một mình bằng cách khôn khéo đề xuất đối ứng 50/50 (1 triệu USD) gắn liền với từng mốc giao hàng thực tế và hỗ trợ miễn phí toàn bộ tài sản thiết kế thương hiệu.",
+            "isCorrect": true
+          },
+          {
+            "text": "We will pay all $2 Million immediately in cash, please take everything from our treasury even if we suffer huge losses.",
+            "trustScore": 0,
+            "feedback": "Nhượng bộ tài chính vô nguyên tắc làm cạn kiệt ngân sách vận hành và đặt doanh nghiệp vào nguy cơ thua lỗ nặng.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa Chủ tịch Wong, liên minh 15 triệu thùng là một bước ngoặt thực sự đối với cả hai tập đoàn chúng ta. Trên tinh thần đối tác cùng chia sẻ rủi ro đích thực, Vikoda sẽ cam kết một quỹ tiếp thị đồng hành tương ứng trị giá 1 triệu USD gắn trực tiếp với các mốc sản lượng giao hàng thực tế hàng quý, đồng thời cung cấp toàn bộ tài nguyên sáng tạo thương hiệu toàn cầu của chúng tôi hoàn toàn miễn phí.",
+        "explanation": "Phương pháp 'Matching Fund tied to Performance' (quỹ đối ứng gắn với sản lượng thực tế) bảo đảm ngân sách tiếp thị chỉ được giải ngân khi hàng hóa đã được bán thành công.",
+        "crucialNote": "Cung cấp miễn phí tài sản sáng tạo (creative brand assets) vừa gia tăng giá trị phi tiền mặt vừa kiểm soát chặt chẽ nhận diện thương hiệu chuẩn mực.",
+        "memoryHook": "Match co-marketing funds tied to verified quarterly shipment milestones."
       }
     ]
   },
@@ -12867,104 +13315,133 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u95-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding the C-Suite jewel in the rock leadership philosophy?",
-        "options": [
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, as confirmed in our recent departmental briefing with executive management.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each core executive leadership philosophy term with its organizational virtue:",
+        "promptVi": "Nối các phẩm chất lãnh đạo C-Suite cốt lõi trong triết lý \"Ngọc Trong Đá\" với ý nghĩa tương ứng:",
+        "englishSentence": "Match the 5 executive leadership and organizational resilience concepts.",
+        "audioText": "Match the 5 executive leadership and organizational resilience concepts.",
+        "explanation": "Triết lý 'Ngọc Trong Đá' của Tập đoàn FIT và Vikoda khẳng định: giá trị đích thực và năng lực lãnh đạo kiệt xuất chỉ có thể được tạo ra qua quá trình rèn giũa kỷ luật nghiêm cẩn dưới áp lực thử thách cam go.",
+        "vietnameseMeaning": "Nối đúng 5 trụ cột tinh thần lãnh đạo bản lĩnh trong triết lý Ngọc Trong Đá.",
+        "pairs": [
+          {
+            "left": "Jewel in the Rock Philosophy",
+            "right": "Triết lý Ngọc Trong Đá: ngọc quý chỉ tỏa sáng rực rỡ sau quá trình mài giũa kiên trì"
+          },
+          {
+            "left": "Uncompromising Discipline",
+            "right": "Kỷ luật điều hành thép không bao giờ thỏa hiệp với sự cẩu thả"
+          },
+          {
+            "left": "Servant Leadership Mindset",
+            "right": "Tư duy lãnh đạo phụng sự vì sự trưởng thành và phát triển của đội ngũ"
+          },
+          {
+            "left": "Organizational Resilience",
+            "right": "Khả năng phục hồi và đứng dậy mạnh mẽ từ nội lực tổ chức"
+          },
+          {
+            "left": "Executive Talent Succession",
+            "right": "Chiến lược đào tạo và chuyển giao thế hệ lãnh đạo kế thừa vững chắc"
+          }
+        ]
       },
       {
         "id": "u95-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this inspiring executive philosophy creed:",
+        "promptVi": "Luyện phát âm câu tuyên ngôn triết lý lãnh đạo tinh hoa của tập đoàn:",
+        "englishSentence": "Like a jewel carved from deep subterranean granite, true corporate leadership is forged through rigorous discipline, resilience, and ethical purpose.",
+        "audioText": "Like a jewel carved from deep subterranean granite, true corporate leadership is forged through rigorous discipline, resilience, and ethical purpose.",
+        "phonetics": "/laɪk ə ˈdʒuːəl kɑːrvd frɒm diːp ˌsʌbtəˈreɪniən ˈɡrænɪt, truː ˈkɔːrpərət ˈliːdərʃɪp ɪz fɔːrdʒd θruː ˈrɪɡərəs ˈdɪsəplɪn, rɪˈzɪljəns, ænd ˈɛθɪkl ˈpɜːrpəs/",
+        "vietnameseMeaning": "Như viên ngọc được mài giũa từ đá hoa cương sâu dưới lòng đất, năng lực lãnh đạo doanh nghiệp đích thực được tôi luyện qua kỷ luật nghiêm cẩn, sự kiên cường và mục đích đạo đức.",
+        "explanation": "Hình tượng văn học tuyệt đẹp so sánh nguồn khoáng Đảnh Thạnh ẩn mình sâu dưới đá granite với quá trình rèn giũa nhân cách nhà lãnh đạo.",
+        "whyWrong": "Phát âm chuẩn từ 'subterranean' (/ˌsʌbtəˈreɪniən/) và 'resilience' (/rɪˈzɪljəns/).",
+        "crucialNote": "Kỷ luật tự thân là nền móng để xây dựng một tổ chức trường tồn hàng thế kỷ.",
+        "memoryHook": "True corporate leadership is forged through discipline, resilience, and ethical purpose."
       },
       {
         "id": "u95-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Construct the maxim on continuous organizational self-refinement:",
+        "promptVi": "Sắp xếp các từ thành câu phương châm không ngừng tự hoàn thiện để nâng tầm tổ chức:",
+        "englishSentence": "True excellence requires continuous self-refinement and an unwavering commitment to elevate the entire organization.",
+        "audioText": "True excellence requires continuous self-refinement and an unwavering commitment to elevate the entire organization.",
         "wordPool": [
-          "agreements",
-          "establish",
-          "clear",
-          "transport",
-          "commercial",
-          "under",
-          "terms.",
-          "maritime",
-          "Our",
-          "cancel",
-          "division",
-          "international",
-          "risk",
-          "never"
+          "True",
+          "excellence",
+          "requires",
+          "continuous",
+          "self-refinement",
+          "and",
+          "an",
+          "unwavering",
+          "commitment",
+          "to",
+          "elevate",
+          "the",
+          "entire",
+          "organization.",
+          "complacency",
+          "sloth"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Sự xuất sắc đích thực đòi hỏi sự không ngừng tự rèn giũa và cam kết kiên định nâng tầm toàn bộ tổ chức.",
+        "explanation": "Khái niệm 'continuous self-refinement' (không ngừng tự mài giũa chính mình) là tinh thần Kaizen kết hợp với bản lĩnh 'Ngọc Trong Đá'.",
+        "whyWrong": "Cần sắp xếp liên từ 'and' kết nối hai tân ngữ 'continuous self-refinement' và 'an unwavering commitment'.",
+        "crucialNote": "Một người lãnh đạo giỏi không chỉ tự tỏa sáng mà còn biết khơi dậy viên ngọc bên trong mỗi nhân viên.",
+        "memoryHook": "Continuous self-refinement and commitment elevate the entire organization."
       },
       {
         "id": "u95-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Select the ultimate executive competency term to complete the leadership principle:",
+        "promptVi": "Chọn thuật ngữ thể hiện đỉnh cao năng lực lãnh đạo:",
+        "englishSentence": "In FIT Group's management culture, leaders cultivate talent by providing challenging trials that transform potential into proven [ _____ ].",
+        "audioText": "In FIT Group's management culture, leaders cultivate talent by providing challenging trials that transform potential into proven mastery.",
+        "blankWord": "mastery",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "mastery",
+          "mediocrity",
+          "subjugation"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Trong văn hóa quản trị của Tập đoàn FIT, những người lãnh đạo ươm mầm tài năng bằng cách tạo ra các thử thách cam go nhằm chuyển hóa tiềm năng thành năng lực tinh hoa đã được kiểm chứng.",
+        "explanation": "'Proven mastery' (năng lực tinh hoa đã qua thử lửa) chỉ có thể đạt được khi đối mặt và vượt qua những nghịch cảnh khắc nghiệt nhất.",
+        "whyWrong": "'Mediocrity' (sự tầm thường) và 'subjugation' (sự áp bức nô dịch) là kẻ thù triệt tiêu tinh thần đổi mới sáng tạo.",
+        "crucialNote": "Thử thách không phải để trừng phạt, mà là chiếc đe và búa rèn nên người lãnh đạo tương lai.",
+        "memoryHook": "Challenging trials transform raw potential into proven mastery."
       },
       {
         "id": "u95-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Triết Lý Lãnh Đạo \"Ngọc Trong Đá\" C-Suite\" (Mài giũa kỷ luật thép và xây dựng đội ngũ kiệt xuất). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, pending formal verification from our international distribution coordinators.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Executive Coaching & Mentorship: Guide a discouraged regional director after a setback:",
+        "promptVi": "Cố vấn lãnh đạo C-Suite: Động viên và khai phóng tư duy cho một giám đốc vùng trẻ tuổi sau một thương vụ chưa thành công:",
+        "englishSentence": "Tuan, remember our core philosophy of 'Ngọc Trong Đá' — raw gems cannot shine without intense friction and pressure. A lost deal is not a failure; it is the masterclass that forges your executive resilience. Let's debrief the buyer's feedback together tomorrow morning, refine our proposal, and turn this setback into our greatest victory.",
+        "audioText": "Tuan, remember our core philosophy of 'Ngọc Trong Đá' — raw gems cannot shine without intense friction and pressure. A lost deal is not a failure; it is the masterclass that forges your executive resilience. Let's debrief the buyer's feedback together tomorrow morning, refine our proposal, and turn this setback into our greatest victory.",
+        "chatMessages": [
+          {
+            "speaker": "Tuan Nguyen (Regional Sales Director, North Asia)",
+            "avatar": "💼",
+            "message": "Minh, I feel I let down the whole executive committee after failing to close the Osaka retail account. Maybe I am not cut out for C-Suite leadership at Vikoda, and I should step down."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Mài giũa kỷ luật thép và xây dựng đội ngũ kiệt xuất",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Tuan, remember our core philosophy of 'Ngọc Trong Đá' — raw gems cannot shine without intense friction and pressure. A lost deal is not a failure; it is the masterclass that forges your executive resilience. Let's debrief the buyer's feedback together tomorrow morning, refine our proposal, and turn this setback into our greatest victory.",
+            "trustScore": 25,
+            "feedback": "Nghệ thuật lãnh đạo truyền cảm hứng đỉnh cao (+25 Điểm Tin Cậy)! Vận dụng trọn vẹn triết lý 'Ngọc Trong Đá' để biến thất bại tạm thời thành bài học rèn luyện bản lĩnh kiên cường, giữ chân và thắp sáng ngọn lửa cống hiến của nhân tài cấp cao.",
+            "isCorrect": true
+          },
+          {
+            "text": "You are absolutely right, you failed Vikoda so submit your immediate resignation letter today and leave the office.",
+            "trustScore": 0,
+            "feedback": "Lãnh đạo độc đoán và tàn nhẫn, phá hủy tinh thần cống hiến của cấp dưới và làm chảy máu chất xám của tập đoàn.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Tuấn, hãy nhớ lại triết lý cốt lõi 'Ngọc Trong Đá' của chúng ta — ngọc thô không thể tỏa sáng nếu không trải qua sự ma sát và áp lực dữ dội. Một thương vụ chưa chốt được không phải là thất bại; đó là lớp học bậc thầy tôi luyện bản lĩnh kiên cường của một nhà lãnh đạo. Sáng mai chúng ta sẽ cùng ngồi lại phân tích kỹ phản hồi của khách hàng, hoàn thiện lại đề xuất và biến trở ngại này thành chiến thắng vẻ vang nhất của chúng ta.",
+        "explanation": "Lãnh đạo phụng sự (Servant Leader) không bao giờ bỏ rơi đồng đội khi gặp sóng gió, mà biến nghịch cảnh thành bệ phóng tôi luyện tài năng kiệt xuất.",
+        "crucialNote": "Sức mạnh vĩ đại nhất của văn hóa 'Ngọc Trong Đá' là tinh thần không bỏ cuộc trước mọi thử thách khắc nghiệt.",
+        "memoryHook": "Raw gems cannot shine without intense friction and executive resilience."
       }
     ]
   },
@@ -12981,104 +13458,137 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u96-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding comprehensive ESG environmental governance reporting?",
-        "options": [
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, as confirmed in our recent departmental briefing with executive management.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each ESG sustainability governance term with its environmental impact action:",
+        "promptVi": "Nối các thuật ngữ quản trị phát triển bền vững ESG với hành động bảo vệ môi trường tương ứng:",
+        "englishSentence": "Match the 5 comprehensive ESG sustainability governance concepts.",
+        "audioText": "Match the 5 comprehensive ESG sustainability governance concepts.",
+        "explanation": "Quản trị ESG (Môi trường - Xã hội - Quản trị) toàn diện là tấm hộ chiếu xanh đưa sản phẩm Vikoda bước vào các thị trường khắt khe nhất thế giới như Liên minh Châu Âu và Bắc Mỹ.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ then chốt trong báo cáo phát triển bền vững ESG của tập đoàn.",
+        "pairs": [
+          {
+            "left": "Environmental, Social & Governance (ESG)",
+            "right": "Bộ ba tiêu chuẩn đo lường tính bền vững và trách nhiệm xã hội doanh nghiệp"
+          },
+          {
+            "left": "Scope 1, 2 and 3 Emissions",
+            "right": "Kiểm toán phát thải khí nhà kính trực tiếp, gián tiếp và toàn bộ chuỗi giá trị"
+          },
+          {
+            "left": "Circular Packaging Economy",
+            "right": "Kinh tế tuần hoàn sử dụng 100% chai thủy tinh và nhựa rPET tái sinh"
+          },
+          {
+            "left": "Aquifer Recharge Preservation",
+            "right": "Bảo tồn vùng bổ cập tự nhiên của tầng nước ngầm địa nhiệt Đảnh Thạnh"
+          },
+          {
+            "left": "Stakeholder Materiality Assessment",
+            "right": "Đánh giá các vấn đề trọng yếu đối với cộng đồng và nhà đầu tư"
+          }
+        ]
       },
       {
         "id": "u96-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this forward-looking carbon neutrality pledge:",
+        "promptVi": "Luyện phát âm câu cam kết trung hòa carbon và bảo tồn nguồn nước bền vững:",
+        "englishSentence": "Our ESG roadmap anchors sustainable groundwater conservation, a hundred percent recyclable packaging, and carbon-neutral bottling operations by 2030.",
+        "audioText": "Our ESG roadmap anchors sustainable groundwater conservation, a hundred percent recyclable packaging, and carbon-neutral bottling operations by 2030.",
+        "phonetics": "/ˈaʊər iː-ɛs-dʒiː ˈroʊdmæp ˈæŋkərz səˈsteɪnəbl ˈɡraʊndwɔːtər ˌkɒnsərˈveɪʃn, ə ˈhʌndrəd pərˈsɛnt ˌriːˈsaɪkləbl ˈpækɪdʒɪŋ, ænd ˈkɑːrbən-ˈnjuːtrəl ˈbɒtlɪŋ ˌɒpəˈreɪʃnz baɪ ˈtwɛnti ˈθɜːrti/",
+        "vietnameseMeaning": "Lộ trình ESG của chúng tôi đặt trọng tâm vào việc bảo tồn bền vững nguồn nước ngầm, một trăm phần trăm bao bì tái chế được và hoạt động đóng chai trung hòa carbon vào năm 2030.",
+        "explanation": "Các thuật ngữ 'sustainable groundwater conservation', 'hundred percent recyclable packaging' và 'carbon-neutral bottling' thể hiện cam kết ESG mạnh mẽ.",
+        "whyWrong": "Chú ý nối âm giữa 'carbon-neutral' và 'bottling operations'.",
+        "crucialNote": "Mục tiêu Net Zero 2030 khẳng định vai trò tiên phong của Vikoda trong cuộc cách mạng xanh của ngành đồ uống Việt Nam.",
+        "memoryHook": "Sustainable conservation, recyclable packaging, and carbon-neutral operations by 2030."
       },
       {
         "id": "u96-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Construct the ecological sanctuary description protecting the Danh Thanh source:",
+        "promptVi": "Sắp xếp các từ thành câu mô tả vành đai sinh thái 35 héc-ta bảo vệ mỏ khoáng ngầm:",
+        "englishSentence": "We maintain a pristine thirty-five hectare ecological buffer zone to safeguard the geothermal aquifer against any environmental contamination.",
+        "audioText": "We maintain a pristine thirty-five hectare ecological buffer zone to safeguard the geothermal aquifer against any environmental contamination.",
         "wordPool": [
-          "terms.",
-          "under",
-          "Our",
-          "division",
-          "maritime",
-          "risk",
-          "cancel",
-          "commercial",
-          "never",
-          "transport",
-          "agreements",
-          "clear",
-          "international",
-          "establish"
+          "We",
+          "maintain",
+          "a",
+          "pristine",
+          "thirty-five",
+          "hectare",
+          "ecological",
+          "buffer",
+          "zone",
+          "to",
+          "safeguard",
+          "the",
+          "geothermal",
+          "aquifer",
+          "against",
+          "any",
+          "environmental",
+          "contamination.",
+          "pollute",
+          "degrade"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Chúng tôi duy trì một vành đai sinh thái nguyên sơ ba mươi lăm héc-ta để bảo vệ nguồn ngậm nước địa nhiệt khỏi bất kỳ sự ô nhiễm môi trường nào.",
+        "explanation": "Vành đai đệm sinh thái 35ha (ecological buffer zone) là lá chắn tự nhiên ngăn ngừa mọi hóa chất nông nghiệp hoặc công nghiệp xâm nhập vào tầng khoáng ngầm.",
+        "whyWrong": "Đảm bảo đúng trật tự tính từ 'pristine thirty-five hectare ecological buffer zone'.",
+        "crucialNote": "Rất ít mỏ khoáng trên thế giới sở hữu vùng bảo tồn sinh thái biệt lập và nghiêm ngặt như Đảnh Thạnh.",
+        "memoryHook": "Maintain a thirty-five hectare buffer zone safeguarding the geothermal aquifer."
       },
       {
         "id": "u96-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Fill in the correct biodiversity action term from international ESG audits:",
+        "promptVi": "Chọn thuật ngữ bảo tồn đa dạng sinh học trong đánh giá kiểm toán ESG quốc tế:",
+        "englishSentence": "Independent sustainability auditors awarded Vikoda the highest rating for sustainable water extraction and local biodiversity [ _____ ].",
+        "audioText": "Independent sustainability auditors awarded Vikoda the highest rating for sustainable water extraction and local biodiversity conservation.",
+        "blankWord": "conservation",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "conservation",
+          "depletion",
+          "litigation"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Các kiểm toán viên độc lập về phát triển bền vững đã trao cho Vikoda xếp hạng cao nhất về khai thác nước bền vững và bảo tồn đa dạng sinh học địa phương.",
+        "explanation": "'Biodiversity conservation' (bảo tồn đa dạng sinh học) chứng minh nhà máy Vikoda vận hành hài hòa tuyệt đối với hệ sinh thái rừng nhiệt đới Khánh Hòa.",
+        "whyWrong": "'Depletion' (sự làm cạn kiệt) và 'litigation' (sự kiện tụng tranh chấp) là những chỉ số tiêu cực mà các kiểm toán viên ESG luôn cảnh báo.",
+        "crucialNote": "Bảo tồn thảm thực vật bản địa giúp duy trì chu trình bổ cập nước ngầm tự nhiên qua các tầng địa chất.",
+        "memoryHook": "Highest audit ratings for sustainable extraction and biodiversity conservation."
       },
       {
         "id": "u96-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Quản Trị Phát Triển Bền Vững ESG Toàn Diện\" (Báo cáo tác động môi trường và trách nhiệm xã hội tập đoàn). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, as confirmed in our recent departmental briefing with executive management.",
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, pending formal verification from our international distribution coordinators.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards."
+        "type": "chat_branch",
+        "promptEn": "Nordic Green Fund Due Diligence: Prove natural water recharge sustainability:",
+        "promptVi": "Thẩm định vốn đầu tư xanh châu Âu: Chứng minh với quỹ đầu tư Bắc Âu rằng sản lượng khai thác không vượt quá khả năng hoàn trả tự nhiên:",
+        "englishSentence": "Ms. Lindgren, we welcome your rigorous due diligence. Our hydrogeological telemetry network monitors aquifer replenishment in real time: we extract less than 15% of the natural subterranean spring recharge capacity, leaving the remaining 85% untouched to preserve geothermal equilibrium and surrounding eco-reserves.",
+        "audioText": "Ms. Lindgren, we welcome your rigorous due diligence. Our hydrogeological telemetry network monitors aquifer replenishment in real time: we extract less than 15% of the natural subterranean spring recharge capacity, leaving the remaining 85% untouched to preserve geothermal equilibrium and surrounding eco-reserves.",
+        "chatMessages": [
+          {
+            "speaker": "Astrid Lindgren (Head of Sustainable Investments, Nordic Green Capital)",
+            "avatar": "🇸🇪",
+            "message": "Minh, before our investment board authorizes a $50 Million green capital injection, we require empirical proof that Vikoda's extraction volume never exceeds the natural subterranean replenishment rate of the Danh Thanh aquifer."
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Báo cáo tác động môi trường và trách nhiệm xã hội tập đoàn",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Ms. Lindgren, we welcome your rigorous due diligence. Our hydrogeological telemetry network monitors aquifer replenishment in real time: we extract less than 15% of the natural subterranean spring recharge capacity, leaving the remaining 85% untouched to preserve geothermal equilibrium and surrounding eco-reserves.",
+            "trustScore": 25,
+            "feedback": "Thẩm định ESG chuẩn mực quốc tế (+25 Điểm Tin Cậy)! Cung cấp số liệu khoa học định lượng (chỉ khai thác <15% trữ lượng bổ cập tự nhiên, dành 85% bảo tồn cân bằng sinh thái), thuyết phục trọn vẹn quỹ đầu tư xanh Bắc Âu giải ngân nguồn vốn 50 triệu USD.",
+            "isCorrect": true
+          },
+          {
+            "text": "We pump out every drop of water as quickly as possible 24/7 to maximize our quarterly financial profits.",
+            "trustScore": 0,
+            "feedback": "Tư duy khai thác tận diệt vi phạm nghiêm trọng nguyên tắc ESG, khiến quỹ đầu tư lập tức rút lui và công khai chỉ trích doanh nghiệp.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa bà Lindgren, chúng tôi hoan nghênh quá trình thẩm định kỹ lưỡng của quý quỹ. Mạng lưới viễn trắc địa chất thủy văn của chúng tôi giám sát sự bổ sung của tầng ngậm nước theo thời gian thực: chúng tôi chỉ khai thác dưới 15% công suất bổ cập tự nhiên của mạch suối ngầm, để lại 85% nguyên vẹn nhằm bảo tồn trạng thái cân bằng địa nhiệt và khu bảo tồn sinh thái xung quanh.",
+        "explanation": "Chỉ số khai thác dưới 15% công suất tái tạo tự nhiên (natural recharge rate) là tiêu chuẩn vàng khẳng định sự trường tồn hàng trăm năm của mỏ nước khoáng Đảnh Thạnh.",
+        "crucialNote": "Quản trị nguồn nước có trách nhiệm bảo đảm rằng sự phát triển của doanh nghiệp hôm nay không làm tổn hại đến tài nguyên của thế hệ tương lai.",
+        "memoryHook": "Extract under 15% of recharge capacity to protect natural geothermal equilibrium."
       }
     ]
   },
@@ -13095,104 +13605,135 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u97-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding annual general meetings and global investor relations?",
-        "options": [
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, as confirmed in our recent departmental briefing with executive management.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each Annual General Meeting (AGM) financial governance term:",
+        "promptVi": "Nối các thuật ngữ tài chính và quan hệ cổ đông (IR) tại Đại hội Cổ đông thường niên:",
+        "englishSentence": "Match the 5 Annual General Meeting and shareholder relations concepts.",
+        "audioText": "Match the 5 Annual General Meeting and shareholder relations concepts.",
+        "explanation": "Đại hội Cổ đông thường niên (AGM) là diễn đàn tối cao nơi ban điều hành báo cáo kết quả tài chính vượt bậc, chiến lược mở rộng xuất khẩu và chính sách chi trả cổ tức.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ tài chính doanh nghiệp niêm yết và quan hệ cổ đông quốc tế.",
+        "pairs": [
+          {
+            "left": "Annual General Meeting (AGM)",
+            "right": "Đại hội đồng cổ đông thường niên thông qua nghị quyết định hướng tập đoàn"
+          },
+          {
+            "left": "Earnings Per Share (EPS)",
+            "right": "Chỉ số lợi nhuận ròng trên mỗi cổ phần phổ thông của công ty niêm yết"
+          },
+          {
+            "left": "Consolidated Operating Margin",
+            "right": "Biên lợi nhuận từ hoạt động kinh doanh hợp nhất sau kiểm toán"
+          },
+          {
+            "left": "Strategic Cash Dividend Payout",
+            "right": "Tỷ lệ chi trả cổ tức bằng tiền mặt thưởng cho các cổ đông gắn kết"
+          },
+          {
+            "left": "Forward-Looking Strategic Guidance",
+            "right": "Định hướng và dự báo tăng trưởng doanh thu cho niên độ tài chính mới"
+          }
+        ]
       },
       {
         "id": "u97-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this triumphant CEO address to the global shareholder assembly:",
+        "promptVi": "Luyện phát âm thông điệp báo cáo tăng trưởng doanh thu xuất khẩu trước đại hội cổ đông:",
+        "englishSentence": "I am delighted to report to our esteemed shareholders that our international export revenue surged forty-two percent, exceeding all strategic benchmarks.",
+        "audioText": "I am delighted to report to our esteemed shareholders that our international export revenue surged forty-two percent, exceeding all strategic benchmarks.",
+        "phonetics": "/aɪ æm dɪˈlaɪtɪd tuː rɪˈpɔːrt tuː ˈaʊər ɪˈstiːmd ˈʃɛərhoʊldərz ðæt ˈaʊər ˌɪntərˈnæʃnəl ˈɛkspɔːrt ˈrɛvənjuː sɜːrdʒd ˈfɔːrti-tuː pərˈsɛnt, ɪkˈsiːdɪŋ ɔːl strəˈtiːdʒɪk ˈbɛntʃmɑːrks/",
+        "vietnameseMeaning": "Tôi rất vui mừng được báo cáo trước quý vị cổ đông đáng kính rằng doanh thu xuất khẩu quốc tế của chúng ta đã tăng vọt bốn mươi hai phần trăm, vượt mọi chỉ tiêu chiến lược.",
+        "explanation": "Giọng điệu hào sảng, tự tin của vị thuyền trưởng dẫn dắt con thuyền Vikoda vươn ra biển lớn.",
+        "whyWrong": "Chú ý phát âm rõ âm /dʒ/ trong 'surged' (/sɜːrdʒd/) và trọng âm của 'benchmarks' (/ˈbɛntʃmɑːrks/).",
+        "crucialNote": "Tăng trưởng xuất khẩu 42% chứng minh chiến lược định vị cao cấp và thâm nhập chuỗi siêu thị quốc tế đã mang lại trái ngọt.",
+        "memoryHook": "Delighted to report international export revenue surged forty-two percent."
       },
       {
         "id": "u97-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Construct the financial statement highlighting premium glass portfolio margins:",
+        "promptVi": "Sắp xếp các từ thành câu phân tích động lực gia tăng biên lợi nhuận từ dòng chai thủy tinh:",
+        "englishSentence": "Strong international demand for our glass bottle portfolio contributed significantly to widening our consolidated operating margins.",
+        "audioText": "Strong international demand for our glass bottle portfolio contributed significantly to widening our consolidated operating margins.",
         "wordPool": [
-          "risk",
+          "Strong",
           "international",
-          "division",
-          "agreements",
-          "transport",
-          "maritime",
-          "Our",
-          "under",
-          "cancel",
-          "terms.",
-          "clear",
-          "commercial",
-          "never",
-          "establish"
+          "demand",
+          "for",
+          "our",
+          "glass",
+          "bottle",
+          "portfolio",
+          "contributed",
+          "significantly",
+          "to",
+          "widening",
+          "our",
+          "consolidated",
+          "operating",
+          "margins.",
+          "eroded",
+          "loss"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Nhu cầu quốc tế mạnh mẽ đối với dòng sản phẩm chai thủy tinh đã đóng góp đáng kể vào việc nới rộng biên lợi nhuận hoạt động hợp nhất của chúng ta.",
+        "explanation": "Dòng chai thủy tinh cao cấp (glass bottle portfolio) có biên lợi nhuận gộp vượt trội, giúp tối ưu hóa hiệu quả tài chính trên mỗi đơn vị thể tích xuất khẩu.",
+        "whyWrong": "Cần đặt cụm trạng từ 'contributed significantly to widening' đúng vị trí vị ngữ.",
+        "crucialNote": "Thủy tinh là bao bì thân thiện môi trường được các thị trường châu Âu và Nhật Bản ưu tiên chọn lựa hàng đầu.",
+        "memoryHook": "Glass bottle portfolio demand contributed significantly to widening operating margins."
       },
       {
         "id": "u97-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Select the corporate financial reward term to complete the AGM resolution:",
+        "promptVi": "Chọn thuật ngữ phân phối lợi nhuận tiền mặt cho cổ đông:",
+        "englishSentence": "The Board of Directors proposed a record cash [ _____ ] distribution following unprecedented international market expansion.",
+        "audioText": "The Board of Directors proposed a record cash dividend distribution following unprecedented international market expansion.",
+        "blankWord": "dividend",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "dividend",
+          "insolvency",
+          "garnishment"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Hội đồng Quản trị đã đề xuất một mức phân phối cổ tức bằng tiền mặt kỷ lục sau bước mở rộng thị trường quốc tế chưa từng có tiền lệ.",
+        "explanation": "'Cash dividend' (cổ tức bằng tiền mặt) là minh chứng hùng hồn nhất cho thấy lợi nhuận kế toán đã được hiện thực hóa thành dòng tiền thật vững mạnh.",
+        "whyWrong": "'Insolvency' (sự vỡ nợ) và 'garnishment' (tịch biên tài sản) là những thuật ngữ tiêu cực về phá sản.",
+        "crucialNote": "Chính sách cổ tức bằng tiền mặt đều đặn thu hút các quỹ đầu tư dài hạn nắm giữ cổ phiếu doanh nghiệp.",
+        "memoryHook": "Record cash dividend distributions reward loyal shareholders."
       },
       {
         "id": "u97-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Đại Hội Cổ Đông & Đối Tác Chiến Lược Toàn Cầu\" (Công bố kết quả tăng trưởng doanh thu xuất khẩu vượt bậc). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, as confirmed in our recent departmental briefing with executive management.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "AGM Floor Q&A: Balance shareholder cash dividends with automated factory capital expenditure:",
+        "promptVi": "Chất vấn tại Đại hội Cổ đông: Cân đối giữa việc chia cổ tức tiền mặt và tái đầu tư mở rộng dây chuyền Krones:",
+        "englishSentence": "Mr. Phong, our capital allocation strategy is disciplined and balanced: we propose allocating 40% of net profits to rewarding shareholders with attractive cash dividends, while reinvesting 60% into Phase 2 of our automated German Krones canning and bottling line, doubling our export capacity by Q3 next year.",
+        "audioText": "Mr. Phong, our capital allocation strategy is disciplined and balanced: we propose allocating 40% of net profits to rewarding shareholders with attractive cash dividends, while reinvesting 60% into Phase 2 of our automated German Krones canning and bottling line, doubling our export capacity by Q3 next year.",
+        "chatMessages": [
+          {
+            "speaker": "Tran Duc Phong (Institutional Fund Representative)",
+            "avatar": "📈",
+            "message": "Mr. CEO, with record export earnings this fiscal year, will the board prioritize higher cash dividend payouts or invest in additional high-speed bottling capacity to satisfy expanding European retail demand?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Công bố kết quả tăng trưởng doanh thu xuất khẩu vượt bậc",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Mr. Phong, our capital allocation strategy is disciplined and balanced: we propose allocating 40% of net profits to rewarding shareholders with attractive cash dividends, while reinvesting 60% into Phase 2 of our automated German Krones canning and bottling line, doubling our export capacity by Q3 next year.",
+            "trustScore": 25,
+            "feedback": "Giải trình tài chính bậc thầy (+25 Điểm Tin Cậy)! Chiến lược phân bổ vốn hài hòa 40/60 (vừa làm hài lòng cổ đông bằng cổ tức tiền mặt hấp dẫn, vừa đầu tư mở rộng gấp đôi công suất xuất khẩu với dây chuyền Krones của Đức), nhận được 100% phiếu tán thành tại đại hội.",
+            "isCorrect": true
+          },
+          {
+            "text": "We will burn 100% of our treasury cash on luxury corporate bonuses and give zero dividend to shareholders this year.",
+            "trustScore": 0,
+            "feedback": "Bất kính với cổ đông khiến giá cổ phiếu lao dốc và các quỹ đầu tư tổ chức đồng loạt rút vốn khỏi doanh nghiệp.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa ông Phong, chiến lược phân bổ vốn của chúng tôi rất kỷ luật và cân bằng: chúng tôi đề xuất trích 40% lợi nhuận ròng để tri ân cổ đông bằng mức cổ tức tiền mặt hấp dẫn, đồng thời tái đầu tư 60% vào Giai đoạn 2 của dây chuyền đóng chai và đóng lon tự động Krones từ Đức, nâng gấp đôi công suất xuất khẩu vào Quý 3 năm sau.",
+        "explanation": "Cân bằng giữa chi trả cổ tức (dividend yield) và tái đầu tư sinh lời (reinvestment for growth) là phẩm chất lãnh đạo tài chính của các CEO hàng đầu thế giới.",
+        "crucialNote": "Dây chuyền tự động Krones thế hệ mới giúp giảm 25% chi phí năng lượng và tối ưu hóa năng suất vận hành.",
+        "memoryHook": "Balance capital allocation: 40% cash dividends and 60% automated capacity expansion."
       }
     ]
   },
@@ -13209,104 +13750,138 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u98-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding brand valuation and cross-border M&A strategy?",
-        "options": [
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, pending formal verification from our international distribution coordinators.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each brand valuation and M&A investment banking term:",
+        "promptVi": "Nối các thuật ngữ định giá thương hiệu và M&A mua bán sáp nhập với định nghĩa tài chính:",
+        "englishSentence": "Match the 5 brand valuation and strategic M&A concepts.",
+        "audioText": "Match the 5 brand valuation and strategic M&A concepts.",
+        "explanation": "Định giá thương hiệu và tài sản vô hình chứng minh rằng nguồn mỏ địa nhiệt Đảnh Thạnh với di sản 68 năm sở hữu giá trị kinh tế khổng lồ vượt xa tài sản hữu hình thông thường.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ chuyên sâu về định giá tài sản vô hình và mua bán sáp nhập doanh nghiệp.",
+        "pairs": [
+          {
+            "left": "Brand Valuation & Goodwill",
+            "right": "Định giá thương hiệu và lợi thế thương mại vô hình của doanh nghiệp"
+          },
+          {
+            "left": "Mergers & Acquisitions (M&A)",
+            "right": "Chiến lược mua bán sáp nhập nhằm mở rộng quy mô và thị phần"
+          },
+          {
+            "left": "Discounted Cash Flow (DCF)",
+            "right": "Phương pháp định giá dòng tiền chiết khấu dựa trên dự phóng doanh thu"
+          },
+          {
+            "left": "Intangible Asset Capitalization",
+            "right": "Vốn hóa tài sản vô hình (bằng sáng chế, giấy phép mỏ độc quyền)"
+          },
+          {
+            "left": "Post-Merger Synergy Realization",
+            "right": "Hiện thực hóa các giá trị cộng hưởng về chi phí và phân phối sau sáp nhập"
+          }
+        ]
       },
       {
         "id": "u98-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this authoritative intangible asset valuation statement:",
+        "promptVi": "Luyện phát âm câu tuyên bố giá trị tài sản vô hình độc nhất vô nhị của mỏ khoáng Đảnh Thạnh:",
+        "englishSentence": "Vikoda's sovereign geothermal aquifer and sixty-eight-year scientific heritage represent irreplaceable intangible assets that drive premium enterprise valuation.",
+        "audioText": "Vikoda's sovereign geothermal aquifer and sixty-eight-year scientific heritage represent irreplaceable intangible assets that drive premium enterprise valuation.",
+        "phonetics": "/vɪˈkoʊdəz ˈsɒvrɪn ˌdʒiːoʊˈθɜːrməl ˈækwɪfər ænd ˈsɪksti-eɪt-jɪər ˌsaɪənˈtɪfɪk ˈhɛrɪtɪdʒ ˌrɛprɪˈzɛnt ˌɪrɪˈpleɪsəbl ɪnˈtændʒəbl ˈæsɛts ðæt draɪv ˈpriːmiəm ˈɛntərpraɪz ˌvæljuˈeɪʃn/",
+        "vietnameseMeaning": "Nguồn ngậm nước địa nhiệt quý giá và di sản khoa học sáu mươi tám năm của Vikoda đại diện cho những tài sản vô hình không thể thay thế giúp nâng tầm định giá doanh nghiệp.",
+        "explanation": "Các cụm từ 'sovereign geothermal aquifer', 'irreplaceable intangible assets' và 'enterprise valuation' khẳng định vị thế tài sản độc quyền.",
+        "whyWrong": "Phát âm chuẩn từ 'irreplaceable' (/ˌɪrɪˈpleɪsəbl/) và 'intangible' (/ɪnˈtændʒəbl/).",
+        "crucialNote": "Một nhà máy đóng nước thông thường có thể xây dựng trong 12 tháng, nhưng một mỏ khoáng 68 năm với chứng thực Pasteur là độc nhất vô nhị.",
+        "memoryHook": "Irreplaceable geothermal aquifers drive premium enterprise valuation."
       },
       {
         "id": "u98-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Construct the independent brand equity valuation appraisal sentence:",
+        "promptVi": "Sắp xếp các từ thành câu công bố kết quả thẩm định giá trị thương hiệu độc lập hơn 200 triệu USD:",
+        "englishSentence": "Independent appraisers valued our brand intangible equity at over two hundred million dollars based on robust international cash flows.",
+        "audioText": "Independent appraisers valued our brand intangible equity at over two hundred million dollars based on robust international cash flows.",
         "wordPool": [
-          "terms.",
-          "commercial",
-          "agreements",
+          "Independent",
+          "appraisers",
+          "valued",
+          "our",
+          "brand",
+          "intangible",
+          "equity",
+          "at",
+          "over",
+          "two",
+          "hundred",
+          "million",
+          "dollars",
+          "based",
+          "on",
+          "robust",
           "international",
-          "Our",
-          "clear",
-          "division",
-          "establish",
-          "risk",
-          "maritime",
-          "cancel",
-          "transport",
-          "under",
-          "never"
+          "cash",
+          "flows.",
+          "bankrupt",
+          "worthless"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Các chuyên gia thẩm định độc lập đã định giá tài sản vô hình thương hiệu của chúng tôi ở mức hơn hai trăm triệu đô la dựa trên dòng tiền quốc tế vững chắc.",
+        "explanation": "Định giá thương hiệu dựa trên dòng tiền tự do (DCF) là phương pháp chuẩn mực được các ngân hàng đầu tư phố Wall công nhận.",
+        "whyWrong": "Cần đặt cụm bổ nghĩa 'based on robust international cash flows' ở cuối câu.",
+        "crucialNote": "Giá trị vô hình chiếm hơn 70% tổng giá trị thị trường của các thương hiệu hàng tiêu dùng cao cấp toàn cầu.",
+        "memoryHook": "Independent appraisers valued brand equity at over two hundred million dollars."
       },
       {
         "id": "u98-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Select the investment banking metric term to complete the M&A analysis:",
+        "promptVi": "Chọn thuật ngữ định giá tài chính trong thẩm định M&A:",
+        "englishSentence": "In strategic M&A evaluations, a natural mineral spring with sovereign bottling concessions commands a significant [ _____ ] multiple compared to generic beverage plants.",
+        "audioText": "In strategic M&A evaluations, a natural mineral spring with sovereign bottling concessions commands a significant valuation multiple compared to generic beverage plants.",
+        "blankWord": "valuation",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "valuation",
+          "depreciation",
+          "forfeiture"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Trong các thẩm định M&A chiến lược, một mỏ khoáng thiên nhiên với giấy phép đóng chai độc quyền được áp dụng hệ số định giá cao vượt trội so với các nhà máy đồ uống thông thường.",
+        "explanation": "'Valuation multiple' (hệ số định giá P/E hoặc EV/EBITDA) của mỏ khoáng thiên nhiên luôn cao hơn từ 2 đến 3 lần so với công ty sản xuất nước ngọt nhân tạo.",
+        "whyWrong": "'Depreciation' (khấu hao tài sản) và 'forfeiture' (bị tịch thu) không dùng để chỉ hệ số nhân trong định giá M&A.",
+        "crucialNote": "Sự khan hiếm địa chất tạo ra con hào kinh tế (economic moat) vững chắc bảo vệ lợi nhuận biên của Vikoda.",
+        "memoryHook": "Sovereign natural springs command premium valuation multiples in M&A."
       },
       {
         "id": "u98-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Định Giá Thương Hiệu & Chiến Lược M&A\" (Nâng tầm giá trị tài sản vô hình của nguồn mỏ Đảnh Thạnh). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, as confirmed in our recent departmental briefing with executive management.",
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, pending formal verification from our international distribution coordinators.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards."
+        "type": "chat_branch",
+        "promptEn": "Private Equity Valuation Defense: Defend Vikoda's 16x EBITDA multiple against generic comparisons:",
+        "promptVi": "Thương thảo định giá M&A: Phản bác đề xuất mua cổ phần định giá thấp của quỹ đầu tư tư nhân Geneva:",
+        "englishSentence": "Monsieur Laurent, comparing a certified 1957 natural geothermal alkaline aquifer with a generic RO water bottler is fundamentally flawed. RO plants can be cloned anywhere with municipal tap water; a pristine 72°C virgin geothermal spring with proven health benefits and a 35-hectare reserve is a rare geological miracle that commands a premium multiple of at least 16x EBITDA.",
+        "audioText": "Monsieur Laurent, comparing a certified 1957 natural geothermal alkaline aquifer with a generic RO water bottler is fundamentally flawed. RO plants can be cloned anywhere with municipal tap water; a pristine 72°C virgin geothermal spring with proven health benefits and a 35-hectare reserve is a rare geological miracle that commands a premium multiple of at least 16x EBITDA.",
+        "chatMessages": [
+          {
+            "speaker": "Philippe Laurent (Senior Partner, Geneva Beverage Capital)",
+            "avatar": "💼",
+            "message": "Minh, we offer an 8x EBITDA multiple to acquire a 40% strategic stake in Vikoda, identical to our recent acquisition of a regional purified bottled water packer."
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Nâng tầm giá trị tài sản vô hình của nguồn mỏ Đảnh Thạnh",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Monsieur Laurent, comparing a certified 1957 natural geothermal alkaline aquifer with a generic RO water bottler is fundamentally flawed. RO plants can be cloned anywhere with municipal tap water; a pristine 72°C virgin geothermal spring with proven health benefits and a 35-hectare reserve is a rare geological miracle that commands a premium multiple of at least 16x EBITDA.",
+            "trustScore": 25,
+            "feedback": "Biện luận tài chính M&A đẳng cấp thế giới (+25 Điểm Tin Cậy)! Vạch rõ ranh giới bản chất giữa 'nhà máy lọc nước máy RO nhân tạo có thể nhân bản ở bất kỳ đâu' và 'mỏ khoáng địa nhiệt 72°C nguyên sinh sâu 220m là kỳ quan địa chất hiếm có', giữ vững hệ số định giá 16x EBITDA xứng tầm quốc tế.",
+            "isCorrect": true
+          },
+          {
+            "text": "Whatever valuation multiple you offer is completely fine with us, please wire the money quickly so we can cash out.",
+            "trustScore": 0,
+            "feedback": "Tư duy bán tháo rẻ mạt làm bốc hơi hàng trăm triệu USD giá trị tài sản của cổ đông và tập đoàn.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa ông Laurent, việc so sánh một mỏ ngậm nước khoáng kiềm địa nhiệt tự nhiên có chứng nhận từ năm 1957 với một cơ sở đóng chai nước RO thông thường là hoàn toàn sai lầm về mặt bản chất. Nhà máy RO có thể nhân bản ở bất kỳ đâu chỉ với nguồn nước máy thành phố; còn một mỏ suối khoáng địa nhiệt 72°C nguyên sơ với lợi ích sức khỏe đã được kiểm chứng cùng khu bảo tồn 35 héc-ta là một kỳ quan địa chất hiếm có đòi hỏi hệ số định giá cao cấp ít nhất 16 lần EBITDA.",
+        "explanation": "Phân biệt rạch ròi giữa 'commodity asset' (tài sản hàng hóa đại trà) và 'monopoly resource asset' (tài sản tài nguyên độc quyền khan hiếm) là vũ khí đàm phán tối thượng trong định giá M&A.",
+        "crucialNote": "Các nguồn suối khoáng danh tiếng thế giới như Evian hay Perrier đều được định giá ở mức trên 18x EBITDA.",
+        "memoryHook": "RO plants can be cloned; virgin geothermal springs command 16x EBITDA multiples."
       }
     ]
   },
@@ -13323,104 +13898,132 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "exercises": [
       {
         "id": "u99-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding national brand diplomatic signing protocols?",
-        "options": [
-          "All bilateral export arrangements must conform strictly to multilateral customs harmonization treaties, as confirmed in our recent departmental briefing with executive management.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match each state commercial diplomacy and National Brand protocol term:",
+        "promptVi": "Nối các thuật ngữ ngoại giao thương mại cấp quốc gia và nghi lễ Thương hiệu Quốc gia:",
+        "englishSentence": "Match the 5 state commercial diplomacy and National Brand protocol terms.",
+        "audioText": "Match the 5 state commercial diplomacy and National Brand protocol terms.",
+        "explanation": "Vinh danh Thương hiệu Quốc gia Việt Nam (Vietnam Value) là sự công nhận cao quý nhất của Đảng và Nhà nước dành cho năng lực chất lượng, đổi mới sáng tạo và sứ mệnh ngoại giao của Vikoda.",
+        "vietnameseMeaning": "Nối đúng 5 thuật ngữ nghi lễ ngoại giao thương mại và biểu trưng Thương hiệu Quốc gia.",
+        "pairs": [
+          {
+            "left": "Vietnam National Brand Award",
+            "right": "Giải thưởng Thương hiệu Quốc gia Việt Nam vinh danh tinh hoa doanh nghiệp"
+          },
+          {
+            "left": "Bilateral Commercial Protocol",
+            "right": "Nghị định thư thương mại song phương cấp chính phủ mở rộng xuất khẩu"
+          },
+          {
+            "left": "Official Signing Ceremony",
+            "right": "Lễ ký kết văn kiện chính thức trong không khí nghi lễ quốc gia trang trọng"
+          },
+          {
+            "left": "Diplomatic Corps & State Ministers",
+            "right": "Đoàn ngoại giao các nước và các vị bộ trưởng ban ngành chứng kiến"
+          },
+          {
+            "left": "Joint Strategic Declaration",
+            "right": "Tuyên bố chung về quan hệ đối tác kinh tế chiến lược toàn diện"
+          }
+        ]
       },
       {
         "id": "u99-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Shadow this noble National Brand acceptance speech statement:",
+        "promptVi": "Luyện phát âm lời phát biểu đón nhận biểu trưng Thương hiệu Quốc gia đầy trang trọng:",
+        "englishSentence": "It is our profound national privilege to be recognized as a Vietnam National Brand, carrying the pristine essence of our homeland onto the global diplomatic stage.",
+        "audioText": "It is our profound national privilege to be recognized as a Vietnam National Brand, carrying the pristine essence of our homeland onto the global diplomatic stage.",
+        "phonetics": "/ɪt ɪz ˈaʊər prəˈfaʊnd ˈnæʃnəl ˈprɪvəlɪdʒ tuː biː ˈrɛkəɡnaɪzd æz ə ˌvjɛtˈnɑːm ˈnæʃnəl brænd, ˈkæri-ɪŋ ðə ˈprɪstiːn ˈɛsns əv ˈaʊər ˈhoʊmlænd ˈɒntuː ðə ˈɡloʊbəl ˌdɪpləˈmætɪk steɪdʒ/",
+        "vietnameseMeaning": "Thật là một đặc ân quốc gia sâu sắc của chúng tôi khi được vinh danh là Thương hiệu Quốc gia Việt Nam, mang tinh hoa nguyên bản của quê hương lên vũ đài ngoại giao toàn cầu.",
+        "explanation": "Ngữ điệu trang trọng, đĩnh đạc, nhấn mạnh vào 'profound national privilege' và 'pristine essence of our homeland'.",
+        "whyWrong": "Chú ý phát âm rõ âm /dʒ/ trong 'privilege' (/ˈprɪvəlɪdʒ/) và trọng âm của 'diplomatic' (/ˌdɪpləˈmætɪk/).",
+        "crucialNote": "Thương hiệu Quốc gia không chỉ là danh hiệu thương mại, mà là sứ mệnh đại diện cho hình ảnh đất nước trên trường quốc tế.",
+        "memoryHook": "Carrying the pristine essence of our homeland onto the global diplomatic stage."
       },
       {
         "id": "u99-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Construct the formal treaty ratification sentence witnessed by state dignitaries:",
+        "promptVi": "Sắp xếp các từ thành câu mô tả nghi thức phê chuẩn hiệp định song phương trang trọng:",
+        "englishSentence": "Witnessed by government dignitaries, the comprehensive bilateral accord was formally ratified and sealed.",
+        "audioText": "Witnessed by government dignitaries, the comprehensive bilateral accord was formally ratified and sealed.",
         "wordPool": [
-          "clear",
-          "establish",
-          "transport",
-          "terms.",
-          "agreements",
-          "under",
-          "international",
-          "never",
-          "maritime",
-          "division",
-          "cancel",
-          "Our",
-          "risk",
-          "commercial"
+          "Witnessed",
+          "by",
+          "government",
+          "dignitaries,",
+          "the",
+          "comprehensive",
+          "bilateral",
+          "accord",
+          "was",
+          "formally",
+          "ratified",
+          "and",
+          "sealed.",
+          "breached",
+          "revoked"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Dưới sự chứng kiến của các quan chức chính phủ cấp cao, hiệp ước song phương toàn diện đã được chính thức phê chuẩn và đóng dấu pháp lý.",
+        "explanation": "Cấu trúc phân từ quá khứ mở đầu 'Witnessed by government dignitaries' tái hiện không khí ngoại giao trang nghiêm của lễ ký kết.",
+        "whyWrong": "Tránh nhầm lẫn vị trí của hai động từ bị động 'ratified and sealed' (phê chuẩn và đóng dấu niêm phong).",
+        "crucialNote": "Sự hiện diện của các vị bộ trưởng và đại sứ là sự bảo chứng chính trị và ngoại giao cao nhất cho hiệp định thương mại.",
+        "memoryHook": "Witnessed by government dignitaries, bilateral accords are formally ratified and sealed."
       },
       {
         "id": "u99-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
-        "blankWord": "governance",
+        "promptEn": "Select the diplomatic leadership term honoring decades of enterprise service:",
+        "promptVi": "Chọn thuật ngữ ngoại giao kinh tế hoàn thiện quyết định vinh danh của Thủ tướng:",
+        "englishSentence": "The Prime Minister conferred the National Brand insignia upon Vikoda, honoring decades of manufacturing excellence and international [ _____ ].",
+        "audioText": "The Prime Minister conferred the National Brand insignia upon Vikoda, honoring decades of manufacturing excellence and international diplomacy.",
+        "blankWord": "diplomacy",
         "options": [
-          "governance",
-          "delayed",
-          "damaged"
+          "diplomacy",
+          "insolvency",
+          "subrogation"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Thủ tướng Chính phủ đã trao biểu trưng Thương hiệu Quốc gia cho Vikoda, vinh danh nhiều thập kỷ sản xuất xuất sắc và ngoại giao thương mại quốc tế.",
+        "explanation": "'International diplomacy' (ngoại giao kinh tế quốc tế) ghi nhận đóng góp của Vikoda trong việc quảng bá hình ảnh Việt Nam tươi đẹp, văn minh và thịnh vượng.",
+        "whyWrong": "'Insolvency' (sự vỡ nợ) và 'subrogation' (thế quyền đòi nợ) hoàn toàn không phù hợp trong quyết định khen thưởng của Nhà nước.",
+        "crucialNote": "Mỗi chai nước khoáng Vikoda xuất khẩu là một đại sứ văn hóa mang thông điệp về đất nước Việt Nam kiên cường và giàu tài nguyên.",
+        "memoryHook": "Honoring decades of manufacturing excellence and international diplomacy."
       },
       {
         "id": "u99-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Lễ Ký Kết Ngoại Giao Thương Mại Cấp Quốc Gia\" (Nghi thức vinh danh sản phẩm đạt Thương Hiệu Quốc Gia Việt Nam). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, pending formal verification from our international distribution coordinators.",
-          "Our board insists on comprehensive maritime cargo insurance under Institute Cargo Clauses A, following the standardized protocols outlined in our operations manual."
+        "type": "chat_branch",
+        "promptEn": "Diplomatic Gala Toast: Secure Vikoda as the official water for a G7 Embassy National Day Gala:",
+        "promptVi": "Tiệc ngoại giao quốc tế: Đáp lại lời khen ngợi của Đại sứ Pháp và đưa Vikoda vào thực đơn dạ tiệc ngoại giao chính thức:",
+        "englishSentence": "Your Excellency, it is an extraordinary honor for Vikoda and for Vietnam. We would be thrilled to supply our flagship glass bottle reserve directly from the 72°C Danh Thanh source for the National Day Diplomatic Gala, celebrating the profound friendship and cultural appreciation between our two nations.",
+        "audioText": "Your Excellency, it is an extraordinary honor for Vikoda and for Vietnam. We would be thrilled to supply our flagship glass bottle reserve directly from the 72°C Danh Thanh source for the National Day Diplomatic Gala, celebrating the profound friendship and cultural appreciation between our two nations.",
+        "chatMessages": [
+          {
+            "speaker": "Ambassador Jean-Luc Moreau (Embassy of France)",
+            "avatar": "🇫🇷",
+            "message": "President Minh, tasting this sparkling Vikoda from Danh Thanh is a revelation — the delicate natural effervescence and mineral balance rival our finest European terroirs. We wish to serve Vikoda at our National Day Diplomatic Gala next month."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Nghi thức vinh danh sản phẩm đạt Thương Hiệu Quốc Gia Việt Nam",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Your Excellency, it is an extraordinary honor for Vikoda and for Vietnam. We would be thrilled to supply our flagship glass bottle reserve directly from the 72°C Danh Thanh source for the National Day Diplomatic Gala, celebrating the profound friendship and cultural appreciation between our two nations.",
+            "trustScore": 25,
+            "feedback": "Ngoại giao văn hóa đỉnh cao (+25 Điểm Tin Cậy)! Ứng đối tinh tế, nhã nhặn và đầy tự hào dân tộc, đưa dòng chai thủy tinh di sản Đảnh Thạnh hiện diện trang trọng trong dạ tiệc Quốc khánh của Đại sứ quán Pháp trước sự chứng kiến của toàn thể đoàn ngoại giao thế giới.",
+            "isCorrect": true
+          },
+          {
+            "text": "We don't give free water to foreign embassies. Tell your assistants to go buy it at the local convenience store.",
+            "trustScore": 0,
+            "feedback": "Thái độ thô lỗ và bần tiện hủy hoại cơ hội ngoại giao thương mại vô giá của tập đoàn và quốc gia.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thưa Đại sứ, đây là một vinh dự phi thường đối với Vikoda và đối với đất nước Việt Nam. Chúng tôi rất vinh hạnh được cung cấp dòng sản phẩm chai thủy tinh di sản trực tiếp từ nguồn mỏ Đảnh Thạnh 72°C cho Dạ tiệc Ngoại giao Quốc khánh, tôn vinh tình hữu nghị sâu sắc và sự giao thoa văn hóa giữa hai quốc gia chúng ta.",
+        "explanation": "Phục vụ tại các dạ tiệc ngoại giao của các đại sứ quán G7 là bảo chứng tối thượng cho đẳng cấp quý tộc của dòng chai thủy tinh Vikoda.",
+        "crucialNote": "Nghệ thuật ẩm thực Pháp đặc biệt khắt khe về sự hài hòa khoáng chất trong nước uống kết hợp với rượu vang và món ăn cao cấp.",
+        "memoryHook": "Serve flagship glass reserves at diplomatic galas to elevate national pride."
       }
     ]
   },
@@ -13432,109 +14035,141 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "level": "C1-C2",
     "icon": "🎓",
     "color": "amber",
-    "xpReward": 60,
-    "gemReward": 20,
+    "xpReward": 100,
+    "gemReward": 50,
     "exercises": [
       {
         "id": "u100-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-        "audioText": "Which international governance framework governs our compliance regarding C-Suite global brand diplomacy master graduation?",
-        "options": [
-          "Cross-border transaction risk must be mitigated via confirmed irrevocable credit documentation, as confirmed in our recent departmental briefing with executive management.",
-          "Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.",
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chiến lược xuất khẩu toàn cầu của chúng tôi tuân thủ nghiêm ngặt quy tắc Incoterms 2020, thư tín dụng xác nhận và luật an toàn thực phẩm quốc tế.",
-        "explanation": "Phản hồi: \"Our global export strategy strictly adheres to Incoterms 2020 rules, confirmed letters of credit, and international food regulations.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Grand Finale Milestone: Pair the 5 supreme leadership competencies across all 100 Units:",
+        "promptVi": "Đại Lễ Tốt Nghiệp 100 Bài Học: Ghép 5 đỉnh cao năng lực Lãnh đạo C-Suite Toàn cầu:",
+        "englishSentence": "Match the 5 supreme C-Suite global leadership competencies.",
+        "audioText": "Match the 5 supreme C-Suite global leadership competencies.",
+        "explanation": "Chúc mừng bạn đã hoàn thành xuất sắc toàn bộ 100 bài học toàn diện từ A1 đến C2 của Học viện Tiếng Anh Doanh nghiệp Vikoda Pro!",
+        "vietnameseMeaning": "Nối đúng 5 trụ cột năng lực lãnh đạo tối thượng được đúc kết từ 100 bài học.",
+        "pairs": [
+          {
+            "left": "Grand C-Suite Global Mastery",
+            "right": "Năng lực lãnh đạo điều hành chiến lược và ngoại giao thương mại đỉnh cao"
+          },
+          {
+            "left": "100-Unit Curriculum Achievement",
+            "right": "Hoàn thành toàn diện 100 bài học tinh hoa từ nền tảng đến C-Suite"
+          },
+          {
+            "left": "Sovereign Brand Ambassadorship",
+            "right": "Sứ mệnh đại sứ thương hiệu quốc gia bảo vệ và tỏa sáng di sản 1957"
+          },
+          {
+            "left": "Enterprise Cross-Border Governance",
+            "right": "Năng lực làm chủ pháp lý thương mại, L/C, Incoterms và trọng tài SIAC"
+          },
+          {
+            "left": "Enduring Value & Legacy Creation",
+            "right": "Kiến tạo giá trị trường tồn và di sản tự hào cho thế hệ tương lai"
+          }
+        ]
       },
       {
         "id": "u100-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "audioText": "We secure high-value international contracts using confirmed irrevocable Letters of Credit at sight.",
-        "phonetics": "/wiː sɪˈkjʊər haɪ ˈvæljuː ˌɪntərˈnæʃnəl ˈkɒntrækts ˈjuːzɪŋ kənˈfɜːrmd ɪˈrɛvəkəbl ˈlɛtərz əv ˈkrɛdɪt æt saɪt/",
-        "vietnameseMeaning": "Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Chúng tôi bảo đảm các hợp đồng quốc tế giá trị cao bằng thư tín dụng không hủy ngang trả ngay được xác nhận."
+        "promptEn": "Speak this triumphant 100-Unit Grand Graduation Oath with absolute conviction:",
+        "promptVi": "Luyện phát biểu lời tuyên thệ tốt nghiệp toàn khóa 100 Bài Học Lãnh Đạo C-Suite Toàn Năng:",
+        "englishSentence": "Having conquered all one hundred units, I stand fully equipped as a global C-Suite leader, championing Vikoda's heritage and driving international enterprise excellence.",
+        "audioText": "Having conquered all one hundred units, I stand fully equipped as a global C-Suite leader, championing Vikoda's heritage and driving international enterprise excellence.",
+        "phonetics": "/ˈhævɪŋ ˈkɒŋkərd ɔːl wʌn ˈhʌndrəd ˈjuːnɪts, aɪ stænd ˈfʊli ɪˈkwɪpt æz ə ˈɡloʊbəl siː-swiːt ˈliːdər, ˈtʃæmpiənɪŋ vɪˈkoʊdəz ˈhɛrɪtɪdʒ ænd ˈdraɪvɪŋ ˌɪntərˈnæʃnəl ˈɛntərpraɪz ˈɛksələns/",
+        "vietnameseMeaning": "Sau khi chinh phục toàn bộ một trăm bài học, tôi hoàn toàn tự tin đứng ở vị thế nhà lãnh đạo C-Suite toàn cầu, giương cao di sản Vikoda và dẫn dắt sự xuất sắc của doanh nghiệp quốc tế.",
+        "explanation": "Lời tuyên thệ đầy tự hào của học viên đã kiên trì vượt qua 500 bài tập đa dạng, làm chủ hoàn toàn tiếng Anh kinh doanh và quản trị quốc tế.",
+        "whyWrong": "Phát biểu với ánh mắt rực sáng, chất giọng hào sảng, vang dội và phong thái đĩnh đạc của một nhà lãnh đạo xuất chúng.",
+        "crucialNote": "Bạn đã chính thức gia nhập tầng lớp tinh hoa lãnh đạo thương mại quốc tế của Tập đoàn Vikoda!",
+        "memoryHook": "Equipped as a global C-Suite leader, championing Vikoda's heritage worldwide."
       },
       {
         "id": "u100-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.\":",
-        "englishSentence": "Our maritime transport agreements establish clear risk division under international commercial terms.",
-        "audioText": "Our maritime transport agreements establish clear risk division under international commercial terms.",
+        "promptEn": "Arrange the words commemorating your historic 100-unit enterprise journey:",
+        "promptVi": "Sắp xếp các từ thành câu tổng kết hành trình biến nước khoáng thiên nhiên thành biểu tượng tự hào quốc gia:",
+        "englishSentence": "Through relentless discipline and scientific mastery, we have transformed natural alkaline water into an enduring national icon.",
+        "audioText": "Through relentless discipline and scientific mastery, we have transformed natural alkaline water into an enduring national icon.",
         "wordPool": [
-          "cancel",
-          "agreements",
-          "transport",
-          "never",
-          "division",
-          "international",
-          "under",
-          "risk",
-          "clear",
-          "maritime",
-          "establish",
-          "commercial",
-          "Our",
-          "terms."
+          "Through",
+          "relentless",
+          "discipline",
+          "and",
+          "scientific",
+          "mastery,",
+          "we",
+          "have",
+          "transformed",
+          "natural",
+          "alkaline",
+          "water",
+          "into",
+          "an",
+          "enduring",
+          "national",
+          "icon.",
+          "stagnant",
+          "ordinary"
         ],
-        "vietnameseMeaning": "Hợp đồng vận tải biển của chúng tôi xác lập phân định rủi ro rõ ràng theo các điều khoản thương mại quốc tế.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our maritime transport agreements establish clear risk division under international commercial terms.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Qua kỷ luật bền bỉ và sự làm chủ khoa học, chúng ta đã chuyển hóa nước khoáng kiềm thiên nhiên thành một biểu tượng trường tồn của quốc gia.",
+        "explanation": "Cấu trúc hoàn hảo 'Through relentless discipline and scientific mastery, we have transformed A into B' đúc kết trọn vẹn tinh thần của toàn bộ chương trình.",
+        "whyWrong": "Xếp đúng trạng ngữ chỉ phương tiện 'Through relentless discipline and scientific mastery' ở đầu câu.",
+        "crucialNote": "Thành công vĩ đại luôn là kết quả của kỷ luật sắt đá và sự kiên trì mài giũa không ngừng nghỉ.",
+        "memoryHook": "Through relentless discipline and scientific mastery, we create enduring icons."
       },
       {
         "id": "u100-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Rigorous ESG sustainability [ _____ ] and international arbitration clauses minimize cross-border legal liabilities.",
-        "audioText": "Rigorous ESG sustainability governance and international arbitration clauses minimize cross-border legal liabilities.",
+        "promptEn": "Select the ultimate executive authority keyword completing your master diploma:",
+        "promptVi": "Chọn thuật ngữ quyền uy cao nhất để hoàn thiện bằng chứng nhận tốt nghiệp bậc thầy:",
+        "englishSentence": "Graduating from this master curriculum certifies your authority in international contract negotiation, global logistics, and boardroom executive [ _____ ].",
+        "audioText": "Graduating from this master curriculum certifies your authority in international contract negotiation, global logistics, and boardroom executive governance.",
         "blankWord": "governance",
         "options": [
           "governance",
-          "delayed",
-          "damaged"
+          "paralysis",
+          "obsolescence"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.",
-        "explanation": "Điền từ \"governance\" để hoàn thiện ý nghĩa: \"Quản trị phát triển bền vững ESG nghiêm ngặt và điều khoản trọng tài quốc tế giảm thiểu rủi ro pháp lý xuyên biên giới.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"governance\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: governance = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Tốt nghiệp khóa học bậc thầy này chứng nhận năng lực của bạn trong đàm phán hợp đồng quốc tế, logistics toàn cầu và quản trị điều hành cấp cao.",
+        "explanation": "'Executive governance' (năng lực quản trị điều hành cấp cao) là viên kim cương sáng nhất trên vương miện tri thức của người làm chủ khóa học 100 Unit.",
+        "whyWrong": "'Paralysis' (sự tê liệt) và 'obsolescence' (sự lạc hậu lỗi thời) hoàn toàn trái ngược với tinh thần vươn tầm đỉnh cao.",
+        "crucialNote": "Chứng chỉ C-Suite Vikoda là bảo chứng vàng cho tương lai sự nghiệp của bạn ở bất kỳ tập đoàn đa quốc gia nào.",
+        "memoryHook": "Mastery in international negotiation, global logistics, and executive governance."
       },
       {
         "id": "u100-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Đại Lễ Tốt Nghiệp Lãnh Đạo C-Suite Toàn Năng\" (Cấp Chứng Chỉ Tinh Hoa Ngoại Giao Thương Hiệu Vikoda Toàn Cầu). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "audioText": "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.",
-        "options": [
-          "We structure global distribution pacts around accredited international commercial arbitration bodies, as confirmed in our recent departmental briefing with executive management.",
-          "Our corporate governance framework enforces transparent environmental compliance audits internationally, pending formal verification from our international distribution coordinators.",
-          "We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards."
+        "type": "chat_branch",
+        "promptEn": "Grand Milestone Final Simulation: Accept the Chief Global Commercial Officer appointment on Slack:",
+        "promptVi": "Đại lễ tốt nghiệp: Chủ tịch Tập đoàn FIT và Hội đồng Quản trị bổ nhiệm bạn làm Giám Đốc Thương Mại Toàn Cầu & Đại Sứ Thương Hiệu:",
+        "englishSentence": "Mr. Chairman and esteemed Board Members, I accept this appointment with the deepest pride and dedication! Armed with the mastery of all 100 units, the spirit of 'Ngọc Trong Đá', and the pristine 68-year heritage of Danh Thanh, I pledge to lead our international expansion with uncompromising excellence, delivering Vietnam's finest natural mineral water to every corner of the globe!",
+        "audioText": "Mr. Chairman and esteemed Board Members, I accept this appointment with the deepest pride and dedication! Armed with the mastery of all 100 units, the spirit of 'Ngọc Trong Đá', and the pristine 68-year heritage of Danh Thanh, I pledge to lead our international expansion with uncompromising excellence, delivering Vietnam's finest natural mineral water to every corner of the globe!",
+        "chatMessages": [
+          {
+            "speaker": "Chairman of the Board (FIT Group & Vikoda Corporation)",
+            "avatar": "👑",
+            "message": "Minh, you have demonstrated exceptional grit, intellectual mastery, and diplomatic finesse throughout all 100 units. Today, the Board unanimously appoints you as Chief Global Commercial Officer & Sovereign Brand Ambassador! Are you ready to lead Vikoda to conquer the world?"
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi đặt nền móng đàm phán toàn cầu trên sự tuân thủ điều ước, các chỉ số ESG minh bạch và cơ chế trọng tài bảo hộ.",
-        "explanation": "Giải pháp tối ưu: \"We anchor our global negotiations on certified treaty compliance, transparent ESG metrics, and dispute arbitration safeguards.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Cấp Chứng Chỉ Tinh Hoa Ngoại Giao Thương Hiệu Vikoda Toàn Cầu",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Mr. Chairman and esteemed Board Members, I accept this appointment with the deepest pride and dedication! Armed with the mastery of all 100 units, the spirit of 'Ngọc Trong Đá', and the pristine 68-year heritage of Danh Thanh, I pledge to lead our international expansion with uncompromising excellence, delivering Vietnam's finest natural mineral water to every corner of the globe!",
+            "trustScore": 25,
+            "feedback": "VINH DANH TỐT NGHIỆP THỦ KHOA XUẤT SẮC 100 BÀI HỌC! Bạn đã chính thức bước lên đỉnh cao danh vọng: Giám Đốc Thương Mại Toàn Cầu kiêm Đại Sứ Thương Hiệu Toàn Quyền của Vikoda! Chúc mừng bạn đã hoàn thành trọn vẹn kiệt tác đào tạo tiếng Anh doanh nghiệp lớn nhất Việt Nam!",
+            "isCorrect": true
+          },
+          {
+            "text": "No thanks, studying 100 units was way too exhausting so I am submitting my resignation and going home to sleep.",
+            "trustScore": 0,
+            "feedback": "Bỏ cuộc ngay trước ngưỡng cửa vinh quang và đánh mất sự nghiệp rực rỡ suốt đời.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Kính thưa Chủ tịch và các thành viên Hội đồng Quản trị đáng kính, tôi xin đón nhận sự bổ nhiệm này với niềm tự hào và sự cống hiến sâu sắc nhất! Được trang bị kiến thức tinh hoa của toàn bộ 100 bài học, tinh thần 'Ngọc Trong Đá' và di sản 68 năm nguyên sơ của nguồn mỏ Đảnh Thạnh, tôi xin tuyên thệ sẽ dẫn dắt công cuộc mở rộng quốc tế với sự xuất sắc không bao giờ thỏa hiệp, đưa nguồn nước khoáng thiên nhiên tuyệt hảo nhất của Việt Nam đến mọi góc bể chân trời!",
+        "explanation": "Khoảnh khắc đăng quang vĩ đại: Hội tụ đủ Tâm - Tầm - Tài, kết tinh tinh hoa ngôn ngữ và tư duy quản trị toàn cầu để giương cao lá cờ thương hiệu Việt Nam trên bản đồ thế giới.",
+        "crucialNote": "Chúc mừng bạn đã xuất sắc tốt nghiệp toàn bộ 100 Unit của Vikoda English Pro!",
+        "memoryHook": "Lead international expansion delivering Vietnam's finest mineral water to the globe."
       }
     ]
   }
