@@ -8431,110 +8431,138 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Chào Hàng B2B Cho Đại Lý & Nhà Phân Phối",
     "subtitle": "Trình bày chính sách hoa hồng và điều kiện hợp tác dài hạn",
     "level": "B2",
-    "icon": "🎯",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "🤝",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u61-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for B2 distributor sales pitch and volume incentives?",
-        "options": [
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions, pending formal verification from our international distribution coordinators.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match B2B distributor pitching and commercial policy terms:",
+        "promptVi": "Ghép cặp thuật ngữ chào hàng phân phối B2B và chính sách thương mại:",
+        "englishSentence": "Match B2B distributor pitching terms.",
+        "audioText": "Match B2B distributor pitching terms.",
+        "explanation": "5 thuật ngữ đàm phán mấu chốt để thiết lập mạng lưới phân phối vững mạnh.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ chính sách đại lý phân phối B2B.",
+        "pairs": [
+          {
+            "left": "Tiered commission structure",
+            "right": "Cơ cấu hoa hồng theo bậc thang lũy tiến hấp dẫn"
+          },
+          {
+            "left": "Territory protection clause",
+            "right": "Điều khoản bảo vệ độc quyền địa bàn phân phối"
+          },
+          {
+            "left": "Quarterly sales rebate",
+            "right": "Chiết khấu thưởng doanh số định kỳ hàng quý"
+          },
+          {
+            "left": "Trade marketing co-op fund",
+            "right": "Quỹ hỗ trợ tiếp thị và khuyến mại chung tại điểm bán"
+          },
+          {
+            "left": "Minimum stocking inventory",
+            "right": "Mức tồn kho tối thiểu đại lý phải luôn duy trì"
+          }
+        ]
       },
       {
         "id": "u61-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this distributor partnership proposition clearly:",
+        "promptVi": "Luyện nói câu đề xuất chính sách phân phối hấp dẫn cho đại lý cấp một:",
+        "englishSentence": "We offer our tier-one distributors a guaranteed twelve percent margin backed by comprehensive nationwide marketing campaigns.",
+        "audioText": "We offer our tier-one distributors a guaranteed twelve percent margin backed by comprehensive nationwide marketing campaigns.",
+        "phonetics": "/wiː ˈɒfər ˈaʊər tɪər wʌn dɪˈstrɪbjʊtərz ə ˌɡærənˈtiːd twɛlv pərˈsɛnt ˈmɑːrdʒɪn bækt baɪ ˌkɒmprɪˈhɛnsɪv ˈneɪʃənwaɪd ˈmɑːrkɪtɪŋ kæmˈpeɪnz/",
+        "vietnameseMeaning": "Chúng tôi cung cấp cho các nhà phân phối cấp một biên lợi nhuận bảo đảm 12% được hậu thuẫn bởi các chiến dịch marketing toàn quốc toàn diện.",
+        "explanation": "\"Guaranteed twelve percent margin backed by comprehensive marketing\" là cam kết mang lại dòng tiền và lợi nhuận hấp dẫn nhất cho nhà phân phối.",
+        "whyWrong": "Phát âm chuẩn từ \"tier-one\" (/tɪər wʌn/), \"margin\" (/ˈmɑːrdʒɪn/) và \"nationwide\" (/ˈneɪʃənwaɪd/).",
+        "crucialNote": "Đại lý phân phối luôn quan tâm đến hai yếu tố: Tỷ suất lợi nhuận và Tốc độ quay vòng vốn hàng hóa.",
+        "memoryHook": "Guaranteed 12% margin backed by nationwide marketing."
       },
       {
         "id": "u61-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the quarterly volume rebate mechanism:",
+        "promptVi": "Ghép câu: \"Các nhà phân phối đạt chỉ tiêu quý sẽ nhận thêm ba phần trăm chiết khấu thưởng\":",
+        "englishSentence": "Distributors exceeding quarterly quotas will receive an additional three percent volume rebate.",
+        "audioText": "Distributors exceeding quarterly quotas will receive an additional three percent volume rebate.",
         "wordPool": [
-          "parties",
-          "to",
-          "sign",
-          "agree",
-          "contract.",
-          "cancel",
-          "commercial",
-          "Both",
-          "never",
-          "the",
-          "comprehensive",
-          "master",
-          "distribution"
+          "Distributors",
+          "exceeding",
+          "quarterly",
+          "quotas",
+          "will",
+          "receive",
+          "an",
+          "additional",
+          "three",
+          "percent",
+          "volume",
+          "rebate.",
+          "penalty",
+          "loss"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Các nhà phân phối vượt chỉ tiêu doanh số hàng quý sẽ nhận thêm ba phần trăm chiết khấu thưởng sản lượng.",
+        "explanation": "\"Volume rebate\" (thưởng chiết khấu sản lượng) là đòn bẩy kích thích đại lý nhập hàng số lượng lớn mỗi quý.",
+        "whyWrong": "Dùng cụm \"exceeding quarterly quotas\" thể hiện phần thưởng xứng đáng cho nỗ lực vượt chỉ tiêu.",
+        "crucialNote": "Chiết khấu thưởng thường được cấn trừ trực tiếp vào đơn hàng nhập của quý kế tiếp.",
+        "memoryHook": "Exceeding quotas receive 3% volume rebate."
       },
       {
         "id": "u61-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct legal contract term for sales area defense:",
+        "promptVi": "Chọn điều khoản hợp đồng bảo vệ đại lý khỏi sự cạnh tranh lấn sân địa bàn:",
+        "englishSentence": "Vikoda guarantees strict [ _____ ] protection so no neighboring dealer can undercut your designated accounts.",
+        "audioText": "Vikoda guarantees strict territory protection so no neighboring dealer can undercut your designated accounts.",
+        "blankWord": "territory",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "territory",
+          "weather",
+          "fashion"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Vikoda cam kết bảo vệ địa bàn nghiêm ngặt để không đại lý lân cận nào có thể bán phá giá vào các khách hàng đã chỉ định của bạn.",
+        "explanation": "\"Territory protection\" (bảo hộ địa bàn) là lời hứa danh dự của hãng để đại lý yên tâm đầu tư nhân sự phát triển thị trường.",
+        "whyWrong": "\"Weather\" (thời tiết) hay \"fashion\" (thời trang) không liên quan đến hợp đồng phân phối.",
+        "crucialNote": "Xử phạt nghiêm khắc các hành vi bán lấn vùng (cross-territory dumping).",
+        "memoryHook": "Strict territory protection = Bảo hộ địa bàn nghiêm ngặt."
       },
       {
         "id": "u61-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Chào Hàng B2B Cho Đại Lý & Nhà Phân Phối\" (Trình bày chính sách hoa hồng và điều kiện hợp tác dài hạn). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets."
+        "type": "chat_branch",
+        "promptEn": "Negotiate distribution terms with an established beverage wholesaler on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Tổng đại lý đồ uống lớn nhất miền Trung muốn phân phối độc quyền Vikoda nhưng đòi chiết khấu 18% ngay từ tháng đầu:",
+        "englishSentence": "We can structure this progressively: start at 12% baseline margin, plus a 6% retrospective rebate once you hit 50,000 cases in Q1!",
+        "audioText": "We can structure this progressively: start at 12% baseline margin, plus a 6% retrospective rebate once you hit 50,000 cases in Q1!",
+        "chatMessages": [
+          {
+            "speaker": "Mr. Vinh (General Director, Central Beverage Logistics)",
+            "avatar": "🚚",
+            "message": "Minh, we distribute to 2,000 retail outlets in Da Nang and Quang Nam. But we need an 18% flat discount upfront or we won't sign."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Trình bày chính sách hoa hồng và điều kiện hợp tác dài hạn",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "We can structure this progressively: start at 12% baseline margin, plus a 6% retrospective rebate once you hit 50,000 cases in Q1!",
+            "trustScore": 25,
+            "feedback": "Nghệ thuật đàm phán thương mại bậc thầy! Không giảm giá sốc làm gãy giá thị trường, mà chia bậc thang: 12% cơ sở + thưởng 6% hồi tố khi đạt 50.000 thùng, bảo vệ trọn vẹn biên lợi nhuận của công ty.",
+            "isCorrect": true
+          },
+          {
+            "text": "Sure, we can give you 25% discount and free trucks too if you sign today.",
+            "trustScore": 0,
+            "feedback": "Nhượng bộ tự sát! Bán dưới giá thành sẽ khiến nhà máy phá sản và làm loạn hệ thống giá cả.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chúng ta có thể thiết kế chính sách theo lộ trình: khởi đầu với biên lợi nhuận cơ sở 12%, cộng thêm 6% thưởng hồi tố khi bạn đạt mốc 50.000 thùng trong Quý 1!",
+        "explanation": "Chiết khấu hồi tố (Retrospective Rebate) gắn liền với doanh số thực tế là công cụ bảo vệ giá bán lẻ chuẩn mực nhất của các tập đoàn đa quốc gia.",
+        "crucialNote": "Bảo vệ giá là bảo vệ sinh mệnh của thương hiệu cao cấp.",
+        "memoryHook": "Progressive structure: baseline margin + retrospective volume rebate."
       }
     ]
   },
@@ -8545,109 +8573,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "subtitle": "Thuyết phục GM và F&B Director đưa chai thủy tinh lên bàn tiệc",
     "level": "B2",
     "icon": "🏨",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u62-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for penetrating five-star luxury hotel HORECA accounts?",
-        "options": [
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions, pending formal verification from our international distribution coordinators.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match 5-star HORECA channel acquisition terms with their definitions:",
+        "promptVi": "Ghép cặp các thuật ngữ thâm nhập kênh HORECA (Hotel - Restaurant - Cafe) khách sạn 5 sao:",
+        "englishSentence": "Match HORECA hospitality channel terms.",
+        "audioText": "Match HORECA hospitality channel terms.",
+        "explanation": "5 thuật ngữ mở toang cánh cửa vào các khu nghỉ dưỡng và khách sạn siêu sang.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ phát triển kênh HORECA cao cấp.",
+        "pairs": [
+          {
+            "left": "HORECA channel penetration",
+            "right": "Thâm nhập mạng lưới Khách sạn - Nhà hàng - Quán Cafe cao cấp"
+          },
+          {
+            "left": "Food & Beverage Director",
+            "right": "Giám đốc Ẩm thực khách sạn chịu trách nhiệm thực đơn đồ uống"
+          },
+          {
+            "left": "Tabletop bottle presentation",
+            "right": "Nghi thức bày chai nước thủy tinh trang nhã trên bàn tiệc"
+          },
+          {
+            "left": "Eco-friendly zero plastic pledge",
+            "right": "Cam kết phát triển xanh loại bỏ rác thải nhựa của khu nghỉ dưỡng"
+          },
+          {
+            "left": "House water pouring rights",
+            "right": "Quyền cung ứng độc quyền nước uống chính thức cho toàn bộ phòng khách"
+          }
+        ]
       },
       {
         "id": "u62-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this pitch to a 5-star hotel General Manager clearly:",
+        "promptVi": "Luyện nói câu thuyết phục Tổng Giám đốc khách sạn 5 sao đưa chai thủy tinh Vikoda vào phòng nghỉ:",
+        "englishSentence": "Serving Vikoda glass bottles in guest rooms aligns perfectly with your resort's luxury sustainability pledge while reducing plastic waste.",
+        "audioText": "Serving Vikoda glass bottles in guest rooms aligns perfectly with your resort's luxury sustainability pledge while reducing plastic waste.",
+        "phonetics": "/ˈsɜːrvɪŋ vɪˈkoʊdə ɡlæs ˈbɒtlz ɪn ɡɛst ruːmz əˈlaɪnz ˈpɜːrfɪktli wɪð jʊər rɪˈzɔːrts ˈlʌkʃəri səˌsteɪnəˈbɪləti plɛdʒ waɪl rɪˈdjuːsɪŋ ˈplæstɪk weɪst/",
+        "vietnameseMeaning": "Phục vụ chai thủy tinh Vikoda trong phòng khách hoàn toàn đồng điệu với cam kết bền vững sang trọng của khu nghỉ dưỡng, đồng thời giảm thiểu rác thải nhựa.",
+        "explanation": "\"Aligns with your luxury sustainability pledge while reducing plastic waste\" đánh trúng mục tiêu phát triển bền vững hàng đầu của các tập đoàn quản lý khách sạn quốc tế.",
+        "whyWrong": "Phát âm chuẩn từ \"sustainability pledge\" (/səˌsteɪnəˈbɪləti plɛdʒ/) và \"aligns perfectly\" (/əˈlaɪnz ˈpɜːrfɪktli/).",
+        "crucialNote": "Các resort như Six Senses hay Aman luôn ưu tiên các sản phẩm không rác thải nhựa.",
+        "memoryHook": "Aligns with sustainability pledge while reducing plastic waste."
       },
       {
         "id": "u62-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to present pouring rights for banquet events:",
+        "promptVi": "Ghép câu: \"Vikoda có thể cung cấp độc quyền nước khoáng chai thủy tinh cho tất cả các hội nghị và tiệc cưới\":",
+        "englishSentence": "Vikoda can provide exclusive glass bottle pouring rights for all conferences and wedding banquets.",
+        "audioText": "Vikoda can provide exclusive glass bottle pouring rights for all conferences and wedding banquets.",
         "wordPool": [
-          "never",
-          "agree",
-          "the",
-          "contract.",
-          "master",
-          "distribution",
-          "to",
-          "parties",
-          "commercial",
-          "cancel",
-          "sign",
-          "comprehensive",
-          "Both"
+          "Vikoda",
+          "can",
+          "provide",
+          "exclusive",
+          "glass",
+          "bottle",
+          "pouring",
+          "rights",
+          "for",
+          "all",
+          "conferences",
+          "and",
+          "wedding",
+          "banquets.",
+          "trash",
+          "plastic"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Vikoda có thể cung cấp độc quyền nước khoáng chai thủy tinh cho tất cả các hội nghị và tiệc cưới.",
+        "explanation": "\"Pouring rights\" (quyền phục vụ đồ uống độc quyền) mang lại sản lượng tiêu thụ khổng lồ và ổn định hàng tháng.",
+        "whyWrong": "Chai thủy tinh nắp vương miện tôn vinh không gian sang trọng của các sảnh tiệc cưới 5 sao.",
+        "crucialNote": "Đảm bảo cung cấp sẵn khui nắp chai inox khắc logo khách sạn sang trọng.",
+        "memoryHook": "Exclusive glass bottle pouring rights for banquets."
       },
       {
         "id": "u62-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct luxury dining metric term:",
+        "promptVi": "Chọn thuật ngữ ẩm thực chỉ thực đơn kết hợp món ăn và nước uống cao cấp:",
+        "englishSentence": "The master sommelier designed an exclusive water [ _____ ] menu pairing Vikoda with fresh seafood courses.",
+        "audioText": "The master sommelier designed an exclusive water pairing menu pairing Vikoda with fresh seafood courses.",
+        "blankWord": "pairing",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "pairing",
+          "fighting",
+          "gambling"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Chuyên gia thử nếm ẩm thực trưởng đã thiết kế một thực đơn kết hợp nước uống độc quyền phối cùng các món hải sản tươi sống.",
+        "explanation": "\"Water pairing\" (nghệ thuật phối hợp nước khoáng với món ăn) là xu hướng ẩm thực thời thượng tại các nhà hàng Michelin.",
+        "whyWrong": "\"Fighting\" (đánh nhau) hay \"gambling\" (đánh bạc) là từ ngữ tiêu cực.",
+        "crucialNote": "Nước khoáng kiềm tôn vinh vị ngọt tự nhiên của tôm hùm và cá biển Nha Trang.",
+        "memoryHook": "Water pairing menu with fresh seafood."
       },
       {
         "id": "u62-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Đột Phá Kênh HORECA Khách Sạn 5 Sao\" (Thuyết phục GM và F&B Director đưa chai thủy tinh lên bàn tiệc). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We must align the proposed rebate framework with our overarching regional retail guidelines.",
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds."
+        "type": "chat_branch",
+        "promptEn": "Close a contract with an international resort chain GM on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Tổng Giám đốc khu nghỉ dưỡng InterContinental hỏi về giải pháp thu hồi vỏ chai thủy tinh để bảo vệ cảnh quan biển:",
+        "englishSentence": "We operate a circular reverse-logistics system: our delivery trucks collect empty sanitized crates weekly, guaranteeing zero environmental footprint for your resort!",
+        "audioText": "We operate a circular reverse-logistics system: our delivery trucks collect empty sanitized crates weekly, guaranteeing zero environmental footprint for your resort!",
+        "chatMessages": [
+          {
+            "speaker": "Christophe (General Manager, InterContinental Danang)",
+            "avatar": "🏖️",
+            "message": "Minh, we love the elegant bottle aesthetics. But our island sustainability charter requires a complete circular bottle return process. Can you support that?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Thuyết phục GM và F&B Director đưa chai thủy tinh lên bàn tiệc",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "We operate a circular reverse-logistics system: our delivery trucks collect empty sanitized crates weekly, guaranteeing zero environmental footprint for your resort!",
+            "trustScore": 25,
+            "feedback": "Giải pháp chuỗi cung ứng tuần hoàn (circular reverse-logistics) đốn tim Tổng Giám đốc! Xe giao hàng tự động thu hồi két vỏ chai hàng tuần, bảo đảm 0% rác thải cho khu nghỉ dưỡng xanh.",
+            "isCorrect": true
+          },
+          {
+            "text": "Just smash the empty glass bottles on the beach rocks, glass is made of sand anyway.",
+            "trustScore": 0,
+            "feedback": "Hủy diệt du lịch và đe dọa tính mạng du khách! Khách sạn sẽ cấm cửa nhân viên bán hàng vĩnh viễn.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chúng tôi vận hành hệ thống logistics tuần hoàn thu hồi: xe tải giao hàng của chúng tôi sẽ thu gom các két vỏ chai rỗng đã làm sạch hàng tuần, bảo đảm khu nghỉ dưỡng của ngài hoàn toàn không có dấu chân rác thải môi trường!",
+        "explanation": "Logistics thu hồi vỏ chai (Reverse Logistics) là tiêu chí quyết định để thắng thầu các khu nghỉ dưỡng sinh thái cao cấp.",
+        "crucialNote": "Mô hình kinh tế tuần hoàn (Circular Economy) khẳng định đẳng cấp phát triển bền vững của Vikoda.",
+        "memoryHook": "Circular reverse-logistics collects empty crates weekly."
       }
     ]
   },
@@ -8658,109 +8716,141 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "subtitle": "Bẻ gãy so sánh với nước lọc rẻ tiền bằng phân tích giá trị",
     "level": "B2",
     "icon": "🛡️",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u63-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for overcoming partner price objections with value analysis?",
-        "options": [
-          "We must align the proposed rebate framework with our overarching regional retail guidelines, as confirmed in our recent departmental briefing with executive management.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, pending formal verification from our international distribution coordinators.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match price objection handling techniques with their negotiation tactics:",
+        "promptVi": "Ghép cặp các kỹ thuật bẻ gãy phản bác về giá đắt trong đàm phán B2B:",
+        "englishSentence": "Match price objection reframing techniques.",
+        "audioText": "Match price objection reframing techniques.",
+        "explanation": "5 chiến thuật tâm lý biến lời chê đắt thành nhận thức sâu sắc về giá trị đầu tư xứng đáng.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp kỹ thuật xử lý phản bác về giá đắt.",
+        "pairs": [
+          {
+            "left": "Value-based reframing",
+            "right": "Định hình lại góc nhìn chuyển từ chi phí sang giá trị nhận được"
+          },
+          {
+            "left": "Cost per serving breakdown",
+            "right": "Chia nhỏ chi phí theo từng ngụm uống bảo vệ sức khỏe mỗi ngày"
+          },
+          {
+            "left": "False equivalence challenge",
+            "right": "Bẻ gãy so sánh khập khiễng giữa nước khoáng và nước lọc tinh khiết"
+          },
+          {
+            "left": "Premium guest satisfaction",
+            "right": "Sự hài lòng của khách hàng thượng lưu giúp tăng giá phòng"
+          },
+          {
+            "left": "Health investment ROI",
+            "right": "Tỷ suất sinh lời từ việc đầu tư vào sức khỏe người tiêu dùng"
+          }
+        ]
       },
       {
         "id": "u63-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this master reframing statement to a skeptical procurement director:",
+        "promptVi": "Luyện nói câu bẻ gãy so sánh khập khiễng giữa Vikoda và nước lọc giá rẻ:",
+        "englishSentence": "Comparing Vikoda to filtered tap water is like comparing aged champagne to carbonated water; our value lies in sixty-eight years of geological purity.",
+        "audioText": "Comparing Vikoda to filtered tap water is like comparing aged champagne to carbonated water; our value lies in sixty-eight years of geological purity.",
+        "phonetics": "/kəmˈpɛərɪŋ vɪˈkoʊdə tuː ˈfɪltərd tæp ˈwɔːtər ɪz laɪk kəmˈpɛərɪŋ eɪdʒd ʃæmˈpeɪn tuː ˈkɑːrbəneɪtɪd ˈwɔːtər; ˈaʊər ˈvæljuː laɪz ɪn ˈsɪksti eɪt jɪərz ɒv ˌdʒiːəˈlɒdʒɪkəl ˈpjʊərəti/",
+        "vietnameseMeaning": "So sánh Vikoda với nước máy lọc cũng giống như so sánh rượu sâm-panh thượng hạng với nước ngọt có ga; giá trị của chúng tôi nằm ở 68 năm tinh khiết địa chất.",
+        "explanation": "\"Comparing Vikoda to filtered tap water is like comparing aged champagne to carbonated water\" là đòn bẩy ẩn dụ kinh điển khiến đối tác tự nhận thấy sự so sánh của họ là vô lý.",
+        "whyWrong": "Phát âm chuẩn từ \"aged champagne\" (/eɪdʒd ʃæmˈpeɪn/) và \"geological purity\" (/ˌdʒiːəˈlɒdʒɪkəl ˈpjʊərəti/).",
+        "crucialNote": "Không tự ti thanh minh giá, hãy tự hào nâng cao vị thế sản phẩm.",
+        "memoryHook": "Like comparing champagne to carbonated water; value lies in geological purity."
       },
       {
         "id": "u63-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to break down the cost per guest per day:",
+        "promptVi": "Ghép câu: \"Chênh lệch chi phí chỉ là hai nghìn đồng mỗi khách nhưng nâng tầm toàn bộ trải nghiệm nghỉ dưỡng\":",
+        "englishSentence": "The cost difference is only two thousand dong per guest but elevates their entire resort stay.",
+        "audioText": "The cost difference is only two thousand dong per guest but elevates their entire resort stay.",
         "wordPool": [
-          "to",
-          "contract.",
-          "Both",
-          "never",
-          "distribution",
-          "the",
-          "cancel",
-          "comprehensive",
-          "sign",
-          "commercial",
-          "agree",
-          "master",
-          "parties"
+          "The",
+          "cost",
+          "difference",
+          "is",
+          "only",
+          "two",
+          "thousand",
+          "dong",
+          "per",
+          "guest",
+          "but",
+          "elevates",
+          "their",
+          "entire",
+          "resort",
+          "stay.",
+          "ruin",
+          "cheap"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Chênh lệch chi phí chỉ là hai nghìn đồng mỗi khách nhưng nâng tầm toàn bộ trải nghiệm nghỉ dưỡng của họ.",
+        "explanation": "Kỹ thuật chia nhỏ chi phí (Cost breakdown): So với giá phòng 5 triệu đồng/đêm, thêm 2.000 đồng để phục vụ nước khoáng kiềm chai thủy tinh là một quyết định đầu tư quá hời.",
+        "whyWrong": "\"Elevates their entire resort stay\" chứng minh lợi ích trải nghiệm vượt xa số tiền chênh lệch.",
+        "crucialNote": "Khách hàng sẵn sàng đánh giá 5 sao trên TripAdvisor nhờ những chi tiết phục vụ tinh tế.",
+        "memoryHook": "Difference is 2,000 dong but elevates entire resort stay."
       },
       {
         "id": "u63-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct commercial negotiation metric:",
+        "promptVi": "Chọn từ định nghĩa trọng tâm của đàm phán giá trị thay vì chỉ chăm chăm nhìn vào chi phí:",
+        "englishSentence": "Sophisticated buyers focus on long-term brand [ _____ ] rather than short-term price cutting.",
+        "audioText": "Sophisticated buyers focus on long-term brand value rather than short-term price cutting.",
+        "blankWord": "value",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "value",
+          "rumor",
+          "debt"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Những người mua hàng thông thái tập trung vào giá trị thương hiệu dài hạn hơn là việc cắt giảm giá ngắn hạn.",
+        "explanation": "\"Brand value\" (giá trị thương hiệu) là nền tảng giữ chân khách hàng cao cấp trung thành.",
+        "whyWrong": "\"Rumor\" (tin đồn) hay \"debt\" (nợ nần) hoàn toàn sai lệch tinh thần kinh doanh chiến lược.",
+        "crucialNote": "Đua nhau giảm giá là con đường tự sát của các nhà sản xuất.",
+        "memoryHook": "Focus on long-term brand value rather than price cutting."
       },
       {
         "id": "u63-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Xử Lý Phản Bác Giá Đắt Của Đối Tác\" (Bẻ gãy so sánh với nước lọc rẻ tiền bằng phân tích giá trị). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts."
+        "type": "chat_branch",
+        "promptEn": "Overcome price pushback from a supermarket procurement buyer on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Giám đốc mua hàng siêu thị ép hạ giá 15% vì cho rằng nước tinh khiết Aquafina/Dasani có giá rẻ hơn nhiều:",
+        "englishSentence": "Aquafina is treated municipal tap water, while Vikoda is 100% natural alkaline mineral water. Health-conscious shoppers happily pay a 20% premium for real natural pH 9.0!",
+        "audioText": "Aquafina is treated municipal tap water, while Vikoda is 100% natural alkaline mineral water. Health-conscious shoppers happily pay a 20% premium for real natural pH 9.0!",
+        "chatMessages": [
+          {
+            "speaker": "Mr. Tuan (Category Sourcing Manager, Mega Market)",
+            "avatar": "🛒",
+            "message": "Minh, your 500ml wholesale price is 15% higher than RO purified bottled water. Slash your price by 15% or we will delist your SKUs."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Bẻ gãy so sánh với nước lọc rẻ tiền bằng phân tích giá trị",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Aquafina is treated municipal tap water, while Vikoda is 100% natural alkaline mineral water. Health-conscious shoppers happily pay a 20% premium for real natural pH 9.0!",
+            "trustScore": 25,
+            "feedback": "Phản pháo bản lĩnh giữ vững giá! Chỉ rõ sự khác biệt giữa nước máy thành phố và nước khoáng kiềm thiên nhiên, khẳng định người tiêu dùng thông thái luôn sẵn sàng trả cao hơn 20% cho sức khỏe, bảo vệ doanh thu cho cả siêu thị.",
+            "isCorrect": true
+          },
+          {
+            "text": "Please don't delist us, we will drop our price to zero profit just to stay on your shelf.",
+            "trustScore": 0,
+            "feedback": "Đầu hàng nhục nhã! Bị ép giá triệt để và phá nát định vị thương hiệu cao cấp.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Aquafina là nước máy đô thị qua xử lý lọc, trong khi Vikoda là nước khoáng kiềm thiên nhiên 100%. Người tiêu dùng quan tâm sức khỏe vui vẻ trả cao hơn 20% cho giá trị pH 9.0 tự nhiên đích thực!",
+        "explanation": "Đứng vững trước áp lực của người mua hàng siêu thị là bản lĩnh của nhân sự bán hàng B2B chuyên nghiệp.",
+        "crucialNote": "Siêu thị kiếm được nhiều lợi nhuận tuyệt đối hơn khi bán một sản phẩm phân khúc cao cấp (Premium Basket Size).",
+        "memoryHook": "Shoppers pay 20% premium for real natural pH 9.0."
       }
     ]
   },
@@ -8770,110 +8860,136 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Bảo Vệ Biên Lợi Nhuận & Không Hạ Giá Vội",
     "subtitle": "Giữ vững định vị cao cấp, thay thế bằng hỗ trợ marketing",
     "level": "B2",
-    "icon": "💰",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "💎",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u64-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for protecting profit margins without early discounting?",
-        "options": [
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, as confirmed in our recent departmental briefing with executive management.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds, pending formal verification from our international distribution coordinators.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match profit margin defense and non-price concession strategies:",
+        "promptVi": "Ghép cặp các chiến lược bảo vệ biên lợi nhuận và nhượng bộ phi tiền mặt:",
+        "englishSentence": "Match margin defense and value-add concession terms.",
+        "audioText": "Match margin defense and value-add concession terms.",
+        "explanation": "5 vũ khí đàm phán thay thế giảm giá bằng các gói tài trợ tiếp thị và hỗ trợ trưng bày điểm bán.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp chiến lược bảo vệ biên lợi nhuận kinh doanh.",
+        "pairs": [
+          {
+            "left": "Margin defense discipline",
+            "right": "Kỷ luật thép kiên quyết bảo vệ biên lợi nhuận gộp"
+          },
+          {
+            "left": "Non-price concessions",
+            "right": "Các nhượng bộ gia tăng giá trị phi tiền mặt"
+          },
+          {
+            "left": "Co-branded POSM support",
+            "right": "Tài trợ biển hiệu và tủ mát đồng thương hiệu"
+          },
+          {
+            "left": "Free staff hydration trial",
+            "right": "Tặng nước khoáng dùng thử chăm sóc nhân viên đối tác"
+          },
+          {
+            "left": "Avoid destructive price war",
+            "right": "Né tránh cuộc chiến giảm giá tự sát tàn phá thị trường"
+          }
+        ]
       },
       {
         "id": "u64-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this diplomatic value-add counter-offer clearly:",
+        "promptVi": "Luyện nói câu từ chối giảm giá khéo léo và đề xuất gói tài trợ tiếp thị thay thế:",
+        "englishSentence": "Instead of discounting unit price, we can provide fifty branded display coolers and comprehensive POSM marketing support.",
+        "audioText": "Instead of discounting unit price, we can provide fifty branded display coolers and comprehensive POSM marketing support.",
+        "phonetics": "/ɪnˈstɛd ɒv dɪsˈkaʊntɪŋ ˈjuːnɪt praɪs, wiː kæn prəˈvaɪd ˈfɪfti brændɪd dɪˈspleɪ ˈkuːlərz ænd ˌkɒmprɪˈhɛnsɪv piː oʊ ɛs ɛm ˈmɑːrkɪtɪŋ səˈpɔːrt/",
+        "vietnameseMeaning": "Thay vì giảm đơn giá sản phẩm, chúng tôi có thể tài trợ năm mươi tủ mát thương hiệu và hỗ trợ marketing vật phẩm điểm bán toàn diện.",
+        "explanation": "\"Instead of discounting unit price, we can provide [Giá trị thay thế]\" là câu thần chú chuyển hướng đàm phán bảo toàn biên lợi nhuận 100%.",
+        "whyWrong": "Phát âm rõ từ \"branded display coolers\" (/brændɪd dɪˈspleɪ ˈkuːlərz/) và \"comprehensive\" (/ˌkɒmprɪˈhɛnsɪv/).",
+        "crucialNote": "Tủ mát là tài sản của công ty, vừa giúp đối tác bán hàng vừa quảng bá thương hiệu ngoài thị trường.",
+        "memoryHook": "Instead of discounting, provide branded coolers and POSM support."
       },
       {
         "id": "u64-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the danger of destructive price wars:",
+        "promptVi": "Ghép câu: \"Cuộc chiến giá cả hủy diệt làm suy yếu giá trị thương hiệu và phá hủy lợi nhuận ngành\":",
+        "englishSentence": "Destructive price wars erode brand equity and destroy industry profitability.",
+        "audioText": "Destructive price wars erode brand equity and destroy industry profitability.",
         "wordPool": [
-          "cancel",
-          "parties",
-          "distribution",
-          "sign",
-          "agree",
-          "the",
-          "never",
-          "comprehensive",
-          "to",
-          "master",
-          "contract.",
-          "Both",
-          "commercial"
+          "Destructive",
+          "price",
+          "wars",
+          "erode",
+          "brand",
+          "equity",
+          "and",
+          "destroy",
+          "industry",
+          "profitability.",
+          "build",
+          "protect"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Cuộc chiến giá cả hủy diệt làm suy yếu giá trị thương hiệu và phá hủy lợi nhuận của toàn ngành.",
+        "explanation": "Doanh nghiệp một khi đã hạ giá thì không bao giờ có thể tăng giá trở lại trong mắt người tiêu dùng.",
+        "whyWrong": "\"Erode brand equity\" (bào mòn giá trị thương hiệu) là cảnh báo kinh điển của các giáo sư kinh tế Harvard.",
+        "crucialNote": "Vikoda định vị phân khúc chất lượng cao không tham gia vào cuộc đua xuống đáy (race to the bottom).",
+        "memoryHook": "Price wars erode brand equity and destroy profitability."
       },
       {
         "id": "u64-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct term for trading concessions in negotiation:",
+        "promptVi": "Chọn thuật ngữ chỉ các giá trị gia tăng được trao đổi để giữ nguyên giá bán:",
+        "englishSentence": "We protected our twenty percent profit margin by offering valuable non-price [ _____ ] like free staff training.",
+        "audioText": "We protected our twenty percent profit margin by offering valuable non-price concessions like free staff training.",
+        "blankWord": "concessions",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "concessions",
+          "confessions",
+          "explosions"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Chúng tôi đã bảo vệ được biên lợi nhuận hai mươi phần trăm bằng cách đề xuất các nhượng bộ phi giá trị quý báu như đào tạo nhân viên miễn phí.",
+        "explanation": "\"Non-price concessions\" (nhượng bộ phi tiền mặt) như đào tạo dịch vụ, kệ trưng bày, tài trợ sự kiện giúp đối tác cảm thấy được hưởng lợi lớn.",
+        "whyWrong": "\"Confessions\" (sự thú tội) hay \"explosions\" (vụ nổ) không liên quan đến kỹ thuật thương thảo hợp đồng.",
+        "crucialNote": "Đưa ra nhượng bộ có chi phí thấp đối với mình nhưng có giá trị cao đối với đối tác.",
+        "memoryHook": "Non-price concessions protect profit margins."
       },
       {
         "id": "u64-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Bảo Vệ Biên Lợi Nhuận & Không Hạ Giá Vội\" (Giữ vững định vị cao cấp, thay thế bằng hỗ trợ marketing). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets.",
-          "We must align the proposed rebate framework with our overarching regional retail guidelines."
+        "type": "chat_branch",
+        "promptEn": "Counter an aggressive discount demand from an airline caterer on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Công ty suất ăn hàng không đe dọa hủy đơn hàng nếu không giảm giá chai 350ml xuống 10%:",
+        "englishSentence": "Our unit price is firm to protect premium mineral purity, but we will provide free customized co-branded tamper seals and priority ramp-side delivery!",
+        "audioText": "Our unit price is firm to protect premium mineral purity, but we will provide free customized co-branded tamper seals and priority ramp-side delivery!",
+        "chatMessages": [
+          {
+            "speaker": "Captain David (Procurement Head, Pacific Airline Catering)",
+            "avatar": "✈️",
+            "message": "Minh, budget cuts require a 10% price reduction across all beverage suppliers. If you cannot match this, we will switch to tap water bottles."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Giữ vững định vị cao cấp, thay thế bằng hỗ trợ marketing",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Our unit price is firm to protect premium mineral purity, but we will provide free customized co-branded tamper seals and priority ramp-side delivery!",
+            "trustScore": 25,
+            "feedback": "Ứng phó ngoại giao xuất sắc! Giữ vững giá thành (unit price is firm) để bảo vệ chất lượng khoáng, nhưng bù đắp bằng in logo đồng thương hiệu trên seal nắp chai và dịch vụ giao hàng ưu tiên tận cửa máy bay.",
+            "isCorrect": true
+          },
+          {
+            "text": "Okay, we cut 10% price today and we can cut another 10% next month if you want.",
+            "trustScore": 0,
+            "feedback": "Hạ giá vô nguyên tắc! Hãng hàng không sẽ coi thường và liên tục ép giá trong tương lai.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Đơn giá của chúng tôi được giữ vững để bảo vệ độ tinh khiết khoáng chất cao cấp, nhưng chúng tôi sẽ tài trợ miễn phí màng niêm phong in logo hai thương hiệu và dịch vụ giao hàng ưu tiên tận chân cầu thang máy bay!",
+        "explanation": "Cung cấp giá trị dịch vụ gia tăng độc quyền (Priority ramp-side delivery) giải quyết nỗi đau vận hành của khách hàng hàng không.",
+        "crucialNote": "Hàng không rất cần độ an toàn niêm phong nắp chai tuyệt đối.",
+        "memoryHook": "Unit price is firm, offer co-branded seals and priority delivery."
       }
     ]
   },
@@ -8883,110 +8999,138 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Phòng Kế Toán & Hóa Đơn Chứng Từ VAT",
     "subtitle": "Xử lý hóa đơn VAT, thanh toán chi phí và công nợ Net 30",
     "level": "B2",
-    "icon": "📊",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "💳",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u65-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for accounting procedures and Net 30 VAT invoices?",
-        "options": [
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, as confirmed in our recent departmental briefing with executive management.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds, pending formal verification from our international distribution coordinators.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match financial accounting and payment settlement terms with their meanings:",
+        "promptVi": "Ghép cặp các thuật ngữ tài chính kế toán và thanh toán công nợ B2B:",
+        "englishSentence": "Match corporate accounting and invoice terms.",
+        "audioText": "Match corporate accounting and invoice terms.",
+        "explanation": "5 thuật ngữ thanh toán chuẩn mực bảo đảm dòng tiền minh bạch và đúng quy định pháp luật thuế.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ kế toán hóa đơn VAT và công nợ.",
+        "pairs": [
+          {
+            "left": "Electronic VAT invoice",
+            "right": "Hóa đơn điện tử giá trị gia tăng hợp pháp"
+          },
+          {
+            "left": "Net 30 payment terms",
+            "right": "Thời hạn thanh toán trong vòng ba mươi ngày kể từ ngày nhận hàng"
+          },
+          {
+            "left": "Accounts receivable",
+            "right": "Các khoản công nợ phải thu từ khách hàng đại lý"
+          },
+          {
+            "left": "Bank reconciliation",
+            "right": "Đối soát số dư tài khoản ngân hàng với sổ sách kế toán"
+          },
+          {
+            "left": "Corporate tax code",
+            "right": "Mã số thuế doanh nghiệp đăng ký chính thức"
+          }
+        ]
       },
       {
         "id": "u65-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this commercial payment terms clarification clearly:",
+        "promptVi": "Luyện nói câu làm rõ điều khoản công nợ thanh toán 30 ngày trong hợp đồng phân phối:",
+        "englishSentence": "Our standard commercial terms specify Net thirty payment upon issuance of the electronic VAT invoice and signed delivery note.",
+        "audioText": "Our standard commercial terms specify Net thirty payment upon issuance of the electronic VAT invoice and signed delivery note.",
+        "phonetics": "/ˈaʊər ˈstændərd kəˈmɜːrʃəl tɜːrmz ˈspɛsɪfaɪ nɛt ˈθɜːrti ˈpeɪmənt əˈpɒn ˈɪʃuːəns ɒv ðiː ˌiːlɛkˈtrɒnɪk viː eɪ tiː ˈɪnvɔɪs ænd saɪnd dɪˈlɪvəri noʊt/",
+        "vietnameseMeaning": "Điều khoản thương mại chuẩn của chúng tôi quy định thanh toán trong vòng ba mươi ngày (Net 30) kể từ khi phát hành hóa đơn điện tử VAT và phiếu giao hàng có chữ ký.",
+        "explanation": "\"Net thirty payment upon issuance of electronic VAT invoice and signed delivery note\" là điều khoản tài chính kinh điển trong mọi hợp đồng mua bán B2B.",
+        "whyWrong": "Phát âm rõ từ \"issuance\" (/ˈɪʃuːəns/) và cụm \"electronic VAT invoice\" (/ˌiːlɛkˈtrɒnɪk viː eɪ tiː ˈɪnvɔɪs/).",
+        "crucialNote": "Luôn đối chiếu đủ 2 chứng từ: Hóa đơn điện tử + Phiếu giao nhận (POD) trước khi giải ngân.",
+        "memoryHook": "Net 30 payment upon electronic VAT invoice and signed delivery note."
       },
       {
         "id": "u65-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to instruct accounting on sending tax clearance documents:",
+        "promptVi": "Ghép câu: \"Phòng kế toán đã gửi hóa đơn điện tử chính thức đến email tài chính của bạn\":",
+        "englishSentence": "The accounting department has sent the official e-invoice to your financial email.",
+        "audioText": "The accounting department has sent the official e-invoice to your financial email.",
         "wordPool": [
-          "comprehensive",
-          "sign",
-          "agree",
-          "commercial",
-          "cancel",
+          "The",
+          "accounting",
+          "department",
+          "has",
+          "sent",
           "the",
-          "distribution",
-          "Both",
-          "master",
-          "never",
-          "contract.",
+          "official",
+          "e-invoice",
           "to",
-          "parties"
+          "your",
+          "financial",
+          "email.",
+          "stolen",
+          "lost"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Phòng kế toán đã gửi hóa đơn điện tử chính thức đến email tài chính của bạn.",
+        "explanation": "Hóa đơn điện tử được tích hợp chữ ký số bảo mật của Tổng cục Thuế Việt Nam.",
+        "whyWrong": "\"Official e-invoice\" (hóa đơn điện tử chính thức) là căn cứ khấu trừ thuế đầu vào cho khách hàng.",
+        "crucialNote": "Đính kèm file XML và PDF để đối tác thuận tiện nhập liệu vào phần mềm ERP.",
+        "memoryHook": "Sent official e-invoice to your financial email."
       },
       {
         "id": "u65-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct term for bank transaction confirmation:",
+        "promptVi": "Chọn thuật ngữ chỉ lệnh ủy nhiệm chi hoặc chứng từ chuyển khoản ngân hàng:",
+        "englishSentence": "Please provide the bank wire transfer [ _____ ] so our warehouse can release the export container immediately.",
+        "audioText": "Please provide the bank wire transfer receipt so our warehouse can release the export container immediately.",
+        "blankWord": "receipt",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "receipt",
+          "lottery",
+          "poem"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Xin vui lòng cung cấp ủy nhiệm chi chuyển khoản ngân hàng để kho chúng tôi có thể xuất container hàng ngay lập tức.",
+        "explanation": "\"Bank wire transfer receipt\" hoặc \"swift advice\" là bằng chứng tiền đã chuyển vào tài khoản.",
+        "whyWrong": "\"Lottery\" (vé số) hay \"poem\" (bài thơ) không phải là chứng từ tài chính.",
+        "crucialNote": "Kiểm tra kỹ thông tin số tài khoản và nội dung thanh toán trùng khớp mã đơn hàng.",
+        "memoryHook": "Bank wire transfer receipt = Giấy báo có / Ủy nhiệm chi ngân hàng."
       },
       {
         "id": "u65-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Phòng Kế Toán & Hóa Đơn Chứng Từ VAT\" (Xử lý hóa đơn VAT, thanh toán chi phí và công nợ Net 30). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "Our commercial department prefers establishing firm minimum order commitments across regions.",
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds."
+        "type": "chat_branch",
+        "promptEn": "Resolve an overdue debt balance with an enterprise supermarket finance team on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Kế toán trưởng chuỗi siêu thị nợ quá hạn 10 ngày hẹn tiếp sang tháng sau mới trả tiền hàng vì trục trặc phần mềm:",
+        "englishSentence": "We understand system transitions, but our credit policy suspends new dispatches beyond 40 days. Let's process a 50% interim wire transfer today to keep stock flowing!",
+        "audioText": "We understand system transitions, but our credit policy suspends new dispatches beyond 40 days. Let's process a 50% interim wire transfer today to keep stock flowing!",
+        "chatMessages": [
+          {
+            "speaker": "Chief Accountant (Lotte Mart Finance)",
+            "avatar": "📑",
+            "message": "Minh, our ERP migration delayed your invoice payment by 10 days. We plan to settle your $50,000 balance at the end of next month instead."
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Xử lý hóa đơn VAT, thanh toán chi phí và công nợ Net 30",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "We understand system transitions, but our credit policy suspends new dispatches beyond 40 days. Let's process a 50% interim wire transfer today to keep stock flowing!",
+            "trustScore": 25,
+            "feedback": "Thu hồi công nợ khôn khéo và dứt khoát! Đồng cảm với sự cố ERP nhưng viện dẫn chính sách khóa đơn hàng quá 40 ngày, đưa ra giải pháp thanh toán tạm ứng 50% ngay hôm nay để duy trì luân chuyển hàng hóa.",
+            "isCorrect": true
+          },
+          {
+            "text": "Take your time, pay us in 2 years whenever you have extra money.",
+            "trustScore": 0,
+            "feedback": "Thất thoát tài chính nghiêm trọng! Dẫn đến nợ xấu đọng vốn hàng tỷ đồng.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chúng tôi rất thông cảm với quá trình chuyển đổi hệ thống, nhưng chính sách tín dụng của chúng tôi sẽ tạm dừng các chuyến giao hàng mới khi nợ quá 40 ngày. Chúng ta hãy thực hiện chuyển khoản tạm ứng 50% hôm nay để hàng hóa tiếp tục được vận chuyển nhé!",
+        "explanation": "Đàm phán giải pháp thanh toán linh hoạt 50% vừa giữ vững kỷ luật thu hồi nợ vừa không làm đứt gãy mối quan hệ kinh doanh.",
+        "crucialNote": "Dòng tiền là mạch máu nuôi sống toàn bộ bộ máy sản xuất kinh doanh.",
+        "memoryHook": "Process 50% interim wire transfer to keep stock flowing."
       }
     ]
   },
@@ -8996,110 +9140,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Dây Chuyền Vô Trùng Krones Đức",
     "subtitle": "Giới thiệu công nghệ chiết rót tốc độ cao hiện đại nhất",
     "level": "B2",
-    "icon": "🏭",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "⚙️",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u66-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for German Krones aseptic high-speed bottling line?",
-        "options": [
-          "Our commercial department prefers establishing firm minimum order commitments across regions, as confirmed in our recent departmental briefing with executive management.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match German Krones bottling technology terms with their functions:",
+        "promptVi": "Ghép cặp các thuật ngữ công nghệ chiết rót tự động Krones của CHLB Đức:",
+        "englishSentence": "Match Krones German automation terms.",
+        "audioText": "Match Krones German automation terms.",
+        "explanation": "5 công nghệ tự động hóa đỉnh cao hàng đầu thế giới được lắp đặt tại nhà máy Đảnh Thạnh.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp công nghệ chiết rót Krones Đức.",
+        "pairs": [
+          {
+            "left": "Krones aseptic block",
+            "right": "Khối liên hợp vô trùng thổi chai - chiết rót - đóng nắp khép kín"
+          },
+          {
+            "left": "High-speed bottling capacity",
+            "right": "Công suất chiết rót tốc độ cao 24.000 chai mỗi giờ"
+          },
+          {
+            "left": "HEPA air overpressure chamber",
+            "right": "Buồng áp suất dương màng siêu lọc HEPA chống vi khuẩn"
+          },
+          {
+            "left": "Precision flowmeter filling",
+            "right": "Công nghệ chiết rót định lượng cảm biến từ trường chính xác"
+          },
+          {
+            "left": "Robotic palletizer",
+            "right": "Cánh tay robot tự động xếp dỡ thùng hàng lên pallet"
+          }
+        ]
       },
       {
         "id": "u66-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this flagship technology showcase sentence clearly:",
+        "promptVi": "Luyện nói câu giới thiệu dây chuyền chiết rót tự động Krones của Đức với phái đoàn quốc tế:",
+        "englishSentence": "Our state-of-the-art German Krones line seamlessly integrates bottle blowing, precision filling, and capping inside an aseptic cleanroom.",
+        "audioText": "Our state-of-the-art German Krones line seamlessly integrates bottle blowing, precision filling, and capping inside an aseptic cleanroom.",
+        "phonetics": "/ˈaʊər steɪt ɒv ðiː ɑːrt ˈdʒɜːrmən kroʊnz laɪn ˈsiːmləsli ˈɪntɪɡreɪts ˈbɒtl ˈbloʊɪŋ, prɪˈsɪʒən ˈfɪlɪŋ, ænd ˈkæpɪŋ ɪnˈsaɪd ən əˈsɛptɪk ˈkliːnruːm/",
+        "vietnameseMeaning": "Dây chuyền Krones hiện đại của Đức tích hợp liền mạch quy trình thổi chai, chiết rót chính xác và đóng nắp bên trong phòng sạch vô trùng.",
+        "explanation": "\"State-of-the-art German Krones line seamlessly integrates...\" là lời giới thiệu đẳng cấp khẳng định tầm vóc công nghệ hàng đầu thế giới của Vikoda.",
+        "whyWrong": "Phát âm chuẩn từ \"state-of-the-art\" (/steɪt ɒv ðiː ɑːrt/ - tối tân), \"aseptic\" (/əˈsɛptɪk/ - vô trùng) và \"seamlessly\" (/ˈsiːmləsli/).",
+        "crucialNote": "Krones là thương hiệu số 1 thế giới về thiết bị đóng chai có trụ sở tại Neutraubling, Đức.",
+        "memoryHook": "German Krones integrates blowing, filling, and capping in aseptic cleanroom."
       },
       {
         "id": "u66-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to describe the lightning-fast bottling speed:",
+        "promptVi": "Ghép câu: \"Dây chuyền chiết rót công nghệ Đức vận hành với công suất kinh ngạc 24.000 chai mỗi giờ\":",
+        "englishSentence": "The German bottling line operates at an astonishing twenty-four thousand bottles per hour.",
+        "audioText": "The German bottling line operates at an astonishing twenty-four thousand bottles per hour.",
         "wordPool": [
-          "Both",
-          "parties",
-          "to",
-          "commercial",
-          "sign",
-          "the",
-          "never",
-          "agree",
-          "contract.",
-          "cancel",
-          "master",
-          "distribution",
-          "comprehensive"
+          "The",
+          "German",
+          "bottling",
+          "line",
+          "operates",
+          "at",
+          "an",
+          "astonishing",
+          "twenty-four",
+          "thousand",
+          "bottles",
+          "per",
+          "hour.",
+          "slow",
+          "broken"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Dây chuyền chiết rót công nghệ Đức vận hành với công suất kinh ngạc 24.000 chai mỗi giờ.",
+        "explanation": "Công suất 24.000 chai/giờ đáp ứng nhu cầu tăng trưởng đột biến trong các mùa cao điểm du lịch và các hợp đồng xuất khẩu lớn.",
+        "whyWrong": "\"At an astonishing twenty-four thousand bottles per hour\" gây ấn tượng mạnh mẽ về quy mô sản xuất công nghiệp hiện đại.",
+        "crucialNote": "Toàn bộ quy trình diễn ra tự động 100% không có bàn tay con người chạm vào sản phẩm.",
+        "memoryHook": "Operates at astonishing 24,000 bottles per hour."
       },
       {
         "id": "u66-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct term for positive pressure air isolation:",
+        "promptVi": "Chọn thuật ngữ chỉ buồng áp suất dương ngăn chặn tuyệt đối bụi bẩn và vi khuẩn xâm nhập:",
+        "englishSentence": "The filling block is maintained under HEPA-filtered positive [ _____ ] to guarantee total sterility.",
+        "audioText": "The filling block is maintained under HEPA-filtered positive pressure to guarantee total sterility.",
+        "blankWord": "pressure",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "pressure",
+          "weather",
+          "traffic"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Khối chiết rót được duy trì dưới áp suất dương lọc màng HEPA để bảo đảm sự vô trùng tuyệt đối.",
+        "explanation": "\"Positive pressure\" (áp suất dương) đẩy không khí từ trong phòng sạch ra ngoài, không cho bất kỳ hạt bụi hay bào tử nấm nào bay vào buồng máy.",
+        "whyWrong": "\"Weather\" (thời tiết) hay \"traffic\" (giao thông) hoàn toàn sai lệch ngữ cảnh kỹ thuật.",
+        "crucialNote": "Tiêu chuẩn phòng sạch tương đương với các nhà máy sản xuất thuốc tiêm y tế.",
+        "memoryHook": "HEPA positive pressure guarantees total sterility."
       },
       {
         "id": "u66-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Dây Chuyền Vô Trùng Krones Đức\" (Giới thiệu công nghệ chiết rót tốc độ cao hiện đại nhất). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets.",
-          "We must align the proposed rebate framework with our overarching regional retail guidelines."
+        "type": "chat_branch",
+        "promptEn": "Discuss predictive IoT sensor monitoring with the Krones German resident engineer on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Chuyên gia kỹ thuật trưởng của hãng Krones gửi báo cáo kiểm tra cảm biến rung và nhiệt độ máy chiết rót:",
+        "englishSentence": "Sensor analytics confirmed 99.8% Overall Equipment Effectiveness! All filling valves are operating with microsecond precision. Ready for continuous export production.",
+        "audioText": "Sensor analytics confirmed 99.8% Overall Equipment Effectiveness! All filling valves are operating with microsecond precision. Ready for continuous export production.",
+        "chatMessages": [
+          {
+            "speaker": "Markus (Resident Commissioning Engineer, Krones AG Germany)",
+            "avatar": "🇩🇪",
+            "message": "Minh, we just analyzed the telemetry data from line 1 filling carousels. What is your team's feedback on the fill-level precision?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Giới thiệu công nghệ chiết rót tốc độ cao hiện đại nhất",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Sensor analytics confirmed 99.8% Overall Equipment Effectiveness! All filling valves are operating with microsecond precision. Ready for continuous export production.",
+            "trustScore": 25,
+            "feedback": "Phản hồi chuẩn ngôn ngữ kỹ thuật công nghiệp 4.0! Trích dẫn chỉ số hiệu suất thiết bị tổng thể OEE 99.8% và độ chính xác van chiết rót đến từng micro-giây, khiến chuyên gia Đức vô cùng hài lòng.",
+            "isCorrect": true
+          },
+          {
+            "text": "The machine is too fast and noisy, can you make it run at 100 bottles per day?",
+            "trustScore": 0,
+            "feedback": "Kéo lùi công nghệ! Không hiểu biết về giá trị của dây chuyền tốc độ cao hàng triệu đô la.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Phân tích dữ liệu cảm biến xác nhận Hiệu suất Thiết bị Tổng thể đạt 99.8%! Tất cả các van chiết rót đang vận hành với độ chính xác đến từng micro-giây. Sẵn sàng cho sản xuất xuất khẩu liên tục.",
+        "explanation": "Chỉ số OEE (Overall Equipment Effectiveness) là thước đo vàng của nền sản xuất thông minh toàn cầu.",
+        "crucialNote": "Đội ngũ kỹ sư người Việt của Vikoda làm chủ hoàn toàn công nghệ Krones hiện đại.",
+        "memoryHook": "99.8% OEE with microsecond precision."
       }
     ]
   },
@@ -9109,110 +9282,136 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Tiêu Chuẩn Quốc Tế ISO 22000 & HACCP",
     "subtitle": "Chứng chỉ an toàn thực phẩm bảo chứng cho chất lượng",
     "level": "B2",
-    "icon": "🛡️",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "🏅",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u67-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for ISO 22000 and HACCP food safety compliance?",
-        "options": [
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, as confirmed in our recent departmental briefing with executive management.",
-          "We must align the proposed rebate framework with our overarching regional retail guidelines, pending formal verification from our international distribution coordinators.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match international quality and food safety standards with their definitions:",
+        "promptVi": "Ghép cặp các tiêu chuẩn an toàn thực phẩm quốc tế ISO 22000 và HACCP:",
+        "englishSentence": "Match international food safety management terms.",
+        "audioText": "Match international food safety management terms.",
+        "explanation": "5 trụ cột quản lý rủi ro vệ sinh an toàn thực phẩm bảo chứng cho mọi lô hàng xuất khẩu.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp tiêu chuẩn an toàn thực phẩm quốc tế.",
+        "pairs": [
+          {
+            "left": "ISO 22000:2018 Certification",
+            "right": "Hệ thống quản lý an toàn thực phẩm tiêu chuẩn toàn cầu mới nhất"
+          },
+          {
+            "left": "Hazard Analysis Critical Control Point",
+            "right": "HACCP - Phân tích mối nguy và điểm kiểm soát tới hạn"
+          },
+          {
+            "left": "Critical Control Point (CCP)",
+            "right": "Điểm kiểm soát sống còn để phòng ngừa hoặc triệt tiêu mối nguy"
+          },
+          {
+            "left": "Annual third-party audit",
+            "right": "Đánh giá tái chứng nhận độc lập hàng năm từ tổ chức uy tín"
+          },
+          {
+            "left": "Strict allergen & cross-contact protocol",
+            "right": "Quy trình kiểm soát nghiêm ngặt chống nhiễm chéo"
+          }
+        ]
       },
       {
         "id": "u67-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this certified food safety compliance statement clearly:",
+        "promptVi": "Luyện nói câu khẳng định hệ thống quản lý an toàn thực phẩm đạt chuẩn quốc tế của Vikoda:",
+        "englishSentence": "Vikoda operates under rigorous ISO 22000 and HACCP certified management systems, ensuring total food safety from wellhead to bottle.",
+        "audioText": "Vikoda operates under rigorous ISO 22000 and HACCP certified management systems, ensuring total food safety from wellhead to bottle.",
+        "phonetics": "/vɪˈkoʊdə ˈɒpəreɪts ˈʌndər ˈrɪɡərəs ˌaɪ ɛs ˈoʊ 22000 ænd ˈhæsʌp ˈsɜːrtɪfaɪd ˈmænɪdʒmənt ˈsɪstəmz, ɪnˈʃʊərɪŋ ˈtoʊtl fuːd ˈseɪfti frɒm ˈwɛlhɛd tuː ˈbɒtl/",
+        "vietnameseMeaning": "Vikoda vận hành dưới hệ thống quản lý được chứng nhận ISO 22000 và HACCP nghiêm ngặt, bảo đảm an toàn thực phẩm toàn diện từ đầu giếng đến thành phẩm chai nước.",
+        "explanation": "\"Operating under ISO 22000 and HACCP certified systems from wellhead to bottle\" là lời tuyên bố chất lượng có sức nặng pháp lý cao nhất trong giao thương xuất khẩu.",
+        "whyWrong": "Phát âm chuẩn từ \"rigorous\" (/ˈrɪɡərəs/ - nghiêm ngặt) và \"wellhead to bottle\" (/ˈwɛlhɛd tuː ˈbɒtl/).",
+        "crucialNote": "Đạt chứng nhận từ tổ chức giám định quốc tế SGS Thụy Sĩ.",
+        "memoryHook": "Rigorous ISO 22000 and HACCP from wellhead to bottle."
       },
       {
         "id": "u67-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the role of Critical Control Points in water safety:",
+        "promptVi": "Ghép câu: \"Việc giám sát liên tục các điểm kiểm soát tới hạn bảo đảm không có bất kỳ sai lệch nào\":",
+        "englishSentence": "Continuous monitoring of critical control points guarantees zero quality deviation.",
+        "audioText": "Continuous monitoring of critical control points guarantees zero quality deviation.",
         "wordPool": [
-          "the",
-          "distribution",
-          "Both",
-          "commercial",
-          "comprehensive",
-          "parties",
-          "cancel",
-          "agree",
-          "sign",
-          "to",
-          "contract.",
-          "master",
-          "never"
+          "Continuous",
+          "monitoring",
+          "of",
+          "critical",
+          "control",
+          "points",
+          "guarantees",
+          "zero",
+          "quality",
+          "deviation.",
+          "error",
+          "defect"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Việc giám sát liên tục các điểm kiểm soát tới hạn bảo đảm không có bất kỳ sai lệch chất lượng nào.",
+        "explanation": "Các điểm CCP tại Vikoda gồm: Lọc vi sinh đầu nguồn -> Giám sát áp suất buồng chiết rót -> Kiểm tra lực đóng nắp chai -> Quét mã vạch lô hàng.",
+        "whyWrong": "\"Zero quality deviation\" khẳng định tỷ lệ lỗi bằng không trong suốt quá trình sản xuất.",
+        "crucialNote": "Mọi dữ liệu CCP được ghi nhận tự động vào phần mềm máy tính không thể chỉnh sửa thủ công.",
+        "memoryHook": "Monitoring critical control points guarantees zero deviation."
       },
       {
         "id": "u67-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct term for periodic external verification:",
+        "promptVi": "Chọn thuật ngữ chỉ kỳ tái đánh giá định kỳ của tổ chức kiểm định quốc tế:",
+        "englishSentence": "Our plant passed the annual third-party [ _____ ] with zero major non-conformities.",
+        "audioText": "Our plant passed the annual third-party audit with zero major non-conformities.",
+        "blankWord": "audit",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "audit",
+          "carnival",
+          "festival"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Nhà máy của chúng tôi đã vượt qua kỳ đánh giá độc lập hàng năm với không có bất kỳ điểm không phù hợp nghiêm trọng nào.",
+        "explanation": "\"Third-party audit\" (đánh giá bên thứ ba) là kỳ thi sát hạch nghiêm ngặt của các chuyên gia kiểm định độc lập.",
+        "whyWrong": "\"Carnival\" (lễ hội hóa trang) hay \"festival\" (ngày hội) không mang tính pháp lý kiểm toán.",
+        "crucialNote": "\"Zero major non-conformities\" là điểm số cao nhất một nhà máy có thể đạt được.",
+        "memoryHook": "Passed third-party audit with zero non-conformities."
       },
       {
         "id": "u67-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Tiêu Chuẩn Quốc Tế ISO 22000 & HACCP\" (Chứng chỉ an toàn thực phẩm bảo chứng cho chất lượng). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets.",
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds."
+        "type": "chat_branch",
+        "promptEn": "Provide ISO compliance proof to an EU retail supermarket auditor on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Đại diện chuỗi siêu thị Carrefour Pháp yêu cầu hồ sơ HACCP và chứng chỉ ISO 22000 còn hiệu lực trước khi ký hợp đồng nhập khẩu:",
+        "englishSentence": "Attached are our valid ISO 22000:2018 and HACCP certificates issued by SGS, along with our complete CCP verification log for immediate approval.",
+        "audioText": "Attached are our valid ISO 22000:2018 and HACCP certificates issued by SGS, along with our complete CCP verification log for immediate approval.",
+        "chatMessages": [
+          {
+            "speaker": "Philippe (Quality Compliance Director, Carrefour Global)",
+            "avatar": "🇫🇷",
+            "message": "Minh, Carrefour vendor onboarding requires accredited ISO 22000:2018 and HACCP certificates. Can you email certified copies today?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Chứng chỉ an toàn thực phẩm bảo chứng cho chất lượng",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Attached are our valid ISO 22000:2018 and HACCP certificates issued by SGS, along with our complete CCP verification log for immediate approval.",
+            "trustScore": 25,
+            "feedback": "Cung cấp hồ sơ pháp lý chuẩn mực và đầy đủ! Gửi ngay bản scan chứng chỉ ISO 22000:2018 và HACCP do tổ chức SGS Thụy Sĩ cấp, mở toang cánh cửa vào chuỗi siêu thị hàng đầu châu Âu.",
+            "isCorrect": true
+          },
+          {
+            "text": "We don't have ISO certificates, but our manager promises the water is very clean.",
+            "trustScore": 0,
+            "feedback": "Loại hồ sơ ngay lập tức! Thị trường châu Âu tuyệt đối không chấp nhận lời hứa suông không có chứng chỉ quốc tế.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Đính kèm tại đây là các chứng chỉ ISO 22000:2018 và HACCP còn hiệu lực của chúng tôi do SGS cấp, cùng nhật ký xác minh điểm kiểm soát tới hạn CCP để quý vị phê duyệt ngay lập tức.",
+        "explanation": "Có sẵn chứng chỉ ISO 22000 và HACCP của các tổ chức hàng đầu thế giới (SGS, TUV, Bureau Veritas) là tấm vé thông hành bắt buộc để xuất khẩu vào EU.",
+        "crucialNote": "Hồ sơ được cập nhật và đóng dấu điện tử minh bạch.",
+        "memoryHook": "Valid ISO 22000 and HACCP issued by SGS."
       }
     ]
   },
@@ -9222,110 +9421,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Đo Chỉ Số TDS & Độ Cứng Nước Khoáng",
     "subtitle": "Giải thích tổng lượng chất rắn hòa tan và khoáng nhẹ",
     "level": "B2",
-    "icon": "🌡️",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "💧",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u68-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for measuring total dissolved solids and water hardness?",
-        "options": [
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, as confirmed in our recent departmental briefing with executive management.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-          "We must align the proposed rebate framework with our overarching regional retail guidelines, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match water mineral balance and hardness parameters with their scientific meanings:",
+        "promptVi": "Ghép cặp các chỉ số đo độ cứng và hàm lượng khoáng hòa tan TDS trong nước:",
+        "englishSentence": "Match water hardness and TDS scientific terms.",
+        "audioText": "Match water hardness and TDS scientific terms.",
+        "explanation": "5 thông số thủy hóa học quyết định độ thanh mát, êm dịu và không bị gắt của nước khoáng Vikoda.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp chỉ số độ cứng và hàm lượng khoáng chất TDS.",
+        "pairs": [
+          {
+            "left": "Total Dissolved Solids (TDS)",
+            "right": "Tổng hàm lượng khoáng chất tự nhiên hòa tan trong một lít nước"
+          },
+          {
+            "left": "Light mineralization index",
+            "right": "Chỉ số khoáng hóa nhẹ cân bằng lý tưởng cho cơ thể"
+          },
+          {
+            "left": "Calcium & Magnesium balance",
+            "right": "Tỷ lệ vàng giữa Canxi và Magie tự nhiên hỗ trợ tế bào"
+          },
+          {
+            "left": "Soft to moderate water hardness",
+            "right": "Độ cứng từ mềm đến vừa phải mang lại vị ngọt thanh êm dịu"
+          },
+          {
+            "left": "Silky smooth palate finish",
+            "right": "Hậu vị êm mượt không để lại cảm giác lợ miệng"
+          }
+        ]
       },
       {
         "id": "u68-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this water sommelier tasting description clearly:",
+        "promptVi": "Luyện nói câu phân tích hương vị khoáng nhẹ thanh khiết của Vikoda như một chuyên gia nếm nước quốc tế:",
+        "englishSentence": "With a balanced TDS of four hundred milligrams per liter, Vikoda delivers refreshing hydration without any mineral heaviness.",
+        "audioText": "With a balanced TDS of four hundred milligrams per liter, Vikoda delivers refreshing hydration without any mineral heaviness.",
+        "phonetics": "/wɪð ə ˈbælənst tiː diː ɛs ɒv fɔːr ˈhʌndrəd ˈmɪlɪɡræmz pər ˈliːtər, vɪˈkoʊdə dɪˈlɪvərz rɪˈfrɛʃɪŋ haɪˈdreɪʃən wɪðˈaʊt ˈɛni ˈmɪnərəl ˈhɛvinəs/",
+        "vietnameseMeaning": "Với hàm lượng TDS cân bằng bốn trăm miligam mỗi lít, Vikoda mang đến sự bù nước sảng khoái mà không có bất kỳ cảm giác nồng khoáng nặng nề nào.",
+        "explanation": "\"Refreshing hydration without mineral heaviness\" miêu tả chính xác vị ngon thanh dịu độc nhất của mỏ khoáng Đảnh Thạnh.",
+        "whyWrong": "Phát âm rõ từ \"mineral heaviness\" (/ˈmɪnərəl ˈhɛvinəs/) và \"balanced TDS\" (/ˈbælənst tiː diː ɛs/).",
+        "crucialNote": "Nhiều loại nước khoáng châu Âu có TDS trên 1.500 mg/L thường có vị mặn hoặc lợ rất khó uống hàng ngày.",
+        "memoryHook": "Balanced TDS of 400 mg/L delivers hydration without heaviness."
       },
       {
         "id": "u68-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the role of mineral hardness in smooth mouthfeel:",
+        "promptVi": "Ghép câu: \"Độ cứng khoáng vừa phải tạo nên hậu vị êm mượt và ngọt dịu tự nhiên trên vòm họng\":",
+        "englishSentence": "Moderate mineral hardness creates a wonderfully smooth and sweet aftertaste on the palate.",
+        "audioText": "Moderate mineral hardness creates a wonderfully smooth and sweet aftertaste on the palate.",
         "wordPool": [
-          "comprehensive",
-          "distribution",
+          "Moderate",
+          "mineral",
+          "hardness",
+          "creates",
+          "a",
+          "wonderfully",
+          "smooth",
+          "and",
+          "sweet",
+          "aftertaste",
+          "on",
           "the",
-          "Both",
-          "agree",
-          "commercial",
-          "parties",
-          "cancel",
-          "contract.",
-          "to",
-          "sign",
-          "never",
-          "master"
+          "palate.",
+          "sour",
+          "bitter"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Độ cứng khoáng vừa phải tạo nên hậu vị êm mượt và ngọt dịu tự nhiên trên vòm họng.",
+        "explanation": "Độ cứng từ ion canxi và magie ở mức vừa phải (không quá cứng gây cặn, không quá mềm gây nhạt nhẽo) tạo nên cảm giác tròn vị (well-rounded taste).",
+        "whyWrong": "\"Smooth and sweet aftertaste on the palate\" là ngôn ngữ cảm quan tinh tế.",
+        "crucialNote": "Thực khách thử nếm mù luôn chọn Vikoda vì hậu vị thanh ngọt dễ chịu.",
+        "memoryHook": "Moderate hardness creates smooth, sweet aftertaste on the palate."
       },
       {
         "id": "u68-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct chemical balance term for water taste:",
+        "promptVi": "Chọn từ chỉ tỷ lệ khoáng cân bằng tự nhiên giúp nước dễ uống hàng ngày:",
+        "englishSentence": "Vikoda is categorized as [ _____ ] mineralized water, making it completely safe for daily drinking across all age groups.",
+        "audioText": "Vikoda is categorized as lightly mineralized water, making it completely safe for daily drinking across all age groups.",
+        "blankWord": "lightly",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "lightly",
+          "dangerously",
+          "heavily"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Vikoda được xếp vào nhóm nước khoáng hóa nhẹ, giúp nước hoàn toàn an toàn để uống hàng ngày cho mọi lứa tuổi.",
+        "explanation": "\"Lightly mineralized water\" (nước khoáng hóa nhẹ có TDS < 500 mg/L) là khuyến nghị hàng đầu của các tổ chức y tế cho việc bù nước thường xuyên.",
+        "whyWrong": "\"Dangerously\" (nguy hiểm) hay \"heavily\" (khoáng nặng chỉ uống theo chỉ định y khoa) không đúng với bản chất Vikoda.",
+        "crucialNote": "Thích hợp cho cả trẻ nhỏ, người cao tuổi và phụ nữ mang thai uống liên tục.",
+        "memoryHook": "Lightly mineralized = Khoáng hóa nhẹ an toàn uống mỗi ngày."
       },
       {
         "id": "u68-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Đo Chỉ Số TDS & Độ Cứng Nước Khoáng\" (Giải thích tổng lượng chất rắn hòa tan và khoáng nhẹ). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets."
+        "type": "chat_branch",
+        "promptEn": "Consult a World Barista Champion looking for ideal brewing water on WhatsApp:",
+        "promptVi": "Mô phỏng tin nhắn: Quán quân pha chế cà phê Barista thế giới hỏi về chỉ số TDS và độ cứng của Vikoda để chiết xuất Espresso đỉnh cao:",
+        "englishSentence": "Vikoda features ideal specialty coffee water chemistry: 400 TDS with balanced Ca/Mg ratios and natural pH 9.0 that buffers chlorogenic coffee acidity for sweeter crema!",
+        "audioText": "Vikoda features ideal specialty coffee water chemistry: 400 TDS with balanced Ca/Mg ratios and natural pH 9.0 that buffers chlorogenic coffee acidity for sweeter crema!",
+        "chatMessages": [
+          {
+            "speaker": "James (World Barista Champion & Coffee Roaster)",
+            "avatar": "☕",
+            "message": "Minh, we are competing at the World Barista Championship. Coffee extraction requires precise mineral hardness. How does Vikoda handle light-roast Geisha coffee?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Giải thích tổng lượng chất rắn hòa tan và khoáng nhẹ",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Vikoda features ideal specialty coffee water chemistry: 400 TDS with balanced Ca/Mg ratios and natural pH 9.0 that buffers chlorogenic coffee acidity for sweeter crema!",
+            "trustScore": 25,
+            "feedback": "Kiến thức khoa học pha chế cà phê đỉnh cao! Phân tích rõ tỷ lệ Ca/Mg giúp chiết xuất hương vị trái cây và độ kiềm pH 9.0 trung hòa vị chua gắt của axit chlorogenic, tạo nên lớp crema ngọt ngào tuyệt hảo cho cà phê đặc sản.",
+            "isCorrect": true
+          },
+          {
+            "text": "Water is just water, coffee will taste like black mud no matter what water you boil.",
+            "trustScore": 0,
+            "feedback": "Xúc phạm nghệ thuật cà phê! Barista vô địch thế giới sẽ không bao giờ hợp tác.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Vikoda sở hữu thành phần hóa học nước lý tưởng cho cà phê đặc sản: TDS 400 với tỷ lệ Canxi/Magie cân bằng và độ pH 9.0 tự nhiên giúp trung hòa vị chua của axit chlorogenic, mang lại lớp crema ngọt ngào hơn hẳn!",
+        "explanation": "Nước chiếm 98% tách cà phê. Nước khoáng kiềm tự nhiên với độ cứng cân bằng là bí quyết đoạt giải của các Barista hàng đầu thế giới.",
+        "crucialNote": "Mở ra thị trường tiêu thụ đầy tiềm năng tại hàng nghìn quán cà phê Specialty cao cấp.",
+        "memoryHook": "Balanced Ca/Mg and pH 9.0 buffers coffee acidity for sweet crema."
       }
     ]
   },
@@ -9335,110 +9563,137 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Phòng Quản Lý Chất Lượng QA/QC",
     "subtitle": "Tiêu chuẩn kiểm nghiệm vi sinh và giám sát an toàn",
     "level": "B2",
-    "icon": "🧪",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "🔬",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u69-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for QA microbiology laboratory testing protocols?",
-        "options": [
-          "Our commercial department prefers establishing firm minimum order commitments across regions, as confirmed in our recent departmental briefing with executive management.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match quality assurance and control (QA/QC) laboratory procedures with their goals:",
+        "promptVi": "Ghép cặp các quy trình kiểm soát chất lượng QA/QC nhà máy với mục tiêu:",
+        "englishSentence": "Match QA/QC laboratory procedures.",
+        "audioText": "Match QA/QC laboratory procedures.",
+        "explanation": "5 công đoạn giám định chất lượng khắt khe bảo đảm mỗi chai nước xuất xưởng đều đạt chuẩn 100%.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp quy trình kiểm soát chất lượng QA/QC nhà máy.",
+        "pairs": [
+          {
+            "left": "Hourly microbiological sampling",
+            "right": "Lấy mẫu xét nghiệm vi sinh định kỳ mỗi giờ một lần"
+          },
+          {
+            "left": "In-line spectrophotometry",
+            "right": "Đo quang phổ liên tục trên dây chuyền để phát hiện tạp chất"
+          },
+          {
+            "left": "Capping torque integrity test",
+            "right": "Kiểm tra lực siết nắp chai chống xì ga và rò rỉ nước"
+          },
+          {
+            "left": "Retained sample archive",
+            "right": "Lưu giữ mẫu đối chứng trong kho lạnh suốt hai mươi tư tháng"
+          },
+          {
+            "left": "Certificate of Analysis (COA)",
+            "right": "Phiếu phân tích kết quả kiểm nghiệm xuất xưởng cho từng lô hàng"
+          }
+        ]
       },
       {
         "id": "u69-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this rigorous QA/QC inspection protocol clearly:",
+        "promptVi": "Luyện nói câu khẳng định quy trình kiểm nghiệm chất lượng nghiêm ngặt của phòng QA/QC:",
+        "englishSentence": "Our QA/QC team performs microbiological and capping torque inspections every single hour to ensure zero defect release.",
+        "audioText": "Our QA/QC team performs microbiological and capping torque inspections every single hour to ensure zero defect release.",
+        "phonetics": "/ˈaʊər kjuː eɪ kjuː siː tiːm pərˈfɔːrmz ˌmaɪkroʊˌbaɪəˈlɒdʒɪkəl ænd ˈkæpɪŋ tɔːrk ɪnˈspɛkʃənz ˈɛvri ˈsɪŋɡl ˈaʊər tuː ɪnˈʃʊər ˈzɪəroʊ ˈdiːfɛkt rɪˈliːs/",
+        "vietnameseMeaning": "Đội ngũ QA/QC của chúng tôi thực hiện kiểm tra vi sinh và lực siết nắp chai mỗi giờ một lần để bảo đảm không có sản phẩm lỗi nào được xuất kho.",
+        "explanation": "\"Every single hour to ensure zero defect release\" khẳng định kỷ luật giám sát không ngừng nghỉ.",
+        "whyWrong": "Phát âm chuẩn từ \"capping torque\" (/ˈkæpɪŋ tɔːrk/ - lực siết nắp) và \"inspections\" (/ɪnˈspɛkʃənz/).",
+        "crucialNote": "Không một pallet hàng nào được phép rời kho nếu chưa có chữ ký nghiệm thu của Trưởng phòng QC.",
+        "memoryHook": "Hourly inspections ensure zero defect release."
       },
       {
         "id": "u69-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the quarantine protocol before shipment release:",
+        "promptVi": "Ghép câu: \"Mỗi lô sản xuất đều được cách ly kiểm dịch cho đến khi có phê duyệt phân tích của phòng thí nghiệm\":",
+        "englishSentence": "Every production lot is quarantined until laboratory analysis approval is granted.",
+        "audioText": "Every production lot is quarantined until laboratory analysis approval is granted.",
         "wordPool": [
-          "the",
-          "comprehensive",
-          "parties",
-          "distribution",
-          "commercial",
-          "never",
-          "contract.",
-          "agree",
-          "cancel",
-          "master",
-          "Both",
-          "sign",
-          "to"
+          "Every",
+          "production",
+          "lot",
+          "is",
+          "quarantined",
+          "until",
+          "laboratory",
+          "analysis",
+          "approval",
+          "is",
+          "granted.",
+          "sold",
+          "lost"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Mỗi lô sản xuất đều được cách ly kiểm dịch cho đến khi có phê duyệt phân tích của phòng thí nghiệm.",
+        "explanation": "Quy trình cách ly kiểm dịch (Quarantine Protocol) 48 giờ để nuôi cấy vi sinh vật đảm bảo nước hoàn toàn vô trùng trước khi phân phối ra thị trường.",
+        "whyWrong": "\"Quarantined until approval is granted\" là quy định bắt buộc trong quản trị dược phẩm và đồ uống cao cấp.",
+        "crucialNote": "Khu vực kho lưu giữ hàng chờ kết quả được dán nhãn cảnh báo màu vàng.",
+        "memoryHook": "Quarantined until lab approval is granted."
       },
       {
         "id": "u69-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct official export document issued by QC:",
+        "promptVi": "Chọn thuật ngữ viết tắt của phiếu phân tích kiểm nghiệm chất lượng đi kèm mỗi lô hàng xuất xưởng:",
+        "englishSentence": "The export shipment cannot clear customs without an official [ _____ ] signed by our QA Director.",
+        "audioText": "The export shipment cannot clear customs without an official COA signed by our QA Director.",
+        "blankWord": "COA",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "COA",
+          "VIP",
+          "SOS"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Lô hàng xuất khẩu không thể thông quan nếu thiếu phiếu phân tích chất lượng (COA) chính thức có chữ ký của Giám đốc QA.",
+        "explanation": "COA (Certificate of Analysis) là tài liệu pháp lý bắt buộc trong thương mại quốc tế chứng minh các chỉ số hóa lý và vi sinh của lô hàng.",
+        "whyWrong": "\"VIP\" (khách quan trọng) hay \"SOS\" (tín hiệu cấp cứu) không phải là chứng từ phân tích chất lượng.",
+        "crucialNote": "COA ghi rõ ngày sản xuất, số lô, hàm lượng ion khoáng và kết quả vi sinh âm tính.",
+        "memoryHook": "Official COA = Certificate of Analysis = Phiếu phân tích chất lượng."
       },
       {
         "id": "u69-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Phòng Quản Lý Chất Lượng QA/QC\" (Tiêu chuẩn kiểm nghiệm vi sinh và giám sát an toàn). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We must align the proposed rebate framework with our overarching regional retail guidelines.",
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts."
+        "type": "chat_branch",
+        "promptEn": "Review automated optical camera inspection data with the plant QA lead on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Trưởng phòng QA gửi báo cáo hệ thống camera quang học AI kiểm tra nắp chai và mức nước chiết rót tự động:",
+        "englishSentence": "Superb data! The optical inspection cameras rejected zero bottles today, confirming 100% cap seal alignment and accurate liquid fill levels across all shifts.",
+        "audioText": "Superb data! The optical inspection cameras rejected zero bottles today, confirming 100% cap seal alignment and accurate liquid fill levels across all shifts.",
+        "chatMessages": [
+          {
+            "speaker": "Loan (Head of QA/QC, Vikoda Plant)",
+            "avatar": "🔍",
+            "message": "Minh, we just pulled the 24-hour optical AI camera inspection log for the Tokyo export batch. Fill-level tolerance was ±1mm across 100,000 bottles."
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Tiêu chuẩn kiểm nghiệm vi sinh và giám sát an toàn",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Superb data! The optical inspection cameras rejected zero bottles today, confirming 100% cap seal alignment and accurate liquid fill levels across all shifts.",
+            "trustScore": 25,
+            "feedback": "Đánh giá quản lý chất lượng xuất sắc! Biểu dương độ chính xác dung sai ±1mm của hệ thống camera quang học AI, bảo đảm 100.000 chai xuất khẩu sang Tokyo đều chuẩn chỉnh như một.",
+            "isCorrect": true
+          },
+          {
+            "text": "Cameras are useless, just let workers look at the bottles while chatting on their phones.",
+            "trustScore": 0,
+            "feedback": "Coi thường công nghệ tự động hóa! Sẽ để lọt sản phẩm lỗi sang thị trường Nhật Bản khắt khe.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Số liệu tuyệt hảo! Các camera quang học kiểm tra không phải loại bỏ chai nào hôm nay, khẳng định 100% nắp chai thẳng hàng kín khí và mức nước chiết rót chuẩn xác trong tất cả các ca.",
+        "explanation": "Hệ thống kiểm tra quang học tự động (Automated Optical Inspection) loại bỏ hoàn toàn yếu tố sai sót chủ quan của mắt người.",
+        "crucialNote": "Thị trường Nhật Bản soi xét từng milimét chiều cao mức nước trong chai.",
+        "memoryHook": "100% cap seal alignment and accurate fill levels."
       }
     ]
   },
@@ -9449,109 +9704,136 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "subtitle": "Báo cáo hỏng hóc máy móc và quy trình sửa chữa",
     "level": "B2",
     "icon": "🔧",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u70-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for plant machinery maintenance and troubleshooting?",
-        "options": [
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets, as confirmed in our recent departmental briefing with executive management.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions, pending formal verification from our international distribution coordinators.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match equipment maintenance and engineering troubleshooting terms:",
+        "promptVi": "Ghép cặp thuật ngữ bảo trì phòng ngừa và khắc phục sự cố máy móc nhà xưởng:",
+        "englishSentence": "Match machinery maintenance and troubleshooting terms.",
+        "audioText": "Match machinery maintenance and troubleshooting terms.",
+        "explanation": "5 thuật ngữ kỹ thuật bảo dưỡng giúp duy trì độ bền máy móc và triệt tiêu nguy cơ dừng dây chuyền đột xuất.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ bảo trì thiết bị và sửa chữa sự cố.",
+        "pairs": [
+          {
+            "left": "Preventive maintenance schedule",
+            "right": "Lịch bảo trì phòng ngừa định kỳ ngăn ngừa sự cố"
+          },
+          {
+            "left": "Standard operating procedure (SOP)",
+            "right": "Quy trình thao tác chuẩn bảo dưỡng kỹ thuật nghiêm ngặt"
+          },
+          {
+            "left": "Original German spare parts",
+            "right": "Phụ tùng thay thế chính hãng nhập khẩu từ Đức"
+          },
+          {
+            "left": "Sensor calibration routine",
+            "right": "Quy trình hiệu chuẩn cảm biến đo lường định kỳ"
+          },
+          {
+            "left": "Emergency maintenance intervention",
+            "right": "Can thiệp xử lý sự cố kỹ thuật khẩn cấp 24/7"
+          }
+        ]
       },
       {
         "id": "u70-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this engineering maintenance commitment clearly:",
+        "promptVi": "Luyện nói câu cam kết duy trì lịch bảo trì định kỳ bảo đảm vận hành dây chuyền trơn tru:",
+        "englishSentence": "Strict adherence to our preventive maintenance schedule guarantees optimal line efficiency and zero unplanned downtime.",
+        "audioText": "Strict adherence to our preventive maintenance schedule guarantees optimal line efficiency and zero unplanned downtime.",
+        "phonetics": "/strɪkt ədˈhɪərəns tuː ˈaʊər prɪˈvɛntɪv ˈmeɪntənəns ˈskɛdʒuːl ˌɡærənˈtiːz ˈɒptɪməl laɪn ɪˈfɪʃənsi ænd ˈzɪəroʊ ʌnˈplænd ˈdaʊntaɪm/",
+        "vietnameseMeaning": "Việc tuân thủ nghiêm ngặt lịch bảo trì phòng ngừa bảo đảm hiệu suất dây chuyền tối ưu và hoàn toàn không có thời gian dừng máy ngoài kế hoạch.",
+        "explanation": "\"Strict adherence to preventive maintenance guarantees zero unplanned downtime\" là tôn chỉ vàng của các kỹ sư bảo trì chuyên nghiệp.",
+        "whyWrong": "Phát âm rõ từ \"preventive maintenance\" (/prɪˈvɛntɪv ˈmeɪntənəns/) và \"unplanned downtime\" (/ʌnˈplænd ˈdaʊntaɪm/).",
+        "crucialNote": "Bảo trì phòng ngừa trước khi máy hỏng giúp tiết kiệm hàng tỷ đồng chi phí sửa chữa khẩn cấp.",
+        "memoryHook": "Adherence to preventive maintenance guarantees zero unplanned downtime."
       },
       {
         "id": "u70-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the standard procedure for sensor lubrication:",
+        "promptVi": "Ghép câu: \"Tất cả kỹ thuật viên phải tuân thủ quy trình thao tác chuẩn khi tra dầu bôi trơn máy móc\":",
+        "englishSentence": "All technicians must follow standard operating procedures for lubrication and calibration.",
+        "audioText": "All technicians must follow standard operating procedures for lubrication and calibration.",
         "wordPool": [
-          "distribution",
-          "cancel",
-          "the",
-          "parties",
-          "commercial",
-          "sign",
-          "contract.",
-          "comprehensive",
-          "master",
-          "never",
-          "Both",
-          "to",
-          "agree"
+          "All",
+          "technicians",
+          "must",
+          "follow",
+          "standard",
+          "operating",
+          "procedures",
+          "for",
+          "lubrication",
+          "and",
+          "calibration.",
+          "ignore",
+          "break"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Tất cả kỹ thuật viên phải tuân thủ các quy trình thao tác chuẩn về bôi trơn và hiệu chuẩn.",
+        "explanation": "Dầu mỡ bôi trơn trong nhà máy thực phẩm và đồ uống phải là dầu mỡ an toàn thực phẩm (Food-grade lubricant H1) đạt chuẩn NSF.",
+        "whyWrong": "Tuyệt đối không dùng dầu nhớt công nghiệp thông thường gần khu vực chiết rót nước uống.",
+        "crucialNote": "Tuân thủ SOP tránh nhiễm bẩn dầu vào sản phẩm.",
+        "memoryHook": "Follow standard operating procedures for lubrication."
       },
       {
         "id": "u70-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct term for critical replacement machine components:",
+        "promptVi": "Chọn từ chính xác chỉ kho linh kiện phụ tùng thay thế sẵn có:",
+        "englishSentence": "We keep an extensive inventory of genuine spare [ _____ ] to resolve any mechanical wear immediately.",
+        "audioText": "We keep an extensive inventory of genuine spare parts to resolve any mechanical wear immediately.",
+        "blankWord": "parts",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "parts",
+          "books",
+          "tickets"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Chúng tôi duy trì một kho lưu trữ phong phú các phụ tùng thay thế chính hãng để xử lý bất kỳ hao mòn cơ khí nào ngay lập tức.",
+        "explanation": "\"Genuine spare parts\" (phụ tùng thay thế chính hãng) nhập khẩu trực tiếp từ nhà sản xuất Krones bảo đảm máy móc luôn vận hành chuẩn xác.",
+        "whyWrong": "\"Books\" (sách) hay \"tickets\" (vé xe) không phải là linh kiện cơ khí nhà máy.",
+        "crucialNote": "Gioăng cao su, van chiết rót, vòng bi chịu nhiệt luôn có sẵn trong kho kỹ thuật.",
+        "memoryHook": "Genuine spare parts resolve mechanical wear immediately."
       },
       {
         "id": "u70-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Bảo Trì Thiết Bị & Khắc Phục Sự Cố\" (Báo cáo hỏng hóc máy móc và quy trình sửa chữa). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts."
+        "type": "chat_branch",
+        "promptEn": "Coordinate swift maintenance resolution during scheduled line pause on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Trưởng ca kỹ thuật báo cáo đã hoàn thành thay thế vòng đệm làm kín van chiết rót trong vòng 20 phút trước khi bắt đầu ca chiều:",
+        "englishSentence": "Outstanding work, Technical Team! Pressure tests confirm zero leakage. Line 1 is fully sterilized and cleared for full-speed production.",
+        "audioText": "Outstanding work, Technical Team! Pressure tests confirm zero leakage. Line 1 is fully sterilized and cleared for full-speed production.",
+        "chatMessages": [
+          {
+            "speaker": "Huy (Chief Maintenance Engineer)",
+            "avatar": "🔧",
+            "message": "Minh, we just completed the scheduled gasket replacement on filling valve #14 in 20 minutes flat. Pressure test at 4.0 bar is holding perfectly."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Báo cáo hỏng hóc máy móc và quy trình sửa chữa",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Outstanding work, Technical Team! Pressure tests confirm zero leakage. Line 1 is fully sterilized and cleared for full-speed production.",
+            "trustScore": 25,
+            "feedback": "Phối hợp điều hành nhà máy mẫu mực! Biểu dương tốc độ bảo trì 20 phút của đội kỹ thuật, xác nhận kiểm tra áp suất không rò rỉ và tiệt trùng dây chuyền sẵn sàng chạy hết tốc lực.",
+            "isCorrect": true
+          },
+          {
+            "text": "Why did you waste 20 minutes? You should let the valve leak water on the floor forever.",
+            "trustScore": 0,
+            "feedback": "Thiếu hiểu biết kỹ thuật! Van rò rỉ sẽ làm nhiễm khuẩn và gây thất thoát hàng nghìn lít nước khoáng quý giá.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Công việc xuất sắc lắm, Đội Kỹ thuật! Kiểm tra áp suất xác nhận không hề rò rỉ. Dây chuyền 1 đã được tiệt trùng hoàn toàn và sẵn sàng cho sản xuất hết công suất.",
+        "explanation": "Bảo trì nhanh chóng và chuẩn xác trong khung giờ nghỉ giúp nhà máy duy trì tỷ lệ vận hành liên tục (Continuous Uptime) trên 99%.",
+        "crucialNote": "Tinh thần phối hợp ăn ý giữa Sản xuất và Kỹ thuật bảo trì là động lực tăng trưởng.",
+        "memoryHook": "Pressure tests confirm zero leakage; cleared for full-speed production."
       }
     ]
   },
@@ -9561,110 +9843,137 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Đàm Phán Chiết Khấu Theo Sản Lượng Volume",
     "subtitle": "Cơ chế bậc thang chiết khấu thúc đẩy đơn hàng lớn",
     "level": "B2",
-    "icon": "📉",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "📈",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u71-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for negotiating tiered volume sales rebates?",
-        "options": [
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds, as confirmed in our recent departmental briefing with executive management.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets, pending formal verification from our international distribution coordinators.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match volume discount negotiation and incentive rebate terms:",
+        "promptVi": "Ghép cặp các thuật ngữ đàm phán chiết khấu bậc thang theo sản lượng tiêu thụ:",
+        "englishSentence": "Match volume discount and tiered rebate terms.",
+        "audioText": "Match volume discount and tiered rebate terms.",
+        "explanation": "5 thuật ngữ tài chính đàm phán kích thích đối tác gom đơn hàng lớn để nhận chiết khấu cao.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ chiết khấu thương mại theo sản lượng.",
+        "pairs": [
+          {
+            "left": "Volume discount tier",
+            "right": "Bậc thang chiết khấu giảm giá theo số lượng thùng hàng"
+          },
+          {
+            "left": "Sliding scale pricing",
+            "right": "Biểu giá lũy tiến linh hoạt giảm dần theo quy mô đơn hàng"
+          },
+          {
+            "left": "Annual volume commitment",
+            "right": "Cam kết tổng sản lượng tiêu thụ tối thiểu cả năm"
+          },
+          {
+            "left": "Quarterly sales incentive",
+            "right": "Thưởng khuyến khích doanh số vượt chỉ tiêu hàng quý"
+          },
+          {
+            "left": "Full container load (FCL) bonus",
+            "right": "Thưởng ưu đãi chi phí khi bốc đủ nguyên một container"
+          }
+        ]
       },
       {
         "id": "u71-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this volume discount proposal clearly to a major beverage buyer:",
+        "promptVi": "Luyện nói câu đề xuất chính sách chiết khấu bậc thang theo sản lượng đơn hàng:",
+        "englishSentence": "By increasing your monthly order to twenty thousand cases, your company unlocks our tier-three volume discount of fifteen percent.",
+        "audioText": "By increasing your monthly order to twenty thousand cases, your company unlocks our tier-three volume discount of fifteen percent.",
+        "phonetics": "/baɪ ɪnˈkriːsɪŋ jʊər ˈmʌnθli ˈɔːrdər tuː ˈtwɛnti ˈθaʊzənd ˈkeɪsɪz, jʊər ˈkʌmpəni ʌnˈlɒks ˈaʊər tɪər θriː ˈvɒljuːm ˈdɪskaʊnt ɒv ˈfɪfˈtiːn pərˈsɛnt/",
+        "vietnameseMeaning": "Bằng việc nâng đơn hàng hàng tháng lên hai mươi nghìn thùng, công ty của bạn sẽ mở khóa mức chiết khấu sản lượng bậc ba mười lăm phần trăm.",
+        "explanation": "\"By increasing your order to [Số lượng], your company unlocks [Mức chiết khấu]\" là kỹ thuật đàm phán kinh điển thúc đẩy khách nâng quy mô mua sắm.",
+        "whyWrong": "Dùng từ ngữ tích cực \"unlocks our discount\" (mở khóa ưu đãi) tạo cảm giác đối tác đạt được một thành tựu lớn.",
+        "crucialNote": "Đơn hàng càng lớn giúp nhà máy tối ưu hóa chi phí vận hành dây chuyền và cước xe tải.",
+        "memoryHook": "Increase order to unlock tier-three volume discount."
       },
       {
         "id": "u71-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the logistics efficiency of full container load orders:",
+        "promptVi": "Ghép câu: \"Đặt hàng nguyên container giúp tối ưu hóa chi phí vận chuyển và đẩy nhanh tiến độ giao hàng\":",
+        "englishSentence": "Ordering full container loads optimizes freight costs and expedites shipping turnaround.",
+        "audioText": "Ordering full container loads optimizes freight costs and expedites shipping turnaround.",
         "wordPool": [
-          "commercial",
-          "agree",
-          "contract.",
-          "to",
-          "sign",
-          "distribution",
-          "Both",
-          "comprehensive",
-          "never",
-          "master",
-          "parties",
-          "cancel",
-          "the"
+          "Ordering",
+          "full",
+          "container",
+          "loads",
+          "optimizes",
+          "freight",
+          "costs",
+          "and",
+          "expedites",
+          "shipping",
+          "turnaround.",
+          "delay",
+          "waste"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Đặt hàng nguyên container giúp tối ưu hóa chi phí vận chuyển và đẩy nhanh tiến độ giao hàng.",
+        "explanation": "Đơn hàng FCL (Full Container Load) luôn được các hãng tàu biển ưu tiên bốc xếp nhanh hơn hàng lẻ LCL.",
+        "whyWrong": "\"Optimizes freight costs\" (tối ưu hóa cước vận tải) giúp chia nhỏ chi phí trên từng chai nước xuống mức thấp nhất.",
+        "crucialNote": "Một container 40ft chở được khoảng 2.000 thùng carton nước khoáng 500ml.",
+        "memoryHook": "Full container loads optimize freight costs and turnaround."
       },
       {
         "id": "u71-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct commercial term for tiered incentive structures:",
+        "promptVi": "Chọn thuật ngữ biểu giá linh hoạt theo nấc thang số lượng đặt hàng:",
+        "englishSentence": "Our sales contract incorporates a sliding [ _____ ] mechanism to reward higher procurement volume.",
+        "audioText": "Our sales contract incorporates a sliding scale mechanism to reward higher procurement volume.",
+        "blankWord": "scale",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "scale",
+          "door",
+          "bridge"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Hợp đồng mua bán của chúng tôi tích hợp cơ chế biểu giá lũy tiến để tưởng thưởng cho sản lượng mua hàng cao hơn.",
+        "explanation": "\"Sliding scale\" (biểu giá lũy tiến trượt) là mô hình định giá tiêu chuẩn trong thương mại quốc tế: Mua càng nhiều, đơn giá càng rẻ.",
+        "whyWrong": "\"Door\" (cửa sổ) hay \"bridge\" (cây cầu) không mang ý nghĩa biểu giá kinh tế.",
+        "crucialNote": "Minh bạch các nấc thang sản lượng giúp đại lý chủ động gom đơn tích lũy.",
+        "memoryHook": "Sliding scale mechanism = Cơ chế biểu giá lũy tiến."
       },
       {
         "id": "u71-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Đàm Phán Chiết Khấu Theo Sản Lượng Volume\" (Cơ chế bậc thang chiết khấu thúc đẩy đơn hàng lớn). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets."
+        "type": "chat_branch",
+        "promptEn": "Structure a win-win volume rebate tier with a supermarket procurement head on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Giám đốc mua hàng chuỗi siêu thị VinMart muốn đàm phán thêm 2% chiết khấu nếu cam kết bao tiêu 50.000 thùng trong mùa hè:",
+        "englishSentence": "Agreed! If your chain exceeds 50,000 cases between May and August, we will grant an additional 2% retrospective bonus rebate at the end of Q3.",
+        "audioText": "Agreed! If your chain exceeds 50,000 cases between May and August, we will grant an additional 2% retrospective bonus rebate at the end of Q3.",
+        "chatMessages": [
+          {
+            "speaker": "Huy (Category Director, WinCommerce)",
+            "avatar": "🛒",
+            "message": "Minh, we are planning a massive summer hydration festival across 3,000 stores. Can you offer an extra 2% margin if we commit to 50,000 cases?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Cơ chế bậc thang chiết khấu thúc đẩy đơn hàng lớn",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Agreed! If your chain exceeds 50,000 cases between May and August, we will grant an additional 2% retrospective bonus rebate at the end of Q3.",
+            "trustScore": 25,
+            "feedback": "Chốt deal xuất sắc win-win đôi bên cùng thắng! Đồng ý mức thưởng thêm 2% nhưng gắn chặt vào điều kiện đạt chỉ tiêu 50.000 thùng và chi trả dưới dạng thưởng hồi tố cuối quý, vừa thúc đẩy doanh số bùng nổ vừa an toàn dòng tiền.",
+            "isCorrect": true
+          },
+          {
+            "text": "No, 50,000 cases is nothing to us, we don't care about your stores.",
+            "trustScore": 0,
+            "feedback": "Hủy hoại doanh thu! Đánh mất cơ hội bán 50.000 thùng hàng vào hệ thống siêu thị lớn nhất Việt Nam.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Đồng ý! Nếu hệ thống của quý vị vượt 50.000 thùng từ tháng 5 đến tháng 8, chúng tôi sẽ trao thêm 2% tiền thưởng chiết khấu hồi tố vào cuối Quý 3.",
+        "explanation": "Chiết khấu hồi tố thưởng doanh số (Bonus Rebate) tạo động lực mãnh liệt cho đội ngũ nhân viên siêu thị đẩy mạnh bán hàng Vikoda.",
+        "crucialNote": "Mùa hè là mùa vàng tiêu thụ nước khoáng thiên nhiên.",
+        "memoryHook": "Exceed 50,000 cases to grant additional 2% retrospective rebate."
       }
     ]
   },
@@ -9674,110 +9983,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Thương Thảo Hạn Mức Tín Dụng & Thanh Toán",
     "subtitle": "Đàm phán tỷ lệ đặt cọc 30% và thanh toán trước giao hàng",
     "level": "B2",
-    "icon": "🤝",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "💰",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u72-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for commercial credit limits and down payment terms?",
-        "options": [
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds, as confirmed in our recent departmental briefing with executive management.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, pending formal verification from our international distribution coordinators.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match international trade finance and credit risk terms with their meanings:",
+        "promptVi": "Ghép cặp các thuật ngữ tài trợ thương mại quốc tế và quản trị rủi ro tín dụng thanh toán:",
+        "englishSentence": "Match international credit and payment terms.",
+        "audioText": "Match international credit and payment terms.",
+        "explanation": "5 công cụ bảo lãnh tài chính quốc tế bảo đảm an toàn dòng vốn thu hồi 100%.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ hạn mức tín dụng và phương thức thanh toán quốc tế.",
+        "pairs": [
+          {
+            "left": "Irrevocable Letter of Credit (L/C)",
+            "right": "Thư tín dụng không thể hủy ngang do ngân hàng bảo lãnh"
+          },
+          {
+            "left": "30% advance deposit",
+            "right": "Tiền đặt cọc ứng trước ba mươi phần trăm khi ký hợp đồng"
+          },
+          {
+            "left": "Balance against Bill of Lading",
+            "right": "Thanh toán phần còn lại ngay khi xuất trình vận đơn đường biển"
+          },
+          {
+            "left": "Credit ceiling limit",
+            "right": "Hạn mức nợ tối đa cho phép đối với đại lý chiến lược"
+          },
+          {
+            "left": "Telegraphic Transfer (T/T)",
+            "right": "Phương thức chuyển tiền điện tử trực tiếp qua ngân hàng"
+          }
+        ]
       },
       {
         "id": "u72-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this firm export payment terms clause clearly:",
+        "promptVi": "Luyện nói câu khẳng định điều kiện thanh toán xuất khẩu tiêu chuẩn của Vikoda:",
+        "englishSentence": "Our export credit policy requires thirty percent advance deposit via T/T, with the seventy percent balance payable against the original Bill of Lading.",
+        "audioText": "Our export credit policy requires thirty percent advance deposit via T/T, with the seventy percent balance payable against the original Bill of Lading.",
+        "phonetics": "/ˈaʊər ˈɛkspɔːrt ˈkrɛdɪt ˈpɒləsi rɪˈkwaɪərz ˈθɜːrti pərˈsɛnt ədˈvɑːns dɪˈpɒzɪt ˈvaɪə tiː tiː, wɪð ðə ˈsɛvənti pərˈsɛnt ˈbæləns ˈpeɪəbl əˈɡɛnst ðiː əˈrɪdʒɪnl bɪl ɒv ˈleɪdɪŋ/",
+        "vietnameseMeaning": "Chính sách tín dụng xuất khẩu của chúng tôi yêu cầu đặt cọc trước 30% qua chuyển khoản T/T, với 70% số tiền còn lại được thanh toán khi xuất trình vận đơn đường biển gốc.",
+        "explanation": "\"30% advance deposit via T/T, balance payable against original Bill of Lading\" là công thức thanh toán thương mại quốc tế vàng (T/T 30/70) an toàn tuyệt đối cho bên bán.",
+        "whyWrong": "Phát âm rõ từ \"advance deposit\" (/ədˈvɑːns dɪˈpɒzɪt/) và \"Bill of Lading\" (/bɪl ɒv ˈleɪdɪŋ/).",
+        "crucialNote": "Không bao giờ thả hàng lên tàu mà không thu đủ 30% tiền cọc sản xuất.",
+        "memoryHook": "30% advance deposit, 70% balance against Bill of Lading."
       },
       {
         "id": "u72-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the security of an irrevocable Letter of Credit:",
+        "promptVi": "Ghép câu: \"Thư tín dụng không thể hủy ngang từ một ngân hàng hạng nhất bảo đảm an toàn thanh toán tuyệt đối\":",
+        "englishSentence": "An irrevocable Letter of Credit from a top-tier bank guarantees total payment security.",
+        "audioText": "An irrevocable Letter of Credit from a top-tier bank guarantees total payment security.",
         "wordPool": [
-          "agree",
-          "sign",
-          "Both",
-          "distribution",
-          "comprehensive",
-          "the",
-          "parties",
-          "cancel",
-          "master",
-          "commercial",
-          "to",
-          "contract.",
-          "never"
+          "An",
+          "irrevocable",
+          "Letter",
+          "of",
+          "Credit",
+          "from",
+          "a",
+          "top-tier",
+          "bank",
+          "guarantees",
+          "total",
+          "payment",
+          "security.",
+          "loss",
+          "danger"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Thư tín dụng không thể hủy ngang từ một ngân hàng hạng nhất bảo đảm an toàn thanh toán tuyệt đối.",
+        "explanation": "Phương thức L/C trả ngay tại ngân hàng quốc tế uy tín (Standard Chartered, HSBC, Citibank) triệt tiêu hoàn toàn rủi ro người mua quỵt tiền.",
+        "whyWrong": "\"Guarantees total payment security\" khẳng định ngân hàng phát hành chịu trách nhiệm thanh toán vô điều kiện.",
+        "crucialNote": "Bộ chứng từ xuất trình L/C phải sạch lỗi không có bất kỳ sai sót chính tả nào.",
+        "memoryHook": "Irrevocable L/C from top-tier bank guarantees payment security."
       },
       {
         "id": "u72-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct financial term for the maximum credit exposure:",
+        "promptVi": "Chọn thuật ngữ chỉ hạn mức dư nợ tối đa cho phép đối với một khách hàng doanh nghiệp:",
+        "englishSentence": "Our financial committee approved an increased credit [ _____ ] of one hundred thousand dollars for your account.",
+        "audioText": "Our financial committee approved an increased credit ceiling of one hundred thousand dollars for your account.",
+        "blankWord": "ceiling",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "ceiling",
+          "blanket",
+          "pillow"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Hội đồng tài chính của chúng tôi đã phê duyệt nâng hạn mức tín dụng trần lên một trăm nghìn đô la cho tài khoản của bạn.",
+        "explanation": "\"Credit ceiling\" hoặc \"credit limit\" là mức trần nợ cho phép dựa trên lịch sử thanh toán uy tín và năng lực tài chính của đại lý.",
+        "whyWrong": "\"Blanket\" (chiếc chăn) hay \"pillow\" (chiếc gối) là đồ dùng phòng ngủ hoàn toàn vô nghĩa trong tài chính.",
+        "crucialNote": "Đại lý thanh toán sòng phẳng đúng hạn Net 30 sẽ được tự động nâng hạn mức trần.",
+        "memoryHook": "Approved credit ceiling = Phê duyệt hạn mức tín dụng trần."
       },
       {
         "id": "u72-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Thương Thảo Hạn Mức Tín Dụng & Thanh Toán\" (Đàm phán tỷ lệ đặt cọc 30% và thanh toán trước giao hàng). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets."
+        "type": "chat_branch",
+        "promptEn": "Negotiate payment terms with an international distributor requesting 100% credit on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Nhà nhập khẩu đồ uống Philippines mới ký hợp đồng lần đầu đòi thanh toán 100% trả chậm sau 60 ngày:",
+        "englishSentence": "For our initial partnership, we can offer 30% deposit with 70% against B/L. Once we establish a 6-month proven track record, we can transition to Net 30 terms!",
+        "audioText": "For our initial partnership, we can offer 30% deposit with 70% against B/L. Once we establish a 6-month proven track record, we can transition to Net 30 terms!",
+        "chatMessages": [
+          {
+            "speaker": "Ramon (Managing Director, Manila Beverage Imports)",
+            "avatar": "🇵🇭",
+            "message": "Minh, we want to import 3 containers. But our company policy prohibits any advance deposit. We only buy on 60-day open credit."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Đàm phán tỷ lệ đặt cọc 30% và thanh toán trước giao hàng",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "For our initial partnership, we can offer 30% deposit with 70% against B/L. Once we establish a 6-month proven track record, we can transition to Net 30 terms!",
+            "trustScore": 25,
+            "feedback": "Quản trị rủi ro tín dụng xuất khẩu xuất sắc! Kiên quyết giữ nguyên tắc cọc 30% cho đơn hàng đầu tiên để bảo vệ vốn doanh nghiệp, đồng thời mở ra lộ trình trả chậm Net 30 sau 6 tháng hợp tác uy tín.",
+            "isCorrect": true
+          },
+          {
+            "text": "Okay, take all 3 containers for free and pay us next year if you remember.",
+            "trustScore": 0,
+            "feedback": "Mất trắng tài sản! Rủi ro bị lừa đảo quốc tế dẫn đến mất hàng chục container không thể đòi lại.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Đối với quan hệ hợp tác ban đầu, chúng tôi có thể đưa ra điều kiện cọc 30% và 70% thanh toán khi xuất trình vận đơn. Sau khi hai bên đã thiết lập lịch sử giao dịch uy tín trong 6 tháng, chúng tôi có thể chuyển sang điều khoản trả chậm Net 30!",
+        "explanation": "Nguyên tắc quản trị rủi ro xuất khẩu: Khách hàng mới bắt buộc phải có tiền cọc hoặc L/C không hủy ngang.",
+        "crucialNote": "Đưa ra lộ trình nới lỏng tín dụng (Credit Road Map) giữ chân khách hàng thiện chí.",
+        "memoryHook": "Initial 30% deposit, transition to Net 30 after 6-month track record."
       }
     ]
   },
@@ -9787,110 +10125,138 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Đưa Hàng Vào Chuỗi Siêu Thị Hiện Đại MT",
     "subtitle": "Thương thảo phí mở mã hàng và chương trình khuyến mãi kệ",
     "level": "B2",
-    "icon": "🛒",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "🏬",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u73-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for modern trade supermarket listing and shelf slotting fees?",
-        "options": [
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, as confirmed in our recent departmental briefing with executive management.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions, pending formal verification from our international distribution coordinators.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match Modern Trade (MT) supermarket listing terms with their commercial functions:",
+        "promptVi": "Ghép cặp các thuật ngữ thương thảo đưa hàng vào chuỗi siêu thị kênh hiện đại (Modern Trade):",
+        "englishSentence": "Match Modern Trade supermarket listing terms.",
+        "audioText": "Match Modern Trade supermarket listing terms.",
+        "explanation": "5 thuật ngữ mấu chốt để đàm phán hợp đồng cung ứng với các tập đoàn bán lẻ AEON, Central, WinCommerce.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ đàm phán đưa hàng vào siêu thị hiện đại.",
+        "pairs": [
+          {
+            "left": "SKU slotting allowance fee",
+            "right": "Phí mở mã hàng niêm yết sản phẩm mới trên quầy kệ"
+          },
+          {
+            "left": "Central distribution center (CDC)",
+            "right": "Tổng kho trung chuyển giao hàng tập trung của chuỗi siêu thị"
+          },
+          {
+            "left": "Planogram compliance audit",
+            "right": "Kiểm tra sự tuân thủ sơ đồ bố trí gian hàng chuẩn"
+          },
+          {
+            "left": "Promotional trade spend",
+            "right": "Ngân sách chiết khấu và quảng bá khuyến mại tại siêu thị"
+          },
+          {
+            "left": "On-shelf availability rate",
+            "right": "Tỷ lệ hàng luôn có sẵn trên kệ không bị đứt hàng"
+          }
+        ]
       },
       {
         "id": "u73-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this supermarket category review proposal clearly:",
+        "promptVi": "Luyện nói câu đề xuất hợp tác mở mã sản phẩm nước khoáng kiềm với giám đốc ngành hàng siêu thị:",
+        "englishSentence": "Listing Vikoda's natural alkaline range will drive category growth and attract health-conscious premium shoppers to your beverage aisle.",
+        "audioText": "Listing Vikoda's natural alkaline range will drive category growth and attract health-conscious premium shoppers to your beverage aisle.",
+        "phonetics": "/ˈlɪstɪŋ vɪˈkoʊdəz ˈnætʃrəl ˈælkəlaɪn reɪndʒ wɪl draɪv ˈkætɪɡəri ɡroʊθ ænd əˈtrækt hɛlθ ˈkɒnʃəs ˈpriːmiəm ˈʃɒpərz tuː jʊər ˈbɛvərɪdʒ aɪl/",
+        "vietnameseMeaning": "Việc mở mã niêm yết dòng sản phẩm kiềm tự nhiên Vikoda sẽ thúc đẩy tăng trưởng toàn ngành hàng và thu hút những người mua sắm cao cấp quan tâm sức khỏe đến quầy đồ uống của quý vị.",
+        "explanation": "\"Drive category growth and attract premium shoppers to your aisle\" thuyết phục siêu thị bằng góc nhìn của nhà bán lẻ: sản phẩm giúp họ kiếm thêm khách hàng mới và tăng doanh số giỏ hàng.",
+        "whyWrong": "Phát âm chuẩn từ \"category growth\" (/ˈkætɪɡəri ɡroʊθ/) và \"beverage aisle\" (/ˈbɛvərɪdʒ aɪl/).",
+        "crucialNote": "Siêu thị chỉ mở mã mới nếu sản phẩm tạo ra tăng trưởng mới thay vì chỉ ăn lấn doanh số của các thương hiệu cũ.",
+        "memoryHook": "Listing Vikoda drives category growth and attracts premium shoppers."
       },
       {
         "id": "u73-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the central warehouse logistics delivery process:",
+        "promptVi": "Ghép câu: \"Đội xe của chúng tôi giao hàng trực tiếp đến tổng kho trung chuyển của siêu thị mỗi ngày\":",
+        "englishSentence": "Our fleet delivers directly to the supermarket central distribution center every day.",
+        "audioText": "Our fleet delivers directly to the supermarket central distribution center every day.",
         "wordPool": [
-          "the",
-          "commercial",
-          "agree",
+          "Our",
+          "fleet",
+          "delivers",
+          "directly",
           "to",
-          "cancel",
-          "contract.",
+          "the",
+          "supermarket",
+          "central",
           "distribution",
-          "comprehensive",
-          "master",
-          "Both",
-          "parties",
-          "sign",
-          "never"
+          "center",
+          "every",
+          "day.",
+          "lose",
+          "broken"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Đội xe của chúng tôi giao hàng trực tiếp đến tổng kho trung chuyển của siêu thị mỗi ngày.",
+        "explanation": "Giao hàng qua tổng kho CDC (Central Distribution Center) giúp giảm thiểu tắc nghẽn giao thông và chi phí giao từng siêu thị nhỏ lẻ.",
+        "whyWrong": "Dùng cụm \"central distribution center\" thể hiện năng lực cung ứng quy mô lớn đồng bộ.",
+        "crucialNote": "Tuân thủ nghiêm ngặt khung giờ hẹn giao hàng (Delivery Slot Time) của tổng kho siêu thị.",
+        "memoryHook": "Delivers directly to central distribution center every day."
       },
       {
         "id": "u73-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct retail shelf management diagram term:",
+        "promptVi": "Chọn thuật ngữ sơ đồ chuẩn chỉ dẫn vị trí và số mặt chai trưng bày trên quầy kệ:",
+        "englishSentence": "Our field merchandisers audit the supermarket [ _____ ] weekly to ensure four facings for our 500ml bottles.",
+        "audioText": "Our field merchandisers audit the supermarket planogram weekly to ensure four facings for our 500ml bottles.",
+        "blankWord": "planogram",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "planogram",
+          "monogram",
+          "telegram"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Nhân viên trưng bày của chúng tôi kiểm tra sơ đồ quầy kệ siêu thị hàng tuần để bảo đảm bốn mặt chai quay ra ngoài cho dòng chai 500ml.",
+        "explanation": "\"Planogram\" (sơ đồ quy hoạch quầy kệ) là bản thiết kế vị trí trưng bày từng sản phẩm được siêu thị phê duyệt.",
+        "whyWrong": "\"Monogram\" (chữ lồng tên) hay \"telegram\" (bức điện tín) không liên quan đến quản trị quầy kệ bán lẻ.",
+        "crucialNote": "Giữ đúng số lượng mặt chai (facings) giúp tối ưu hóa tầm nhìn của người mua sắm.",
+        "memoryHook": "Audit planogram to ensure four facings on shelf."
       },
       {
         "id": "u73-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Đưa Hàng Vào Chuỗi Siêu Thị Hiện Đại MT\" (Thương thảo phí mở mã hàng và chương trình khuyến mãi kệ). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "Our commercial department prefers establishing firm minimum order commitments across regions.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets.",
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions."
+        "type": "chat_branch",
+        "promptEn": "Negotiate listing slotting fees with a multinational hypermarket commercial director on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Giám đốc thương mại chuỗi đại siêu thị AEON đòi phí mở mã hàng (Listing fee) 200 triệu đồng cho 3 dòng sản phẩm mới:",
+        "englishSentence": "We can agree to the 200 million fee if AEON converts 50% of it into two premium endcap gondola displays during your grand summer festival!",
+        "audioText": "We can agree to the 200 million fee if AEON converts 50% of it into two premium endcap gondola displays during your grand summer festival!",
+        "chatMessages": [
+          {
+            "speaker": "Mr. Nakata (Commercial VP, AEON Retail)",
+            "avatar": "🏬",
+            "message": "Minh, onboarding 3 new Vikoda SKUs into 15 AEON malls requires a 200 million VND upfront slotting fee. Non-negotiable."
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Thương thảo phí mở mã hàng và chương trình khuyến mãi kệ",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "We can agree to the 200 million fee if AEON converts 50% of it into two premium endcap gondola displays during your grand summer festival!",
+            "trustScore": 25,
+            "feedback": "Chiêu thức đàm phán thương mại siêu đẳng! Chấp nhận con số 200 triệu nhưng chuyển đổi 50% thành quyền lợi thuê 2 kệ đầu dãy (Endcap Gondola) trong đợt lễ hội hè, biến chi phí chết thành công cụ thúc đẩy doanh số bán hàng bùng nổ.",
+            "isCorrect": true
+          },
+          {
+            "text": "200 million is extortion! We cancel the deal and will tell police you are taking bribes.",
+            "trustScore": 0,
+            "feedback": "Cực kỳ thiếu chuyên nghiệp và ngớ ngẩn! Bị tập đoàn đại siêu thị lớn nhất châu Á cấm cửa vĩnh viễn.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chúng tôi có thể đồng ý với mức phí 200 triệu nếu AEON chuyển đổi 50% số tiền đó thành quyền trưng bày hai kệ đầu dãy cao cấp trong đợt lễ hội mùa hè lớn của quý vị!",
+        "explanation": "Kỹ thuật biến chi phí mở mã (Sunk Cost) thành quyền lợi trưng bày đắc địa (Sales-generating Asset) là bí quyết của các giám đốc bán hàng hiện đại lão luyện.",
+        "crucialNote": "Kệ đầu dãy mang lại doanh số gấp 5 lần so với kệ thông thường.",
+        "memoryHook": "Convert slotting fee into premium endcap gondola displays."
       }
     ]
   },
@@ -9900,110 +10266,140 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Đàm Phán Quyền Phân Phối Độc Quyền",
     "subtitle": "Gắn độc quyền vùng với chỉ tiêu doanh số cam kết hàng quý",
     "level": "B2",
-    "icon": "🔒",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "⚖️",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u74-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for territorial exclusive distribution rights?",
-        "options": [
-          "We must align the proposed rebate framework with our overarching regional retail guidelines, as confirmed in our recent departmental briefing with executive management.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds, pending formal verification from our international distribution coordinators.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match territory exclusivity contract clauses with their legal purposes:",
+        "promptVi": "Ghép cặp các điều khoản hợp đồng phân phối độc quyền với mục đích pháp lý thương mại:",
+        "englishSentence": "Match exclusive territory contract clauses.",
+        "audioText": "Match exclusive territory contract clauses.",
+        "explanation": "5 điều khoản bảo vệ quyền lợi nhà sản xuất khi trao quyền phân phối độc quyền một vùng lãnh thổ.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp điều khoản hợp đồng phân phối độc quyền.",
+        "pairs": [
+          {
+            "left": "Territory exclusivity grant",
+            "right": "Quyền phân phối độc quyền tại một khu vực địa lý xác định"
+          },
+          {
+            "left": "Minimum quarterly sales quota",
+            "right": "Chỉ tiêu sản lượng bán ra tối thiểu cam kết mỗi quý"
+          },
+          {
+            "left": "Automatic termination clause",
+            "right": "Điều khoản tự động tước quyền độc quyền nếu không đạt chỉ tiêu"
+          },
+          {
+            "left": "Non-compete covenant",
+            "right": "Cam kết không kinh doanh sản phẩm đối thủ cạnh tranh trực tiếp"
+          },
+          {
+            "left": "Annual exclusivity audit",
+            "right": "Đánh giá lại hiệu quả phân phối hàng năm trước khi gia hạn"
+          }
+        ]
       },
       {
         "id": "u74-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this firm exclusivity condition clearly to an ambitious distributor:",
+        "promptVi": "Luyện nói câu xác lập nguyên tắc gắn liền độc quyền với chỉ tiêu doanh số cam kết:",
+        "englishSentence": "Exclusive territory rights are granted exclusively under the condition that your company achieves our agreed quarterly volume targets.",
+        "audioText": "Exclusive territory rights are granted exclusively under the condition that your company achieves our agreed quarterly volume targets.",
+        "phonetics": "/ɪkˈskluːsɪv ˈtɛrɪtəri raɪts ɑːr ˈɡrɑːntɪd ɪkˈskluːsɪvli ˈʌndər ðə kənˈdɪʃən ðæt jʊər ˈkʌmpəni əˈtʃiːvz ˈaʊər əˈɡriːd ˈkwɔːrtərli ˈvɒljuːm ˈtɑːrɡɪts/",
+        "vietnameseMeaning": "Quyền độc quyền địa bàn chỉ được cấp duy nhất với điều kiện công ty của bạn đạt được các chỉ tiêu sản lượng hàng quý đã thỏa thuận của chúng tôi.",
+        "explanation": "\"Exclusivity rights are granted under the condition that you achieve quarterly volume targets\" là nguyên tắc bất di bất dịch: Quyền lợi độc quyền luôn đi đôi với nghĩa vụ doanh số.",
+        "whyWrong": "Phát âm rõ từ \"exclusively\" (/ɪkˈskluːsɪvli/) và \"quarterly volume targets\" (/ˈkwɔːrtərli ˈvɒljuːm ˈtɑːrɡɪts/).",
+        "crucialNote": "Tuyệt đối không cấp độc quyền vô điều kiện tránh tình trạng đại lý ôm địa bàn nhưng không bán hàng.",
+        "memoryHook": "Exclusivity is granted under condition of achieving quarterly targets."
       },
       {
         "id": "u74-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to describe the consequence of failing minimum quotas:",
+        "promptVi": "Ghép câu: \"Nếu không đạt chỉ tiêu tối thiểu sẽ tự động chuyển đổi sang cơ chế phân phối không độc quyền\":",
+        "englishSentence": "Failure to achieve minimum quotas will automatically convert the agreement to a non-exclusive partnership.",
+        "audioText": "Failure to achieve minimum quotas will automatically convert the agreement to a non-exclusive partnership.",
         "wordPool": [
+          "Failure",
           "to",
-          "distribution",
+          "achieve",
+          "minimum",
+          "quotas",
+          "will",
+          "automatically",
+          "convert",
           "the",
-          "master",
-          "agree",
-          "never",
-          "comprehensive",
-          "sign",
-          "contract.",
-          "cancel",
-          "commercial",
-          "Both",
-          "parties"
+          "agreement",
+          "to",
+          "a",
+          "non-exclusive",
+          "partnership.",
+          "reward",
+          "win"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Việc không đạt chỉ tiêu tối thiểu sẽ tự động chuyển đổi hợp đồng sang quan hệ đối tác không độc quyền.",
+        "explanation": "Điều khoản chuyển đổi tự động (Automatic Conversion) bảo vệ nhà sản xuất không bị giam chân tại các thị trường trọng điểm.",
+        "whyWrong": "\"Convert to a non-exclusive partnership\" cho phép công ty ký thêm đại lý mới nếu đại lý cũ làm ăn kém hiệu quả.",
+        "crucialNote": "Quy định rõ thời gian gia ân (grace period) là 30 ngày trước khi áp dụng điều khoản này.",
+        "memoryHook": "Failure to achieve quotas converts agreement to non-exclusive."
       },
       {
         "id": "u74-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct legal restriction term for distributing rival brands:",
+        "promptVi": "Chọn thuật ngữ cam kết không phân phối sản phẩm đối thủ cạnh tranh cùng phân khúc:",
+        "englishSentence": "The distributor agreed to a strict [ _____ ] covenant prohibiting the sale of rival mineral water brands.",
+        "audioText": "The distributor agreed to a strict non-compete covenant prohibiting the sale of rival mineral water brands.",
+        "blankWord": "non-compete",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "non-compete",
+          "non-stop",
+          "non-smoking"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Nhà phân phối đã đồng ý với cam kết không cạnh tranh nghiêm ngặt nghiêm cấm việc bán các thương hiệu nước khoáng đối thủ.",
+        "explanation": "\"Non-compete covenant\" (cam kết không cạnh tranh) bảo đảm đại lý tập trung 100% nguồn lực tiếp thị cho Vikoda.",
+        "whyWrong": "\"Non-stop\" (không ngừng) hay \"non-smoking\" (không hút thuốc) hoàn toàn sai lệch ngữ cảnh pháp lý.",
+        "crucialNote": "Vi phạm điều khoản này sẽ bị phạt bồi thường hợp đồng và chấm dứt quyền đại lý ngay lập tức.",
+        "memoryHook": "Strict non-compete covenant = Cam kết không cạnh tranh nghiêm ngặt."
       },
       {
         "id": "u74-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Đàm Phán Quyền Phân Phối Độc Quyền\" (Gắn độc quyền vùng với chỉ tiêu doanh số cam kết hàng quý). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions."
+        "type": "chat_branch",
+        "promptEn": "Negotiate territory exclusivity for the Australian market on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Công ty phân phối đồ uống tại Sydney muốn độc quyền nhập khẩu Vikoda trên toàn lãnh thổ nước Úc nhưng chỉ cam kết nhập 1 container thử nghiệm:",
+        "englishSentence": "We can grant exclusivity for New South Wales first with a 3-container quarterly commitment. Once nationwide volume hits 10 containers, we will expand to full Australian exclusivity!",
+        "audioText": "We can grant exclusivity for New South Wales first with a 3-container quarterly commitment. Once nationwide volume hits 10 containers, we will expand to full Australian exclusivity!",
+        "chatMessages": [
+          {
+            "speaker": "Liam (CEO, Aussie Beverage Gateway Sydney)",
+            "avatar": "🇦🇺",
+            "message": "Minh, we want exclusive distribution rights for the entire country of Australia, but we will start with just one trial 20ft container to test the waters."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Gắn độc quyền vùng với chỉ tiêu doanh số cam kết hàng quý",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "We can grant exclusivity for New South Wales first with a 3-container quarterly commitment. Once nationwide volume hits 10 containers, we will expand to full Australian exclusivity!",
+            "trustScore": 25,
+            "feedback": "Chiến lược phân phối quốc tế thông minh tuyệt đỉnh! Không khóa cả một quốc gia rộng lớn chỉ vì 1 container thử nghiệm; thay vào đó cấp độc quyền 1 bang (New South Wales) với cam kết 3 container, rồi mở rộng toàn quốc khi đạt 10 container.",
+            "isCorrect": true
+          },
+          {
+            "text": "Sure, take exclusive rights for the whole planet Earth forever, you don't even need to buy anything.",
+            "trustScore": 0,
+            "feedback": "Hành vi ngây thơ nguy hiểm! Khóa chết thị trường xuất khẩu và không thể bán hàng cho ai khác.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chúng tôi có thể cấp độc quyền cho bang New South Wales trước với cam kết 3 container mỗi quý. Một khi sản lượng toàn quốc đạt 10 container, chúng tôi sẽ mở rộng quyền độc quyền cho toàn bộ nước Úc!",
+        "explanation": "Chiến lược cấp độc quyền theo từng bang/khu vực (Territory Staging) là cách làm bài bản của các tập đoàn xuất khẩu toàn cầu.",
+        "crucialNote": "Đảm bảo thị trường Úc phát triển bền vững và không bị đối tác ôm quyền bỏ hoang.",
+        "memoryHook": "Grant state exclusivity first, expand to full country as volume grows."
       }
     ]
   },
@@ -10014,109 +10410,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "subtitle": "So sánh lợi thế khoáng kiềm tự nhiên pH 9.0 và carbon thấp",
     "level": "B2",
     "icon": "⚔️",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u75-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for head-to-head positioning against Evian and San Pellegrino?",
-        "options": [
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds, as confirmed in our recent departmental briefing with executive management.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, pending formal verification from our international distribution coordinators.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match competitive benchmarking terms against global imported mineral waters:",
+        "promptVi": "Ghép cặp các tiêu chí so sánh đối đầu trực diện giữa Vikoda với các thương hiệu quốc tế Evian và San Pellegrino:",
+        "englishSentence": "Match competitive benchmarking terms against global mineral water brands.",
+        "audioText": "Match competitive benchmarking terms against global mineral water brands.",
+        "explanation": "5 ưu thế vượt trội giúp Vikoda tự tin đánh bại các thương hiệu nhập khẩu đắt đỏ ngay trên sân nhà.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp tiêu chí so sánh đối đầu nước khoáng cao cấp.",
+        "pairs": [
+          {
+            "left": "Natural alkaline pH 9.0 edge",
+            "right": "Độ kiềm pH 9.0 tự nhiên vượt trội so với nước trung tính pH 7.2 của đối thủ"
+          },
+          {
+            "left": "Low food-mile carbon footprint",
+            "right": "Dấu chân carbon thấp nhờ nguồn cung nội địa không phải đi tàu biển vạn dặm"
+          },
+          {
+            "left": "Accessible luxury price point",
+            "right": "Định vị giá sang trọng hợp lý hơn từ ba mươi đến bốn mươi phần trăm"
+          },
+          {
+            "left": "Direct blind sensory test",
+            "right": "Thử nghiệm nếm mù trực tiếp khẳng định vị ngọt thanh êm dịu"
+          },
+          {
+            "left": "Preserved geological freshness",
+            "right": "Độ tươi mới nguyên bản không bị ảnh hưởng bởi vận chuyển container biển dài ngày"
+          }
+        ]
       },
       {
         "id": "u75-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this powerful competitive comparison statement clearly:",
+        "promptVi": "Luyện nói câu so sánh ưu thế kiềm tự nhiên và phát thải carbon thấp so với Evian và San Pellegrino:",
+        "englishSentence": "While European imports travel over ten thousand miles generating massive maritime carbon emissions, Vikoda delivers natural pH 9.0 freshness sustainably.",
+        "audioText": "While European imports travel over ten thousand miles generating massive maritime carbon emissions, Vikoda delivers natural pH 9.0 freshness sustainably.",
+        "phonetics": "/waɪl ˌjʊərəˈpiːən ˈɪmpɔːrts ˈtrævl ˈoʊvər tɛn ˈθaʊzənd maɪlz ˈdʒɛnəˌreɪtɪŋ ˈmæsɪv ˈmærɪtaɪm ˈkɑːrbən ɪˈmɪʃənz, vɪˈkoʊdə dɪˈlɪvərz ˈnætʃrəl piː eɪtʃ naɪn ˈfrɛʃnəs səˈsteɪnəbli/",
+        "vietnameseMeaning": "Trong khi hàng nhập khẩu châu Âu di chuyển hơn mười nghìn dặm tạo ra lượng khí thải carbon hàng hải khổng lồ, Vikoda mang đến sự tươi mới của độ pH 9.0 tự nhiên một cách bền vững.",
+        "explanation": "\"European imports travel over 10,000 miles generating massive maritime carbon emissions\" đánh trúng lương tri bảo vệ môi trường của các nhà quản lý quốc tế.",
+        "whyWrong": "Phát âm chuẩn từ \"maritime carbon emissions\" (/ˈmærɪtaɪm ˈkɑːrbən ɪˈmɪʃənz/) và \"sustainably\" (/səˈsteɪnəbli/).",
+        "crucialNote": "Evian có độ pH chỉ khoảng 7.2 (trung tính), trong khi Vikoda có độ kiềm vượt trội pH 9.0.",
+        "memoryHook": "Avoid massive shipping emissions, choose local pH 9.0 freshness sustainably."
       },
       {
         "id": "u75-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to describe the blind taste testing preference:",
+        "promptVi": "Ghép câu: \"Các cuộc thử nếm mù chứng minh khách hàng ưa chuộng hậu vị ngọt dịu tự nhiên của Vikoda hơn\":",
+        "englishSentence": "Blind taste tests prove consumers prefer Vikoda's naturally sweet finish over heavily mineralized imports.",
+        "audioText": "Blind taste tests prove consumers prefer Vikoda's naturally sweet finish over heavily mineralized imports.",
         "wordPool": [
-          "agree",
-          "distribution",
-          "never",
-          "master",
-          "comprehensive",
-          "to",
-          "contract.",
-          "sign",
-          "parties",
-          "the",
-          "commercial",
-          "Both",
-          "cancel"
+          "Blind",
+          "taste",
+          "tests",
+          "prove",
+          "consumers",
+          "prefer",
+          "Vikoda's",
+          "naturally",
+          "sweet",
+          "finish",
+          "over",
+          "heavily",
+          "mineralized",
+          "imports.",
+          "salty",
+          "dirty"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Các cuộc thử nếm mù chứng minh người tiêu dùng ưa chuộng hậu vị ngọt dịu tự nhiên của Vikoda hơn các loại nước nhập khẩu khoáng nặng.",
+        "explanation": "Nhiều loại nước châu Âu có vị lợ hoặc hơi chát do hàm lượng canxi quá đặc. Vikoda có vị khoáng thanh nhẹ ngọt ngào tự nhiên rất hợp khẩu vị châu Á.",
+        "whyWrong": "\"Naturally sweet finish\" là cảm nhận vị giác đắt giá nhất.",
+        "crucialNote": "Tổ chức thử nếm mù tại chỗ cho ban giám đốc khách sạn nếm thử ngay trên bàn đàm phán.",
+        "memoryHook": "Blind tests prove preference for Vikoda's sweet finish."
       },
       {
         "id": "u75-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct environmental footprint measurement term:",
+        "promptVi": "Chọn thuật ngữ đo lường quãng đường vận chuyển thực phẩm và khí thải môi trường:",
+        "englishSentence": "Vikoda dramatically cuts hotel Scope 3 emissions by eliminating long-haul maritime [ _____ ].",
+        "audioText": "Vikoda dramatically cuts hotel Scope 3 emissions by eliminating long-haul maritime shipping.",
+        "blankWord": "shipping",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "shipping",
+          "dancing",
+          "sleeping"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Vikoda cắt giảm đáng kể lượng phát thải Phạm vi 3 của khách sạn bằng việc loại bỏ vận tải hàng hải đường dài.",
+        "explanation": "\"Maritime shipping\" (vận tải đường biển liên lục địa) phát thải hàng nghìn tấn khí nhà kính CO2.",
+        "whyWrong": "\"Dancing\" (khiêu vũ) hay \"sleeping\" (ngủ) hoàn toàn vô lý trong báo cáo môi trường ESG.",
+        "crucialNote": "Khách sạn sử dụng sản phẩm địa phương cao cấp (Locally sourced luxury) được cộng điểm rất cao trong chứng chỉ xanh Green Globe.",
+        "memoryHook": "Cuts Scope 3 emissions by eliminating maritime shipping."
       },
       {
         "id": "u75-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Đối Đầu Trực Diện Evian & San Pellegrino\" (So sánh lợi thế khoáng kiềm tự nhiên pH 9.0 và carbon thấp). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts.",
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions."
+        "type": "chat_branch",
+        "promptEn": "Persuade a French GM of a luxury Da Nang resort to replace Evian with Vikoda glass bottles on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Tổng Giám đốc người Pháp của khu nghỉ dưỡng 5 sao Pullman Đà Nẵng băn khoăn liệu khách phương Tây có chấp nhận thay thế Evian bằng chai thủy tinh Vikoda:",
+        "englishSentence": "International luxury travelers seek authentic local terroir! Vikoda offers superior pH 9.0 alkaline wellness, 40% cost savings, and saves 12 tons of shipping CO2 annually for your resort.",
+        "audioText": "International luxury travelers seek authentic local terroir! Vikoda offers superior pH 9.0 alkaline wellness, 40% cost savings, and saves 12 tons of shipping CO2 annually for your resort.",
+        "chatMessages": [
+          {
+            "speaker": "Laurent (General Manager, Pullman Danang Beach Resort)",
+            "avatar": "🇫🇷",
+            "message": "Minh, our hotel brand standard has used Evian and San Pellegrino for 20 years. How can I justify to our regional VP replacing iconic European water with Vikoda?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "So sánh lợi thế khoáng kiềm tự nhiên pH 9.0 và carbon thấp",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "International luxury travelers seek authentic local terroir! Vikoda offers superior pH 9.0 alkaline wellness, 40% cost savings, and saves 12 tons of shipping CO2 annually for your resort.",
+            "trustScore": 25,
+            "feedback": "Cú hích đàm phán hoàn hảo đánh gục Tổng Giám đốc Pháp! Dẫn chứng triết lý bản sắc địa phương 'authentic local terroir' mà giới tinh hoa ưa chuộng, vượt trội về độ kiềm pH 9.0, tiết kiệm 40% chi phí và giảm 12 tấn CO2 vận tải hàng năm.",
+            "isCorrect": true
+          },
+          {
+            "text": "Evian is fake water from a sewer in France, you are stupid if you buy Evian.",
+            "trustScore": 0,
+            "feedback": "Xúc phạm nước Pháp và Tổng Giám đốc! Sẽ bị đuổi khỏi phòng họp ngay lập tức.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Khách du lịch thượng lưu quốc tế tìm kiếm bản sắc tinh hoa địa phương đích thực (terroir)! Vikoda mang lại độ kiềm pH 9.0 vượt trội cho sức khỏe, tiết kiệm 40% chi phí và cắt giảm 12 tấn CO2 vận tải mỗi năm cho khu nghỉ dưỡng của ngài.",
+        "explanation": "Từ tiếng Pháp 'Terroir' (tinh hoa thổ nhưỡng địa phương) là ngôn ngữ chạm thẳng vào trái tim của các nhà quản lý người Pháp.",
+        "crucialNote": "Biến sản phẩm Việt Nam thành niềm tự hào sánh ngang các thương hiệu huyền thoại thế giới.",
+        "memoryHook": "Authentic local terroir, pH 9.0 wellness, 40% savings, cuts 12 tons CO2."
       }
     ]
   },
@@ -10127,109 +10553,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "subtitle": "Điều khoản giao hàng, đổi trả và trách nhiệm các bên",
     "level": "B2",
     "icon": "📜",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u76-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for drafting master sale and purchase agreements?",
-        "options": [
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, pending formal verification from our international distribution coordinators.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match commercial contract clauses with their legal purposes:",
+        "promptVi": "Ghép cặp các điều khoản hợp đồng nguyên tắc mua bán B2B với mục đích pháp lý:",
+        "englishSentence": "Match master sales contract clauses.",
+        "audioText": "Match master sales contract clauses.",
+        "explanation": "5 điều khoản pháp lý cốt tử bảo vệ quyền và nghĩa vụ của các bên trong hợp đồng thương mại.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp điều khoản hợp đồng nguyên tắc mua bán hàng hóa.",
+        "pairs": [
+          {
+            "left": "Master sales agreement",
+            "right": "Hợp đồng nguyên tắc khung quy định các giao dịch mua bán"
+          },
+          {
+            "left": "Force majeure clause",
+            "right": "Điều khoản bất khả kháng miễn trách nhiệm khi có thiên tai bão lũ"
+          },
+          {
+            "left": "Product liability indemnification",
+            "right": "Cam kết bồi thường bảo hiểm trách nhiệm sản phẩm"
+          },
+          {
+            "left": "Governing law & jurisdiction",
+            "right": "Luật điều chỉnh và cơ quan tài phán giải quyết tranh chấp"
+          },
+          {
+            "left": "Breach of contract penalties",
+            "right": "Chế tài xử phạt khi một trong hai bên vi phạm hợp đồng"
+          }
+        ]
       },
       {
         "id": "u76-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this formal contract preamble and commitment clause clearly:",
+        "promptVi": "Luyện nói câu cam kết quyền và nghĩa vụ trong hợp đồng nguyên tắc mua bán:",
+        "englishSentence": "The master sales agreement establishes binding commitments regarding delivery timelines, quality warranties, and dispute resolution mechanisms.",
+        "audioText": "The master sales agreement establishes binding commitments regarding delivery timelines, quality warranties, and dispute resolution mechanisms.",
+        "phonetics": "/ðə ˈmæstər seɪlz əˈɡriːmənt ɪˈstæblɪʃɪz ˈbaɪndɪŋ kəˈmɪtmənts rɪˈɡɑːrdɪŋ dɪˈlɪvəri ˈtaɪmlaɪnz, ˈkwɒləti ˈwɒrəntiz, ænd dɪˈspjuːt ˌrɛzəˈluːʃən ˈmɛkənɪzəmz/",
+        "vietnameseMeaning": "Hợp đồng nguyên tắc mua bán thiết lập các cam kết có tính ràng buộc pháp lý liên quan đến tiến độ giao hàng, bảo hành chất lượng và cơ chế giải quyết tranh chấp.",
+        "explanation": "\"Establishes binding commitments regarding delivery timelines, quality warranties, and dispute resolution\" là ngôn ngữ pháp lý thương mại chuẩn mực quốc tế.",
+        "whyWrong": "Phát âm rõ từ \"binding commitments\" (/ˈbaɪndɪŋ kəˈmɪtmənts/) và \"dispute resolution\" (/dɪˈspjuːt ˌrɛzəˈluːʃən/).",
+        "crucialNote": "Hợp đồng nguyên tắc khung là nền tảng để ký các phụ lục đơn hàng PO (Purchase Order) hàng tháng.",
+        "memoryHook": "Binding commitments regarding delivery, quality warranties, and dispute resolution."
       },
       {
         "id": "u76-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the force majeure exemption clause:",
+        "promptVi": "Ghép câu: \"Không bên nào phải chịu trách nhiệm về việc chậm giao hàng do các sự kiện bất khả kháng có thể kiểm chứng\":",
+        "englishSentence": "Neither party shall be liable for delivery failures caused by verifiable force majeure events.",
+        "audioText": "Neither party shall be liable for delivery failures caused by verifiable force majeure events.",
         "wordPool": [
-          "to",
-          "comprehensive",
-          "never",
-          "commercial",
-          "master",
-          "Both",
-          "contract.",
-          "the",
-          "distribution",
-          "parties",
-          "agree",
-          "cancel",
-          "sign"
+          "Neither",
+          "party",
+          "shall",
+          "be",
+          "liable",
+          "for",
+          "delivery",
+          "failures",
+          "caused",
+          "by",
+          "verifiable",
+          "force",
+          "majeure",
+          "events.",
+          "fault",
+          "guilt"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Không bên nào phải chịu trách nhiệm về các sự cố giao hàng do các sự kiện bất khả kháng có thể kiểm chứng gây ra.",
+        "explanation": "Bất khả kháng (Force Majeure) bao gồm động đất, sóng thần, chiến tranh, dịch bệnh hoặc lệnh phong tỏa của chính phủ.",
+        "whyWrong": "\"Neither party shall be liable\" là cấu trúc pháp lý mẫu mực miễn trừ trách nhiệm dân sự.",
+        "crucialNote": "Bên gặp sự cố phải thông báo bằng văn bản trong vòng 48 giờ kèm xác nhận của cơ quan chức năng.",
+        "memoryHook": "Neither party liable for failures caused by force majeure."
       },
       {
         "id": "u76-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct legal dispute settlement mechanism term:",
+        "promptVi": "Chọn cơ quan tài phán quốc tế giải quyết tranh chấp hợp đồng thương mại:",
+        "englishSentence": "Any unresolved dispute shall be referred to binding [ _____ ] at the Singapore International Arbitration Centre.",
+        "audioText": "Any unresolved dispute shall be referred to binding arbitration at the Singapore International Arbitration Centre.",
+        "blankWord": "arbitration",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "arbitration",
+          "wrestling",
+          "boxing"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Bất kỳ tranh chấp nào không thể hòa giải sẽ được đưa ra trọng tài phân xử có tính ràng buộc tại Trung tâm Trọng tài Quốc tế Singapore (SIAC).",
+        "explanation": "\"Binding arbitration\" (trọng tài có tính ràng buộc pháp lý) là phương thức giải quyết tranh chấp thương mại công bằng và nhanh chóng nhất được các tập đoàn tin cậy.",
+        "whyWrong": "\"Wrestling\" (đấu vật) hay \"boxing\" (đấm bốc) hoàn toàn phi lý.",
+        "crucialNote": "Phán quyết của trọng tài quốc tế được công nhận và thi hành tại hơn 160 quốc gia theo Công ước New York 1958.",
+        "memoryHook": "Binding arbitration at Singapore International Arbitration Centre."
       },
       {
         "id": "u76-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Soạn Thảo Hợp Đồng Nguyên Tắc Mua Bán\" (Điều khoản giao hàng, đổi trả và trách nhiệm các bên). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds.",
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions."
+        "type": "chat_branch",
+        "promptEn": "Finalize master sales contract clauses with the distributor's legal counsel on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Luật sư nội bộ của nhà phân phối Singapore đề xuất sửa đổi điều khoản đổi trả hàng lỗi trong vòng 14 ngày kể từ khi dỡ hàng:",
+        "englishSentence": "We accept the 14-day defect notification window. We have updated Clause 8.2 and our General Director has digitally countersigned the final draft!",
+        "audioText": "We accept the 14-day defect notification window. We have updated Clause 8.2 and our General Director has digitally countersigned the final draft!",
+        "chatMessages": [
+          {
+            "speaker": "Alicia (General Legal Counsel, RedMart Singapore)",
+            "avatar": "⚖️",
+            "message": "Minh, our audit team requests extending the latent transit defect notification window from 7 days to 14 days in Clause 8.2. Can you accept this revision?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Điều khoản giao hàng, đổi trả và trách nhiệm các bên",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "We accept the 14-day defect notification window. We have updated Clause 8.2 and our General Director has digitally countersigned the final draft!",
+            "trustScore": 25,
+            "feedback": "Kỹ năng đàm phán hợp đồng pháp lý xuất sắc! Nhượng bộ hợp lý về thời hạn báo cáo lỗi 14 ngày (thể hiện sự tự tin tuyệt đối vào chất lượng nước khoáng), cập nhật điều khoản và ký điện tử ngay để chốt hợp đồng lớn.",
+            "isCorrect": true
+          },
+          {
+            "text": "No, if you don't sign our original contract today we will sue your company in court.",
+            "trustScore": 0,
+            "feedback": "Hành vi thù địch ngớ ngẩn! Luật sư đối tác sẽ dừng ngay lập tức mọi giao dịch.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chúng tôi chấp thuận thời hạn thông báo sản phẩm lỗi 14 ngày. Chúng tôi đã cập nhật Điều khoản 8.2 và Tổng Giám đốc chúng tôi đã ký số vào bản thảo cuối cùng!",
+        "explanation": "Linh hoạt trong các điều khoản kỹ thuật hợp lý giúp đẩy nhanh tiến độ ký kết hợp đồng thương mại trị giá hàng triệu đô la.",
+        "crucialNote": "Chữ ký số DocuSign hoặc Adobe Sign được pháp luật quốc tế công nhận toàn diện.",
+        "memoryHook": "Accept 14-day defect window, updated Clause 8.2 and countersigned."
       }
     ]
   },
@@ -10240,109 +10696,136 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "subtitle": "Chương trình tri ân nhà phân phối đạt doanh số vàng",
     "level": "B2",
     "icon": "🔄",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u77-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for B2B client retention and contract renewal strategies?",
-        "options": [
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts, pending formal verification from our international distribution coordinators.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match B2B customer retention and renewal terms with their commercial strategies:",
+        "promptVi": "Ghép cặp các thuật ngữ chiến lược tái ký hợp đồng và giữ chân khách hàng doanh nghiệp B2B:",
+        "englishSentence": "Match B2B client retention and contract renewal terms.",
+        "audioText": "Match B2B client retention and contract renewal terms.",
+        "explanation": "5 chiến thuật thắt chặt mối quan hệ gắn bó, biến đại lý thành bạn đồng hành trọn đời.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ giữ chân khách hàng và tái ký hợp đồng.",
+        "pairs": [
+          {
+            "left": "Customer lifetime value (CLV)",
+            "right": "Tổng giá trị doanh thu trọn đời mà một khách hàng mang lại"
+          },
+          {
+            "left": "Contract renewal incentive",
+            "right": "Gói ưu đãi khuyến khích tái ký hợp đồng sớm trước hạn"
+          },
+          {
+            "left": "Golden partner loyalty rebate",
+            "right": "Chiết khấu tri ân dành riêng cho các đối tác đạt danh hiệu vàng"
+          },
+          {
+            "left": "Quarterly business review (QBR)",
+            "right": "Họp đánh giá hiệu quả kinh doanh định kỳ hàng quý cùng đối tác"
+          },
+          {
+            "left": "Zero client churn rate",
+            "right": "Duy trì tỷ lệ khách hàng rời bỏ bằng không"
+          }
+        ]
       },
       {
         "id": "u77-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this gracious partnership renewal speech clearly:",
+        "promptVi": "Luyện nói câu tri ân đối tác nhân dịp tái ký hợp đồng phân phối năm thứ năm liên tiếp:",
+        "englishSentence": "To celebrate our five years of shared success, we are delighted to upgrade your distributor status with our highest tier loyalty rebate.",
+        "audioText": "To celebrate our five years of shared success, we are delighted to upgrade your distributor status with our highest tier loyalty rebate.",
+        "phonetics": "/tuː ˈsɛlɪbreɪt ˈaʊər faɪv jɪərz ɒv ʃɛərd səkˈsɛs, wiː ɑːr dɪˈlaɪtɪd tuː ʌpˈɡreɪd jʊər dɪˈstrɪbjʊtər ˈsteɪtəs wɪð ˈaʊər ˈhaɪɪst tɪər ˈlɔɪəlti ˈriːbeɪt/",
+        "vietnameseMeaning": "Để chào mừng năm năm cùng chia sẻ thành công, chúng tôi rất vui mừng được nâng hạng vị thế nhà phân phối của bạn với mức chiết khấu tri ân cao nhất của chúng tôi.",
+        "explanation": "\"To celebrate five years of shared success, we upgrade your status with our highest loyalty rebate\" tôn vinh lòng trung thành và sự cống hiến của đối tác.",
+        "whyWrong": "Phát âm rõ từ \"upgrade your distributor status\" (/ʌpˈɡreɪd jʊər dɪˈstrɪbjʊtər ˈsteɪtəs/) và \"loyalty rebate\" (/ˈlɔɪəlti ˈriːbeɪt/).",
+        "crucialNote": "Giữ chân 1 khách hàng cũ tiết kiệm chi phí gấp 5 lần so với việc tìm kiếm 1 khách hàng mới.",
+        "memoryHook": "Celebrate shared success, upgrade status with highest loyalty rebate."
       },
       {
         "id": "u77-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the strategic timing of contract renewal talks:",
+        "promptVi": "Ghép câu: \"Chúng tôi chủ động bắt đầu các cuộc thảo luận tái ký hợp đồng ba tháng trước khi hết hạn\":",
+        "englishSentence": "We initiate proactive contract renewal discussions three months prior to expiration.",
+        "audioText": "We initiate proactive contract renewal discussions three months prior to expiration.",
         "wordPool": [
-          "comprehensive",
-          "never",
-          "commercial",
-          "master",
-          "the",
-          "contract.",
-          "agree",
-          "sign",
+          "We",
+          "initiate",
+          "proactive",
+          "contract",
+          "renewal",
+          "discussions",
+          "three",
+          "months",
+          "prior",
           "to",
-          "distribution",
-          "Both",
-          "parties",
+          "expiration.",
+          "delay",
           "cancel"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Chúng tôi chủ động bắt đầu các cuộc thảo luận tái ký hợp đồng ba tháng trước khi hết hạn.",
+        "explanation": "Chủ động đàm phán sớm 90 ngày (3 months prior) ngăn chặn đối thủ chen chân và bảo đảm không có ngày nào bị đứt gãy hợp đồng.",
+        "whyWrong": "\"Three months prior to expiration\" là thông lệ quản trị khách hàng B2B chuyên nghiệp.",
+        "crucialNote": "Chuẩn bị sẵn báo cáo tổng kết doanh số và các số liệu tăng trưởng ấn tượng trong năm qua.",
+        "memoryHook": "Initiate proactive renewal discussions 3 months prior."
       },
       {
         "id": "u77-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct business metric for customer loyalty:",
+        "promptVi": "Chọn chỉ số đo lường tỷ lệ khách hàng ngưng hợp tác cần phải triệt tiêu:",
+        "englishSentence": "Our dedicated account management team achieved a near-zero customer [ _____ ] rate this fiscal year.",
+        "audioText": "Our dedicated account management team achieved a near-zero customer churn rate this fiscal year.",
+        "blankWord": "churn",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "churn",
+          "party",
+          "holiday"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Đội ngũ quản lý tài khoản tận tâm của chúng tôi đã đạt được tỷ lệ rời bỏ khách hàng gần như bằng không trong năm tài chính này.",
+        "explanation": "\"Customer churn rate\" (tỷ lệ khách hàng rời bỏ) là chỉ số sống còn của mọi doanh nghiệp phát triển bền vững.",
+        "whyWrong": "\"Party\" hay \"holiday\" không phải là chỉ số đo lường sự gắn kết khách hàng.",
+        "crucialNote": "Tỷ lệ giữ chân khách hàng (Retention Rate) của Vikoda đạt trên 98% qua từng năm.",
+        "memoryHook": "Near-zero customer churn rate = Tỷ lệ rời bỏ gần như bằng không."
       },
       {
         "id": "u77-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Chiến Lược Tái Ký & Giữ Chân Khách B2B\" (Chương trình tri ân nhà phân phối đạt doanh số vàng). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "Our commercial department prefers establishing firm minimum order commitments across regions.",
-          "We must align the proposed rebate framework with our overarching regional retail guidelines.",
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions."
+        "type": "chat_branch",
+        "promptEn": "Celebrate a 3-year partnership milestone with a Korean supermarket franchise CEO on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Chủ tịch chuỗi siêu thị Hàn Quốc tại Việt Nam K-Market gửi lời chúc mừng tròn 3 năm đồng hành cùng Vikoda:",
+        "englishSentence": "Thank you Chairman Kim! To honor our 3-year journey, our Board has reserved 10 exclusive factory VIP tour packages for your top store managers!",
+        "audioText": "Thank you Chairman Kim! To honor our 3-year journey, our Board has reserved 10 exclusive factory VIP tour packages for your top store managers!",
+        "chatMessages": [
+          {
+            "speaker": "Chairman Kim (K-Market Retail Group Korea)",
+            "avatar": "🇰🇷",
+            "message": "Minh, today marks exactly 3 years since our first Vikoda shipment. Our 80 stores have sold over 2 million bottles. Looking forward to renewing for another 3 years!"
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Chương trình tri ân nhà phân phối đạt doanh số vàng",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Thank you Chairman Kim! To honor our 3-year journey, our Board has reserved 10 exclusive factory VIP tour packages for your top store managers!",
+            "trustScore": 25,
+            "feedback": "Nghệ thuật chăm sóc đối tác vàng đỉnh cao! Tri ân cột mốc 2 triệu chai bằng gói nghỉ dưỡng và tham quan mỏ khoáng Đảnh Thạnh 5 sao cho các quản lý siêu thị xuất sắc của đối tác, thắt chặt tình thâm giao bền chặt.",
+            "isCorrect": true
+          },
+          {
+            "text": "3 years is nothing special, just send the contract and wire money quickly.",
+            "trustScore": 0,
+            "feedback": "Lạnh lùng và vô ơn! Làm tổn thương đối tác chiến lược đã đồng hành suốt 3 năm.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Cảm ơn Chủ tịch Kim! Để tôn vinh chặng đường 3 năm của chúng ta, Ban Giám đốc chúng tôi đã dành tặng 10 gói trải nghiệm tour VIP nhà máy độc quyền cho các giám đốc cửa hàng xuất sắc nhất của ngài!",
+        "explanation": "Tri ân nhân sự tuyến đầu của đối tác (cửa hàng trưởng siêu thị) giúp họ càng thêm yêu mến và ưu tiên bán hàng Vikoda tại các điểm bán.",
+        "crucialNote": "Quan hệ B2B bền vững được xây dựng trên sự tôn trọng và tình cảm chân thành giữa con người với con người.",
+        "memoryHook": "Honor 3-year journey with exclusive factory VIP packages."
       }
     ]
   },
@@ -10352,110 +10835,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Kỹ Thuật Đóng Deal Trong 48 Giờ",
     "subtitle": "Tạo cảm giác cấp bách bằng giới hạn thời gian ưu đãi",
     "level": "B2",
-    "icon": "⏱️",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "⏳",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u78-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for the 48-hour deal closing methodology?",
-        "options": [
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets, as confirmed in our recent departmental briefing with executive management.",
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-          "We must align the proposed rebate framework with our overarching regional retail guidelines, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match deal closing urgency techniques with their negotiation psychology:",
+        "promptVi": "Ghép cặp các kỹ thuật tạo tính cấp bách (Strategic Urgency) để chốt hợp đồng trong 48 giờ:",
+        "englishSentence": "Match rapid deal closing urgency techniques.",
+        "audioText": "Match rapid deal closing urgency techniques.",
+        "explanation": "5 đòn bẩy tâm lý thúc đẩy đối tác đặt bút ký hợp đồng ngay lập tức mà không chần chừ do dự.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp kỹ thuật đóng hợp đồng thần tốc trong 48 giờ.",
+        "pairs": [
+          {
+            "left": "Strategic closing urgency",
+            "right": "Tạo động lực cấp bách chiến lược thúc đẩy ra quyết định nhanh"
+          },
+          {
+            "left": "Time-sensitive promotional incentive",
+            "right": "Gói ưu đãi khuyến mại có giới hạn thời gian nghiêm ngặt"
+          },
+          {
+            "left": "Priority production slot allocation",
+            "right": "Khóa chỗ ưu tiên chạy máy chiết rót cho đơn hàng chốt sớm"
+          },
+          {
+            "left": "Impending wholesale price revision",
+            "right": "Cảnh báo trước đợt điều chỉnh tăng giá xuất xưởng sắp tới"
+          },
+          {
+            "left": "Fast-track onboarding protocol",
+            "right": "Quy trình kích hoạt giao hàng siêu tốc trong vòng hai mươi tư giờ"
+          }
+        ]
       },
       {
         "id": "u78-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this compelling 48-hour closing proposal clearly:",
+        "promptVi": "Luyện nói câu tạo tính cấp bách chốt hợp đồng trong 48 giờ với đối tác còn do dự:",
+        "englishSentence": "By signing the distribution agreement within forty-eight hours, your company secures our promotional launch pricing and priority export production slots.",
+        "audioText": "By signing the distribution agreement within forty-eight hours, your company secures our promotional launch pricing and priority export production slots.",
+        "phonetics": "/baɪ ˈsaɪnɪŋ ðə ˌdɪstrɪˈbjuːʃən əˈɡriːmənt wɪðˈɪn ˈfɔːrti eɪt ˈaʊərz, jʊər ˈkʌmpəni sɪˈkjʊərz ˈaʊər prəˈmoʊʃənl lɔːntʃ ˈpraɪsɪŋ ænd praɪˈɒrəti ˈɛkspɔːrt prəˈdʌkʃən slɒts/",
+        "vietnameseMeaning": "Bằng việc ký hợp đồng phân phối trong vòng bốn mươi tám giờ, công ty của bạn sẽ giữ được mức giá ra mắt ưu đãi và các suất chạy máy sản xuất xuất khẩu ưu tiên.",
+        "explanation": "\"By signing within 48 hours, you secure launch pricing and priority production slots\" đánh trúng tâm lý sợ bỏ lỡ cơ hội (FOMO) của người làm kinh doanh.",
+        "whyWrong": "Phát âm rõ từ \"priority export production slots\" (/praɪˈɒrəti ˈɛkspɔːrt prəˈdʌkʃən slɒts/).",
+        "crucialNote": "Lý do cấp bách phải hợp lý và chân thật: Dây chuyền Krones đang kín lịch sản xuất cho các đơn hàng xuất khẩu châu Âu.",
+        "memoryHook": "Signing in 48 hours secures launch pricing and priority slots."
       },
       {
         "id": "u78-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to explain the consequence of missing the deadline:",
+        "promptVi": "Ghép câu: \"Việc hoàn tất hợp đồng trước thứ Sáu bảo đảm quyền tiếp cận ngân sách tiếp thị ra mắt thị trường\":",
+        "englishSentence": "Finalizing the agreement before Friday secures access to our dedicated launch marketing fund.",
+        "audioText": "Finalizing the agreement before Friday secures access to our dedicated launch marketing fund.",
         "wordPool": [
+          "Finalizing",
           "the",
-          "agree",
-          "sign",
-          "parties",
-          "contract.",
-          "commercial",
+          "agreement",
+          "before",
+          "Friday",
+          "secures",
+          "access",
           "to",
-          "never",
-          "Both",
-          "comprehensive",
-          "master",
-          "distribution",
-          "cancel"
+          "our",
+          "dedicated",
+          "launch",
+          "marketing",
+          "fund.",
+          "delay",
+          "loss"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Việc hoàn tất hợp đồng trước thứ Sáu bảo đảm quyền tiếp cận ngân sách tiếp thị ra mắt thị trường của chúng tôi.",
+        "explanation": "Tặng kèm gói ngân sách marketing chỉ dành cho những đối tác quyết đoán ký hợp đồng đúng thời hạn.",
+        "whyWrong": "Dùng từ chỉ thời điểm cụ thể \"before Friday\" tạo mốc giới hạn rõ ràng.",
+        "crucialNote": "Không gia hạn tùy tiện làm mất uy tín của lời cam kết thời gian.",
+        "memoryHook": "Finalizing before Friday secures launch marketing fund."
       },
       {
         "id": "u78-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct term for time-bound negotiation offers:",
+        "promptVi": "Chọn thuật ngữ chỉ ưu đãi thương mại có thời hạn hiệu lực nghiêm ngặt:",
+        "englishSentence": "This introductory volume rebate is strictly [ _____ ] to contracts countersigned within forty-eight hours.",
+        "audioText": "This introductory volume rebate is strictly subject to contracts countersigned within forty-eight hours.",
+        "blankWord": "subject",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "subject",
+          "object",
+          "grammar"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Mức chiết khấu sản lượng mở màn này chỉ áp dụng nghiêm ngặt cho các hợp đồng được ký xác nhận trong vòng bốn mươi tám giờ.",
+        "explanation": "\"Strictly subject to\" (chỉ áp dụng nghiêm ngặt theo điều kiện) là thuật ngữ pháp lý xác lập giới hạn thời gian không thể thỏa hiệp.",
+        "whyWrong": "\"Object\" hay \"grammar\" không mang ý nghĩa điều kiện tiên quyết trong hợp đồng.",
+        "crucialNote": "Tạo tính nghiêm túc và giá trị cao cho gói ưu đãi.",
+        "memoryHook": "Strictly subject to contracts signed in 48 hours."
       },
       {
         "id": "u78-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Kỹ Thuật Đóng Deal Trong 48 Giờ\" (Tạo cảm giác cấp bách bằng giới hạn thời gian ưu đãi). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "We must align the proposed rebate framework with our overarching regional retail guidelines.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets."
+        "type": "chat_branch",
+        "promptEn": "Close a hesitant beverage distribution director before the monthly deadline on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Giám đốc phân phối đang do dự giữa Vikoda và một thương hiệu nước khác vào ngày 28 của tháng:",
+        "englishSentence": "Our Krones export batch for Singapore runs this Sunday. Sign today to include your 2 containers on this sailing and save $3,000 in ocean freight surcharges!",
+        "audioText": "Our Krones export batch for Singapore runs this Sunday. Sign today to include your 2 containers on this sailing and save $3,000 in ocean freight surcharges!",
+        "chatMessages": [
+          {
+            "speaker": "Anthony (Sourcing VP, Singapore Drinks Network)",
+            "avatar": "🇸🇬",
+            "message": "Minh, we love the product, but our board meets in two weeks. Can we postpone the contract signing until mid-next month?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Tạo cảm giác cấp bách bằng giới hạn thời gian ưu đãi",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Our Krones export batch for Singapore runs this Sunday. Sign today to include your 2 containers on this sailing and save $3,000 in ocean freight surcharges!",
+            "trustScore": 25,
+            "feedback": "Nghệ thuật đóng hợp đồng thần tốc đạt điểm 10 tuyệt đối! Đưa ra lý do chính đáng: Dây chuyền chạy lô xuất khẩu Chủ Nhật này, ký ngay để ghép tàu kịp chuyến và tiết kiệm ngay 3.000 USD phụ phí cước biển. Đối tác sẽ ký ngay trong ngày!",
+            "isCorrect": true
+          },
+          {
+            "text": "Sure, wait 2 months or 2 years, we have nothing to do all day anyway.",
+            "trustScore": 0,
+            "feedback": "Bỏ cuộc thảm hại! Thể hiện sự tuyệt vọng và để tuột mất thương vụ vào tay đối thủ.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Dây chuyền Krones của chúng tôi sẽ chạy lô hàng xuất khẩu sang Singapore vào Chủ Nhật này. Hãy ký hợp đồng hôm nay để ghép 2 container của bạn vào chuyến tàu này và tiết kiệm ngay 3.000 USD phụ phí cước vận tải biển!",
+        "explanation": "Gắn liền quyết định ký hợp đồng với lợi ích tài chính cụ thể (tiết kiệm 3.000 USD cước biển) là đòn bẩy đóng deal mạnh mẽ nhất trong xuất nhập khẩu.",
+        "crucialNote": "Lịch tàu biển chạy cố định là yếu tố khách quan không thể trì hoãn.",
+        "memoryHook": "Sign today to join this sailing and save $3,000 freight."
       }
     ]
   },
@@ -10465,110 +10977,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Lễ Ký Kết Hợp Tác Phân Phối Chiến Lược",
     "subtitle": "Nghi thức bắt tay, phát biểu và công bố với báo giới",
     "level": "B2",
-    "icon": "✍️",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "🤝",
+    "color": "blue",
+    "xpReward": 75,
+    "gemReward": 25,
     "exercises": [
       {
         "id": "u79-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for signing ceremonies and distributor partnership announcements?",
-        "options": [
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-          "We must align the proposed rebate framework with our overarching regional retail guidelines, pending formal verification from our international distribution coordinators.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match strategic signing ceremony protocol and media terms with their definitions:",
+        "promptVi": "Ghép cặp các thuật ngữ nghi thức lễ ký kết hợp tác chiến lược và họp báo truyền thông:",
+        "englishSentence": "Match strategic partnership signing ceremony terms.",
+        "audioText": "Match strategic partnership signing ceremony terms.",
+        "explanation": "5 nghi thức ngoại giao trang trọng đánh dấu cột mốc liên minh kinh tế giữa hai tập đoàn.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ lễ ký kết hợp tác chiến lược.",
+        "pairs": [
+          {
+            "left": "Strategic signing ceremony",
+            "right": "Lễ ký kết hợp tác phân phối chiến lược trọng thể"
+          },
+          {
+            "left": "Memorandum of Understanding (MOU)",
+            "right": "Biên bản ghi nhớ hợp tác chiến lược khung toàn diện"
+          },
+          {
+            "left": "Joint media press release",
+            "right": "Thông cáo báo chí chung gửi các cơ quan truyền thông"
+          },
+          {
+            "left": "Exchange of signed portfolios",
+            "right": "Nghi thức trao đổi cặp bìa hồ sơ hợp đồng đã ký kết"
+          },
+          {
+            "left": "Firm bilateral executive handshake",
+            "right": "Cái bắt tay nồng ấm và kiên định giữa hai vị lãnh đạo"
+          }
+        ]
       },
       {
         "id": "u79-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this triumphant signing ceremony keynote statement clearly:",
+        "promptVi": "Luyện nói lời phát biểu trang trọng tại lễ ký kết hợp tác phân phối chiến lược:",
+        "englishSentence": "Today's signing ceremony marks an exciting milestone as we unite our strengths to deliver pristine natural alkaline water to global markets.",
+        "audioText": "Today's signing ceremony marks an exciting milestone as we unite our strengths to deliver pristine natural alkaline water to global markets.",
+        "phonetics": "/təˈdeɪz ˈsaɪnɪŋ ˈsɛrɪmoʊni mɑːrks ən ɪkˈsaɪtɪŋ ˈmaɪlstoʊn æz wiː juːˈnaɪt ˈaʊər strɛŋkθs tuː dɪˈlɪvər ˈprɪstiːn ˈnætʃrəl ˈælkəlaɪn ˈwɔːtər tuː ˈɡloʊbəl ˈmɑːrkɪts/",
+        "vietnameseMeaning": "Lễ ký kết ngày hôm nay đánh dấu một cột mốc đầy phấn khởi khi chúng ta hợp nhất sức mạnh để đưa nguồn nước khoáng kiềm thiên nhiên thuần khiết đến với các thị trường toàn cầu.",
+        "explanation": "\"Today's signing marks an exciting milestone as we unite our strengths...\" là câu phát biểu truyền cảm hứng dồi dào, tôn vinh mối liên minh chiến lược giữa hai doanh nghiệp.",
+        "whyWrong": "Nói với chất giọng dõng dạc, ánh mắt rạng ngời và nụ cười tự hào trước ống kính phóng viên.",
+        "crucialNote": "Đứng ngay ngắn bên cạnh đối tác, cầm bìa hồ sơ màu xanh Cyan thương hiệu Vikoda.",
+        "memoryHook": "Signing marks an exciting milestone as we unite our strengths."
       },
       {
         "id": "u79-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to describe the exchange of signed contract binders:",
+        "promptVi": "Ghép câu: \"Cả hai vị lãnh đạo điều hành đã trao đổi các cặp bìa hợp đồng đã ký trong tiếng vỗ tay nồng nhiệt\":",
+        "englishSentence": "Both executive leaders exchanged signed contract binders amidst warm applause from the audience.",
+        "audioText": "Both executive leaders exchanged signed contract binders amidst warm applause from the audience.",
         "wordPool": [
-          "to",
-          "commercial",
-          "comprehensive",
           "Both",
-          "distribution",
-          "cancel",
-          "sign",
-          "agree",
-          "contract.",
+          "executive",
+          "leaders",
+          "exchanged",
+          "signed",
+          "contract",
+          "binders",
+          "amidst",
+          "warm",
+          "applause",
+          "from",
           "the",
-          "parties",
-          "never",
-          "master"
+          "audience.",
+          "fight",
+          "shout"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Cả hai vị lãnh đạo điều hành đã trao đổi các cặp bìa hợp đồng đã ký trong tiếng vỗ tay nồng nhiệt từ cử tọa.",
+        "explanation": "Nghi thức trao đổi cặp bìa hợp đồng (Exchange of Binders) là khoảnh khắc lịch sử được ghi lại trên các trang báo kinh tế hàng đầu.",
+        "whyWrong": "\"Amidst warm applause\" miêu tả bầu không khí trang trọng và hân hoan của buổi lễ.",
+        "crucialNote": "Cúi đầu nhẹ và bắt tay chúc mừng sau khi trao bìa hợp đồng.",
+        "memoryHook": "Exchanged signed contract binders amidst warm applause."
       },
       {
         "id": "u79-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the correct official corporate media announcement term:",
+        "promptVi": "Chọn thuật ngữ chỉ bản thông cáo chính thức gửi đến các cơ quan báo chí truyền thông:",
+        "englishSentence": "The corporate communications department distributed the joint [ _____ ] release to national news agencies.",
+        "audioText": "The corporate communications department distributed the joint press release to national news agencies.",
+        "blankWord": "press",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "press",
+          "iron",
+          "laundry"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Phòng truyền thông đối ngoại đã phát hành bản thông cáo báo chí chung đến các hãng thông tấn quốc gia.",
+        "explanation": "\"Press release\" (thông cáo báo chí) là tài liệu truyền thông chính thống công bố thỏa thuận hợp tác thương mại lớn.",
+        "whyWrong": "\"Iron\" (bàn ủi) hay \"laundry\" (tiệm giặt là) hoàn toàn sai lệch ngữ cảnh truyền thông.",
+        "crucialNote": "Thông cáo báo chí nêu bật quy mô phân phối và mục tiêu bảo vệ sức khỏe cộng đồng của hai bên.",
+        "memoryHook": "Distributed the joint press release = Phát hành thông cáo báo chí chung."
       },
       {
         "id": "u79-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Lễ Ký Kết Hợp Tác Phân Phối Chiến Lược\" (Nghi thức bắt tay, phát biểu và công bố với báo giới). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "Our commercial department prefers establishing firm minimum order commitments across regions.",
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "We must align the proposed rebate framework with our overarching regional retail guidelines."
+        "type": "chat_branch",
+        "promptEn": "Coordinate immediate post-signing media rollout with the partner PR head on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Giám đốc truyền thông đối tác thông báo báo chí đang chờ phỏng vấn ngắn sau lễ ký kết:",
+        "englishSentence": "Perfect! Our General Director is ready. We have prepared the media briefing kits and product gift boxes featuring our glass bottle collection.",
+        "audioText": "Perfect! Our General Director is ready. We have prepared the media briefing kits and product gift boxes featuring our glass bottle collection.",
+        "chatMessages": [
+          {
+            "speaker": "Mai (PR VP, Central Group Communications)",
+            "avatar": "📸",
+            "message": "Minh, reporters from Forbes and Vietnam News are in the press room for the 10-minute executive Q&A. Are your leaders ready?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Nghi thức bắt tay, phát biểu và công bố với báo giới",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Perfect! Our General Director is ready. We have prepared the media briefing kits and product gift boxes featuring our glass bottle collection.",
+            "trustScore": 25,
+            "feedback": "Phối hợp truyền thông sự kiện xuất sắc! Sẵn sàng cho phiên họp báo với Forbes và Vietnam News kèm bộ thông tin báo chí và hộp quà chai thủy tinh cao cấp, tối đa hóa hiệu ứng truyền thông cho thương hiệu.",
+            "isCorrect": true
+          },
+          {
+            "text": "Tell the reporters to go home, we don't talk to journalists.",
+            "trustScore": 0,
+            "feedback": "Thái độ thô lỗ và tự cô lập truyền thông! Bỏ lỡ cơ hội vàng xuất hiện trên các trang bìa tạp chí tài chính uy tín.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Hoàn hảo! Tổng Giám đốc của chúng tôi đã sẵn sàng. Chúng tôi đã chuẩn bị sẵn bộ tài liệu báo chí và các hộp quà sản phẩm giới thiệu bộ sưu tập chai thủy tinh cao cấp.",
+        "explanation": "Tận dụng triệt để sức mạnh truyền thông ngay tại lễ ký kết giúp nâng cao định giá thương hiệu và khẳng định uy tín trên thị trường chứng khoán.",
+        "crucialNote": "Hộp quà chai thủy tinh Vikoda luôn là món quà gây ấn tượng sâu sắc nhất với giới báo chí.",
+        "memoryHook": "Prepared media briefing kits and glass bottle gift boxes."
       }
     ]
   },
@@ -10578,110 +11119,142 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Mốc Tốt Nghiệp Bậc Thầy Bán Hàng B2B",
     "subtitle": "Kỳ thi sát hạch toàn bộ kỹ năng đàm phán hợp đồng thương mại",
     "level": "B2",
-    "icon": "👑",
-    "color": "purple",
-    "xpReward": 60,
-    "gemReward": 20,
+    "icon": "🎓",
+    "color": "blue",
+    "xpReward": 100,
+    "gemReward": 50,
     "exercises": [
       {
         "id": "u80-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-        "audioText": "How do you structure contractual terms and commercial incentives for B2 master negotiator milestone assessment?",
-        "options": [
-          "We structure progressive volume discounts while preserving retail price integrity across all distribution channels.",
-          "Both commercial partners must agree to maintain strict price parity across modern trade outlets, pending formal verification from our international distribution coordinators.",
-          "We recommend structuring the wholesale agreement around quarterly volume performance thresholds, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi xây dựng chiết khấu bậc thang theo sản lượng đồng thời giữ vững kỷ luật giá bán lẻ trên mọi kênh phân phối.",
-        "explanation": "Phản hồi: \"We structure progressive volume discounts while preserving retail price integrity across all distribution channels.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Capstone Grand Match: Pair the 5 B2B Commercial Master competencies of Level B2:",
+        "promptVi": "Đại Thử Thách Tốt Nghiệp B2: Ghép 5 trụ cột năng lực Bậc Thầy Đàm Phán Thương Mại B2B:",
+        "englishSentence": "Match the 5 cornerstone competencies of Level B2.",
+        "audioText": "Match the 5 cornerstone competencies of Level B2.",
+        "explanation": "5 đỉnh cao năng lực thương mại biến bạn thành chuyên gia đàm phán hợp đồng triệu đô cho tập đoàn.",
+        "vietnameseMeaning": "Ghép đúng 5 chuẩn năng lực Bậc Thầy Bán Hàng B2B Cấp độ B2.",
+        "pairs": [
+          {
+            "left": "Value-Based Margin Defense",
+            "right": "Bảo vệ kiên cường biên lợi nhuận bằng đòn bẩy giá trị dịch vụ"
+          },
+          {
+            "left": "International Credit & L/C Risk",
+            "right": "Quản trị rủi ro thanh toán quốc tế bằng thư tín dụng không hủy ngang"
+          },
+          {
+            "left": "Modern Trade Channel Mastery",
+            "right": "Làm chủ quy trình thương thảo quầy kệ chuỗi siêu thị đại chúng"
+          },
+          {
+            "left": "Strategic 48-Hour Deal Closing",
+            "right": "Nghệ thuật chốt hợp đồng thần tốc tạo tính cấp bách khôn khéo"
+          },
+          {
+            "left": "Long-Term Alliance Retention",
+            "right": "Chiến lược nuôi dưỡng và giữ chân đối tác chiến lược trọn đời"
+          }
+        ]
       },
       {
         "id": "u80-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "audioText": "Our German Krones aseptic bottling line operates under certified ISO 22000 standards.",
-        "phonetics": "/ˈaʊər ˈdʒɜːrmən ˈkroʊnəs eɪˈsɛptɪk ˈbɒtlɪŋ laɪn ˈɒpəreɪts ˈʌndər ˈsɜːrtɪfaɪd ˌaɪ ɛs ˈoʊ ˈtwɛnti tuː ˈθaʊznd ˈstændərdz/",
-        "vietnameseMeaning": "Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Dây chuyền chiết rót vô trùng Krones của Đức vận hành theo tiêu chuẩn ISO 22000 đã được chứng nhận."
+        "promptEn": "Speak this triumphant Level B2 Commercial Master graduation pledge clearly:",
+        "promptVi": "Luyện nói lời tuyên thệ tốt nghiệp Cấp độ B2 Bậc Thầy Bán Hàng Thương Mại B2B:",
+        "englishSentence": "I am fully empowered as a B2B Commercial Master, defending enterprise margins, negotiating multi-million dollar agreements, and expanding Vikoda's global footprint.",
+        "audioText": "I am fully empowered as a B2B Commercial Master, defending enterprise margins, negotiating multi-million dollar agreements, and expanding Vikoda's global footprint.",
+        "phonetics": "/aɪ æm ˈfʊli ɪmˈpaʊərd æz ə biː tuː biː kəˈmɜːrʃəl ˈmæstər, dɪˈfɛndɪŋ ˈɛntərpraɪz ˈmɑːrdʒɪnz, nɪˈɡoʊʃieɪtɪŋ ˈmʌlti ˈmɪljən ˈdɒlər əˈɡriːmənts, ænd ɪkˈspændɪŋ vɪˈkoʊdəz ˈɡloʊbəl ˈfʊtprɪnt/",
+        "vietnameseMeaning": "Tôi hoàn toàn tự tin đảm nhiệm vị thế Bậc Thầy Thương Mại B2B, bảo vệ biên lợi nhuận doanh nghiệp, đàm phán các hợp đồng triệu đô và mở rộng dấu chân toàn cầu của Vikoda.",
+        "explanation": "Lời tuyên thệ tự hào của nhân sự cấp cao nắm vững mọi nghệ thuật đàm phán kinh doanh quốc tế.",
+        "whyWrong": "Nói với chất giọng đĩnh đạc, bản lĩnh và đầy uy quyền của một nhà đàm phán xuất chúng.",
+        "crucialNote": "Chúc mừng bạn đã hoàn thành 80 bài học danh giá nhất của học viện đào tạo Vikoda!",
+        "memoryHook": "Defending margins, negotiating multi-million agreements, expanding global footprint."
       },
       {
         "id": "u80-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.\":",
-        "englishSentence": "Both commercial parties agree to sign the comprehensive master distribution contract.",
-        "audioText": "Both commercial parties agree to sign the comprehensive master distribution contract.",
+        "promptEn": "Arrange the words to celebrate your Level B2 enterprise milestone:",
+        "promptVi": "Ghép câu: \"Chúng tôi đã làm chủ xuất sắc tất cả tám mươi bài học từ Cấp độ A1 đến Cấp độ B2 tại Vikoda\":",
+        "englishSentence": "We have successfully mastered all eighty comprehensive units from Level A1 to Level B2 at Vikoda.",
+        "audioText": "We have successfully mastered all eighty comprehensive units from Level A1 to Level B2 at Vikoda.",
         "wordPool": [
-          "distribution",
-          "parties",
-          "the",
-          "Both",
-          "contract.",
-          "never",
-          "commercial",
-          "cancel",
+          "We",
+          "have",
+          "successfully",
+          "mastered",
+          "all",
+          "eighty",
+          "comprehensive",
+          "units",
+          "from",
+          "Level",
+          "A1",
           "to",
-          "agree",
-          "sign",
-          "master",
-          "comprehensive"
+          "Level",
+          "B2",
+          "at",
+          "Vikoda.",
+          "lost",
+          "quit"
         ],
-        "vietnameseMeaning": "Cả hai bên thương mại đồng thuận ký kết hợp đồng phân phối nguyên tắc toàn diện.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Both commercial parties agree to sign the comprehensive master distribution contract.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Chúng tôi đã làm chủ xuất sắc tất cả tám mươi bài học toàn diện từ Cấp độ A1 đến Cấp độ B2 tại Vikoda.",
+        "explanation": "80 bài học là kho tàng tri thức đồ sộ trang bị toàn diện kỹ năng giao tiếp, vận hành và thương thảo hợp đồng quốc tế.",
+        "whyWrong": "\"Mastered all eighty comprehensive units\" là chứng chỉ bản lĩnh cho mọi cuộc đàm phán xuyên quốc gia.",
+        "crucialNote": "Sẵn sàng bước vào 20 bài học đỉnh cao cuối cùng: Cấp độ C1-C2 (Chiến lược Xuất khẩu Toàn cầu & Tầm nhìn Ban Điều Hành C-Suite).",
+        "memoryHook": "Mastered all eighty comprehensive units from A1 to B2."
       },
       {
         "id": "u80-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Securing adequate profit [ _____ ] for distributors is essential for sustainable brand growth.",
-        "audioText": "Securing adequate profit margins for distributors is essential for sustainable brand growth.",
-        "blankWord": "margins",
+        "promptEn": "Select the ultimate keyword for business collaboration:",
+        "promptVi": "Chọn từ định nghĩa mục tiêu cao quý nhất của đàm phán thương mại quốc tế bền vững:",
+        "englishSentence": "Principled commercial negotiation builds enduring alliances founded upon shared [ _____ ] and mutual trust.",
+        "audioText": "Principled commercial negotiation builds enduring alliances founded upon shared prosperity and mutual trust.",
+        "blankWord": "prosperity",
         "options": [
-          "margins",
-          "delayed",
-          "damaged"
+          "prosperity",
+          "poverty",
+          "bankruptcy"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.",
-        "explanation": "Điền từ \"margins\" để hoàn thiện ý nghĩa: \"Bảo đảm biên lợi nhuận thỏa đáng cho nhà phân phối là điều thiết yếu để thương hiệu tăng trưởng bền vững.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"margins\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: margins = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Đàm phán thương mại dựa trên nguyên tắc xây dựng các liên minh bền vững được tạo lập dựa trên sự cùng thịnh vượng và tin cậy lẫn nhau.",
+        "explanation": "\"Shared prosperity\" (cùng thịnh vượng - Win-Win) là triết lý kinh doanh bất biến giúp Vikoda trường tồn suốt 68 năm qua.",
+        "whyWrong": "\"Poverty\" (nghèo đói) hay \"bankruptcy\" (phá sản) là hậu quả của tư duy kinh doanh chộp giật.",
+        "crucialNote": "Thành công của đối tác và khách hàng chính là thành công rực rỡ nhất của Vikoda.",
+        "memoryHook": "Enduring alliances founded upon shared prosperity and mutual trust."
       },
       {
         "id": "u80-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Mốc Tốt Nghiệp Bậc Thầy Bán Hàng B2B\" (Kỳ thi sát hạch toàn bộ kỹ năng đàm phán hợp đồng thương mại). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "audioText": "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-        "options": [
-          "We defend product margins by offering customized marketing allowances instead of granting price reductions.",
-          "The distributor agreement provides structured marketing allowances instead of upfront price cuts.",
-          "Our commercial department prefers establishing firm minimum order commitments across regions."
+        "type": "chat_branch",
+        "promptEn": "Capstone B2 Simulation: Close a $10 Million nationwide retail consortium deal on Slack:",
+        "promptVi": "Mô phỏng tốt nghiệp B2: Chủ tịch Hiệp hội Bán lẻ Quốc gia đưa ra đề nghị chốt hợp đồng cung ứng độc quyền trị giá 10 triệu USD trên toàn bộ hệ thống đại siêu thị:",
+        "englishSentence": "It is an absolute honor, Chairman Le! Our executive board accepts the terms: we guarantee dedicated production line allocation, zero stockouts, and joint nationwide marketing excellence!",
+        "audioText": "It is an absolute honor, Chairman Le! Our executive board accepts the terms: we guarantee dedicated production line allocation, zero stockouts, and joint nationwide marketing excellence!",
+        "chatMessages": [
+          {
+            "speaker": "Chairman Le (President, National Hypermarket Consortium)",
+            "avatar": "🏆",
+            "message": "Minh, after our 3-month rigorous evaluation of your Krones facility, Pasteur lab purity, and commercial flexibility, our board votes unanimously to award Vikoda the $10 Million exclusive mineral water contract for 1,200 stores! Are you ready to execute?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi bảo vệ biên lợi nhuận bằng cách tài trợ ngân sách tiếp thị chuyên biệt thay vì giảm giá bán.",
-        "explanation": "Giải pháp tối ưu: \"We defend product margins by offering customized marketing allowances instead of granting price reductions.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Kỳ thi sát hạch toàn bộ kỹ năng đàm phán hợp đồng thương mại",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "It is an absolute honor, Chairman Le! Our executive board accepts the terms: we guarantee dedicated production line allocation, zero stockouts, and joint nationwide marketing excellence!",
+            "trustScore": 25,
+            "feedback": "Tốt nghiệp Xuất Sắc 100% Cấp Độ B2 Bậc Thầy Đàm Phán B2B! Đóng thành công thương vụ lịch sử trị giá 10 triệu USD cho 1.200 đại siêu thị toàn quốc, mở ra kỷ nguyên phát triển vượt bậc cho tập đoàn Vikoda!",
+            "isCorrect": true
+          },
+          {
+            "text": "10 million dollars is too much work for us, we just want to sit in the office and sleep.",
+            "trustScore": 0,
+            "feedback": "Thất bại thảm hại! Vứt bỏ hợp đồng 10 triệu USD vào tay đối thủ.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Thật là một vinh dự tuyệt đối, thưa Chủ tịch Lê! Ban điều hành của chúng tôi đồng thuận chấp thuận các điều khoản: chúng tôi cam kết dành riêng dây chuyền sản xuất ưu tiên, bảo đảm không bao giờ đứt hàng và phối hợp tiếp thị xuất sắc trên toàn quốc!",
+        "explanation": "Đỉnh cao của nghệ thuật đàm phán B2B: Biến sự chuyên nghiệp, chuẩn mực kỹ thuật và năng lực cung ứng thành bản hợp đồng chiến lược trị giá hàng triệu đô la.",
+        "crucialNote": "Chúc mừng bạn đã xuất sắc tốt nghiệp toàn bộ Cấp độ B2 Bậc Thầy Đàm Phán Thương Mại B2B!",
+        "memoryHook": "Closed $10 Million exclusive contract for 1,200 stores."
       }
     ]
   },
