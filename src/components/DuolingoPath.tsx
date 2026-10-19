@@ -15,6 +15,7 @@ import { DUOLINGO_PATH_NODES } from '../data/vikodaData';
 import { PathNode } from '../types';
 import { playSound } from '../services/soundEffects';
 import { playSpeech, stopSpeech } from '../services/speechService';
+import { VikoDynamicAnimator, MascotAnimMode } from './VikoDynamicAnimator';
 
 interface DuolingoPathProps {
   completedNodeIds: string[];
@@ -40,10 +41,15 @@ export const DuolingoPath: React.FC<DuolingoPathProps> = ({
   const [quizAnswer, setQuizAnswer] = useState<number | null>(null);
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
 
+  // Living Mascot state on Map and inside Modal
+  const [mapMascotMode, setMapMascotMode] = useState<MascotAnimMode>('idle');
+  const [modalMascotMode, setModalMascotMode] = useState<MascotAnimMode>('student_book');
+
   const handleNodeClick = (node: PathNode) => {
     playSound('click');
     setQuizAnswer(null);
     setQuizSubmitted(false);
+    setModalMascotMode('student_book');
     setActiveModalNode(node);
   };
 
@@ -149,6 +155,7 @@ export const DuolingoPath: React.FC<DuolingoPathProps> = ({
 
     if (quizAnswer === sample.quiz.correct) {
       playSound('correct');
+      setModalMascotMode('streak_fever');
       setTimeout(() => {
         playSound('gem');
         onCompleteNode(activeModalNode.id, activeModalNode.xpReward, activeModalNode.gemReward);
@@ -160,6 +167,7 @@ export const DuolingoPath: React.FC<DuolingoPathProps> = ({
       }, 300);
     } else {
       playSound('wrong');
+      setModalMascotMode('wrong_encourage');
     }
   };
 
@@ -184,6 +192,59 @@ export const DuolingoPath: React.FC<DuolingoPathProps> = ({
           <div className="text-4xl filter drop-shadow-md">
             💎
           </div>
+        </div>
+      </div>
+
+      {/* Interactive Map Companion & Navigation Controls (Nhóm 3 Map Navigation) */}
+      <div className="rounded-2xl bg-white border border-sky-100 p-3.5 shadow-sm flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="shrink-0">
+            <VikoDynamicAnimator size="sm" mode={mapMascotMode} />
+          </div>
+          <div>
+            <div className="text-xs font-black text-slate-800 flex items-center gap-1.5">
+              <span>Viko Dẫn Đường Bản Đồ</span>
+              <span className="text-[10px] font-bold text-sky-600 bg-sky-50 px-2 py-0.5 rounded-full border border-sky-200">
+                {mapMascotMode === 'map_sprint' ? 'Chạy Nước Rút 💨' : mapMascotMode === 'map_hesitate' ? 'Ngập Ngừng 🤔' : 'Đồng Hành 🌟'}
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-500 font-medium">
+              Chuyển động linh hoạt bám sát từng chặng hành trình!
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            onClick={() => {
+              playSound('click');
+              setMapMascotMode('map_sprint');
+              setTimeout(() => setMapMascotMode('idle'), 3000);
+            }}
+            className={`px-2.5 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1 transition-all cursor-pointer ${
+              mapMascotMode === 'map_sprint'
+                ? 'bg-blue-600 text-white shadow-xs'
+                : 'bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200'
+            }`}
+            title="Kích hoạt trạng thái Chạy Nước Rút (Dash/Sprint)"
+          >
+            <span>⚡ Chạy Rút</span>
+          </button>
+          <button
+            onClick={() => {
+              playSound('click');
+              setMapMascotMode('map_hesitate');
+              setTimeout(() => setMapMascotMode('idle'), 3000);
+            }}
+            className={`px-2.5 py-1.5 rounded-xl font-bold text-xs flex items-center gap-1 transition-all cursor-pointer ${
+              mapMascotMode === 'map_hesitate'
+                ? 'bg-indigo-600 text-white shadow-xs'
+                : 'bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200'
+            }`}
+            title="Kích hoạt trạng thái Ngập Ngừng Trước Ải Mới"
+          >
+            <span>🤔 Ngập Ngừng</span>
+          </button>
         </div>
       </div>
 
@@ -294,8 +355,10 @@ export const DuolingoPath: React.FC<DuolingoPathProps> = ({
             
             {/* Header */}
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <div className="flex items-center space-x-2">
-                <span className="text-2xl">{activeModalNode.icon}</span>
+              <div className="flex items-center space-x-2.5">
+                <div className="shrink-0">
+                  <VikoDynamicAnimator size="sm" mode={modalMascotMode} />
+                </div>
                 <div>
                   <h3 className="text-base font-extrabold text-slate-900">
                     {activeModalNode.title}

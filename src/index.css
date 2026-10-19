@@ -146,8 +146,54 @@
   transition: all 0.15s ease;
 }
 .duo-card:hover {
-  border-color: #93c5fd;
-  border-bottom-color: #60a5fa;
+  border-color: #38bdf8;
+  border-bottom-color: #0284c7;
+}
+
+/* 3D Tactile Interactive Cards (Answer options) */
+.duo-choice-card {
+  background-color: #ffffff;
+  border: 2px solid #e2e8f0;
+  border-bottom: 4px solid #cbd5e1;
+  border-radius: 1.25rem;
+  cursor: pointer;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+.duo-choice-card:hover {
+  background-color: #f0f9ff;
+  border-color: #7dd3fc;
+  border-bottom-color: #0284c7;
+  transform: translateY(-2px);
+}
+.duo-choice-card:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}
+.duo-choice-card.selected {
+  background-color: #e0f2fe;
+  border-color: #009fe3;
+  border-bottom: 4px solid #0077b6;
+  color: #0077b6;
+}
+
+/* Mineral Water Bubble Animation for Progress Bar */
+@keyframes bubbleFloat {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.mineral-progress-fill {
+  background: linear-gradient(90deg, #009fe3, #38bdf8, #00d2ff, #009fe3);
+  background-size: 200% 200%;
+  animation: bubbleFloat 3s ease infinite;
 }
 
 /* Duolingo Floating Badge / Tooltip */
@@ -164,33 +210,377 @@
   animation: duo-float 2.4s ease-in-out infinite;
 }
 
+/* ========================================================
+   Duolingo-Grade Living Mascot Fluid Micro-Animations
+   Physical squash-and-stretch, breathing, dynamic contact shadow
+   ======================================================== */
+@keyframes mascotBreatheFloat {
+  0%, 100% {
+    transform: translateY(0px) scale(1, 1);
+  }
+  50% {
+    transform: translateY(-7px) scale(0.98, 1.025);
+  }
+}
+
+@keyframes mascotShadowPulse {
+  0%, 100% {
+    transform: scale(1, 1);
+    opacity: 0.28;
+  }
+  50% {
+    transform: scale(0.78, 0.7);
+    opacity: 0.12;
+  }
+}
+
+@keyframes mascotJoyHop {
+  0%, 100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  20% {
+    transform: translateY(-4px) scale(1.08, 0.92);
+  }
+  45% {
+    transform: translateY(-16px) scale(0.94, 1.06) rotate(3deg);
+  }
+  65% {
+    transform: translateY(-18px) scale(1.02, 0.98) rotate(-3deg);
+  }
+  85% {
+    transform: translateY(0) scale(1.12, 0.88);
+  }
+}
+
+@keyframes mascotPonderTilt {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  30% {
+    transform: rotate(3.5deg) translateY(-4px);
+  }
+  70% {
+    transform: rotate(-2.5deg) translateY(-2px);
+  }
+}
+
+@keyframes mascotSadShiver {
+  0%, 100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  25% {
+    transform: translateY(2px) scale(0.97, 0.97) rotate(-1.5deg);
+  }
+  75% {
+    transform: translateY(3px) scale(0.96, 0.96) rotate(1.5deg);
+  }
+}
+
+@keyframes mascotTearDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.5);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px) scale(1.2);
+  }
+}
+
+.animate-mascot-idle {
+  animation: mascotBreatheFloat 3s ease-in-out infinite;
+}
+
+.animate-mascot-shadow {
+  animation: mascotShadowPulse 3s ease-in-out infinite;
+}
+
+.animate-mascot-joy {
+  animation: mascotJoyHop 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+.animate-mascot-ponder {
+  animation: mascotPonderTilt 3.6s ease-in-out infinite;
+}
+
+.animate-mascot-sad {
+  animation: mascotSadShiver 2s ease-in-out infinite;
+}
+
+.animate-mascot-tear {
+  animation: mascotTearDrop 1.6s ease-in-out infinite;
+}
+
+/* Sủi bọt khoáng thiên nhiên li ti */
+@keyframes mineralBubbleRise {
+  0% {
+    transform: translateY(12px) scale(0.4);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-28px) scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* Bong bóng nước ngủ phập phồng ở mũi */
+@keyframes sleepBubbleBreath {
+  0%, 100% {
+    transform: scale(0.65) translate(0, 0);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.28) translate(3px, -3px);
+    opacity: 1;
+  }
+}
+
+/* Nổ bong bóng POP */
+@keyframes bubbleBurst {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Chạy nước rút (Sprint Dash) */
+@keyframes sprintDashBody {
+  0%, 100% {
+    transform: skewX(-14deg) translateY(0) scale(1.05, 0.95);
+  }
+  50% {
+    transform: skewX(-16deg) translateY(-8px) scale(0.96, 1.04);
+  }
+}
+
+/* Vệt nước tung tóe gót chân */
+@keyframes waterTrailSplash {
+  0% {
+    transform: scale(0.4) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4) translateX(-18px);
+    opacity: 0;
+  }
+}
+
+/* Tung tim lượn sóng */
+@keyframes heartFloatBurst {
+  0% {
+    transform: scale(0.4) translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.25) translateY(-32px) rotate(15deg);
+    opacity: 0;
+  }
+}
+
+/* Hào quang bừng sáng phát quang (Aura Glow) */
+@keyframes mineralAuraPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.6)) drop-shadow(0 0 20px rgba(56, 189, 248, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 18px rgba(250, 204, 21, 0.85)) drop-shadow(0 0 28px rgba(14, 165, 233, 0.7));
+  }
+}
+
+/* Elastic Boing Nảy Đàn Hồi Tắt Dần */
+@keyframes elasticBoing {
+  0% {
+    transform: scale(0.7, 1.35) translateY(-12px);
+  }
+  30% {
+    transform: scale(1.28, 0.75) translateY(8px);
+  }
+  55% {
+    transform: scale(0.9, 1.12) translateY(-4px);
+  }
+  75% {
+    transform: scale(1.05, 0.96) translateY(2px);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+  }
+}
+
+.animate-mineral-bubble {
+  animation: mineralBubbleRise 1.4s ease-out infinite;
+}
+
+.animate-sleep-bubble {
+  animation: sleepBubbleBreath 2.8s ease-in-out infinite;
+}
+
+.animate-heart-burst {
+  animation: heartFloatBurst 1.8s ease-out forwards;
+}
+
+.animate-sprint-dash {
+  animation: sprintDashBody 0.35s ease-in-out infinite;
+}
+
+.animate-boing-spring {
+  animation: elasticBoing 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* 8 FPS Shake Effect tiếc nuối khi trả lời sai (Nhóm 3) */
+@keyframes mascotSadShake8Fps {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  20% { transform: translateX(-6px) rotate(-3deg); }
+  40% { transform: translateX(6px) rotate(3deg); }
+  60% { transform: translateX(-4px) rotate(-2deg); }
+  80% { transform: translateX(4px) rotate(2deg); }
+}
+
+.animate-mascot-shake-8fps {
+  animation: mascotSadShake8Fps 0.5s steps(4, end);
+}
+
+/* Ngập ngừng (Ponder): Rotate lắc nhẹ ảnh từ -5 độ đến 5 độ trong 1 giây */
+@keyframes mascotPonderRotate {
+  0% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  100% { transform: rotate(-5deg); }
+}
+
+.animate-mascot-ponder {
+  animation: mascotPonderRotate 1s ease-in-out infinite;
+}
+
+/* Thất bại (Sad): Rung lắc tọa độ X liên tục trong 0.5 giây */
+@keyframes mascotSadShakeX {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-6px); }
+  20% { transform: translateX(6px); }
+  30% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  50% { transform: translateX(-4px); }
+  60% { transform: translateX(4px); }
+  70% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+  90% { transform: translateX(-1px); }
+}
+
+.animate-mascot-sad-shake {
+  animation: mascotSadShakeX 0.5s ease-in-out forwards;
+}
+
+/* Tương tác chạm (Tap/Tickle): Scale ép trục Y xuống 80%, phóng trục X lên 110%, sau đó nảy ElasticOut về 100% */
+@keyframes mascotTapElasticOut {
+  0% { transform: scale(1.1, 0.8); }
+  28% { transform: scale(0.93, 1.15); }
+  52% { transform: scale(1.05, 0.95); }
+  72% { transform: scale(0.98, 1.02); }
+  88% { transform: scale(1.01, 0.99); }
+  100% { transform: scale(1, 1); }
+}
+
+.animate-mascot-tap-elastic {
+  animation: mascotTapElasticOut 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Ghost trail afterimages cho Chạy nhanh (Nhóm 1) */
+.ghost-trail-afterimage-1 {
+  transform: translate(-12px, 3px) scale(0.96) skewX(-16deg);
+  opacity: 0.35;
+  filter: blur(1.5px) hue-rotate(15deg);
+  pointer-events: none;
+}
+/* ========================================================
+   Modular Arm Rigging Animations (Cử Chỉ Tay Viko Độc Lập)
+   ======================================================== */
+@keyframes armWaveRotate {
+  0% { transform: rotate(-8deg); }
+  50% { transform: rotate(26deg); }
+  100% { transform: rotate(-8deg); }
+}
+
+.animate-arm-wave {
+  transform-origin: 20% 80%;
+  animation: armWaveRotate 0.85s ease-in-out infinite;
+}
+
+@keyframes armPointPulse {
+  0%, 100% { transform: translateX(0) scale(1); }
+  50% { transform: translateX(4px) scale(1.05); }
+}
+
+.animate-arm-point {
+  transform-origin: 15% 50%;
+  animation: armPointPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes armThumbsUpBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  40% { transform: translateY(-4px) scale(1.12); }
+  70% { transform: translateY(1px) scale(0.98); }
+}
+
+.animate-arm-thumbsup {
+  transform-origin: 20% 80%;
+  animation: armThumbsUpBounce 1s ease-in-out infinite;
+}
+
+@keyframes fingertipRipple {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.animate-fingertip-ripple {
+  animation: fingertipRipple 1.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+
 /* Custom modern scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(240, 249, 255, 0.6);
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(14, 165, 233, 0.35);
+  background: #cbd5e1;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(14, 165, 233, 0.6);
+  background: #94a3b8;
 }
 
-/* GPU-Accelerated Pure CSS Audio Waveform Animation (0% React re-render, 60fps) */
+/* GPU-Accelerated Pure CSS Audio Waveform Animation */
 @keyframes audioWaveBar {
-  0%, 100% {
-    height: 18%;
-  }
-  50% {
-    height: 96%;
-  }
+  0%, 100% { height: 18%; }
+  50% { height: 96%; }
 }
 
 .wave-bar-1 { animation: audioWaveBar 0.75s ease-in-out infinite 0.1s; }
@@ -200,4 +590,67 @@
 .wave-bar-5 { animation: audioWaveBar 0.80s ease-in-out infinite 0.15s; }
 .wave-bar-6 { animation: audioWaveBar 0.70s ease-in-out infinite 0.35s; }
 .wave-bar-7 { animation: audioWaveBar 0.90s ease-in-out infinite 0.2s; }
+
+/* ========================================================
+   Vikoda Liquid Glassmorphism & Alkaline Mineral Water Effects
+   ======================================================== */
+.card-liquid-glass {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(0, 159, 227, 0.22);
+  box-shadow: 0 12px 32px -8px rgba(0, 114, 206, 0.14);
+}
+
+html.dark body {
+  background-color: #0b132b;
+  color: #f1f5f9;
+}
+
+html.dark .card-liquid-glass {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(0, 229, 255, 0.25);
+  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.5);
+}
+
+.badge-alkaline-ph {
+  background: linear-gradient(135deg, #009fe3 0%, #0072ce 50%, #003882 100%);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(0, 159, 227, 0.45);
+}
+
+/* Water Droplet Caustics Shimmer */
+@keyframes waterShimmerAnim {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.water-shimmer {
+  background: linear-gradient(
+    90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.35) 50%, 
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: waterShimmerAnim 3s infinite;
+}
+
+/* 3D Tilt Card Container */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+
 

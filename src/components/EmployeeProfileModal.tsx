@@ -19,6 +19,14 @@ import { EmployeeProfile, GamificationState } from '../types';
 import { CompanyEmblem, VikoMascot } from './brand/VikodaLogos';
 import { playSound } from '../services/soundEffects';
 import { GlobalProficiencyDashboard, calculateProficiency } from './GlobalProficiencyDashboard';
+import { 
+  MASCOT_SKINS, 
+  getEquippedSkinId, 
+  setEquippedSkinId, 
+  getUnlockedSkinIds, 
+  unlockSkinId 
+} from '../services/mascotWardrobe';
+import { adminSetTestAccount } from '../services/firebase';
 
 interface EmployeeProfileModalProps {
   isOpen: boolean;
@@ -29,7 +37,7 @@ interface EmployeeProfileModalProps {
   onLogout?: () => void;
   onOpenPlacementTest?: () => void;
   onOpenAdmin?: () => void;
-  initialTab?: 'card' | 'proficiency';
+  initialTab?: 'card' | 'proficiency' | 'wardrobe';
 }
 
 const PRESET_AVATARS = [
@@ -52,8 +60,11 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
   onOpenAdmin,
   initialTab,
 }) => {
-  const [activeTab, setActiveTab] = useState<'card' | 'proficiency'>(initialTab || 'card');
+  const [activeTab, setActiveTab] = useState<'card' | 'proficiency' | 'wardrobe'>(initialTab || 'card');
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [equippedSkin, setEquippedSkin] = useState<string>(() => getEquippedSkinId());
+  const [unlockedSkins, setUnlockedSkins] = useState<string[]>(() => getUnlockedSkinIds());
+  const [wardrobeToast, setWardrobeToast] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen && initialTab) {
@@ -166,11 +177,136 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
             <Globe className="w-3.5 h-3.5" />
             <span>Thước Đo Quốc Tế (TOEIC / IELTS)</span>
           </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              playSound('click');
+              setActiveTab('wardrobe');
+            }}
+            className={`pb-2.5 px-3 text-xs font-black border-b-2 flex items-center gap-1.5 transition-all cursor-pointer ${
+              activeTab === 'wardrobe'
+                ? 'border-[#0070D1] text-[#0070D1]'
+                : 'border-transparent text-slate-500 hover:text-slate-700'
+            }`}
+          >
+            <Sparkles className="w-3.5 h-3.5 text-cyan-500" />
+            <span>Tủ Đồ Viko Mascot</span>
+          </button>
         </div>
 
         {/* Modal Body */}
         <div className="p-4 space-y-3.5 overflow-y-auto">
-          {activeTab === 'proficiency' ? (
+          {activeTab === 'wardrobe' ? (
+            <div className="space-y-4">
+              <div className="p-3.5 rounded-2xl bg-gradient-to-r from-cyan-50 to-blue-50 border border-cyan-200 flex items-center justify-between">
+                <div>
+                  <h4 className="text-xs font-black text-slate-900">Tủ Đồ Viko Mascot</h4>
+                  <p className="text-[11px] text-slate-600">Đổi trang phục để Viko đồng hành cùng bạn trên bản đồ!</p>
+                </div>
+                <div className="flex items-center gap-1 px-3 py-1 bg-white rounded-xl border border-cyan-300 font-mono font-black text-xs text-cyan-800 shadow-2xs">
+                  <Gem className="w-3.5 h-3.5 text-cyan-600 fill-cyan-500" />
+                  <span>{stats.gems} 💎</span>
+                </div>
+              </div>
+
+              {wardrobeToast && (
+                <div className="p-2.5 rounded-xl bg-slate-900 text-white text-xs font-bold text-center animate-in fade-in">
+                  {wardrobeToast}
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {MASCOT_SKINS.map((skin) => {
+                  const isEquipped = equippedSkin === skin.id;
+                  const isUnlocked = skin.unlockedByDefault || unlockedSkins.includes(skin.id);
+
+                  return (
+                    <div
+                      key={skin.id}
+                      className={`p-3.5 rounded-2xl border transition-all flex items-center gap-3 relative ${
+                        isEquipped
+                          ? 'bg-cyan-50/80 border-cyan-400 shadow-xs ring-2 ring-cyan-400/30'
+                          : 'bg-white border-slate-200 hover:border-slate-300'
+                      }`}
+                    >
+                      <div className="w-16 h-16 shrink-0 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-center p-1 overflow-hidden">
+                        <img
+                          src={skin.previewSrc}
+                          alt={skin.nameVi}
+                          className="w-full h-full object-contain filter drop-shadow-2xs"
+                        />
+                      </div>
+
+                      <div className="min-w-0 flex-1 space-y-1">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[9px] font-black uppercase px-1.5 py-0.2 rounded-md bg-slate-100 text-slate-700">
+                            {skin.badge}
+                          </span>
+                          {isEquipped && (
+                            <span className="text-[9px] font-black uppercase px-1.5 py-0.2 rounded-md bg-emerald-500 text-white">
+                              Đang Mặc
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="text-xs font-black text-slate-900 truncate">
+                          {skin.nameVi}
+                        </div>
+                        <p className="text-[10px] text-slate-500 line-clamp-2 leading-tight">
+                          {skin.descVi}
+                        </p>
+
+                        <div className="pt-1">
+                          {isUnlocked ? (
+                            <button
+                              onClick={() => {
+                                playSound('bottle_cap');
+                                setEquippedSkinId(skin.id);
+                                setEquippedSkin(skin.id);
+                                setWardrobeToast('✨ Đã khoác trang phục mới cho Viko Mascot!');
+                                setTimeout(() => setWardrobeToast(null), 3000);
+                              }}
+                              disabled={isEquipped}
+                              className={`px-3 py-1 rounded-xl text-[11px] font-black transition-all cursor-pointer ${
+                                isEquipped
+                                  ? 'bg-emerald-100 text-emerald-800 cursor-default'
+                                  : 'bg-[#0070D1] hover:bg-[#005bb5] text-white shadow-2xs active:scale-95'
+                              }`}
+                            >
+                              {isEquipped ? '✓ Đã Trang Bị' : 'Mặc Trang Phục'}
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => {
+                                if (stats.gems < skin.costGems) {
+                                  playSound('wrong');
+                                  setWardrobeToast(`❌ Bạn cần thêm ${skin.costGems - stats.gems} 💎 để mở khóa!`);
+                                  setTimeout(() => setWardrobeToast(null), 3000);
+                                  return;
+                                }
+                                playSound('gem');
+                                stats.gems -= skin.costGems;
+                                unlockSkinId(skin.id);
+                                setUnlockedSkins(getUnlockedSkinIds());
+                                setEquippedSkinId(skin.id);
+                                setEquippedSkin(skin.id);
+                                setWardrobeToast('🎉 Mở khóa và trang bị thành công!');
+                                setTimeout(() => setWardrobeToast(null), 3000);
+                              }}
+                              className="px-3 py-1 rounded-xl text-[11px] font-black bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-2xs active:scale-95 flex items-center gap-1 cursor-pointer"
+                            >
+                              <span>Mở khóa ({skin.costGems} 💎)</span>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : activeTab === 'proficiency' ? (
             <GlobalProficiencyDashboard
               stats={stats}
               profile={profile}
@@ -197,10 +333,15 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
                   <div className="absolute -bottom-1 -right-1 bg-emerald-500 w-3.5 h-3.5 rounded-full border-2 border-white" />
                 </div>
                 <div className="min-w-0">
-                  <div className="flex items-center space-x-1.5">
+                  <div className="flex items-center space-x-1.5 flex-wrap gap-y-1">
                     <span className="text-[10px] font-black px-1.5 py-0.5 rounded-md bg-cyan-400 text-slate-900 tracking-wider">
                       {employeeCode}
                     </span>
+                    {profile.isTestAccount && (
+                      <span className="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-purple-400 text-slate-950 flex items-center gap-0.5 shadow-xs">
+                        🧪 Test VIP (Full Bài)
+                      </span>
+                    )}
                     <span className="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-white/20 text-white border border-white/20">
                       {currentTier.cefr} • {currentTier.readinessBadge}
                     </span>
@@ -366,6 +507,37 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
           ) : (
             /* ACTION BUTTONS (Clean, no endless scrolling) */
             <div className="grid grid-cols-2 gap-2 pt-1">
+              {/* Test Account Quick Switcher for Admins */}
+              {profile.isAdmin && (
+                <div className="col-span-2 p-3 rounded-2xl bg-purple-50 border border-purple-200 flex items-center justify-between gap-2 shadow-2xs">
+                  <div className="flex items-center gap-2">
+                    <span className="text-lg">🧪</span>
+                    <div>
+                      <div className="text-xs font-black text-purple-950">Chế độ Tài Khoản Test (Mở full bài)</div>
+                      <div className="text-[10px] text-purple-700">Mở toàn bộ bài học & mọi Level để kiểm thử</div>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      playSound('click');
+                      const newStatus = !profile.isTestAccount;
+                      const updated = { ...profile, isTestAccount: newStatus };
+                      onSaveProfile(updated);
+                      await adminSetTestAccount(profile.email, newStatus);
+                      playSound(newStatus ? 'success' : 'click');
+                    }}
+                    className={`px-3 py-1.5 rounded-xl font-black text-xs transition-all cursor-pointer shrink-0 ${
+                      profile.isTestAccount
+                        ? 'bg-purple-600 text-white shadow-xs ring-1 ring-purple-300'
+                        : 'bg-white text-purple-800 border border-purple-300 hover:bg-purple-100'
+                    }`}
+                  >
+                    {profile.isTestAccount ? '✓ Đang BẬT' : 'BẬT Test'}
+                  </button>
+                </div>
+              )}
+
               <button
                 onClick={() => {
                   playSound('click');

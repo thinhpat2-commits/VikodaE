@@ -77,6 +77,7 @@ export interface UserCloudProfile {
     timestamp: string;
     reason: string;
   };
+  isTestAccount?: boolean; // Tài khoản test mở full bài
 }
 
 const STORAGE_KEY_AUTH_SESSION = 'vikoda_auth_session_v4';
@@ -132,6 +133,7 @@ export const persistSession = (profile: UserCloudProfile) => {
       totalPracticeCount: 1,
       isLoggedIn: true,
       isAdmin: isUserAdmin(profile.email),
+      isTestAccount: Boolean(profile.isTestAccount),
     }));
 
     // Store user-scoped cached stats
@@ -383,7 +385,7 @@ export async function saveProgressToCloud(
  */
 export async function updateUserProfileInCloud(
   userId: string,
-  profileData: { displayName: string; department?: string; avatarUrl?: string }
+  profileData: { displayName: string; department?: string; avatarUrl?: string; isTestAccount?: boolean }
 ): Promise<void> {
   if (!userId) return;
 
@@ -392,6 +394,7 @@ export async function updateUserProfileInCloud(
     displayName: profileData.displayName,
     ...(profileData.department && { department: profileData.department }),
     ...(profileData.avatarUrl && { avatarUrl: profileData.avatarUrl }),
+    ...(profileData.isTestAccount !== undefined && { isTestAccount: profileData.isTestAccount }),
     updatedAt: now,
     lastActive: new Date().toISOString(),
   };
@@ -665,8 +668,69 @@ export async function adminDeleteUser(email: string): Promise<boolean> {
 }
 
 /**
+ * ADMIN: Toggle or Set an account as a Test Account (Unlocks 100% lessons across all Levels)
+ */
+export async function adminSetTestAccount(emailOrUserId: string, isTestAccount: boolean): Promise<boolean> {
+  const cleanEmail = emailOrUserId.toLowerCase().trim();
+  const userId = emailOrUserId.startsWith('usr_') ? emailOrUserId : emailToUserId(cleanEmail);
+
+  // 1. Update Firestore cloud database
+  try {
+    const userRef = doc(db, 'users', userId);
+    await updateDoc(userRef, {
+      isTestAccount,
+      updatedAt: Date.now()
+    });
+  } catch (err) {
+    console.warn('Firestore updateDoc offline notice for test account:', err);
+    await enqueueOfflineMutation('update_profile', { userId, isTestAccount });
+  }
+
+  // 2. Synchronize in LocalStorage & Session
+  if (typeof window !== 'undefined') {
+    const session = getPersistedSession();
+    if (session && (session.userId === userId || session.email.toLowerCase().trim() === cleanEmail)) {
+      session.isTestAccount = isTestAccount;
+      localStorage.setItem(STORAGE_KEY_AUTH_SESSION, JSON.stringify(session));
+    }
+
+    const profileKey = `vikoda_profile_${userId}`;
+    const pStr = localStorage.getItem(profileKey);
+    if (pStr) {
+      try {
+        const p = JSON.parse(pStr);
+        p.isTestAccount = isTestAccount;
+        localStorage.setItem(profileKey, JSON.stringify(p));
+      } catch (e) {}
+    }
+
+    // Update corporate employees list
+    const saved = localStorage.getItem('vikoda_corporate_employees_v2');
+    if (saved) {
+      try {
+        const list = JSON.parse(saved);
+        const updated = list.map((emp: any) => 
+          (emp.id === userId || emp.email.toLowerCase().trim() === cleanEmail)
+            ? { ...emp, isTestAccount }
+            : emp
+        );
+        localStorage.setItem('vikoda_corporate_employees_v2', JSON.stringify(updated));
+      } catch (e) {}
+    }
+
+    // Dispatch global event
+    window.dispatchEvent(new CustomEvent('vikoda_test_account_changed', {
+      detail: { userId, email: cleanEmail, isTestAccount }
+    }));
+  }
+
+  return true;
+}
+
+/**
  * Sign out (Safely clears active session without wiping other employees' stored data)
  */
 export async function logoutUser() {
   clearSession();
 }
+

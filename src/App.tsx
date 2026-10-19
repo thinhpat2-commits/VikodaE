@@ -23,6 +23,7 @@ import { PvPArenaModal } from './components/PvPArenaModal';
 import { DailyQuickReviewModal } from './components/DailyQuickReviewModal';
 import { PlacementTestModal, PlacementTestResult } from './components/PlacementTestModal';
 import { PersonalCoachModal } from './components/PersonalCoachModal';
+import { AssetStudioModal } from './components/AssetStudioModal';
 import { PracticeHub } from './components/PracticeHub';
 import { useDeviceDetect } from './hooks/useDeviceDetect';
 import { LaptopSidebarNav } from './components/laptop/LaptopSidebarNav';
@@ -81,6 +82,33 @@ export default function App() {
   const [isDailyReviewOpen, setIsDailyReviewOpen] = useState<boolean>(false);
   const [isPlacementTestOpen, setIsPlacementTestOpen] = useState<boolean>(false);
   const [isCoachOpen, setIsCoachOpen] = useState<boolean>(false);
+  const [isAssetStudioOpen, setIsAssetStudioOpen] = useState<boolean>(false);
+
+  // Dark Mode Theme State (Sync with LocalStorage & OS preference)
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('vikoda_theme_dark_mode');
+      if (saved !== null) return saved === 'true';
+      return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false;
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      if (isDarkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      localStorage.setItem('vikoda_theme_dark_mode', String(isDarkMode));
+    }
+  }, [isDarkMode]);
+
+  const toggleDarkMode = () => {
+    playSound('bottle_cap');
+    setIsDarkMode((prev) => !prev);
+  };
 
   // Employee Profile State (Restored strictly from current active user session)
   const [profile, setProfile] = useState<EmployeeProfile>(() => {
@@ -105,6 +133,7 @@ export default function App() {
           totalPracticeCount: 1,
           isLoggedIn: true,
           isAdmin: isUserAdmin(session.email),
+          isTestAccount: Boolean(session.isTestAccount),
         };
       }
     }
@@ -191,6 +220,7 @@ export default function App() {
         totalPracticeCount: (session as any).totalPracticeCount !== undefined ? (session as any).totalPracticeCount : 0,
         isLoggedIn: true,
         isAdmin: isUserAdmin(session.email),
+        isTestAccount: Boolean(session.isTestAccount),
       };
       setProfile(userProfile);
 
@@ -213,13 +243,12 @@ export default function App() {
         .then((snap) => {
           if (snap.exists()) {
             const remote = snap.data() as UserCloudProfile;
-            if (remote.displayName) {
-              setProfile((prev) => ({
-                ...prev,
-                fullName: remote.displayName,
-                department: remote.department || prev.department,
-              }));
-            }
+            setProfile((prev) => ({
+              ...prev,
+              fullName: remote.displayName || prev.fullName,
+              department: remote.department || prev.department,
+              isTestAccount: remote.isTestAccount !== undefined ? Boolean(remote.isTestAccount) : prev.isTestAccount,
+            }));
             setGamificationState((local) => {
               const merged = resolveStateConflict(local as any, remote);
               saveGamificationStateOffline(merged, session.userId);
@@ -231,9 +260,24 @@ export default function App() {
           console.warn('Background sync notice:', err);
         });
     } else {
-      // First time opening app: require login
-      setIsAuthModalOpen(true);
+      // First time opening app: allow guest learning immediately like Duolingo!
+      setIsAuthModalOpen(false);
     }
+
+    // Global listener for test account toggling from Admin or Profile
+    const handleTestAccountChange = (e: any) => {
+      const { email, isTestAccount } = e.detail || {};
+      setProfile((prev) => {
+        if (!prev.email || prev.email.toLowerCase().trim() === (email || '').toLowerCase().trim()) {
+          return { ...prev, isTestAccount: Boolean(isTestAccount) };
+        }
+        return prev;
+      });
+    };
+    window.addEventListener('vikoda_test_account_changed', handleTestAccountChange);
+    return () => {
+      window.removeEventListener('vikoda_test_account_changed', handleTestAccountChange);
+    };
   }, []);
 
   const saveGamificationState = (newState: GamificationState) => {
@@ -267,6 +311,7 @@ export default function App() {
       totalPracticeCount: 1,
       isLoggedIn: true,
       isAdmin: isUserAdmin(cloudProfile.email),
+      isTestAccount: Boolean(cloudProfile.isTestAccount),
     };
     setProfile(userProfile);
     saveProfileOffline(userProfile, cloudProfile.userId);
@@ -666,6 +711,7 @@ export default function App() {
             setProfileModalTab('proficiency');
             setIsProfileModalOpen(true);
           }}
+          isTestAccount={Boolean(profile.isTestAccount)}
         />
       )}
 
@@ -713,7 +759,7 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-slate-100/70 text-slate-900 flex flex-col antialiased selection:bg-cyan-500 selection:text-white">
+    <div className={`min-h-screen ${isDarkMode ? 'dark bg-[#0b132b] text-slate-100' : 'bg-slate-100/70 text-slate-900'} flex flex-col antialiased selection:bg-cyan-500 selection:text-white transition-colors duration-300`}>
       
       {isLaptop ? (
         /* ================= LAPTOP / DESKTOP EXECUTIVE WORKSPACE (3-COLUMN) ================= */
@@ -745,12 +791,18 @@ export default function App() {
               playSound('click');
               setIsAdminPortalOpen(true);
             }}
+            onOpenAssetStudio={() => {
+              playSound('click');
+              setIsAssetStudioOpen(true);
+            }}
             onOpenCoach={() => {
               playSound('click');
               setIsCoachOpen(true);
             }}
             onLogout={handleLogout}
             isCloudSynced={isCloudSynced}
+            isDarkMode={isDarkMode}
+            onToggleDarkMode={toggleDarkMode}
           />
 
           {/* 2. Center Spacious Main Canvas */}
@@ -882,6 +934,8 @@ export default function App() {
             }}
             isCloudSynced={isCloudSynced}
             onLogout={handleLogout}
+            isDarkMode={isDarkMode}
+            onToggleDarkMode={toggleDarkMode}
           />
 
           {/* Main Mobile Screen Content */}
@@ -996,6 +1050,12 @@ export default function App() {
         profile={profile}
         stats={gamificationState}
         speechRate={speechRate}
+      />
+
+      {/* 3D Asset Studio Modal for Gemini Pro Sync */}
+      <AssetStudioModal
+        isOpen={isAssetStudioOpen}
+        onClose={() => setIsAssetStudioOpen(false)}
       />
 
       {/* Executive HR & Training Admin Portal Modal */}

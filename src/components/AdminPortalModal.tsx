@@ -38,18 +38,21 @@ import {
   Send,
   Zap,
   BookOpen,
-  Target
+  Target,
+  Gauge
 } from 'lucide-react';
 import { EmployeeProfile, GamificationState } from '../types';
 import { playSound } from '../services/soundEffects';
 import { resetOfflineUserData } from '../services/offlineStorage';
+import { getStoredMascotFps, setStoredMascotFps } from './VikoDynamicAnimator';
 import { 
   fetchAllUsersAdmin, 
   adminResetUserProgress, 
   updateUserProfileInCloud, 
   emailToUserId, 
   adminCreateOrUpdateUser, 
-  adminDeleteUser 
+  adminDeleteUser,
+  adminSetTestAccount
 } from '../services/firebase';
 
 interface AdminPortalModalProps {
@@ -75,6 +78,7 @@ export interface EmployeeRecord {
   completedUnits: number;
   certified: boolean;
   lastActive: string;
+  isTestAccount?: boolean;
 }
 
 export interface CompanyAnnouncement {
@@ -369,18 +373,33 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
     };
   });
 
+  // Mascot Settings State (Tốc độ chuyển động & Hiển thị ngoài màn hình)
+  const [mascotFps, setMascotFps] = useState<number>(() => getStoredMascotFps());
+  const [showMascotCompanion, setShowMascotCompanion] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('vikoda_show_mascot_companion');
+      if (saved !== null) return saved === 'true';
+    }
+    return true;
+  });
+
   const handleSaveSettings = (e: React.FormEvent) => {
     e.preventDefault();
     playSound('click');
     if (typeof window !== 'undefined') {
       localStorage.setItem(STORAGE_KEY_ADMIN_SETTINGS, JSON.stringify(trainingSettings));
+      setStoredMascotFps(mascotFps);
+      localStorage.setItem('vikoda_show_mascot_companion', String(showMascotCompanion));
+      window.dispatchEvent(new CustomEvent('vikoda_mascot_visibility_updated', {
+        detail: { visible: showMascotCompanion }
+      }));
     }
     addAuditLog({
       adminEmail: currentUserProfile.email || 'admin@vikoda.com.vn',
       action: 'CẤU_HÌNH_HỆ_THỐNG',
-      targetName: 'Quy chế đào tạo',
+      targetName: 'Quy chế đào tạo & Mascot',
       targetEmail: 'system@vikoda.com.vn',
-      details: `Mở khóa 100 bài: ${trainingSettings.unlockAllUnits ? 'BẬT' : 'TẮT'} | Tim vô hạn: ${trainingSettings.unlimitedEnergy ? 'BẬT' : 'TẮT'} | Timer: ${trainingSettings.drillCountdownSeconds}s | Mục tiêu ngày: ${trainingSettings.dailyXpGoal} XP`,
+      details: `Mở khóa 100 bài: ${trainingSettings.unlockAllUnits ? 'BẬT' : 'TẮT'} | Tim vô hạn: ${trainingSettings.unlimitedEnergy ? 'BẬT' : 'TẮT'} | Mascot: ${showMascotCompanion ? 'Hiện' : 'Ẩn'} (${mascotFps} FPS) | Timer: ${trainingSettings.drillCountdownSeconds}s | Mục tiêu ngày: ${trainingSettings.dailyXpGoal} XP`,
     });
     playSound('success');
     setToastMessage('Đã lưu quy chế & cấu hình vận hành thành công!');
@@ -563,6 +582,7 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                 completedUnits: (cu.completedUnits || []).length,
                 certified: cu.role === 'admin',
                 lastActive: cu.lastActive ? 'Gần đây' : 'Hôm nay',
+                isTestAccount: Boolean(cu.isTestAccount),
               };
               if (idx !== -1) {
                 updated[idx] = {
@@ -573,6 +593,7 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                   streak: cu.streak !== undefined ? cu.streak : updated[idx].streak,
                   gems: cu.gems !== undefined ? cu.gems : updated[idx].gems,
                   completedUnits: cu.completedLessons ? cu.completedLessons.length : updated[idx].completedUnits,
+                  isTestAccount: cu.isTestAccount !== undefined ? Boolean(cu.isTestAccount) : updated[idx].isTestAccount,
                 };
               } else {
                 updated.push(rec);
@@ -584,6 +605,35 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
       });
     }
   }, [isOpen]);
+
+  const handleToggleTestAccount = async (emp: EmployeeRecord) => {
+    playSound('click');
+    const newStatus = !emp.isTestAccount;
+    const cleanEmail = emp.email.toLowerCase().trim();
+    const updated = employees.map((e) =>
+      e.id === emp.id || e.email.toLowerCase().trim() === cleanEmail
+        ? { ...e, isTestAccount: newStatus }
+        : e
+    );
+    setEmployees(updated);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY_EMPLOYEES, JSON.stringify(updated));
+    }
+
+    await adminSetTestAccount(emp.email, newStatus);
+
+    addAuditLog({
+      adminEmail: currentUserProfile.email || 'admin@vikoda.com.vn',
+      action: newStatus ? 'SET_TÀI_KHOẢN_TEST' : 'HỦY_TÀI_KHOẢN_TEST',
+      targetName: emp.name,
+      targetEmail: emp.email,
+      details: `${newStatus ? 'Kích hoạt' : 'Hủy'} chế độ Tài khoản Test: ${newStatus ? 'Mở full toàn bộ 100+ bài học & mọi Level' : 'Khóa theo tiến độ thông thường'}`,
+    });
+
+    playSound(newStatus ? 'success' : 'click');
+    setToastMessage(`Đã ${newStatus ? 'kích hoạt' : 'hủy'} Tài khoản Test cho ${emp.name} (${newStatus ? 'Đã mở full tất cả bài học' : 'Theo tiến độ thường'})!`);
+    setTimeout(() => setToastMessage(null), 3500);
+  };
 
   // Sync current user's active session and custom name into the employee list
   useEffect(() => {
@@ -724,7 +774,10 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
       await updateUserProfileInCloud(userId, {
         displayName: editingEmployee.name,
         department: editingEmployee.dept,
+        isTestAccount: Boolean(editingEmployee.isTestAccount),
       });
+      await adminSetTestAccount(cleanEmail, Boolean(editingEmployee.isTestAccount));
+
       // Also update local storage if it's the current user
       if (cleanEmail === currentUserProfile.email?.toLowerCase().trim()) {
         const saved = localStorage.getItem('vikoda_employee_profile_v3');
@@ -732,6 +785,7 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
           const parsed = JSON.parse(saved);
           parsed.fullName = editingEmployee.name;
           parsed.department = editingEmployee.dept;
+          parsed.isTestAccount = Boolean(editingEmployee.isTestAccount);
           localStorage.setItem('vikoda_employee_profile_v3', JSON.stringify(parsed));
         }
       }
@@ -782,7 +836,8 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
       highestScore: Number(newEmployeeData.highestScore) || 200,
       completedUnits: Number(newEmployeeData.completedUnits) || 2,
       certified: Boolean(newEmployeeData.certified),
-      lastActive: 'Vừa tạo'
+      lastActive: 'Vừa tạo',
+      isTestAccount: Boolean(newEmployeeData.isTestAccount),
     };
 
     setEmployees((prev) => [created, ...prev]);
@@ -798,6 +853,9 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
         streak: created.streak,
         gems: created.gems,
       });
+      if (created.isTestAccount) {
+        await adminSetTestAccount(email, true);
+      }
     } catch (err) {
       console.warn('Error creating employee in cloud:', err);
     }
@@ -1302,11 +1360,16 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                                     {emp.code.replace('VKD-', '')}
                                   </span>
                                   <div>
-                                    <div className="font-black text-slate-900 flex items-center gap-1.5">
+                                    <div className="font-black text-slate-900 flex items-center gap-1.5 flex-wrap">
                                       <span>{emp.name}</span>
                                       {isCurrent && (
                                         <span className="text-[9px] font-black bg-[#0070D1] text-white px-1.5 py-0.2 rounded">
                                           Bạn
+                                        </span>
+                                      )}
+                                      {emp.isTestAccount && (
+                                        <span className="text-[9px] font-black bg-purple-100 text-purple-850 border border-purple-300 px-1.5 py-0.2 rounded-full inline-flex items-center gap-0.5">
+                                          🧪 Test Full
                                         </span>
                                       )}
                                     </div>
@@ -1356,6 +1419,21 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
 
                               <td className="p-3 text-center">
                                 <div className="flex items-center justify-center space-x-1.5">
+                                  {/* 🧪 1-CLICK SET TEST ACCOUNT BUTTON */}
+                                  <button
+                                    type="button"
+                                    onClick={() => handleToggleTestAccount(emp)}
+                                    className={`px-2 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1 text-[10px] font-black ${
+                                      emp.isTestAccount
+                                        ? 'bg-purple-600 hover:bg-purple-700 text-white border-purple-700 shadow-xs ring-1 ring-purple-300'
+                                        : 'bg-purple-50 hover:bg-purple-100 text-purple-900 border-purple-300'
+                                    }`}
+                                    title={emp.isTestAccount ? 'Tài khoản đang mở full toàn bộ bài học. Bấm để tắt.' : 'Bấm để set tài khoản này thành Tài khoản Test (mở full bài học)'}
+                                  >
+                                    <Sparkles className="w-3 h-3" />
+                                    <span>{emp.isTestAccount ? '✓ Đang Test' : '🧪 Set TK Test'}</span>
+                                  </button>
+
                                   <button
                                     onClick={() => {
                                       playSound('click');
@@ -1669,6 +1747,89 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                             }`}
                           >
                             {xp} XP / ngày
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Policy Card 4: Mascot Viko Animation & Display Settings */}
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                          <Sparkles className="w-4 h-4 text-cyan-600" />
+                          <h5 className="text-xs font-black text-slate-900">
+                            Cấu Hình Linh Vật Viko Mascot (Tốc Độ Hoạt Ảnh & Hiển Thị)
+                          </h5>
+                        </div>
+                        <p className="text-xs text-slate-600 leading-relaxed">
+                          Điều chỉnh tốc độ chạy hoạt ảnh của Viko Mascot trên toàn bộ ứng dụng và bật/tắt hiển thị linh vật đồng hành trên màn hình chính để tối ưu độ tập trung.
+                        </p>
+                      </div>
+
+                      {/* Show / Hide Companion Toggle */}
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="text-[11px] font-bold text-slate-600">
+                          {showMascotCompanion ? 'Đang hiện Mascot' : 'Đã ẩn Mascot'}
+                        </span>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={showMascotCompanion}
+                            onChange={(e) => {
+                              const val = e.target.checked;
+                              setShowMascotCompanion(val);
+                              if (typeof window !== 'undefined') {
+                                localStorage.setItem('vikoda_show_mascot_companion', String(val));
+                                window.dispatchEvent(new CustomEvent('vikoda_mascot_visibility_updated', {
+                                  detail: { visible: val }
+                                }));
+                              }
+                            }}
+                            className="sr-only peer"
+                          />
+                          <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500"></div>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Animation Speed Row */}
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 text-xs font-black text-slate-800">
+                          <Gauge className="w-3.5 h-3.5 text-cyan-600" />
+                          <span>Tốc độ chuyển động:</span>
+                        </div>
+                        <span className="text-xs font-mono font-black text-cyan-700 bg-cyan-100 px-2 py-0.5 rounded-md">
+                          {mascotFps} FPS (~{Math.round(1000 / mascotFps)}ms/frame)
+                        </span>
+                      </div>
+
+                      {/* Speed Presets */}
+                      <div className="grid grid-cols-5 gap-1.5">
+                        {[
+                          { fps: 3, label: '3 FPS (Chậm)' },
+                          { fps: 4, label: '4 FPS' },
+                          { fps: 5, label: '5 FPS (Chuẩn ⭐)' },
+                          { fps: 8, label: '8 FPS' },
+                          { fps: 12, label: '12 FPS (Nhanh)' },
+                        ].map((preset) => (
+                          <button
+                            type="button"
+                            key={preset.fps}
+                            onClick={() => {
+                              setMascotFps(preset.fps);
+                              setStoredMascotFps(preset.fps);
+                              playSound('click');
+                            }}
+                            className={`py-1.5 px-1 text-center rounded-xl text-[10.5px] font-black border transition-all cursor-pointer ${
+                              mascotFps === preset.fps
+                                ? 'bg-cyan-600 border-cyan-600 text-white shadow-2xs'
+                                : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-100'
+                            }`}
+                          >
+                            {preset.label}
                           </button>
                         ))}
                       </div>
@@ -2118,6 +2279,19 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                 </label>
               </div>
 
+              <div className="flex items-center space-x-2.5 p-3 rounded-2xl bg-purple-50 border-2 border-purple-200">
+                <input
+                  type="checkbox"
+                  id="editTestAccountCheck"
+                  checked={Boolean(editingEmployee.isTestAccount)}
+                  onChange={(e) => setEditingEmployee({ ...editingEmployee, isTestAccount: e.target.checked })}
+                  className="w-4 h-4 rounded text-purple-600 cursor-pointer accent-purple-600"
+                />
+                <label htmlFor="editTestAccountCheck" className="font-black text-purple-950 cursor-pointer text-xs leading-snug">
+                  🧪 Đặt làm Tài Khoản Test (Mở full 100% tất cả bài học & mọi Level)
+                </label>
+              </div>
+
               <div className="flex items-center justify-end space-x-2 pt-3 border-t">
                 <button
                   type="button"
@@ -2227,6 +2401,19 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                     required
                   />
                 </div>
+              </div>
+
+              <div className="flex items-center space-x-2.5 p-3 rounded-2xl bg-purple-50 border-2 border-purple-200">
+                <input
+                  type="checkbox"
+                  id="newTestAccountCheck"
+                  checked={Boolean(newEmployeeData.isTestAccount)}
+                  onChange={(e) => setNewEmployeeData({ ...newEmployeeData, isTestAccount: e.target.checked })}
+                  className="w-4 h-4 rounded text-purple-600 cursor-pointer accent-purple-600"
+                />
+                <label htmlFor="newTestAccountCheck" className="font-black text-purple-950 cursor-pointer text-xs leading-snug">
+                  🧪 Đặt làm Tài Khoản Test (Mở full 100% tất cả bài học & mọi Level)
+                </label>
               </div>
 
               <div className="flex items-center justify-end space-x-2 pt-3 border-t">

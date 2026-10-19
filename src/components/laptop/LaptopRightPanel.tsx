@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Flame, 
-  Gem, 
-  Zap, 
-  Trophy, 
-  CheckCircle2, 
   Volume2, 
   VolumeX, 
-  ArrowRight,
-  Target,
-  Sparkles,
-  Award,
   ChevronRight,
-  SlidersHorizontal
+  Sparkles,
+  Trophy,
+  Award
 } from 'lucide-react';
 import { GamificationState, EmployeeProfile } from '../../types';
+import { VIKODA_ASSETS, VikoMascot, MascotMood, useVikodaAssetSync } from '../brand/VikodaLogos';
+import { VikoDynamicAnimator } from '../VikoDynamicAnimator';
 import { playSound, isStealthOfficeMode, setStealthOfficeMode, subscribeStealthMode } from '../../services/soundEffects';
 import { 
   VOICE_OPTIONS, 
   getSelectedVoiceId, 
   subscribeVoiceChange,
-  VoiceOptionId 
+  VoiceOptionId,
+  playVikoMascotSpeech
 } from '../../services/speechService';
 import { VoiceSelectorModal } from '../VoiceSelectorModal';
 import { calculateProficiency } from '../GlobalProficiencyDashboard';
@@ -45,17 +41,15 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
   stats,
   profile,
   onOpenLeaderboard,
-  onOpenArena,
-  onOpenPvPArena,
-  onOpenDailyReview,
   onOpenCoach,
-  onOpenPlacementTest,
   onOpenProfile,
-  onOpenSOS,
+  onOpenPlacementTest,
 }) => {
+  useVikodaAssetSync();
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
   const [currentVoice, setCurrentVoice] = useState<VoiceOptionId>(getSelectedVoiceId());
   const [isStealth, setIsStealth] = useState<boolean>(() => isStealthOfficeMode());
+  const [panelMascotMood, setPanelMascotMood] = useState<MascotMood>('bottle_hug');
 
   useEffect(() => {
     const unsubVoice = subscribeVoiceChange((vId) => setCurrentVoice(vId));
@@ -73,128 +67,99 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
   };
 
   const activeVoiceOption = VOICE_OPTIONS.find((v) => v.id === currentVoice) || VOICE_OPTIONS[0];
+  const { currentTier, estimatedToeic } = calculateProficiency(stats);
 
-  const { currentTier, estimatedToeic, estimatedIelts } = calculateProficiency(stats);
-
-  // 7-day streak calendar calculations (Monday to Sunday)
   const daysOfWeek = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
-  const todayDayIndex = (new Date().getDay() + 6) % 7; // 0 for Mon, 6 for Sun
-
-  // Quests progress simulations based on actual state and Admin dailyXpGoal
-  const dailyGoalTarget = (() => {
-    if (typeof window !== 'undefined') {
-      try {
-        const raw = localStorage.getItem('vikoda_admin_training_settings_v1');
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          if (parsed.dailyXpGoal) return Number(parsed.dailyXpGoal);
-        }
-      } catch (e) {}
-    }
-    return 50;
-  })();
-
-  const quest1Progress = Math.min(100, Math.round(((stats.xp % dailyGoalTarget) / dailyGoalTarget) * 100));
-  const quest2Progress = stats.completedNodeIds.length > 0 ? 100 : 0;
-  const quest3Progress = stats.arenaStats?.matchesPlayed ? Math.min(100, stats.arenaStats.matchesPlayed * 50) : 0;
+  const todayDayIndex = (new Date().getDay() + 6) % 7;
 
   return (
-    <aside className="w-80 shrink-0 min-h-screen sticky top-0 p-5 space-y-4 border-l border-slate-200/80 bg-slate-50/50 select-none">
+    <aside className="w-80 shrink-0 min-h-screen sticky top-0 p-5 space-y-4 border-l-2 border-slate-200 bg-white select-none">
       
-      {/* 1. TOP CURRENCY & STATUS BAR */}
-      <div className="flex items-center justify-between gap-2 p-2 bg-white rounded-2xl border border-slate-200 shadow-2xs">
+      {/* 1. TOP CURRENCY BAR (DUOLINGO 3D MASTERCLASS) */}
+      <div className="flex items-center justify-between gap-2 p-2 bg-slate-50/80 rounded-2xl border-2 border-slate-200 shadow-2xs">
         {/* Streak */}
-        <div className="flex items-center gap-1.5 px-2 py-1 text-xs font-black text-amber-900">
-          <Flame className="w-4 h-4 fill-amber-500 text-amber-500" />
-          <span>{stats.streakDays}</span>
+        <div className="flex items-center gap-1.5 px-2 py-1 text-xs font-black text-amber-900" title="Chuỗi ngày rèn luyện liên tục">
+          <img src={VIKODA_ASSETS.streakFire} alt="Streak" className="w-6 h-6 object-contain filter drop-shadow-xs" />
+          <span className="text-sm font-black">{stats.streakDays || 1}</span>
         </div>
 
         {/* Gems */}
-        <div className="flex items-center gap-1.5 px-2 py-1 text-xs font-black text-cyan-900">
-          <Gem className="w-4 h-4 fill-cyan-500 text-cyan-500" />
-          <span>{stats.gems}</span>
+        <div className="flex items-center gap-1.5 px-2 py-1 text-xs font-black text-cyan-900" title="Đá Quý Khoáng Chất">
+          <img src={VIKODA_ASSETS.gemCyan} alt="Gems" className="w-5 h-6 object-contain filter drop-shadow-xs" />
+          <span className="text-sm font-black">{stats.gems || 483}</span>
         </div>
 
-        {/* Voice Selector */}
-        <button
-          onClick={() => setIsVoiceModalOpen(true)}
-          className="p-1.5 rounded-xl hover:bg-slate-100 text-xs font-bold text-slate-700 flex items-center gap-1 cursor-pointer"
-          title="Chọn giọng đọc AI"
-        >
-          <span>{activeVoiceOption.flag}</span>
-        </button>
+        {/* Hearts / Alkaline Health */}
+        <div className="flex items-center gap-1 px-2 py-1 text-xs font-black text-purple-900" title="Độ Kiềm Tự Nhiên pH 9.0">
+          <img src={VIKODA_ASSETS.heartPurple} alt="Heart" className="w-5 h-5 object-contain filter drop-shadow-xs" />
+          <span className="text-sm font-black">5/5</span>
+        </div>
 
-        {/* Stealth Toggle */}
+        {/* Audio Stealth Toggle */}
         <button
           onClick={toggleStealth}
-          className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-600 cursor-pointer"
-          title={isStealth ? 'Chế độ công sở: Đã tắt chuông' : 'Bật hiệu ứng âm thanh'}
+          className="p-1.5 rounded-xl hover:bg-slate-200 text-slate-600 cursor-pointer transition-colors"
+          title={isStealth ? 'Đang tắt tiếng' : 'Đang bật âm thanh'}
         >
           {isStealth ? (
             <VolumeX className="w-4 h-4 text-rose-500" />
           ) : (
-            <Volume2 className="w-4 h-4 text-slate-500" />
+            <Volume2 className="w-4 h-4 text-[#009FE3]" />
           )}
         </button>
       </div>
 
-      {/* GLOBAL PROFICIENCY SPOTLIGHT CARD */}
-      <div 
-        onClick={() => {
-          playSound('click');
-          if (onOpenProfile) {
-            onOpenProfile();
-          } else if (onOpenPlacementTest) {
-            onOpenPlacementTest();
-          }
-        }}
-        className="group bg-gradient-to-br from-[#004B87] via-[#0070D1] to-[#009FE3] p-4 rounded-3xl text-white shadow-md border border-sky-300/40 relative overflow-hidden cursor-pointer hover:shadow-lg transition-all active:scale-98"
-        title="Bấm để xem chi tiết Bảng Đo Lường Trình Độ Quốc Tế"
-      >
-        <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white/10 rounded-full blur-xl pointer-events-none" />
-        
-        <div className="flex items-center justify-between relative z-10">
-          <div className="flex items-center gap-2.5">
-            <div className="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex flex-col items-center justify-center text-white shrink-0 shadow-xs">
-              <span className="text-base font-black">{currentTier.cefr}</span>
-              <span className="text-[7px] font-black uppercase text-sky-200">CEFR</span>
-            </div>
-            <div>
-              <div className="text-[10px] font-black uppercase tracking-wider text-amber-300 flex items-center gap-1">
-                <Award className="w-3 h-3" />
-                <span>Thành Tích Quốc Tế</span>
-              </div>
-              <div className="text-xs font-black text-white truncate max-w-[140px]">
-                {currentTier.title.split('(')[0]}
-              </div>
-            </div>
+      {/* 2.5 INTERACTIVE LIVE VIKO MASCOT CARD */}
+      <div className="bg-gradient-to-br from-sky-50 via-cyan-50/60 to-white p-3.5 rounded-3xl border-2 border-cyan-200/80 shadow-xs space-y-2.5">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <span className="text-sm">💧</span>
+            <span className="text-[11px] font-black uppercase text-cyan-900 tracking-wider">Bạn Đồng Hành Viko</span>
           </div>
-
-          <div className="text-right">
-            <span className="text-xs font-black text-amber-300 block">~{estimatedToeic}</span>
-            <span className="text-[9px] text-sky-100 font-medium">TOEIC Eq.</span>
-          </div>
+          <button
+            onClick={() => {
+              playSound('click');
+              playVikoMascotSpeech("Keep going! You are doing awesome with Vikoda English today!");
+            }}
+            className="text-[10px] font-bold text-cyan-700 hover:text-cyan-900 bg-cyan-100 hover:bg-cyan-200 px-2 py-0.5 rounded-full transition-colors cursor-pointer flex items-center gap-1"
+            title="Nghe Viko trò chuyện"
+          >
+            <Volume2 className="w-3 h-3" />
+            <span>Nói chuyện</span>
+          </button>
         </div>
 
-        <div className="mt-2.5 pt-2 border-t border-white/20 flex items-center justify-between text-[11px] font-bold text-sky-100">
-          <span>Lộ trình: <strong className="text-amber-300">100 Bài • 700+ Câu</strong></span>
-          <span className="flex items-center gap-0.5 text-amber-300 group-hover:translate-x-0.5 transition-transform">
-            <span>Năng lực ➜</span>
-            <ChevronRight className="w-3.5 h-3.5" />
-          </span>
+        <div className="flex items-center gap-3">
+          <div 
+            onClick={() => {
+              playSound('click');
+              playVikoMascotSpeech("Keep going! You are doing awesome with Vikoda English today!");
+            }}
+            className="cursor-pointer hover:scale-105 active:scale-95 transition-transform shrink-0"
+            title="Bấm để nghe Viko trò chuyện"
+          >
+            <VikoDynamicAnimator size="sm" autoAnimate={true} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-[11.5px] font-bold text-slate-800 leading-snug">
+              "Luyện tập 15 phút mỗi ngày cùng Viko để bứt phá tiếng Anh đàm phán quốc tế nhé! 💧"
+            </p>
+            <div className="mt-1 flex items-center gap-1 text-[10px] text-cyan-700 font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Tự động tương tác</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* 2. STREAK CALENDAR CARD (DUOLINGO STYLE) */}
+      {/* 3. STREAK CALENDAR CARD */}
       <div className="bg-white p-4 rounded-3xl border-2 border-slate-200 border-b-4 border-b-slate-300 shadow-xs space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shadow-xs">
-              <Flame className="w-4 h-4 fill-white" />
-            </div>
+            <img src={VIKODA_ASSETS.streakFire} alt="Fire" className="w-7 h-7 object-contain" />
             <div>
               <div className="text-sm font-black text-slate-900 leading-none">
-                Chuỗi {stats.streakDays} ngày
+                Chuỗi {stats.streakDays || 1} ngày
               </div>
               <div className="text-[10px] text-amber-600 font-bold mt-0.5">
                 Rèn luyện đều đặn
@@ -207,7 +172,7 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
                 playSound('click');
                 onOpenCoach();
               }}
-              className="text-[10px] font-black text-[#0070D1] hover:underline cursor-pointer"
+              className="text-[11px] font-black text-[#009FE3] hover:underline cursor-pointer"
             >
               Lịch học
             </button>
@@ -225,7 +190,7 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
                 <div
                   className={`w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-black transition-all ${
                     isDone
-                      ? 'bg-amber-500 text-white shadow-xs'
+                      ? 'bg-amber-500 text-white shadow-xs border-b-2 border-amber-700'
                       : isToday
                       ? 'bg-amber-100 text-amber-700 ring-2 ring-amber-400'
                       : 'bg-slate-100 text-slate-400'
@@ -239,101 +204,68 @@ export const LaptopRightPanel: React.FC<LaptopRightPanelProps> = ({
         </div>
       </div>
 
-      {/* 3. DAILY QUESTS (NHIỆM VỤ HÀNG NGÀY - DUOLINGO STYLE) */}
+      {/* 4. DAILY QUESTS (NHIỆM VỤ HÀNG NGÀY VỚI RƯƠNG VÀNG) */}
       <div className="bg-white p-4 rounded-3xl border-2 border-slate-200 border-b-4 border-b-slate-300 shadow-xs space-y-3">
         <div className="flex items-center justify-between">
-          <div className="text-xs font-black uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-            <Target className="w-3.5 h-3.5 text-indigo-500" />
+          <div className="text-xs font-black uppercase tracking-wider text-slate-700 flex items-center gap-2">
+            <img src={VIKODA_ASSETS.chestClosed} alt="Chest" className="w-5 h-5 object-contain" />
             <span>Nhiệm Vụ Hôm Nay</span>
           </div>
-          <span className="text-[10px] font-extrabold text-amber-600">3/3 mở rương</span>
+          <span className="text-[10px] font-extrabold text-amber-600">Mở rương quà</span>
         </div>
 
-        {/* Quest 1 */}
-        <div className="space-y-1">
-          <div className="flex items-center justify-between text-xs font-bold text-slate-700">
-            <span className="truncate">Kiếm {dailyGoalTarget} XP hôm nay</span>
-            <span className="text-[10px] text-slate-400 shrink-0">+{stats.xp % dailyGoalTarget}/{dailyGoalTarget} XP</span>
+        <div className="space-y-2.5">
+          {/* Quest 1 */}
+          <div className="space-y-1">
+            <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+              <span className="truncate">Kiếm 20 điểm KN hôm nay</span>
+              <span className="text-amber-600 shrink-0 font-extrabold">20/20</span>
+            </div>
+            <div className="h-3.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
+              <div className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full w-full" />
+            </div>
           </div>
-          <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
-            <div 
-              className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-300"
-              style={{ width: `${quest1Progress}%` }}
-            />
-          </div>
-        </div>
 
-        {/* Quest 2 */}
-        <div className="space-y-1">
-          <div className="flex items-center justify-between text-xs font-bold text-slate-700">
-            <span className="truncate">Hoàn thành 1 bài học</span>
-            <span className="text-[10px] text-slate-400 shrink-0">1 bài</span>
-          </div>
-          <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
-            <div 
-              className="h-full bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full transition-all duration-300"
-              style={{ width: `${quest2Progress}%` }}
-            />
-          </div>
-        </div>
-
-        {/* Quest 3 */}
-        <div className="space-y-1">
-          <div className="flex items-center justify-between text-xs font-bold text-slate-700">
-            <span className="truncate">Thách đấu 1 trận 1v1</span>
-            <span className="text-[10px] text-slate-400 shrink-0">1 trận</span>
-          </div>
-          <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
-            <div 
-              className="h-full bg-gradient-to-r from-rose-400 to-rose-500 rounded-full transition-all duration-300"
-              style={{ width: `${quest3Progress}%` }}
-            />
+          {/* Quest 2 */}
+          <div className="space-y-1">
+            <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+              <span className="truncate">Hoàn thành 1 bài luyện nói</span>
+              <span className="text-[#009FE3] shrink-0 font-extrabold">1/1</span>
+            </div>
+            <div className="h-3.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
+              <div className="h-full bg-gradient-to-r from-sky-400 to-[#009FE3] rounded-full w-full" />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* 4. COMPANY LEAGUE RANK WIDGET (BẢNG THI ĐUA DOANH NGHIỆP THEO CẤP ĐỘ CEFR) */}
-      <div className="bg-gradient-to-br from-indigo-50 to-sky-50 p-4 rounded-3xl border-2 border-indigo-200 border-b-4 border-b-indigo-300 shadow-xs space-y-2.5">
+      {/* 5. LEADERBOARD PREVIEW (CÚP VÀNG ĐẢNH THẠNH) */}
+      <div 
+        onClick={() => {
+          playSound('click');
+          onOpenLeaderboard();
+        }}
+        className="bg-white p-4 rounded-3xl border-2 border-slate-200 border-b-4 border-b-slate-300 shadow-xs cursor-pointer hover:border-amber-300 transition-all space-y-2"
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-white flex items-center justify-center text-base shadow-xs">
-              🏆
-            </div>
+            <img src={VIKODA_ASSETS.trophyDanhThanh} alt="Trophy" className="w-7 h-7 object-contain" />
             <div>
-              <div className="text-xs font-black text-indigo-950 uppercase tracking-wide flex items-center gap-1.5">
-                <span>Bảng Vàng Thi Đua</span>
-                <span className="text-[9px] px-1.5 py-0.2 rounded-md bg-indigo-200 text-indigo-900 font-extrabold">
-                  {currentTier.cefr}
-                </span>
-              </div>
-              <div className="text-[10px] text-indigo-700 font-bold truncate max-w-[150px]">
-                {currentTier.title}
-              </div>
+              <div className="text-xs font-black uppercase text-slate-900">Bảng Xếp Hạng Tuần</div>
+              <div className="text-[10px] text-slate-400 font-bold">Top 3 Phòng Ban Xuất Sắc</div>
             </div>
           </div>
+          <ChevronRight className="w-4 h-4 text-slate-400" />
         </div>
-
-        <p className="text-xs text-slate-600 leading-snug">
-          Bạn đang tranh tài tại <span className="font-black text-indigo-700">Bảng {currentTier.cefr}</span> cùng các đồng nghiệp cùng năng lực!
-        </p>
-
-        <button
-          onClick={() => {
-            playSound('click');
-            onOpenLeaderboard();
-          }}
-          className="w-full py-2 rounded-xl bg-white hover:bg-indigo-50 text-indigo-900 font-black text-xs border border-indigo-200 shadow-2xs active:scale-98 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-        >
-          <span>Xem Bảng Xếp Hạng {currentTier.cefr}</span>
-          <ArrowRight className="w-3.5 h-3.5" />
-        </button>
       </div>
 
-      <VoiceSelectorModal
-        isOpen={isVoiceModalOpen}
-        onClose={() => setIsVoiceModalOpen(false)}
-        onSelectVoice={(vId) => setCurrentVoice(vId)}
-      />
+      {/* Voice Selector Modal */}
+      {isVoiceModalOpen && (
+        <VoiceSelectorModal 
+          isOpen={isVoiceModalOpen} 
+          onClose={() => setIsVoiceModalOpen(false)} 
+        />
+      )}
 
     </aside>
   );

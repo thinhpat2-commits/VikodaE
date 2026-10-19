@@ -22,7 +22,9 @@ import {
   Copy,
   FileText,
   Zap,
-  Check
+  Check,
+  RotateCw,
+  QrCode
 } from 'lucide-react';
 import { EmployeeProfile, GamificationState } from '../types';
 import { playSpeech, stopSpeech } from '../services/speechService';
@@ -48,6 +50,23 @@ export const VikodaExecutivePortfolioModal: React.FC<VikodaExecutivePortfolioMod
   const [isPlayingDay1, setIsPlayingDay1] = useState<boolean>(false);
   const [isPlayingDay30, setIsPlayingDay30] = useState<boolean>(false);
   const [feedbackToast, setFeedbackToast] = useState<string | null>(null);
+
+  // 3D Hologram Tilt & Flip Interaction
+  const [cardTilt, setCardTilt] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const rotateX = -(y / (rect.height / 2)) * 10;
+    const rotateY = (x / (rect.width / 2)) * 10;
+    setCardTilt({ x: rotateX, y: rotateY });
+  };
+
+  const handleCardMouseLeave = () => {
+    setCardTilt({ x: 0, y: 0 });
+  };
 
   if (!isOpen || typeof document === 'undefined') return null;
 
@@ -230,83 +249,190 @@ Ngày xuất báo cáo: ${new Date().toLocaleDateString('vi-VN')}
             /* ================= TAB 1: EXECUTIVE CERTIFICATE ================= */
             <div className="space-y-4">
               
-              {/* Printable Digital Certificate Canvas Frame */}
-              <div className="p-5 rounded-3xl bg-gradient-to-b from-amber-50/70 via-white to-amber-50/50 border-4 border-amber-300/80 shadow-md relative text-center space-y-3">
-                
-                {/* Gold Seal Watermark */}
-                <div className="flex items-center justify-between border-b-2 border-amber-200/80 pb-3">
-                  <div className="flex items-center space-x-2 text-left">
-                    <Building className="w-5 h-5 text-amber-600" />
-                    <div>
-                      <div className="text-[10px] font-black text-amber-950 uppercase tracking-widest">
-                        KHANH HOA MINERAL WATER J.S.C
+              {/* 3D Hologram Control Toolbar */}
+              <div className="flex items-center justify-between px-1 text-xs">
+                <div className="flex items-center space-x-1.5 text-amber-700 font-bold">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
+                  <span>Thẻ Hologram 3D Tương Tác</span>
+                  <span className="hidden sm:inline text-slate-400 font-normal">(Di chuột để nghiêng góc 3D)</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsFlipped(!isFlipped);
+                    playSound('bubble_fizz');
+                  }}
+                  className="px-3 py-1 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 font-black text-[11px] flex items-center space-x-1 cursor-pointer transition-all active:scale-95 shadow-sm"
+                >
+                  <RotateCw className="w-3.5 h-3.5 text-amber-600" />
+                  <span>{isFlipped ? 'Xem Mặt Trước (Bằng Khen)' : 'Lật Mặt Sau (Bảng Điểm CEFR)'}</span>
+                </button>
+              </div>
+
+              {/* 3D Perspective Card Wrapper */}
+              <div className="perspective-1000 w-full select-none">
+                <div
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  style={{
+                    transform: `perspective(1000px) rotateX(${cardTilt.x}deg) rotateY(${cardTilt.y + (isFlipped ? 180 : 0)}deg)`,
+                    transformStyle: 'preserve-3d',
+                    transition: cardTilt.x === 0 && cardTilt.y === 0 ? 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none'
+                  }}
+                  className="relative w-full rounded-3xl transform-style-preserve-3d shadow-xl transition-shadow hover:shadow-2xl"
+                >
+                  
+                  {/* ================= CARD FRONT: OFFICIAL CREDENTIAL ================= */}
+                  <div className={`p-5 rounded-3xl bg-gradient-to-b from-amber-50/90 via-white to-amber-50/70 border-4 border-amber-300/90 shadow-md relative text-center space-y-3 overflow-hidden backface-hidden ${isFlipped ? 'pointer-events-none' : ''}`}>
+                    {/* Water Shimmer Hologram Sheen */}
+                    <div className="absolute inset-0 water-shimmer opacity-25 pointer-events-none" />
+
+                    {/* Gold Seal Header */}
+                    <div className="flex items-center justify-between border-b-2 border-amber-200/80 pb-3 relative z-10">
+                      <div className="flex items-center space-x-2 text-left">
+                        <Building className="w-5 h-5 text-amber-600" />
+                        <div>
+                          <div className="text-[10px] font-black text-amber-950 uppercase tracking-widest">
+                            KHANH HOA MINERAL WATER J.S.C
+                          </div>
+                          <div className="text-[9px] text-slate-500 font-bold">
+                            A Member of F.I.T Group Vietnam • Since 1957
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-[9px] text-slate-500 font-bold">
-                        A Member of F.I.T Group Vietnam
+
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-300 via-amber-400 to-amber-500 border-2 border-amber-200 shadow-inner flex items-center justify-center text-amber-950 text-xs font-black">
+                        1957
+                      </div>
+                    </div>
+
+                    <div className="space-y-1 pt-1 relative z-10">
+                      <span className="text-[10px] uppercase tracking-widest font-black text-amber-700 bg-amber-100 px-3 py-0.5 rounded-full inline-block shadow-sm">
+                        EXECUTIVE CREDENTIAL CERTIFICATE
+                      </span>
+                      <h2 className="text-lg font-black text-slate-900 tracking-tight">
+                        CHỨNG CHỈ ĐẠI SỨ THƯƠNG HIỆU QUỐC TẾ
+                      </h2>
+                      <p className="text-[11px] text-slate-500 italic">
+                        Chứng nhận hoàn thành xuất sắc Khung năng lực Tiếng Anh Ngoại Giao & Đàm Phán B2B
+                      </p>
+                    </div>
+
+                    {/* Recipient Name Box */}
+                    <div className="py-2 relative z-10">
+                      <div className="text-xl sm:text-2xl font-black text-[#004B87] tracking-wide uppercase border-b-2 border-slate-300 pb-1 max-w-sm mx-auto">
+                        {profile.fullName}
+                      </div>
+                      <div className="text-xs font-bold text-slate-600 mt-1">
+                        Mã nhân sự: <span className="font-mono font-black text-slate-900">{profile.employeeCode}</span> • {profile.department}
+                      </div>
+                    </div>
+
+                    {/* Core Competencies Passed */}
+                    <div className="grid grid-cols-2 gap-2 text-left bg-white/90 backdrop-blur-xs p-3 rounded-2xl border border-amber-200/80 text-[10px] text-slate-700 relative z-10">
+                      <div className="flex items-center space-x-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span className="font-semibold">Thuyết trình nguồn mỏ 220m pH 9.0</span>
+                      </div>
+                      <div className="flex items-center space-x-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span className="font-semibold">Đàm phán Incoterms FOB/CIF & L/C</span>
+                      </div>
+                      <div className="flex items-center space-x-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span className="font-semibold">Bẻ gãy phản đối giá theo chuẩn Harvard</span>
+                      </div>
+                      <div className="flex items-center space-x-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span className="font-semibold">Ký kết hợp đồng độc quyền quốc tế</span>
+                      </div>
+                    </div>
+
+                    {/* Footer Signatures */}
+                    <div className="pt-3 border-t border-amber-200/80 flex items-center justify-between text-[10px] text-slate-600 px-2 relative z-10">
+                      <div className="text-left space-y-0.5">
+                        <span className="text-slate-400 block font-bold">Ngày cấp chứng chỉ:</span>
+                        <span className="font-bold text-slate-800">{new Date().toLocaleDateString('vi-VN')}</span>
+                      </div>
+
+                      <div className="text-right space-y-0.5">
+                        <span className="text-slate-400 block font-bold">Xác nhận của Ban Giám Đốc:</span>
+                        <span className="font-black text-[#004B87] uppercase tracking-wider block">VIKODA ACADEMY</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="w-10 h-10 rounded-full bg-amber-400/20 border-2 border-amber-500 flex items-center justify-center text-amber-700 text-xs font-black">
-                    1957
+                  {/* ================= CARD BACK: OFFICIAL CEFR TRANSCRIPT ================= */}
+                  <div 
+                    className={`backface-hidden absolute inset-0 p-5 rounded-3xl bg-gradient-to-b from-slate-900 via-[#001f3f] to-slate-900 border-4 border-cyan-400/70 shadow-2xl text-white space-y-3 overflow-hidden rotate-y-180 flex flex-col justify-between ${!isFlipped ? 'pointer-events-none' : ''}`}
+                  >
+                    {/* Water Shimmer Sheen */}
+                    <div className="absolute inset-0 water-shimmer opacity-15 pointer-events-none" />
+
+                    {/* Header */}
+                    <div className="flex items-center justify-between border-b border-cyan-500/30 pb-2 relative z-10">
+                      <div className="flex items-center space-x-2 text-left">
+                        <ShieldCheck className="w-5 h-5 text-cyan-400" />
+                        <div>
+                          <div className="text-[10px] font-black text-cyan-300 uppercase tracking-widest">
+                            F.I.T GROUP EXECUTIVE AUDIT
+                          </div>
+                          <div className="text-[9px] text-slate-400">
+                            CEFR Academic Competency Transcript
+                          </div>
+                        </div>
+                      </div>
+                      <span className="text-[9px] font-mono bg-cyan-950/80 text-cyan-300 border border-cyan-500/40 px-2 py-0.5 rounded-full">
+                        VKD-{profile.employeeCode}-VERIFIED
+                      </span>
+                    </div>
+
+                    {/* 4 Pillars Matrix */}
+                    <div className="grid grid-cols-2 gap-2 text-left relative z-10">
+                      <div className="p-2 rounded-xl bg-white/5 border border-white/10">
+                        <div className="text-[9px] text-slate-400">Nghe Hiểu (Listening)</div>
+                        <div className="text-base font-black text-cyan-300">{proficiency.pillarScores.listening}%</div>
+                        <div className="text-[9px] text-emerald-400 font-bold">✓ Cấp độ C1 Tự nhiên</div>
+                      </div>
+                      <div className="p-2 rounded-xl bg-white/5 border border-white/10">
+                        <div className="text-[9px] text-slate-400">Phát Âm (Speaking)</div>
+                        <div className="text-base font-black text-amber-300">{proficiency.pillarScores.speaking}%</div>
+                        <div className="text-[9px] text-emerald-400 font-bold">✓ Âm Chuẩn Michael US</div>
+                      </div>
+                      <div className="p-2 rounded-xl bg-white/5 border border-white/10">
+                        <div className="text-[9px] text-slate-400">Từ Vựng HORECA</div>
+                        <div className="text-base font-black text-blue-300">{proficiency.pillarScores.vocabulary}%</div>
+                        <div className="text-[9px] text-emerald-400 font-bold">✓ 100+ Thuật Ngữ Kiềm</div>
+                      </div>
+                      <div className="p-2 rounded-xl bg-white/5 border border-white/10">
+                        <div className="text-[9px] text-slate-400">Đàm Phán B2B Harvard</div>
+                        <div className="text-base font-black text-emerald-300">{proficiency.pillarScores.negotiation}%</div>
+                        <div className="text-[9px] text-emerald-400 font-bold">✓ Chốt Deal Khối Ngoại</div>
+                      </div>
+                    </div>
+
+                    {/* CEFR Grade & QR Footer */}
+                    <div className="pt-2 border-t border-cyan-500/30 flex items-center justify-between text-left relative z-10">
+                      <div className="space-y-0.5">
+                        <div className="text-[10px] text-slate-400">Cấp độ CEFR Đạt Chuẩn:</div>
+                        <div className="text-sm font-black text-cyan-300 flex items-center space-x-1.5">
+                          <span>{proficiency.currentTier.cefr} ({proficiency.currentTier.title})</span>
+                          <span className="text-[10px] font-mono text-slate-400">~{proficiency.estimatedToeic} TOEIC</span>
+                        </div>
+                        <div className="text-[9px] text-emerald-400">
+                          {stats.streakDays} ngày Streak • {totalPracticeCount} phiên Spaced Repetition
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col items-center justify-center p-1.5 rounded-xl bg-white/10 border border-white/20">
+                        <QrCode className="w-7 h-7 text-cyan-300" />
+                        <span className="text-[8px] font-mono text-cyan-200 mt-0.5">F.I.T AUDIT</span>
+                      </div>
+                    </div>
+
                   </div>
+
                 </div>
-
-                <div className="space-y-1 pt-1">
-                  <span className="text-[10px] uppercase tracking-widest font-black text-amber-700 bg-amber-100 px-3 py-0.5 rounded-full inline-block">
-                    EXECUTIVE CREDENTIAL CERTIFICATE
-                  </span>
-                  <h2 className="text-lg font-black text-slate-900 tracking-tight">
-                    CHỨNG CHỈ ĐẠI SỨ THƯƠNG HIỆU QUỐC TẾ
-                  </h2>
-                  <p className="text-[11px] text-slate-500 italic">
-                    Chứng nhận hoàn thành xuất sắc Khung năng lực Tiếng Anh Ngoại Giao & Đàm Phán B2B
-                  </p>
-                </div>
-
-                {/* Recipient Name Box */}
-                <div className="py-2">
-                  <div className="text-xl sm:text-2xl font-black text-[#004B87] tracking-wide uppercase border-b-2 border-slate-300 pb-1 max-w-sm mx-auto">
-                    {profile.fullName}
-                  </div>
-                  <div className="text-xs font-bold text-slate-600 mt-1">
-                    Mã nhân sự: <span className="font-mono font-black text-slate-900">{profile.employeeCode}</span> • {profile.department}
-                  </div>
-                </div>
-
-                {/* Core Competencies Passed */}
-                <div className="grid grid-cols-2 gap-2 text-left bg-white p-3 rounded-2xl border border-amber-200/80 text-[10px] text-slate-700">
-                  <div className="flex items-center space-x-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span className="font-semibold">Thuyết trình nguồn mỏ 220m pH 9.0</span>
-                  </div>
-                  <div className="flex items-center space-x-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span className="font-semibold">Đàm phán Incoterms FOB/CIF & L/C</span>
-                  </div>
-                  <div className="flex items-center space-x-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span className="font-semibold">Bẻ gãy phản đối giá theo chuẩn Harvard</span>
-                  </div>
-                  <div className="flex items-center space-x-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span className="font-semibold">Ký kết hợp đồng độc quyền quốc tế</span>
-                  </div>
-                </div>
-
-                {/* Footer Signatures */}
-                <div className="pt-3 border-t border-amber-200/80 flex items-center justify-between text-[10px] text-slate-600 px-2">
-                  <div className="text-left space-y-0.5">
-                    <span className="text-slate-400 block font-bold">Ngày cấp chứng chỉ:</span>
-                    <span className="font-bold text-slate-800">{new Date().toLocaleDateString('vi-VN')}</span>
-                  </div>
-
-                  <div className="text-right space-y-0.5">
-                    <span className="text-slate-400 block font-bold">Xác nhận của Ban Giám Đốc:</span>
-                    <span className="font-black text-[#004B87] uppercase tracking-wider block">VIKODA ACADEMY</span>
-                  </div>
-                </div>
-
               </div>
 
               {/* Action Buttons: Print/Export for HR */}

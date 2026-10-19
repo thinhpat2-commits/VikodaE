@@ -7,7 +7,7 @@
 import { GamificationState, EmployeeProfile } from '../types';
 
 const DB_NAME = 'VikodaEnterpriseOfflineDB_v2';
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 
 export interface OfflineSyncQueueItem {
   id: string;
@@ -24,6 +24,12 @@ export interface StoredGamificationState extends GamificationState {
 export interface StoredProfile extends EmployeeProfile {
   updatedAt: number;
   deviceId: string;
+}
+
+export interface StoredCustomAsset {
+  filename: string;
+  dataUrl: string;
+  updatedAt: number;
 }
 
 let dbPromise: Promise<IDBDatabase> | null = null;
@@ -60,6 +66,9 @@ export const openOfflineDB = (): Promise<IDBDatabase> => {
       }
       if (!db.objectStoreNames.contains('sync_queue')) {
         db.createObjectStore('sync_queue', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('custom_assets')) {
+        db.createObjectStore('custom_assets', { keyPath: 'filename' });
       }
     };
 
@@ -368,3 +377,60 @@ export const resolveStateConflict = (
     };
   }
 };
+
+/**
+ * Save Custom Asset to IndexedDB (Persistent across page reloads & browser restarts)
+ */
+export const saveCustomAssetOffline = async (filename: string, dataUrl: string): Promise<void> => {
+  try {
+    const db = await openOfflineDB();
+    const tx = db.transaction('custom_assets', 'readwrite');
+    const store = tx.objectStore('custom_assets');
+    store.put({ filename, dataUrl, updatedAt: Date.now() });
+  } catch (e) {
+    console.warn('Failed to save custom asset to IndexedDB:', e);
+  }
+};
+
+/**
+ * Load all custom assets stored in IndexedDB
+ */
+export const loadAllCustomAssetsOffline = async (): Promise<Record<string, string>> => {
+  try {
+    const db = await openOfflineDB();
+    return new Promise((resolve) => {
+      const tx = db.transaction('custom_assets', 'readonly');
+      const store = tx.objectStore('custom_assets');
+      const req = store.getAll();
+      req.onsuccess = () => {
+        const result: Record<string, string> = {};
+        if (req.result && Array.isArray(req.result)) {
+          req.result.forEach((item: any) => {
+            if (item.filename && item.dataUrl) {
+              result[item.filename] = item.dataUrl;
+            }
+          });
+        }
+        resolve(result);
+      };
+      req.onerror = () => resolve({});
+    });
+  } catch (e) {
+    return {};
+  }
+};
+
+/**
+ * Remove Custom Asset from IndexedDB
+ */
+export const removeCustomAssetOffline = async (filename: string): Promise<void> => {
+  try {
+    const db = await openOfflineDB();
+    const tx = db.transaction('custom_assets', 'readwrite');
+    const store = tx.objectStore('custom_assets');
+    store.delete(filename);
+  } catch (e) {
+    console.warn('Failed to remove custom asset from IndexedDB:', e);
+  }
+};
+

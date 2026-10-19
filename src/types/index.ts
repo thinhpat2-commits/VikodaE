@@ -34,6 +34,7 @@ export interface EmployeeProfile {
   practiceStats?: ContinuousPracticeStats;
   isLoggedIn: boolean;
   isAdmin?: boolean;
+  isTestAccount?: boolean; // Tài khoản kiểm thử: Mở full tất cả bài học & Level
 }
 
 export interface GamificationState {

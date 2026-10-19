@@ -7,7 +7,9 @@ import {
   Volume2, 
   VolumeX,
   Award,
-  ShieldCheck
+  ShieldCheck,
+  Sun,
+  Moon
 } from 'lucide-react';
 import { HeaderBrandLogo } from './brand/VikodaLogos';
 import { CourseLevel } from '../data/curriculumData';
@@ -38,6 +40,8 @@ interface VikodaHeaderProps {
   onOpenProficiency?: () => void;
   isCloudSynced?: boolean;
   onLogout?: () => void;
+  isDarkMode?: boolean;
+  onToggleDarkMode?: () => void;
 }
 
 export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
@@ -52,6 +56,8 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
   onOpenProficiency,
   onOpenAdmin,
   isCloudSynced = false,
+  isDarkMode = false,
+  onToggleDarkMode,
 }) => {
   const [isLevelDropdownOpen, setIsLevelDropdownOpen] = useState<boolean>(false);
   const [isStealth, setIsStealth] = useState<boolean>(() => isStealthOfficeMode());
@@ -238,6 +244,25 @@ export const VikodaHeader: React.FC<VikodaHeaderProps> = ({
               <Volume2 className="w-4 h-4 text-slate-600" />
             )}
           </button>
+
+          {/* Dark / Light Mode Switcher */}
+          {onToggleDarkMode && (
+            <button
+              onClick={onToggleDarkMode}
+              className={`p-1.5 rounded-xl border transition-all active:scale-95 cursor-pointer shadow-2xs ${
+                isDarkMode 
+                  ? 'bg-slate-800 border-amber-400/40 text-amber-400 hover:bg-slate-700' 
+                  : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
+              }`}
+              title={isDarkMode ? 'Đang bật Chế độ ban đêm • Bấm để chuyển sang Ban ngày' : 'Đang bật Chế độ ban ngày • Bấm để chuyển sang Ban đêm'}
+            >
+              {isDarkMode ? (
+                <Sun className="w-4 h-4 fill-amber-400 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-slate-600" />
+              )}
+            </button>
+          )}
 
           {/* Avatar Button: DIRECTLY OPENS 1-PAGE DIGITAL PROFILE BADGE */}
           <button

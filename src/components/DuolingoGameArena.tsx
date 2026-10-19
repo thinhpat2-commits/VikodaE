@@ -23,7 +23,8 @@ import {
   Zap
 } from 'lucide-react';
 import { UnitLesson, LessonExercise } from '../data/curriculumData';
-import { VikoMascot } from './brand/VikodaLogos';
+import { VikoMascot, VIKODA_ASSETS, useVikodaAssetSync } from './brand/VikodaLogos';
+import { VikoDynamicAnimator } from './VikoDynamicAnimator';
 import { playSound } from '../services/soundEffects';
 import { VoiceSelectorModal } from './VoiceSelectorModal';
 import { LiveCircularMicButton } from './LiveCircularMicButton';
@@ -162,6 +163,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   speechRate,
   onRecordMistake
 }) => {
+  useVikodaAssetSync();
   // Session exercises: pre-shuffled once per session to avoid predictable patterns
   const [sessionExercises, setSessionExercises] = useState<LessonExercise[]>(() => 
     prepareSessionExercises(lesson.exercises)
@@ -193,6 +195,7 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
   const [showGrammarDetail, setShowGrammarDetail] = useState<boolean>(false);
   const [streakCombo, setStreakCombo] = useState<number>(0);
   const [lessonMistakeCount, setLessonMistakeCount] = useState<number>(0);
+  const [copiedShare, setCopiedShare] = useState<boolean>(false);
 
   // Quiet Office Study Mode & Mic Permission Modal states
   const [isQuietModeActive, setIsQuietModeActive] = useState<boolean>(() => {
@@ -489,11 +492,13 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
       setExerciseIndex(prev => prev + 1);
     } else {
       setIsLessonFinished(true);
-      playSound('celebrate');
+      playSound('fanfare_victory');
+      setTimeout(() => playSound('bubble_fizz'), 220);
       confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 }
+        particleCount: 110,
+        spread: 85,
+        origin: { y: 0.58 },
+        colors: ['#009fe3', '#0072ce', '#10b981', '#f59e0b', '#ffffff']
       });
       onFinishLesson(lesson.xpReward, lesson.gemReward, earnedStars);
     }
@@ -608,12 +613,30 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
           <X className="w-5 h-5 stroke-[2.5]" />
         </button>
 
-        {/* Progress Bar */}
-        <div className="flex-1 bg-slate-100 h-3.5 rounded-full overflow-hidden border border-slate-200/80">
+        {/* Glossy Capsule Mineral Progress Bar */}
+        <div className="flex-1 bg-slate-100 h-4 rounded-full overflow-hidden border-2 border-slate-200 relative shadow-inner">
           <div
-            className="bg-[#22c55e] h-full transition-all duration-300 ease-out rounded-full"
+            className="mineral-progress-fill h-full transition-all duration-300 ease-out rounded-full relative"
             style={{ width: `${progressPercent}%` }}
+          >
+            {/* White glossy shine reflection */}
+            <div className="absolute top-0.5 inset-x-2 h-1 bg-white/40 rounded-full pointer-events-none" />
+          </div>
+        </div>
+
+        {/* 3D Purple Mineral Heart / Lives Counter */}
+        <div 
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-purple-50 border-2 border-purple-200 border-b-4 border-b-purple-300 shadow-2xs shrink-0 select-none"
+          title={hasUnlimitedEnergy ? 'Chế độ Tim Vô Hạn đang bật' : `Còn lại ${Math.max(0, 5 - lessonMistakeCount)}/5 tim`}
+        >
+          <img 
+            src={VIKODA_ASSETS.heartPurple} 
+            alt="pH 9.0 Heart" 
+            className="w-5 h-5 object-contain filter drop-shadow-xs" 
           />
+          <span className="font-black text-xs text-purple-900">
+            {hasUnlimitedEnergy ? '∞' : Math.max(0, 5 - lessonMistakeCount)}
+          </span>
         </div>
 
         {/* Quick Voice Switcher */}
@@ -622,25 +645,14 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
             playSound('click');
             setIsVoicePickerOpen(true);
           }}
-          className="px-2 py-1 rounded-xl bg-sky-50 border border-sky-200 text-[#0070D1] hover:bg-sky-100 text-xs font-bold flex items-center gap-1 cursor-pointer shrink-0"
+          className="px-2.5 py-1.5 rounded-2xl bg-sky-50 border-2 border-sky-200 border-b-4 border-b-sky-300 text-[#0070D1] hover:bg-sky-100 text-xs font-black flex items-center gap-1 cursor-pointer shrink-0"
           title="Chọn giọng phát âm AI"
         >
           <span>{VOICE_OPTIONS.find(v => v.id === currentVoiceId)?.flag || '🇺🇸'}</span>
           <Settings2 className="w-3.5 h-3.5 text-sky-600" />
         </button>
 
-        {/* Unlimited Hearts indicator when Admin enabled */}
-        {hasUnlimitedEnergy && (
-          <div 
-            className="px-2 py-1 rounded-xl bg-amber-500 text-slate-950 font-black text-[11px] flex items-center gap-1 shadow-2xs shrink-0 select-none animate-in fade-in"
-            title="Admin đã kích hoạt Chế độ Tim Vô Hạn: Làm sai không bị trừ tim!"
-          >
-            <Zap className="w-3.5 h-3.5 fill-current" />
-            <span className="hidden sm:inline">Tim Vô Hạn</span>
-          </div>
-        )}
-
-        {/* Quiet Office Mode Toggle (Dành cho nhân viên cần im lặng) */}
+        {/* Quiet Office Mode Toggle */}
         <button
           onClick={() => {
             playSound('click');
@@ -653,10 +665,10 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               handlePassSpeakingQuietly('quiet_office');
             }
           }}
-          className={`px-2.5 py-1 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shrink-0 border ${
+          className={`px-2.5 py-1.5 rounded-2xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer shrink-0 border-2 border-b-4 ${
             isQuietModeActive
-              ? 'bg-amber-100 border-amber-300 text-amber-900 shadow-xs'
-              : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-600'
+              ? 'bg-amber-100 border-amber-300 border-b-amber-400 text-amber-900 shadow-xs'
+              : 'bg-slate-50 hover:bg-slate-100 border-slate-200 border-b-slate-300 text-slate-600'
           }`}
           title={isQuietModeActive ? 'Chế độ im lặng đang BẬT (Tự động bỏ qua bài nói)' : 'Bấm để bật Chế độ im lặng (Khi ở văn phòng, nơi công cộng)'}
         >
@@ -678,20 +690,27 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
           {/* Question Prompt with Mascot reaction */}
           <div className="flex items-start gap-3 sm:gap-3.5 pt-1 sm:pt-2">
             <div className="shrink-0 mt-1 flex flex-col items-center">
-              <VikoMascot 
+              <VikoDynamicAnimator 
                 size="md" 
-                mood={
+                mode={
                   isEvaluated 
                     ? (isAnswerCorrect 
-                        ? (streakCombo >= 3 ? 'dancing' : 'celebrate') 
-                        : 'scratching_head') 
-                    : (streakCombo >= 3 ? 'dancing' : 'happy')
+                        ? (streakCombo >= 3 ? 'streak_fever' : 'celebrating') 
+                        : 'wrong_encourage') 
+                    : (currentExercise.type === 'speak'
+                        ? 'microphone'
+                        : (exerciseIndex >= sessionExercises.length - 1)
+                        ? 'prep_challenge'
+                        : currentExercise.type === 'listen_choice'
+                        ? 'student_book'
+                        : (streakCombo >= 3 ? 'cool_shades' : 'thinking'))
                 } 
               />
               {streakCombo >= 3 && (
-                <span className="mt-1 px-1.5 py-0.2 rounded-full bg-amber-400 text-amber-950 font-black text-[9px] shadow-xs animate-bounce whitespace-nowrap">
-                  🔥 x{streakCombo} Streak!
-                </span>
+                <div className="mt-1 flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 text-amber-950 font-black text-[9.5px] shadow-xs animate-bounce whitespace-nowrap">
+                  <img src={VIKODA_ASSETS.streakFire} alt="Combo" className="w-3.5 h-3.5 object-contain" />
+                  <span>x{streakCombo} Streak! 🔥</span>
+                </div>
               )}
             </div>
 
@@ -812,16 +831,16 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
               {/* Emotional Mascot Encouragement Bubble */}
               {isEvaluated && !isAnswerCorrect && (
                 <div className="mt-2.5 p-2 rounded-xl bg-amber-100/90 border border-amber-300 text-amber-900 text-xs font-bold flex items-center gap-1.5 animate-in fade-in">
-                  <span>💡 Viko động viên:</span>
-                  <span className="italic">"Thử lại nhé, bạn sắp làm được rồi! 💪"</span>
+                  <span>💧 Viko động viên:</span>
+                  <span className="italic">"Xị mặt 1 giây thôi nhé! Tự tin thử lại nào, Viko tin bạn làm được! 💪"</span>
                 </div>
               )}
 
               {/* Combo Streak Cheering */}
               {isEvaluated && isAnswerCorrect && streakCombo >= 3 && (
-                <div className="mt-2.5 p-2 rounded-xl bg-emerald-100/90 border border-emerald-300 text-emerald-950 text-xs font-black flex items-center gap-1.5 animate-bounce">
-                  <span>🎉 Viko nhảy múa:</span>
-                  <span>"Quá đỉnh! Giữ vững chuỗi đúng x{streakCombo} nhé!"</span>
+                <div className="mt-2.5 p-2 rounded-xl bg-gradient-to-r from-emerald-100 to-cyan-100 border border-emerald-300 text-emerald-950 text-xs font-black flex items-center gap-1.5 animate-bounce shadow-xs">
+                  <span>✨ Viko sủi bọt khoáng & lộn vòng:</span>
+                  <span>"Chuỗi đúng x{streakCombo}! Giọt nước Vikoda tỏa sáng rực rỡ! 🔥💖"</span>
                 </div>
               )}
             </div>
@@ -1123,7 +1142,10 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
       ) : (
         /* LESSON FINISHED SUMMARY (ACCURATE STAR SCORING) */
         <div className="flex-1 flex flex-col items-center justify-center p-6 text-center space-y-4 max-w-sm mx-auto">
-          <VikoMascot size="xl" mood="celebrate" />
+          <div className="relative">
+            <div className="absolute -inset-4 bg-cyan-400/20 rounded-full blur-xl animate-pulse pointer-events-none" />
+            <VikoMascot size="xl" mood={earnedStars === 3 ? "trophy" : "dancing"} />
+          </div>
 
           {/* Dynamic 3-Star Rating Animation */}
           <div className="flex items-center justify-center gap-2 py-1">
@@ -1172,15 +1194,32 @@ export const DuolingoGameArena: React.FC<DuolingoGameArenaProps> = ({
             </div>
           )}
 
-          <button
-            onClick={() => {
-              stopSpeech();
-              onClose();
-            }}
-            className="w-full py-3.5 rounded-2xl bg-[#22c55e] hover:bg-[#16a34a] border-b-4 border-[#15803d] text-white font-black text-sm uppercase tracking-wide cursor-pointer shadow-md"
-          >
-            Nhận Thưởng & Tiếp Tục
-          </button>
+          <div className="flex flex-col gap-2 w-full pt-1">
+            <button
+              onClick={() => {
+                playSound('pop');
+                const shareText = `🎉 Tôi vừa hoàn thành xuất sắc bài học "${lesson.title}" (${earnedStars}/3 ⭐) trên Vikoda Enterprise English!\n💧 Đạt +${lesson.xpReward} XP & +${lesson.gemReward} Gems! Hãy cùng luyện tiếng Anh công sở với Viko nhé!`;
+                if (navigator.clipboard) {
+                  navigator.clipboard.writeText(shareText);
+                }
+                setCopiedShare(true);
+                setTimeout(() => setCopiedShare(false), 2500);
+              }}
+              className="w-full py-2.5 rounded-2xl bg-white hover:bg-slate-50 border-2 border-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs transition-all active:scale-95"
+            >
+              <span>{copiedShare ? '✅ Đã sao chép thành tích vào Clipboard!' : '🏆 Khoe Bảng Vàng (Copy Thành Tích)'}</span>
+            </button>
+
+            <button
+              onClick={() => {
+                stopSpeech();
+                onClose();
+              }}
+              className="w-full py-3.5 rounded-2xl bg-[#22c55e] hover:bg-[#16a34a] border-b-4 border-[#15803d] text-white font-black text-sm uppercase tracking-wide cursor-pointer shadow-md"
+            >
+              Nhận Thưởng & Tiếp Tục
+            </button>
+          </div>
         </div>
       )}
 

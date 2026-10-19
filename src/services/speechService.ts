@@ -323,6 +323,137 @@ export const playSpeech = (
   return true;
 };
 
+/**
+ * SIGNATURE CUTE CHILD / CARTOON CHARACTER VOICE (DEDICATED EXCLUSIVELY TO VIKO MASCOT)
+ * - 0ms Instant Playback, Zero Lag
+ * - Auto-detects English vs. Vietnamese
+ * - High, lively, adorable child persona (pitch 1.42, rate 1.08)
+ * - Anti-freeze watchdog timer so Viko never gets stuck in "Speaking..." state
+ */
+export const playVikoMascotSpeech = (
+  text: string,
+  onEnd?: () => void
+): boolean => {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+    if (onEnd) onEnd();
+    return false;
+  }
+
+  const clean = cleanSpeechText(text)
+    .replace(/\bpH 9\.0\b/gi, 'p H nine point zero')
+    .replace(/\b1v1\b/gi, 'one on one')
+    .replace(/\bUnit (\d+)\b/gi, (_, n) => `Unit ${n}`)
+    .replace(/\bXP\b/g, 'X P');
+
+  if (!clean) {
+    if (onEnd) onEnd();
+    return false;
+  }
+
+  // Cancel prior utterance cleanly
+  stopSpeech();
+
+  // Detect Vietnamese vs English
+  const isVietnamese = /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(clean);
+
+  const voices = refreshVoices();
+  let matchedVoice: SpeechSynthesisVoice | undefined;
+
+  if (isVietnamese) {
+    const viVoices = voices.filter(v => v.lang === 'vi-VN' || v.lang === 'vi_VN' || v.lang.startsWith('vi'));
+    const preferredVi = ['google tiếng việt', 'hoaimy', 'an', 'linh', 'vietnamese', 'female'];
+    for (const pref of preferredVi) {
+      const match = viVoices.find(v => v.name.toLowerCase().includes(pref));
+      if (match) {
+        matchedVoice = match;
+        break;
+      }
+    }
+    if (!matchedVoice && viVoices.length > 0) matchedVoice = viVoices[0];
+  } else {
+    const enVoices = voices.filter(v => v.lang === 'en-US' || v.lang === 'en_US' || v.lang.startsWith('en'));
+    const pool = enVoices.length > 0 ? enVoices : voices;
+    const preferredClearVoices = [
+      'google us english',
+      'jenny online (natural)',
+      'samantha',
+      'aria online (natural)',
+      'victoria',
+      'guy online (natural)',
+      'natural',
+      'female'
+    ];
+    for (const pref of preferredClearVoices) {
+      const match = pool.find(v => v.name.toLowerCase().includes(pref));
+      if (match) {
+        matchedVoice = match;
+        break;
+      }
+    }
+    if (!matchedVoice && pool.length > 0) matchedVoice = pool[0];
+  }
+
+  const utterance = new SpeechSynthesisUtterance(clean);
+  utterance.lang = isVietnamese ? 'vi-VN' : 'en-US';
+  // Cute, energetic, crisp persona: Pitch 1.42, Rate 1.08 (zero sluggish delay, adorable charm)
+  utterance.rate = 1.08;
+  utterance.pitch = isVietnamese ? 1.35 : 1.42;
+  utterance.volume = 1.0;
+
+  if (matchedVoice) {
+    utterance.voice = matchedVoice;
+  }
+
+  activeUtterances.add(utterance);
+
+  let hasEnded = false;
+  let watchdogTimer: any = null;
+
+  const finish = () => {
+    if (hasEnded) return;
+    hasEnded = true;
+    if (watchdogTimer) clearTimeout(watchdogTimer);
+    activeUtterances.delete(utterance);
+    notifySpeechState(false);
+    if (onEnd) onEnd();
+  };
+
+  utterance.onstart = () => {
+    notifySpeechState(true, clean);
+    startKeepAlive();
+  };
+
+  utterance.onend = finish;
+  utterance.onerror = () => {
+    finish();
+  };
+
+  // Watchdog timeout to prevent speech synthesis freeze in Chrome
+  const estimatedDurationMs = Math.max(2000, Math.min(25000, clean.length * 85));
+  watchdogTimer = setTimeout(finish, estimatedDurationMs + 1500);
+
+  // 0ms instant execution with fallback
+  try {
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
+    window.speechSynthesis.speak(utterance);
+  } catch (err) {
+    setTimeout(() => {
+      try {
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+        }
+        window.speechSynthesis.speak(utterance);
+      } catch (e2) {
+        finish();
+      }
+    }, 15);
+  }
+
+  return true;
+};
+
 export const preloadAudioForPhrases = async (
   _phrases: string[],
   _voiceName: string = 'Puck'
