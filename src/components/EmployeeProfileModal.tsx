@@ -27,6 +27,7 @@ import {
   unlockSkinId 
 } from '../services/mascotWardrobe';
 import { adminSetTestAccount } from '../services/firebase';
+import { CURRENT_APP_VERSION, CURRENT_BUILD_NUMBER } from '../config/version';
 
 interface EmployeeProfileModalProps {
   isOpen: boolean;
@@ -581,6 +582,15 @@ export const EmployeeProfileModal: React.FC<EmployeeProfileModalProps> = ({
             </>
           )}
 
+        </div>
+
+        {/* Footer: Version Info */}
+        <div className="px-4 py-2.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400 font-mono shrink-0">
+          <span className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span>Vikoda EdTech Platform</span>
+          </span>
+          <span className="font-bold text-slate-500">v{CURRENT_APP_VERSION} ({CURRENT_BUILD_NUMBER})</span>
         </div>
 
       </div>

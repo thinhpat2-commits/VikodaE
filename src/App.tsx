@@ -24,6 +24,13 @@ import { DailyQuickReviewModal } from './components/DailyQuickReviewModal';
 import { PlacementTestModal, PlacementTestResult } from './components/PlacementTestModal';
 import { PersonalCoachModal } from './components/PersonalCoachModal';
 import { AssetStudioModal } from './components/AssetStudioModal';
+import { WhatsNewModal } from './components/WhatsNewModal';
+import { BuyerObjectionsModal } from './components/BuyerObjectionsModal';
+import { ExportEmailModal } from './components/ExportEmailModal';
+import { MeetingSurvivalModal } from './components/MeetingSurvivalModal';
+import { VocabVaultModal } from './components/VocabVaultModal';
+import { RoleplayModal } from './components/RoleplayModal';
+import { CURRENT_APP_VERSION, checkIsNewVersionAvailable } from './config/version';
 import { PracticeHub } from './components/PracticeHub';
 import { useDeviceDetect } from './hooks/useDeviceDetect';
 import { LaptopSidebarNav } from './components/laptop/LaptopSidebarNav';
@@ -83,6 +90,20 @@ export default function App() {
   const [isPlacementTestOpen, setIsPlacementTestOpen] = useState<boolean>(false);
   const [isCoachOpen, setIsCoachOpen] = useState<boolean>(false);
   const [isAssetStudioOpen, setIsAssetStudioOpen] = useState<boolean>(false);
+  const [isWhatsNewOpen, setIsWhatsNewOpen] = useState<boolean>(false);
+  const [isBuyerBattleOpen, setIsBuyerBattleOpen] = useState<boolean>(false);
+  const [isExportEmailOpen, setIsExportEmailOpen] = useState<boolean>(false);
+  const [isMeetingSurvivalOpen, setIsMeetingSurvivalOpen] = useState<boolean>(false);
+  const [isVocabVaultOpen, setIsVocabVaultOpen] = useState<boolean>(false);
+  const [isRoleplayOpen, setIsRoleplayOpen] = useState<boolean>(false);
+
+  // Check if system has been updated to a newer version
+  useEffect(() => {
+    const { isNew, oldVersion } = checkIsNewVersionAvailable();
+    if (isNew) {
+      showToast(`🎉 Hệ thống đã nâng cấp lên bản v${CURRENT_APP_VERSION}! Bấm vào số phiên bản góc trái dưới để xem tính năng mới.`);
+    }
+  }, []);
 
   // Dark Mode Theme State (Sync with LocalStorage & OS preference)
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
@@ -740,6 +761,34 @@ export default function App() {
             playSound('click');
             setIsPitchSimulatorOpen(true);
           }}
+          onOpenBuyerBattle={() => {
+            playSound('click');
+            setIsBuyerBattleOpen(true);
+          }}
+          onOpenExportEmail={() => {
+            playSound('click');
+            setIsExportEmailOpen(true);
+          }}
+          onOpenMeetingSurvival={() => {
+            playSound('click');
+            setIsMeetingSurvivalOpen(true);
+          }}
+          onOpenVocabVault={() => {
+            playSound('click');
+            setIsVocabVaultOpen(true);
+          }}
+          onOpenRoleplay={() => {
+            playSound('click');
+            setIsRoleplayOpen(true);
+          }}
+          onOpenSOS={() => {
+            playSound('click');
+            setIsSOSModalOpen(true);
+          }}
+          onOpenCommute={() => {
+            playSound('click');
+            setIsCommuteModalOpen(true);
+          }}
         />
       )}
 
@@ -798,6 +847,10 @@ export default function App() {
             onOpenCoach={() => {
               playSound('click');
               setIsCoachOpen(true);
+            }}
+            onOpenWhatsNew={() => {
+              playSound('click');
+              setIsWhatsNewOpen(true);
             }}
             onLogout={handleLogout}
             isCloudSynced={isCloudSynced}
@@ -1190,6 +1243,49 @@ export default function App() {
       <AuthModal
         isOpen={isAuthModalOpen}
         onSuccess={handleAuthSuccess}
+      />
+
+      {/* What's New & System Version Modal */}
+      <WhatsNewModal
+        isOpen={isWhatsNewOpen}
+        onClose={() => setIsWhatsNewOpen(false)}
+      />
+
+      {/* International Buyer Objections Battle Modal */}
+      <BuyerObjectionsModal
+        isOpen={isBuyerBattleOpen}
+        onClose={() => setIsBuyerBattleOpen(false)}
+        speechRate={speechRate}
+        onAwardXpAndGems={handleAwardXpAndGems}
+      />
+
+      {/* Export Email & Quotation Studio Modal */}
+      <ExportEmailModal
+        isOpen={isExportEmailOpen}
+        onClose={() => setIsExportEmailOpen(false)}
+        speechRate={speechRate}
+      />
+
+      {/* Meeting Survival 60s Phrases Modal */}
+      <MeetingSurvivalModal
+        isOpen={isMeetingSurvivalOpen}
+        onClose={() => setIsMeetingSurvivalOpen(false)}
+        speechRate={speechRate}
+      />
+
+      {/* 3D Flashcards & Corporate Vocab Vault Modal */}
+      <VocabVaultModal
+        isOpen={isVocabVaultOpen}
+        onClose={() => setIsVocabVaultOpen(false)}
+        speechRate={speechRate}
+      />
+
+      {/* Workplace Roleplay Simulation Modal */}
+      <RoleplayModal
+        isOpen={isRoleplayOpen}
+        onClose={() => setIsRoleplayOpen(false)}
+        speechRate={speechRate}
+        onAwardXpAndGems={handleAwardXpAndGems}
       />
 
       {/* Floating Gamified Toast Notification */}

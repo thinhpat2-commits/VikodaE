@@ -22,6 +22,13 @@ interface PracticeHubProps {
   onOpenEndlessDrill: () => void;
   onGoToVoiceCoach: () => void;
   onOpenPitchSimulator?: () => void;
+  onOpenBuyerBattle?: () => void;
+  onOpenExportEmail?: () => void;
+  onOpenMeetingSurvival?: () => void;
+  onOpenVocabVault?: () => void;
+  onOpenRoleplay?: () => void;
+  onOpenSOS?: () => void;
+  onOpenCommute?: () => void;
 }
 
 export const PracticeHub: React.FC<PracticeHubProps> = ({
@@ -32,6 +39,13 @@ export const PracticeHub: React.FC<PracticeHubProps> = ({
   onOpenEndlessDrill,
   onGoToVoiceCoach,
   onOpenPitchSimulator,
+  onOpenBuyerBattle,
+  onOpenExportEmail,
+  onOpenMeetingSurvival,
+  onOpenVocabVault,
+  onOpenRoleplay,
+  onOpenSOS,
+  onOpenCommute,
 }) => {
   const masteredMistakesCount = stats.mistakesVault
     ? stats.mistakesVault.filter((m) => m.mastered).length
@@ -262,7 +276,208 @@ export const PracticeHub: React.FC<PracticeHubProps> = ({
 
       </div>
 
-      {/* 3. ĐẤU TRƯỜNG ĐỐI KHÁNG 1V1 (DÀNH CHO THI ĐUA NỘI BỘ VIKODA) */}
+      {/* 3. EXECUTIVE WORKPLACE TOOLKITS (BỘ CÔNG CỤ THỰC CHIẾN B2B & XUẤT KHẨU) */}
+      <div className="space-y-3 pt-1">
+        <div className="flex items-center justify-between px-1">
+          <div className="flex items-center gap-2">
+            <h2 className="text-base font-black text-slate-900 tracking-tight flex items-center gap-2">
+              <span>💼 Bộ Công Cụ Thực Chiến B2B</span>
+            </h2>
+            <span className="px-2 py-0.5 rounded-full bg-slate-200/80 text-slate-700 text-[10px] font-black uppercase">
+              6 Tiện Ích
+            </span>
+          </div>
+          <span className="text-[11px] text-slate-400 font-medium hidden sm:inline">
+            Sẵn sàng đàm phán, viết mail & giao thương quốc tế
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Toolkit 1: Buyer Objections Battle */}
+          <div
+            onClick={() => {
+              playSound('click');
+              if (onOpenBuyerBattle) onOpenBuyerBattle();
+            }}
+            className="group bg-white hover:bg-rose-50/40 rounded-2xl p-4 border border-slate-200 hover:border-rose-300 shadow-2xs hover:shadow-xs transition-all cursor-pointer flex items-start gap-3.5"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-red-600 text-white flex items-center justify-center text-lg shadow-xs group-hover:scale-105 transition-transform shrink-0">
+              🥊
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-1">
+                <h4 className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-rose-600 transition-colors truncate">
+                  Hạ Gục Từ Chối Của Buyer
+                </h4>
+                <span className="px-1.5 py-0.5 rounded-md bg-rose-100 text-rose-700 text-[9px] font-bold shrink-0">
+                  10 Tình Huống
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                Xử lý ép giá 15%, cặn khoáng, pH 9.0 tự nhiên và gọt giũa tiếng Anh thô thành chuẩn ngoại giao.
+              </p>
+            </div>
+          </div>
+
+          {/* Toolkit 2: Export Email Studio */}
+          <div
+            onClick={() => {
+              playSound('click');
+              if (onOpenExportEmail) onOpenExportEmail();
+            }}
+            className="group bg-white hover:bg-sky-50/40 rounded-2xl p-4 border border-slate-200 hover:border-sky-300 shadow-2xs hover:shadow-xs transition-all cursor-pointer flex items-start gap-3.5"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#005A9C] to-[#009FE3] text-white flex items-center justify-center text-lg shadow-xs group-hover:scale-105 transition-transform shrink-0">
+              ✉️
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-1">
+                <h4 className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-[#0070D1] transition-colors truncate">
+                  Xưởng Email & Báo Giá Xuất Khẩu
+                </h4>
+                <span className="px-1.5 py-0.5 rounded-md bg-sky-100 text-sky-700 text-[9px] font-bold shrink-0">
+                  B2B Studio
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                Chào hàng Tokyo/London, báo giá CIF/FOB, gửi hồ sơ FDA & Điền nhanh thông số đơn hàng.
+              </p>
+            </div>
+          </div>
+
+          {/* Toolkit 3: Meeting Survival */}
+          <div
+            onClick={() => {
+              playSound('click');
+              if (onOpenMeetingSurvival) onOpenMeetingSurvival();
+            }}
+            className="group bg-white hover:bg-indigo-50/40 rounded-2xl p-4 border border-slate-200 hover:border-indigo-300 shadow-2xs hover:shadow-xs transition-all cursor-pointer flex items-start gap-3.5"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 text-white flex items-center justify-center text-lg shadow-xs group-hover:scale-105 transition-transform shrink-0">
+              🤝
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-1">
+                <h4 className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-indigo-600 transition-colors truncate">
+                  Cẩm Nang Sinh Tồn Cuộc Họp
+                </h4>
+                <span className="px-1.5 py-0.5 rounded-md bg-indigo-100 text-indigo-700 text-[9px] font-bold shrink-0">
+                  8 Chủ Đề Mic
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                Ngắt lời lịch thiệp, câu giờ, phản biện ngoại giao & Luyện chấm mic trực tiếp từng câu nói.
+              </p>
+            </div>
+          </div>
+
+          {/* Toolkit 4: Vocab Vault 3D Flashcards */}
+          <div
+            onClick={() => {
+              playSound('click');
+              if (onOpenVocabVault) onOpenVocabVault();
+            }}
+            className="group bg-white hover:bg-teal-50/40 rounded-2xl p-4 border border-slate-200 hover:border-teal-300 shadow-2xs hover:shadow-xs transition-all cursor-pointer flex items-start gap-3.5"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-500 to-emerald-600 text-white flex items-center justify-center text-lg shadow-xs group-hover:scale-105 transition-transform shrink-0">
+              🃏
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-1">
+                <h4 className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-teal-700 transition-colors truncate">
+                  Kho Flashcard & Từ Vựng 3D
+                </h4>
+                <span className="px-1.5 py-0.5 rounded-md bg-teal-100 text-teal-700 text-[9px] font-bold shrink-0">
+                  Lật Thẻ 3D
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                Thuật ngữ chuyên ngành FMCG, Nước khoáng kiềm, Logistics & Luyện nhớ kèm audio phát âm.
+              </p>
+            </div>
+          </div>
+
+          {/* Toolkit 5: Roleplay Simulation */}
+          <div
+            onClick={() => {
+              playSound('click');
+              if (onOpenRoleplay) onOpenRoleplay();
+            }}
+            className="group bg-white hover:bg-amber-50/40 rounded-2xl p-4 border border-slate-200 hover:border-amber-300 shadow-2xs hover:shadow-xs transition-all cursor-pointer flex items-start gap-3.5"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 text-white flex items-center justify-center text-lg shadow-xs group-hover:scale-105 transition-transform shrink-0">
+              🎭
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-1">
+                <h4 className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-amber-700 transition-colors truncate">
+                  Mô Phỏng Hội Thoại Công Sở
+                </h4>
+                <span className="px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-700 text-[9px] font-bold shrink-0">
+                  Roleplay
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                Đóng vai xử lý các tình huống đối thoại công sở, phỏng vấn và giải quyết xung đột đa hiệp.
+              </p>
+            </div>
+          </div>
+
+          {/* Toolkit 6: Pre-Meeting 60s Emergency SOS */}
+          <div
+            onClick={() => {
+              playSound('click');
+              if (onOpenSOS) onOpenSOS();
+            }}
+            className="group bg-white hover:bg-rose-50/40 rounded-2xl p-4 border border-slate-200 hover:border-rose-300 shadow-2xs hover:shadow-xs transition-all cursor-pointer flex items-start gap-3.5"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-amber-500 text-white flex items-center justify-center text-lg shadow-xs group-hover:scale-105 transition-transform shrink-0">
+              🚨
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-1">
+                <h4 className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-rose-600 transition-colors truncate">
+                  Cấp Cứu 60s Trước Cuộc Họp
+                </h4>
+                <span className="px-1.5 py-0.5 rounded-md bg-rose-100 text-rose-700 text-[9px] font-bold shrink-0">
+                  Khẩn Cấp
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                Cheat-sheet phản xạ nhanh, mở đầu ấn tượng trước khi bước vào phòng họp Zoom/Teams.
+              </p>
+            </div>
+          </div>
+
+          {/* Toolkit 7: Hands-Free Commute Audio */}
+          <div
+            onClick={() => {
+              playSound('click');
+              if (onOpenCommute) onOpenCommute();
+            }}
+            className="group bg-white hover:bg-cyan-50/40 rounded-2xl p-4 border border-slate-200 hover:border-cyan-300 shadow-2xs hover:shadow-xs transition-all cursor-pointer flex items-start gap-3.5 sm:col-span-2"
+          >
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white flex items-center justify-center text-lg shadow-xs group-hover:scale-105 transition-transform shrink-0">
+              🚗
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between gap-1">
+                <h4 className="text-xs sm:text-sm font-black text-slate-900 group-hover:text-cyan-700 transition-colors truncate">
+                  Chế Độ Nghe Rảnh Tay Khi Lái Xe & Đi Lại
+                </h4>
+                <span className="px-1.5 py-0.5 rounded-md bg-cyan-100 text-cyan-800 text-[9px] font-bold shrink-0">
+                  Audio Shadowing
+                </span>
+              </div>
+              <p className="text-[11px] text-slate-500 mt-1 line-clamp-1 leading-relaxed">
+                Tự động phát bài học, đệm quãng nghỉ cho bạn nhại giọng (Shadowing) mà không cần chạm màn hình.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 4. ĐẤU TRƯỜNG ĐỐI KHÁNG 1V1 (DÀNH CHO THI ĐUA NỘI BỘ VIKODA) */}
       <div 
         onClick={() => {
           playSound('click');

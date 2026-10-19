@@ -17,6 +17,7 @@ import { VIKODA_ASSETS } from '../brand/VikodaLogos';
 import { CourseLevel } from '../../data/curriculumData';
 import { EmployeeProfile, GamificationState } from '../../types';
 import { playSound } from '../../services/soundEffects';
+import { CURRENT_APP_VERSION } from '../../config/version';
 
 interface LaptopSidebarNavProps {
   activeTab: string;
@@ -31,6 +32,7 @@ interface LaptopSidebarNavProps {
   onOpenAdmin: () => void;
   onOpenAssetStudio?: () => void;
   onOpenCoach?: () => void;
+  onOpenWhatsNew?: () => void;
   onLogout?: () => void;
   isCloudSynced?: boolean;
   isDarkMode?: boolean;
@@ -49,6 +51,7 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
   onOpenAi,
   onOpenAdmin,
   onOpenAssetStudio,
+  onOpenWhatsNew,
   onLogout,
   isCloudSynced = false,
   isDarkMode = false,
@@ -252,6 +255,23 @@ export const LaptopSidebarNav: React.FC<LaptopSidebarNavProps> = ({
             <span>Đăng Xuất</span>
           </button>
         )}
+
+        {/* Official Version Badge & What's New Trigger */}
+        <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[10.5px] text-slate-400 font-mono px-1">
+          <button
+            onClick={() => {
+              playSound('click');
+              if (onOpenWhatsNew) onOpenWhatsNew();
+            }}
+            className="hover:text-[#009FE3] flex items-center gap-1.5 transition-colors cursor-pointer group"
+            title="Bấm để xem chi tiết bản cập nhật mới (Changelog)"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-125 transition-transform" />
+            <span className="font-bold text-slate-600 group-hover:text-[#009FE3]">v{CURRENT_APP_VERSION}</span>
+            <span className="opacity-60">• Bản tin</span>
+          </button>
+          <span className="opacity-40">Vikoda EdTech</span>
+        </div>
       </div>
 
     </aside>

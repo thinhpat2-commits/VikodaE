@@ -54,6 +54,7 @@ import {
   adminDeleteUser,
   adminSetTestAccount
 } from '../services/firebase';
+import { CURRENT_APP_VERSION, CURRENT_BUILD_NUMBER } from '../config/version';
 
 interface AdminPortalModalProps {
   isOpen: boolean;
@@ -1083,6 +1084,9 @@ export const AdminPortalModal: React.FC<AdminPortalModalProps> = ({
                     </span>
                     <span className="text-[10px] text-sky-200">
                       F.I.T Group • Vikoda Enterprise
+                    </span>
+                    <span className="text-[10px] font-mono text-emerald-300 bg-emerald-950/80 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                      v{CURRENT_APP_VERSION}
                     </span>
                   </div>
                   <h3 className="text-base font-black text-white mt-0.5">
