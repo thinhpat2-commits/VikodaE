@@ -32,7 +32,7 @@ const RAW_VIKODA_ASSETS = {
   logo3D: '/assets/vikoda_learn_english_logo.png',
   nodeStarGold: '/assets/node_star_gold_3d.png',
   nodeWaterCyan: '/assets/node_water_cyan_3d.png',
-  nodeStoneWater: '/assets/node_stone_water_3d.png',
+  nodeStoneWater: '/assets/node_stone_water_3d.png?v=2',
   nodeStoneLock: '/assets/node_stone_lock_3d.png',
   nodeCrown: '/assets/node_crown_boss_3d.png',
   trophyDanhThanh: '/assets/trophy_danhthanh_3d.png',

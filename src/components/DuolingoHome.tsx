@@ -417,11 +417,15 @@ export const DuolingoHome: React.FC<DuolingoHomeProps> = ({
             const yPx = idx * nodeRowHeight + 10;
             const isShiftedRight = xPct > 50;
 
+            const isMilestone = (idx + 1) % 10 === 0;
+
             // Select 3D node asset
             const nodeAsset = isCompleted 
               ? VIKODA_ASSETS.nodeStarGold 
               : isCurrent 
               ? VIKODA_ASSETS.nodeWaterCyan 
+              : isMilestone && isUnlocked
+              ? VIKODA_ASSETS.nodeCrown
               : isUnlocked 
               ? VIKODA_ASSETS.nodeStoneWater 
               : VIKODA_ASSETS.nodeStoneLock;
