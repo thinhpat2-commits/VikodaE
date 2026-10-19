@@ -5596,111 +5596,140 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Thuyết Minh Tour Mỏ Đảnh Thạnh",
     "subtitle": "Dẫn khách thăm giếng khoan sâu 220m và quy trình khai thác khép kín",
     "level": "B1",
-    "icon": "🏞️",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🏭",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u41-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that guiding the Danh Thanh artesian spring tour provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of guiding the Danh Thanh artesian spring tour?",
-        "options": [
-          "We adhere strictly to certified regional extraction protocols established under health decrees, as confirmed in our recent departmental briefing with executive management.",
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters, pending formal verification from our international distribution coordinators.",
-          "Our clinical research proves that guiding the Danh Thanh artesian spring tour provides natural health benefits without synthetic additives."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng thuyết minh tour mỏ đảnh thạnh đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that guiding the Danh Thanh artesian spring tour provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match mineral spring tour and extraction terms with their meanings:",
+        "promptVi": "Ghép cặp thuật ngữ thuyết minh tour mỏ khoáng và quy trình khai thác khép kín:",
+        "englishSentence": "Match geothermal spring tour and extraction terms.",
+        "audioText": "Match geothermal spring tour and extraction terms.",
+        "explanation": "5 thuật ngữ đắt giá khi tháp tùng đoàn đối tác tham quan đầu giếng mỏ Đảnh Thạnh.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp từ vựng thuyết minh tour mỏ nước khoáng.",
+        "pairs": [
+          {
+            "left": "Geothermal wellhead",
+            "right": "Đầu giếng khoan địa nhiệt khai thác nước khoáng"
+          },
+          {
+            "left": "Closed-loop extraction",
+            "right": "Quy trình khai thác khép kín chống nhiễm khuẩn"
+          },
+          {
+            "left": "Virgin thermal spring",
+            "right": "Nguồn khoáng nóng nguyên bản từ lòng đất mẹ"
+          },
+          {
+            "left": "Stainless steel piping",
+            "right": "Hệ thống đường ống dẫn bằng inox vi sinh 316L"
+          },
+          {
+            "left": "Cleanroom bottling hall",
+            "right": "Khu vực chiết rót phòng sạch tiêu chuẩn quốc tế"
+          }
+        ]
       },
       {
         "id": "u41-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this wellhead tour introductory statement clearly:",
+        "promptVi": "Luyện nói câu mở đầu thuyết minh tour tham quan đầu giếng mỏ Đảnh Thạnh:",
+        "englishSentence": "Welcome to the heart of Vikoda: our geothermal wellhead extracting natural mineral water from 220 meters below.",
+        "audioText": "Welcome to the heart of Vikoda: our geothermal wellhead extracting natural mineral water from 220 meters below.",
+        "phonetics": "/ˈwɛlkəm tuː ðə hɑːrt ɒv vɪˈkoʊdə: ˈaʊər ˌdʒiːoʊˈθɜːrməl ˈwɛlhɛd ɪkˈstræktɪŋ ˈnætʃrəl ˈmɪnərəl ˈwɔːtər frɒm 220 ˈmiːtərz bɪˈloʊ/",
+        "vietnameseMeaning": "Chào mừng quý vị đến với trái tim của Vikoda: đầu giếng địa nhiệt khai thác nước khoáng thiên nhiên từ độ sâu 220 mét.",
+        "explanation": "\"Welcome to the heart of Vikoda: our geothermal wellhead...\" là câu chào mở đầu tour tràn đầy tự hào thương hiệu.",
+        "whyWrong": "Phát âm chuẩn từ \"geothermal\" (/ˌdʒiːoʊˈθɜːrməl/) và \"wellhead\" (/ˈwɛlhɛd/).",
+        "crucialNote": "Đưa tay hướng về phía miệng giếng khoan inox sáng bóng được bảo vệ trong lồng kính cách ly.",
+        "memoryHook": "Heart of Vikoda = Geothermal wellhead at 220m depth."
       },
       {
         "id": "u41-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to describe the sanitary enclosed transport process:",
+        "promptVi": "Ghép câu: \"Nước khoáng chảy qua đường ống inox trực tiếp vào dây chuyền chiết rót\":",
+        "englishSentence": "The water flows through stainless steel sanitary pipes directly into the cleanroom bottling line.",
+        "audioText": "The water flows through stainless steel sanitary pipes directly into the cleanroom bottling line.",
         "wordPool": [
-          "deep",
-          "Our",
-          "from",
+          "The",
+          "water",
+          "flows",
+          "through",
+          "stainless",
+          "steel",
+          "sanitary",
+          "pipes",
+          "directly",
+          "into",
           "the",
-          "surface",
-          "aquifer",
-          "volcanic",
-          "cancel",
-          "environmental",
-          "protects",
-          "never",
-          "contamination.",
-          "mineral",
-          "water"
+          "cleanroom",
+          "bottling",
+          "line.",
+          "dirty",
+          "air"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Nước khoáng chảy qua đường ống inox vi sinh trực tiếp vào dây chuyền chiết rót phòng sạch.",
+        "explanation": "Quy trình khép kín tuyệt đối bảo đảm nước khoáng không bao giờ tiếp xúc với không khí bên ngoài trước khi đóng nắp.",
+        "whyWrong": "Dùng \"stainless steel sanitary pipes\" (ống inox vi sinh) khẳng định tiêu chuẩn an toàn dược phẩm.",
+        "crucialNote": "Inox 316L chống ăn mòn và không gây biến đổi hàm lượng khoáng hóa.",
+        "memoryHook": "Flows through sanitary pipes directly into bottling line."
       },
       {
         "id": "u41-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct technical term for airtight industrial harvesting:",
+        "promptVi": "Chọn từ kỹ thuật chỉ quy trình khai thác khép kín ngăn chặn giọt bắn và vi khuẩn:",
+        "englishSentence": "This automated closed-loop [ _____ ] prevents any external airborne contamination.",
+        "audioText": "This automated closed-loop extraction prevents any external airborne contamination.",
+        "blankWord": "extraction",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "extraction",
+          "explosion",
+          "erosion"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Quy trình khai thác khép kín tự động này ngăn chặn mọi sự nhiễm khuẩn từ không khí bên ngoài.",
+        "explanation": "\"Closed-loop extraction\" (khai thác vòng kín khép kín) là tiêu chuẩn vàng của ngành nước khoáng thiên nhiên.",
+        "whyWrong": "\"Explosion\" (vụ nổ) hay \"erosion\" (xói mòn) là các tai họa địa chất hoàn toàn sai ngữ cảnh.",
+        "crucialNote": "Không khí phòng chiết rót được lọc qua màng siêu lọc HEPA đẳng cấp bệnh viện.",
+        "memoryHook": "Closed-loop extraction prevents contamination."
       },
       {
         "id": "u41-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Thuyết Minh Tour Mỏ Đảnh Thạnh\" (Dẫn khách thăm giếng khoan sâu 220m và quy trình khai thác khép kín). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees.",
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing."
+        "type": "chat_branch",
+        "promptEn": "Answer a technical question from a European bottling auditor at the wellhead on Teams:",
+        "promptVi": "Mô phỏng tin nhắn Teams: Kỹ sư trưởng đoàn thanh tra châu Âu hỏi liệu nước mặt (nước mưa sông suối) có thể ngấm vào giếng khoan hay không:",
+        "englishSentence": "Zero surface water can enter! The wellhead is encased in 3 layers of high-grade steel casing and sealed with impermeable bentonite grout down to bedrock.",
+        "audioText": "Zero surface water can enter! The wellhead is encased in 3 layers of high-grade steel casing and sealed with impermeable bentonite grout down to bedrock.",
+        "chatMessages": [
+          {
+            "speaker": "Jens (Lead Auditor, SGS Switzerland)",
+            "avatar": "🇨🇭",
+            "message": "Minh, we are examining the geological wellhead chamber. What engineering measures prevent shallow rainwater runoff from entering the 220m borehole?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Dẫn khách thăm giếng khoan sâu 220m và quy trình khai thác khép kín",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Zero surface water can enter! The wellhead is encased in 3 layers of high-grade steel casing and sealed with impermeable bentonite grout down to bedrock.",
+            "trustScore": 25,
+            "feedback": "Câu trả lời của chuyên gia địa kỹ thuật bậc thầy! Nêu rõ 3 lớp ống thép bảo vệ và lớp vữa sét bentonite chống thấm tuyệt đối xuống tầng đá gốc.",
+            "isCorrect": true
+          },
+          {
+            "text": "Rainwater goes right into the hole, but we just boil it later so it is totally fine.",
+            "trustScore": 0,
+            "feedback": "Tai họa kiến thức! Nước khoáng tự nhiên tuyệt đối không bao giờ được đun nấu hay để nước mặt xâm lấn.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Không một giọt nước mặt nào có thể xâm nhập! Đầu giếng được bọc trong 3 lớp ống thép chuyên dụng và trám bít bằng vữa sét bentonite chống thấm xuống tận tầng đá gốc.",
+        "explanation": "Kỹ thuật trám xi măng sét bentonite là tiêu chuẩn bảo vệ địa chất ngầm hàng đầu thế giới.",
+        "crucialNote": "Đoàn thanh tra quốc tế sẽ chấm điểm xuất sắc cho câu trả lời am tường kỹ thuật này.",
+        "memoryHook": "Encased in 3 layers of steel and sealed with bentonite."
       }
     ]
   },
@@ -5710,111 +5739,140 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "4 Con Số Vàng Nguồn Khoáng 1957",
     "subtitle": "Thuộc lòng pH 9.0, độ sâu 220m, 72°C và vành đai 35ha",
     "level": "B1",
-    "icon": "🏅",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🔢",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u42-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that the four golden heritage metrics of 1957 provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of the four golden heritage metrics of 1957?",
-        "options": [
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters, as confirmed in our recent departmental briefing with executive management.",
-          "Our clinical research proves that the four golden heritage metrics of 1957 provides natural health benefits without synthetic additives.",
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng 4 con số vàng nguồn khoáng 1957 đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that the four golden heritage metrics of 1957 provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match the 4 golden numbers of Vikoda with their scientific significance:",
+        "promptVi": "Ghép cặp 4 con số vàng của nguồn khoáng Đảnh Thạnh với ý nghĩa khoa học:",
+        "englishSentence": "Match the 4 golden figures with their scientific value.",
+        "audioText": "Match the 4 golden figures with their scientific value.",
+        "explanation": "4 con số thần thánh tạo nên đẳng cấp độc bản của thương hiệu nước khoáng kiềm Vikoda.",
+        "vietnameseMeaning": "Ghép đúng 4 con số vàng và năm phát hiện mỏ khoáng Đảnh Thạnh.",
+        "pairs": [
+          {
+            "left": "Natural pH 9.0",
+            "right": "Độ kiềm tự nhiên thanh mát hoàn hảo cho sức khỏe"
+          },
+          {
+            "left": "220-meter depth",
+            "right": "Độ sâu khai thác dưới lòng đất qua nhiều tầng đá magma"
+          },
+          {
+            "left": "72 degrees Celsius",
+            "right": "Nhiệt độ phun trào tự nhiên vô trùng nhiệt tại vòi"
+          },
+          {
+            "left": "35-hectare buffer",
+            "right": "Vành đai xanh sinh thái bảo tồn không hóa chất"
+          },
+          {
+            "left": "Heritage since 1957",
+            "right": "Năm phát hiện mỏ khoáng quý giá bởi bác sĩ Pháp"
+          }
+        ]
       },
       {
         "id": "u42-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this flagship elevator pitch clearly:",
+        "promptVi": "Luyện nói câu giới thiệu cô đọng 4 con số vàng thuyết phục nhà đầu tư quốc tế:",
+        "englishSentence": "Vikoda is defined by four golden figures: natural pH 9.0, 220-meter depth, 72 degrees Celsius, and a 35-hectare ecological reserve.",
+        "audioText": "Vikoda is defined by four golden figures: natural pH 9.0, 220-meter depth, 72 degrees Celsius, and a 35-hectare ecological reserve.",
+        "phonetics": "/vɪˈkoʊdə ɪz dɪˈfaɪnd baɪ fɔːr ˈɡoʊldən ˈfɪɡjərz: ˈnætʃrəl piː eɪtʃ naɪn, 220 ˈmiːtər dɛpθ, ˈsɛvənti tuː dɪˈɡriːz ˈsɛlsiəs, ænd ə 35 ˈhɛktɛər ˌiːkəˈlɒdʒɪkəl rɪˈzɜːrv/",
+        "vietnameseMeaning": "Vikoda được định nghĩa bởi bốn con số vàng: độ pH kiềm tự nhiên 9.0, độ sâu 220 mét, nhiệt độ 72 độ C và khu bảo tồn sinh thái 35 héc-ta.",
+        "explanation": "Elevator Pitch (bài giới thiệu ngắn 30 giây) giúp người nghe ghi nhớ ngay lập tức 4 giá trị cốt lõi của thương hiệu.",
+        "whyWrong": "Nói liền mạch, dõng dạc, nhấn mạnh vào từng con số vàng.",
+        "crucialNote": "Đây là bài kiểm tra thuộc lòng đầu tiên của bất kỳ Đại sứ Thương hiệu Vikoda nào.",
+        "memoryHook": "4 golden figures: pH 9.0, 220m, 72°C, 35ha."
       },
       {
         "id": "u42-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to explain the temperature indicator of pure geothermal energy:",
+        "promptVi": "Ghép câu: \"Nhiệt độ tự nhiên 72 độ C khẳng định nguồn nước phun trào từ lòng đất mẹ sâu thẳm\":",
+        "englishSentence": "The natural temperature of seventy-two degrees confirms the water erupts from deep geothermal layers.",
+        "audioText": "The natural temperature of seventy-two degrees confirms the water erupts from deep geothermal layers.",
         "wordPool": [
+          "The",
+          "natural",
+          "temperature",
+          "of",
+          "seventy-two",
+          "degrees",
+          "confirms",
           "the",
-          "volcanic",
-          "Our",
-          "never",
-          "protects",
           "water",
-          "environmental",
-          "surface",
-          "deep",
-          "contamination.",
-          "cancel",
-          "aquifer",
+          "erupts",
           "from",
-          "mineral"
+          "deep",
+          "geothermal",
+          "layers.",
+          "freezes",
+          "ice"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Nhiệt độ tự nhiên 72 độ C khẳng định nguồn nước phun trào từ các tầng địa nhiệt sâu thẳm.",
+        "explanation": "Nhiệt độ 72°C là bằng chứng nhiệt học chứng minh nguồn gốc nguyên sinh từ sâu trong lòng đất, cách ly hoàn toàn với các túi nước ngầm nông.",
+        "whyWrong": "\"Erupts from deep geothermal layers\" miêu tả sức sống mãnh liệt của nguồn khoáng nóng.",
+        "crucialNote": "Nhiệt độ cao tự nhiên tiêu diệt mọi vi khuẩn gây hại trước khi vào nhà máy.",
+        "memoryHook": "72 degrees confirms water erupts from geothermal layers."
       },
       {
         "id": "u42-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct term for the natural alkaline measurement:",
+        "promptVi": "Chọn chỉ số đo lường độ kiềm tự nhiên hoàn hảo của Vikoda:",
+        "englishSentence": "Vikoda possesses a perfectly stable and sweet natural [ _____ ] of 9.0.",
+        "audioText": "Vikoda possesses a perfectly stable and sweet natural pH of 9.0.",
+        "blankWord": "pH",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "pH",
+          "Brix",
+          "Proof"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Vikoda sở hữu độ pH tự nhiên ngọt lành và ổn định hoàn hảo ở mức 9.0.",
+        "explanation": "\"Natural pH of 9.0\" là chỉ số kiềm lý tưởng giúp cân bằng axit trong cơ thể và hỗ trợ hệ tiêu hóa.",
+        "whyWrong": "\"Brix\" đo độ ngọt của trái cây, còn \"Proof\" đo độ cồn của rượu mạnh.",
+        "crucialNote": "Độ kiềm 9.0 của Vikoda là hoàn toàn tự nhiên từ khoáng chất bicacbonat.",
+        "memoryHook": "Natural pH of 9.0 = Kiềm tự nhiên 9.0."
       },
       {
         "id": "u42-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"4 Con Số Vàng Nguồn Khoáng 1957\" (Thuộc lòng pH 9.0, độ sâu 220m, 72°C và vành đai 35ha). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute."
+        "type": "chat_branch",
+        "promptEn": "Present the 4 golden numbers during a commercial negotiation pitch on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Đại diện chuỗi khách sạn quốc tế hỏi lý do tại sao nên chọn Vikoda thay vì các thương hiệu nước khoáng đóng chai khác:",
+        "englishSentence": "Vikoda is Vietnam's only mineral water backed by 4 golden truths: pH 9.0 natural alkaline, 220m depth, 72°C sterile source, and a 35ha sanctuary since 1957!",
+        "audioText": "Vikoda is Vietnam's only mineral water backed by 4 golden truths: pH 9.0 natural alkaline, 220m depth, 72°C sterile source, and a 35ha sanctuary since 1957!",
+        "chatMessages": [
+          {
+            "speaker": "Mr. Jonathan (VP Procurement, Marriott International)",
+            "avatar": "🏨",
+            "message": "Minh, we are evaluating 3 mineral water suppliers for our luxury resorts. Give me your strongest 15-second pitch."
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Thuộc lòng pH 9.0, độ sâu 220m, 72°C và vành đai 35ha",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Vikoda is Vietnam's only mineral water backed by 4 golden truths: pH 9.0 natural alkaline, 220m depth, 72°C sterile source, and a 35ha sanctuary since 1957!",
+            "trustScore": 25,
+            "feedback": "Phản hồi bùng nổ năng lượng! Nắm trọn 4 con số vàng và di sản 1957 đánh gục mọi đối thủ cạnh tranh trong vòng 15 giây.",
+            "isCorrect": true
+          },
+          {
+            "text": "We sell water in plastic bottles and we can give you a very cheap price if you buy a lot.",
+            "trustScore": 0,
+            "feedback": "Hạ thấp phẩm cấp thương hiệu! Tập đoàn khách sạn 5 sao tìm kiếm sự đẳng cấp và câu chuyện độc bản chứ không mua hàng giá rẻ tầm thường.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Vikoda là nguồn nước khoáng duy nhất tại Việt Nam được bảo chứng bởi 4 chân lý vàng: kiềm tự nhiên pH 9.0, độ sâu 220m, nguồn nhiệt vô trùng 72°C và vành đai sinh thái 35ha từ năm 1957!",
+        "explanation": "Đưa 4 con số vàng vào bài đàm phán biến sản phẩm thành biểu tượng độc bản không thể thay thế.",
+        "crucialNote": "Marriott và các tập đoàn khách sạn hàng đầu luôn tìm kiếm đối tác có câu chuyện nguồn gốc ấn tượng.",
+        "memoryHook": "4 golden truths win luxury enterprise accounts."
       }
     ]
   },
@@ -5822,113 +5880,140 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "id": "unit-43",
     "unitNumber": 43,
     "title": "Phân Biệt Nước Khoáng vs Nước Lọc",
-    "subtitle": "Phân tích ranh giới \"Natural Mineral water\" vs \"Purified water\"",
+    "subtitle": "Phân tích ranh giới nước khoáng thiên nhiên và nước lọc tinh khiết RO",
     "level": "B1",
-    "icon": "🔬",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "⚖️",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u43-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that differentiating natural mineral water from purified water provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of differentiating natural mineral water from purified water?",
-        "options": [
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches, as confirmed in our recent departmental briefing with executive management.",
-          "Our clinical research proves that differentiating natural mineral water from purified water provides natural health benefits without synthetic additives.",
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng phân biệt nước khoáng vs nước lọc đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that differentiating natural mineral water from purified water provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match mineral water and purified water contrasting terms:",
+        "promptVi": "Ghép cặp thuật ngữ phân biệt sự khác biệt giữa nước khoáng thiên nhiên và nước lọc tinh khiết RO:",
+        "englishSentence": "Match natural mineral vs purified RO water terms.",
+        "audioText": "Match natural mineral vs purified RO water terms.",
+        "explanation": "5 sự đối lập khoa học chứng minh nước khoáng thiên nhiên vượt trội hơn hẳn nước lọc nhân tạo.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ so sánh nước khoáng và nước lọc tinh khiết.",
+        "pairs": [
+          {
+            "left": "Natural mineral water",
+            "right": "Nước khoáng thiên nhiên nguyên bản đóng chai tại nguồn"
+          },
+          {
+            "left": "Purified tap water",
+            "right": "Nước máy thành phố lọc nhân tạo bằng màng RO"
+          },
+          {
+            "left": "Demineralized liquid",
+            "right": "Nước trơ bị lọc mất hết khoáng chất có lợi"
+          },
+          {
+            "left": "Biologically active minerals",
+            "right": "Khoáng chất tự nhiên có hoạt tính sinh học dễ hấp thu"
+          },
+          {
+            "left": "Artificial remineralization",
+            "right": "Bù khoáng nhân tạo bằng hóa chất tổng hợp"
+          }
+        ]
       },
       {
         "id": "u43-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this clear scientific distinction clearly:",
+        "promptVi": "Luyện nói câu phân tích sự khác biệt đẳng cấp giữa Vikoda và nước lọc RO thông thường:",
+        "englishSentence": "Unlike RO purified water which is stripped of electrolytes, Vikoda provides natural minerals essential for cellular hydration.",
+        "audioText": "Unlike RO purified water which is stripped of electrolytes, Vikoda provides natural minerals essential for cellular hydration.",
+        "phonetics": "/ʌnˈlaɪk ɑːr oʊ ˈpjʊərɪfaɪd ˈwɔːtər wɪtʃ ɪz strɪpt ɒv ɪˈlɛktrəlaɪts, vɪˈkoʊdə prəˈvaɪdz ˈnætʃrəl ˈmɪnərəlz ɪˈsɛnʃəl fɔːr ˈsɛljʊlər haɪˈdreɪʃən/",
+        "vietnameseMeaning": "Không giống như nước tinh khiết RO bị lọc sạch hết chất điện giải, Vikoda cung cấp các khoáng chất tự nhiên thiết yếu cho quá trình bù nước tế bào.",
+        "explanation": "\"Stripped of electrolytes\" (bị lọc mất hết điện giải) chỉ ra nhược điểm chí mạng của nước lọc thẩm thấu ngược RO.",
+        "whyWrong": "Phát âm chuẩn từ \"electrolytes\" (/ɪˈlɛktrəlaɪts/) và \"cellular hydration\" (/ˈsɛljʊlər haɪˈdreɪʃən/).",
+        "crucialNote": "Uống nước RO lâu ngày có thể gây hiện tượng loãng khoáng trong cơ thể.",
+        "memoryHook": "RO is stripped of electrolytes; Vikoda provides natural minerals."
       },
       {
         "id": "u43-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to explain the superior absorption of natural electrolytes:",
+        "promptVi": "Ghép câu: \"Khoáng chất tự nhiên hòa tan được cơ thể con người hấp thụ dễ dàng hơn nhiều\":",
+        "englishSentence": "Dissolved natural minerals are absorbed much more easily by the human body.",
+        "audioText": "Dissolved natural minerals are absorbed much more easily by the human body.",
         "wordPool": [
-          "water",
-          "mineral",
+          "Dissolved",
+          "natural",
+          "minerals",
+          "are",
+          "absorbed",
+          "much",
+          "more",
+          "easily",
+          "by",
           "the",
-          "protects",
-          "aquifer",
-          "volcanic",
-          "cancel",
-          "deep",
-          "surface",
-          "environmental",
-          "never",
-          "Our",
-          "contamination.",
-          "from"
+          "human",
+          "body.",
+          "plastic",
+          "waste"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Khoáng chất tự nhiên hòa tan được cơ thể con người hấp thụ dễ dàng hơn nhiều.",
+        "explanation": "Khoáng chất trong Vikoda tồn tại dưới dạng ion hòa tan vi lượng, thẩm thấu trực tiếp qua màng tế bào.",
+        "whyWrong": "Khoáng nhân tạo bù vào nước RO thường là muối hóa học khó hòa tan và dễ lắng đọng.",
+        "crucialNote": "Canxi và Magie dạng ion tự nhiên hỗ trợ xương khớp và hệ tim mạch khỏe mạnh.",
+        "memoryHook": "Dissolved minerals absorbed easily by the body."
       },
       {
         "id": "u43-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct term for artificial mineral addition:",
+        "promptVi": "Chọn thuật ngữ chỉ quy trình nhân tạo thêm khoáng hóa chất vào nước tinh khiết:",
+        "englishSentence": "Vikoda has zero artificial [ _____ ], retaining its pristine mineral balance directly from nature.",
+        "audioText": "Vikoda has zero artificial additives, retaining its pristine mineral balance directly from nature.",
+        "blankWord": "additives",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "additives",
+          "calories",
+          "colors"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Vikoda hoàn toàn không có chất phụ gia nhân tạo, giữ trọn vẹn sự cân bằng khoáng chất tinh khiết trực tiếp từ thiên nhiên.",
+        "explanation": "\"Zero artificial additives\" (không phụ gia nhân tạo) là cam kết vì sức khỏe người tiêu dùng.",
+        "whyWrong": "\"Calories\" (calo) hay \"colors\" (phẩm màu) không liên quan đến thành phần muối khoáng tự nhiên.",
+        "crucialNote": "Được Bộ Y tế và Viện Pasteur chứng nhận nước khoáng thiên nhiên 100% nguyên bản.",
+        "memoryHook": "Zero artificial additives = Không phụ gia nhân tạo."
       },
       {
         "id": "u43-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Phân Biệt Nước Khoáng vs Nước Lọc\" (Phân tích ranh giới \"Natural Mineral water\" vs \"Purified water\"). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells."
+        "type": "chat_branch",
+        "promptEn": "Convince a hospital procurement board to switch from cheap RO to Vikoda on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Trưởng ban dược bệnh viện quốc tế hỏi tại sao nên đầu tư nước khoáng kiềm Vikoda cho bệnh nhân thay vì nước tinh khiết RO giá rẻ:",
+        "englishSentence": "Demineralized RO water can leach essential electrolytes from recovering patients, whereas Vikoda's natural pH 9.0 with bicarbonate accelerates metabolic recovery!",
+        "audioText": "Demineralized RO water can leach essential electrolytes from recovering patients, whereas Vikoda's natural pH 9.0 with bicarbonate accelerates metabolic recovery!",
+        "chatMessages": [
+          {
+            "speaker": "Dr. Sarah (Chief Medical Officer, Columbia Asia Hospital)",
+            "avatar": "👩‍⚕️",
+            "message": "Minh, our procurement team argues that purified RO water costs 30% less. From a clinical perspective, why is Vikoda better for our in-patient recovery wards?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Phân tích ranh giới \"Natural Mineral water\" vs \"Purified water\"",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Demineralized RO water can leach essential electrolytes from recovering patients, whereas Vikoda's natural pH 9.0 with bicarbonate accelerates metabolic recovery!",
+            "trustScore": 25,
+            "feedback": "Luận điểm y khoa đắt giá bậc nhất! Bác sĩ trưởng hoàn toàn bị thuyết phục bởi cơ chế chống mất điện giải và tính kiềm bicacbonat hỗ trợ chuyển hóa phục hồi cho bệnh nhân.",
+            "isCorrect": true
+          },
+          {
+            "text": "RO water and Vikoda are the exact same thing, but our bottle label has a nicer picture.",
+            "trustScore": 0,
+            "feedback": "Phá hỏng thương vụ! Đánh đồng nước khoáng quý giá với nước lọc nhân tạo rẻ tiền.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Nước tinh khiết RO bị rút hết khoáng có thể làm rửa trôi các chất điện giải thiết yếu của bệnh nhân đang hồi sức, trong khi tính kiềm tự nhiên pH 9.0 cùng bicacbonat của Vikoda thúc đẩy quá trình hồi phục chuyển hóa!",
+        "explanation": "Kiến thức y khoa chuẩn xác biến bạn từ một người bán hàng bình thường thành một chuyên gia tư vấn sức khỏe đáng tin cậy.",
+        "crucialNote": "Các bác sĩ tiêu hóa và tim mạch quốc tế luôn khuyến nghị bệnh nhân dùng nước khoáng kiềm tự nhiên.",
+        "memoryHook": "Accelerates metabolic recovery with natural pH 9.0."
       }
     ]
   },
@@ -5938,225 +6023,281 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Di Sản Lịch Sử Mỏ Khoáng Từ Năm 1957",
     "subtitle": "Kể lại hành trình khai phá nguồn nước quý giá ngàn năm",
     "level": "B1",
-    "icon": "📜",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🏛️",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u44-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that the historical legacy of the 1957 spring discovery provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of the historical legacy of the 1957 spring discovery?",
-        "options": [
-          "Our clinical research proves that the historical legacy of the 1957 spring discovery provides natural health benefits without synthetic additives.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees, pending formal verification from our international distribution coordinators.",
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng di sản lịch sử mỏ khoáng từ năm 1957 đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that the historical legacy of the 1957 spring discovery provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match historical brand heritage terms with their meanings:",
+        "promptVi": "Ghép cặp các thuật ngữ di sản lịch sử mỏ khoáng Đảnh Thạnh từ năm 1957:",
+        "englishSentence": "Match historical brand heritage and exploration terms.",
+        "audioText": "Match historical brand heritage and exploration terms.",
+        "explanation": "5 dấu mốc lịch sử hào hùng khẳng định vị thế di sản trường tồn của Vikoda.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ di sản lịch sử mỏ khoáng.",
+        "pairs": [
+          {
+            "left": "Brand heritage since 1957",
+            "right": "Di sản thương hiệu bền vững suốt từ năm 1957"
+          },
+          {
+            "left": "French geological expedition",
+            "right": "Đoàn thám hiểm địa chất của các nhà khoa học Pháp"
+          },
+          {
+            "left": "Revered natural treasure",
+            "right": "Kho báu thiên nhiên vô giá được các thế hệ tôn kính"
+          },
+          {
+            "left": "Generational trust",
+            "right": "Niềm tin yêu trao truyền qua nhiều thế hệ người tiêu dùng"
+          },
+          {
+            "left": "Enduring symbol of purity",
+            "right": "Biểu tượng trường tồn của sự thuần khiết và sức khỏe"
+          }
+        ]
       },
       {
         "id": "u44-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this heritage pride statement clearly:",
+        "promptVi": "Luyện nói câu tự hào khẳng định bề dày lịch sử hơn sáu thập kỷ của thương hiệu Vikoda:",
+        "englishSentence": "For sixty-eight years, Vikoda has protected this virgin mineral spring, honoring our rich Vietnamese heritage.",
+        "audioText": "For sixty-eight years, Vikoda has protected this virgin mineral spring, honoring our rich Vietnamese heritage.",
+        "phonetics": "/fɔːr ˈsɪksti eɪt jɪərz, vɪˈkoʊdə hæz prəˈtɛktɪd ðɪs ˈvɜːrdʒɪn ˈmɪnərəl sprɪŋ, ˈɒnərɪŋ ˈaʊər rɪtʃ ˌvjɛtnəˈmiːz ˈhɛrɪtɪdʒ/",
+        "vietnameseMeaning": "Suốt sáu mươi tám năm qua, Vikoda đã gìn giữ mỏ khoáng nguyên sinh này, tôn vinh di sản giàu bản sắc của dân tộc Việt Nam.",
+        "explanation": "\"For sixty-eight years, Vikoda has protected...\" là câu nói truyền cảm hứng khơi dậy niềm tin cậy tuyệt đối nơi đối tác.",
+        "whyWrong": "Phát âm rõ từ \"virgin mineral spring\" (/ˈvɜːrdʒɪn ˈmɪnərəl sprɪŋ/) và \"heritage\" (/ˈhɛrɪtɪdʒ/).",
+        "crucialNote": "Thương hiệu lâu đời nhất ngành nước khoáng Việt Nam còn tồn tại và phát triển rực rỡ đến ngày nay.",
+        "memoryHook": "68 years protecting the virgin spring, honoring heritage."
       },
       {
         "id": "u44-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to describe the French scientists' geological exploration in 1957:",
+        "promptVi": "Ghép câu: \"Năm 1957, các nhà khoa học Pháp đã khám phá ra mỏ khoáng Đảnh Thạnh quý giá\":",
+        "englishSentence": "In nineteen fifty-seven, French scientists explored the extraordinary Danh Thanh mineral source.",
+        "audioText": "In nineteen fifty-seven, French scientists explored the extraordinary Danh Thanh mineral source.",
         "wordPool": [
-          "Our",
-          "deep",
+          "In",
+          "nineteen",
+          "fifty-seven,",
+          "French",
+          "scientists",
+          "explored",
           "the",
-          "environmental",
+          "extraordinary",
+          "Danh",
+          "Thanh",
           "mineral",
-          "volcanic",
-          "water",
-          "from",
-          "contamination.",
-          "surface",
-          "never",
-          "aquifer",
-          "protects",
-          "cancel"
+          "source.",
+          "destroyed",
+          "lost"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Năm 1957, các nhà khoa học Pháp đã khám phá ra mỏ khoáng Đảnh Thạnh phi thường.",
+        "explanation": "Cuộc thám hiểm năm 1957 đánh dấu mốc lịch sử đầu tiên nguồn khoáng được ghi nhận vào bản đồ địa chất thế giới.",
+        "whyWrong": "Dùng tính từ \"extraordinary\" (/ɪkˈstrɔːrdɪnɛri/ - phi thường, kỳ diệu) mô tả tính chất độc nhất của mỏ.",
+        "crucialNote": "Đọc năm 1957 bằng tiếng Anh: \"nineteen fifty-seven\".",
+        "memoryHook": "1957 French scientists explored the extraordinary source."
       },
       {
         "id": "u44-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct term for unbroken historical continuity:",
+        "promptVi": "Chọn từ chính xác thể hiện sự gắn kết và niềm tin qua nhiều thế hệ người tiêu dùng:",
+        "englishSentence": "Vikoda has earned deep [ _____ ] trust across three generations of Vietnamese families.",
+        "audioText": "Vikoda has earned deep generational trust across three generations of Vietnamese families.",
+        "blankWord": "generational",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "generational",
+          "accidental",
+          "temporary"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Vikoda đã chiếm trọn niềm tin yêu qua nhiều thế hệ suốt ba thế hệ gia đình người Việt.",
+        "explanation": "\"Generational trust\" (niềm tin yêu qua nhiều thế hệ) là tài sản vô giá không thể mua được bằng tiền.",
+        "whyWrong": "\"Accidental\" (tình cờ) hay \"temporary\" (tạm thời) hoàn toàn trái ngược với bề dày 68 năm phát triển.",
+        "crucialNote": "Ông bà, cha mẹ và con cháu đều lớn lên cùng dòng nước khoáng Đảnh Thạnh mát lành.",
+        "memoryHook": "Generational trust across three generations."
       },
       {
         "id": "u44-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Di Sản Lịch Sử Mỏ Khoáng Từ Năm 1957\" (Kể lại hành trình khai phá nguồn nước quý giá ngàn năm). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We adhere strictly to certified regional extraction protocols established under health decrees.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches."
+        "type": "chat_branch",
+        "promptEn": "Share historical archival photos with a documentary film crew on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Đạo diễn kênh truyền hình Discovery Asia muốn làm phim tài liệu về nguồn gốc mỏ khoáng Đảnh Thạnh:",
+        "englishSentence": "We are honored to welcome Discovery! I have digitized original 1957 French expedition journals and geological maps for your production crew.",
+        "audioText": "We are honored to welcome Discovery! I have digitized original 1957 French expedition journals and geological maps for your production crew.",
+        "chatMessages": [
+          {
+            "speaker": "David (Producer, Discovery Channel Asia)",
+            "avatar": "🎥",
+            "message": "Minh, we are shooting a series on Asia's legendary natural springs. Does Vikoda still preserve original 1957 exploration records and photography?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Kể lại hành trình khai phá nguồn nước quý giá ngàn năm",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "We are honored to welcome Discovery! I have digitized original 1957 French expedition journals and geological maps for your production crew.",
+            "trustScore": 25,
+            "feedback": "Phản hồi chuẩn tầm vóc quốc tế! Chủ động cung cấp tài liệu gốc năm 1957 đã số hóa, mở ra cơ hội quảng bá di sản thương hiệu Vikoda trên toàn cầu.",
+            "isCorrect": true
+          },
+          {
+            "text": "We threw away all old papers long ago because they were taking up office space.",
+            "trustScore": 0,
+            "feedback": "Phá hủy giá trị lịch sử! Khiến đoàn làm phim quốc tế thất vọng tràn trề.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chúng tôi rất vinh hạnh được đón tiếp Discovery! Tôi đã số hóa các nhật ký thám hiểm gốc của Pháp năm 1957 và bản đồ địa chất để phục vụ đoàn làm phim của bạn.",
+        "explanation": "Di sản lịch sử được lưu trữ bài bản là bệ phóng truyền thông vô giá đưa thương hiệu vươn tầm thế giới.",
+        "crucialNote": "Bảo tàng truyền thống tại trụ sở Vikoda lưu giữ đầy đủ các hiện vật từ năm 1957.",
+        "memoryHook": "Preserve 1957 expedition journals and maps."
       }
     ]
   },
   {
     "id": "unit-45",
     "unitNumber": 45,
-    "title": "Bác Sĩ Pháp H. Fronte & Nghiên Cứu Vi Sinh",
+    "title": "Bác Sĩ Pháp H. Fontaine & Nghiên Cứu Vi Sinh",
     "subtitle": "Dẫn chứng tài liệu nghiên cứu y khoa giá trị lịch sử",
     "level": "B1",
-    "icon": "👨‍⚕️",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🔬",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u45-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that French physician Dr. H. Fronte's medical research provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of French physician Dr. H. Fronte's medical research?",
-        "options": [
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells, as confirmed in our recent departmental briefing with executive management.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees, pending formal verification from our international distribution coordinators.",
-          "Our clinical research proves that French physician Dr. H. Fronte's medical research provides natural health benefits without synthetic additives."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng bác sĩ pháp h. fronte & nghiên cứu vi sinh đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that French physician Dr. H. Fronte's medical research provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match medical research and hydrogeological analysis terms:",
+        "promptVi": "Ghép cặp thuật ngữ nghiên cứu vi sinh và y khoa của Bác sĩ Pháp Henri Fontaine:",
+        "englishSentence": "Match medical hydrogeology and scientific analysis terms.",
+        "audioText": "Match medical hydrogeology and scientific analysis terms.",
+        "explanation": "5 dẫn chứng khoa học y học khẳng định giá trị trị liệu sức khỏe của nguồn khoáng Đảnh Thạnh.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ nghiên cứu y khoa về mỏ nước khoáng Đảnh Thạnh.",
+        "pairs": [
+          {
+            "left": "Dr. Henri Fontaine",
+            "right": "Bác sĩ địa chất học người Pháp phát hiện mỏ khoáng năm 1957"
+          },
+          {
+            "left": "Hydro-mineral classification",
+            "right": "Phân loại nguồn nước khoáng theo bảng chỉ số y học quốc tế"
+          },
+          {
+            "left": "Vichy mineral equivalent",
+            "right": "Đặc tính khoáng tương đương mỏ khoáng Vichy trứ danh nước Pháp"
+          },
+          {
+            "left": "Therapeutic wellness virtues",
+            "right": "Công dụng trị liệu và phục hồi sức khỏe tự nhiên"
+          },
+          {
+            "left": "Pasteur Institute validation",
+            "right": "Chứng thực kiểm nghiệm vi sinh của Viện Pasteur danh tiếng"
+          }
+        ]
       },
       {
         "id": "u45-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this historical medical endorsement clearly:",
+        "promptVi": "Luyện nói câu dẫn chứng nghiên cứu y học của Bác sĩ Pháp Henri Fontaine:",
+        "englishSentence": "In 1957, French physician Doctor Henri Fontaine confirmed Danh Thanh matches the esteemed quality of famous European mineral spas.",
+        "audioText": "In 1957, French physician Doctor Henri Fontaine confirmed Danh Thanh matches the esteemed quality of famous European mineral spas.",
+        "phonetics": "/ɪn 1957, frɛntʃ fɪˈzɪʃən ˈdɒktər ˈɒnri fɒnˈtɛn kənˈfɜːrmd daɪn tæŋ ˈmætʃɪz ðiː ɪˈstiːmd ˈkwɒləti ɒv ˈfeɪməs ˌjʊərəˈpiːən ˈmɪnərəl spɑːz/",
+        "vietnameseMeaning": "Năm 1957, bác sĩ người Pháp Henri Fontaine đã khẳng định Đảnh Thạnh sánh ngang chất lượng quý giá của các mỏ khoáng trị liệu danh tiếng châu Âu.",
+        "explanation": "\"Confirmed Danh Thanh matches the esteemed quality of famous European mineral spas\" là bằng chứng y khoa đanh thép bảo chứng đẳng cấp quốc tế.",
+        "whyWrong": "Phát âm chuẩn tên riêng tiếng Pháp \"Doctor Henri Fontaine\" (/ˈdɒktər ˈɒnri fɒnˈtɛn/) và \"esteemed\" (/ɪˈstiːmd/ - đáng kính, quý giá).",
+        "crucialNote": "Tài liệu này được lưu trữ trong văn khố địa chất Đông Dương.",
+        "memoryHook": "Dr. Henri Fontaine confirmed quality matches European spas."
       },
       {
         "id": "u45-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to describe the comparison with the Vichy spring in France:",
+        "promptVi": "Ghép câu: \"Các nghiên cứu y học ban đầu đã so sánh độ kiềm của Đảnh Thạnh với nguồn nước khoáng Vichy\":",
+        "englishSentence": "Early medical studies compared Danh Thanh's alkalinity to the famous Vichy spring in France.",
+        "audioText": "Early medical studies compared Danh Thanh's alkalinity to the famous Vichy spring in France.",
         "wordPool": [
-          "volcanic",
-          "from",
-          "mineral",
-          "deep",
-          "environmental",
-          "never",
-          "surface",
+          "Early",
+          "medical",
+          "studies",
+          "compared",
+          "Danh",
+          "Thanh's",
+          "alkalinity",
+          "to",
           "the",
-          "water",
-          "protects",
-          "aquifer",
-          "Our",
-          "contamination.",
-          "cancel"
+          "famous",
+          "Vichy",
+          "spring",
+          "in",
+          "France.",
+          "poison",
+          "dirty"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Các nghiên cứu y học ban đầu đã so sánh độ kiềm của Đảnh Thạnh với nguồn nước khoáng Vichy nổi tiếng tại Pháp.",
+        "explanation": "Nguồn khoáng Vichy của Pháp là biểu tượng nước khoáng kiềm thanh lọc cơ thể hàng đầu thế giới.",
+        "whyWrong": "So sánh tương đương giúp đối tác phương Tây hiểu ngay giá trị địa chất phi thường của Vikoda.",
+        "crucialNote": "Đảnh Thạnh thậm chí còn có độ kiềm tự nhiên pH 9.0 cao và ổn định hơn.",
+        "memoryHook": "Compared alkalinity to famous Vichy spring in France."
       },
       {
         "id": "u45-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct term for historical scientific testing verification:",
+        "promptVi": "Chọn từ chính xác chỉ chứng nhận kiểm nghiệm vi sinh độc lập bảo chứng chất lượng:",
+        "englishSentence": "Doctor Fontaine's microbiological discoveries were formally [ _____ ] by the Pasteur Institute.",
+        "audioText": "Doctor Fontaine's microbiological discoveries were formally verified by the Pasteur Institute.",
+        "blankWord": "verified",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "verified",
+          "rejected",
+          "banned"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Những phát hiện vi sinh của Bác sĩ Fontaine đã được Viện Pasteur chính thức chứng thực.",
+        "explanation": "\"Formally verified\" (được chứng thực chính thức) khẳng định tính xác thực khoa học không thể chối cãi.",
+        "whyWrong": "\"Rejected\" (bác bỏ) hay \"banned\" (cấm đoán) hoàn toàn sai lệch sự thật lịch sử.",
+        "crucialNote": "Viện Pasteur Nha Trang là cái nôi nghiên cứu vi sinh hàng đầu Đông Nam Á do bác sĩ Alexandre Yersin sáng lập.",
+        "memoryHook": "Formally verified by the Pasteur Institute."
       },
       {
         "id": "u45-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Bác Sĩ Pháp H. Fronte & Nghiên Cứu Vi Sinh\" (Dẫn chứng tài liệu nghiên cứu y khoa giá trị lịch sử). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute."
+        "type": "chat_branch",
+        "promptEn": "Answer a French pharmaceutical buyer inquiring about hydro-mineral data on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Đại diện tập đoàn dược phẩm Pháp hỏi về dữ liệu phân tích mỏ Đảnh Thạnh theo hệ tiêu chuẩn Pháp:",
+        "englishSentence": "Indeed! Dr. Fontaine's 1957 hydrogeological monograph classified Danh Thanh as bicarbonate-alkaline water, identical to French thermal spring standards.",
+        "audioText": "Indeed! Dr. Fontaine's 1957 hydrogeological monograph classified Danh Thanh as bicarbonate-alkaline water, identical to French thermal spring standards.",
+        "chatMessages": [
+          {
+            "speaker": "Dr. Laurent (Head of Sourcing, Sanofi Health Paris)",
+            "avatar": "🇫🇷",
+            "message": "Minh, we noticed historical references to Dr. Henri Fontaine in your technical dossier. Did he analyze the specific bicarbonate concentration?"
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Dẫn chứng tài liệu nghiên cứu y khoa giá trị lịch sử",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Indeed! Dr. Fontaine's 1957 hydrogeological monograph classified Danh Thanh as bicarbonate-alkaline water, identical to French thermal spring standards.",
+            "trustScore": 25,
+            "feedback": "Phản hồi thông thái xuất chúng! Dẫn giải chuyên khảo địa chất của Bác sĩ Fontaine và phân loại kiềm bicacbonat chuẩn dược điển Pháp, khiến đối tác vô cùng thán phục.",
+            "isCorrect": true
+          },
+          {
+            "text": "I don't know who Fontaine is, probably some tourist who visited Khanh Hoa.",
+            "trustScore": 0,
+            "feedback": "Vô tri về lịch sử doanh nghiệp! Làm mất đi uy tín nghiên cứu y khoa quý giá hơn 60 năm của công ty.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chính xác ạ! Chuyên khảo địa chất thủy văn năm 1957 của Bác sĩ Fontaine đã phân loại Đảnh Thạnh là nước khoáng kiềm bicacbonat, hoàn toàn tương đồng với các tiêu chuẩn mỏ khoáng nhiệt trị liệu của Pháp.",
+        "explanation": "Hiểu sâu sắc lịch sử nghiên cứu y học Pháp giúp Vikoda đàm phán tự tin và bình đẳng với các tập đoàn dược phẩm lớn trên thế giới.",
+        "crucialNote": "Bác sĩ Henri Fontaine là nhà địa chất và cổ sinh vật học lừng danh của Viện Địa chất Pháp.",
+        "memoryHook": "Bicarbonate-alkaline water identical to French standards."
       }
     ]
   },
@@ -6164,113 +6305,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "id": "unit-46",
     "unitNumber": 46,
     "title": "Khoa Học Muối Bicarbonate & Bền Kiềm",
-    "subtitle": "Chứng minh độ pH 9.0 duy trì bền bỉ suốt 3 năm trong chai",
+    "subtitle": "Chứng minh độ pH 9.0 duy trì bền bỉ suốt 2 năm trong chai",
     "level": "B1",
-    "icon": "⚛️",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🧪",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u46-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that natural bicarbonate mineralization and alkaline stability provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of natural bicarbonate mineralization and alkaline stability?",
-        "options": [
-          "Our clinical research proves that natural bicarbonate mineralization and alkaline stability provides natural health benefits without synthetic additives.",
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing, pending formal verification from our international distribution coordinators.",
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng khoa học muối bicarbonate & bền kiềm đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that natural bicarbonate mineralization and alkaline stability provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match mineral chemistry and alkaline stability concepts:",
+        "promptVi": "Ghép cặp các khái niệm hóa học về muối khoáng Bicacbonat và tính bền kiềm tự nhiên:",
+        "englishSentence": "Match bicarbonate chemistry and alkaline buffer terms.",
+        "audioText": "Match bicarbonate chemistry and alkaline buffer terms.",
+        "explanation": "5 thuật ngữ hóa học giải mã bí mật độ kiềm pH 9.0 bền bỉ suốt 2 năm của Vikoda.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ hóa học về tính bền kiềm tự nhiên.",
+        "pairs": [
+          {
+            "left": "Bicarbonate ion (HCO3-)",
+            "right": "Ion bicacbonat tự nhiên trung hòa axit dạ dày"
+          },
+          {
+            "left": "Chemical buffer capacity",
+            "right": "Hệ đệm hóa học tự nhiên duy trì cân bằng kiềm"
+          },
+          {
+            "left": "Long-term alkaline stability",
+            "right": "Độ bền kiềm kéo dài suốt 24 tháng trong chai"
+          },
+          {
+            "left": "Gastric acid neutralization",
+            "right": "Trung hòa axit dư thừa trong dịch vị bao tử"
+          },
+          {
+            "left": "Metasilicic acid (H2SiO3)",
+            "right": "Axit metasilicic vi lượng làm đẹp da và mạch máu"
+          }
+        ]
       },
       {
         "id": "u46-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this chemical stability explanation clearly:",
+        "promptVi": "Luyện nói câu giải thích cơ chế bền kiềm tự nhiên nhờ muối bicacbonat:",
+        "englishSentence": "Vikoda's natural pH 9.0 remains stable for two full years thanks to rich bicarbonate mineral buffers.",
+        "audioText": "Vikoda's natural pH 9.0 remains stable for two full years thanks to rich bicarbonate mineral buffers.",
+        "phonetics": "/vɪˈkoʊdəz ˈnætʃrəl piː eɪtʃ naɪn rɪˈmeɪnz ˈsteɪbl fɔːr tuː fʊl jɪərz θæŋks tuː rɪtʃ baɪˈkɑːrbənət ˈmɪnərəl ˈbʌfərz/",
+        "vietnameseMeaning": "Độ kiềm tự nhiên pH 9.0 của Vikoda duy trì ổn định suốt hai năm trọn vẹn nhờ vào hệ đệm khoáng chất bicacbonat dồi dào.",
+        "explanation": "\"Remains stable for two full years thanks to bicarbonate mineral buffers\" là luận điểm hóa học đắt giá giải thích độ bền vượt trội.",
+        "whyWrong": "Phát âm chuẩn từ \"bicarbonate\" (/baɪˈkɑːrbənət/) và \"buffers\" (/ˈbʌfərz/ - hệ đệm).",
+        "crucialNote": "Hệ đệm tự nhiên ngăn chặn không khí làm tụt độ pH khi nước được lưu giữ trong chai đóng kín.",
+        "memoryHook": "pH 9.0 stable for 2 years thanks to bicarbonate buffers."
       },
       {
         "id": "u46-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to explain how bicarbonate neutralizes stomach acid:",
+        "promptVi": "Ghép câu: \"Các ion bicacbonat tự nhiên hỗ trợ đắc lực việc trung hòa axit dư thừa trong dạ dày\":",
+        "englishSentence": "Natural bicarbonate ions actively support the neutralization of excess stomach acid.",
+        "audioText": "Natural bicarbonate ions actively support the neutralization of excess stomach acid.",
         "wordPool": [
-          "water",
-          "mineral",
-          "environmental",
-          "Our",
-          "from",
-          "deep",
-          "contamination.",
-          "volcanic",
-          "aquifer",
-          "protects",
-          "surface",
-          "never",
-          "cancel",
-          "the"
+          "Natural",
+          "bicarbonate",
+          "ions",
+          "actively",
+          "support",
+          "the",
+          "neutralization",
+          "of",
+          "excess",
+          "stomach",
+          "acid.",
+          "burn",
+          "ulcer"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Các ion bicacbonat tự nhiên hỗ trợ đắc lực việc trung hòa axit dư thừa trong dạ dày.",
+        "explanation": "Cơ chế kiềm hóa tự nhiên giúp giảm triệu chứng ợ chua, trào ngược dạ dày thực quản (GERD) mà không cần dùng thuốc kháng axit.",
+        "whyWrong": "\"Neutralization of excess stomach acid\" là cụm từ y học chuẩn chỉ việc trung hòa axit bao tử.",
+        "crucialNote": "Uống 1 chai Vikoda mỗi sáng khi bụng đói giúp cân bằng độ pH đường tiêu hóa lý tưởng.",
+        "memoryHook": "Bicarbonate ions neutralize excess stomach acid."
       },
       {
         "id": "u46-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct chemical compound responsible for alkaline buffering:",
+        "promptVi": "Chọn hợp chất khoáng tự nhiên đóng vai trò hệ đệm giữ vững độ kiềm:",
+        "englishSentence": "The high concentration of natural [ _____ ] preserves the water's alkaline integrity without artificial chemicals.",
+        "audioText": "The high concentration of natural bicarbonate preserves the water's alkaline integrity without artificial chemicals.",
+        "blankWord": "bicarbonate",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "bicarbonate",
+          "cyanide",
+          "chlorine"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Hàm lượng bicacbonat tự nhiên cao bảo toàn tính kiềm nguyên bản của nước mà không cần hóa chất nhân tạo.",
+        "explanation": "\"Bicarbonate\" (HCO3-) là khoáng chất lành tính quý giá nhất trong nước khoáng kiềm thiên nhiên.",
+        "whyWrong": "\"Cyanide\" hay \"chlorine\" là hóa chất độc hại nguy hiểm.",
+        "crucialNote": "Chỉ số bicacbonat trong Vikoda đạt ngưỡng vàng từ 300 đến 450 mg/lít.",
+        "memoryHook": "Natural bicarbonate preserves alkaline integrity."
       },
       {
         "id": "u46-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Khoa Học Muối Bicarbonate & Bền Kiềm\" (Chứng minh độ pH 9.0 duy trì bền bỉ suốt 3 năm trong chai). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We adhere strictly to certified regional extraction protocols established under health decrees.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing."
+        "type": "chat_branch",
+        "promptEn": "Answer an organic chemist regarding pH stability on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Tiến sĩ hóa học hữu cơ Úc hỏi tại sao nước ion kiềm nhân tạo tụt pH sau vài ngày, trong khi Vikoda lại giữ được 2 năm:",
+        "englishSentence": "Artificial ionized water lacks mineral buffers, so CO2 from air drops its pH quickly. Vikoda contains rich natural HCO3- ions which maintain stable pH 9.0 indefinitely!",
+        "audioText": "Artificial ionized water lacks mineral buffers, so CO2 from air drops its pH quickly. Vikoda contains rich natural HCO3- ions which maintain stable pH 9.0 indefinitely!",
+        "chatMessages": [
+          {
+            "speaker": "Dr. Oliver (Senior Biochemist, Sydney Organic Labs)",
+            "avatar": "🔬",
+            "message": "Minh, we tested multiple alkaline brands. Most ionized waters degrade to pH 7.2 after 48 hours. What chemical mechanism keeps Vikoda at pH 9.0 for 2 years?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Chứng minh độ pH 9.0 duy trì bền bỉ suốt 3 năm trong chai",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Artificial ionized water lacks mineral buffers, so CO2 from air drops its pH quickly. Vikoda contains rich natural HCO3- ions which maintain stable pH 9.0 indefinitely!",
+            "trustScore": 25,
+            "feedback": "Phản hồi của nhà khoa học đại tài! Phân tích rõ sự khác biệt giữa nước thiếu đệm khoáng và nước giàu ion HCO3- tự nhiên, hoàn toàn thuyết phục hội đồng khoa học Úc.",
+            "isCorrect": true
+          },
+          {
+            "text": "We put special preservatives in the bottle cap to stop the pH from leaking out.",
+            "trustScore": 0,
+            "feedback": "Sai lệch hoàn toàn về mặt khoa học! Vikoda cam kết 100% không chất bảo quản.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Nước ion kiềm nhân tạo thiếu hệ đệm khoáng nên khí CO2 từ không khí làm tụt pH rất nhanh. Vikoda chứa các ion HCO3- tự nhiên dồi dào giúp duy trì độ pH 9.0 ổn định bền bỉ!",
+        "explanation": "Khí CO2 trong khí quyển tác dụng với nước tạo axit cacbonic yếu làm trung hòa kiềm nếu không có hệ đệm bicacbonat bảo vệ.",
+        "crucialNote": "Đây là luận điểm khoa học đánh bại hoàn toàn các máy lọc nước điện phân ion kiềm nhân tạo.",
+        "memoryHook": "Natural HCO3- buffers maintain pH 9.0 against CO2 degradation."
       }
     ]
   },
@@ -6280,111 +6447,138 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "So Sánh Kiềm Tự Nhiên vs Điện Phân",
     "subtitle": "Chỉ rõ kiềm nhân tạo mất tính kiềm sau 48 giờ mở nắp",
     "level": "B1",
-    "icon": "⚖️",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "⚡",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u47-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that natural alkaline water versus artificial electrolysis provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of natural alkaline water versus artificial electrolysis?",
-        "options": [
-          "Our clinical research proves that natural alkaline water versus artificial electrolysis provides natural health benefits without synthetic additives.",
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches, pending formal verification from our international distribution coordinators.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng so sánh kiềm tự nhiên vs điện phân đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that natural alkaline water versus artificial electrolysis provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match natural vs artificial alkaline contrasting characteristics:",
+        "promptVi": "Ghép cặp các đặc tính tương phản giữa nước kiềm thiên nhiên và nước ion kiềm điện phân nhân tạo:",
+        "englishSentence": "Match natural vs artificial alkaline characteristics.",
+        "audioText": "Match natural vs artificial alkaline characteristics.",
+        "explanation": "5 sự đối chiếu khoa học vạch rõ ranh giới giữa kiềm tự nhiên đất mẹ và kiềm máy móc nhân tạo.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp đặc tính phân biệt kiềm tự nhiên và kiềm điện phân.",
+        "pairs": [
+          {
+            "left": "Natural alkaline mineral water",
+            "right": "Kiềm tự nhiên hấp thu từ lòng đất qua hàng trăm năm"
+          },
+          {
+            "left": "Artificial electrolyzed water",
+            "right": "Nước lọc dùng dòng điện tách ion qua các bản cực kim loại"
+          },
+          {
+            "left": "Rapid pH degradation",
+            "right": "Mất tính kiềm nhanh chóng chỉ sau 24 đến 48 giờ mở nắp"
+          },
+          {
+            "left": "Platinum electrode plates",
+            "right": "Bản cực kim loại bạch kim nhân tạo dùng trong máy điện phân"
+          },
+          {
+            "left": "Geological mineral synergy",
+            "right": "Sự cộng hưởng hài hòa của các khoáng chất địa chất tự nhiên"
+          }
+        ]
       },
       {
         "id": "u47-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this decisive product comparison statement clearly:",
+        "promptVi": "Luyện nói câu phân biệt dứt khoát giá trị bền vững của kiềm tự nhiên Vikoda:",
+        "englishSentence": "Unlike artificial electrolyzed water which degrades within forty-eight hours, Vikoda delivers natural, enduring alkalinity straight from the earth.",
+        "audioText": "Unlike artificial electrolyzed water which degrades within forty-eight hours, Vikoda delivers natural, enduring alkalinity straight from the earth.",
+        "phonetics": "/ʌnˈlaɪk ˌɑːrtɪˈfɪʃəl ɪˈlɛktrəlaɪzd ˈwɔːtər wɪtʃ dɪˈɡreɪdz wɪðˈɪn ˈfɔːrti eɪt ˈaʊərz, vɪˈkoʊdə dɪˈlɪvərz ˈnætʃrəl, ɪnˈdjʊərɪŋ ˌælkəˈlɪnɪti streɪt frɒm ðiː ɜːrθ/",
+        "vietnameseMeaning": "Không giống như nước điện giải nhân tạo bị mất tính kiềm trong vòng 48 giờ, Vikoda mang đến độ kiềm tự nhiên bền bỉ trực tiếp từ lòng đất mẹ.",
+        "explanation": "\"Enduring alkalinity straight from the earth\" là định vị độc tôn nâng tầm Vikoda thành nguồn nước sống tự nhiên.",
+        "whyWrong": "Phát âm rõ từ \"electrolyzed\" (/ɪˈlɛktrəlaɪzd/) và \"enduring alkalinity\" (/ɪnˈdjʊərɪŋ ˌælkəˈlɪnɪti/).",
+        "crucialNote": "Nước điện phân chỉ là nước tinh khiết bị kích hoạt ion giả tạo tạm thời bằng dòng điện.",
+        "memoryHook": "Electrolyzed degrades in 48 hours; Vikoda is enduring from the earth."
       },
       {
         "id": "u47-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to explain the rapid loss of artificial alkaline charge:",
+        "promptVi": "Ghép câu: \"Nước điện phân nhân tạo nhanh chóng mất tính kiềm khi tiếp xúc với không khí\":",
+        "englishSentence": "Artificial ionized water quickly loses its alkaline charge upon contact with air.",
+        "audioText": "Artificial ionized water quickly loses its alkaline charge upon contact with air.",
         "wordPool": [
-          "mineral",
-          "from",
-          "surface",
-          "the",
-          "Our",
+          "Artificial",
+          "ionized",
           "water",
-          "never",
-          "aquifer",
-          "deep",
-          "protects",
-          "cancel",
-          "volcanic",
-          "contamination.",
-          "environmental"
+          "quickly",
+          "loses",
+          "its",
+          "alkaline",
+          "charge",
+          "upon",
+          "contact",
+          "with",
+          "air.",
+          "gain",
+          "forever"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Nước ion hóa nhân tạo nhanh chóng mất tính kiềm khi tiếp xúc với không khí.",
+        "explanation": "Các ion H+ và OH- tự do tạo ra bởi dòng điện không bền, nhanh chóng tái kết hợp thành phân tử nước trung tính H2O thông thường.",
+        "whyWrong": "\"Loses its alkaline charge\" là thuật ngữ vật lý mô tả sự tan biến của điện tích ion nhân tạo.",
+        "crucialNote": "Người tiêu dùng mua máy điện giải đắt tiền nhưng thường uống phải nước đã mất kiềm sau vài giờ đựng trong bình.",
+        "memoryHook": "Loses its alkaline charge upon contact with air."
       },
       {
         "id": "u47-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct term for artificial electrolysis equipment:",
+        "promptVi": "Chọn thuật ngữ chỉ cơ chế dùng dòng điện nhân tạo để tách nước:",
+        "englishSentence": "Vikoda requires zero artificial [ _____ ] because our alkalinity is created purely by geological mineral contact.",
+        "audioText": "Vikoda requires zero artificial electrolysis because our alkalinity is created purely by geological mineral contact.",
+        "blankWord": "electrolysis",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "electrolysis",
+          "hypnosis",
+          "paralysis"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Vikoda hoàn toàn không cần điện phân nhân tạo vì độ kiềm của chúng tôi được tạo ra thuần khiết qua sự tiếp xúc khoáng chất địa chất.",
+        "explanation": "\"Electrolysis\" (quá trình điện phân) là phương pháp nhân tạo can thiệp bằng máy móc.",
+        "whyWrong": "\"Hypnosis\" (thôi miên) hay \"paralysis\" (tê liệt) hoàn toàn sai lệch ngữ cảnh.",
+        "crucialNote": "Thiên nhiên mất hàng trăm năm để kiến tạo giọt nước kiềm Vikoda, không máy móc nào làm giả được.",
+        "memoryHook": "Zero artificial electrolysis = Không điện phân nhân tạo."
       },
       {
         "id": "u47-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"So Sánh Kiềm Tự Nhiên vs Điện Phân\" (Chỉ rõ kiềm nhân tạo mất tính kiềm sau 48 giờ mở nắp). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute."
+        "type": "chat_branch",
+        "promptEn": "Debate an ionized alkaline machine salesperson on Teams professionally:",
+        "promptVi": "Mô phỏng tin nhắn: Đại lý máy lọc nước ion kiềm tuyên bố máy của họ tạo được nước kiềm pH 9.5 tốt hơn nước khoáng đóng chai:",
+        "englishSentence": "Your machine uses artificial electrolysis on municipal tap water which reverts to neutral in 24 hours. Vikoda is 100% natural mineral water with stable pH 9.0 certified since 1957!",
+        "audioText": "Your machine uses artificial electrolysis on municipal tap water which reverts to neutral in 24 hours. Vikoda is 100% natural mineral water with stable pH 9.0 certified since 1957!",
+        "chatMessages": [
+          {
+            "speaker": "Ken (Sales Director, Kangen Ionizer Vietnam)",
+            "avatar": "🔌",
+            "message": "Why should consumers buy bottled Vikoda when our $4,000 electrolysis machine can create pH 9.5 water on demand at the kitchen sink?"
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Chỉ rõ kiềm nhân tạo mất tính kiềm sau 48 giờ mở nắp",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Your machine uses artificial electrolysis on municipal tap water which reverts to neutral in 24 hours. Vikoda is 100% natural mineral water with stable pH 9.0 certified since 1957!",
+            "trustScore": 25,
+            "feedback": "Bản lĩnh phản biện đỉnh cao! Chỉ rõ bản chất máy điện phân dùng nước máy đô thị và mất kiềm sau 24 giờ, khẳng định giá trị nước khoáng kiềm thiên nhiên đóng chai tại nguồn được chứng thực suốt 68 năm.",
+            "isCorrect": true
+          },
+          {
+            "text": "Oh, your machine is so high-tech! Maybe our factory should buy your machines instead.",
+            "trustScore": 0,
+            "feedback": "Tự ti và đánh mất bản sắc! Nước khoáng Đảnh Thạnh quý gấp vạn lần nước máy điện phân nhân tạo.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Máy của bạn dùng điện phân nhân tạo trên nguồn nước máy đô thị và nước sẽ trở về trạng thái trung tính sau 24 giờ. Vikoda là nước khoáng thiên nhiên 100% với độ pH 9.0 ổn định được chứng thực từ năm 1957!",
+        "explanation": "Hiểu rõ nguồn gốc nước máy (tap water) so với mỏ khoáng sâu 220m giúp bảo vệ thị phần và định vị cao cấp của Vikoda.",
+        "crucialNote": "Nước máy qua điện phân vẫn có thể chứa dư lượng hóa chất xử lý nước của thành phố.",
+        "memoryHook": "Tap water electrolysis reverts to neutral; Vikoda is 100% natural mineral water."
       }
     ]
   },
@@ -6394,111 +6588,137 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Khai Thác Độ Sâu 220m Qua Vỉa Khoáng",
     "subtitle": "Mô tả lớp địa chất bazan ngàn năm lọc sạch giọt nước",
     "level": "B1",
-    "icon": "🌋",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "⛰️",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u48-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that 220-meter extraction depth through basalt strata provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of 220-meter extraction depth through basalt strata?",
-        "options": [
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters, as confirmed in our recent departmental briefing with executive management.",
-          "Our clinical research proves that 220-meter extraction depth through basalt strata provides natural health benefits without synthetic additives.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng khai thác độ sâu 220m qua vỉa khoáng đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that 220-meter extraction depth through basalt strata provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match deep geological extraction terms with their definitions:",
+        "promptVi": "Ghép cặp các thuật ngữ địa chất khai thác nước ngầm ở độ sâu 220 mét:",
+        "englishSentence": "Match deep geological drilling and strata terms.",
+        "audioText": "Match deep geological drilling and strata terms.",
+        "explanation": "5 khái niệm địa chất học mô tả hành trình thẩm thấu kỳ diệu qua tầng đá magma núi lửa.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ địa chất khai thác mỏ khoáng sâu 220 mét.",
+        "pairs": [
+          {
+            "left": "220-meter extraction depth",
+            "right": "Độ sâu khai thác hai trăm hai mươi mét trong lòng đất"
+          },
+          {
+            "left": "Magma basalt rock formation",
+            "right": "Tầng đá bazan magma núi lửa cổ xưa lọc nước"
+          },
+          {
+            "left": "Centuries of natural percolation",
+            "right": "Hàng trăm năm thẩm thấu chắt lọc qua các khe nứt địa chất"
+          },
+          {
+            "left": "Confined deep aquifer",
+            "right": "Tầng chứa nước ngầm sâu được che chắn kín tuyệt đối"
+          },
+          {
+            "left": "Natural artesian pressure",
+            "right": "Áp lực thủy tĩnh tự nhiên đẩy nước phun trào lên mặt đất"
+          }
+        ]
       },
       {
         "id": "u48-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this geological journey narrative clearly:",
+        "promptVi": "Luyện nói câu kể câu chuyện địa chất kỳ vĩ của giọt nước khoáng Đảnh Thạnh:",
+        "englishSentence": "Filtered through ancient magma rock layers for hundreds of years, every drop arrives at our 220-meter well with pristine mineral purity.",
+        "audioText": "Filtered through ancient magma rock layers for hundreds of years, every drop arrives at our 220-meter well with pristine mineral purity.",
+        "phonetics": "/ˈfɪltərd θruː ˈeɪnʃənt ˈmæɡmə rɒk ˈleɪərz fɔːr ˈhʌndrədz ɒv jɪərz, ˈɛvri drɒp əˈraɪvz æt ˈaʊər 220 ˈmiːtər wɛl wɪð ˈprɪstiːn ˈmɪnərəl ˈpjʊərəti/",
+        "vietnameseMeaning": "Được lọc qua các tầng đá magma cổ xưa suốt hàng trăm năm, mỗi giọt nước đến giếng khoan 220 mét của chúng tôi với độ tinh khiết khoáng chất nguyên bản.",
+        "explanation": "\"Filtered through ancient magma rock layers for hundreds of years\" là ngôn ngữ storytelling giàu hình ảnh thơ mộng và giá trị thời gian.",
+        "whyWrong": "Phát âm chuẩn từ \"ancient magma\" (/ˈeɪnʃənt ˈmæɡmə/) và \"percolation\" (/ˌpɜːrkəˈleɪʃən/).",
+        "crucialNote": "Độ sâu 220m cách ly nguồn nước hoàn toàn khỏi mọi biến động môi trường và biến đổi khí hậu trên bề mặt.",
+        "memoryHook": "Filtered through magma rock for centuries to 220m well."
       },
       {
         "id": "u48-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to describe the natural filtration through dense volcanic strata:",
+        "promptVi": "Ghép câu: \"Các tầng địa chất núi lửa dày đặc hoạt động như một hệ thống lọc tự nhiên phi thường\":",
+        "englishSentence": "Dense volcanic geological strata act as an extraordinary natural filtration system.",
+        "audioText": "Dense volcanic geological strata act as an extraordinary natural filtration system.",
         "wordPool": [
-          "surface",
-          "Our",
-          "environmental",
-          "deep",
-          "never",
-          "mineral",
-          "cancel",
+          "Dense",
           "volcanic",
-          "water",
-          "aquifer",
-          "from",
-          "protects",
-          "the",
-          "contamination."
+          "geological",
+          "strata",
+          "act",
+          "as",
+          "an",
+          "extraordinary",
+          "natural",
+          "filtration",
+          "system.",
+          "broken",
+          "dirty"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Các tầng địa chất núi lửa dày đặc hoạt động như một hệ thống lọc tự nhiên phi thường.",
+        "explanation": "Đá magma bazan có cấu trúc rỗng xốp vi mô giữ lại mọi tạp chất và giải phóng các nguyên tố vi lượng quý giá vào nước.",
+        "whyWrong": "\"Extraordinary natural filtration system\" khẳng định thiên nhiên là bộ lọc siêu đẳng nhất.",
+        "crucialNote": "Không có màng lọc nhân tạo nào mô phỏng được độ cân bằng khoáng học này.",
+        "memoryHook": "Volcanic strata act as natural filtration system."
       },
       {
         "id": "u48-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct geological term for deep groundwater pockets:",
+        "promptVi": "Chọn thuật ngữ địa chất chỉ tầng chứa nước ngầm tinh khiết sâu trong lòng đất:",
+        "englishSentence": "The borehole penetrates deep into a protected artesian [ _____ ] sealed by crystalline bedrock.",
+        "audioText": "The borehole penetrates deep into a protected artesian aquifer sealed by crystalline bedrock.",
+        "blankWord": "aquifer",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "aquifer",
+          "volcano",
+          "swamp"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Mũi khoan đâm sâu vào một tầng chứa nước ngầm phun trào tự nhiên được bảo vệ bởi tầng đá gốc kết tinh.",
+        "explanation": "\"Artesian aquifer\" (tầng ngậm nước ngầm tự phun) là nguồn khoáng có áp lực thủy tĩnh tự nhiên phun trào.",
+        "whyWrong": "\"Volcano\" (núi lửa phun nham thạch) hay \"swamp\" (đầm lầy ô nhiễm) hoàn toàn sai lệch tính chất nước khoáng sạch.",
+        "crucialNote": "Tầng ngậm nước Đảnh Thạnh được hình thành từ kỷ đệ tứ cách đây hàng triệu năm.",
+        "memoryHook": "Protected artesian aquifer = Tầng ngậm nước tự phun được bảo vệ."
       },
       {
         "id": "u48-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Khai Thác Độ Sâu 220m Qua Vỉa Khoáng\" (Mô tả lớp địa chất bazan ngàn năm lọc sạch giọt nước). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees."
+        "type": "chat_branch",
+        "promptEn": "Explain the geological depth advantage to an international mining investor on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Chuyên gia địa chất tập đoàn Mitsui Nhật Bản hỏi về độ bền vững của giếng khoan 220 mét:",
+        "englishSentence": "At 220m depth, our water is fully confined beneath impermeable granite and basalt, guaranteeing eternal protection from surface drought or pollution.",
+        "audioText": "At 220m depth, our water is fully confined beneath impermeable granite and basalt, guaranteeing eternal protection from surface drought or pollution.",
+        "chatMessages": [
+          {
+            "speaker": "Mr. Kenzo (Geological Sourcing Director, Mitsui Tokyo)",
+            "avatar": "🇯🇵",
+            "message": "Minh, we are evaluating long-term supply resilience. How does your 220-meter extraction depth insulate the spring against severe regional droughts?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Mô tả lớp địa chất bazan ngàn năm lọc sạch giọt nước",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "At 220m depth, our water is fully confined beneath impermeable granite and basalt, guaranteeing eternal protection from surface drought or pollution.",
+            "trustScore": 25,
+            "feedback": "Phản hồi chuẩn mực chuyên gia địa chất! Nêu bật tầng đá hoa cương (granite) và bazan không thấm nước, bảo vệ nguồn nước vĩnh cửu trước hạn hán hay ô nhiễm mặt đất.",
+            "isCorrect": true
+          },
+          {
+            "text": "When drought comes, we just pour tap water into the well so the water level stays high.",
+            "trustScore": 0,
+            "feedback": "Gian lận và xúc phạm khoa học! Tập đoàn Mitsui sẽ hủy bỏ toàn bộ đàm phán hợp tác.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Ở độ sâu 220m, nguồn nước của chúng tôi hoàn toàn được giam giữ kín dưới tầng đá hoa cương và bazan không thấm nước, bảo đảm sự bảo vệ vĩnh cửu trước hạn hán hay ô nhiễm bề mặt.",
+        "explanation": "Độ sâu 220 mét là lá chắn vững chắc bảo vệ nguồn cung ứng ổn định 365 ngày mỗi năm cho các đối tác toàn cầu.",
+        "crucialNote": "Dù mùa khô hạn kéo dài ở miền Trung, lưu lượng mỏ Đảnh Thạnh vẫn phun trào dồi dào và nguyên vẹn.",
+        "memoryHook": "220m depth confined beneath granite guarantees eternal protection."
       }
     ]
   },
@@ -6509,110 +6729,137 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "subtitle": "Khẳng định độ tinh khiết vô trùng nhiệt từ lòng đất mẹ",
     "level": "B1",
     "icon": "♨️",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u49-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that 72-degree thermal tap temperature at source provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of 72-degree thermal tap temperature at source?",
-        "options": [
-          "Our clinical research proves that 72-degree thermal tap temperature at source provides natural health benefits without synthetic additives.",
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters, pending formal verification from our international distribution coordinators.",
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng nhiệt độ vòi phun 72°c tại nguồn đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that 72-degree thermal tap temperature at source provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match geothermal thermal spring properties with their scientific meanings:",
+        "promptVi": "Ghép cặp các đặc tính địa nhiệt 72 độ C tại nguồn khoáng Đảnh Thạnh với ý nghĩa khoa học:",
+        "englishSentence": "Match thermal spring and geothermal sterility terms.",
+        "audioText": "Match thermal spring and geothermal sterility terms.",
+        "explanation": "5 thông số nhiệt học chứng minh độ vô trùng tự nhiên không cần hóa chất của nước khoáng Vikoda.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thông số nhiệt độ nguồn khoáng 72 độ C.",
+        "pairs": [
+          {
+            "left": "72 degrees Celsius at wellhead",
+            "right": "Nhiệt độ phun trào tự nhiên bảy mươi hai độ C tại miệng giếng"
+          },
+          {
+            "left": "Thermal virgin sterility",
+            "right": "Độ vô trùng nhiệt tự nhiên không có vi sinh vật gây hại"
+          },
+          {
+            "left": "Geothermal energy gradient",
+            "right": "Gradien địa nhiệt sâu tích tụ năng lượng lòng đất"
+          },
+          {
+            "left": "Closed-circuit cooling heat exchanger",
+            "right": "Hệ thống trao đổi nhiệt làm nguội khép kín không tiếp xúc không khí"
+          },
+          {
+            "left": "Pasteur-equivalent natural heat",
+            "right": "Nhiệt độ tương đương quá trình thanh trùng Pasteur tự nhiên"
+          }
+        ]
       },
       {
         "id": "u49-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this thermal sterility scientific pitch clearly:",
+        "promptVi": "Luyện nói câu khẳng định độ vô trùng nhiệt tự nhiên 72 độ C của Vikoda:",
+        "englishSentence": "Erupting at seventy-two degrees Celsius, Vikoda is naturally sterilized by geothermal heat before bottling.",
+        "audioText": "Erupting at seventy-two degrees Celsius, Vikoda is naturally sterilized by geothermal heat before bottling.",
+        "phonetics": "/ɪˈrʌptɪŋ æt ˈsɛvənti tuː dɪˈɡriːz ˈsɛlsiəs, vɪˈkoʊdə ɪz ˈnætʃrəli ˈstɛrɪlaɪzd baɪ ˌdʒiːoʊˈθɜːrməl hiːt bɪˈfɔːr ˈbɒtlɪŋ/",
+        "vietnameseMeaning": "Phun trào ở nhiệt độ bảy mươi hai độ C, Vikoda được khử trùng tự nhiên bằng nhiệt lượng địa nhiệt trước khi đóng chai.",
+        "explanation": "\"Naturally sterilized by geothermal heat\" (được khử trùng tự nhiên bằng nhiệt địa nhiệt) là món quà vô giá của tạo hóa.",
+        "whyWrong": "Phát âm rõ từ \"sterilized\" (/ˈstɛrɪlaɪzd/ - tiệt trùng) và \"geothermal heat\" (/ˌdʒiːoʊˈθɜːrməl hiːt/).",
+        "crucialNote": "72°C tương đương nhiệt độ thanh trùng Pasteur tiêu diệt vi khuẩn mà không phá hủy cấu trúc khoáng chất.",
+        "memoryHook": "72 degrees Celsius = Naturally sterilized by geothermal heat."
       },
       {
         "id": "u49-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to explain the hygienic cooling process without air exposure:",
+        "promptVi": "Ghép câu: \"Nước khoáng nóng được làm nguội nhẹ nhàng qua thiết bị trao đổi nhiệt khép kín\":",
+        "englishSentence": "The hot mineral water is gently cooled through a closed-loop heat exchanger.",
+        "audioText": "The hot mineral water is gently cooled through a closed-loop heat exchanger.",
         "wordPool": [
-          "the",
-          "protects",
-          "Our",
-          "from",
-          "cancel",
+          "The",
+          "hot",
           "mineral",
-          "deep",
-          "volcanic",
-          "surface",
-          "contamination.",
           "water",
-          "never",
-          "aquifer",
-          "environmental"
+          "is",
+          "gently",
+          "cooled",
+          "through",
+          "a",
+          "closed-loop",
+          "heat",
+          "exchanger.",
+          "boiled",
+          "frozen"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Nước khoáng nóng được làm nguội nhẹ nhàng qua thiết bị trao đổi nhiệt khép kín.",
+        "explanation": "Nước khoáng từ 72°C được hạ nhiệt xuống nhiệt độ phòng (25-28°C) bên trong các tấm trao đổi nhiệt inox vi sinh mà không tiếp xúc với môi trường bên ngoài.",
+        "whyWrong": "Dùng \"closed-loop heat exchanger\" khẳng định công nghệ chế biến thực phẩm tối tân.",
+        "crucialNote": "Nhiệt lượng tỏa ra được tái thu hồi để sấy bao bì và tiết kiệm điện năng cho nhà máy xanh.",
+        "memoryHook": "Gently cooled through closed-loop heat exchanger."
       },
       {
         "id": "u49-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct temperature unit for scientific reporting:",
+        "promptVi": "Chọn đơn vị đo nhiệt độ tiêu chuẩn quốc tế cho nguồn khoáng 72 độ:",
+        "englishSentence": "The spring erupts constantly at seventy-two degrees [ _____ ] throughout all seasons of the year.",
+        "audioText": "The spring erupts constantly at seventy-two degrees Celsius throughout all seasons of the year.",
+        "blankWord": "Celsius",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "Celsius",
+          "Fahrenheit",
+          "Calories"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Mỏ khoáng phun trào liên tục ở nhiệt độ 72 độ C trong suốt tất cả các mùa trong năm.",
+        "explanation": "\"72 degrees Celsius\" (72°C tương đương khoảng 161.6°F) là con số biểu tượng của mỏ Đảnh Thạnh.",
+        "whyWrong": "\"Calories\" đo năng lượng thức ăn, không đo nhiệt độ dòng nước.",
+        "crucialNote": "Nhiệt độ ổn định quanh năm bất kể mùa hè hay mùa đông chứng tỏ độ sâu địa chất vĩ đại.",
+        "memoryHook": "Seventy-two degrees Celsius all year round."
       },
       {
         "id": "u49-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Nhiệt Độ Vòi Phun 72°C Tại Nguồn\" (Khẳng định độ tinh khiết vô trùng nhiệt từ lòng đất mẹ). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches."
+        "type": "chat_branch",
+        "promptEn": "Explain the 72°C virgin heat advantage to a food safety auditor on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Chuyên gia kiểm toán vệ sinh an toàn thực phẩm hỏi nhà máy dùng hóa chất clo khử trùng nước không:",
+        "englishSentence": "Zero chlorine or chemicals! Mother Nature performs natural Pasteur sterilization at 72°C underground, so Vikoda is 100% pure and chemical-free.",
+        "audioText": "Zero chlorine or chemicals! Mother Nature performs natural Pasteur sterilization at 72°C underground, so Vikoda is 100% pure and chemical-free.",
+        "chatMessages": [
+          {
+            "speaker": "Inspector Walter (HACCP Lead Auditor)",
+            "avatar": "🛡️",
+            "message": "Minh, what chemical biocides or chlorine treatments do you apply to kill harmful bacteria before bottling?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Khẳng định độ tinh khiết vô trùng nhiệt từ lòng đất mẹ",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Zero chlorine or chemicals! Mother Nature performs natural Pasteur sterilization at 72°C underground, so Vikoda is 100% pure and chemical-free.",
+            "trustScore": 25,
+            "feedback": "Câu trả lời xuất sắc đạt điểm tuyệt đối! Tuyên bố dõng dạc 0% clo hay hóa chất, vì Mẹ Thiên Nhiên đã thanh trùng tự nhiên bằng nhiệt độ 72°C dưới lòng đất.",
+            "isCorrect": true
+          },
+          {
+            "text": "We add large amounts of chlorine bleach every morning to make sure no bacteria survives.",
+            "trustScore": 0,
+            "feedback": "Phá hủy toàn bộ giá trị nước khoáng tự nhiên! Sẽ bị tước giấy phép đóng chai ngay lập tức.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Hoàn toàn không có clo hay hóa chất! Mẹ Thiên Nhiên đã thực hiện thanh trùng tự nhiên ở nhiệt độ 72 độ C dưới lòng đất, vì vậy Vikoda hoàn toàn tinh khiết 100% và không có hóa chất.",
+        "explanation": "Nước khoáng thiên nhiên nguyên bản theo luật quốc tế tuyệt đối bị cấm khử trùng bằng clo hay hóa chất diệt khuẩn.",
+        "crucialNote": "Nhiệt độ 72°C tự nhiên là giải pháp sinh học an toàn nhất thế giới.",
+        "memoryHook": "Zero chlorine! Nature performs Pasteur sterilization at 72°C."
       }
     ]
   },
@@ -6622,111 +6869,138 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Vành Đai Xanh Sinh Thái Nghiêm Ngặt 35ha",
     "subtitle": "Cam kết bảo vệ môi trường mỏ không hóa chất nông nghiệp",
     "level": "B1",
-    "icon": "🌿",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🌲",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u50-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that the 35-hectare protected ecological green belt provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of the 35-hectare protected ecological green belt?",
-        "options": [
-          "We adhere strictly to certified regional extraction protocols established under health decrees, as confirmed in our recent departmental briefing with executive management.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells, pending formal verification from our international distribution coordinators.",
-          "Our clinical research proves that the 35-hectare protected ecological green belt provides natural health benefits without synthetic additives."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng vành đai xanh sinh thái nghiêm ngặt 35ha đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that the 35-hectare protected ecological green belt provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match ecological reserve and watershed protection terms with their meanings:",
+        "promptVi": "Ghép cặp các thuật ngữ vành đai bảo vệ sinh thái 35 héc-ta quanh mỏ khoáng Đảnh Thạnh:",
+        "englishSentence": "Match watershed sanctuary and ecological buffer terms.",
+        "audioText": "Match watershed sanctuary and ecological buffer terms.",
+        "explanation": "5 tiêu chuẩn bảo tồn lưu vực sinh thái bảo vệ giọt nước ngầm nguyên sinh.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ vành đai xanh sinh thái bảo tồn mỏ nước.",
+        "pairs": [
+          {
+            "left": "35-hectare green sanctuary",
+            "right": "Vành đai xanh sinh thái ba mươi lăm héc-ta được bảo vệ nghiêm ngặt"
+          },
+          {
+            "left": "Zero chemical pesticide policy",
+            "right": "Chính sách cấm tuyệt đối phân bón hóa học và thuốc trừ sâu"
+          },
+          {
+            "left": "Protected catchment area",
+            "right": "Lưu vực hứng nước ngầm được bảo tồn toàn vẹn"
+          },
+          {
+            "left": "Native botanical reforestation",
+            "right": "Trồng tái tạo thảm thực vật cây xanh bản địa hàng năm"
+          },
+          {
+            "left": "Sanitary protection perimeter",
+            "right": "Hàng rào ranh giới bảo vệ vệ sinh nghiêm ngặt cấp 1"
+          }
+        ]
       },
       {
         "id": "u50-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this environmental commitment statement clearly:",
+        "promptVi": "Luyện nói câu cam kết bảo vệ môi trường vành đai xanh sinh thái 35ha của Vikoda:",
+        "englishSentence": "Our thirty-five hectare ecological sanctuary strictly prohibits pesticides and chemical fertilizers to protect the pristine aquifer.",
+        "audioText": "Our thirty-five hectare ecological sanctuary strictly prohibits pesticides and chemical fertilizers to protect the pristine aquifer.",
+        "phonetics": "/ˈaʊər ˈθɜːrti faɪv ˈhɛktɛər ˌiːkəˈlɒdʒɪkəl ˈsæŋktʃʊəri ˈstrɪktli prəˈhɪbɪts ˈpɛstɪsaɪdz ænd ˈkɛmɪkəl ˈfɜːrtəlaɪzərz tuː prəˈtɛkt ðə ˈprɪstiːn ˈækwɪfər/",
+        "vietnameseMeaning": "Vành đai xanh sinh thái ba mươi lăm héc-ta của chúng tôi nghiêm cấm thuốc trừ sâu và phân bón hóa học để bảo vệ tầng nước ngầm thuần khiết.",
+        "explanation": "\"Strictly prohibits pesticides and chemical fertilizers to protect the aquifer\" khẳng định trách nhiệm môi trường cao nhất.",
+        "whyWrong": "Phát âm chuẩn từ \"prohibits\" (/prəˈhɪbɪts/) và \"pesticides\" (/ˈpɛstɪsaɪdz/).",
+        "crucialNote": "Không có vùng đất canh tác nông nghiệp hay khu dân cư nào được phép tồn tại trong vành đai 35ha.",
+        "memoryHook": "35ha sanctuary strictly prohibits pesticides and fertilizers."
       },
       {
         "id": "u50-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to explain the role of native trees in watershed conservation:",
+        "promptVi": "Ghép câu: \"Hàng nghìn cây xanh bản địa che phủ sườn đồi để nuôi dưỡng mạch nước ngầm\":",
+        "englishSentence": "Thousands of native trees blanket the foothills to nourish the underground spring.",
+        "audioText": "Thousands of native trees blanket the foothills to nourish the underground spring.",
         "wordPool": [
-          "Our",
-          "never",
+          "Thousands",
+          "of",
+          "native",
+          "trees",
+          "blanket",
           "the",
-          "cancel",
-          "surface",
-          "water",
-          "contamination.",
-          "deep",
-          "mineral",
-          "aquifer",
-          "protects",
-          "volcanic",
-          "environmental",
-          "from"
+          "foothills",
+          "to",
+          "nourish",
+          "the",
+          "underground",
+          "spring.",
+          "cut",
+          "burn"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Hàng nghìn cây xanh bản địa che phủ sườn đồi để nuôi dưỡng mạch nước ngầm.",
+        "explanation": "Rễ cây rừng giữ nước mưa, làm chậm dòng chảy mặt và đưa nước ngấm sâu vào các tầng địa chất tự nhiên.",
+        "whyWrong": "Dùng từ tượng hình \"blanket the foothills\" (bao phủ sườn đồi như một tấm chăn xanh) rất giàu chất thơ.",
+        "crucialNote": "Mỗi nhân viên Vikoda đều tham gia trồng cây gây rừng hàng năm.",
+        "memoryHook": "Native trees blanket foothills to nourish the spring."
       },
       {
         "id": "u50-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct term for pure biological habitat preservation:",
+        "promptVi": "Chọn thuật ngữ sinh thái chỉ khu bảo tồn thiên nhiên hoang dã:",
+        "englishSentence": "The thirty-five hectare [ _____ ] ensures that wildlife and virgin forests flourish around our mineral source.",
+        "audioText": "The thirty-five hectare sanctuary ensures that wildlife and virgin forests flourish around our mineral source.",
+        "blankWord": "sanctuary",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "sanctuary",
+          "parking",
+          "highway"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Khu bảo tồn sinh thái ba mươi lăm héc-ta bảo đảm cho muông thú và rừng nguyên sinh phát triển mạnh mẽ quanh mỏ khoáng của chúng tôi.",
+        "explanation": "\"Sanctuary\" là khu bảo tồn thiên nhiên thiêng liêng và bất khả xâm phạm.",
+        "whyWrong": "\"Parking\" (bãi đỗ xe) hay \"highway\" (đường cao tốc) là công trình bê tông hóa phá hoại lưu vực nước ngầm.",
+        "crucialNote": "Nhiều loài chim quý và thảm thực vật dược liệu sinh trưởng tươi tốt trong khu bảo tồn Vikoda.",
+        "memoryHook": "35-hectare sanctuary protects nature and wildlife."
       },
       {
         "id": "u50-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Vành Đai Xanh Sinh Thái Nghiêm Ngặt 35ha\" (Cam kết bảo vệ môi trường mỏ không hóa chất nông nghiệp). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing.",
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute."
+        "type": "chat_branch",
+        "promptEn": "Host an international environmental NGO delegation on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Tổ chức bảo tồn thiên nhiên quốc tế WWF hỏi về cam kết bảo vệ đa dạng sinh học tại mỏ Đảnh Thạnh:",
+        "englishSentence": "We maintain a 35ha chemical-free sanctuary with zero industrial effluent, continuously planting indigenous trees to preserve biodiversity and recharge our aquifer.",
+        "audioText": "We maintain a 35ha chemical-free sanctuary with zero industrial effluent, continuously planting indigenous trees to preserve biodiversity and recharge our aquifer.",
+        "chatMessages": [
+          {
+            "speaker": "Dr. Beatrice (Senior Conservation Officer, WWF Greater Mekong)",
+            "avatar": "🐼",
+            "message": "Minh, we applaud Vikoda's 35-hectare sanctuary. How do you measure your biodiversity impact and watershed health?"
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Cam kết bảo vệ môi trường mỏ không hóa chất nông nghiệp",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "We maintain a 35ha chemical-free sanctuary with zero industrial effluent, continuously planting indigenous trees to preserve biodiversity and recharge our aquifer.",
+            "trustScore": 25,
+            "feedback": "Phản hồi mẫu mực vì màu xanh Trái Đất! Nêu bật cam kết không hóa chất, không xả thải công nghiệp, trồng cây bản địa bảo tồn đa dạng sinh học và nuôi dưỡng mạch nước ngầm.",
+            "isCorrect": true
+          },
+          {
+            "text": "We cut down most trees to build a commercial shopping mall inside the spring zone.",
+            "trustScore": 0,
+            "feedback": "Hủy hoại môi trường sinh thái! Tổ chức quốc tế sẽ lên án hành vi này.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chúng tôi duy trì một khu bảo tồn 35ha hoàn toàn không hóa chất và không có nước thải công nghiệp, liên tục trồng các loài cây bản địa để bảo tồn đa dạng sinh học và bổ hồi cho tầng nước ngầm.",
+        "explanation": "Cam kết bảo tồn thiên nhiên đưa Vikoda trở thành doanh nghiệp kiểu mẫu về phát triển bền vững tại Việt Nam.",
+        "crucialNote": "Đạt chứng nhận Doanh nghiệp Xanh và phát triển bền vững ESG.",
+        "memoryHook": "Maintain 35ha chemical-free sanctuary with zero industrial effluent."
       }
     ]
   },
@@ -6736,111 +7010,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Bác Bỏ Tin Đồn Nước Khoáng Gây Sỏi Thận",
     "subtitle": "Dẫn giải khoa học muối khoáng hòa tan vi lượng an toàn",
     "level": "B1",
-    "icon": "🏥",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🛡️",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u51-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that dispelling kidney stone myths with soluble trace minerals provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of dispelling kidney stone myths with soluble trace minerals?",
-        "options": [
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters, as confirmed in our recent departmental briefing with executive management.",
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing, pending formal verification from our international distribution coordinators.",
-          "Our clinical research proves that dispelling kidney stone myths with soluble trace minerals provides natural health benefits without synthetic additives."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng bác bỏ tin đồn nước khoáng gây sỏi thận đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that dispelling kidney stone myths with soluble trace minerals provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match medical nephrology and mineral water safety terms:",
+        "promptVi": "Ghép cặp các thuật ngữ y khoa thận học và chứng minh sự an toàn của nước khoáng kiềm:",
+        "englishSentence": "Match medical nephrology and mineral water safety terms.",
+        "audioText": "Match medical nephrology and mineral water safety terms.",
+        "explanation": "5 luận cứ khoa học đanh thép đập tan tin đồn thất thiệt nước khoáng gây sỏi thận.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ y học về an toàn nước khoáng và chức năng thận.",
+        "pairs": [
+          {
+            "left": "Kidney stone myth",
+            "right": "Tin đồn thất thiệt vô căn cứ về sỏi thận"
+          },
+          {
+            "left": "Soluble trace minerals",
+            "right": "Muối khoáng hòa tan vi lượng dễ đào thải qua thận"
+          },
+          {
+            "left": "Lightly mineralized water",
+            "right": "Nước khoáng hóa nhẹ với hàm lượng TDS cân bằng lý tưởng"
+          },
+          {
+            "left": "Alkaline urine pH",
+            "right": "Độ pH kiềm hóa nước tiểu giúp hòa tan tinh thể axit uric"
+          },
+          {
+            "left": "Clinical consensus",
+            "right": "Sự đồng thuận của các nghiên cứu y khoa lâm sàng thế giới"
+          }
+        ]
       },
       {
         "id": "u51-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this scientific medical rebuttal clearly:",
+        "promptVi": "Luyện nói câu bác bỏ tin đồn sỏi thận bằng chứng cứ y khoa thuyết phục:",
+        "englishSentence": "Medical science confirms that drinking natural alkaline mineral water actually helps prevent kidney stones by neutralizing acidic urine.",
+        "audioText": "Medical science confirms that drinking natural alkaline mineral water actually helps prevent kidney stones by neutralizing acidic urine.",
+        "phonetics": "/ˈmɛdɪkəl ˈsaɪəns kənˈfɜːrmz ðæt ˈdrɪŋkɪŋ ˈnætʃrəl ˈælkəlaɪn ˈmɪnərəl ˈwɔːtər ˈæktʃuəli hɛlps prɪˈvɛnt ˈkɪdni stoʊnz baɪ ˈnjuːtrəlaɪzɪŋ əˈsɪdɪk ˈjʊərɪn/",
+        "vietnameseMeaning": "Y học khẳng định rằng uống nước khoáng kiềm tự nhiên thực tế còn giúp ngăn ngừa sỏi thận bằng cách trung hòa độ axit trong nước tiểu.",
+        "explanation": "Nước tiểu có tính axit cao (pH < 5.5) là môi trường tạo sỏi axit uric và canxi oxalat. Kiềm tự nhiên của Vikoda giúp nâng pH nước tiểu lên mức an toàn (6.5 - 7.0), ngăn ngừa kết tinh sỏi.",
+        "whyWrong": "Phát âm chuẩn từ \"nephrology\" (/nɛˈfrɒlədʒi/) và \"kidney stones\" (/ˈkɪdni stoʊnz/).",
+        "crucialNote": "Người bị sỏi thận thường do uống quá ít nước chứ không phải do uống nước khoáng thiên nhiên.",
+        "memoryHook": "Alkaline water prevents kidney stones by neutralizing acidic urine."
       },
       {
         "id": "u51-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to explain the role of soluble calcium in mineral water:",
+        "promptVi": "Ghép câu: \"Canxi tự nhiên hòa tan trong nước liên kết với oxalat trong ruột để bảo vệ thận\":",
+        "englishSentence": "Dissolved natural calcium binds with oxalate in the gut to protect your kidneys.",
+        "audioText": "Dissolved natural calcium binds with oxalate in the gut to protect your kidneys.",
         "wordPool": [
-          "protects",
-          "never",
-          "cancel",
-          "water",
-          "aquifer",
-          "volcanic",
-          "environmental",
-          "contamination.",
+          "Dissolved",
+          "natural",
+          "calcium",
+          "binds",
+          "with",
+          "oxalate",
+          "in",
           "the",
-          "from",
-          "mineral",
-          "deep",
-          "surface",
-          "Our"
+          "gut",
+          "to",
+          "protect",
+          "your",
+          "kidneys.",
+          "damage",
+          "hurt"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Canxi tự nhiên hòa tan trong nước liên kết với oxalat trong ruột để bảo vệ thận của bạn.",
+        "explanation": "Nghiên cứu của Đại học Y Harvard chỉ ra rằng: Canxi trong nước uống liên kết với oxalat ngay tại ruột non và đào thải qua phân, không cho oxalat ngấm vào máu gây sỏi thận.",
+        "whyWrong": "Dùng cụm \"binds with oxalate in the gut\" thể hiện cơ chế sinh hóa chính xác.",
+        "crucialNote": "Thiếu canxi trong chế độ ăn uống mới là nguyên nhân chính gây hấp thu nhiều oxalat tạo sỏi.",
+        "memoryHook": "Calcium binds with oxalate in gut to protect kidneys."
       },
       {
         "id": "u51-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct medical term for disproving a myth:",
+        "promptVi": "Chọn từ chính xác chỉ hành động dùng khoa học để bác bỏ hoàn toàn tin đồn sai sự thật:",
+        "englishSentence": "Peer-reviewed medical trials conclusively [ _____ ] the belief that mineral water causes renal calculi.",
+        "audioText": "Peer-reviewed medical trials conclusively debunk the belief that mineral water causes renal calculi.",
+        "blankWord": "debunk",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "debunk",
+          "create",
+          "support"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Các thử nghiệm y học phản biện độc lập đã bác bỏ dứt khoát quan niệm rằng nước khoáng gây ra sỏi thận.",
+        "explanation": "\"Conclusively debunk\" (bác bỏ dứt khoát bằng bằng chứng xác thực) là cụm từ đắt giá trong tranh luận khoa học.",
+        "whyWrong": "\"Create\" (tạo ra) hay \"support\" (ủng hộ) hoàn toàn sai lệch sự thật y khoa.",
+        "crucialNote": "\"Renal calculi\" là thuật ngữ y khoa chính thức của sỏi thận.",
+        "memoryHook": "Conclusively debunk the kidney stone belief."
       },
       {
         "id": "u51-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Bác Bỏ Tin Đồn Nước Khoáng Gây Sỏi Thận\" (Dẫn giải khoa học muối khoáng hòa tan vi lượng an toàn). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We adhere strictly to certified regional extraction protocols established under health decrees.",
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute."
+        "type": "chat_branch",
+        "promptEn": "Answer a health journalist writing about hydration myths on LinkedIn:",
+        "promptVi": "Mô phỏng tin nhắn: Nhà báo chuyên mục sức khỏe hỏi Vikoda phản hồi thế nào về tin đồn uống nước khoáng hàng ngày bị lắng đọng canxi tạo sỏi:",
+        "englishSentence": "Nephrology studies prove the opposite! Vikoda's balanced TDS and bicarbonate actually dissolve uric acid crystals, making it a daily protective choice for kidney wellness.",
+        "audioText": "Nephrology studies prove the opposite! Vikoda's balanced TDS and bicarbonate actually dissolve uric acid crystals, making it a daily protective choice for kidney wellness.",
+        "chatMessages": [
+          {
+            "speaker": "Hanna (Health Editor, Wellness Asia Magazine)",
+            "avatar": "📰",
+            "message": "Minh, some readers worry that drinking mineral water daily causes calcium buildup and kidney stones. What clinical proof does Vikoda offer?"
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Dẫn giải khoa học muối khoáng hòa tan vi lượng an toàn",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Nephrology studies prove the opposite! Vikoda's balanced TDS and bicarbonate actually dissolve uric acid crystals, making it a daily protective choice for kidney wellness.",
+            "trustScore": 25,
+            "feedback": "Phản hồi mẫu mực của chuyên gia y khoa! Trích dẫn nghiên cứu thận học khẳng định TDS cân bằng và bicacbonat giúp hòa tan tinh thể axit uric, bảo vệ chức năng thận mỗi ngày.",
+            "isCorrect": true
+          },
+          {
+            "text": "Yes, our water might cause stones, so you should only drink 1 sip per month.",
+            "trustScore": 0,
+            "feedback": "Hủy hoại doanh nghiệp! Thừa nhận tin đồn thất thiệt làm người tiêu dùng hoang mang tẩy chay sản phẩm.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Các nghiên cứu thận học chứng minh điều hoàn toàn ngược lại! Hàm lượng TDS cân bằng và bicacbonat của Vikoda thực tế hòa tan các tinh thể axit uric, khiến đây là sự lựa chọn bảo vệ hàng ngày cho sức khỏe thận.",
+        "explanation": "Tự tin dẫn giải y học lâm sàng giúp dập tắt tin đồn thất thiệt và củng cố niềm tin của hàng triệu người tiêu dùng.",
+        "crucialNote": "Được các chuyên gia tiết niệu khuyên dùng để bù nước lành mạnh.",
+        "memoryHook": "Bicarbonate dissolves uric acid crystals for kidney wellness."
       }
     ]
   },
@@ -6851,110 +7153,137 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "subtitle": "Giải thích các chỉ số an toàn vi sinh đạt chuẩn quốc tế",
     "level": "B1",
     "icon": "📑",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u52-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that Pasteur Institute clinical test certificates provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of Pasteur Institute clinical test certificates?",
-        "options": [
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing, as confirmed in our recent departmental briefing with executive management.",
-          "Our clinical research proves that Pasteur Institute clinical test certificates provides natural health benefits without synthetic additives.",
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng trình bày phiếu kiểm nghiệm viện pasteur đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that Pasteur Institute clinical test certificates provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match laboratory testing parameters with their health standards:",
+        "promptVi": "Ghép cặp các chỉ số kiểm nghiệm tại Viện Pasteur với tiêu chuẩn an toàn sức khỏe:",
+        "englishSentence": "Match laboratory testing parameters with health standards.",
+        "audioText": "Match laboratory testing parameters with health standards.",
+        "explanation": "5 chỉ tiêu kiểm nghiệm vi sinh và hóa lý khắt khe khẳng định sự vô trùng tuyệt đối của Vikoda.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp chỉ số kiểm nghiệm Viện Pasteur.",
+        "pairs": [
+          {
+            "left": "Pasteur Institute certificate",
+            "right": "Chứng thư kiểm nghiệm vi sinh độc lập từ Viện Pasteur"
+          },
+          {
+            "left": "Total Dissolved Solids (TDS)",
+            "right": "Tổng chất rắn hòa tan tự nhiên ở ngưỡng vàng lý tưởng"
+          },
+          {
+            "left": "Zero coliform bacteria",
+            "right": "Tuyệt đối không có vi khuẩn Coliform và E. Coli"
+          },
+          {
+            "left": "Heavy metal screening",
+            "right": "Kiểm nghiệm sàng lọc không có chì, thạch tín hay thủy ngân"
+          },
+          {
+            "left": "ISO 17025 accredited lab",
+            "right": "Phòng kiểm nghiệm đạt chuẩn quốc tế ISO 17025"
+          }
+        ]
       },
       {
         "id": "u52-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this certified quality presentation sentence clearly:",
+        "promptVi": "Luyện nói câu trình bày kết quả kiểm nghiệm Viện Pasteur với đoàn kiểm toán quốc tế:",
+        "englishSentence": "The Pasteur Institute tests certify that Vikoda strictly meets all international microbiological and physicochemical safety benchmarks.",
+        "audioText": "The Pasteur Institute tests certify that Vikoda strictly meets all international microbiological and physicochemical safety benchmarks.",
+        "phonetics": "/ðə pæsˈtɜːr ˈɪnstɪtjuːt tɛsts ˈsɜːrtɪfaɪ ðæt vɪˈkoʊdə ˈstrɪktli miːts ɔːl ˌɪntərˈnæʃənl ˌmaɪkroʊˌbaɪəˈlɒdʒɪkəl ænd ˈfɪzɪkoʊˈkɛmɪkəl ˈseɪfti ˈbɛntʃmɑːrks/",
+        "vietnameseMeaning": "Các kết quả xét nghiệm của Viện Pasteur chứng nhận Vikoda đáp ứng nghiêm ngặt mọi tiêu chuẩn an toàn vi sinh và hóa lý quốc tế.",
+        "explanation": "\"Certify that Vikoda strictly meets all microbiological and physicochemical safety benchmarks\" là câu khẳng định chất lượng có giá trị pháp lý quốc tế cao nhất.",
+        "whyWrong": "Phát âm chuẩn từ \"microbiological\" (/ˌmaɪkroʊˌbaɪəˈlɒdʒɪkəl/) và \"physicochemical\" (/ˈfɪzɪkoʊˈkɛmɪkəl/).",
+        "crucialNote": "Viện Pasteur là tổ chức giám định uy tín hàng đầu khu vực với hơn 100 năm lịch sử.",
+        "memoryHook": "Pasteur certifies microbiological and physicochemical benchmarks."
       },
       {
         "id": "u52-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to explain the periodic testing rigor of Vikoda water:",
+        "promptVi": "Ghép câu: \"Mỗi cuộc xét nghiệm định kỳ xác nhận không có bất kỳ kim loại nặng hay chất gây ô nhiễm nào\":",
+        "englishSentence": "Every periodic laboratory test confirms zero heavy metals and zero chemical contamination.",
+        "audioText": "Every periodic laboratory test confirms zero heavy metals and zero chemical contamination.",
         "wordPool": [
-          "from",
-          "mineral",
+          "Every",
+          "periodic",
+          "laboratory",
+          "test",
+          "confirms",
+          "zero",
+          "heavy",
+          "metals",
+          "and",
+          "zero",
+          "chemical",
           "contamination.",
-          "never",
-          "water",
-          "protects",
-          "surface",
-          "aquifer",
-          "environmental",
-          "the",
-          "Our",
-          "deep",
-          "volcanic",
-          "cancel"
+          "dirty",
+          "arsenic"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Mỗi cuộc xét nghiệm định kỳ tại phòng thí nghiệm xác nhận không có bất kỳ kim loại nặng hay chất gây ô nhiễm hóa học nào.",
+        "explanation": "Quy trình kiểm tra 3 cấp: Kiểm tra tại chỗ hàng giờ bởi QC -> Kiểm tra hàng tuần tại Viện Pasteur -> Kiểm tra định kỳ gửi mẫu sang các phòng lab châu Âu.",
+        "whyWrong": "\"Zero heavy metals and zero chemical contamination\" là lời cam kết bằng văn bản có giá trị bảo hiểm toàn cầu.",
+        "crucialNote": "Độ tinh khiết không tì vết là niềm tự hào của vùng đất Đảnh Thạnh.",
+        "memoryHook": "Confirms zero heavy metals and zero contamination."
       },
       {
         "id": "u52-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct scientific abbreviation for total mineral content:",
+        "promptVi": "Chọn thuật ngữ viết tắt chỉ tổng hàm lượng khoáng hòa tan trong nước:",
+        "englishSentence": "Vikoda maintains an ideal [ _____ ] level of 350 to 450 milligrams per liter, offering refreshing taste without mineral heaviness.",
+        "audioText": "Vikoda maintains an ideal TDS level of 350 to 450 milligrams per liter, offering refreshing taste without mineral heaviness.",
+        "blankWord": "TDS",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "TDS",
+          "GPS",
+          "CPU"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Vikoda duy trì hàm lượng TDS lý tưởng từ 350 đến 450 miligam mỗi lít, mang đến hương vị thanh mát mà không bị nồng khoáng.",
+        "explanation": "TDS (Total Dissolved Solids) ở mức 300-500 mg/L được Tổ chức Y tế Thế giới (WHO) đánh giá là ngưỡng khoáng hóa tuyệt hảo nhất cho vị giác con người.",
+        "whyWrong": "\"GPS\" là định vị toàn cầu, \"CPU\" là bộ vi xử lý máy tính.",
+        "crucialNote": "TDS quá cao (>1000 mg/L) sẽ có vị lợ khó uống, TDS quá thấp (<50 mg/L) là nước trơ thiếu chất.",
+        "memoryHook": "TDS 350 to 450 mg/L = Ngưỡng vàng thanh mát."
       },
       {
         "id": "u52-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Trình Bày Phiếu Kiểm Nghiệm Viện Pasteur\" (Giải thích các chỉ số an toàn vi sinh đạt chuẩn quốc tế). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees.",
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches."
+        "type": "chat_branch",
+        "promptEn": "Submit accredited lab reports to a US FDA export auditor on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Kiểm toán viên Cục Quản lý Thực phẩm & Dược phẩm Hoa Kỳ (FDA) yêu cầu xuất trình hồ sơ kiểm nghiệm kim loại nặng mới nhất:",
+        "englishSentence": "Here is the official Pasteur Institute report dated this month: Arsenic, Lead, Cadmium, and Mercury are all 100% Non-Detectable, fully complying with US FDA Title 21 standards.",
+        "audioText": "Here is the official Pasteur Institute report dated this month: Arsenic, Lead, Cadmium, and Mercury are all 100% Non-Detectable, fully complying with US FDA Title 21 standards.",
+        "chatMessages": [
+          {
+            "speaker": "Inspector Miller (FDA Foreign Facility Inspection)",
+            "avatar": "🇺🇸",
+            "message": "Minh, before clearing your export container for California retail, we need official lab certification verifying heavy metal limits under FDA Title 21 CFR 165."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Giải thích các chỉ số an toàn vi sinh đạt chuẩn quốc tế",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Here is the official Pasteur Institute report dated this month: Arsenic, Lead, Cadmium, and Mercury are all 100% Non-Detectable, fully complying with US FDA Title 21 standards.",
+            "trustScore": 25,
+            "feedback": "Phản hồi chuẩn xác đến từng điều luật FDA! Cung cấp đúng mã hiệu Title 21 CFR 165 và khẳng định 4 kim loại nặng độc hại đều ở mức Non-Detectable (không phát hiện), giúp lô hàng được cấp phép nhập cảnh Mỹ ngay lập tức.",
+            "isCorrect": true
+          },
+          {
+            "text": "We don't check for heavy metals in Vietnam, water is water why are you so picky?",
+            "trustScore": 0,
+            "feedback": "Thảm họa xuất khẩu! Container hàng sẽ bị FDA tịch thu và tiêu hủy ngay tại cảng Los Angeles.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Đây là báo cáo chính thức của Viện Pasteur trong tháng này: Asen, Chì, Cadimi và Thủy ngân đều 100% ở mức Không phát hiện (ND), hoàn toàn tuân thủ theo tiêu chuẩn FDA Tiêu đề 21 của Hoa Kỳ.",
+        "explanation": "Sở hữu hồ sơ kiểm nghiệm vi sinh và kim loại nặng đạt chuẩn FDA là tấm hộ chiếu quyền lực nhất của Vikoda trên thị trường xuất khẩu quốc tế.",
+        "crucialNote": "Độ tinh khiết được chứng nhận độc lập là vũ khí cạnh tranh số một.",
+        "memoryHook": "Heavy metals 100% Non-Detectable, complying with US FDA Title 21."
       }
     ]
   },
@@ -6964,111 +7293,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Kỹ Năng Thuyết Trình Dự Án PowerPoint",
     "subtitle": "Mở đầu ấn tượng, chuyển ý mượt mà và nhấn mạnh số liệu",
     "level": "B1",
-    "icon": "🖥️",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "📊",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u53-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that PowerPoint slide delivery for corporate pitching provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of PowerPoint slide delivery for corporate pitching?",
-        "options": [
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters, as confirmed in our recent departmental briefing with executive management.",
-          "Our clinical research proves that PowerPoint slide delivery for corporate pitching provides natural health benefits without synthetic additives.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng kỹ năng thuyết trình dự án powerpoint đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that PowerPoint slide delivery for corporate pitching provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match presentation staging and delivery techniques with their functions:",
+        "promptVi": "Ghép cặp các kỹ thuật thuyết trình PowerPoint chuyên nghiệp theo chuẩn Oxford English:",
+        "englishSentence": "Match executive presentation techniques.",
+        "audioText": "Match executive presentation techniques.",
+        "explanation": "5 kỹ thuật sân khấu then chốt giúp bạn chinh phục mọi hội đồng giám khảo và đối tác đầu tư.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp kỹ thuật thuyết trình dự án PowerPoint.",
+        "pairs": [
+          {
+            "left": "Hook the audience",
+            "right": "Mở đầu bằng câu hỏi hoặc số liệu gây ấn tượng mạnh"
+          },
+          {
+            "left": "Smooth transition phrase",
+            "right": "Câu chuyển ý nhịp nhàng và kết nối các phần nội dung"
+          },
+          {
+            "left": "Highlight key metrics",
+            "right": "Nhấn mạnh các con số tăng trưởng doanh thu và sản lượng"
+          },
+          {
+            "left": "Visual slide simplicity",
+            "right": "Thiết kế slide tối giản, trực quan và hạn chế chữ dày đặc"
+          },
+          {
+            "left": "Memorable call to action",
+            "right": "Lời kêu gọi hành động sâu sắc đọng lại trong tâm trí"
+          }
+        ]
       },
       {
         "id": "u53-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this charismatic presentation opening clearly:",
+        "promptVi": "Luyện nói câu mở đầu bài thuyết trình dự án mở rộng kênh phân phối quốc tế:",
+        "englishSentence": "Good morning distinguished guests! Today, I am proud to share how Vikoda delivers pristine wellness to over thirty million consumers.",
+        "audioText": "Good morning distinguished guests! Today, I am proud to share how Vikoda delivers pristine wellness to over thirty million consumers.",
+        "phonetics": "/ɡʊd ˈmɔːrnɪŋ dɪˈstɪŋɡwɪʃt ɡɛsts! təˈdeɪ, aɪ æm praʊd tuː ʃɛər haʊ vɪˈkoʊdə dɪˈlɪvərz ˈprɪstiːn ˈwɛlnəs tuː ˈoʊvər ˈθɜːrti ˈmɪljən kənˈsuːmərz/",
+        "vietnameseMeaning": "Chào buổi sáng quý vị khách quý! Hôm nay, tôi rất tự hào được chia sẻ cách Vikoda mang nguồn sức khỏe thuần khiết đến với hơn ba mươi triệu người tiêu dùng.",
+        "explanation": "\"Good morning distinguished guests! Today, I am proud to share...\" là câu mở đầu đĩnh đạc, sang trọng và truyền cảm hứng dồi dào.",
+        "whyWrong": "Phát âm chuẩn từ \"distinguished guests\" (/dɪˈstɪŋɡwɪʃt ɡɛsts/) và \"pristine wellness\" (/ˈprɪstiːn ˈwɛlnəs/).",
+        "crucialNote": "Đứng thẳng người, ánh mắt bao quát toàn bộ khán phòng và mỉm cười tự tin.",
+        "memoryHook": "Good morning distinguished guests + proud to share how Vikoda delivers wellness."
       },
       {
         "id": "u53-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to guide audience attention to a market growth chart:",
+        "promptVi": "Ghép câu: \"Xin hãy hướng sự chú ý của quý vị vào biểu đồ tăng trưởng doanh số trên slide này\":",
+        "englishSentence": "Please direct your attention to the impressive sales growth chart on this slide.",
+        "audioText": "Please direct your attention to the impressive sales growth chart on this slide.",
         "wordPool": [
-          "mineral",
-          "cancel",
-          "from",
+          "Please",
+          "direct",
+          "your",
+          "attention",
+          "to",
           "the",
-          "volcanic",
-          "never",
-          "surface",
-          "aquifer",
-          "protects",
-          "deep",
-          "environmental",
-          "water",
-          "Our",
-          "contamination."
+          "impressive",
+          "sales",
+          "growth",
+          "chart",
+          "on",
+          "this",
+          "slide.",
+          "ignore",
+          "sleep"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Xin hãy hướng sự chú ý của quý vị vào biểu đồ tăng trưởng doanh số ấn tượng trên slide này.",
+        "explanation": "\"Please direct your attention to [Chi tiết]\" là mẫu câu điều hướng sự chú ý đỉnh cao trong thuyết trình thương mại.",
+        "whyWrong": "Dùng từ chỉ thị lịch thiệp thay vì chỉ tay thô lỗ vào màn hình chiếu.",
+        "crucialNote": "Dừng lại 2-3 giây sau khi nói câu này để khán giả kịp nhìn vào số liệu biểu đồ.",
+        "memoryHook": "Direct your attention to the sales growth chart."
       },
       {
         "id": "u53-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct transitional presentation phrase:",
+        "promptVi": "Chọn cụm từ chuyển tiếp mượt mà để bước sang phần chiến lược xuất khẩu:",
+        "englishSentence": "Now that we have reviewed production capacity, let us [ _____ ] on to our international export roadmap.",
+        "audioText": "Now that we have reviewed production capacity, let us move on to our international export roadmap.",
+        "blankWord": "move",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "move",
+          "sleep",
+          "quit"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Sau khi đã điểm qua năng lực sản xuất, bây giờ chúng ta hãy chuyển tiếp sang lộ trình xuất khẩu quốc tế.",
+        "explanation": "\"Let us move on to [Chủ đề tiếp theo]\" là cụm từ chuyển ý kinh điển trong cẩm nang thuyết trình của Oxford.",
+        "whyWrong": "\"Sleep\" hay \"quit\" hoàn toàn phá hỏng nhịp điệu của bài thuyết trình.",
+        "crucialNote": "Tóm tắt ngắn gọn phần trước trước khi mở ra phần nội dung mới.",
+        "memoryHook": "Let us move on to our export roadmap."
       },
       {
         "id": "u53-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Kỹ Năng Thuyết Trình Dự Án PowerPoint\" (Mở đầu ấn tượng, chuyển ý mượt mà và nhấn mạnh số liệu). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells."
+        "type": "chat_branch",
+        "promptEn": "Align presentation slide delivery with your co-presenter before taking the stage on Teams:",
+        "promptVi": "Mô phỏng tin nhắn: Bạn cùng thuyết trình với Giám đốc Marketing trước hội đồng đầu tư tại Bangkok, hãy thống nhất phân chia vai trò:",
+        "englishSentence": "I will deliver the 1957 heritage story and lab purity data, then pass the floor to you for the financial projections and regional rollout plan!",
+        "audioText": "I will deliver the 1957 heritage story and lab purity data, then pass the floor to you for the financial projections and regional rollout plan!",
+        "chatMessages": [
+          {
+            "speaker": "Linh (Marketing Director, Vikoda International)",
+            "avatar": "📈",
+            "message": "Minh, we have 15 minutes total in front of the Bangkok venture capital panel. How shall we split the slides?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Mở đầu ấn tượng, chuyển ý mượt mà và nhấn mạnh số liệu",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "I will deliver the 1957 heritage story and lab purity data, then pass the floor to you for the financial projections and regional rollout plan!",
+            "trustScore": 25,
+            "feedback": "Phối hợp thuyết trình đồng đội hoàn hảo! Chia rõ phần câu chuyện di sản và dữ liệu kiểm nghiệm, sau đó nhường lời mượt mà (pass the floor) cho phần tài chính và kế hoạch triển khai.",
+            "isCorrect": true
+          },
+          {
+            "text": "I will talk for 14 minutes and leave you 30 seconds to say whatever you want.",
+            "trustScore": 0,
+            "feedback": "Thiếu tinh thần đồng đội trầm trọng! Hội đồng đầu tư sẽ đánh giá nội bộ thiếu gắn kết.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Em sẽ trình bày câu chuyện di sản 1957 và số liệu kiểm nghiệm độ tinh khiết, sau đó sẽ chuyển lời cho chị phụ trách phần dự báo tài chính và kế hoạch triển khai khu vực nhé!",
+        "explanation": "Nghệ thuật chuyển giao quyền phát biểu (Pass the floor) nhịp nhàng chứng tỏ sự ăn ý tuyệt đối của ban lãnh đạo doanh nghiệp.",
+        "crucialNote": "Sự đồng lòng của đội ngũ thuyết trình mang lại 80% niềm tin cho các nhà đầu tư.",
+        "memoryHook": "Pass the floor smoothly for financial projections."
       }
     ]
   },
@@ -7078,111 +7435,137 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Làm Chủ Phần Hỏi Đáp Q&A Cân Não",
     "subtitle": "Bình tĩnh phản hồi các câu hỏi hóc búa của chuyên gia",
     "level": "B1",
-    "icon": "❓",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🎯",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u54-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that handling tough Q&A questions from experts provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of handling tough Q&A questions from experts?",
-        "options": [
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters, as confirmed in our recent departmental briefing with executive management.",
-          "Our clinical research proves that handling tough Q&A questions from experts provides natural health benefits without synthetic additives.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng làm chủ phần hỏi đáp q&a cân não đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that handling tough Q&A questions from experts provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match executive Q&A handling strategies with their goals:",
+        "promptVi": "Ghép cặp các chiến lược làm chủ phần hỏi đáp (Q&A) cân não trước hội đồng thẩm định:",
+        "englishSentence": "Match executive Q&A defense strategies.",
+        "audioText": "Match executive Q&A defense strategies.",
+        "explanation": "5 chiến thuật ngoại giao bản lĩnh giúp hóa giải mọi câu hỏi hóc búa từ chuyên gia và đối thủ.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp chiến thuật làm chủ phần hỏi đáp Q&A.",
+        "pairs": [
+          {
+            "left": "Thank the questioner",
+            "right": "Cảm ơn người đặt câu hỏi để có thêm thời gian suy ngẫm"
+          },
+          {
+            "left": "Clarify ambiguous points",
+            "right": "Hỏi lại để làm rõ câu hỏi trước khi trả lời trực tiếp"
+          },
+          {
+            "left": "Bridge to core strengths",
+            "right": "Kỹ thuật bắc cầu chuyển hướng câu hỏi về thế mạnh sản phẩm"
+          },
+          {
+            "left": "Diplomatic composure",
+            "right": "Giữ vững phong thái điềm tĩnh, không nổi nóng hay tự ái"
+          },
+          {
+            "left": "Follow up with documentation",
+            "right": "Cam kết gửi thêm tài liệu chuyên sâu sau buổi họp"
+          }
+        ]
       },
       {
         "id": "u54-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this diplomatic Q&A acknowledgment clearly:",
+        "promptVi": "Luyện nói câu tiếp nhận câu hỏi hóc búa một cách hòa nhã và bản lĩnh:",
+        "englishSentence": "Thank you for that thought-provoking question regarding our seasonal bottling capacity during the dry season.",
+        "audioText": "Thank you for that thought-provoking question regarding our seasonal bottling capacity during the dry season.",
+        "phonetics": "/θæŋk juː fɔːr ðæt θɔːt prəˈvoʊkɪŋ ˈkwɛstʃən rɪˈɡɑːrdɪŋ ˈaʊər ˈsiːzənl ˈbɒtlɪŋ kəˈpæsɪti ˈdjʊərɪŋ ðə draɪ ˈsiːzən/",
+        "vietnameseMeaning": "Cảm ơn ngài vì câu hỏi rất sâu sắc liên quan đến công suất đóng chai theo mùa trong mùa khô hạn.",
+        "explanation": "\"Thank you for that thought-provoking question...\" là câu khen ngợi người hỏi rất tinh tế, giúp xoa dịu bầu không khí căng thẳng.",
+        "whyWrong": "Dùng tính từ sang trọng \"thought-provoking\" (/θɔːt prəˈvoʊkɪŋ/ - gợi mở nhiều suy ngẫm).",
+        "crucialNote": "Không tỏ thái độ khó chịu hay ngắt lời người đang đặt câu hỏi.",
+        "memoryHook": "Thank you for that thought-provoking question."
       },
       {
         "id": "u54-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to deploy the bridging technique in business defense:",
+        "promptVi": "Ghép câu: \"Cho phép tôi làm rõ giao thức dự phòng nguồn nước của chúng tôi một cách chi tiết hơn\":",
+        "englishSentence": "Allow me to clarify our contingency buffer protocol in greater detail.",
+        "audioText": "Allow me to clarify our contingency buffer protocol in greater detail.",
         "wordPool": [
-          "water",
-          "Our",
-          "never",
-          "surface",
-          "contamination.",
-          "aquifer",
-          "the",
-          "deep",
-          "environmental",
-          "mineral",
-          "from",
-          "protects",
-          "cancel",
-          "volcanic"
+          "Allow",
+          "me",
+          "to",
+          "clarify",
+          "our",
+          "contingency",
+          "buffer",
+          "protocol",
+          "in",
+          "greater",
+          "detail.",
+          "argue",
+          "yell"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Cho phép tôi làm rõ quy trình đệm dự phòng sự cố của chúng tôi một cách chi tiết hơn.",
+        "explanation": "\"Allow me to clarify [Chủ đề] in greater detail\" là bước chuyển nhẹ nhàng biến câu hỏi chất vấn thành cơ hội khoe năng lực dự phòng vững mạnh của công ty.",
+        "whyWrong": "\"Contingency buffer protocol\" thể hiện tính chuẩn bị bài bản cấp tập đoàn.",
+        "crucialNote": "Tự tin nhìn thẳng vào mắt người hỏi khi giải thích.",
+        "memoryHook": "Allow me to clarify our protocol in greater detail."
       },
       {
         "id": "u54-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct diplomatic term for addressing partner worries:",
+        "promptVi": "Chọn từ chính xác thể hiện sự thấu hiểu và giải tỏa nỗi băn khoăn của đối tác:",
+        "englishSentence": "I completely understand your perspective, and I am glad to address that [ _____ ] directly.",
+        "audioText": "I completely understand your perspective, and I am glad to address that concern directly.",
+        "blankWord": "concern",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "concern",
+          "insult",
+          "gossip"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Tôi hoàn toàn thấu hiểu góc nhìn của ngài, và tôi rất vui mừng được giải tỏa nỗi băn khoăn đó một cách trực tiếp.",
+        "explanation": "\"Address that concern directly\" (giải quyết trực tiếp mối băn khoăn) thể hiện sự minh bạch và tự tin tuyệt đối.",
+        "whyWrong": "\"Insult\" (sự sỉ nhục) hay \"gossip\" (chuyện ngồi lê đôi mách) phá hỏng tính chuyên nghiệp của phiên Q&A.",
+        "crucialNote": "Biến nỗi lo của đối tác thành sự an tâm tuyệt đối.",
+        "memoryHook": "Address that concern directly = Giải tỏa băn khoăn trực diện."
       },
       {
         "id": "u54-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Làm Chủ Phần Hỏi Đáp Q&A Cân Não\" (Bình tĩnh phản hồi các câu hỏi hóc búa của chuyên gia). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees."
+        "type": "chat_branch",
+        "promptEn": "Handle a skeptical competitor consultant challenging water freshness on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Chuyên gia thẩm định từ quỹ đầu tư đối thủ hỏi khó liệu nước đóng chai lưu kho 6 tháng có bị mất vị ngọt tự nhiên không:",
+        "englishSentence": "Because Vikoda is naturally bottled at 72°C with impermeable crown glass seals, blind sensory tests prove zero flavor degradation even after 18 months!",
+        "audioText": "Because Vikoda is naturally bottled at 72°C with impermeable crown glass seals, blind sensory tests prove zero flavor degradation even after 18 months!",
+        "chatMessages": [
+          {
+            "speaker": "Frank (Senior Sourcing Consultant, Horizon Capital)",
+            "avatar": "🧐",
+            "message": "Minh, mineral water often develops a stale flat taste after sitting in warehouse pallets for 6 months. How do you guarantee shelf taste consistency?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Bình tĩnh phản hồi các câu hỏi hóc búa của chuyên gia",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Because Vikoda is naturally bottled at 72°C with impermeable crown glass seals, blind sensory tests prove zero flavor degradation even after 18 months!",
+            "trustScore": 25,
+            "feedback": "Phản pháo sắc bén và khoa học! Dẫn chứng kiểm nghiệm cảm quan nếm mù (blind sensory test), nắp kim loại kín khí và nguồn nhiệt 72°C bảo toàn trọn vẹn hương vị sau 18 tháng lưu kho.",
+            "isCorrect": true
+          },
+          {
+            "text": "If it tastes stale, just shake the bottle hard and put some ice cubes into it.",
+            "trustScore": 0,
+            "feedback": "Câu trả lời cợt nhả thiếu hiểu biết! Làm mất đi toàn bộ uy tín trước các nhà đầu tư lớn.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Bởi vì Vikoda được đóng chai tự nhiên ở 72 độ C với nắp kim loại kín khí tuyệt đối, các thử nghiệm cảm quan nếm mù chứng minh không hề có sự suy giảm hương vị nào kể cả sau 18 tháng!",
+        "explanation": "Đưa ra bằng chứng thử nghiệm cảm quan (Sensory Testing) là đòn kết liễu dập tắt mọi nghi ngờ của những chuyên gia khó tính nhất.",
+        "crucialNote": "Hương vị thanh ngọt nguyên bản của mỏ Đảnh Thạnh là tài sản vô giá trường tồn.",
+        "memoryHook": "Blind sensory tests prove zero flavor degradation."
       }
     ]
   },
@@ -7192,111 +7575,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Xử Lý Phàn Nàn Của Khách Hàng",
     "subtitle": "Lắng nghe thấu cảm và đưa ra giải pháp khắc phục ngay",
     "level": "B1",
-    "icon": "🎧",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🤝",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u55-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that empathic customer complaint resolution provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of empathic customer complaint resolution?",
-        "options": [
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches, as confirmed in our recent departmental briefing with executive management.",
-          "Our clinical research proves that empathic customer complaint resolution provides natural health benefits without synthetic additives.",
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng xử lý phàn nàn của khách hàng đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that empathic customer complaint resolution provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match customer complaint resolution and empathy steps with their actions:",
+        "promptVi": "Ghép cặp các bước trong quy trình xử lý khiếu nại khách hàng chuẩn mực quốc tế:",
+        "englishSentence": "Match customer complaint recovery steps.",
+        "audioText": "Match customer complaint recovery steps.",
+        "explanation": "5 bước vàng biến một khách hàng đang tức giận thành người ủng hộ trung thành suốt đời của thương hiệu.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp quy trình xử lý khiếu nại khách hàng B2B.",
+        "pairs": [
+          {
+            "left": "Acknowledge with empathy",
+            "right": "Lắng nghe chân thành và thấu cảm sâu sắc nỗi bức xúc"
+          },
+          {
+            "left": "Investigate root cause",
+            "right": "Tìm hiểu điều tra nguyên nhân gốc rễ của sự cố"
+          },
+          {
+            "left": "Propose immediate solution",
+            "right": "Đưa ra phương án giải quyết khắc phục ngay lập tức"
+          },
+          {
+            "left": "Offer goodwill compensation",
+            "right": "Tặng quà lưu niệm hoặc chiết khấu thiện chí tri ân"
+          },
+          {
+            "left": "Prevent future recurrence",
+            "right": "Cải tiến quy trình để không bao giờ tái diễn lỗi lần sau"
+          }
+        ]
       },
       {
         "id": "u55-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this heartfelt de-escalation apology clearly:",
+        "promptVi": "Luyện nói câu xin lỗi chân thành và cam kết hành động khẩn cấp giải tỏa cơn giận của đối tác:",
+        "englishSentence": "We sincerely apologize for this delivery delay and have already dispatched a priority replacement van to your hotel.",
+        "audioText": "We sincerely apologize for this delivery delay and have already dispatched a priority replacement van to your hotel.",
+        "phonetics": "/wiː sɪnˈsɪərli əˈpɒlədʒaɪz fɔːr ðɪs dɪˈlɪvəri dɪˈleɪ ænd hæv ɔːlˈrɛdi dɪˈspætʃt ə praɪˈɒrəti rɪˈpleɪsmənt væn tuː jʊər hoʊˈtɛl/",
+        "vietnameseMeaning": "Chúng tôi thành thật xin lỗi vì sự chậm trễ trong chuyến giao hàng này và đã cho xuất phát ngay một xe van thay thế ưu tiên đến khách sạn của bạn.",
+        "explanation": "\"We sincerely apologize for [Sự cố] and have already dispatched [Giải pháp]\" thể hiện trách nhiệm giải quyết vấn đề bằng hành động cụ thể chứ không bao biện vòng vo.",
+        "whyWrong": "Phát âm chuẩn từ \"sincerely apologize\" (/sɪnˈsɪərli əˈpɒlədʒaɪz/).",
+        "crucialNote": "Không bao giờ đổ lỗi cho thời tiết hay tài xế trước mặt khách hàng.",
+        "memoryHook": "Sincerely apologize + already dispatched priority replacement."
       },
       {
         "id": "u55-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to present a gesture of goodwill to retain customer loyalty:",
+        "promptVi": "Ghép câu: \"Xin hãy nhận món quà tri ân này như lời xin lỗi chân thành nhất từ ban giám đốc\":",
+        "englishSentence": "Please accept this gesture of goodwill as a sincere apology from our management.",
+        "audioText": "Please accept this gesture of goodwill as a sincere apology from our management.",
         "wordPool": [
-          "cancel",
-          "volcanic",
-          "environmental",
-          "never",
-          "surface",
-          "deep",
-          "the",
-          "protects",
-          "mineral",
-          "contamination.",
-          "Our",
-          "water",
+          "Please",
+          "accept",
+          "this",
+          "gesture",
+          "of",
+          "goodwill",
+          "as",
+          "a",
+          "sincere",
+          "apology",
           "from",
-          "aquifer"
+          "our",
+          "management.",
+          "hate",
+          "fight"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Xin hãy nhận cử chỉ thiện chí này như lời xin lỗi chân thành nhất từ ban giám đốc của chúng tôi.",
+        "explanation": "\"Gesture of goodwill\" (cử chỉ thiện chí) như tặng kèm 5 thùng nước chai thủy tinh hoặc miễn phí vận chuyển giúp hàn gắn mối quan hệ lập tức.",
+        "whyWrong": "Dùng từ trang nhã biến sự cố thành cơ hội thắt chặt tình nghĩa đối tác.",
+        "crucialNote": "Đích thân quản lý cấp cao ký thư xin lỗi gửi đến khách.",
+        "memoryHook": "Gesture of goodwill as a sincere apology."
       },
       {
         "id": "u55-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct term for root-cause quality analysis:",
+        "promptVi": "Chọn thuật ngữ chỉ quá trình truy tìm nguyên nhân cốt lõi để triệt tiêu lỗi:",
+        "englishSentence": "Our plant manager initiated a thorough root-cause [ _____ ] to eliminate warehouse dispatch errors.",
+        "audioText": "Our plant manager initiated a thorough root-cause investigation to eliminate warehouse dispatch errors.",
+        "blankWord": "investigation",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "investigation",
+          "party",
+          "celebration"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Giám đốc nhà máy của chúng tôi đã khởi động một cuộc điều tra nguyên nhân gốc rễ toàn diện để triệt tiêu các lỗi xuất kho.",
+        "explanation": "\"Root-cause investigation\" (điều tra nguyên nhân gốc rễ) là phương pháp quản trị chất lượng 5 Whys loại bỏ dứt điểm sai sót.",
+        "whyWrong": "\"Party\" (bữa tiệc) hay \"celebration\" (lễ ăn mừng) hoàn toàn không phù hợp trong xử lý sự cố.",
+        "crucialNote": "Báo cáo nguyên nhân gốc rễ được gửi minh bạch cho khách hàng thẩm duyệt.",
+        "memoryHook": "Root-cause investigation to eliminate errors."
       },
       {
         "id": "u55-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Xử Lý Phàn Nàn Của Khách Hàng\" (Lắng nghe thấu cảm và đưa ra giải pháp khắc phục ngay). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees."
+        "type": "chat_branch",
+        "promptEn": "De-escalate an enraged 5-star resort general manager on WhatsApp:",
+        "promptVi": "Mô phỏng tin nhắn: Tổng Giám đốc khu nghỉ dưỡng Fusion Resort Nha Trang nhắn tin nổi giận vì đơn hàng 200 thùng nước bị giao thiếu 10 thùng chai thủy tinh:",
+        "englishSentence": "I completely understand your frustration, Mr. Daniel! I am personally driving our emergency vehicle with 15 complimentary cases to arrive within 20 minutes.",
+        "audioText": "I completely understand your frustration, Mr. Daniel! I am personally driving our emergency vehicle with 15 complimentary cases to arrive within 20 minutes.",
+        "chatMessages": [
+          {
+            "speaker": "Mr. Daniel (General Manager, Fusion Resort)",
+            "avatar": "😤",
+            "message": "Minh! Your truck just short-delivered 10 cases of glass bottles right before our VIP ambassadors dinner! This is totally unacceptable!"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Lắng nghe thấu cảm và đưa ra giải pháp khắc phục ngay",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "I completely understand your frustration, Mr. Daniel! I am personally driving our emergency vehicle with 15 complimentary cases to arrive within 20 minutes.",
+            "trustScore": 25,
+            "feedback": "Cứu nguy và xoa dịu khách hàng đỉnh cao 100%! Đồng cảm với cơn giận, đích thân điều xe khẩn cấp chở bù 15 thùng miễn phí đến trong 20 phút. Tổng Giám đốc resort sẽ vô cùng kính nể tinh thần trách nhiệm này.",
+            "isCorrect": true
+          },
+          {
+            "text": "Check your receipt, maybe your lazy staff stole the 10 boxes.",
+            "trustScore": 0,
+            "feedback": "Xúc phạm khách hàng thô bạo! Hợp đồng triệu đô sẽ bị hủy ngay lập tức.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Tôi hoàn toàn thấu hiểu sự thất vọng và bực bội của ngài, thưa ông Daniel! Tôi đang đích thân lái xe chở khẩn cấp 15 thùng nước miễn phí đến nơi trong vòng 20 phút nữa ạ.",
+        "explanation": "Tác phong nhận trách nhiệm và tự tay giải quyết sự cố thần tốc là phẩm chất của nhà lãnh đạo dịch vụ xuất sắc.",
+        "crucialNote": "Tặng thêm 5 thùng bù đắp sự bất tiện thể hiện sự hào sảng của thương hiệu Vikoda.",
+        "memoryHook": "Personally driving emergency vehicle with complimentary cases."
       }
     ]
   },
@@ -7304,113 +7715,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "id": "unit-56",
     "unitNumber": 56,
     "title": "Kỹ Thuật Kể Câu Chuyện Thương Hiệu",
-    "subtitle": "Truyền cảm hứng về giọt \"Ngọc Trong Đá\" của Đảnh Thạnh",
+    "subtitle": "Truyền cảm hứng về giọt Ngọc Trong Đá - Tinh hoa Đảnh Thạnh",
     "level": "B1",
-    "icon": "📖",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "💎",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u56-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that brand storytelling of the jewel in the rock provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of brand storytelling of the jewel in the rock?",
-        "options": [
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing, as confirmed in our recent departmental briefing with executive management.",
-          "Our clinical research proves that brand storytelling of the jewel in the rock provides natural health benefits without synthetic additives.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng kỹ thuật kể câu chuyện thương hiệu đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that brand storytelling of the jewel in the rock provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match brand storytelling and emotional resonance terms with their meanings:",
+        "promptVi": "Ghép cặp các khái niệm nghệ thuật kể chuyện thương hiệu (Storytelling) \"Ngọc Trong Đá\":",
+        "englishSentence": "Match brand storytelling and emotional resonance terms.",
+        "audioText": "Match brand storytelling and emotional resonance terms.",
+        "explanation": "5 kỹ thuật chạm tới trái tim người nghe, biến giọt nước khoáng thành kiệt tác thiên nhiên.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ nghệ thuật kể chuyện thương hiệu.",
+        "pairs": [
+          {
+            "left": "Gem in the rock narrative",
+            "right": "Câu chuyện biểu tượng triết lý Ngọc Trong Đá mài giũa tỏa sáng"
+          },
+          {
+            "left": "Centuries of patience",
+            "right": "Hàng trăm năm kiên nhẫn chắt lọc qua các tầng địa chất"
+          },
+          {
+            "left": "Emotional brand resonance",
+            "right": "Sự đồng điệu cảm xúc sâu sắc giữa người dùng và thương hiệu"
+          },
+          {
+            "left": "Gift of Mother Nature",
+            "right": "Món quà vô giá của Mẹ Thiên Nhiên ban tặng cho sức khỏe"
+          },
+          {
+            "left": "Authentic heritage storytelling",
+            "right": "Nghệ thuật truyền cảm hứng bằng câu chuyện di sản có thật"
+          }
+        ]
       },
       {
         "id": "u56-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this poetic brand storytelling passage clearly:",
+        "promptVi": "Luyện nói câu chuyện thương hiệu đầy cảm xúc về viên Ngọc Trong Đá của Vikoda:",
+        "englishSentence": "Like a precious gem hidden within ancient rock, every drop of Vikoda is patiently purified by Mother Nature to deliver pure vitality.",
+        "audioText": "Like a precious gem hidden within ancient rock, every drop of Vikoda is patiently purified by Mother Nature to deliver pure vitality.",
+        "phonetics": "/laɪk ə ˈprɛʃəs dʒɛm ˈhɪdən wɪðˈɪn ˈeɪnʃənt rɒk, ˈɛvri drɒp ɒv vɪˈkoʊdə ɪz ˈpeɪʃəntli ˈpjʊərɪfaɪd baɪ ˈmʌðər ˈneɪtʃər tuː dɪˈlɪvər pjʊər vaɪˈtæləti/",
+        "vietnameseMeaning": "Như một viên ngọc quý ẩn mình trong tầng đá cổ, mỗi giọt nước Vikoda được Mẹ Thiên Nhiên kiên nhẫn thanh lọc để mang đến sức sống thuần khiết.",
+        "explanation": "Triết lý \"Ngọc Trong Đá\" là linh hồn văn hóa của tập đoàn FIT và Vikoda: Giá trị đích thực cần sự kiên định mài giũa qua thử thách của thời gian.",
+        "whyWrong": "Nói với ngữ điệu truyền cảm, nhấn vào \"precious gem\", \"patiently purified\" và \"pure vitality\".",
+        "crucialNote": "Câu chuyện giúp sản phẩm thoát khỏi cuộc chiến cạnh tranh giá rẻ để đứng ở vị thế kiệt tác vô giá.",
+        "memoryHook": "Like a precious gem within ancient rock, purified by nature."
       },
       {
         "id": "u56-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to describe the emotional bond created by authentic storytelling:",
+        "promptVi": "Ghép câu: \"Câu chuyện thương hiệu chân thật tạo nên mối liên kết cảm xúc bền chặt cùng khách hàng\":",
+        "englishSentence": "Authentic brand storytelling creates an enduring emotional bond with our customers.",
+        "audioText": "Authentic brand storytelling creates an enduring emotional bond with our customers.",
         "wordPool": [
-          "volcanic",
-          "protects",
-          "the",
-          "deep",
-          "surface",
-          "from",
-          "aquifer",
-          "water",
-          "cancel",
-          "contamination.",
-          "never",
-          "Our",
-          "mineral",
-          "environmental"
+          "Authentic",
+          "brand",
+          "storytelling",
+          "creates",
+          "an",
+          "enduring",
+          "emotional",
+          "bond",
+          "with",
+          "our",
+          "customers.",
+          "fake",
+          "boring"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Câu chuyện thương hiệu chân thật tạo nên mối liên kết cảm xúc bền chặt cùng khách hàng của chúng tôi.",
+        "explanation": "Khách hàng không chỉ mua chai nước, họ mua niềm tự hào, nguồn năng lượng thanh khiết và di sản văn hóa Việt Nam.",
+        "whyWrong": "\"Enduring emotional bond\" (mối gắn kết cảm xúc trường tồn) là đỉnh cao của lòng trung thành thương hiệu.",
+        "crucialNote": "Chân thực (Authentic) là yếu tố quyết định sức sống của câu chuyện.",
+        "memoryHook": "Storytelling creates an enduring emotional bond."
       },
       {
         "id": "u56-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct symbolic term for the brand philosophy:",
+        "promptVi": "Chọn biểu tượng triết lý cốt lõi của thương hiệu Vikoda:",
+        "englishSentence": "Our brand philosophy compares human potential to a [ _____ ] hidden inside the raw rock waiting to shine.",
+        "audioText": "Our brand philosophy compares human potential to a gem hidden inside the raw rock waiting to shine.",
+        "blankWord": "gem",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "gem",
+          "brick",
+          "stone"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Triết lý thương hiệu của chúng tôi ví tiềm năng con người như một viên ngọc quý ẩn giấu trong khối đá thô đang chờ ngày tỏa sáng.",
+        "explanation": "\"Gem\" (viên ngọc quý) là hình tượng bất hủ trong Cẩm nang nhân sự và triết lý doanh nghiệp Vikoda.",
+        "whyWrong": "\"Brick\" (viên gạch) hay \"stone\" (hòn đá thông thường) không mang ý nghĩa của sự quý giá và tỏa sáng.",
+        "crucialNote": "Mỗi nhân viên Vikoda là một viên ngọc quý đang được tôi luyện để vươn tầm quốc tế.",
+        "memoryHook": "A gem hidden inside the raw rock waiting to shine."
       },
       {
         "id": "u56-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Kỹ Thuật Kể Câu Chuyện Thương Hiệu\" (Truyền cảm hứng về giọt \"Ngọc Trong Đá\" của Đảnh Thạnh). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees."
+        "type": "chat_branch",
+        "promptEn": "Pitch the brand storytelling concept to an international advertising agency on Slack:",
+        "promptVi": "Mô phỏng tin nhắn: Giám đốc sáng tạo agency quảng cáo Singapore muốn tìm ý tưởng đột phá cho phim quảng cáo toàn cầu:",
+        "englishSentence": "Let's build the commercial around 'The Gem in the Rock': tracing a droplet's 100-year underground journey through basalt strata into a glass bottle!",
+        "audioText": "Let's build the commercial around 'The Gem in the Rock': tracing a droplet's 100-year underground journey through basalt strata into a glass bottle!",
+        "chatMessages": [
+          {
+            "speaker": "Marcus (Executive Creative Director, BBDO Singapore)",
+            "avatar": "🎬",
+            "message": "Minh, we want a cinematic commercial concept that moves beyond ordinary product features. What is the poetic heart of Vikoda?"
+          }
         ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Truyền cảm hứng về giọt \"Ngọc Trong Đá\" của Đảnh Thạnh",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Let's build the commercial around 'The Gem in the Rock': tracing a droplet's 100-year underground journey through basalt strata into a glass bottle!",
+            "trustScore": 25,
+            "feedback": "Ý tưởng kịch bản điện ảnh xuất sắc! Khắc họa hành trình 100 năm xuyên qua các tầng đá bazan thành giọt ngọc trong chai thủy tinh, chạm đến mọi giác quan của người xem.",
+            "isCorrect": true
+          },
+          {
+            "text": "Just show a video of a plastic bottle rotating on a white background with loud pop music.",
+            "trustScore": 0,
+            "feedback": "Tầm thường và nhàm chán! Biến kiệt tác thiên nhiên thành clip quảng cáo rẻ tiền.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Hãy xây dựng đoạn phim quảng cáo xoay quanh 'Ngọc Trong Đá': dõi theo hành trình 100 năm của một giọt nước dưới lòng đất qua các tầng đá bazan vào chai thủy tinh!",
+        "explanation": "Biến khoa học địa chất thành nghệ thuật điện ảnh lay động trái tim hàng triệu người tiêu dùng thế giới.",
+        "crucialNote": "Hình ảnh giọt ngọc lấp lánh phản chiếu nguồn năng lượng kiềm tự nhiên sống động.",
+        "memoryHook": "Trace a droplet's 100-year underground journey into a glass bottle."
       }
     ]
   },
@@ -7420,111 +7857,139 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Đảnh Thạnh Có Ga & Nghệ Thuật Pha Chế",
     "subtitle": "Công thức Mocktail và Cocktail khoáng sảng khoái",
     "level": "B1",
-    "icon": "🍹",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🍸",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u57-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that sparkling water mocktail mixology artistry provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of sparkling water mocktail mixology artistry?",
-        "options": [
-          "We adhere strictly to certified regional extraction protocols established under health decrees, as confirmed in our recent departmental briefing with executive management.",
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters, pending formal verification from our international distribution coordinators.",
-          "Our clinical research proves that sparkling water mocktail mixology artistry provides natural health benefits without synthetic additives."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng đảnh thạnh có ga & nghệ thuật pha chế đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that sparkling water mocktail mixology artistry provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match sparkling mixology and beverage sensory terms with their definitions:",
+        "promptVi": "Ghép cặp các thuật ngữ pha chế Mixology với nước khoáng có ga Đảnh Thạnh:",
+        "englishSentence": "Match sparkling water mixology and sensory terms.",
+        "audioText": "Match sparkling water mixology and sensory terms.",
+        "explanation": "5 thuật ngữ thời thượng biến Đảnh Thạnh có ga thành nguyên liệu vàng tại các quán bar cao cấp.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ pha chế thức uống sủi bọt cao cấp.",
+        "pairs": [
+          {
+            "left": "Artisan mixology base",
+            "right": "Nguyên liệu nền pha chế thủ công đỉnh cao cho quầy bar"
+          },
+          {
+            "left": "Fine effervescent mouthfeel",
+            "right": "Cảm giác sủi bọt mịn màng êm ái trên vòm miệng"
+          },
+          {
+            "left": "Tropical fruit mocktail",
+            "right": "Thức uống giải khát không cồn kết hợp trái cây nhiệt đới"
+          },
+          {
+            "left": "Citrus garnish aroma",
+            "right": "Hương thơm tinh dầu từ vỏ chanh và cam trang trí"
+          },
+          {
+            "left": "Mineral palate elevation",
+            "right": "Nâng tầm vị giác nhờ hậu vị khoáng ngọt thanh sâu lắng"
+          }
+        ]
       },
       {
         "id": "u57-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this craft mixology pitch clearly:",
+        "promptVi": "Luyện nói câu giới thiệu nước khoáng có ga Đảnh Thạnh cho các chuyên gia pha chế hàng đầu:",
+        "englishSentence": "Danh Thanh Sparkling mineral water creates the ultimate effervescent foundation for craft cocktails and tropical mocktails.",
+        "audioText": "Danh Thanh Sparkling mineral water creates the ultimate effervescent foundation for craft cocktails and tropical mocktails.",
+        "phonetics": "/daɪn tæŋ ˈspɑːrklɪŋ ˈmɪnərəl ˈwɔːtər kriˈeɪts ðiː ˈʌltɪmət ˌɛfərˈvɛsənt faʊnˈdeɪʃən fɔːr kræft ˈkɒkteɪlz ænd ˈtrɒpɪkəl ˈmɒkteɪlz/",
+        "vietnameseMeaning": "Nước khoáng có ga Đảnh Thạnh tạo nên nền tảng sủi bọt tuyệt đỉnh cho các ly cocktail thủ công và mocktail nhiệt đới.",
+        "explanation": "\"Ultimate effervescent foundation for craft cocktails\" là định vị đắt giá giúp Đảnh Thạnh chiếm lĩnh quầy bar các khách sạn 5 sao.",
+        "whyWrong": "Phát âm chuẩn từ \"effervescent\" (/ˌɛfərˈvɛsənt/ - sủi bọt lăn tăn) và \"mocktails\" (/ˈmɒkteɪlz/).",
+        "crucialNote": "Bọt khí của Đảnh Thạnh mịn màng không bị gắt cổ như các loại nước soda công nghiệp.",
+        "memoryHook": "Ultimate effervescent foundation for craft cocktails."
       },
       {
         "id": "u57-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to describe a signature summer mocktail recipe:",
+        "promptVi": "Ghép câu: \"Kết hợp nước khoáng có ga cùng chanh dây tươi và lá bạc hà mang lại sự sảng khoái phi thường\":",
+        "englishSentence": "Pairing sparkling mineral water with fresh passion fruit and mint delivers extraordinary refreshment.",
+        "audioText": "Pairing sparkling mineral water with fresh passion fruit and mint delivers extraordinary refreshment.",
         "wordPool": [
-          "never",
+          "Pairing",
+          "sparkling",
           "mineral",
-          "protects",
           "water",
-          "aquifer",
-          "cancel",
-          "the",
-          "volcanic",
-          "deep",
-          "Our",
-          "from",
-          "environmental",
-          "contamination.",
-          "surface"
+          "with",
+          "fresh",
+          "passion",
+          "fruit",
+          "and",
+          "mint",
+          "delivers",
+          "extraordinary",
+          "refreshment.",
+          "bitter",
+          "stale"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Kết hợp nước khoáng có ga cùng chanh dây tươi và lá bạc hà mang lại sự sảng khoái phi thường.",
+        "explanation": "Công thức Mocktail Chanh Dây Bạc Hà Đảnh Thạnh là thức uống giải nhiệt mùa hè số một tại các bãi biển Nha Trang.",
+        "whyWrong": "Dùng từ \"extraordinary refreshment\" (sự sảng khoái phi thường) kích thích vị giác người nghe.",
+        "crucialNote": "Khoáng chất tự nhiên làm nổi bật vị chua thanh của chanh dây và hương the mát của bạc hà.",
+        "memoryHook": "Sparkling water with passion fruit delivers extraordinary refreshment."
       },
       {
         "id": "u57-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct beverage sensory term for tactile sensation on tongue:",
+        "promptVi": "Chọn thuật ngữ cảm quan chỉ cảm giác của thức uống trong vòm miệng:",
+        "englishSentence": "The tight natural bubbles provide a crisp and delightful [ _____ ] that enhances every sip.",
+        "audioText": "The tight natural bubbles provide a crisp and delightful mouthfeel that enhances every sip.",
+        "blankWord": "mouthfeel",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "mouthfeel",
+          "headache",
+          "toothache"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Những bọt khí tự nhiên lăn tăn mang lại cảm giác vòm miệng thanh giòn và thú vị, nâng tầm từng ngụm nước.",
+        "explanation": "\"Mouthfeel\" (cảm giác vòm miệng) là thuật ngữ chuyên môn của các chuyên gia nếm thử đồ uống quốc tế (Sommeliers).",
+        "whyWrong": "\"Headache\" (đau đầu) hay \"toothache\" (đau răng) là những từ tiêu cực hoàn toàn sai lệch.",
+        "crucialNote": "Bọt khí nhỏ mịn (tight bubbles) giúp giữ ga lâu hơn trong ly thủy tinh.",
+        "memoryHook": "Delightful mouthfeel enhances every sip."
       },
       {
         "id": "u57-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Đảnh Thạnh Có Ga & Nghệ Thuật Pha Chế\" (Công thức Mocktail và Cocktail khoáng sảng khoái). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells."
+        "type": "chat_branch",
+        "promptEn": "Collaborate with a celebrity mixologist at an upscale beach club on WhatsApp:",
+        "promptVi": "Mô phỏng tin nhắn: Chuyên gia pha chế quốc tế tại Sailing Club Nha Trang muốn thử nghiệm Đảnh Thạnh có ga cho menu cocktail độc quyền:",
+        "englishSentence": "We would love to collaborate! We will deliver chilled cases of Danh Thanh Sparkling along with fresh local lime and pink sea salt for your masterclass.",
+        "audioText": "We would love to collaborate! We will deliver chilled cases of Danh Thanh Sparkling along with fresh local lime and pink sea salt for your masterclass.",
+        "chatMessages": [
+          {
+            "speaker": "Matteo (Beverage Consultant, Sailing Club Nha Trang)",
+            "avatar": "🍹",
+            "message": "Minh, we want to launch a 'Nha Trang Sunset Fizz' cocktail using a local heritage sparkling mineral water. Can we test Danh Thanh with aged rum?"
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Công thức Mocktail và Cocktail khoáng sảng khoái",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "We would love to collaborate! We will deliver chilled cases of Danh Thanh Sparkling along with fresh local lime and pink sea salt for your masterclass.",
+            "trustScore": 25,
+            "feedback": "Hợp tác thương hiệu đỉnh cao! Nắm bắt ngay cơ hội đưa sản phẩm vào menu cocktail của câu lạc bộ bãi biển nổi tiếng nhất Nha Trang kèm nguyên liệu địa phương độc đáo.",
+            "isCorrect": true
+          },
+          {
+            "text": "Our water is not for drinking with alcohol, please drink tap water with your rum.",
+            "trustScore": 0,
+            "feedback": "Bỏ lỡ cơ hội vàng! Thái độ bảo thủ làm mất đi kênh tiêu thụ cao cấp tại các quán bar bãi biển.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chúng tôi rất hào hứng được hợp tác! Chúng tôi sẽ giao ngay những thùng Đảnh Thạnh Có Ga mát lạnh kèm theo chanh tươi địa phương và muối hồng cho buổi pha chế thử nghiệm của bạn.",
+        "explanation": "Đưa sản phẩm vào thực đơn cocktail của các điểm đến du lịch nổi tiếng giúp thương hiệu tiếp cận hàng triệu du khách quốc tế mỗi năm.",
+        "crucialNote": "Sự kết hợp giữa rượu Rum và nước khoáng có ga Đảnh Thạnh tạo nên hương vị bùng nổ.",
+        "memoryHook": "Deliver chilled Danh Thanh Sparkling for craft masterclass."
       }
     ]
   },
@@ -7535,110 +8000,140 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "subtitle": "Mời khách thử nước và phát tài liệu giới thiệu sản phẩm",
     "level": "B1",
     "icon": "🎪",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u58-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that F&B trade exhibition booth presentation provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of F&B trade exhibition booth presentation?",
-        "options": [
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing, as confirmed in our recent departmental briefing with executive management.",
-          "Our clinical research proves that F&B trade exhibition booth presentation provides natural health benefits without synthetic additives.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 1,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng gian hàng hội chợ triển lãm f&b đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that F&B trade exhibition booth presentation provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match trade expo booth hosting terms with their functions:",
+        "promptVi": "Ghép cặp các thuật ngữ trực gian hàng hội chợ triển lãm F&B quốc tế:",
+        "englishSentence": "Match international trade expo booth terms.",
+        "audioText": "Match international trade expo booth terms.",
+        "explanation": "5 kỹ năng biến gian hàng triển lãm thành cỗ máy thu hút đối tác và chốt đơn hàng xuất khẩu.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp từ vựng trực gian hàng hội chợ quốc tế.",
+        "pairs": [
+          {
+            "left": "Trade exhibition booth",
+            "right": "Gian hàng trưng bày triển lãm thương mại quốc tế"
+          },
+          {
+            "left": "Water tasting bar",
+            "right": "Quầy bar nếm thử nước khoáng kiềm mát lạnh"
+          },
+          {
+            "left": "Product catalog brochure",
+            "right": "Tập tài liệu giới thiệu danh mục sản phẩm sắc nét"
+          },
+          {
+            "left": "Foreign buyer lead generation",
+            "right": "Thu thập thông tin khách hàng mua hàng tiềm năng"
+          },
+          {
+            "left": "Live pH demonstration",
+            "right": "Thí nghiệm trực quan chứng minh độ kiềm pH 9.0"
+          }
+        ]
       },
       {
         "id": "u58-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this magnetic trade booth greeting clearly:",
+        "promptVi": "Luyện nói câu mời khách quốc tế ghé thăm gian hàng triển lãm Vikoda:",
+        "englishSentence": "Good afternoon! Welcome to the Vikoda pavilion. Would you like to taste Vietnam's natural alkaline mineral water?",
+        "audioText": "Good afternoon! Welcome to the Vikoda pavilion. Would you like to taste Vietnam's natural alkaline mineral water?",
+        "phonetics": "/ɡʊd ˌɑːftərˈnuːn! ˈwɛlkəm tuː ðə vɪˈkoʊdə pəˈvɪljən. wʊd juː laɪk tuː teɪst ˌvjɛtnɑːmz ˈnætʃrəl ˈælkəlaɪn ˈmɪnərəl ˈwɔːtər/",
+        "vietnameseMeaning": "Xin chào buổi chiều! Chào mừng quý khách đến với gian hàng triển lãm Vikoda. Quý vị có muốn nếm thử nước khoáng kiềm tự nhiên của Việt Nam không ạ?",
+        "explanation": "\"Welcome to the Vikoda pavilion. Would you like to taste...\" là lời mời nồng hậu mở ra cuộc trò chuyện kinh doanh thuận lợi.",
+        "whyWrong": "Dùng từ \"pavilion\" (/pəˈvɪljən/ - gian hàng lớn quy mô trang trọng) thể hiện vị thế doanh nghiệp.",
+        "crucialNote": "Rót nước vào ly thủy tinh trong suốt đưa bằng hai tay mời khách.",
+        "memoryHook": "Welcome to Vikoda pavilion, would you like to taste natural alkaline water."
       },
       {
         "id": "u58-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to present brochures and product samples to an overseas buyer:",
+        "promptVi": "Ghép câu: \"Xin vui lòng nhận danh mục xuất khẩu của chúng tôi và thưởng thức cả dòng chai nhựa lẫn chai thủy tinh\":",
+        "englishSentence": "Please take our export catalog and feel free to sample both PET and glass bottles.",
+        "audioText": "Please take our export catalog and feel free to sample both PET and glass bottles.",
         "wordPool": [
-          "contamination.",
-          "aquifer",
-          "never",
-          "volcanic",
-          "deep",
-          "surface",
-          "Our",
-          "protects",
-          "the",
-          "cancel",
-          "water",
-          "environmental",
-          "mineral",
-          "from"
+          "Please",
+          "take",
+          "our",
+          "export",
+          "catalog",
+          "and",
+          "feel",
+          "free",
+          "to",
+          "sample",
+          "both",
+          "PET",
+          "and",
+          "glass",
+          "bottles.",
+          "steal",
+          "run"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Xin vui lòng nhận danh mục xuất khẩu của chúng tôi và cứ tự nhiên nếm thử cả dòng chai nhựa lẫn chai thủy tinh.",
+        "explanation": "Tạo cơ hội cho đối tác trải nghiệm trực tiếp sự khác biệt giữa hai dòng bao bì.",
+        "whyWrong": "\"Feel free to sample\" khuyến khích trải nghiệm sản phẩm không áp lực.",
+        "crucialNote": "Chuẩn bị sẵn danh thiếp ghim kèm góc tài liệu xuất khẩu.",
+        "memoryHook": "Take export catalog and sample PET and glass bottles."
       },
       {
         "id": "u58-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct term for high-volume commercial visitors:",
+        "promptVi": "Chọn từ chỉ các đối tác mua hàng đại diện cho chuỗi siêu thị tại hội chợ:",
+        "englishSentence": "Our live pH testing attracted hundreds of foreign retail [ _____ ] at the Bangkok expo.",
+        "audioText": "Our live pH testing attracted hundreds of foreign retail buyers at the Bangkok expo.",
+        "blankWord": "buyers",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "buyers",
+          "criminals",
+          "tourists"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Thí nghiệm đo pH trực tiếp của chúng tôi đã thu hút hàng trăm đại diện người mua hàng bán lẻ nước ngoài tại hội chợ triển lãm Bangkok.",
+        "explanation": "\"Retail buyers\" (người mua hàng bán lẻ) là các nhân vật quyền lực quyết định đưa sản phẩm vào chuỗi siêu thị quốc tế.",
+        "whyWrong": "\"Criminals\" (tội phạm) hay \"tourists\" (khách du lịch vãng lai) không phải là đối tượng B2B mục tiêu.",
+        "crucialNote": "Thí nghiệm nhỏ dung dịch thử pH chuyển màu tím kiềm lập tức gây ấn tượng thị giác mạnh mẽ.",
+        "memoryHook": "Attracted hundreds of foreign retail buyers."
       },
       {
         "id": "u58-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Gian Hàng Hội Chợ Triển Lãm F&B\" (Mời khách thử nước và phát tài liệu giới thiệu sản phẩm). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "We adhere strictly to certified regional extraction protocols established under health decrees.",
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing."
+        "type": "chat_branch",
+        "promptEn": "Capture trade lead data from an interested Middle East distributor on WhatsApp:",
+        "promptVi": "Mô phỏng tin nhắn: Giám đốc phân phối đồ uống Dubai vừa ghé gian hàng Vikoda tại hội chợ Gulfood và xin báo giá FOB cảng Quy Nhơn:",
+        "englishSentence": "Pleasure meeting you at Gulfood Dubai! I have emailed our official FOB Quy Nhon quotation and container loading specs for 20ft and 40ft shipments.",
+        "audioText": "Pleasure meeting you at Gulfood Dubai! I have emailed our official FOB Quy Nhon quotation and container loading specs for 20ft and 40ft shipments.",
+        "chatMessages": [
+          {
+            "speaker": "Tariq (Import Director, Al Maya Group Dubai)",
+            "avatar": "🇦🇪",
+            "message": "Hello Minh, your pH 9.0 mineral water tasted exceptional at the booth. Please send FOB quotation for 5 containers monthly."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Mời khách thử nước và phát tài liệu giới thiệu sản phẩm",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Pleasure meeting you at Gulfood Dubai! I have emailed our official FOB Quy Nhon quotation and container loading specs for 20ft and 40ft shipments.",
+            "trustScore": 25,
+            "feedback": "Phản ứng xuất khẩu chuyên nghiệp thần tốc! Gửi ngay báo giá điều kiện FOB cảng Quy Nhơn và thông số đóng container 20ft/40ft, đón đầu cơ hội chốt hợp đồng lớn sang Trung Đông.",
+            "isCorrect": true
+          },
+          {
+            "text": "We are still partying in Dubai, will reply to your email in two weeks.",
+            "trustScore": 0,
+            "feedback": "Đánh mất khách hàng vàng! Các nhà nhập khẩu Dubai sẽ chuyển sang đối tác khác chỉ sau 24 giờ.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Rất hân hạnh được gặp ngài tại hội chợ Gulfood Dubai! Tôi đã gửi email bảng báo giá chính thức điều kiện FOB Quy Nhơn và thông số bốc xếp container cho các chuyến hàng 20ft và 40ft.",
+        "explanation": "Quy tắc vàng tại hội chợ triển lãm quốc tế: Gửi phản hồi báo giá trong vòng 12 giờ sau khi gặp đối tác.",
+        "crucialNote": "Cảng Quy Nhơn hoặc Nha Trang là cảng biển xuất phát gần nhà máy Đảnh Thạnh nhất.",
+        "memoryHook": "Send official FOB quotation and container loading specs promptly."
       }
     ]
   },
@@ -7648,111 +8143,140 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Nghi Thức Dùng Tiệc Với Đối Tác Cấp Cao",
     "subtitle": "Quy tắc mời rượu, nâng ly và kết nối ngoại giao thân tình",
     "level": "B1",
-    "icon": "🍽️",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🥂",
+    "color": "amber",
+    "xpReward": 60,
+    "gemReward": 20,
     "exercises": [
       {
         "id": "u59-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that high-level diplomatic dining banquet etiquette provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of high-level diplomatic dining banquet etiquette?",
-        "options": [
-          "We adhere strictly to certified regional extraction protocols established under health decrees, as confirmed in our recent departmental briefing with executive management.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells, pending formal verification from our international distribution coordinators.",
-          "Our clinical research proves that high-level diplomatic dining banquet etiquette provides natural health benefits without synthetic additives."
-        ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng nghi thức dùng tiệc với đối tác cấp cao đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that high-level diplomatic dining banquet etiquette provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Match executive dining and diplomatic toasting etiquette terms:",
+        "promptVi": "Ghép cặp các thuật ngữ nghi thức tiệc chiêu đãi cấp cao và nâng ly ngoại giao:",
+        "englishSentence": "Match executive formal dining and toasting terms.",
+        "audioText": "Match executive formal dining and toasting terms.",
+        "explanation": "5 quy tắc bàn tiệc ngoại giao giúp bạn tỏa sáng và gắn kết mối quan hệ thâm giao với các CEO quốc tế.",
+        "vietnameseMeaning": "Ghép đúng 5 cặp thuật ngữ nghi thức tiệc chiêu đãi doanh nhân cấp cao.",
+        "pairs": [
+          {
+            "left": "Executive formal banquet",
+            "right": "Tiệc chiêu đãi trọng thể dành cho lãnh đạo cấp cao"
+          },
+          {
+            "left": "Propose a cordial toast",
+            "right": "Đề xuất lời chúc nâng ly ngoại giao ấm áp chân tình"
+          },
+          {
+            "left": "Seating protocol etiquette",
+            "right": "Nghi thức sắp xếp vị trí ngồi theo cấp bậc ngoại giao"
+          },
+          {
+            "left": "Mutually prosperous partnership",
+            "right": "Quan hệ đối tác cùng thịnh vượng và phát triển đôi bên"
+          },
+          {
+            "left": "Clink glasses gently",
+            "right": "Cụng ly nhẹ nhàng với ánh mắt chân thành"
+          }
+        ]
       },
       {
         "id": "u59-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this executive toast clearly and passionately:",
+        "promptVi": "Luyện nói câu chúc rượu ngoại giao trang trọng trong tiệc chiêu đãi đối tác chiến lược:",
+        "englishSentence": "May I propose a toast to our mutually prosperous partnership and to many years of fruitful cooperation ahead!",
+        "audioText": "May I propose a toast to our mutually prosperous partnership and to many years of fruitful cooperation ahead!",
+        "phonetics": "/meɪ aɪ prəˈpoʊz ə toʊst tuː ˈaʊər ˈmjuːtʃuəli ˈprɒspərəs ˈpɑːrtnərʃɪp ænd tuː ˈmɛni jɪərz ɒv ˈfruːtfʊl koʊˌɒpəˈreɪʃən əˈhɛd/",
+        "vietnameseMeaning": "Tôi xin phép được nâng ly chúc cho mối quan hệ đối tác cùng thịnh vượng của chúng ta và chúc cho nhiều năm hợp tác gặt hái thành công rực rỡ phía trước!",
+        "explanation": "\"May I propose a toast to our mutually prosperous partnership...\" là câu chúc nâng ly kinh điển bậc nhất trong tiệc ngoại giao thượng đỉnh.",
+        "whyWrong": "Đứng dậy đĩnh đạc, cầm ly bằng tay phải, giơ cao ngang tầm mắt và nói dõng dạc.",
+        "crucialNote": "Nhìn vào mắt các vị khách VIP khi cụng ly thể hiện sự chân thành tuyệt đối.",
+        "memoryHook": "Propose a toast to mutually prosperous partnership."
       },
       {
         "id": "u59-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to express gratitude to the international delegation for joining the banquet:",
+        "promptVi": "Ghép câu: \"Thật là một vinh hạnh lớn khi được chia sẻ bữa tối tuyệt vời này cùng phái đoàn quý mến\":",
+        "englishSentence": "It is a true honor to share this wonderful dinner with your distinguished delegation.",
+        "audioText": "It is a true honor to share this wonderful dinner with your distinguished delegation.",
         "wordPool": [
-          "never",
-          "volcanic",
-          "surface",
-          "water",
-          "cancel",
-          "mineral",
-          "environmental",
-          "deep",
-          "from",
-          "the",
-          "contamination.",
-          "protects",
-          "aquifer",
-          "Our"
+          "It",
+          "is",
+          "a",
+          "true",
+          "honor",
+          "to",
+          "share",
+          "this",
+          "wonderful",
+          "dinner",
+          "with",
+          "your",
+          "distinguished",
+          "delegation.",
+          "fight",
+          "boring"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Thật là một vinh hạnh lớn khi được chia sẻ bữa tối tuyệt vời này cùng phái đoàn quý mến của các bạn.",
+        "explanation": "Lời phát biểu mở đầu bữa tiệc tạo cảm giác ấm cúng, xóa nhòa khoảng cách ngôn ngữ và văn hóa.",
+        "whyWrong": "\"Distinguished delegation\" tôn vinh tầm vóc của đoàn khách.",
+        "crucialNote": "Bố trí thực đơn kết hợp ẩm thực tinh hoa Việt Nam cùng nước khoáng chai thủy tinh Vikoda.",
+        "memoryHook": "True honor to share dinner with distinguished delegation."
       },
       {
         "id": "u59-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the correct term for raising glasses in formal banquets:",
+        "promptVi": "Chọn động từ chính xác chỉ hành động nâng ly chúc mừng trong tiệc ngoại giao:",
+        "englishSentence": "Let us [ _____ ] our glasses to celebrate our long-term distribution agreement.",
+        "audioText": "Let us raise our glasses to celebrate our long-term distribution agreement.",
+        "blankWord": "raise",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "raise",
+          "smash",
+          "drop"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Chúng ta hãy cùng nâng ly để chúc mừng thỏa thuận phân phối dài hạn của chúng ta.",
+        "explanation": "\"Raise our glasses\" (nâng ly chúc mừng) là cử chỉ ngoại giao cao đẹp.",
+        "whyWrong": "\"Smash\" (đập vỡ) hay \"drop\" (làm rơi) là tai nạn bàn tiệc tối kỵ.",
+        "crucialNote": "Không uống cạn một hơi thô lỗ trong tiệc trang trọng, nhấp một ngụm nhẹ nhàng sau lời chúc.",
+        "memoryHook": "Raise our glasses to celebrate the agreement."
       },
       {
         "id": "u59-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Nghi Thức Dùng Tiệc Với Đối Tác Cấp Cao\" (Quy tắc mời rượu, nâng ly và kết nối ngoại giao thân tình). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells."
+        "type": "chat_branch",
+        "promptEn": "Follow up the morning after hosting an executive dinner on WhatsApp:",
+        "promptVi": "Mô phỏng tin nhắn sáng hôm sau: Gửi lời cảm ơn chân thành đến Tổng Giám đốc tập đoàn đối tác sau bữa tiệc chiêu đãi tối qua:",
+        "englishSentence": "Good morning Mr. Watanabe! Thank you for the delightful dinner conversation last night. Our team is inspired and ready to finalize contract terms today.",
+        "audioText": "Good morning Mr. Watanabe! Thank you for the delightful dinner conversation last night. Our team is inspired and ready to finalize contract terms today.",
+        "chatMessages": [
+          {
+            "speaker": "Mr. Watanabe (CEO, Japan Beverage Import Corp)",
+            "avatar": "🇯🇵",
+            "message": "Minh, thank you for the wonderful seafood dinner and the exceptional Vikoda hospitality. Truly enjoyed our conversation."
+          }
         ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Quy tắc mời rượu, nâng ly và kết nối ngoại giao thân tình",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "Good morning Mr. Watanabe! Thank you for the delightful dinner conversation last night. Our team is inspired and ready to finalize contract terms today.",
+            "trustScore": 25,
+            "feedback": "Follow-up ngoại giao điểm 10! Gửi lời cảm ơn ngay sáng hôm sau và giữ nhịp tiến độ công việc để tiến hành ký kết hợp đồng trong ngày.",
+            "isCorrect": true
+          },
+          {
+            "text": "You drank too much wine last night. Don't forget you promised to give us a million dollars.",
+            "trustScore": 0,
+            "feedback": "Bất lịch sự thô lỗ! Phá hỏng toàn bộ công sức của bữa tiệc chiêu đãi tối qua.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chào buổi sáng ông Watanabe! Cảm ơn ngài vì cuộc trò chuyện tuyệt vời trong bữa tối hôm qua. Đội ngũ chúng tôi tràn đầy cảm hứng và đã sẵn sàng hoàn tất các điều khoản hợp đồng hôm nay ạ.",
+        "explanation": "Một tin nhắn cảm ơn lịch thiệp vào 8:30 sáng hôm sau là chìa khóa vàng khép lại thương vụ thành công.",
+        "crucialNote": "Khách Nhật đánh giá rất cao sự chu đáo trước sau như một.",
+        "memoryHook": "Delightful dinner conversation + ready to finalize contract terms."
       }
     ]
   },
@@ -7762,111 +8286,142 @@ export const MASTER_100_UNITS: UnitLesson[] = [
     "title": "Mốc Tốt Nghiệp Đại Sứ Thương Hiệu B1",
     "subtitle": "Sát hạch toàn diện kỹ năng thuyết trình và bảo vệ giá trị",
     "level": "B1",
-    "icon": "🏆",
-    "color": "blue",
-    "xpReward": 45,
-    "gemReward": 15,
+    "icon": "🎓",
+    "color": "amber",
+    "xpReward": 75,
+    "gemReward": 35,
     "exercises": [
       {
         "id": "u60-e1",
-        "type": "listen_choice",
-        "promptEn": "Listen to your counterpart and select the best professional response:",
-        "promptVi": "Nghe đối tác nói và chọn câu phản hồi tiếng Anh lịch thiệp nhất:",
-        "englishSentence": "Our clinical research proves that B1 brand ambassador milestone graduation provides natural health benefits without synthetic additives.",
-        "audioText": "What scientific findings highlight the advantages of B1 brand ambassador milestone graduation?",
-        "options": [
-          "Our clinical research proves that B1 brand ambassador milestone graduation provides natural health benefits without synthetic additives.",
-          "Our preservation standards ensure that natural mineral composition remains untouched by processing, pending formal verification from our international distribution coordinators.",
-          "The geological survey confirms high mineral stability across all monitored deep artesian wells, following the standardized protocols outlined in our operations manual."
-        ],
-        "correctIndex": 0,
-        "vietnameseMeaning": "Nghiên cứu lâm sàng chứng minh rằng mốc tốt nghiệp đại sứ thương hiệu b1 đem lại lợi ích sức khỏe tự nhiên không cần hóa chất nhân tạo.",
-        "explanation": "Phản hồi: \"Our clinical research proves that B1 brand ambassador milestone graduation provides natural health benefits without synthetic additives.\" thể hiện tác phong nhã nhặn, tôn trọng đối tác và mở ra cơ hội hợp tác tích cực.",
-        "whyWrong": "Tuyệt đối tránh câu trả lời cộc lốc hoặc thiếu tính xây dựng trong giao tiếp B2B.",
-        "crucialNote": "Lắng nghe kỹ từ khóa then chốt trong câu hỏi của đối tác trước khi phản hồi.",
-        "memoryHook": "Listen for key intent and reply with proactive hospitality."
+        "type": "match_pairs",
+        "promptEn": "Capstone Grand Match: Pair the 5 Brand Ambassador core competencies of Level B1:",
+        "promptVi": "Đại Thử Thách Tốt Nghiệp B1: Ghép 5 năng lực cốt lõi của Đại sứ Thương hiệu Vikoda toàn cầu:",
+        "englishSentence": "Match the 5 cornerstone competencies of Level B1.",
+        "audioText": "Match the 5 cornerstone competencies of Level B1.",
+        "explanation": "5 chuẩn mực bản lĩnh biến bạn thành gương mặt đại diện xứng tầm cho thương hiệu Vikoda trên trường quốc tế.",
+        "vietnameseMeaning": "Ghép đúng 5 chuẩn năng lực Đại sứ Thương hiệu Cấp độ B1.",
+        "pairs": [
+          {
+            "left": "Scientific Validation Mastery",
+            "right": "Bảo vệ giá trị khoa học 4 con số vàng và chứng chỉ Pasteur"
+          },
+          {
+            "left": "Executive Pitching & Delivery",
+            "right": "Thuyết trình dự án PowerPoint tự tin trước hội đồng đầu tư"
+          },
+          {
+            "left": "Hostile Q&A Defense",
+            "right": "Hóa giải các câu hỏi chất vấn cân não và bác bỏ tin đồn"
+          },
+          {
+            "left": "Customer Empathy Recovery",
+            "right": "Xử lý phàn nàn và biến khách hàng bức xúc thành đối tác trung thành"
+          },
+          {
+            "left": "Global Heritage Storytelling",
+            "right": "Truyền cảm hứng câu chuyện Ngọc Trong Đá từ năm 1957"
+          }
+        ]
       },
       {
         "id": "u60-e2",
         "type": "speak",
-        "promptEn": "Speak this sentence clearly into the microphone:",
-        "promptVi": "Luyện nói dõng dạc câu tiếng Anh giao tiếp sau:",
-        "englishSentence": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "audioText": "Vikoda preserves innate natural pH 9.0 alkalinity directly from our 1957 artesian source.",
-        "phonetics": "/vɪˈkoʊdə prɪˈzɜːrvz ɪˈneɪt ˈnætʃrəl piː eɪtʃ naɪn ˌælkəˈlɪnəti daɪˈrɛktli frɒm ˈaʊər ˈnaɪnˈtiːn ˈfɪfti ˈsɛvn ɑːrˈtiːʒn sɔːrs/",
-        "vietnameseMeaning": "Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.",
-        "explanation": "Mẫu câu chuẩn mực diễn đạt: \"Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi.\".",
-        "whyWrong": "Chú ý phát âm rõ âm cuối (ending sounds) và nhấn đúng trọng âm của các thuật ngữ chuyên môn.",
-        "crucialNote": "Giữ tốc độ nói vừa phải, dõng dạc và ánh mắt tự tin.",
-        "memoryHook": "Key speech habit: Vikoda bảo tồn độ kiềm tự nhiên pH 9.0 nguyên bản trực tiếp từ nguồn mỏ phun 1957 của chúng tôi."
+        "promptEn": "Speak this proud Level B1 Brand Ambassador graduation pledge clearly:",
+        "promptVi": "Luyện nói lời tuyên thệ tốt nghiệp Cấp độ B1 Đại sứ Thương hiệu Vikoda toàn cầu:",
+        "englishSentence": "As a certified Vikoda Brand Ambassador, I champion our 1957 heritage, scientific excellence, and natural alkaline wellness across global markets.",
+        "audioText": "As a certified Vikoda Brand Ambassador, I champion our 1957 heritage, scientific excellence, and natural alkaline wellness across global markets.",
+        "phonetics": "/æz ə ˈsɜːrtɪfaɪd vɪˈkoʊdə brænd æmˈbæsədər, aɪ ˈtʃæmpiən ˈaʊər 1957 ˈhɛrɪtɪdʒ, ˌsaɪənˈtɪfɪk ˈɛksələns, ænd ˈnætʃrəl ˈælkəlaɪn ˈwɛlnəs əˈkrɒs ˈɡloʊbəl ˈmɑːrkɪts/",
+        "vietnameseMeaning": "Là một Đại sứ Thương hiệu được chứng nhận của Vikoda, tôi tự hào tiên phong bảo vệ di sản 1957, sự xuất sắc về khoa học và nguồn sức khỏe kiềm tự nhiên trên khắp các thị trường toàn cầu.",
+        "explanation": "Lời tuyên thệ đánh dấu bước chuyển mình vượt bậc thành nhân sự tinh hoa, có khả năng đàm phán và thuyết trình độc lập bằng tiếng Anh thương mại.",
+        "whyWrong": "Nói với chất giọng dõng dạc, ánh mắt ngời sáng tự hào.",
+        "crucialNote": "Chúc mừng bạn đã hoàn thành 60 bài học nền tảng vững chắc nhất!",
+        "memoryHook": "Champion 1957 heritage, scientific excellence, and alkaline wellness."
       },
       {
         "id": "u60-e3",
         "type": "word_order",
-        "promptEn": "Arrange the words to form a correct English sentence:",
-        "promptVi": "Ghép câu tiếng Anh có nghĩa: \"Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.\":",
-        "englishSentence": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
-        "audioText": "Our deep volcanic aquifer protects the mineral water from surface environmental contamination.",
+        "promptEn": "Arrange the words to celebrate your Level B1 milestone achievement:",
+        "promptVi": "Ghép câu: \"Chúng tôi đã làm chủ thành công tất cả sáu mươi bài học từ Cấp độ A1 đến Cấp độ B1 tại Vikoda\":",
+        "englishSentence": "We have successfully mastered all sixty core units from Level A1 to Level B1 at Vikoda.",
+        "audioText": "We have successfully mastered all sixty core units from Level A1 to Level B1 at Vikoda.",
         "wordPool": [
-          "aquifer",
-          "deep",
-          "cancel",
-          "contamination.",
-          "environmental",
-          "water",
-          "surface",
-          "Our",
-          "protects",
+          "We",
+          "have",
+          "successfully",
+          "mastered",
+          "all",
+          "sixty",
+          "core",
+          "units",
           "from",
-          "the",
-          "never",
-          "mineral",
-          "volcanic"
+          "Level",
+          "A1",
+          "to",
+          "Level",
+          "B1",
+          "at",
+          "Vikoda.",
+          "failed",
+          "quit"
         ],
-        "vietnameseMeaning": "Tầng ngậm nước bazan sâu bảo vệ nước khoáng khỏi mọi ô nhiễm môi trường bề mặt.",
-        "explanation": "Cấu trúc câu hoàn chỉnh: \"Our deep volcanic aquifer protects the mineral water from surface environmental contamination.\".",
-        "whyWrong": "Sắp xếp đúng trật tự chủ ngữ, vị ngữ và trạng ngữ theo văn phong tiếng Anh thương mại.",
-        "crucialNote": "Đọc to lại cả câu sau khi xếp hoàn thành để ghi nhớ nhịp điệu ngữ pháp.",
-        "memoryHook": "Mastering sentence structure creates natural fluency."
+        "vietnameseMeaning": "Chúng tôi đã làm chủ thành công tất cả sáu mươi bài học cốt lõi từ Cấp độ A1 đến Cấp độ B1 tại Vikoda.",
+        "explanation": "60 Unit đã qua là hành trình biến người học thành chuyên gia giao tiếp và đàm phán doanh nghiệp xuất sắc.",
+        "whyWrong": "\"Mastered all sixty core units\" ghi nhận năng lực thực chiến đã được tôi luyện vững vàng.",
+        "crucialNote": "Sẵn sàng chinh phục Cấp độ B2 (Thương thảo hợp đồng & Xuất nhập khẩu chuyên sâu).",
+        "memoryHook": "Mastered all sixty core units from A1 to B1."
       },
       {
         "id": "u60-e4",
         "type": "fill_blank",
-        "promptEn": "Select the precise professional term to complete the sentence:",
-        "promptVi": "Chọn từ chính xác để hoàn thành câu chuyên môn:",
-        "englishSentence": "Certified Pasteur Institute laboratory dossiers confirm the natural [ _____ ] of our spring.",
-        "audioText": "Certified Pasteur Institute laboratory dossiers confirm the natural purity of our spring.",
-        "blankWord": "purity",
+        "promptEn": "Select the ultimate keyword for brand advocacy:",
+        "promptVi": "Chọn từ cốt lõi định nghĩa tư cách của một đại sứ thương hiệu doanh nghiệp:",
+        "englishSentence": "An authentic brand [ _____ ] inspires international partners through scientific truth and passionate dedication.",
+        "audioText": "An authentic brand ambassador inspires international partners through scientific truth and passionate dedication.",
+        "blankWord": "ambassador",
         "options": [
-          "purity",
-          "delayed",
-          "damaged"
+          "ambassador",
+          "bystander",
+          "stranger"
         ],
         "correctIndex": 0,
-        "vietnameseMeaning": "Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.",
-        "explanation": "Điền từ \"purity\" để hoàn thiện ý nghĩa: \"Hồ sơ kiểm định của Viện Pasteur khẳng định độ tinh khiết tự nhiên của nguồn khoáng chúng tôi.\".",
-        "whyWrong": "Dùng từ chính xác tránh gây hiểu lầm hoặc tranh chấp trong văn bản thương mại.",
-        "crucialNote": "Thuật ngữ \"purity\" là từ vựng cốt lõi trong nghiệp vụ này.",
-        "memoryHook": "Vocabulary hook: purity = Thuật ngữ thiết yếu."
+        "vietnameseMeaning": "Một đại sứ thương hiệu chân chính truyền cảm hứng cho các đối tác quốc tế thông qua chân lý khoa học và sự cống hiến đầy nhiệt huyết.",
+        "explanation": "\"Brand ambassador\" (đại sứ thương hiệu) là người mang trong mình tình yêu thương hiệu và kiến thức uyên thâm.",
+        "whyWrong": "\"Bystander\" (người đứng ngoài bàng quan) hay \"stranger\" (người xa lạ) không có tinh thần trách nhiệm với tổ chức.",
+        "crucialNote": "Mỗi thành viên Vikoda chính là một đại sứ thương hiệu sống động.",
+        "memoryHook": "Brand ambassador inspires through scientific truth."
       },
       {
         "id": "u60-e5",
-        "type": "choice",
-        "promptEn": "Select the winning diplomatic response for this situation:",
-        "promptVi": "Tình huống: \"Mốc Tốt Nghiệp Đại Sứ Thương Hiệu B1\" (Sát hạch toàn diện kỹ năng thuyết trình và bảo vệ giá trị). Chọn câu phản hồi tiếng Anh chuyên nghiệp nhất:",
-        "englishSentence": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "audioText": "We substantiate our presentation with certified clinical test results from the Pasteur Institute.",
-        "options": [
-          "Clinical documentation from accredited testing laboratories validates our water quality parameters.",
-          "Our research team is currently conducting longitudinal mineral evaluations on new batches.",
-          "We substantiate our presentation with certified clinical test results from the Pasteur Institute."
+        "type": "chat_branch",
+        "promptEn": "Capstone B1 Simulation: Close an exclusive regional distribution agreement on Slack:",
+        "promptVi": "Mô phỏng tốt nghiệp B1: Chủ tịch tập đoàn siêu thị bán lẻ Thái Lan quyết định chọn Vikoda làm đối tác nước khoáng kiềm độc quyền:",
+        "englishSentence": "We are honored, President Somchai! Our executive board will sign the exclusive distribution agreement today, bringing Vietnam's finest mineral water to Thailand!",
+        "audioText": "We are honored, President Somchai! Our executive board will sign the exclusive distribution agreement today, bringing Vietnam's finest mineral water to Thailand!",
+        "chatMessages": [
+          {
+            "speaker": "President Somchai (Central Retail Group Thailand)",
+            "avatar": "🇹🇭",
+            "message": "Minh, after reviewing your Pasteur certificates, factory tour, and passionate brand vision, our board has voted unanimously to award Vikoda the exclusive alkaline water contract for 150 hypermarkets!"
+          }
         ],
-        "correctIndex": 2,
-        "vietnameseMeaning": "Chúng tôi chứng minh bài thuyết trình bằng các kết quả thử nghiệm lâm sàng được chứng nhận từ Viện Pasteur.",
-        "explanation": "Giải pháp tối ưu: \"We substantiate our presentation with certified clinical test results from the Pasteur Institute.\". Thể hiện bản lĩnh ngoại giao và trách nhiệm bảo vệ thương hiệu.",
-        "whyWrong": "Thái độ trốn tránh trách nhiệm gây tổn hại nghiêm trọng đến hình ảnh chuyên nghiệp của Vikoda.",
-        "crucialNote": "Sát hạch toàn diện kỹ năng thuyết trình và bảo vệ giá trị",
-        "memoryHook": "Win-win diplomacy builds lasting enterprise partnerships."
+        "chatOptions": [
+          {
+            "text": "We are honored, President Somchai! Our executive board will sign the exclusive distribution agreement today, bringing Vietnam's finest mineral water to Thailand!",
+            "trustScore": 25,
+            "feedback": "Tốt nghiệp Xuất Sắc 100% Cấp Độ B1! Đại Sứ Thương Hiệu Đỉnh Cao: Giành thắng lợi ngoạn mục trong thương vụ phân phối độc quyền 150 đại siêu thị tại Thái Lan, mở toang cánh cửa xuất khẩu khu vực ASEAN.",
+            "isCorrect": true
+          },
+          {
+            "text": "Okay, send us the money first then we will think about it.",
+            "trustScore": 0,
+            "feedback": "Phản hồi vô văn hóa! Làm mất đi hợp đồng xuất khẩu trị giá hàng triệu đô la vào tay đối thủ.",
+            "isCorrect": false
+          }
+        ],
+        "vietnameseMeaning": "Chúng tôi vô cùng vinh dự, thưa Chủ tịch Somchai! Ban điều hành của chúng tôi sẽ ký thỏa thuận phân phối độc quyền ngay hôm nay, đưa nguồn nước khoáng tinh hoa nhất Việt Nam đến với đất nước Thái Lan!",
+        "explanation": "Cái kết huy hoàng cho Cấp độ B1: Biến kiến thức khoa học và nghệ thuật thuyết trình thành hợp đồng xuất khẩu hàng triệu chai nước mỗi năm.",
+        "crucialNote": "Chúc mừng bạn đã xuất sắc tốt nghiệp toàn bộ Cấp độ B1 Đại sứ Thương hiệu!",
+        "memoryHook": "Sign exclusive distribution agreement for 150 hypermarkets."
       }
     ]
   },
